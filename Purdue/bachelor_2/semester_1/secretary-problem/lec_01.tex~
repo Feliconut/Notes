@@ -1,0 +1,91 @@
+\lecture{1}{Sun 30 Jan 2022 15:42}{abstract error SP}
+\section{Abstract Error SP}
+\subsection{Basic Definitions}
+$i \approx j$ means that $i$ and $j$ are in-distinguishable in the first observation.
+   
+   
+\begin{itemize}
+ \item (reflexivity) $i \approx i$
+  \item(symmetry) $i \approx j \iff j \approx i$
+  \item(connectedness) $i \approx j , r_i < r_j \implies \forall k, l [r_k, r_l \in [r_i, r_j] \implies r_k \approx r_l ]$
+\end{itemize}
+\subsection{Algorithmic Representations}
+
+
+\begin{algorithm}[H]
+\caption{Oct 14 2021}
+\label{algo1} 
+\begin{algorithmic}[1]
+\For{$i \in [n]$}
+	\State{$\alpha \gets$ the current item to be decided}
+	\If{$i < r$} \Comment Phase 1
+		\If{$\exists \beta\in O_i \ldotp \alpha <_i \beta$}\Comment $\alpha$ is \emph{not} a maximum
+			\State{Decline this item}
+		\ElsIf{$\alpha \in E_i$}
+			\State{Decline this item}
+		\Else 
+			\State{Examine this item}
+		\EndIf
+	\ElsIf{$i < n$}\Comment Phase 2
+		\If{$\exists \beta\in O_i \ldotp \alpha <_i \beta$}
+			\State{Decline this item}
+		\Else				\If{$\forall \beta\in O_i \ldotp \beta \leq_i \alpha$} \Comment $\alpha$ is the absolute maximum
+				\State{Accept this item}
+			\ElsIf{$\alpha \in E_i$}
+				\State{Decline this item}
+			\Else
+				\State{Examine this item}
+			\EndIf
+		\EndIf
+	\Else
+		\State{Accept this item}
+	\EndIf
+
+\EndFor
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+\begin{algorithm}[H]
+\caption{Game Process, Relaxed}
+\label{algo1} 
+\begin{algorithmic}[1]
+
+
+\State{$[n], r_i$ and $\approx$ relation are given according to definition}
+
+
+\State{$O_1 = \{1\}$}
+\State{$E_1 = \emptyset$}
+\State{$\alpha_1 = 1$}
+\State{$\Theta_1 = \emptyset$}
+
+
+
+\For{$i \in [n]$}
+	\State{$d_{i} \gets $ player's decision}
+	\If{$d_i = \mathrm{Accept}$}
+		\State Game terminates with reward $v(\alpha_i)$
+			
+	\ElsIf{$d_i = \mathrm{Decline}$}
+		\State{$O_{i+1} \gets O_i\cup \{i+1\}$}
+		\State{$E_{i+1} \gets E_i$}
+		\State{$\alpha_{i+1} \gets i+1$}
+		
+	\ElsIf{$d_i = \mathrm{Examine}$}
+		\State{$O_{i+1} \gets O_i$}
+		\State{$E_{i+1} \gets E_i\cup \{i\}$}
+		\State{$\alpha_{i+1} \gets \alpha$}
+	\EndIf
+	\State{$\Theta_{i+1} \gets 
+		\{(\beta, \gamma) \in O_{i+1}^2: r_\beta \leq r_\gamma, \beta \not\approx \gamma\} \cup
+		\{(\beta, \gamma) \in E_{i+1}^2: r_\beta \leq r_\gamma\}$}
+	
+	
+\EndFor
+
+\end{algorithmic}
+\
