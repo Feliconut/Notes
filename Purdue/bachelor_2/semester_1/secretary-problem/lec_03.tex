@@ -1,0 +1,19 @@
+\lecture{3}{Tue 01 Feb 2022 00:06}{Relaxed SP with error}
+\section{Calculation with error involved}
+Now we define the game and strategy as followed.
+
+The weights $X_1, \ldots, X_n \sim \text{Unif}(0,1).$
+The noisy observations $\tilde{X_1},\ldots,\tilde{X_n} \sim \text{Unif}(x_i-\delta, x_{i}+\delta).$
+
+The strategy is to introduce thresholding parameters $R$ and $T \in (0,1).$ We examine the upcoming item $i$ if $\tilde{x_{i}}>R$, and accept the item if $x_{i}>T$.
+We still want to find $\prob{X_{max} is selected}$ given particular $R,T,n,\delta$.
+
+\begin{equation}
+	\prob{X_{max} \text{ selected}}
+	=\sum_i \int_0^1 \prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x} f(x) \, dx 
+\end{equation}
+
+\begin{equation}
+	\prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x}
+	= \prob{\text{reach }i \cap \tilde{X_{i}}	>R \cap X_{i}>T \cap X_i \text{ max} | X_i= x}
+\end{equation}

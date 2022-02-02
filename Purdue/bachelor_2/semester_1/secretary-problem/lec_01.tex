@@ -89,3 +89,74 @@ $i \approx j$ means that $i$ and $j$ are in-distinguishable in the first observa
 
 \end{algorithmic}
 \end{algorithm}
+
+
+\subsection{Calculation under a relaxed condition}
+
+
+We give the expected value of $\ALG$ on the relaxed model (only one examine is required to obain precise comparisons). Let $\alpha$ denote the selected item.
+
+\begin{equation}
+  \expect{\OPT}=m
+\end{equation}
+
+\begin{equation}
+  \expect{\ALG}=\sum_{t=1}^m t\prob{v(\alpha)=t}
+\end{equation}
+
+\begin{align}
+  \prob{v(\alpha)=t} &= \sum_{i=r}^n
+  \prob{\alpha = i | v(i)=t}
+  \prob{v(i)=t}\\&+
+  \prob{\text{reach }n \cap \text{not accept }n} \prob{v(n)=t}\\&+
+  \prob{\text{reach }n-1 \cap \text{examine and decline }n-1}\prob{v(n-1)=t}
+\end{align}
+
+The two added terms are cases where the items are exhausted. If $n$ is reached then it must be selected. If $n-1$ is examined then it must be selected also.
+
+\begin{equation}
+  \prob{v(i)=t}=1/m, \forall i\forall t
+\end{equation}
+
+\begin{align}
+  \prob{\alpha = i | v(i)=t} &= \prob{\text{reach }i|\max_{j<r}v(j)\leq t}\prob{\max_{j<r}v(j)\leq t}\\&=
+  \sum_{s=1}^t \prob{\text{reach }i|\max_{j<r}v(j)= s}\prob{\max_{j<r}v(j)= s}
+\end{align}
+
+\begin{equation}\label{eqn:exhaust1}
+	\prob{\text{reach }n \cap \text{not accept }n}
+	=\sum_{s=t+1}^m
+		\prob{\text{reach }n|\max_{j<r}v(j)= s}\prob{\max_{j<r}v(j)= s}
+\end{equation}
+
+\begin{equation}\label{eqn:exhaust2}
+	\prob{\text{reach }n-1 \cap \text{examine and decline }n-1}
+	=\sum_{s=t+1}^m
+		\ind_{s\leq t + \delta}
+		\prob{\text{reach }n-1|\max_{j<r}v(j)= s}\prob{\max_{j<r}v(j)= s}
+\end{equation}
+
+\begin{align}
+\prob{\max_{j<r}v(j)= s} 
+	&= \prob{\max_{j<r}v(j)\leq s}-\prob{\max_{j<r}v(j)\leq s-1}\\
+	&= (\frac{s}{m})^{r-1}-(\frac{s-1}{m})^{r-1}
+\end{align}
+
+\begin{align}
+  \prob{\text{reach }i|\max_{j<r}v(j)= s}
+  &= \sum_{(a_1,\dots,a_k):a_j\in\{1,2\},\sum a_j = i-r} \,\prod_{j=1}^k 
+  \ind_{\delta<t}
+  \left(\ind_{a_j = 1}\frac{s-\delta-1}{m}
+  +\ind_{a_j = 2}\frac{\delta}{m}
+  \right)
+  +\ind_{\delta\geq t}\frac{t-1}{m}
+  \\
+  &= \sum_{x=0}^{\lfloor\frac{i-r}{2}\rfloor} 
+  \left(
+  		\ind_{\delta<t}\left(\frac{\delta}{m}\right)^x\left(\frac{s-\delta-1}{m}\right)^{i-r-2x}
+  		+\ind_{\delta \geq t} \left(\frac{t-1}{m}\right)^x 0^{i-r-2x}
+  \right)
+  \frac{(i-r-x)!}{x!(i-r-2x)!}
+\end{align}
+
+Explanation: There are $i-r$ steps to go from $r$ to $i$. Each decline will go 1 step, and each examine+decline will go 2 steps. We calculate the probability to take each possible path and then sum them up. In the second equation, $x$ is the number of items examined going from $r$ to $i$.
