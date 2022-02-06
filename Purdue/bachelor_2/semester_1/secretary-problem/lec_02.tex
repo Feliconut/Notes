@@ -1,94 +1,4 @@
 \lecture{2}{Sun 30 Jan 2022 15:50}{Relaxed SP}
-\section{Relaxed SP Prophet Inequality}
-\subsection{classical SP PI}
-We have $n$ items with weights $X_1, \dots, X_n \sim \text{Unif}(0,1)$.
-We adopt a thresholding scheme for $\ALG$: We pick the first item encountered with weight $\geq T$.
-
-\begin{align*}
-\prob{X_{max} \text{ selected}}
-&=\sum_{i=1}^n\prob{X_1, \dots, X_{i-1}<T \cap X_i \geq T \cap X_i \text{ is max}}\\
-&=\sum_{i=1}^n\int_0^1 \prob{X_1,\dots,X_{i-1}<T\cap X_i\geq T \cap X_{i+1},\dots,X_{n}\leq X_i | X_i = x} f_{\text{Unif}(0,1)}(x) dx\\
-&=\sum_{i=1}^n\int_T^1 \prob{X_1,\dots,X_{i-1}<T \cap X_{i+1},\dots,X_n\leq x} f_{\text{Unif}(0,1)}(x) dx\\
-&=\sum_{i=1}^n\int_T^1 T^{i-1} x^{n-i} dx\\
-&=\sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1})
-\end{align*}
-
-\subsection{Lower Bound of $P^{\text{max}}$}
-
-In this section, we provide a lower bound of $P^{\text{max}}$, where
-\[
-P^{\text{max}} = \max_{T \in [0,1]}\sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1}).
-\]
-
-The optimal $T^{*}$ can be solved by the optimization problem. Let's show the lower bound of $P^{\text{max}}(T^{*})$. Let $T=\frac{n}{n+1}$, then we have
-\begin{align*}
-    P^{\text{max}}(T^{*}) &\geq P^{\text{max}}(T) \\&= \sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1}) \\&= \sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}- \sum_{i=1}^n\frac{1}{n-i+1} T^{n} \\&= T^n \sum_{i=1}^n\frac{1}{i} (T^{-i}-1) 
-\end{align*}
-
-We take the limit $n \to \infty$, we have
-\begin{align*}
-    \lim_{n \to \infty} T^n \sum_{i=1}^n\frac{1}{i} (T^{-i}-1)  &= \frac{1}{e} \lim_{n \to \infty} \sum_{i=1}^n\frac{1}{i} ((1+\frac{1}{n})^i-1)
-\end{align*}
-
-Observe that
-\[
-(1+\frac{1}{n})^i-1=\sum_{k=1}^{i}{i \choose k}\frac{1}{n^k}.
-\]
-
-Then, we take the sum on $i$, we have
-\[
-\sum_{i=1}^n \frac{1}{i}(1+\frac{1}{n})^i-1=\sum_{i=1}^n \frac{1}{i} \sum_{k=1}^{i}{i \choose k}\frac{1}{n^k}
-\]
-
-By Fubini Theorem, we have
-\[
-\sum_{i=1}^n \frac{1}{i} \sum_{k=1}^{i}{i \choose k}\frac{1}{n^k} = \sum_{k=1}^n \sum_{i=k}^{n}\frac{1}{i}{i \choose k}\frac{1}{n^k}
-\]
-
-We have
-\[
-\frac{1}{i}{i \choose k} = \frac{(i-1)(i-2)...(i-k+1)}{k!}
-\]
-
-The nominator is a polynomial with order $k-1$ with respect to $i$. 
-
-{\color{red} Exercise: Show that $\sum_{i=1}^ni^k = \frac{1}{k+1}n^{k+1}+O(n^k)$}
-
-By this property, we have 
-\[
-\lim_{n \to \infty} \sum_{i=k}^{n}\frac{1}{i}{i \choose k}\frac{1}{n^k} = \frac{1}{k \cdot k!}\frac{n^k}{n^k} = \frac{1}{k \cdot k!}.
-\]
-
-Finally, we have the lower bound of $P^{\text{max}}$ is 
-\[
-\frac{1}{e}\sum_{k=1}^{n}\frac{1}{k \cdot k!} \approx 0.485.
-\]
-
-\subsection{Upper Bound of $P^{\text{max}}$}
-
-Consider there are only two secretaries in the arriving sequence. We have $X_1 \sim \text{Unif}(0,1)$, $X_2 \sim \text{Unif}(0,1)$. 
-
-{\color{red} Exercise: Show that the upper bound of $P^{\text{max}}$ among all deterministic algorithms is $\frac{1}{2}$}
-
-{\color{blue} Hint: Any deterministic algorithm can only choose $X_1$ or $X_2$. If $X_1=x$, what will happen? Then take integral. Another method is that think about a coupling random arrival instance $Y_1=X_1$, $Y_2=\text{Unif}(0,1)$. $Y$ obviously follows the arrival process distribution. When the first customer arrives, any algorithm cannot distinguish the arrival instance is $X$ or $Y$. Then for the first customer, if the algorithm accepts him, ...., if not accept,....}
-
-
-{\color{red} Exercise: Show that the upper bound of $P^{\text{max}}$ among all randomized algorithms is $\frac{1}{2}$}
-
-{\color{blue} Hint: Yao's principle. (or set a probability distribution on $X_1$ and $X_2$)}.
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{relaxed model PI}
 \subsubsection{calculation 1 (in meeting)}
 
@@ -131,3 +41,89 @@ We adopt a thresholding scheme for $\ALG$: We examine an item if $\tilde x_i > T
 &=\sum_{i=1}^n\int_T^1 T^{i-1} x^{n-i} dx\\
 &=\sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1})
 \end{align*}
+\section{Relaxed SP Prophet Inequality}
+\subsection{Lower Bound of $P^{\text{max}}$}
+
+In this section, we provide a lower bound of $P^{\text{max}}$, where
+\[
+P^{\text{max}} = \max_{T \in [0,1]}\sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1}).
+\]
+
+The optimal $T^{*}$ can be solved by the optimization problem. Let's show the lower bound of $P^{\text{max}}(T^{*})$. Let $T=\frac{n}{n+1}$, then we have
+\begin{align*}
+    P^{\text{max}}(T^{*}) &\geq P^{\text{max}}(T) \\&= \sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1}) \\&= \sum_{i=1}^n\frac{1}{n-i+1} T^{i-1}- \sum_{i=1}^n\frac{1}{n-i+1} T^{n} \\&= T^n \sum_{i=1}^n\frac{1}{i} (T^{-i}-1) 
+\end{align*}
+
+We take the limit $n \to \infty$, we have
+\begin{align*}
+    \lim_{n \to \infty} T^n \sum_{i=1}^n\frac{1}{i} (T^{-i}-1)  &= \frac{1}{e} \lim_{n \to \infty} \sum_{i=1}^n\frac{1}{i} ((1+\frac{1}{n})^i-1)
+\end{align*}
+
+Observe that
+\[
+(1+\frac{1}{n})^i-1=\sum_{k=1}^{i}{i \choose k}\frac{1}{n^k}.
+\]
+
+Then, we take the sum on $i$, we have
+\[
+\sum_{i=1}^n \frac{1}{i}(1+\frac{1}{n})^i-1=\sum_{i=1}^n \frac{1}{i} \sum_{k=1}^{i}{i \choose k}\frac{1}{n^k}
+\]
+
+By Fubini Theorem, we have
+\[
+\sum_{i=1}^n \frac{1}{i} \sum_{k=1}^{i}{i \choose k}\frac{1}{n^k} = \sum_{k=1}^n \sum_{i=k}^{n}\frac{1}{i}{i \choose k}\frac{1}{n^k}
+\]
+
+We have
+\[
+\frac{1}{i}{i \choose k} = \frac{(i-1)(i-2)...(i-k+1)}{k!}
+\]
+
+The nominator is a polynomial with order $k-1$ with respect to $i$. 
+
+\begin{exercise}
+\label{ex1}	
+{\color{red}  Show that $\sum_{i=1}^ni^k = \frac{1}{k+1}n^{k+1}+O(n^k)$}
+\end{exercise}
+
+By this property, we have 
+\[
+\lim_{n \to \infty} \sum_{i=k}^{n}\frac{1}{i}{i \choose k}\frac{1}{n^k} = \frac{1}{k \cdot k!}\frac{n^k}{n^k} = \frac{1}{k \cdot k!}.
+\]
+
+Finally, we have the lower bound of $P^{\text{max}}$ is 
+\[
+\frac{1}{e}\sum_{k=1}^{n}\frac{1}{k \cdot k!} \approx 0.485.
+\]
+
+\subsection{Upper Bound of $P^{\text{max}}$}
+
+Consider there are only two secretaries in the arriving sequence. We have $X_1 \sim \text{Unif}(0,1)$, $X_2 \sim \text{Unif}(0,1)$. 
+
+\begin{exercise}
+\label{ex2}	
+{\color{red} Show that the upper bound of $P^{\text{max}}$ among all deterministic algorithms is $\frac{1}{2}$}
+\end{exercise}
+
+{\color{blue} Hint: Any deterministic algorithm can only choose $X_1$ or $X_2$. If $X_1=x$, what will happen? Then take integral. Another method is that think about a coupling random arrival instance $Y_1=X_1$, $Y_2=\text{Unif}(0,1)$. $Y$ obviously follows the arrival process distribution. When the first customer arrives, any algorithm cannot distinguish the arrival instance is $X$ or $Y$. Then for the first customer, if the algorithm accepts him, ...., if not accept,....}
+
+
+\begin{exercise}
+\label{ex3}
+{\color{red}  Show that the upper bound of $P^{\text{max}}$ among all randomized algorithms is $\frac{1}{2}$}
+\end{exercise}
+
+{\color{blue} Hint: Yao's principle. (or set a probability distribution on $X_1$ and $X_2$)}.
+
+
+
+
+
+
+
+
+
+
+
+
+
