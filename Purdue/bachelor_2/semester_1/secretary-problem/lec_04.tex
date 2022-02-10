@@ -8,17 +8,22 @@ The strategy is to introduce thresholding parameters $R$ and $T \in (0,1).$ We e
 We still want to find $\prob{X_{max} \text{ is selected}}$ given particular $R,T,n,\delta$.
 
 \begin{equation}
-	\prob{X_{max} \text{ selected}}
-	=\sum_i \int_0^1 \prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x} f(x) \, dx 
+	\begin{split}
+	    \prob{X_{max} \text{ selected}}&=\sum_{i=1}^{n-2} \int_0^1 \prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x} f(x) \, dx \\
+	    &\qquad + \prob{\text{reach }n-1 \cap X_{n-1} \text{ best} \cap \tilde X_{n-1} > R} \\
+	    &\qquad + \prob{\text{reach }n \cap X_n \text{ best}}
+	\end{split}
 \end{equation}
 
 \begin{align*}
+    \intertext{For all $i\le i-2$:}
 	&\prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x} \\
 	&= \prob{\text{reach }i \cap \tilde{X_{i}}>R \cap X_{i}>T \cap X_i \text{ max} | X_i= x} \\
 	&= \prob{\text{Unif}(x-\delta, x+\delta)>R}\ind{\left( x>T \right) }\prob{\text{reach }i \cap X_i \max | X_i = x}
 \end{align*}
 	
 \begin{align*}
+    \intertext{For all $i\le i-2$:}
 	&\prob{\text{reach }i \cap X_i \max | X_i = x} \\
 	&= \sum_{k=0}^{\left\lfloor \frac{i-1}{2} \right\rfloor}
 	\prob{\text{reach }i \cap X_i \max \cap k \text{ examines before reaching }i | X_i = x}\\
@@ -47,6 +52,4 @@ where
 	\\
 	&F(x) & = & x
 .\end{align*}
-
-
 

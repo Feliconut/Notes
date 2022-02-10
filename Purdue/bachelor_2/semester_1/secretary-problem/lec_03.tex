@@ -26,7 +26,7 @@ Optimal P for a determininstic algorithm is $0.75$.
 \begin{align*}
 	\prob{\text{win}} 
 	&= \int_0^1 \alpha \prob{X_2<x} + (1-\alpha)\prob{X_2>x} f(x) \, dx \\
-	&= \int_0^1 \alpha x + (1-\alpha)(1-x) \\
+	&= \int_0^1 \alpha x + (1-\alpha)(1-x) \,dx\\
 	&= \int_0^1 2 \alpha x - \alpha \,dx + \frac{1}{2}\\
 	&\le  \max_{\alpha} \int_0^1 2\alpha x - \alpha \,dx + \frac{1}{2}
 .\end{align*}
