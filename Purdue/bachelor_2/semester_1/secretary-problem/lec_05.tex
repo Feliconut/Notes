@@ -1,0 +1,126 @@
+\lecture{5}{Wed 09 Mar 2022 23:23}{Properties of the optimal solution to the relaxed problem with and without error}
+
+\section{Simple Problem}
+We begin with a relaxed problem of best selection with no error. Let $[x,n]$ denote the game state $[x, (x_{n-1}),\ldots,(x_{1})]$, i.e., the upcoming item with value $x$ and $n$ un-observed items after the current item.
+
+If the player accepts the first item, he wins iff all other items are less than the first item. Hence $\prob{\text{win} | \text{accept at } [x,n]} = x^{n}$.  
+If the player declines $x$, he wins iff he wins the sub-game $[x_{n-1}, n-1]$, and $\max(x_{n-1}, \ldots, x_1) < x$. 
+
+From principle of dynamic programming, the optimal policy can be yielded from the following system of equations:
+\begin{align*}
+	V(x, 0) &= 1\\
+	V(x, n) &= \max\left( x^n,  (1-F_{n-1}(x) ) E_{x_{n}} V(x_{n},n-1)\right) \\
+	\intertext{where}
+	F_{n}(x) &:= \prob{\max\left(  x_n, \ldots, x_1 \right)<x | [x_n,n-1] \text{wins under optimal policy} }
+.\end{align*}
+
+Our first observation is that a thresholding scheme can be optimal.
+
+\begin{theorem}
+	There exists a sequence $T_n \subset \R$ such that $ x^n>  (1-F_{n-1}(x) ) E_{x_{n}} V(x_{n},n-1) \iff x > T_n$ for all $n \in  \N$. The same is true if we replace all $>$ with $\ge $.
+\end{theorem}
+\begin{proof}
+	The LHS of the inequality monotonely increase wrt $x$, while the RHS monotonely decrease wrt $x$. Hence the solution set is in the form $(T_n, 1]$. Specifically, $T_n = \left( \left( 1-F_{n-1}(x) \right) EV(\cdot, n-1) \right)^{\frac{1}{n}}$.
+\end{proof}
+
+We can also say something about $T_n $:
+
+\begin{theorem}
+	The optimal thresholding sequence $T_n$ has the following properties:
+	\begin{enumerate}
+		\item $T_0 = 0 $ and $T_1 = \frac{1}{2}$
+		 \item $T_n$ strictly monotone increase.
+		\item  $\lim_{n \to \infty} T_n = 1$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	TBD.
+\end{proof}
+
+Now we examine the asymptotic behavior of the optimal policy.
+
+\begin{theorem}
+	The optimal policy ensures a $\frac{1}{2}$ winning rate, and the bound is tight for large $n$. In other words, $V(0,n) \downarrow \frac{1}{2}$.
+\end{theorem}
+\begin{proof}
+	TBD.
+\end{proof}
+
+We obtain recipe for the optimal policy by iterated calculation:
+
+\begin{align*}
+	EV(\cdot, n) &= \int_0^{T_n}  (1-F_{n-1}(x) ) EV(\cdot,n-1) \,dx + \int_{T_n}^1 x^n \,dx\\
+	F_n(x) &= \frac{\int_0^x \int_0^x \ind(z<T_n \land z<y) + \ind(z>T_n \land z>y) F'_{n-1}(y) \,dy dz}{\int_0^1 \int_0^1 \ind(z<T_n \land z<y) + \ind(z>T_n \land z>y) F'_{n-1}(y) \,dy dz} \\
+	F_0(x) &= x
+.\end{align*}
+
+
+Numerical result for $T_n$ is summarized in the following table.
+(Numerical experiments TBD)
+
+
+\section{Relaxed Problem with Error}
+Fix $\delta > 0$, and use the following notation for game state: $[\tilde x, n]$ means the current item to be decided has observed (inaccurate) value  $\tilde x$, and we have $n$ items after the current item. 
+If the player examines the current item, the game state evolves into $[x, n-1]$, where we now have the exact value $x$, and one item (the next) is omitted. 
+If the player otherwise declines the current item, the game state evolves into $[\tilde x_n, n-1]$ where $\tilde x$ is replaced by $\tilde x_n$, the next item, and we have one item less in the queue.
+
+Define $X^*_{[x, n]}$ be r.v. representing the value of accepted item from a winning run of the game starting from the specified state, where the policy is assumed to be optimal.
+We again obtain the DP equations.
+\begin{align}
+\label{base}	V(\tilde x, 0) &= V(x, 0) = 1\\
+	\label{err_induct}V(\tilde x, n) &= \max\left( \expect{ \prob{X_2 < X^*_{[X,n-1]}} V(X,n-1)}, \expect{\prob{X<X^*_{[\tilde Y, n-1]}} V(\tilde Y, n-1)} \right)  \\
+	\label{noerr_induct}V(x, n) &= \max\left( x^n,  \expect{\prob{x<X^*_{[\tilde Y, n-1]}} V(\tilde Y, n-1)}\right) 
+.\end{align}
+
+The problem with error is again solvable using thresholding:
+\begin{theorem}
+	The optimal policy for the problem with error can be described completely by thresholding. In other words, for each $\delta \ge 0$, there exists sequences $T_n$ and $R_n \in \R$ such that the LHS in the $\max$ operator of \eqref{err_induct} is greater than the RHS iff $\tilde x > R_n$. Similarly, the LHS is picked in \eqref{noerr_induct} iff $x > T_n$.
+\end{theorem}
+\begin{proof}
+	In \eqref{noerr_induct}, note that $\prob{x<X^*_ {[\tilde Y, n-1]}}$ is $1-$ a CDF. Taking expectation won't affect monotonicity, so the argument in the previous theorem applies.  \\
+	
+	Now consider \eqref{err_induct}. We define $A(x) := \prob{X_2 < X^*_{[x, n-1]}} V(x, n-1)$ and $B(x) := \expect{\prob{x < X^*_{[\tilde \cdot, n-1]} }V(\tilde \cdot, n-1)}$. Our goals is showing that the inequality $EA > EB$, where expectation is taken over $x \in  [u-\delta, u+\delta] \cap [0,1]$, is true iff $u > R_n$ for some $R_n \in  \R$.
+	We will first prove that the solution of $A(x)>B(x)$ is a thresholding on $x$. Then complete the proof by considering properties of expectation.\\
+
+	Let $x = 0$. Now we have $A(0) = \prob{X_2 < X^*_{[0,n-1]}}\prob{0<X^*_{\tilde\cdot, n-2]}} V(\tilde \cdot, n-2) = \prob{X_2 < X^*_{[\tilde\cdot, n-2]}} V(\tilde\cdot, n-2)$, and $B(0) = V(\tilde\cdot, n-1)$. $B(0)$ is the probability of winning a game of $n$ items, while $A(0)$ is also the probability of picking the best item from $n$ items, but the exact item $X_2$ must not be optimum. Hence $A(0)$ is a sub-event of $B(0)$, so $A(0) < B(0)$.\\
+
+	Let $x < T_n $ and now we compute $A(x) = \prob{X_2 < X^*_{[x,n-1]}}\prob{x<X^*_{[\tilde\cdot, n-2]}} V(\tilde \cdot, n-2) = \prob{X_2 < X^*_{[\tilde\cdot, n-2]}} \prob{x < X^*_{[\tilde \cdot, n-2]}} V(\tilde\cdot, n-2) = A(0)\prob{x < X^*_{[\tilde \cdot, n-2]}} $, which monotonely decrease wrt $x$. $B(x) = B(0) \prob{x < X^*_{[\tilde \cdot, n-1]}}$ also monotonely decrease wrt $x$.  $A(x) < B(x)$ follows from the lemma:
+
+	\begin{lemma}
+		As $n$ increases, the distribution of $X^*_{[0, n]}$ is strictly more right-skewed. To put precisely, \[
+		\prob{x<X^*_{[0, n]}} 
+		<\prob{x<X^*_{[0, m]}} 
+		\] 
+		whenever $n > m$ for all $0\lt x\lt 1$.
+	\end{lemma}
+
+	Now let $x \ge T_n$. Then $A(x) = \prob{X_2 < X^*_{[x, n-1]}} x^{n-1} = x^n$, which monotonely increase up to $1$. $B(x)$ still monotonely decrease. We can also verify that $A(x)$ and $B(x)$ are continuous. Thus we can conclude that there exists a unique point $\alpha \in [T_n, 1]$ such that $A(x) > B(x)$ iff $x > \alpha$ for all $x \in [0,1]$.
+\end{proof}
+
+Again we can say something about the thresholding sequences.
+
+\begin{theorem}
+	The optimal thresholding sequences $T_n$ and $R_n$ has the following properties:
+	\begin{enumerate}
+		\item When $\delta = 0$, $T_n \equiv R_n$ are same as the problem without error.
+		 \item For fixed $\delta$,  $T_n$ and $R_n$ both strictly monotone increase wrt $n$.
+		 \item For fixed $n$, $T_n$ and $R_n$ both monotone decrease wrt $\delta$.
+		\item  $\lim_{n \to \infty} T_n = 1$
+		\item (?) $\lim_{n \to \infty} R_n = 1-\delta$.
+		\item As $\delta \to \infty$, $R_n^{(\delta)} \to  -\infty$ and $T_n^{(\delta)} \to  T_{\left\lceil \frac{n}{2} \right\rceil }^{(0)}$ for all $n$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	TBD.
+\end{proof}
+
+\begin{corollary}
+	The optimal wininng rate $V(0,n)$ satisfies the following:
+	\begin{enumerate}
+		\item $V_{(0)}$ is identical to the problem without error.
+		\item As $\delta \to \infty$, $V_{(\delta)}(0,n) \to V_{(0)}(0,\left\lceil \frac{n}{2} \right\rceil )$ for all $n$.
+	\end{enumerate}
+\end{corollary}
+
+We can compute the optimal thresholds iteratively. Numerical results are summarized below. 
+(Numerical experiments TBD)
