@@ -53,3 +53,70 @@ where
 	&F(x) & = & x
 .\end{align*}
 
+\section{Another Approach to Estimate $P^{\max}$}
+To simplify the writing, we write $\text{Error Win}$ as the event that we find the best secretary under the model with error. We write $\text{Original Win}$ as the event that we find the best secretary under the original model. 
+
+\begin{align*}
+    \Pr(\text{Error Win}) &= \Pr(\text{Error Win} \vert \text{Original Win}) \Pr(\text{Original Win}) \\&+ \Pr(\text{Error Win} \vert \text{Original Lose}) \Pr(\text{Original Lose}) \\& \geq 0.485 \Pr(\text{Error Win} \vert \text{Original Win}).
+\end{align*}
+
+{\color{red} Optional exercise: Is there any method to bound $\Pr(\text{Error Win} \vert \text{Original Lose})$. }
+
+Next, we bound the probability of $\text{Error win}$ conditional on $\text{Original Win}$. We start with defining two events: we let $\mathcal E_x=\max X_i = x$. We let $\mathcal F_y$ be that the secretary who arrives in the last period before the max secretary arrives. Because the arriving process is i.i.d, it is easy to see that $\mathcal F_y \sim \text{Unif}(0,1)$.
+
+{\color{red} Exercise1: Find the distribution of $\mathcal E_x$.}
+
+{\color{blue} Hint: See Beta distribution.}
+
+We have 
+\begin{align*}
+    \Pr(\text{Error Win} \vert \text{Original Win}) &= \int_{x,y}  \Pr(\text{Error Win} \vert \text{Original Win}, \mathcal E_x, \mathcal F_y) f(x) dxdy.
+\end{align*}
+
+We construct two arriving instances as follows: let $I_1$ contains $n$ i.i.d $\text{Unif}(0,1)$ r.v. In additional, the maximal realization is $x$. The last r.r. before the max one has realization $y$. Let $I_2$ be a copy of $I_1$. Conditional on $\text{Original win}$, there are two cases that we do not win on the same instance:
+
+\begin{itemize}
+    \item The max $x$ has observation $\hat{x} < T$, then we do not examine the best secretary.
+    \item The one before max, $y$, has observation $\hat{y} \geq T$, then the best secretary is skipped. (Notice that here we do not need to consider the second last before $x$ and all the previous r.v., because we are providing the lower bound.)
+\end{itemize}
+
+Therefore, we have
+\[
+\Pr(\text{Error lose} \vert \text{Original Win}, \mathcal E_x, \mathcal F_y) \leq \Pr(\text{Case 1} \cup \text{Case 2}) \leq \Pr(\text{Case 1})+\Pr(\text{Case 2}).
+\]
+
+{\color{red} Exercise 2: Find the probability of Case 1 and Case 2 by considering that the observation cannot exceed $1$ or below $0$.}
+
+All calculation were based on the assumption that $\delta < T < 1-\delta$.
+
+\begin{gather*}
+    F(x) = \begin{cases}
+    1 & x<T-\delta \\
+    0 & x>T+\delta \\
+    \frac{x+\delta-T}{2\delta} & \text{otherwise}
+    \end{cases} \\
+    \Pr(\text{Case 1}) = F(x)\\
+    \Pr(\text{Case 2}) = 1-F(y)
+\end{gather*}
+
+Finally, we have 
+\begin{align*}
+    \Pr(\text{Error Win}) &\geq  0.485 \Pr(\text{Error Win} \vert \text{Original Win}) \\&\geq 0.485 \int_{x,y} (1-\Pr(\text{Case 1})-\Pr(\text{Case 2}))f(x)dxdy.
+\end{align*}
+
+{\color{red} Please complete the final estimation. Write it as a function of $\delta$, if the integral is hard to calculate, run numerical experiments for different $\delta$ and see what the value of the integral is.}
+
+
+{\color{blue} Evaluated Integral:}
+
+\begin{align*}
+&\frac{\left(\left(-2 n -1\right) \delta -T \right) \left(T -\delta \right)^{n}+\left(\left(-2 n -1\right) \delta +T \right) \left(\delta +T \right)^{n}+2 T \delta \left(n +1\right)}{2 \left(n +1\right) \delta} \\
+&\longrightarrow^{n\to\infty}{T}
+\end{align*}
+    
+    
+\begin{align*}
+    \prob{\text{Error Win} | \text{Original Lose}}
+&=\prob{\text{reach }i | \exists j<i, X_j > T} \prob{X_{\max} > T | \text{Original Lose}}\\
+&\leq \prob{j-1 \text{ examine}} \prob{X_{\max} > T | \text{Original Lose}}
+\end{align*}
