@@ -20,7 +20,7 @@ Our first observation is that a thresholding scheme can be optimal.
 	There exists a sequence $T_n \subset \R$ such that $ x^n>  (1-F_{n-1}(x) ) E_{x_{n}} V(x_{n},n-1) \iff x > T_n$ for all $n \in  \N$. The same is true if we replace all $>$ with $\ge $.
 \end{theorem}
 \begin{proof}
-	The LHS of the inequality monotonely increase wrt $x$, while the RHS monotonely decrease wrt $x$. Hence the solution set is in the form $(T_n, 1]$. Specifically, $T_n = \left( \left( 1-F_{n-1}(x) \right) EV(\cdot, n-1) \right)^{\frac{1}{n}}$.
+	The LHS of the inequality monotonically increase wrt $x$, while the RHS monotonically decrease wrt $x$. Hence the solution set is in the form $(T_n, 1]$.
 \end{proof}
 
 We can also say something about $T_n $:
@@ -29,7 +29,7 @@ We can also say something about $T_n $:
 	The optimal thresholding sequence $T_n$ has the following properties:
 	\begin{enumerate}
 		\item $T_0 = 0 $ and $T_1 = \frac{1}{2}$
-		 \item $T_n$ strictly monotone increase.
+		 \item $T_n$ strictly monotonically increase.
 		\item  $\lim_{n \to \infty} T_n = 1$
 	\end{enumerate}
 \end{theorem}
@@ -84,17 +84,17 @@ The problem with error is again solvable using thresholding:
 
 	Let $x = 0$. Now we have $A(0) = \prob{X_2 < X^*_{[0,n-1]}}\prob{0<X^*_{\tilde\cdot, n-2]}} V(\tilde \cdot, n-2) = \prob{X_2 < X^*_{[\tilde\cdot, n-2]}} V(\tilde\cdot, n-2)$, and $B(0) = V(\tilde\cdot, n-1)$. $B(0)$ is the probability of winning a game of $n$ items, while $A(0)$ is also the probability of picking the best item from $n$ items, but the exact item $X_2$ must not be optimum. Hence $A(0)$ is a sub-event of $B(0)$, so $A(0) < B(0)$.\\
 
-	Let $x < T_n $ and now we compute $A(x) = \prob{X_2 < X^*_{[x,n-1]}}\prob{x<X^*_{[\tilde\cdot, n-2]}} V(\tilde \cdot, n-2) = \prob{X_2 < X^*_{[\tilde\cdot, n-2]}} \prob{x < X^*_{[\tilde \cdot, n-2]}} V(\tilde\cdot, n-2) = A(0)\prob{x < X^*_{[\tilde \cdot, n-2]}} $, which monotonely decrease wrt $x$. $B(x) = B(0) \prob{x < X^*_{[\tilde \cdot, n-1]}}$ also monotonely decrease wrt $x$.  $A(x) < B(x)$ follows from the lemma:
+	Let $x < T_n $ and now we compute $A(x) = \prob{X_2 < X^*_{[x,n-1]}}\prob{x<X^*_{[\tilde\cdot, n-2]}} V(\tilde \cdot, n-2) = \prob{X_2 < X^*_{[\tilde\cdot, n-2]}} \prob{x < X^*_{[\tilde \cdot, n-2]}} V(\tilde\cdot, n-2) = A(0)\prob{x < X^*_{[\tilde \cdot, n-2]}} $, which monotonically decrease wrt $x$. $B(x) = B(0) \prob{x < X^*_{[\tilde \cdot, n-1]}}$ also monotonically decrease wrt $x$.  $A(x) < B(x)$ follows from the lemma:
 
 	\begin{lemma}
 		As $n$ increases, the distribution of $X^*_{[0, n]}$ is strictly more right-skewed. To put precisely, \[
-		\prob{x<X^*_{[0, n]}} 
-		<\prob{x<X^*_{[0, m]}} 
+		\prob{X^*_{[0, n]}<x} 
+		<\prob{X^*_{[0, m]}<x} 
 		\] 
 		whenever $n > m$ for all $0\lt x\lt 1$.
 	\end{lemma}
 
-	Now let $x \ge T_n$. Then $A(x) = \prob{X_2 < X^*_{[x, n-1]}} x^{n-1} = x^n$, which monotonely increase up to $1$. $B(x)$ still monotonely decrease. We can also verify that $A(x)$ and $B(x)$ are continuous. Thus we can conclude that there exists a unique point $\alpha \in [T_n, 1]$ such that $A(x) > B(x)$ iff $x > \alpha$ for all $x \in [0,1]$.
+	Now let $x \ge T_n$. Then $A(x) = \prob{X_2 < X^*_{[x, n-1]}} x^{n-1} = x^n$, which monotonically increase up to $1$. $B(x)$ still monotonically decrease. We can also verify that $A(x)$ and $B(x)$ are continuous. Thus we can conclude that there exists a unique point $\alpha \in [T_n, 1]$ such that $A(x) > B(x)$ iff $x > \alpha$ for all $x \in [0,1]$.
 \end{proof}
 
 Again we can say something about the thresholding sequences.
@@ -103,8 +103,8 @@ Again we can say something about the thresholding sequences.
 	The optimal thresholding sequences $T_n$ and $R_n$ has the following properties:
 	\begin{enumerate}
 		\item When $\delta = 0$, $T_n \equiv R_n$ are same as the problem without error.
-		 \item For fixed $\delta$,  $T_n$ and $R_n$ both strictly monotone increase wrt $n$.
-		 \item For fixed $n$, $T_n$ and $R_n$ both monotone decrease wrt $\delta$.
+		 \item For fixed $\delta$,  $T_n$ and $R_n$ both strictly monotonically increase wrt $n$.
+		 \item For fixed $n$, $T_n$ and $R_n$ both monotonically decrease wrt $\delta$.
 		\item  $\lim_{n \to \infty} T_n = 1$
 		\item (?) $\lim_{n \to \infty} R_n = 1-\delta$.
 		\item As $\delta \to \infty$, $R_n^{(\delta)} \to  -\infty$ and $T_n^{(\delta)} \to  T_{\left\lceil \frac{n}{2} \right\rceil }^{(0)}$ for all $n$.
@@ -115,12 +115,12 @@ Again we can say something about the thresholding sequences.
 \end{proof}
 
 \begin{corollary}
-	The optimal wininng rate $V(0,n)$ satisfies the following:
+	The optimal winning rate $V(0,n)$ satisfies the following:
 	\begin{enumerate}
 		\item $V_{(0)}$ is identical to the problem without error.
-		\item As $\delta \to \infty$, $V_{(\delta)}(0,n) \to V_{(0)}(0,\left\lceil \frac{n}{2} \right\rceil )$ for all $n$.
+		\item As $\delta \to \infty$, $V_{(\delta)}(0,n) \to \frac{1}{2} V_{(0)}(0,\left\lceil \frac{n}{2} \right\rceil )$ for all $n$.
 	\end{enumerate}
 \end{corollary}
 
-We can compute the optimal thresholds iteratively. Numerical results are summarized below. 
+We can compute the optimal thresholds by iteratively solving inequalities. Numerical results are summarized below. 
 (Numerical experiments TBD)
