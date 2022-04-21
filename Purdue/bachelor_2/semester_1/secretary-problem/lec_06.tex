@@ -1,0 +1,45 @@
+\lecture{6}{Thu 21 Apr 2022 00:09}{}
+\section{Noisy SP with examine}
+\subsection{Construction from R.V.s}
+
+We use notation from (Krieger and Samuel-Cahn, 2012) and (Garrod and Morris, 2013). Consider a set of items $P = \{x_1, \ldots, x_n\}$. Let $X_i$ be i.i.d. continuous R.V.s, and $Y_i = X_i + \varepsilon_i$, and the $\varepsilon_i$ are i.i.d. noise variables. The goal is to maximize the probability of selecting the $i$ for which the $X$ value is maximal.
+
+Upon arrival of each item $x_i$, the player may choose to either reject the item, or to examine this item, forfeiting $k$ items. After examination the player must decide whether to accept or reject it. Hence if $t \ge n - k|S|$ where $S$ is the set of examined items, the game terminates and the current item at hand is selected. We denote the number of remaining items by $n_t = n - k |S_t|$.
+
+Upon each arrival the player observes a total order of $\{x_1,\ldots,x_t\}$ sorted by their corresponding $Y_i$, and for each \textit{examinated} item  $x_i$,  $Y_i$ replaced by $X_i$.
+
+We may limit the number of examinations throughout the game by $m$.
+\begin{enumerate}
+	\item When $m=0$, the game is Noisy SP.
+	\item When $k=0$, this is a Noisy SP with limited query from an oracle.
+	\item When $k=0$ and $m\ge  n$, this is Classical SP.
+\end{enumerate}
+
+\textbf{Claim.} The optimal strategy can always achieve an asymptotic winning rate $\frac{1}{(1+k)e} + \delta$ for some $\delta > 0$.
+
+\textbf{Conjecture.} A nontrivial lower bound can be obtained with $m = o(n)$, possibly $O(\log n)$ examinations.
+
+\textbf{Conjecture.} The optimal solution is in the following form: there exists $1\le k_1\le k_2 \le \ldots\le k_n \le n$ and $1\le R\le n$, and for each arriving item $x_i$, examine if its relative rank $\le  k_{i+n-n_t}$, and decline otherwise. After examination, accept if it has relative rank $1$, and $i>R$.
+
+
+
+\subsection{Construction from permutation group}
+
+
+Let $S_n$ be the permutation group on $[n]$. We identify the \textit{swaps} $\tau_i: i \leftrightarrow i+1$, $i = 1\ldots n-1$. Define i.i.d. poisson R.V.s $N_i \sim \text{Po}(\lambda)$ to be the \textit{multiplicity} of $\tau_i$.
+
+Now we randomly permute $\tau_i,\ldots, \tau_{n-1}$ where each $\tau_i$ appears $N_i$ times. We denote the resultant array by $\tau_{(j)}, j = 1\ldots N = \sum N_i$. Define the \textit{resultant permutation} $\pi$ by \[
+\pi = \tau_{(1)} \circ \tau_{(2)} \circ \ldots \circ \tau_{N}
+.\] 
+
+\textbf{Claim.} $\mathbb{P}(\pi) = f(d(\pi, I))$ where $I$ is identity permutation, and $d$ is \textit{Kendall-tau Distance}. Moreover, $f$ is strictly monotone decreasing.
+
+\textbf{Conjecture.} $\pi$ is distributed as if we observe the effect of $\epsilon_i$ on $X_i$, for arbitrary continuous i.i.d. distribution, under some additional conditions.
+
+The player observes $\pi_t$ which is induced by $\pi$ on $[t]$. The distribution of $\pi$ is restricted according to the set of examinated items $E_t$ such that
+\begin{enumerate}
+	\item $i,j \in E_t \implies \left( \pi(i) < \pi(j) \iff i < j \right) $
+	\item some other conditions that uniquely determine the restriction.
+\end{enumerate}
+
+\textbf{Claim.} The optimal winning rate, $W_n(\lambda)$ goes to  $\frac{1}{(k+1)e}$ as $\lambda \to \infty$, where the distribution of $\pi$ becomes uniform in $S_n$.
