@@ -1,0 +1,21 @@
+\lecture{7}{Tue 03 May 2022 05:45}{Formulation for Noisy SP with examination}
+
+Let $S_i$ be set of examined items at round $i$. Let $Z_i$ be the rank affected by examination, that is \[
+Z_i = \begin{cases}
+	X_i & i \in S_i \\
+	Y_i & i \not \in S_i
+\end{cases}
+.\] 
+
+Define the absolute and relative ranks by 
+\begin{align}
+	\text{AR}(X_i) &:= \sum_{j=1}^n \ind(X_i \le X_j) \\
+	\text{RR}(X_i) &:= \sum_{j=1}^i \ind(X_i \le X_j) \\
+\end{align}
+Also define $\text{AR}(Y_i)$, $\text{AR}(Z_i)$, $\text{RR}(Y_i)$, and $\text{RR}(Z_i)$ in similar manner.
+
+Let $\mathcal{F}_i := \sigma\left(\text{RR}(Y_1),\ldots,\text{RR}(Y_i),\text{RR}(Z_1), \text{RR}(Z_{i-1}) \right) $.
+
+The examined objects is a random set $S_i \in \mathcal{F}_i$ such that $S_0 = \emptyset$, $S_i \subset S_{i+1} \subset S_i \cup \{i+1\}$ and $|S_n| \le  m$.
+
+The decision to accept is a stopping time $\{\tau = i\} \in \sigma\left( \mathcal{F}_i, \text{RR}(Z_i) \right) $. 

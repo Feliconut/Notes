@@ -1,0 +1,80 @@
+\lecture{8}{Tue 31 May 2022 08:47}{Partially Adversarial SP with Examination}
+
+\section{Partially Adversarial SP}
+text
+\subsection{Problem formulation }
+$n $ items are totally ordered. A random permutation $\sigma $ is taken uniformly from the permutation group $S_n$. The classical SP corresponds to finding a stopping time that most likely stops on $t = \sigma(1)$.
+
+
+The adversary adds a random noise with resultant permutation $\pi $. This permutation is not over the arriving order of object, but over the observed rank, i.e. $\pi(i)=j $ means that the item with actual rank $j $ will be found by the player to be $i $-th best, if the player observes all items without examining them. We will always use numbers to denote the true rank of items, so the incoming stream of items is represented by $\sigma \pi (1,\ldots,n)$.
+
+A randomized stopping time $\tau$ that takes random input $\mathbf{r}$, and acts on the incoming items $\sigma \pi$. The $\sigma $-algebra it lies on is $\mathcal{F} = \sigma(\text{RR}_t)$ where $\text{RR}_t(i)=\sum_{j=1}^t \mathbf{1}\left( \sigma^{-1}(j)\ge \sigma^{-1}(i) \right) $ is the observed relative rank function.
+
+To restrict the power of adversary, we demand $\pi$ to be long-range stable, i.e. $\pi(i)<\pi(j)$ whenever $i<j $ and $j-i>c $, where the constant $c $ is known to the algorithm.
+
+
+
+	We list several obvious facts about this problem construction.
+\begin{lemma}
+	\begin{enumerate}
+		\item The relative ranks behave the same:  $\text{RR}(t)$ is uniformly sampled from $1, \ldots,t+1$ and independent from each other.
+		\item When $\pi$ do not depend on $\sigma$, $\sigma \pi$ and $\sigma$ have exactly same distribution.
+	\end{enumerate}
+\end{lemma}
+
+\subsection{Case without examination}
+
+We first do not allow examination, and see how far the algorithm can get.
+
+\subsubsection{Weak adversarial, do not know anything}
+
+Consider the weakest adversary, that can only pick a single $\pi$ without knowing about the algorithm. The competitive ratio is
+\begin{align*}
+	&\inf_\pi \sup_\tau \mathbb{E}_\sigma \left[ \prob{  \tau = \sigma\pi(1) }   \right]\\
+	&= \inf_k \inf_{\pi:\pi(1)=k}\sup_\tau \mathbb{E}_\sigma \left[ \prob{  \tau = \sigma(k) }   \right]\\
+	&\le  \inf_k \sup_\tau \mathbb{E}_\sigma \left[ \prob{  \tau = \sigma(k) }   \right]
+.\end{align*}
+
+The problem reduces to a generalized post-doc variant of SP, where we want the item with absolute rank $k$ instead of $1$. Each time $k $ is provided, we may specifically design our algorithm to maximize the probability of choosing the rank $k $ item. This is significantly harder to solve as compared to the classical SP, in its value function is no longer monotone: the function \[
+\prob{\text{AR}(t) = m | \text{RR}(t) = r } = \frac{\binom{m-1}{r-1}\binom{n-m}{t-r}}{\binom{n}{t}}
+\]
+is not monotone wrt $r $ for any fixed $m $. No explicit solution has been found so far. We can show that the worst case when $c < \frac{n}{2}$ is attained at $\pi(1)=c $, and at $\pi(1) = \left\lfloor \frac{n}{2} \right\rfloor $ when $ c \ge  \frac{n}{2}$.
+
+\subsubsection{Weak adversarial, know algorithm}
+
+Now we assume that the adversary adapts to each algorithm, but cannot depend on the random permutation $\sigma$. The competitive ratio is now
+\begin{align*}
+	&\sup_\tau  \inf_\pi \mathbb{E}_\sigma \left[ \prob{ 
+	\tau = \sigma\pi(1) }   \right] \\
+\intertext{Note that the generalized postdoc variant of SP is an upper bound to the problem:}
+	&= \sup_\tau \inf_k \inf_{\pi:\pi(1)=k } \mathbb{E}_\sigma \prob{ \tau =\sigma(k) }  \\
+	&\le  \sup_\tau \inf_k \mathbb{E}_\sigma \prob{ \tau =\sigma(k) }  
+.\end{align*}
+This time we need to tackle all sub-problems using only one algorithm. In other words, the algorithm's probability to choose the 1, 2, \ldots, $c $-th item are compared, and the minimum one is the CR.
+
+For lower bound, we consider the following algorithm: When each item arrives, if $\text{RR}(t) > c $, reject the item. Otherwise, accept with probability $p $, where $p $ is a tuning parameter. Now for some algorithm $\tau$ and fixed $k $, We derive analytic result for this algorithm. Its performance monotonely decrease wrt $\pi(1)$ for fixed $n $ and $p $, and always approach the trivial lower bound $\frac{1}{n }$. 
+
+Consider another algorithm: Let the first $pn$ items to go by, and then select the first item with relative rank better or equal to $c $. This algorithm makes no distinction among the first $c $ items, so it suffices to analyze its behavior on the classic SP. 
+
+\subsubsection{Strong adversarial, knows $\tau $ and $\sigma$}
+
+\begin{align*}
+	\sup_\tau  \mathbb{E}_\sigma \inf_\pi \left[ \prob{ 
+	\tau = \sigma\pi(1) }   \right] 
+.\end{align*}
+
+
+
+
+
+\subsubsection{Strong adversarial, knows $\tau$,  $\sigma$ and $\mathbf{r}$ }
+
+
+\begin{align*}
+	\sup_\tau  \mathbb{E}_\sigma \left[ \mathbb{E}_{\mathbf{r}} \left[ \inf_\pi  
+	\mathbf{1}\left( \tau = \sigma\pi(1) \right)  \right]  \right] 
+.\end{align*}
+
+In this case the adversary knows the random seed used by the algorithm, so it's able to make hindsight decisions. In this setting, the algorithm achieve zero cr. This can be shown by calling to an auxillary problem of adversarial best-choice within the top $c $ items, where no deterministic algorithm can guarantee nonzero competitive ratio against an adversary.
+
+There is always a way to embed the exactly same relative order as seen by the $t $-th round, into a total order where some un-observed item is maximum.
