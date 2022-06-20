@@ -6,9 +6,9 @@ text
 $n $ items are totally ordered. A random permutation $\sigma $ is taken uniformly from the permutation group $S_n$. The classical SP corresponds to finding a stopping time that most likely stops on $t = \sigma(1)$.
 
 
-The adversary adds a random noise with resultant permutation $\pi $. This permutation is not over the arriving order of object, but over the observed rank, i.e. $\pi(i)=j $ means that the item with actual rank $j $ will be found by the player to be $i $-th best, if the player observes all items without examining them. We will always use numbers to denote the true rank of items, so the incoming stream of items is represented by $\sigma \pi (1,\ldots,n)$.
+The adversary adds a random noise with resultant permutation $\pi $. This permutation is not over the arriving order of object, but over the observed rank, i.e. $\pi(j)=i $ means that the item with actual rank $j $ will be found by the player to be $i $-th best, if the player observes all items without examining them. We will always use numbers to denote the true rank of items, so the incoming stream of items is represented by $\sigma \pi (1,\ldots,n)$.
 
-A randomized stopping time $\tau$ that takes random input $\mathbf{r}$, and acts on the incoming items $\sigma \pi$. The $\sigma $-algebra it lies on is $\mathcal{F} = \sigma(\text{RR}_t)$ where $\text{RR}_t(i)=\sum_{j=1}^t \mathbf{1}\left( \sigma^{-1}(j)\ge \sigma^{-1}(i) \right) $ is the observed relative rank function.
+A randomized stopping time $\tau$ that takes random input $\mathbf{r}$, and acts on the incoming items $\sigma \pi$. The $\sigma $-algebra it lies on is $\mathcal{F}_t = \sigma(\text{RR}_t)$ where $\text{RR}_t(i)=\sum_{j=1}^t \mathbf{1}\left( \sigma^{-1}(j)\ge \sigma^{-1}(i) \right) $ is the observed relative rank function.
 
 To restrict the power of adversary, we demand $\pi$ to be long-range stable, i.e. $\pi(i)<\pi(j)$ whenever $i<j $ and $j-i>c $, where the constant $c $ is known to the algorithm.
 
@@ -52,7 +52,7 @@ Now we assume that the adversary adapts to each algorithm, but cannot depend on 
 .\end{align*}
 This time we need to tackle all sub-problems using only one algorithm. In other words, the algorithm's probability to choose the 1, 2, \ldots, $c $-th item are compared, and the minimum one is the CR.
 
-For lower bound, we consider the following algorithm: When each item arrives, if $\text{RR}(t) > c $, reject the item. Otherwise, accept with probability $p $, where $p $ is a tuning parameter. Now for some algorithm $\tau$ and fixed $k $, We derive analytic result for this algorithm. Its performance monotonely decrease wrt $\pi(1)$ for fixed $n $ and $p $, and always approach the trivial lower bound $\frac{1}{n }$. 
+For lower bound, we consider the following algorithm: When each item arrives, if $\text{RR}(t) > c $, reject the item. Otherwise, accept with probability $p $, where $p $ is a tuning parameter. Now for some algorithm $\tau$ and fixed $k $, We derive analytic result for this algorithm. Its performance monotonously decrease wrt $\pi(1)$ for fixed $n $ and $p $, and always approach the trivial lower bound $\frac{1}{n }$. 
 
 Consider another algorithm: Let the first $pn$ items to go by, and then select the first item with relative rank better or equal to $c $. This algorithm makes no distinction among the first $c $ items, so it suffices to analyze its behavior on the classic SP. 
 
@@ -75,6 +75,4 @@ Consider another algorithm: Let the first $pn$ items to go by, and then select t
 	\mathbf{1}\left( \tau = \sigma\pi(1) \right)  \right]  \right] 
 .\end{align*}
 
-In this case the adversary knows the random seed used by the algorithm, so it's able to make hindsight decisions. In this setting, the algorithm achieve zero cr. This can be shown by calling to an auxillary problem of adversarial best-choice within the top $c $ items, where no deterministic algorithm can guarantee nonzero competitive ratio against an adversary.
-
-There is always a way to embed the exactly same relative order as seen by the $t $-th round, into a total order where some un-observed item is maximum.
+In this case the adversary knows the random seed used by the algorithm, so it's able to make hindsight decisions. In this setting, the algorithm achieve zero cr. This can be shown by calling to an auxiliary problem of adversarial best-choice within the top $c $ items, where no deterministic algorithm can guarantee nonzero competitive ratio against an adversary.
