@@ -93,3 +93,52 @@ Consider another algorithm: Let the first $pn$ items to go by, and then select t
 .\end{align*}
 
 In this case the adversary knows the random seed used by the algorithm, so it's able to make hindsight decisions. In this setting, the algorithm achieve zero cr. This can be shown by calling to an auxiliary problem of adversarial best-choice within the top $c $ items, where no deterministic algorithm can guarantee nonzero competitive ratio against an adversary.
+
+
+\subsection{Lower Bound for an algorithm}
+
+Algorithm: examine each item with $\text{RR}_t(t) \le  c $. Accept the current item if $t \ge  T $ and the item is the best so far.
+
+It is equivalent to view this game as follows: when an item is examined, the last available item is omitted, i.e. the omitted item is taken from the end of the queue. To simplify the analysis, we also allow the omitted item to appear as an ordinary item. The player wins only if the best itme is chosen, AND the item is not omitted.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{lowerbound}
+    \caption{LowerBound}
+    \label{fig:lowerbound}
+\end{figure}
+
+ \begin{align*}
+	 \prob{\text{win}} &= \prob{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n}\\
+			   &\ge \max_{a\le n}\frac{1}{e } \prob{t^*\le a} \prob{|E_a|\le n-a}
+.\end{align*}
+
+For $t\ge c$ we have \[
+|E_t| = c-1+c \sum_{s=c}^{t} B_s
+\]  where $B_s \sim \text{Ber}(\frac{1}{s })$.
+
+Using Hoeffding's Bound:
+
+\[
+\prob{\sum_c^t B_s - \sum_c^t \frac{1}{s } \le \beta} \ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
+\] 
+\[
+\prob{|E_t| \le c(\beta+\sum_{s=c }^t \frac{1}{s })+c-1}\ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
+.\] 
+
+Fix some $a$. Let $\beta$ be the greatest real number such that \[
+c(\beta+\sum_{s=c }^a \frac{1}{s })+c-1 \le n-a
+.\] 
+Therefore,  \[
+\beta = \frac{n-a}{c} -1 - H(a)+H(c-1)
+\] where we use $H(a)$ to denote the $a $-th harmonic number.
+
+Applying this bound, we now have
+\begin{align*}
+	\prob{\text{win}} \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right)  \right) 
+.\end{align*}
+
+
+
+Take $c=2 $ for an example. When $a = 70$, we have the numerical bound $\prob{\text{win }}\ge 0.674 \frac{1}{e}$, which is a non-trivial improvement from the examine-everything algorithm which guarantees only a competitive ratio of $0.5 \frac{1}{e}$.
+
