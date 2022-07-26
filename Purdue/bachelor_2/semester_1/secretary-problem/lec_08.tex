@@ -108,9 +108,13 @@ It is equivalent to view this game as follows: when an item is examined, the las
     \label{fig:lowerbound}
 \end{figure}
 
- \begin{align*}
+\begin{align*}
 	 \prob{\text{win}} &= \prob{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n}\\
-			   &\ge \max_{a\le n}\frac{1}{e } \prob{t^*\le a} \prob{|E_a|\le n-a}
+	   &\ge \max_{a \le n} \prob{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n \cap t^* \le a}\\
+	   &= \max_{a \le n} \prob{\text{win CSP with }n \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a} \prob{t^* +  |E_{t^*}| \le n | t^* \le a}\prob{t^* \le a}\\
+	   &= \max_{a \le n} \prob{\text{win CSP with }a \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a} \prob{|E_{t^*}|\le n-a} \prob{t^* \le a}\\
+	   &= \max_{a \le n} \prob{\text{win CSP with }a \text{ items } } \prob{|E_{t^*}|\le n-a} \prob{t^* \le a}\\
+	   &\ge \max_{a \le n} \frac{1}{e } \prob{|E_a|\le n-a} \prob{t^*\le a}
 .\end{align*}
 
 For $t\ge c$ we have \[
@@ -135,7 +139,7 @@ Therefore,  \[
 
 Applying this bound, we now have
 \begin{align*}
-	\prob{\text{win}} \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right)  \right) 
+	\prob{\text{win}} \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{a-c+1} \right)  \right) 
 .\end{align*}
 
 
