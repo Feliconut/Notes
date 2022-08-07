@@ -21,16 +21,16 @@ By considering $(n+1)^k = O(n^k)$ and $O(n^k) \pm O(n^k) = O(n^k)$, the differen
 }
 Optimal P for a determininstic algorithm is $0.75$.
 \begin{proof}
-	$\ALG$ is competely characterized by a function $\alpha: [0,1] \to [ 0,1 ]$, where $\alpha(x)$ represents the probability of accepting  $X_1$ after an observation $X_1 = x$.
+	$\text{ALG}$ is competely characterized by a function $\alpha: [0,1] \to [ 0,1 ]$, where $\alpha(x)$ represents the probability of accepting  $X_1$ after an observation $X_1 = x$.
 
 \begin{align*}
-	\prob{\text{win}} 
-	&= \int_0^1 \alpha \prob{X_2<x} + (1-\alpha)\prob{X_2>x} f(x) \, dx \\
+	\operatorname{Pr}\left[{\text{win}}\right] 
+	&= \int_0^1 \alpha \operatorname{Pr}\left[{X_2<x}\right] + (1-\alpha)\operatorname{Pr}\left[{X_2>x}\right] f(x) \, dx \\
 	&= \int_0^1 \alpha x + (1-\alpha)(1-x) \,dx\\
 	&= \int_0^1 2 \alpha x - \alpha \,dx + \frac{1}{2}\\
 	&\le  \max_{\alpha} \int_0^1 2\alpha x - \alpha \,dx + \frac{1}{2}
 .\end{align*}
-$\ALG$ is deterministic iff $\alpha(x) \in \{0,1\}$. If $\alpha$ takes $0$, the integral is zero. If $\alpha$ takes $1$, $2\alpha x - a > 0$ iff $x > \frac{1}{2}$. Hence to maximize the integral we take $\alpha(x) = \begin{cases}
+$\text{ALG}$ is deterministic iff $\alpha(x) \in \{0,1\}$. If $\alpha$ takes $0$, the integral is zero. If $\alpha$ takes $1$, $2\alpha x - a > 0$ iff $x > \frac{1}{2}$. Hence to maximize the integral we take $\alpha(x) = \begin{cases}
 	1 &x\ge \frac{1}{2}\\
 	0 &x<\frac{1}{2}
 \end{cases}$, which gives an upper bound of $\frac{3}{4}$.

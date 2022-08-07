@@ -5,33 +5,33 @@ The weights $X_1, \ldots, X_n \sim \text{Unif}(0,1).$
 The noisy observations $\tilde{X_1},\ldots,\tilde{X_n} \sim \text{Unif}(x_i-\delta, x_{i}+\delta).$
 
 The strategy is to introduce thresholding parameters $R$ and $T \in (0,1).$ We examine the upcoming item $i$ if $\tilde{x}_{i}>R$, and accept the item if $x_{i}>T$.
-We still want to find $\prob{X_{max} \text{ is selected}}$ given particular $R,T,n,\delta$.
+We still want to find $\operatorname{Pr}\left[{X_{max} \text{ is selected}}\right]$ given particular $R,T,n,\delta$.
 
 \begin{equation}
 	\begin{split}
-	    \prob{X_{max} \text{ selected}}&=\sum_{i=1}^{n-2} \int_0^1 \prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x} f(x) \, dx \\
-	    &\qquad + \prob{\text{reach }n-1 \cap X_{n-1} \text{ best} \cap \tilde X_{n-1} > R} \\
-	    &\qquad + \prob{\text{reach }n \cap X_n \text{ best}}
+	    \operatorname{Pr}\left[{X_{max} \text{ selected}}\right]&=\sum_{i=1}^{n-2} \int_0^1 \operatorname{Pr}\left[{X_i \text{best} \cap i \text{ selected} | X_{i} = x}\right] f(x) \, dx \\
+	    &\qquad + \operatorname{Pr}\left[{\text{reach }n-1 \cap X_{n-1} \text{ best} \cap \tilde X_{n-1} > R}\right] \\
+	    &\qquad + \operatorname{Pr}\left[{\text{reach }n \cap X_n \text{ best}}\right]
 	\end{split}
 \end{equation}
 
 \begin{align*}
     \intertext{For all $i\le i-2$:}
-	&\prob{X_i \text{best} \cap i \text{ selected} | X_{i} = x} \\
-	&= \prob{\text{reach }i \cap \tilde{X_{i}}>R \cap X_{i}>T \cap X_i \text{ max} | X_i= x} \\
-	&= \prob{\text{Unif}(x-\delta, x+\delta)>R}\ind{\left( x>T \right) }\prob{\text{reach }i \cap X_i \max | X_i = x}
+	&\operatorname{Pr}\left[{X_i \text{best} \cap i \text{ selected} | X_{i} = x}\right] \\
+	&= \operatorname{Pr}\left[{\text{reach }i \cap \tilde{X_{i}}>R \cap X_{i}>T \cap X_i \text{ max} | X_i= x}\right] \\
+	&= \operatorname{Pr}\left[{\text{Unif}(x-\delta, x+\delta)>R}\right]\textbf{1}{\left( x>T \right) }\operatorname{Pr}\left[{\text{reach }i \cap X_i \max | X_i = x}\right]
 \end{align*}
 	
 \begin{align*}
     \intertext{For all $i\le i-2$:}
-	&\prob{\text{reach }i \cap X_i \max | X_i = x} \\
+	&\operatorname{Pr}\left[{\text{reach }i \cap X_i \max | X_i = x}\right] \\
 	&= \sum_{k=0}^{\left\lfloor \frac{i-1}{2} \right\rfloor}
-	\prob{\text{reach }i \cap X_i \max \cap k \text{ examines before reaching }i | X_i = x}\\
+	\operatorname{Pr}\left[{\text{reach }i \cap X_i \max \cap k \text{ examines before reaching }i | X_i = x}\right]\\
 	&= \sum_{k=0}^{\left\lfloor \frac{i-1}{2} \right\rfloor}
-	\prob{\text{reach $i$ with $k$ examines}}\prob{X_i \max |\text{reach $i$ with $k$ examines} \cap X_i = x} \\
+	\operatorname{Pr}\left[{\text{reach $i$ with $k$ examines}}\right]\operatorname{Pr}\left[{X_i \max |\text{reach $i$ with $k$ examines} \cap X_i = x}\right] \\
 	&= \sum_{k=0}^{\left\lfloor \frac{i-1}{2} \right\rfloor}
 	\underbrace{ \frac{\left( i-1-k \right) !}{k!\left( i-1-2k \right) !} }_{\text{ ways to reach $i$ }}
-	\prob{\text{ED}}^k \prob{\text{D}}^{i-1-2k} 
+	\operatorname{Pr}\left[{\text{ED}}\right]^k \operatorname{Pr}\left[{\text{D}}\right]^{i-1-2k} 
 	\underbrace{ F(x | X<T)^k  }_{\text{examined}}
 	\underbrace{ F(x)^k  }_{\text{omitted}}
 	\underbrace{ F(x | \tilde X < R)^{i-1-2k}  }_{\text{declined directly}}
@@ -39,16 +39,16 @@ We still want to find $\prob{X_{max} \text{ is selected}}$ given particular $R,T
 \end{align*}
 where
 \begin{align*}
-	&\prob{\text{ED}} &=&\frac{1}{2\delta} \int_0^T \int_{y-\delta}^{y+\delta} \ind(z>R) \,dz \,dy = \text{const}
+	&\operatorname{Pr}\left[{\text{ED}}\right] &=&\frac{1}{2\delta} \int_0^T \int_{y-\delta}^{y+\delta} \textbf{1}(z>R) \,dz \,dy = \text{const}
 	\\
-	&\prob{D} &=&\frac{1}{2\delta} \int_0^1 \int_{y-\delta}^{y+\delta} \ind(z<R) \,dz \,dy = \text{const} 
+	&\operatorname{Pr}\left[{D}\right] &=&\frac{1}{2\delta} \int_0^1 \int_{y-\delta}^{y+\delta} \textbf{1}(z<R) \,dz \,dy = \text{const} 
 	\intertext{and for $0\le x\le 1$:}
 	&F(x|X<T) &= &\begin{cases}
 		\frac{x}{T}	&0\le x<T \\
 		1		&x\ge T
 	\end{cases}
 	\\
-	&F(x | \tilde X < R) & = & \frac{\int_0^x \int_{y-\delta}^{y+\delta} \ind(z<R) \,dz \,dy}{\int_0^1 \int_{y-\delta}^{y+\delta} \ind(z<R) \,dz \,dy}
+	&F(x | \tilde X < R) & = & \frac{\int_0^x \int_{y-\delta}^{y+\delta} \textbf{1}(z<R) \,dz \,dy}{\int_0^1 \int_{y-\delta}^{y+\delta} \textbf{1}(z<R) \,dz \,dy}
 	\\
 	&F(x) & = & x
 .\end{align*}
@@ -116,7 +116,7 @@ Finally, we have
     
     
 \begin{align*}
-    \prob{\text{Error Win} | \text{Original Lose}}
-&=\prob{\text{reach }i | \exists j<i, X_j > T} \prob{X_{\max} > T | \text{Original Lose}}\\
-&\leq \prob{j-1 \text{ examine}} \prob{X_{\max} > T | \text{Original Lose}}
+    \operatorname{Pr}\left[{\text{Error Win} | \text{Original Lose}}\right]
+&=\operatorname{Pr}\left[{\text{reach }i | \exists j<i, X_j > T}\right] \operatorname{Pr}\left[{X_{\max} > T | \text{Original Lose}}\right]\\
+&\leq \operatorname{Pr}\left[{j-1 \text{ examine}}\right] \operatorname{Pr}\left[{X_{\max} > T | \text{Original Lose}}\right]
 \end{align*}

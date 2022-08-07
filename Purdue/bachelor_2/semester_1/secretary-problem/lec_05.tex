@@ -3,12 +3,12 @@
 \section{Simple Problem}
 We begin with a relaxed problem of best selection with no error. Let $[x,n]$ denote the initial game state where we have an upcoming item with value $x$ and $n$ un-observed items after the current item.
 
-If the player accepts the first item, he wins iff all other items are less than the first item. Hence $\prob{\text{win} | \text{accept at } [x,n]} = x^{n}$.  
+If the player accepts the first item, he wins iff all other items are less than the first item. Hence $\operatorname{Pr}\left[{\text{win} | \text{accept at } [x,n]}\right] = x^{n}$.  
 If the player declines $x$, he wins iff he wins the sub-game $[x_{n-1}, n-1]$, and $\max(x_{n-1}, \ldots, x_1) < x$. We denote the new game state by $[x_{n-1}, n-1, x]$.
 
-Let $V(x,n,x^*) := \prob{\text{win starting from} [x,n] \cap \max\left( x, x_n, \ldots, x_0 \right) > x^*} $. From principle of dynamic programming, the optimal policy can be yielded from the following system of equations:
+Let $V(x,n,x^*) := \operatorname{Pr}\left[{\text{win starting from} [x,n] \cap \max\left( x, x_n, \ldots, x_0 \right) > x^*}\right] $. From principle of dynamic programming, the optimal policy can be yielded from the following system of equations:
 \begin{align*}
-	V(x, 0, x^*) &= \ind(x>x^*)\\
+	V(x, 0, x^*) &= \textbf{1}(x>x^*)\\
 	V(x, n, x^*) &= \begin{cases}
 		\max\left( x^n,   EV(\cdot,n-1, x)\right) &x\ge x^*\\
 		EV(\cdot, n-1, x^*) &x<x^*
@@ -78,7 +78,7 @@ If the player otherwise declines the current item, the game state evolves into $
 
 We again obtain the DP equations. $a \wedge b$ denotes $\max(a,b)$.
 \begin{align}
-	\label{base}	V(x, 0, x^*) &= \ind(x>x^*)\\
+	\label{base}	V(x, 0, x^*) &= \textbf{1}(x>x^*)\\
 	\label{err_induct}V(\tilde x, n, x^*) &= \max\left( EV(X,n-1, x^* \wedge X_{n-1}), EV(\tilde X_{n-1}, n-1, x^* \wedge X)\right)  \\
 	\label{noerr_induct}V(x, n, x^*) &=  \begin{cases}
 	\max\left( x^n,  \expect{V(\tilde X_{n-1}, n-1, x)}\right) &x\ge x^*\\

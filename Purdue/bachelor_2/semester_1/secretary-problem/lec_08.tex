@@ -27,7 +27,7 @@ By a stopping time, we mean a random variable $\tau$ taking values in $[n]$ and 
 	\textsf{Exm}_{t+1} \in \mathcal{F}_t \text{ and } \textsf{Exm}_{t}\textsf{Exm}_{t+1} = 0 \text{ and } \mathbf{1}\left( \tau = t  \right) \textsf{Exm}_t = 0
 .\]
 
-\textbf{Goal.} Our goal is to choose a decision rule $\left( \tau, \textsf{Exm} \right) $ to maximize $\prob{\tau=\sigma(1)}$.
+\textbf{Goal.} Our goal is to choose a decision rule $\left( \tau, \textsf{Exm} \right) $ to maximize $\operatorname{Pr}\left[{\tau=\sigma(1)}\right]$.
 
 \subsection{Preliminaries}
 
@@ -47,13 +47,13 @@ We first do not allow examination, and see how far the algorithm can get.
 
 Consider the weakest adversary, that can only pick a single $\pi$ without knowing about the algorithm. The competitive ratio is
 \begin{align*}
-	&\inf_\pi \sup_\tau \mathbb{E}_\sigma \left[ \prob{  \tau = \sigma\pi(1) }   \right]\\
-	&= \inf_k \inf_{\pi:\pi(1)=k}\sup_\tau \mathbb{E}_\sigma \left[ \prob{  \tau = \sigma(k) }   \right]\\
-	&\le  \inf_k \sup_\tau \mathbb{E}_\sigma \left[ \prob{  \tau = \sigma(k) }   \right]
+	&\inf_\pi \sup_\tau \mathbb{E}_\sigma \left[ \operatorname{Pr}\left[{  \tau = \sigma\pi(1) }\right]   \right]\\
+	&= \inf_k \inf_{\pi:\pi(1)=k}\sup_\tau \mathbb{E}_\sigma \left[ \operatorname{Pr}\left[{  \tau = \sigma(k) }\right]   \right]\\
+	&\le  \inf_k \sup_\tau \mathbb{E}_\sigma \left[ \operatorname{Pr}\left[{  \tau = \sigma(k) }\right]   \right]
 .\end{align*}
 
 The problem reduces to a generalized post-doc variant of SP, where we want the item with absolute rank $k$ instead of $1$. Each time $k $ is provided, we may specifically design our algorithm to maximize the probability of choosing the rank $k $ item. This is significantly harder to solve as compared to the classical SP, in its value function is no longer monotone: the function \[
-\prob{\text{AR}(t) = m | \text{RR}(t) = r } = \frac{\binom{m-1}{r-1}\binom{n-m}{t-r}}{\binom{n}{t}}
+\operatorname{Pr}\left[{\text{AR}(t) = m | \text{RR}(t) = r }\right] = \frac{\binom{m-1}{r-1}\binom{n-m}{t-r}}{\binom{n}{t}}
 \]
 is not monotone wrt $r $ for any fixed $m $. No explicit solution has been found so far. We can show that the worst case when $c < \frac{n}{2}$ is attained at $\pi(1)=c $, and at $\pi(1) = \left\lfloor \frac{n}{2} \right\rfloor $ when $ c \ge  \frac{n}{2}$.
 
@@ -61,11 +61,11 @@ is not monotone wrt $r $ for any fixed $m $. No explicit solution has been found
 
 Now we assume that the adversary adapts to each algorithm, but cannot depend on the random permutation $\sigma$. The competitive ratio is now
 \begin{align*}
-	&\sup_\tau  \inf_\pi \mathbb{E}_\sigma \left[ \prob{ 
-	\tau = \sigma\pi(1) }   \right] \\
+	&\sup_\tau  \inf_\pi \mathbb{E}_\sigma \left[ \operatorname{Pr}\left[{ 
+	\tau = \sigma\pi(1) }   \right] \right]\\
 \intertext{Note that the generalized postdoc variant of SP is an upper bound to the problem:}
-	&= \sup_\tau \inf_k \inf_{\pi:\pi(1)=k } \mathbb{E}_\sigma \prob{ \tau =\sigma(k) }  \\
-	&\le  \sup_\tau \inf_k \mathbb{E}_\sigma \prob{ \tau =\sigma(k) }  
+	&= \sup_\tau \inf_k \inf_{\pi:\pi(1)=k } \mathbb{E}_\sigma \operatorname{Pr}\left[{ \tau =\sigma(k) }\right]  \\
+	&\le  \sup_\tau \inf_k \mathbb{E}_\sigma \operatorname{Pr}\left[{ \tau =\sigma(k) }\right]  
 .\end{align*}
 This time we need to tackle all sub-problems using only one algorithm. In other words, the algorithm's probability to choose the 1, 2, \ldots, $c $-th item are compared, and the minimum one is the CR.
 
@@ -76,8 +76,8 @@ Consider another algorithm: Let the first $pn$ items to go by, and then select t
 \subsubsection{Strong adversarial, knows $\tau $ and $\sigma$}
 
 \begin{align*}
-	\sup_\tau  \mathbb{E}_\sigma \inf_\pi \left[ \prob{ 
-	\tau = \sigma\pi(1) }   \right] 
+	\sup_\tau  \mathbb{E}_\sigma \inf_\pi \left[ \operatorname{Pr}\left[{ 
+	\tau = \sigma\pi(1) }   \right]\right] 
 .\end{align*}
 
 
@@ -109,12 +109,12 @@ It is equivalent to view this game as follows: when an item is examined, the las
 \end{figure}
 
 \begin{align*}
-	 \prob{\text{win}} &= \prob{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n}\\
-	   &\ge \max_{a \le n} \prob{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n \cap t^* \le a}\\
-	   &= \max_{a \le n} \prob{\text{win CSP with }n \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a} \prob{t^* +  |E_{t^*}| \le n | t^* \le a}\prob{t^* \le a}\\
-	   &= \max_{a \le n} \prob{\text{win CSP with }a \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a} \prob{|E_{t^*}|\le n-a} \prob{t^* \le a}\\
-	   &= \max_{a \le n} \prob{\text{win CSP with }a \text{ items } } \prob{|E_{t^*}|\le n-a} \prob{t^* \le a}\\
-	   &\ge \max_{a \le n} \frac{1}{e } \prob{|E_a|\le n-a} \prob{t^*\le a}
+	 \operatorname{Pr}\left[{\text{win}}\right] &= \operatorname{Pr}\left[{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n}\right]\\
+	   &\ge \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n \cap t^* \le a}\right]\\
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }n \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a}\right] \operatorname{Pr}\left[{t^* +  |E_{t^*}| \le n | t^* \le a}\right]\operatorname{Pr}\left[{t^* \le a}\right]\\
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }a \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a}\right] \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]\\
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }a \text{ items } }\right] \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]\\
+	   &\ge \max_{a \le n} \frac{1}{e } \operatorname{Pr}\left[{|E_a|\le n-a}\right] \operatorname{Pr}\left[{t^*\le a}\right]
 .\end{align*}
 
 For $t\ge c$ we have \[
@@ -124,10 +124,10 @@ For $t\ge c$ we have \[
 Using Hoeffding's Bound:
 
 \[
-\prob{\sum_c^t B_s - \sum_c^t \frac{1}{s } \le \beta} \ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
+\operatorname{Pr}\left[{\sum_c^t B_s - \sum_c^t \frac{1}{s } \le \beta}\right] \ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
 \] 
 \[
-\prob{|E_t| \le c(\beta+\sum_{s=c }^t \frac{1}{s })+c-1}\ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
+\operatorname{Pr}\left[{|E_t| \le c(\beta+\sum_{s=c }^t \frac{1}{s })+c-1}\right]\ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
 .\] 
 
 Fix some $a$. Let $\beta$ be the greatest real number such that \[
@@ -139,10 +139,11 @@ Therefore,  \[
 
 Applying this bound, we now have
 \begin{align*}
-	\prob{\text{win}} \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{a-c+1} \right)  \right) 
+	\operatorname{Pr}\left[{\text{win}}\right] \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{a-c+1} \right)  \right) 
 .\end{align*}
 
 
 
-Take $c=2 $ for an example. When $a = 70$, we have the numerical bound $\prob{\text{win }}\ge 0.674 \frac{1}{e}$, which is a non-trivial improvement from the examine-everything algorithm which guarantees only a competitive ratio of $0.5 \frac{1}{e}$.
+Take $c=2 $ for an example. When $a = 70$, we have the numerical bound $\operatorname{Pr}\left[{\text{win }}\right]\ge 0.674 \frac{1}{e}$, which is a non-trivial improvement from the examine-everything algorithm which guarantees only a competitive ratio of $0.5 \frac{1}{e}$.
+
 

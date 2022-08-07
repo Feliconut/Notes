@@ -94,68 +94,70 @@ $i \approx j$ means that $i$ and $j$ are in-distinguishable in the first observa
 \subsection{Calculation under a relaxed condition}
 
 
-We give the expected value of $\ALG$ on the relaxed model (only one examine is required to obain precise comparisons). Let $\alpha$ denote the selected item.
+We give the expected value of $\text{ALG}$ on the relaxed model (only one examine is required to obain precise comparisons). Let $\alpha$ denote the selected item.
 
 \begin{equation}
-  \expect{\OPT}=m
+  \operatorname{E}\left[\text{OPT}\right]=m
 \end{equation}
 
 \begin{equation}
-  \expect{\ALG}=\sum_{t=1}^m t\prob{v(\alpha)=t}
+  \operatorname{E}[ \text{ALG} ]=\sum_{t=1}^m t\operatorname{Pr}\left[{v(\alpha)=t}\right]
 \end{equation}
 
 \begin{align}
-  \prob{v(\alpha)=t} &= \sum_{i=r}^n
-  \prob{\alpha = i | v(i)=t}
-  \prob{v(i)=t}\\&+
-  \prob{\text{reach }n \cap \text{not accept }n} \prob{v(n)=t}\\&+
-  \prob{\text{reach }n-1 \cap \text{ED }n-1}\prob{v(n-1)=t}
+  \operatorname{Pr}\left[{v(\alpha)=t}\right] &= \sum_{i=r}^n
+  \operatorname{Pr}\left[{\alpha = i | v(i)=t}\right]
+  \operatorname{Pr}\left[{v(i)=t}\right]\\&+
+  \operatorname{Pr}\left[{\text{reach }n \cap \text{not accept }n}\right] \operatorname{Pr}\left[{v(n)=t}\right]\\&+
+  \operatorname{Pr}\left[{\text{reach }n-1 \cap \text{ED }n-1}\right]\operatorname{Pr}\left[{v(n-1)=t}\right]
 \end{align}
 
 The two added terms are cases where the items are exhausted. If $n$ is reached then it must be selected. If $n-1$ is examined then it must be selected also.
 
 \begin{equation}
-  \prob{v(i)=t}=1/m, \forall i\forall t
+  \operatorname{Pr}\left[{v(i)=t}\right]=1/m, \forall i\forall t
 \end{equation}
 
 \begin{align}
-  \prob{\alpha = i | v(i)=t} &= \prob{\text{reach }i|\max_{j<r}v(j)\leq t}\prob{\max_{j<r}v(j)\leq t}\\&=
-  \sum_{s=1}^t \prob{\text{reach }i|\max_{j<r}v(j)= s}\prob{\max_{j<r}v(j)= s}
+  \operatorname{Pr}\left[{\alpha = i | v(i)=t}\right] &= \operatorname{Pr}\left[{\text{reach }i|\max_{j<r}v(j)\leq t}\right]\operatorname{Pr}\left[{\max_{j<r}v(j)\leq t}\right]\\&=
+  \sum_{s=1}^t \operatorname{Pr}\left[{\text{reach }i|\max_{j<r}v(j)= s}\right]\operatorname{Pr}\left[{\max_{j<r}v(j)= s}\right]
 \end{align}
 
-\begin{equation}\label{eqn:exhaust1}
-	\prob{\text{reach }n \cap \text{not accept }n}
+\begin{equation}
+	\label{eqn:exhaust1}
+	\operatorname{Pr}\left[{\text{reach }n \cap \text{not accept }n}\right]
 	=\sum_{s=t+1}^m
-		\prob{\text{reach }n|\max_{j<r}v(j)= s}\prob{\max_{j<r}v(j)= s}
+		\operatorname{Pr}\left[{\text{reach }n|\max_{j<r}v(j)= s}\right]\operatorname{Pr}\left[{\max_{j<r}v(j)= s}\right]
 \end{equation}
 
-\begin{equation}\label{eqn:exhaust2}
-	\prob{\text{reach }n-1 \cap \text{ED }n-1}
+\begin{equation}
+	\label{eqn:exhaust2}
+	\operatorname{Pr}\left[{\text{reach }n-1 \cap \text{ED }n-1}\right]
 	=\sum_{s=t+1}^m
-		\ind_{s\leq t + \delta}
-		\prob{\text{reach }n-1|\max_{j<r}v(j)= s}\prob{\max_{j<r}v(j)= s}
+		\textbf{1}_{s\leq t + \delta}
+		\operatorname{Pr}\left[{\text{reach }n-1|\max_{j<r}v(j)= s}\right]\operatorname{Pr}\left[{\max_{j<r}v(j)= s}\right]
 \end{equation}
 
 \begin{align}
-\prob{\max_{j<r}v(j)= s} 
-	&= \prob{\max_{j<r}v(j)\leq s}-\prob{\max_{j<r}v(j)\leq s-1}\\
+\operatorname{Pr}\left[{\max_{j<r}v(j)= s}\right] 
+	&= \operatorname{Pr}\left[{\max_{j<r}v(j)\leq s}\right]-\operatorname{Pr}\left[{\max_{j<r}v(j)\leq s-1}\right]\\
 	&= (\frac{s}{m})^{r-1}-(\frac{s-1}{m})^{r-1}
 \end{align}
 
 \begin{align}
-  &\prob{\text{reach }i|\max_{j<r}v(j)= s} \\
+  &\operatorname{Pr}\left[{\text{reach }i|\max_{j<r}v(j)= s}\right] \\
   &\qquad = \sum_{(a_{1\dots k}) \in\{1,2\}^k,\sum a_j = i-r} \,\prod_{j=1}^k 
-  \ind_{\delta<t}
-  \left(\ind_{a_j = 1}\frac{s-\delta-1}{m}
-  +\ind_{a_j = 2}\frac{\delta}{m}
+  \textbf{1}_{\delta<t}
+  \left(\textbf{1}_{a_j = 1}\frac{s-\delta-1}{m}
+  +\textbf{1}_{a_j = 2}\frac{\delta}{m}
   \right)
-  +\ind_{\delta\geq t}\frac{t-1}{m}
+  +\textbf{1}_{\delta\geq t}\frac{t-1}{m}
   \\
   \begin{split}
         &\qquad = \sum_{x=0}^{\lfloor\frac{i-r}{2}\rfloor} 
   \left(
-  		\ind_{\delta<t}\left(\frac{\delta}{m}\right)^x\left(\frac{s-\delta-1}{m}\right)^{i-r-2x}
-  		+\ind_{\delta \geq t} \left(\frac{t-1}{m}\right)^x 0^{i-r-2x}
+  		\textbf{1}_{\delta<t}\left(\frac{\delta}{m}\right)^x\left(\frac{s-\delta-1}{m}\right)^{i-r-2x}
+  		+\textbf{1}_{\delta \geq t} \left(\frac{t-1}{m}\right)^x 0^{i-r-2x}
   \right)\\
     &\qquad\qquad \times\frac{(i-r-x)!}{x!(i-r-2x)!}
   \end{split}
