@@ -4,6 +4,7 @@
 \usepackage{textcomp}
 \usepackage[english]{babel}
 \usepackage{url}
+\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
@@ -34,9 +35,9 @@
 \newcommand\N{\ensuremath{\mathbb{N}}}
 \newcommand\R{\ensuremath{\mathbb{R}}}
 \newcommand\Z{\ensuremath{\mathbb{Z}}}
-\renewcommand\O{\ensuremath{\emptyset}}
-\newcommand\Q{\ensuremath{\mathbb{Q}}}
-\newcommand\C{\ensuremath{\mathbb{C}}}
+%\renewcommand\O{\ensuremath{\emptyset}}
+%\newcommand\Q{\ensuremath{\mathbb{Q}}}
+%\newcommand\C{\ensuremath{\mathbb{C}}}
 
 % Easily typeset systems of equations (French package)
 \usepackage{systeme}
@@ -49,12 +50,12 @@
 \let\impliedby\Leftarrow
 \let\iff\Leftrightarrow
 \let\epsilon\varepsilon
+% \let\phi\varphi
 
 % Add \contra symbol to denote contradiction
 \usepackage{stmaryrd} % for \lightning
 \newcommand\contra{\scalebox{1.5}{$\lightning$}}
 
-% \let\phi\varphi
 
 % Command for short corrections
 % Usage: 1+1=\correct{3}{2}
@@ -81,52 +82,49 @@
 \usepackage{mdframed}
 \mdfsetup{skipabove=1em,skipbelow=0em}
 \theoremstyle{definition}
-\newmdtheoremenv[nobreak=true]{definitie}{Definitie}
-\newmdtheoremenv[nobreak=true]{eigenschap}{Eigenschap}
-\newmdtheoremenv[nobreak=true]{gevolg}{Gevolg}
-\newmdtheoremenv[nobreak=true]{lemma}{Lemma}
-\newmdtheoremenv[nobreak=true]{propositie}{Propositie}
-\newmdtheoremenv[nobreak=true]{stelling}{Stelling}
-\newmdtheoremenv[nobreak=true]{wet}{Wet}
-\newmdtheoremenv[nobreak=true]{postulaat}{Postulaat}
-\newmdtheoremenv{conclusie}{Conclusie}
-\newmdtheoremenv{toemaatje}{Toemaatje}
-\newmdtheoremenv{vermoeden}{Vermoeden}
-\newtheorem*{herhaling}{Herhaling}
-\newtheorem*{intermezzo}{Intermezzo}
-\newtheorem*{notatie}{Notatie}
-\newtheorem*{observatie}{Observatie}
-\newtheorem*{oef}{Oefening}
-\newtheorem*{opmerking}{Opmerking}
-\newtheorem*{praktisch}{Praktisch}
-\newtheorem*{probleem}{Probleem}
-\newtheorem*{terminologie}{Terminologie}
-\newtheorem*{toepassing}{Toepassing}
-\newtheorem*{uovt}{UOVT}
-\newtheorem*{vb}{Voorbeeld}
-\newtheorem*{vraag}{Vraag}
-
 \newmdtheoremenv[nobreak=true]{definition}{Definition}
-\newtheorem*{eg}{Example}
+\newmdtheoremenv[nobreak=true]{characteristic}{Characteristic}
+\newmdtheoremenv[nobreak=true]{consequence}{Consequence}
+\newmdtheoremenv[nobreak=true]{lemma}{Lemma}
+\newmdtheoremenv[nobreak=true]{proposition}{Proposition}
+\newmdtheoremenv[nobreak=true]{statement}{Statement}
+\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
+\newmdtheoremenv[nobreak=true]{postulate}{Postulate}
+\newmdtheoremenv{conclusion}{Conclusion}
+\newmdtheoremenv{bonus}{Bonus}
+\newmdtheoremenv{conjecture}{Conjecture}
+\newtheorem*{repetition}{Repetition}
+\newtheorem*{interlude}{Interlude}
 \newtheorem*{notation}{Notation}
-\newtheorem*{previouslyseen}{As previously seen}
+\newtheorem*{observation}{Observation}
+\newtheorem*{excercise}{Excercise}
 \newtheorem*{remark}{Remark}
-\newtheorem*{note}{Note}
+\newtheorem*{practice}{Practice}
 \newtheorem*{problem}{Problem}
+\newtheorem*{terminology}{Terminology}
+\newtheorem*{application}{Application}
+\newtheorem*{example}{Example}
+\newtheorem*{question}{Question}
+\newtheorem*{previouslyseen}{As previously seen}
+
+%\newmdtheoremenv[nobreak=true]{definition}{Definition}
+\newtheorem*{eg}{Example}
+%\newtheorem*{notation}{Notation}
+%\newtheorem*{remark}{Remark}
+%\newtheorem*{note}{Note}
 \newtheorem*{observe}{Observe}
 \newtheorem*{property}{Property}
 \newtheorem*{intuition}{Intuition}
 \newmdtheoremenv[nobreak=true]{prop}{Proposition}
-\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
+%\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
 \newmdtheoremenv[nobreak=true]{corollary}{Corollary}
-\newtheorem{exercise}{Exercise}[section]
+%\newtheorem{exercise}{Exercise}[section]
 
 % End example and intermezzo environments with a small diamond (just like proof
 % environments end with a small square)
 \usepackage{etoolbox}
-\AtEndEnvironment{vb}{\null\hfill$\diamond$}%
-\AtEndEnvironment{intermezzo}{\null\hfill$\diamond$}%
-% \AtEndEnvironment{opmerking}{\null\hfill$\diamond$}%
+\AtEndEnvironment{example}{\null\hfill$\diamond$}%
+\AtEndEnvironment{interlude}{\null\hfill$\diamond$}%
 
 % Fix some spacing
 % http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
@@ -138,22 +136,22 @@
 
 % Exercise 
 % Usage:
-% \oefening{5}
-% \suboefening{1}
-% \suboefening{2}
-% \suboefening{3}
+% \exercise{5}
+% \subexercise{1}
+% \subexercise{2}
+% \subexercise{3}
 % gives
-% Oefening 5
-%   Oefening 5.1
-%   Oefening 5.2
-%   Oefening 5.3
-\newcommand{\oefening}[1]{%
-    \def\@oefening{#1}%
-    \subsection*{Oefening #1}
+% Exercise 5
+%   Exercise 5.1
+%   Exercise 5.2
+%   Exercise 5.3
+\newcommand{\exercise}[1]{%
+    \def\@exercise{#1}%
+    \subsection*{Exercise #1}
 }
 
-\newcommand{\suboefening}[1]{%
-    \subsubsection*{Oefening \@oefening.#1}
+\newcommand{\subexercise}[1]{%
+    \subsubsection*{Exercise \@exercise.#1}
 }
 
 
@@ -219,23 +217,23 @@
 
 % Verbetering is correction in Dutch
 % Usage: 
-% \begin{verbetering}
+% \begin{correction}
 %     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
 %     tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
 %     vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
 %     no sea takimata sanctus est Lorem ipsum dolor sit amet.
-% \end{verbetering}
-\newenvironment{verbetering}{\begin{tcolorbox}[
+% \end{correction}
+\newenvironment{correction}{\begin{tcolorbox}[
     arc=0mm,
     colback=white,
     colframe=green!60!black,
-    title=Opmerking,
+    title=Remark,
     fonttitle=\sffamily,
     breakable
 ]}{\end{tcolorbox}}
 
 % Noot is note in Dutch. Same as 'verbetering' but color of box is different
-\newenvironment{noot}[1]{\begin{tcolorbox}[
+\newenvironment{note}[1]{\begin{tcolorbox}[
     arc=0mm,
     colback=white,
     colframe=white!60!black,
@@ -264,3 +262,13 @@
 
 % My name
 \author{Xiaoyu Liu}
+
+
+% Logseq [[ ]] link support
+\newcommand{\logseq}[1]{
+	\href{logseq://graph/Feliconut?page=#1}{
+	\color{lightgray}{\texttt{[\![\!}}
+	\color{cyan}{\textsf{#1}}
+	\color{lightgray}{\texttt{\!]\!]}}
+}}
+

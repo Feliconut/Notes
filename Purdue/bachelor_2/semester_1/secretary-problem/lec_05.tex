@@ -78,11 +78,14 @@ If the player otherwise declines the current item, the game state evolves into $
 
 We again obtain the DP equations. $a \wedge b$ denotes $\max(a,b)$.
 \begin{align}
-	\label{base}	V(x, 0, x^*) &= \textbf{1}(x>x^*)\\
-	\label{err_induct}V(\tilde x, n, x^*) &= \max\left( EV(X,n-1, x^* \wedge X_{n-1}), EV(\tilde X_{n-1}, n-1, x^* \wedge X)\right)  \\
-	\label{noerr_induct}V(x, n, x^*) &=  \begin{cases}
-	\max\left( x^n,  \expect{V(\tilde X_{n-1}, n-1, x)}\right) &x\ge x^*\\
-	\expect{V(\tilde X_{n-1}, n-1, x^*)} &x<x^*
+	\label{base}
+	V(x, 0, x^*) &= \textbf{1}(x>x^*)\\
+	\label{err_induct}
+	V(\tilde x, n, x^*) &= \max\left( EV(X,n-1, x^* \wedge X_{n-1}), EV(\tilde X_{n-1}, n-1, x^* \wedge X)\right)  \\
+	\label{noerr_induct}
+	V(x, n, x^*) &=  \begin{cases}
+	\max\left( x^n,  \operatorname{E}\left[{V(\tilde X_{n-1}, n-1, x)}\right]\right) &x\ge x^*\\
+	\operatorname{E}\left[{V(\tilde X_{n-1}, n-1, x^*)}\right] &x<x^*
 	\end{cases}
 .\end{align}
 
@@ -93,11 +96,11 @@ The problem with error is again solvable using thresholding:
 \begin{proof}
 	We first prove the existence of $T_{n}$. In \eqref{noerr_induct}, note that $ V(\tilde X_{n-1}, n-1, x)$ is monotone decreasing wrt $x$ for each specific realization of $\tilde X_{n-1}$. Taking expectation won't affect monotonicity, so the argument in the previous theorem applies.  
 	
-	Now we work on existence of $R_{n}$ and consider \eqref{err_induct}. Let $A(x) := \expect{V(x, n-1, x^* \wedge X_{n-1}}$ and $B(x):= \expect{V(\tilde X_{n-1}, n-1, x^* \wedge x)}$, where the expectation is taken over $(u-\delta, u+\delta)\cap (0,1)$. Our goal is to prove that $EA > EB$ is a thresholding on $u$. We will first show that $A(x)>B(x)$ is a thresholding on $x$, and apply properties of expectation.
+	Now we work on existence of $R_{n}$ and consider \eqref{err_induct}. Let $A(x) := \operatorname{E}\left[{V(x, n-1, x^* \wedge X_{n-1}}\right]$ and $B(x):= \operatorname{E}\left[{V(\tilde X_{n-1}, n-1, x^* \wedge x)}\right]$, where the expectation is taken over $(u-\delta, u+\delta)\cap (0,1)$. Our goal is to prove that $EA > EB$ is a thresholding on $u$. We will first show that $A(x)>B(x)$ is a thresholding on $x$, and apply properties of expectation.
 	
-	Let $x < x^*$. Now $A(x) = \expect{V\left( \tilde X_{n-2}, n-2, x^* \wedge X_{n-1} \right) }$ and $B(x) = \expect{V\left( \tilde X_{n-1}, n-1, x^* \right) }$. $B(x)$ is measure of the event that the best item is selected with value $>x^*$, while $A(x)$ is measure of the same event with additional constraint that $X_{n-1}$ is not the best item. Hence $A(x)$ is a sub-event of $B(x)$, and $A(x) < B(x)$.
+	Let $x < x^*$. Now $A(x) = \operatorname{E}\left[{V\left( \tilde X_{n-2}, n-2, x^* \wedge X_{n-1} \right) }\right]$ and $B(x) = \operatorname{E}\left[{V\left( \tilde X_{n-1}, n-1, x^* \right) }\right]$. $B(x)$ is measure of the event that the best item is selected with value $>x^*$, while $A(x)$ is measure of the same event with additional constraint that $X_{n-1}$ is not the best item. Hence $A(x)$ is a sub-event of $B(x)$, and $A(x) < B(x)$.
 
-	Let $x > x^*$ and assume $x < T_{n}$. Now $A(x) = \expect{V\left( \tilde X_{n-2}, n-2, x \wedge X_{n-1} \right) }$ and $B(x) = \expect{V\left( \tilde X_{n-1}, n-1, x \right) }$. By the same argument, $A(x) < B(x)$.
+	Let $x > x^*$ and assume $x < T_{n}$. Now $A(x) = \operatorname{E}\left[{V\left( \tilde X_{n-2}, n-2, x \wedge X_{n-1} \right) }\right]$ and $B(x) = \operatorname{E}\left[{V\left( \tilde X_{n-1}, n-1, x \right) }\right]$. By the same argument, $A(x) < B(x)$.
 	
 	Now assume $x > T_{n}$. Take $\omega \in \Omega$. For all $x < X_{n-1}(\omega)$, we have $A_\omega(x) < B(x)$ (why? Need to clarify). For all $x > X_{n-1}(\omega)$, $A_\omega(x) = x^{n-1}$  monotonically increase up to $A(1) = 1$. Hence we have a unique intersection  $\alpha \in (T_{n}, 1)$ where $x > \alpha \iff A_\omega(x) > B(x)$. $\alpha$ does not depend on $\omega$, so it's the unique intersection between $B(x)$ and the "averaged"  $A(x)$.
 
