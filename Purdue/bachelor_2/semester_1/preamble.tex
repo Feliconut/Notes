@@ -4,13 +4,28 @@
 \usepackage{textcomp}
 \usepackage[english]{babel}
 \usepackage{url}
-\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{enumitem}
 
 \pdfminorversion=7
+
+\usepackage[
+    backend=biber,
+    style=authoryear-icomp,
+    sortlocale=auto,
+    natbib=true,
+    url=false, 
+    doi=true,
+    eprint=false
+]{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+}
 
 % Don't indent paragraphs, leave some space between them
 \usepackage{parskip}
