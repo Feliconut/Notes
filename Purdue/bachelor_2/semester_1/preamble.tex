@@ -188,14 +188,27 @@
     \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
 }
 
-\def\@lecture{}%
+\def\@doctype{}%
+
+
 \newcommand{\lecture}[3]{
     \ifthenelse{\isempty{#3}}{%
-        \def\@lecture{Lecture #1}%
+        \def\@doctype{Lecture #1}%
     }{%
-        \def\@lecture{Lecture #1: #3}%
+        \def\@doctype{Lecture #1: #3}%
     }%
-    \subsection*{\@lecture}
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+
+\newcommand{\lab}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Lab #1}%
+    }{%
+        \def\@doctype{Lab #1: #3}%
+    }%
+    \subsection*{\@doctype}
     \marginpar{\small\textsf{\mbox{#2}}}
 }
 
@@ -211,7 +224,7 @@
 % My name for when I print my lecture notes to use for an open book exam.
 % \fancyhead[LE,RO]{Xiaoyu Liu}
 
-\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RO,LE]{\@doctype} % Right odd,  Left even
 \fancyhead[RE,LO]{}          % Right even, Left odd
 
 \fancyfoot[RO,LE]{\thepage}  % Right odd,  Left even
