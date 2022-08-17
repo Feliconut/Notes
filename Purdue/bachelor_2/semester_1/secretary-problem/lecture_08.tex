@@ -33,6 +33,7 @@ By a stopping time, we mean a random variable $\tau$ taking values in $[n]$ and 
 
 	We list several obvious facts about this problem construction.
 \begin{lemma}
+\label{partial-adversarial-obv-facts}
 	\begin{enumerate}
 		\item The relative ranks behave the same:  $\text{RR}(t)$ is uniformly sampled from $1, \ldots,t+1$ and independent from each other.
 		\item When $\pi$ do not depend on $\sigma$, $\sigma \pi$ and $\sigma$ have exactly same distribution.
@@ -97,9 +98,49 @@ In this case the adversary knows the random seed used by the algorithm, so it's 
 
 \subsection{Lower Bound for an algorithm}
 
-Algorithm: examine each item with $\text{RR}_t(t) \le  c $. Accept the current item if $t \ge  T $ and the item is the best so far.
+We establish a lower bound for the following simple algorithm: examine each item with $\text{RR}_t(t) \le  c $. Accept the current item if $t \ge  T $ and the item is the best so far.
 
-It is equivalent to view this game as follows: when an item is examined, the last available item is omitted, i.e. the omitted item is taken from the end of the queue. To simplify the analysis, we also allow the omitted item to appear as an ordinary item. The player wins only if the best itme is chosen, AND the item is not omitted.
+\begin{algorithm}[H]
+\caption{Simple algorithm}
+\label{alg:simple} 
+\begin{algorithmic}[1]
+\For{$ t \in [n] $}
+\If{$\text{RR}_t(t) \le c$}
+\State{\textsf{Examine} $x_t$}
+\If{$x_{t}=\max{P_{t+1}} \land t\ge T$ }
+\State{\textsf{Accept} $x_{t}$}
+\State{\textbf{return}}
+ 	\EndIf
+\State{\textsf{Decline} $x_t$}
+\EndIf
+\EndFor
+\State{\textsf{Accept} $x_{n}$}
+\State{\textbf{return}}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{lemma}[Equivalent construction of the game]
+It is equivalent to view this game as follows: when an item is examined, instead of omitting the next item, the last available item is taken from the end of the queue. The player wins only if the best item is accepted, and the item is not omitted.
+\end{lemma}
+\begin{proof}
+	The arrival of items may be viewed as a random process $\left( \text{RR}_t(t) \right)_{t \in [n]} $, and by Lemma \ref{partial-adversarial-obv-facts}, we preserve the standard result that $\text{RR}_t(t)$ takes a uniform distribution over $[t]$. In this way, we can ignore the "real" rank of upcoming items in our analysis, and treat them as randomly assigned upon arrival.
+
+	We denote a particular state of the "omit next" game as $\omega_t := \left( O_t, P_t \right) $, and suppose the player chooses to \textsf{Examine} at $\omega_t$. Now the next game states are
+	\begin{align*}
+		\omega_{t+1} &= \left( O_{t}, P_{t}\cup \{x_t\}  \right) \\
+		\omega_{t+2} &= \left( O_{t}\cup \{x_{t+2}\}, P_{t}\cup \{x_t\}   \right) 
+	\end{align*}
+A sequence of game states $\mathbf{\omega} := \left( \omega_1, \ldots, \omega_\tau \right) $ completely describes the game.
+
+	If we omit the last available item instead, suppose that $x_t$ arrives at time $t$, we end up with the following game states:
+	\begin{align*}
+		\omega'_t &= \left( O'_t, P'_t \right) \\
+		\omega'_{t+1} &= \left( O'_{t}, P'_{t}\cup \{x_t\}  \right) \\
+		\omega'_{t+2} &= \left( O'_{t}\cup \{x_{t+1}\}, P'_{t}\cup \{x_t\}   \right) 
+	\end{align*}
+
+
+\end{proof}
 
 \begin{figure}[ht]
     \centering
@@ -143,7 +184,5 @@ Applying this bound, we now have
 .\end{align*}
 
 
-
 Take $c=2 $ for an example. When $a = 70$, we have the numerical bound $\operatorname{Pr}\left[{\text{win }}\right]\ge 0.674 \frac{1}{e}$, which is a non-trivial improvement from the examine-everything algorithm which guarantees only a competitive ratio of $0.5 \frac{1}{e}$.
 
-\logseq{Linear Algebra}
