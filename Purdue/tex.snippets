@@ -322,15 +322,15 @@ snippet sr "\sqrt{}" iA
 \sqrt{${1:${VISUAL}}} $0
 endsnippet
 
-context "math()"
-snippet sq "^2" iA
-^2
-endsnippet
+#context "math()"
+#snippet sq "^2" iA
+#^2
+#endsnippet
 
-context "math()"
-snippet cb "^3" iA
-^3
-endsnippet
+#context "math()"
+#snippet cb "^3" iA
+#^3
+#endsnippet
 
 context "math()"
 snippet ^^ "superscript" iA
@@ -340,6 +340,11 @@ endsnippet
 context "math()"
 snippet __ "subscript" iA
 _{$1}$0
+endsnippet
+
+context "math()"
+snippet oo "\infty" i
+\infty
 endsnippet
 
 context "math()"
@@ -373,18 +378,26 @@ snippet AA "forall" iA
 endsnippet
 
 context "math()"
+snippet LN "logical not" iA
+\lnot
+endsnippet
+context "math()"
 snippet LL "logical not" iA
 \lnot
 endsnippet
 
+context "math()"
+snippet LO "logical or" iA
+\lor
+endsnippet
 context "math()"
 snippet LU "logical or" iA
 \lor
 endsnippet
 
 context "math()"
-snippet LN "logical and" iA
-\land
+snippet LA "logical and" iA
+\land 
 endsnippet
 
 context "math()"
@@ -409,10 +422,10 @@ snippet plot "Plot" w
 \end{figure}
 endsnippet
 
-snippet nn "Tikz node" w
-\node[$5] (${1/[^0-9a-zA-Z]//g}${2}) ${3:at (${4:0,0}) }{$${1}$};
-$0
-endsnippet
+#snippet nn "Tikz node" w
+#\node[$5] (${1/[^0-9a-zA-Z]//g}${2}) ${3:at (${4:0,0}) }{$${1}$};
+#$0
+#endsnippet
 
 context "math()"
 snippet mcal "mathcal" iA
@@ -459,6 +472,12 @@ snippet -> "to" iA
 \to 
 endsnippet
 
+priority 100
+context "math()"
+snippet -< "gets" iA
+\gets 
+endsnippet
+
 priority 200
 context "math()"
 snippet <-> "leftrightarrow" iA
@@ -466,7 +485,7 @@ snippet <-> "leftrightarrow" iA
 endsnippet
 
 context "math()"
-snippet L> "mapsto" iA
+snippet :> "mapsto" iA
 \mapsto 
 endsnippet
 
@@ -476,31 +495,38 @@ snippet -1 "inverse" i
 endsnippet
 
 context "math()"
-snippet invs "inverse" iA
+snippet -1 "inverse" i
 ^{-1}
 endsnippet
 
 context "math()"
-snippet compl "complement" iA
+snippet c "complement" i
 ^{c}
 endsnippet
 
 context "math()"
-snippet \\\ "setminus" iA
+snippet \ "setminus" i
 \setminus 
 endsnippet
 
+context "math()"
 snippet >> ">>" iA
 \gg
 endsnippet
 
+context "math()"
 snippet << "<<" iA
 \ll
 endsnippet
 
 
+context "math()"
 snippet ~~ "~" iA
 \sim 
+endsnippet
+context "math()"
+snippet ~= "~=" iA
+\simeq 
 endsnippet
 
 context "math()"
@@ -508,8 +534,9 @@ snippet set "set" wA
 \\{$1\\} $0
 endsnippet
 
+context "math()"
 snippet || "mid" iA
- \mid 
+\mid 
 endsnippet
 
 
@@ -528,34 +555,42 @@ snippet inn "in " iA
 \in 
 endsnippet
 
+context "math()"
 snippet nn "cap" iA
-\cap 
+\cap
 endsnippet
 
+context "math()"
 snippet uu "cup" iA
-\cup 
+\cup
 endsnippet
 
-snippet U "bigcup" i
+context "math()"
+snippet \cupu "bigcup" iA
 \bigcup_{${1:i \in ${2: I}}} $0
 endsnippet
 
-snippet N "bigcap" i
+context "math()"
+snippet \capn "bigcap" iA
 \bigcap_{${1:i \in ${2: I}}} $0
 endsnippet
 
-snippet \O "emptyset" iA
+context "math()"
+snippet O\ "emptyset" iA
 \emptyset
 endsnippet
 
+context "math()"
 snippet <| "normal" iA
 \triangleleft 
 endsnippet
 
+context "math()"
 snippet |> "normal" iA
 \triangleright 
 endsnippet
 
+context "math()"
 snippet <> "diamond" iA
 \diamond 
 endsnippet
@@ -623,6 +658,9 @@ snippet "([0-9a-zA-Z])bb" "mathbb" riA
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
+priority 100 context "math()" snippet "([a-zA-Z])cal" "mathcal" riA
+\mathcal{`!p snip.rv=match.group(1)`}
+endsnippet
 priority 100
 context "math()"
 snippet "([a-zA-Z])cal" "mathcal" riA
@@ -650,4 +688,21 @@ snippet "([A-Zx-z])([ijkmnt])" "common subscript" wriA
 `!p snip.rv=match.group(1)`_{`!p snip.rv=match.group(2)`}
 endsnippet
 
+context "not math()"
+snippet solution "Solution environment" wriA
+\begin{proof}[Solution.]
+$1
+\end{proof}
+$0
+endsnippet
+
+context "math()"
+snippet div "divergence" wi
+\nabla \cdot $0
+endsnippet
+
+context "math()"
+snippet curl "curl" wi
+\nabla \times $0
+endsnippet
 # vim:ft=snippets

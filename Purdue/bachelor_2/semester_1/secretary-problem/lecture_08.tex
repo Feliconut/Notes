@@ -1,9 +1,8 @@
 \lecture{8}{Tue 31 May 2022 08:47}{Partially Adversarial SP with Examination}
 
-\section{Partially Adversarial SP}
-cont. on next page
-
 \newpage
+\section{Partially Adversarial SP}
+
 \subsection{Problem formulation }
 \textbf{Random arrival.} $n $ items are totally ordered. A random permutation $\sigma $ is taken uniformly from the permutation group $S_n$. The classical SP corresponds to finding a stopping time that most likely stops on $t = \sigma(1)$. We will always use numbers to denote the true rank of items, so the incoming stream of items is represented by $\sigma(1,\ldots,n)$.
 
@@ -17,6 +16,7 @@ cont. on next page
 Let $O_t$ be the observed total order on round $t $. It is a total order on $[t] $ induced by $\pi \sigma^{-1}$.
 Let $\widehat{O}_t$ be the actual total order on round $t$. It is a total order on $[t] $ induced by $\sigma^{-1}$.
 Let $P_t $ be the total order obtained from examination, defined by restricting $\widehat{O}_t $ to $E_t $. Note that $O_t$ and $P_t$ may not be compatible since $O_t$ is subject to observational "mistakes" caused by the noise.
+We use $\ge_{O_{t}}$ to denote the order inside the ordered set $O_{t}$.
 
 It is equivalent, but sometimes more convenient, to use the notion of relative rank instead of total order. We define $\text{RR}_t(i)=\sum_{s=1}^t \mathbf{1}\left( \pi\sigma^{-1}(s)\ge \pi\sigma^{-1}(i) \right) $ to be the observed relative rank function.
 
@@ -104,18 +104,22 @@ We establish a lower bound for the following simple algorithm: examine each item
 \caption{Simple algorithm}
 \label{alg:simple} 
 \begin{algorithmic}[1]
-\For{$ t \in [n] $}
-\If{$\text{RR}_t(t) \le c$}
-\State{\textsf{Examine} $x_t$}
-\If{$x_{t}=\max{P_{t+1}} \land t\ge T$ }
-\State{\textsf{Accept} $x_{t}$}
-\State{\textbf{return}}
- 	\EndIf
-\State{\textsf{Decline} $x_t$}
+\While{At least two items are left}
+\State{$x \gets$ the current item to be decided}
+\State{$t, O_{t}$, $P_{t} \gets $ as defined before }
+\If{$x \in P_{t}$}
+\If{$x = \max P_{t}$ and $t\ge T$}
+\State{\textsf{Accept} $x$}
+\Else
+\State{\textsf{Decline} $x$}
 \EndIf
-\EndFor
-\State{\textsf{Accept} $x_{n}$}
-\State{\textbf{return}}
+\ElsIf{$\left| \{a \in O_{t}: a \ge_{O_t} x\} \right| \le c $} \Comment{Means $\text{RR}_t(x)\le c$}
+\State{\textsf{Examine} $x$}
+\Else
+\State{\textsf{Decline} $x$}
+\EndIf
+\EndWhile
+\State{\textsf{Accept} the only item left}
 \end{algorithmic}
 \end{algorithm}
 
@@ -123,40 +127,75 @@ We establish a lower bound for the following simple algorithm: examine each item
 It is equivalent to view this game as follows: when an item is examined, instead of omitting the next item, the last available item is taken from the end of the queue. The player wins only if the best item is accepted, and the item is not omitted.
 \end{lemma}
 \begin{proof}
-	The arrival of items may be viewed as a random process $\left( \text{RR}_t(t) \right)_{t \in [n]} $, and by Lemma \ref{partial-adversarial-obv-facts}, we preserve the standard result that $\text{RR}_t(t)$ takes a uniform distribution over $[t]$. In this way, we can ignore the "real" rank of upcoming items in our analysis, and treat them as randomly assigned upon arrival.
-
-	We denote a particular state of the "omit next" game as $\omega_t := \left( O_t, P_t \right) $, and suppose the player chooses to \textsf{Examine} at $\omega_t$. Now the next game states are
-	\begin{align*}
-		\omega_{t+1} &= \left( O_{t}, P_{t}\cup \{x_t\}  \right) \\
-		\omega_{t+2} &= \left( O_{t}\cup \{x_{t+2}\}, P_{t}\cup \{x_t\}   \right) 
-	\end{align*}
-A sequence of game states $\mathbf{\omega} := \left( \omega_1, \ldots, \omega_\tau \right) $ completely describes the game.
-
-	If we omit the last available item instead, suppose that $x_t$ arrives at time $t$, we end up with the following game states:
-	\begin{align*}
-		\omega'_t &= \left( O'_t, P'_t \right) \\
-		\omega'_{t+1} &= \left( O'_{t}, P'_{t}\cup \{x_t\}  \right) \\
-		\omega'_{t+2} &= \left( O'_{t}\cup \{x_{t+1}\}, P'_{t}\cup \{x_t\}   \right) 
-	\end{align*}
-
-
+	(informal, to be put rigorously) Consider a deterministic algorithm. The algorithm never knows $\sigma^{-1}(t)$, the position of the current item in the arrival sequence. For some $\sigma \in S_n$, we can perform some reordering according to the following rule: We first let the algorithm run through the sequence, and take out all the items omitted, and stack them to the end of the queue. The resultant sequence $\sigma'$ looks exactly same to the algorithm in the new setting.
+	Hence, the whole gameplay will be identical up to an automorphism on $S_n$, and there's no difference revealed to the algorithm. Because the only randomness we used is the randomized $\sigma \in  S_n$, we have essentially created an isomorphism between the two probability spaces for the two versions of the game.
 \end{proof}
 
+\begin{intuition}
+	Imagine a strip of paper which represents the incoming sequence of items. One consumes the items from left to right, but the paper strip burns from right to left (due to examination which makes some items unavailable). The moment the paper is used up, the game is forced to end.
+\end{intuition}
 \begin{figure}[ht]
     \centering
     \incfig{lowerbound}
-    \caption{LowerBound}
+    \caption{Our scheme to finding a lower bound}
     \label{fig:lowerbound}
 \end{figure}
 
-\begin{align*}
-	 \operatorname{Pr}\left[{\text{win}}\right] &= \operatorname{Pr}\left[{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n}\right]\\
+Let $t^* := \sigma^{-1}(1)$, i.e., the position of the best item. We couple the game with the classical secretary problem (CSP). 
+
+\begin{lemma}[Coupling with CSP]
+\label{lem:CSP-couple}
+	Whenever an algorithm wins the problem, it automatically wins CSP in the same item setting. Whenever an algorthm wins CSP such that $t^* + |E_{t^*}| \le n$, it automatically wins our problem.
+\end{lemma}
+\begin{proof}
+	To be done.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:CSP*}
+	For any $a$ and $n> a$,
+ 	\begin{equation*}
+		\begin{split}
+	&\operatorname{Pr}\left[{\text{win CSP with }a \text{ items } |  t^* +  |E_{t^*}| \le n }\right] \\
+	&\qquad \ge \operatorname{Pr}\left[{\text{win CSP with }a \text{ items }}\right]
+		\end{split}
+ 	\end{equation*}  
+
+\end{lemma}
+\begin{proof}
+	To be done.
+\end{proof}
+
+
+From Lemma \ref{lem:CSP-couple} we have
+\begin{align}
+	 \operatorname{Pr}\left[{\text{win}}\right] 
+	 &= \operatorname{Pr}\left[{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n}\right]\\
+	 \intertext{Now we constrain $t^*$ and $|E_{t^*}|$ by  $a$ to make sure they don't meet.}
 	   &\ge \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }n \text{ items and } t^* +  |E_{t^*}| \le n \cap t^* \le a}\right]\\
-	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }n \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a}\right] \operatorname{Pr}\left[{t^* +  |E_{t^*}| \le n | t^* \le a}\right]\operatorname{Pr}\left[{t^* \le a}\right]\\
-	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }a \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a}\right] \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]\\
-	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }a \text{ items } }\right] \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]\\
+	 \intertext{Which follows from property of intersection. Continue to apply elementary properties,}
+	 \begin{split}
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }n \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a}\right] \\
+	   & \qquad\qquad\qquad \operatorname{Pr}\left[{t^* +  |E_{t^*}| \le n | t^* \le a}\right]\operatorname{Pr}\left[{t^* \le a}\right]
+	 \end{split}\\
+	 \begin{split}
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }n \text{ items } |  t^* +  |E_{t^*}| \le n \cap t^* \le a}\right] \\
+	   &\qquad\qquad\qquad \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]
+	 \end{split}\\
+	 \intertext{Since a CSP with n items where only the first $a$ items may be the best is identical to a CSP with $a$ items,}
+	 \begin{split}
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }a \text{ items } |  t^* +  |E_{t^*}| \le n}\right] \\
+	   &\qquad\qquad\qquad \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]
+	 \end{split}\\
+	 \intertext{By Lemma \ref{lem:CSP*}}
+	 \begin{split}
+	   &= \max_{a \le n} \operatorname{Pr}\left[{\text{win CSP with }a \text{ items } }\right] \\
+	   &\qquad\qquad\qquad \operatorname{Pr}\left[{|E_{t^*}|\le n-a}\right] \operatorname{Pr}\left[{t^* \le a}\right]\\
+	 \end{split}\\
+	 \intertext{Evaluate each term separately,}
+	 \operatorname{Pr}\left[{\text{win}}\right] 
 	   &\ge \max_{a \le n} \frac{1}{e } \operatorname{Pr}\left[{|E_a|\le n-a}\right] \operatorname{Pr}\left[{t^*\le a}\right]
-.\end{align*}
+.\end{align}
 
 For $t\ge c$ we have \[
 |E_t| = c-1+c \sum_{s=c}^{t} B_s
@@ -178,11 +217,49 @@ Therefore,  \[
 \beta = \frac{n-a}{c} -1 - H(a)+H(c-1)
 \] where we use $H(a)$ to denote the $a $-th harmonic number.
 
+Now we have a concentration bound for $|E_{t^*}|$ :
+\[
+	\operatorname{Pr}\left[{|E_{t^*}| \le n-a}\right]\ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
+.\] 
+
 Applying this bound, we now have
 \begin{align*}
 	\operatorname{Pr}\left[{\text{win}}\right] \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{a-c+1} \right)  \right) 
 .\end{align*}
 
 
+\textbf{Numerical Result.}
 Take $c=2 $ for an example. When $a = 70$, we have the numerical bound $\operatorname{Pr}\left[{\text{win }}\right]\ge 0.674 \frac{1}{e}$, which is a non-trivial improvement from the examine-everything algorithm which guarantees only a competitive ratio of $0.5 \frac{1}{e}$.
 
+\newpage
+\subsection{Upperbound for the problem}
+
+\textbf{This section only contains ideas, there's not any proof.}
+
+\subsubsection{some guesses}
+
+\begin{definition}
+	A \textit{simple algorithm} is an algorithm in the following form, with parameters $c$ and $T$ replaced by any valid value: \textsf{Examine} each item with observed relative rank $\le c$, and \textsf{Accept} if it is $\max P_{t+1}$ and  $t\ge T$.
+\end{definition}
+
+\begin{conjecture}
+	Any algorithm, no matter deterministic or randomized, has its competitive ratio dominated by some simple algorithm.
+\end{conjecture}
+
+\begin{conjecture}
+	For each $c$ and $n$ (as parameters of the game), of all simple best algorithms, there is one optimal simple algorithm. The optimal algorithm has the exactly same $c$.
+\end{conjecture}
+
+If the above guesses are true, then we only need to find the optimal $T$ for the simple algorithm, and bound its competitive ratio from above.
+
+
+\subsubsection{An alternative thought}
+
+The process of examination and omitting items will often bring the player to a \textbf{from-two-choose-one} scenario. For example, consider the following sequence of items:
+
+$*, \triangleleft , \triangleright , -, -$
+
+Where the player is at *. Suppose that both $\triangleleft$  and $\triangleright$  are "critical" items such that they have relative rank $\le $ c and shall be examinated. Now if the player declines *, it has to examine $\triangleleft$  and therefore lose $\triangleright$ ; if it examines and declines *, it loses $\triangleleft$ .
+
+Therefore one of $\triangleleft$  and $\triangleright$  must be lost, and there is no way to mitigate this.
+This behavior can be something fundamental that can be properly exploited to obtain an upper bound.

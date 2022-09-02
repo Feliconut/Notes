@@ -1,0 +1,104 @@
+\lecture{1}{Sun 28 Aug 2022 13:58}{Recap of classical mechanics}
+	
+\section{Deficiencies of Classical Physics}
+\subsection{EM wave from Maxwell's equations}
+Maxwell's equations in free space
+\begin{align*}
+	\nabla \cdot \vec B &= 0\\
+	\nabla \cdot \vec E &= 0\\
+	\nabla \times \vec E + \frac{\partial \vec B }{\partial t }  &= 0\\
+	\nabla \times \vec B - \mu \varepsilon \frac{\partial \vec E }{\partial t }  &= 0
+.\end{align*}
+
+Assume a harmonic time dependence $e^{i \omega t}$
+
+Rewrite the equations:
+\begin{align*}
+	\nabla \times \vec E - i \omega B &= 0\\
+	\nabla \times \vec{B} + i \omega \mu \varepsilon E &= 0
+.\end{align*}
+
+Take the curl of the first equation:
+\begin{align*}
+	\nabla \times \nabla \times \vec{E} -i \omega \nabla \times \vec{B}  &= 0 \\
+	- \nabla^2 E - \omega^2 \mu\varepsilon E &= 0 \\
+	\left( \nabla^2 + \omega^2 \mu\varepsilon  \right) \vec{E} &= 0
+.\end{align*}
+
+Now we solve the equation in 1D. 
+
+The solution is of the form $E = Ae^{ikx}+Be^{-ikx}$, where $k = \omega\sqrt{\mu\varepsilon } $
+
+\begin{align*}
+	\frac{\partial E }{\partial x} &= i k A e ^{ikx} - ikBe^{-ikx}\\
+	\frac{\partial ^2 E }{\partial x^2 } &= -k^{2} A e ^{ikx } - i k^2 B e^{-i h x }= - k^2 E \\
+	\frac{\partial ^2 E }{\partial x^2 } + \omega^2 \mu\varepsilon E &= 0 \implies k^2 = \omega^2 \mu\varepsilon
+.\end{align*}
+
+We examine the solution $E = A \sin\left( kx \pm \omega t + \phi \right) $. We see:
+
+\begin{equation}
+E = A \sin\left( k\left( x \pm \frac{1}{\sqrt{\mu\varepsilon } t }+ \phi \right)  \right) 
+.\end{equation} 
+
+When in vacuum, the wave speed is $c = \frac{1}{\sqrt{\mu_0\varepsilon_0} }$. When not in vacuum, the speed is determined by $v = \frac{1}{\sqrt{\mu\varepsilon} } = \frac{c}{n}$ where $n$ is the index of refraction.
+
+The valocity is free space is always $c$, which is a breakdown of \logseq{Galilean Relativity}.
+
+\subsection{Kinetic Theory of Matter}
+also known as: \logseq{Statistical Mechanics}
+
+For a rarified monatomic gas, there's no interaction of gas molecules. Hence, apart from gravitational field, there is only kinetic energy in the system. 
+
+This is the ideal case where there's no potential energy, we have the ideal gas formulae
+\begin{gather*}
+	P V = N k_B T \\
+	k_B = \SI{1.38}{\joule \per \kelvin}
+	.
+\end{gather*}
+
+Take room temperature $T \approx \SI{300}{\kelvin}$, we have
+\begin{align}
+	k_B T &\approx \SI{4e-21}{\joule}\\
+	      &\approx \SI{2.5e-2}{\electronvolt}\\
+	      &\approx \SI{4}{\pico\newton \nano\metre}
+\end{align}
+
+A different form of the ideal gas formula:
+\begin{align*}
+	P V &= n R T
+\end{align*} 
+where $n$ is the moles of molecules, $R = \SI{8.315}{\joule \per \kelvin \per \mole}$ is the ideal gas constant. 
+These two translate by \[
+R = k_B N_A
+\] where $N_A = 6 * 10^{23}$ is the Avogadro's Number.
+
+\subsubsection{Equipartition of Energy}
+
+\begin{theorem}[Equipartition of Energy]
+	When number of particles in a system is large and Newtonian mechanics is obeyed,
+	Each molecular degree of freedom corresponds to $\frac{1}{2}k_B T$ of average energy.
+\end{theorem}
+
+\begin{example}
+	The monatomic system has total energy \[
+	E = \frac{1}{2} m v_x^2+ \frac{1}{2} m v_y^2 + \frac{1}{2} m v_z^2
+	.\] 
+	There are three DoF, so $\left\langle E \right\rangle  \approx \frac{3}{2} k_B T$.
+\end{example}
+\begin{example}
+	The diatomic system has total energy
+	\begin{align*}
+		\begin{split}
+			E &= \frac{1}{2} m v_x^2+ \frac{1}{2} m v_y^2 + \frac{1}{2} m v_z^2
+		       \\ &+ 1/2I \omega_x^2+ 1/2I \omega_y^2
+		       \\ &+ 1/2k x^2+ 1/2m v^2
+\end{split} 
+	\end{align*}
+	The second set of terms are rotational kinetic energy. Since the axial ratation does not embody any energy, there are only two rotational terms. The third set of terms is vibrational kinetic and potential energy.
+	There are seven DoF, so $\left\langle E \right\rangle  \approx \frac{7}{2} k_B T$.
+\end{example}
+
+\begin{remark}
+	To put precisely, each term in the total energy that depend quadratically on system parameter is treated as a DoF and gets $\frac{1}{2}k_B T$. Other terms are more complex and are treated in statistical mechanics.
+\end{remark}

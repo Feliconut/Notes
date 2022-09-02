@@ -1,0 +1,211 @@
+\homework{1}{Thu 18 Aug 2022 15:11}{Week 1 due Aug 30}
+
+\begin{enumerate}
+	\item Write in form $a+bi$
+\begin{proof}[Solution]
+\begin{align*}
+	& \frac{8i - 1}{i }=8-\frac{1}{i }=8+\frac{ i^2 }{i }=8+i\\
+	& \frac{-1+5 i}{2+3 i}
+	= \frac{(-1+5 i)(2-3i)}{(2-3i)(2+3 i)}
+	= \frac{-2+3i+10i-15i^2}{4+9}
+	= \frac{13+13i}{13}
+	= 1+i	\\
+	& \frac{3}{i}+\frac{i}{3}
+	= \frac{-3i^2}{i}+\frac{1}{3}i
+	= -3i+\frac{1}{3}i
+	= -\frac{8}{3}i
+\end{align*}
+\end{proof}
+\item Use the result of Problem 15 to find
+(a) $i^{7}$
+(b) $i^{62}$
+(c) $i^{-202}$
+(d) $i^{-4321}$
+\begin{proof}[Solution]
+\begin{align*}
+	i^7 &= i^{4k+3}|_{k=1} = -i\\
+	i^{62} &= i^{4k+2}|_{k=15} = -1\\
+	i^{-202} &= i^{4k+2}|_{k=-51} = -1\\
+	i^{-4321} &= i^{4k+3}|_{k=-1081} = -i\\
+.\end{align*}
+\end{proof}
+\item Solve each of the following equations for $z$.
+\\(b) $\frac{z}{1-z}=1-5 i$
+\begin{proof}[Solution]
+	\begin{align*}
+		\frac{z}{1-z}&=1-5 i\\
+		z&=(1-5 i)(1-z)\\
+		z&=1-z-5i+5iz\\
+		2z-5iz&=1-5i\\
+		(2-5i)z&=1-5i\\
+		z&=\frac{1-5i}{2-5i}\\
+		z&=\frac{(1-5i)(2+5i)}{4+25}\\
+		z&=\frac{2+5i-10i+25}{29}\\
+		z&=\frac{27-5i}{29}\\
+		z&=\frac{27}{29} - \frac{5}{29}i\\
+	\end{align*}
+\end{proof}
+
+(d) $z^{2}+16=0$
+\begin{proof}[Solution]
+\begin{align*}
+	z^2 + 16 &= 0 \\
+	z^2 &= -16 \\
+	z^2 &= (4i)^2 \\
+	z &= \pm 4i \\
+.\end{align*}
+\end{proof}
+\item Find all solutions to the equation $z^{4}-16=0$.
+\begin{proof}[Solution]
+\begin{align*}
+	z^4-16&=0\\
+	z^4&=16\\
+	(z^2)^2&=4^2\\
+	(z^2)&=\pm 4\\
+.\end{align*}
+When $z^2 = 4$, 
+\begin{align*}
+	z^2 &= 2^2\\
+	z = \pm 2
+.\end{align*}
+When $z^2 = -4 $,
+\begin{align*}
+	z^2 &= (2i)^2\\
+	z &= \pm 2i
+.\end{align*}
+Hence $z \in \{2,-2,2i,-2i\} $
+\end{proof}
+\item Let $z$ be a complex number such that $\operatorname{Re} z>0$. Prove that $\operatorname{Re}(1 / z)>0$.
+\begin{proof}[Solution]
+For any $z = a + i b \in  \mathbb{C}$, 
+$\frac{1}{z } = \frac{a-ib }{a^2+b^2}$.
+
+Now $\text{Re}(\frac{1}{z }) = \frac{a}{a^2+b^2}> 0$ since $a = \text{Re}(z) > 0$.
+\end{proof}
+	\item Describe the set of points $z$ in the complex plane that satisfies each of the following.\\
+(c) $|2 z-i|=4$
+\begin{proof}[Solution]
+	Solve the equations:
+	\begin{align*}
+		|2 z - i|&= 4\\
+		2z &\in \partial B_\mathbb{C}(i, 4)\\
+		z &\in \frac{1}{2}\partial B_\mathbb{C}(i, 4)\\
+		z &\in B_\mathbb{C}(\frac{i}{2}, 2)
+	.\end{align*}
+	Where $\partial B_\mathbb{C}(x,r)$ denotes the boundary of a ball, i.e., an $S^1$ sphere, in $\mathbb{C}$ with center $x \in \mathbb{C}$ and radius $r \in  \mathbb{R}$.
+\end{proof}
+
+(e) $|z|=\operatorname{Re} z+2$
+\begin{proof}[Solution]
+Let $z = a + i b$. Solve the equations:
+\begin{align*}
+	|z| &= \text{Re}z + 2\\
+	\sqrt{a^2 + b^2} &= a + 2\\
+	a^2 + b^2 &= a^2 + 4a + 4\\
+	b^2 &= 4a+4\\
+	a &= \frac{b^2}{4}-1
+.\end{align*}
+This equation describes a parabola.
+\end{proof}
+(f) $|z-1|+|z+1|=7$
+\begin{proof}[Solution]
+	A point $z $ satisfies Eq.(f) iff the sum of its distance from the points $1$ and $-1$ is $7$. This is the definition of a ellipse with $1$ and  $-1$ as its foci, and  $3.5$ as the length of its semi-major axis.
+
+Let $z = x + i y$. Solve the equations:
+\begin{align*}
+	\sqrt{(x-1)^2+y^2}+\sqrt{(x+1)^2+y^2}&=7\\  	
+	\sqrt{(x-1)^2+y^2}&=7-\sqrt{(x+1)^2+y^2}\\  	
+	(x-1)^2+y^2&=49-14\sqrt{(x+1)^2+y^2}+(x+1)^2+y^2\\  	
+	14\sqrt{(x+1)^2+y^2}&=49+4x\\  	
+	14^2((x+1)^2+y^2)&=49^2+16x^2+49\cdot 8x\\  	
+	(x+1)^2+y^2&=\frac{49}{4}+\frac{4}{49}x^2+ 2x\\  	
+	\frac{45}{49}x^2+y^2&=\frac{45}{4}  	
+.\end{align*}
+\end{proof}
+	\item 13. Prove that if $(\bar{z})^{2}=z^{2}$, then $z$ is either real or pure imaginary.
+\begin{proof}[Solution]
+Let $z = x + i y$. Solve the equations:
+\begin{align*}
+	(\overline{z})^2 &= z^2\\
+	(x-iy)^2 &= (x+iy)^2\\
+	x^2-y^2-2ixy &= x^2-y^2+2ixy\\
+	-2ixy &= 2ixy\\
+	xy &= 0
+.\end{align*}
+By elementary properties of real numbers, we have $x=0 \lor y=0$. Hence $z $ is either real or pure imaginary.
+\end{proof}
+	\item 11. Using the complex product $(1+i)(5-i)^{4}$, derive
+\[
+\pi / 4=4 \tan ^{-1}(1 / 5)-\tan ^{-1}(1 / 239) .
+\]
+\begin{proof}[Solution]
+\begin{align*}
+	(1+i)(5-i)^4&= (239-i)4\\
+	\intertext{By property of argument:}
+	\text{arg}(1+i)+\text{arg}\left[(5-i)^4\right]&= \text{arg}(239-i)\\
+	(\frac{\pi}{4}+2k\pi) +
+	4(-\tan^{-1}(\frac{1}{5}+2k\pi))
+	&= -\tan^{-1}(\frac{1}{239}+2k\pi)\\
+	\frac{\pi}{4} &=  \tan ^{-1}(1 / 5)-\tan ^{-1}(1 / 239) 
+.\end{align*}
+Where we slightly abuse notation by using the same $k$, since $k$ need not be the same for all three terms.
+The last step is a little loose because we have not made rigorous proof that no branch-crossing take place.
+\end{proof}
+	\item 13. Decide which of the following statements are always true.\\
+(a) $\operatorname{Arg} z_{1} z_{2}=\operatorname{Arg} z_{1}+\operatorname{Arg} z_{2}$ if $z_{1} \neq 0, z_{2} \neq 0$.
+\begin{proof}[Solution]
+	Not always true. True only if $\text{Arg}z_1 + \text{Arg}z_2 \in (-\pi,\pi]$.
+\end{proof}
+
+(b) $\operatorname{Arg} \bar{z}=-\operatorname{Arg} z$ if $z$ is not a real number.
+\begin{proof}[Solution]
+	Not always true. True only if $\text{Arg}z \in (-\pi,\pi)$.
+\end{proof}
+
+(c) $\operatorname{Arg}\left(z_{1} / z_{2}\right)=\operatorname{Arg} z_{1}-\operatorname{Arg} z_{2}$ if $z_{1} \neq 0, z_{2} \neq 0$.
+\begin{proof}[Solution]
+	Not always true. True only if $\text{Arg}z_1 - \text{Arg}z_2 \in (-\pi,\pi]$.
+\end{proof}
+
+(d) $\arg z=\operatorname{Arg} z+2 \pi k, k=0, \pm 1, \pm 2, \ldots$, if $z \neq 0$.
+\begin{proof}[Solution]
+	Always true by definition.
+\end{proof}
+
+
+	\item Write in polar form.\\
+(a) $\left(\cos \frac{2 \pi}{9}+i \sin \frac{2 \pi}{9}\right)^{3}$
+\begin{proof}[Solution]
+	\[
+		=  \left(\text{cis} { \frac{2\pi}{9}} \right)^3
+		=  \left(\text{cis} {3 \frac{2\pi}{9}} \right)
+		=  \text{cis} {\frac{2\pi}{3}}.
+	\]
+\end{proof}
+(b) $\frac{2+2 i}{-\sqrt{3}+i}$
+\begin{proof}[Solution]
+	\[
+	= \frac{2\sqrt{2} \text{cis}{ \frac{\pi}{4}}}{2 \text{cis}{ \frac{5}{6}\pi}}
+	= \sqrt{2} \text{cis}{- \frac{7}{12}\pi} 
+	.\] 	
+\end{proof}
+(c) $\frac{2 i}{3 e^{4+i}}$
+\begin{proof}[Solution]
+	\[
+	= \frac{2 e^{i\frac{\pi}{2}}}{3 e^{4} e^{i}}
+	= \frac{2}{3} e^{-4} \text{cis}{ \left( \frac{\pi}{2} -1 \right) }
+	.\] 
+\end{proof}
+
+	\item Show that $\left|e^{z}\right| \leq 1$ if $\operatorname{Re} z \leq 0$
+\begin{proof}[Solution]
+	Write $z = a + bi $. Now \[
+	\left| e^z \right| 
+	= \left| e^{ a+bi } \right| 
+	= \left| e^a e^{bi} \right| 
+	= \left| e^a\right| \left|   e^{bi} \right| 
+	.\]   
+	Where $|e^a| = e^a \le 1$ (because $a = \text{Re} z \le 0$)
+	and $\left| e^{bi } \right| = 1$ (since $bi $ is purely imaginary).
+\end{proof}
+\end{enumerate}

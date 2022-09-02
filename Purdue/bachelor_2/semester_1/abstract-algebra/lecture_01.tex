@@ -1,0 +1,80 @@
+\lecture{1}{Sat 27 Aug 2022 12:14}{lecture}
+
+\section{Prerequisite}
+\subsection{Sets and Functions}
+
+subsection{Arithmetics of Integers}
+
+\begin{notation}
+	$\mathbb{N} = \{1,2,3,\ldots\} $
+\end{notation}
+
+\begin{theorem}[Well-ordering]
+	Any nonempty set of nonnegative integers has a smallest member.
+\end{theorem}
+
+\begin{theorem}[Euclid's Algorithm]
+	For $m,n \in  \mathbb{Z}$ and $n \neq  0$, there exists $q, r \in  \mathbb{Z}$ such that $0 \le  r < n$ and $m = n q + r $.
+\end{theorem}
+
+A \textit{Division Algorithm} computes the result of Euclid's Algorithm. Division algorithms allow us to compute division efficiently, and are implemented in modern computers.
+
+\begin{definition}[Divisibility]
+	\quad
+	\begin{itemize}
+		\item We say $m $ \textit{divides} $n$, writing $m \mid n$, if $n = cm$ for some $c \in  \mathbb{Z}$.
+		\item A \textit{proper divisor} $m$ of $n$ satisfies $m | n$ and $1 \ge m < |n|$.
+		\item We write $a^k \|  b :\iff a^k | b $ but $a^{k+1}\nmid b $.
+	\end{itemize}\end{definition}
+
+\begin{lemma}[Basic properties of divisibility]
+	\quad
+	\begin{enumerate}
+		\item $1 | n$ for all $n$, and $n | 0$ for all $n \neq  0$.
+		\item (transitivity) $a | b \land  b | c \implies a | c $.
+		\item (linear combination) $a | b \land  a | c \implies \forall x,y \in \mathbb{Z}, a|\left( bx+cz  \right) $.
+		\item (antisymmetry) $a|b \land b|a \implies a = \pm b $.
+		\item (ordering) $a|b, a>0, b>0 \implies a\le b $.
+		\item (multiplication) $m \neq  0 \implies \left( a | b \iff ma | mb \right) $.
+	\end{enumerate}
+\end{lemma}
+
+\begin{definition}[greatest common divisor]
+	Given $a, b \in \mathbb{Z}$, not both $0$,  $c \in Z$ is their greatest common divisor if:
+	\begin{itemize}
+		\item $c>0$,
+		\item $c|a \land  c | b $, and
+		\item if $d | a$ and $d | b $, then $d | c $.
+	\end{itemize}
+\end{definition}
+\begin{notation}
+	GCD of two integers $a, b$ is written as $(a, b)$. This needs to be disambiguated from the 2-tuple $(a,b)$ by context.
+\end{notation}
+
+\begin{theorem}
+	For any two integers $a,b \in \mathbb{Z}$, their GCD is a linear combination. In other words, there exists $m,n \in  \mathbb{Z}$ such that $(a,b) = ma+nb $.
+\end{theorem}
+Note also, that $(a,b)$ is the least positive linear combination of $a $ and $b $.
+
+\begin{definition}[relative prime]
+	$a,b \in \mathbb{Z}$ are relatively prime if $(a,b) = 1 $.
+\end{definition}
+
+\begin{definition}[prime]
+	$p$ is prime of 
+	\begin{enumerate}
+		\item $p > 1$
+		\item $d | p \implies d = 1 \lor d = p$.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[1.5.7]
+	Every positive integer is prime or product of primes.
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Arithmetics]
+	There is a unique factorization of each positive integer into primes.
+\end{theorem}
+\begin{remark}
+	The FTA may not be generally true for rings, since rings may not have a well-ordered structure.
+\end{remark}

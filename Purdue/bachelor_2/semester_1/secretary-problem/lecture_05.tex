@@ -1,6 +1,6 @@
-\lecture{5}{Wed 09 Mar 2022 23:23}{Properties of the optimal solution to the relaxed problem with and without error}
+\lecture{5}{Wed 09 Mar 2022 23:23}{Properties of the DP  solution to the relaxed problem with and without error}
 
-\section{Simple Problem}
+\section{DP solution to Simple Problem}
 We begin with a relaxed problem of best selection with no error. Let $[x,n]$ denote the initial game state where we have an upcoming item with value $x$ and $n$ un-observed items after the current item.
 
 If the player accepts the first item, he wins iff all other items are less than the first item. Hence $\operatorname{Pr}\left[{\text{win} | \text{accept at } [x,n]}\right] = x^{n}$.  
@@ -94,7 +94,7 @@ The problem with error is again solvable using thresholding:
 	The optimal policy for the problem with error can be described completely by thresholding. In other words, for each $\delta \ge 0$, there exists sequences $T_n$ and $R_n \in \R$ such that the LHS in the $\max$ operator of \eqref{err_induct} is greater than the RHS iff $\tilde x > R_n$. Similarly, the LHS is picked in \eqref{noerr_induct} iff $x > T_n$.
 \end{theorem}
 \begin{proof}
-	We first prove the existence of $T_{n}$. In \eqref{noerr_induct}, note that $ V(\tilde X_{n-1}, n-1, x)$ is monotone decreasing wrt $x$ for each specific realization of $\tilde X_{n-1}$. Taking expectation won't affect monotonicity, so the argument in the previous theorem applies.  
+	(incomplete) We first prove the existence of $T_{n}$. In \eqref{noerr_induct}, note that $ V(\tilde X_{n-1}, n-1, x)$ is monotone decreasing wrt $x$ for each specific realization of $\tilde X_{n-1}$. Taking expectation won't affect monotonicity, so the argument in the previous theorem applies.  
 	
 	Now we work on existence of $R_{n}$ and consider \eqref{err_induct}. Let $A(x) := \operatorname{E}\left[{V(x, n-1, x^* \wedge X_{n-1}}\right]$ and $B(x):= \operatorname{E}\left[{V(\tilde X_{n-1}, n-1, x^* \wedge x)}\right]$, where the expectation is taken over $(u-\delta, u+\delta)\cap (0,1)$. Our goal is to prove that $EA > EB$ is a thresholding on $u$. We will first show that $A(x)>B(x)$ is a thresholding on $x$, and apply properties of expectation.
 	
@@ -135,7 +135,5 @@ Again we can say something about the thresholding sequences.
 	\end{enumerate}
 \end{corollary}
 
-We can compute the optimal thresholds by iteratively solving inequalities. Numerical results are summarized below. 
-(Numerical experiments TBD)
-
+We can compute the optimal thresholds by iteratively solving inequalities.
 	

@@ -1,0 +1,88 @@
+\lecture{1}{Sun 21 Aug 2022 23:56}{lecture}
+
+\subsubsection{triangle inequality}
+
+\begin{lemma}
+	If $c > 0$, $|a| \le  c \iff -c \le a\le c$.
+	
+\end{lemma}
+
+\begin{theorem}[Triangle Inequality]
+	For $a, b \in \mathbb{R}$,  $|a+b|\le |a| + |b|$.
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		|a+b|\le |a| + |b|
+		&\iff -|a| - |b| \le  a+b \le |a|+|b|\\
+		&\impliedby -|a| \le a \le |a| \land  -|b| \le  b \le  |b|
+	.\end{align*}
+\end{proof}
+
+\begin{theorem}[Reverse triangle inequality]
+	\[
+	\left| |a|-|b|  \right| \le |a-b|
+	.\] 
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		&\iff -|a-b| \le  |a|-|b| \le |a-b|
+		\intertext{By symmetry we prove the right part}
+		&\iff |a| \le  |a-b| + |b| \\
+		&\iff |a-0| \le |a-b| + |b-0|
+		\intertext{Which follows from triangle inequality.}
+	\end{align*}
+\end{proof}
+
+
+\subsubsection{Completeness of $\mathbb{R}$}
+
+\begin{definition}[supremum]
+	If  $S \subset  \mathbb{R}$ and $u \in  R$ then $u = \operatorname{sup} S$ if 
+	\begin{enumerate}
+		\item $u$ is an upper bound for $S$ 
+		\item Any $v<u$ is not an upper bound for $S$.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}[equivalent condition for supremum]
+	$u = \operatorname{sup} S$ iff
+	\begin{enumerate}
+		\item $s\le u$ for any $s \in S$ 
+		\item For any  $v<s$, there exists $s_v \in S$ such that  $v <s_v \le u$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{axiom}[supremum property]
+	Any subset of $\mathbb{R}$ bounded above has a supremum.
+\end{axiom}
+
+Note: there are many ways to realize this axiom in specific models, for example the construction of $\mathbb{R}$ from $\mathbb{Q}$ by Dedekind cuts or equivalence classes of Cauchy sequences.We may also construct $\mathbb{R}$ from subset of $\mathbb{N}$. In this course, however, we do not concern about the specific construction of $\mathbb{R}$.
+
+\begin{definition}[infimum]
+	If  $S \subset  \mathbb{R}$ and $u \in  R$ then $u = \operatorname{inf} S$ if 
+	\begin{enumerate}
+		\item $u$ is an lower bound for $S$ 
+		\item Any $v>u$ is not an lower bound for $S$.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}[equivalent condition for supremum]
+	$u = \operatorname{inf} S$ iff
+	\begin{enumerate}
+		\item $s\ge u$ for any $s \in S$ 
+		\item For any  $v>s$, there exists $s_v \in S$ such that  $v >s_v \ge u$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{theorem}[infimum property]
+	Any nonempty subset of $\mathbb{R}$ bounded below has an infimum.
+\end{theorem}
+\begin{proof}
+Let $-S = \{-s:s\in S\} $. Then check that $-\left( \operatorname{sup} \left( -S \right)  \right) =\operatorname{inf} S$.
+\end{proof}
+
+\begin{remark}
+	Supremum and infimum are unique for any bounded set. Formally we write $\operatorname{sup} S = \infty $ if $S$ is unbounded above; we write $\operatorname{sup} S = -\infty  $ if $S = \emptyset $.
+\end{remark}
+
+

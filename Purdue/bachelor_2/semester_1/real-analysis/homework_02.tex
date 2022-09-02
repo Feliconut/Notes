@@ -1,0 +1,158 @@
+\homework{2}{Mon 29 Aug 2022 14:24}{Week 2 Due Sep 9}
+
+I use the following lemma to prove Exercise 3.J.
+\begin{lemma}[pigeonhole principle]
+	Let $Y$ be a finite set and $X$ be finite with cardinality greater than $|Y|$. Then for any function $f: X \to  Y$, there exists $x_1, x_2 \in X$ such that $f(x_1) = f(x_2)$.
+\end{lemma}
+\begin{proof}
+Denote $A_y$ by the set $\{x \in X: f(x) = y\} $. We must have $|A_y| < 2$ for all $y \in Y$, otherwise there will be more than one element from $X$ mapped to the same element in $Y$. Hence $0 \le |A_y| \le  1$. We have
+\[
+\left| \bigcup_{y \in Y} A_y \right| = \sum_{y \in Y } |A_y| \le \sum_{y \in Y} 1 =  |Y|
+.\] 
+The first equality comes from the fact that $A_y$ are all disjoint and finite (since elements mapped to different targets must be different).
+
+But for any $x \in X$, it is mapped to some element $y = f(x)$. In other words, $x \in A_{f(x)} \subset \bigcup_{y \in Y} A_y$. In the other direction, for any $x \in \bigcup_{y \in Y} A_y$, it is some element in $X$ by definition. We have shown that $X = \bigcup_{y \in Y} A_y$ and therefore $|X| = \left| \bigcup_{y \in  Y} A_y \right| \le |Y|$ which is a contradiction to the assumption that $|X| > |Y|$. Therefore there must exist some $y$ such that  $|A_y| \ge 2$, which is exactly what we want to prove.
+\end{proof}
+
+I prove this exercise in extra, because I used it in Exercise 7.I.
+
+7.I. Show that the collection of "right hand" end points in $\boldsymbol{F}$ is denumerable. Show that if all these end points are deleted from $\boldsymbol{F}$, then what remains can be put onto one-one correspondence with all of $[0,1)$. Conclude that the set $\boldsymbol{F}$ is not countable.
+\begin{proof}
+Each "right hand" end point is in the form $\frac{k+1}{3^n}$ where $k, n \in \mathbb{N}$. Therefore it is a rational number, and the set of rational numbers $\mathbb{Q}$ is denumerable. Because the set of right hand end points is a subset of rational numbers, it is denumerable.
+
+Now we construct cascaded segmentation of the half-open interval $[0,1)$. For each nonnegative integer $n$ and $0\le k\le n$, define $A_{nk}$ to be \[
+A_{nk} = [\frac{k}{2^n}, \frac{k+1}{2^n}) 
+.\] 
+
+We use induction to verify the following properties:
+\begin{enumerate}
+	\item for all $n$ and all distinct  $k, l$, 
+		\[
+		A_{nk}\cap A_{nl} = \emptyset 
+		.\] 
+	\item for all $n$ there are exactly $2^n$ disjoint sets of the form $A_{nk }$.
+	\item for all $n$, \[
+\bigcup_{0\le k\le n} A_{nk} = [0,1)
+.\] 
+
+\item Also, for any $n, k$, $A_{n+1, l} \subset A_{nk}$ if and only if \[
+2k \le l \le 2k+1
+.\] 
+\end{enumerate}
+
+Now define the sequence $(x_n)_{n=0}^{\infty }$ as
+\begin{align*}
+	x_0 &= \begin{cases}
+		0 & x \in A_{00} \\
+		1 & x \in A_{01}
+	\end{cases}\\
+	x_n &= \begin{cases}
+		0 & x \in A_{n, 2k} \text{ where } x \in A_{n -1, k}\\
+		1 & x \in A_{n, 2k+1} \text{ where } x \in A_{n -1, k}\\
+	\end{cases}
+\end{align*}
+
+Now the function $F$ defined below is a bijection between all 0-1 sequences that are not fully 1 and  $[0,1)$:
+ \begin{align*}
+	F: \{0,1\}^\omega\setminus (1)_{n\in\N} &\longrightarrow [0,1) \\
+	(x_n)_{n\ge 0} &\longmapsto F((x_n)_{n\ge 0}) = \sum_{n=0}^{\infty} \frac{x_n}{2^{n+1}}
+.\end{align*}
+
+Now we introduce a function $G $:
+\begin{align*}
+	G: \{0,1\}^\omega\setminus (1)_{n\in\N} &\longrightarrow [0,1) \\
+	(x_n)_{n\ge 0}  &\longmapsto G((x_n)_{n\ge 0} ) = \sum_{n=0}^{\infty} \frac{2x_n}{3^{n+1}} 
+.\end{align*}
+We verify that $G$ is a bijection between all not-all-one 0-1 sequences and the cantor set. Then we have a bijection between $[0,1)$ and the cantor set.
+\end{proof}
+
+
+6.M, 7.F, 7.G, 7.J, 7.L, 3.F, 3.J
+
+\begin{enumerate}
+	\item 6.M. Modify the argument given in Theorem $6.8$ to show that if $a>0$, then the number
+\[
+b=\sup \left\{y \in \boldsymbol{R}: 0 \leq y, \quad y^{2} \leq a\right\}
+\]
+exists and has the property that $b^{2}=a$. This number will be denoted by $\sqrt{a}$ or $a^{1 / 2}$, and is called the positive square root of $a$.
+\begin{proof}
+	Denote the set by $S$. We first show that the supremum exists. Clearly $0 \in S$, so the set is nonempty. Net we show that the set is bounded from above. We split into cases where $x\le 1$ and $x>1$. When  $x\le 1$, we claim that the set is bounded above by $1$. Suppose not, then there exists some $s \in S$ such that $s >1$, hence $s^2 >1$ but we have $s^2 \le a \le 1$, a contradiction. When $x>1$, we claim that the set is bounded above by $a$. Suppose not, then there exists some $s \in S$ such that $s > a$, hence $s^2 > a^2$ but we have $s^2 \le  a < a^2$ (the second inequality is due to $a>1$), a contradiction. In both cases the set is bounded above. By supremum property of $\mathbb{R}$, $b = \operatorname{sup} S$ exists.
+
+	Now we show $b^2 = a$. Suppose not, then by trichotomy property of real ordering, we have either $b^2 < a$ or $b^2 > a$. When $b^2 < a$, we take $n \in \mathbb{N}$, such that $\frac{1}{n}<\frac{a-b^2}{2b+1}$ (using Corollary 6.7 (b) of Archimedean Property). In this case \[
+		(b+\frac{1}{n})^2 = b^2 + \frac{1}{n}\left( 2b + \frac{1}{n} \right) \le b^2 + \frac{1}{n}\left( 2b + 1 \right) < b^2 + (a-b^2) = a
+	.\] 
+This means $b + \frac{1}{n} \in S$, contrary to the fact that $b$ is an upper bound of $S$.
+
+When $b^2>a$, we take $n \in \mathbb{N}$ such that $\frac{1}{n} < \frac{b^2 - a}{2b}$ (such $n$ exists by Corollary 6.7(b) of the Archimedean Property). Since $b = \operatorname{sup} S$, there exists an $s_0\in S$ such that $b - \frac{1}{n} <s_0$. But this implies that
+\[
+a < b^2 - 2 \frac{b}{n} < b^2 - 2 \frac{b}{n} + \frac{1}{n^2} = \left( n-\frac{1}{n} \right) ^2 < s_0^2
+.\] 
+But this means $s_0^2 > a$, contrary to the fact that $s_0 \in S$.
+
+We have excluded the possibilities of $b^2<a$ and $b^2>a$, so the only possibility left is $b^2 = a$.
+\end{proof}
+
+	\item 7.F. Let $J_{n}=(0,1 / n)$ for $n \in \mathbf{N}$. Show that this sequence of intervals is nested, but that there is no common point.
+\begin{proof}
+	We first show the sequence is nested. Fix some $n \in \mathbb{N}$. It suffices to show that $J_{n+1} \subset J_n$. Take some $x \in J_{n+1}$, then by definition we have $0<x<\frac{1}{n+1}$. But since $\frac{1}{n+1}<\frac{1}{n}$, we have $0<x<\frac{1}{n}$, hence by definition again we have $x \in J_n$.
+
+	Now we show there is no common point. Fix any $x \in J_1 = (0,1)$. By Corollary 6.7(b), there exists some $n \in \mathbb{N}$ such that $0<\frac{1}{n}<x$. In other words, $x \not\in J_n$. Therefore, $\bigcap_{n \in \mathbb{N}} J_n = \emptyset $ since each element is not in at least one of the sets.
+\end{proof}
+	\item 7.G. If $I_{n}=\left[a_{n}, b_{n}\right], n \in \mathbf{N}$, is a nested sequence of closed cells, show that
+\[
+a_{1} \leq a_{2} \leq \cdots \leq a_{n} \leq \cdots \leq b_{m} \leq \cdots \leq b_{2} \leq b_{1} .
+\]
+If we put $\xi=\sup \left\{a_{n}: n \in \mathbf{N}\right\}$ and $\eta=\inf \left\{b_{m}: m \in \mathbf{N}\right\}$, show that $[\xi, \eta]=\bigcap_{n \in N} I_{n}$.
+\begin{proof}
+	Take $n, m \in \mathbb{N}$ where $n\le m$. By assumption $I_m \subset  I_n$. We need to show that $a_n \le a_m$ and $b_m\le b_n$. By definition of closed intervals, for all  $x \in \mathbb{R}$, $x \in I_n \iff a_n \le  x \le  b_n$ and $x \in I_m \iff a_m \le  x \le  b_m$. By set inclusion, $x \in I_m \implies x \in I_n$. Therefore \[
+	a_m \le  x \le  b_m \implies a_n \le  x \le  b_n
+	.\] 
+Suppose that $a_m < a_n$. Then there exists some $x$ such that $a_m < x < x_n$, such that $a_n \le x\le b_n$ is not true, therefore the implication is not true for the specific $x$, a contradiction to the universally quantified statement. By trichotomy of real order, we have $a_m \ge a_n$. By the same reasoning we have $b_m \le  b_n$.
+
+Now we show that $[\xi, \eta]=\bigcap_{n \in N} I_{n}$. We first show that $[\xi, \eta]\subset \bigcap_{n \in N} I_{n}$. Take $x \in  \left[ \xi, \eta \right] $, and take an arbitrary $n \in \mathbb{N}$. It suffices to show that $x \in I_n$. Since $\xi$ is a supremum, we must have $\xi \ge a_n$. Therefore $x \ge  \xi \ge  a_n$. Similarly we have $x \le  b_n$. By definition of $I_n$, we have $x \in  I_n$.
+
+Next we show that $[\xi, \eta]\supset \bigcap_{n \in N} I_{n}$. Take $x \in \bigcap_{n \in N} I_{n}$. Then $x \in I_n$ for all $n \in \mathbb{N}$. Suppose that $x < \xi$. Then there exists some $m \in \mathbb{N}$ such that $x<a_m \le  \xi$. Clearly $x \in I_m$ is not true, a contradiction. Therefore we must have $x \ge \xi$. By the same reasoning we have $x\le \eta$, so $x \in  \left[ \xi, \eta \right] $.
+\end{proof}
+	\item 7.J. Every open interval $(a, b)$ which contains a point of $\boldsymbol{F}$ also contains an entire "middle third"' set which belongs to $\mathscr{C}(\boldsymbol{F})$. Hence $\boldsymbol{F}$ does not contain any non-void open interval.
+\begin{proof}
+	Fix some interval $(a,b) \subset \mathbb{R}$ and some point $x \in \mathbf{F}\cap (a,b)$. Since $a<x<b$, we have $b-x>0$ and $x-a>0$. We can choose some $n \in \mathbb{N}$ such that\[
+	3^n > \max(\frac{1}{x-a}, \frac{1}{b-x})
+	.\] 
+	To justify this, note that by Bernoulli's Inequality\[
+	3^n = (1+2)^n \ge  1 + 2n
+	\]
+	and by Archimedean property we can choose $n$ such that  $n> \frac{\max(\frac{1}{x-a}, \frac{1}{b-x}) - 1}{2}$.
+
+	By Corollary 6.7(c) of the Archimedean property, there exists $k \in \mathbb{N}$ such that $k \le  3^n x < k+1$. Since $3^n x - 3^n a > 1$, we have $k > 3^n x -1 > 3^n a$. Since $3^nb - 3^nx > 1$, we have $k+1 \le 3^n x + 1<3^n b$. Therefore $\left[ \frac{k}{3^n}, \frac{k+1}{3^n} \right]  \subset  \left( a,b \right) $.
+
+	By definition and construction, $x \in \left[ \frac{k}{3^n}, \frac{k+1}{3^n} \right] \subset F_n$. $F_{n+1}$ takes the middle third from this interval, which is $\left[ \frac{3k}{3^{n+1}}, \frac{3k+1}{3^{n+1}} \right]\cup \left[ \frac{3k+2}{3^{n+1}}, \frac{3k+3}{3^{n+1}} \right] \subset F_{n+1}$. The middle-third $M = \left( \left[ \frac{3k+1}{3^{n+1}}, \frac{3k+2}{3^{n+1}} \right] \right)$ satisfies the properties $M \subset F_n $ and $M \subset (a,b)$.
+\end{proof}
+
+	\item 7.L. Show that $\boldsymbol{F}$ is not the union of a countable collection of closed intervals.
+\begin{proof}
+	Suppose $\mathbf{F} = \bigcup_{n \in \mathbb{N}} I_n$ where each $I_n = [a_n, b_n]$. Suppose there exists some $m \in \mathbb{N}$ such that $a_m < b_m$. Then the open interval $(a_m, b_m)$ is nonempty, and has an nonempty intersection with $\mathbf{F}$. By Exercise 7.J, the interval $(a_m, b_m)$ contains, a "middle-third" set. This contradicts the fact that $[a_n, b_n] \subset  \mathbf{F}$. 
+
+	Therefore $a_n\ge b_n$ for all $n \in \mathbb{N}$. If $a_n>b _n$ then the interval is empty, so we have $I_n = \{x_n\} \subset \mathbf{F}$ for at most countable number of $I_n$, and the rest of them are empty. This is to say that the set $\mathbf{F}$ is at most countable. But we have concluded in Exercise 7.I that  $\mathbf{F}$ is not countable.
+\end{proof}
+
+	\item 3.F. Use the fact that every infinite set has a denumerable subset to show that every infinite set can be put into one-one correspondence with a proper subset of itself.
+\begin{proof}
+Consider an infinite set $X$ and a denumerable subset  $A\subset X$. Denumerate $A$ by $a_1, a_2, \ldots, a_i, \ldots$, and define the map \begin{align*}
+	F: X &\longrightarrow X\setminus \{a_1\}  \\
+	x &\longmapsto F(x) = \begin{cases}
+		x & x \not\in A\\
+		a_{i+1} & x = a_i \in A
+	\end{cases}
+.\end{align*}
+$F$ is a function because for every $x$ either $x \not\in A$, or $x \in A$, in this case there must exist $i \in \mathbb{N}$ such that $x = a_i$. $F$ is injective since for any $x_1 \neq  x_2$, either they both  $\not\in  A$, in this case $F(x_1) = x_1 \neq  x_2 = F(x_2)$; or they are both $\in A$, in this case $F(x_1) = F(a_i) = a_{i+1} \neq a_{j+1} = F(a_j) = F(x_2)$ ; or one of them is in $A$ and the other is not, in this case the claim is obvious.
+
+$F$ is surjective because for any $x \in X\setminus A$, its preimage is itself; and for any $x = a_i \in A\setminus \{a_1\} $ where $i \neq 1$, its preimage is $a_{i -1} \in A\setminus \{a_1\} $.
+\end{proof}
+
+
+\item 3.J. Prove that $\mathbf{N}$ cannot be put into one-one correspondence with any initial segment of $\mathbf{N}$.
+\begin{proof}
+Suppose for the sake of contradiction that there exists some $n \in \mathbb{N}$ such that there is a bijection $f: \mathbb{N} \to  S_n$. Hence in particular $f$ is injective. Then by restricting the domain, $f|_{S_{n+1}} : S_{n+1} \to  S_n$ is injective. However this cannot be true since by the pigeonhole principle there must exist two elements in $S_{n+1}$ that are mapped to the some same element in $S_n$.
+\end{proof}
+
+\end{enumerate}

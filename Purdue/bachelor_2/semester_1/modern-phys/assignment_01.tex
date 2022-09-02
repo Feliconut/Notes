@@ -1,0 +1,73 @@
+\assignment{1}{Mon 29 Aug 2022 16:23}{assignment}
+
+\begin{enumerate}
+\item Observer A, who is at rest in the laboratory, is studying a particle that is moving through the laboratory at a speed of $0.624 c$ and determines its lifetime to be \SI{159}{\nano\second}.
+	\begin{enumerate}
+		\item Observer A places markers in the laboratory at the locations where the particle is produced and where it decays. How far apart are those markers in the laboratory?
+\begin{proof}[Solution]
+	\begin{align*}
+		x_A = v_A t_A &= \SI{0.624}{c} \times \SI{159}{ns}\\
+		&= 0.624\times \SI{3e8}{m\per s} \times \SI{1.59e-7}{s} \\
+		&= \SI{29.7648}{m}
+	\end{align*}
+\end{proof}
+
+	\item Observer B, who is traveling parallel to the particle at a speed of $0.624 c$, observes the particle to be at rest and measures its lifetime to be \SI{124}{\nano\second}. According to B, how far apart are the two markers in the laboratory?
+\begin{proof}[Solution]
+	\begin{align*}
+		x_B = v_B t_B &= \SI{0.624}{c} \times \SI{124}{ns} \\
+		&= \SI{1.872e8}{m \per s}\times  \SI{1.24e-7}{s} \\
+		&= \SI{23.21}{m}
+	.\end{align*}
+\end{proof}
+
+	\end{enumerate}
+\item For a gas at thermal equilibrium at absolute temperature $\mathrm{T}$, the distribution of molecular energies is given by the Maxwell-Boltzmann distribution
+\[
+N(E)=\frac{2 N}{\sqrt{\pi}} \frac{1}{(k T)^{3 / 2}} E^{1 / 2} e^{-E / k T}
+\]
+where $N$ is the total number of molecules and $N(E)$ is the distribution function defined so that $N(E) d E$ is the number of molecules in the energy interval between $E$ and $E+d E$. Show that the most probably molecular energy is $\frac{1}{2} k T$.
+
+\begin{proof}[Solution]
+	We assume that the distribution is continuous and unimodal. It suffices to find an extremum value for $N(E)$.
+ From calculus we know that a continous function reaches extremum iff its first derivative is zero at that point.\begin{align*}
+	N'(E)&= 0 \\
+	\frac{\partial }{\partial E} \left( \frac{2 N}{\sqrt{\pi}} \frac{1}{(k T)^{3 / 2}} E^{1 / 2} e^{-E / k T} \right) &= 0 \\
+	\frac{\partial }{\partial E} \left( E^{1 / 2} e^{-E / k T} \right) &= 0 \\
+	\frac{1}{2}E^{-\frac{1}{2}}e^{-\frac{E}{kT}} + E^{\frac{1}{2}}\left( -\frac{1}{KT} \right) e^{-\frac{E}{kT}} &= 0 \\
+	\frac{1}{2}E^{-\frac{1}{2}} + E^{\frac{1}{2}}\left( -\frac{1}{KT} \right)  &= 0 \\
+	\frac{1}{2} + E\left( -\frac{1}{KT} \right)  &= 0 \\
+	E &= \frac{\frac{1}{2}}{\frac{1}{kT}} \\
+	E &= \frac{1}{2}kT 
+.\end{align*}
+\end{proof}
+
+
+\item For a molecule of Oxygen $\left(\mathrm{O}_{2}\right)$ at room temperature \SI{300}{\kelvin} aligned on the z-axis, calculate the average angular velocity for rotations about the $\mathrm{x}$-axis. The distance between the O atoms in the molecule is \SI{0.121}{\nano\metre}.
+\begin{proof}[Solution]
+	We assume that classical statistical mechanics work for the problem. The rotation about $x$-axis corresponds to one degree of freedom. By theorem of equipartition of energy, it takes $\frac{1}{2}k_B T$ of energy. Therefore,
+\begin{align*}
+	E_{\text{rot}}&= \frac{1}{2}k_B T \\
+	&= \frac{1}{2} \SI{1.38e-23}{m\squared \kilogram \per s \squared \kelvin} \times  \SI{300}{K} \\
+	&=  \SI{2.07e-21}{J}
+.\end{align*}
+We also assume that we can view an oxygen molecule as two oxygen atoms connected by a lightweight and rigid rod. We may consider this rod to be rigid since we are only interested in rotational motion, not vibrational.
+
+Use the known data that an oxygen atom has mass  \SI{15.999}{\atomicmassunit}. Its moment of inertia around $x$ axis at its center of mass is then
+\begin{align}
+I = \frac{1}{2} m x^2 &= \frac{1}{2} \SI{15.999}{\atomicmassunit} (\SI{0.121}{\nano\metre})^2 \\
+&=  \SI{1.9442e-46}{\kilogram \square \metre}
+.\end{align}
+Finally we solve the equation for rotational kinetic energy:
+
+\begin{align*}
+	E_{\text{rot}} &= \frac{1}{2} I \omega^2\\
+	\omega^2 &= \SI{2.1294e+25}{}\\
+	\omega &= \SI{4.6146e+12}{\radian \per \second}\\
+	\omega &= \SI{7.3442e+11}{rounds \per \second}
+.\end{align*}
+
+They are turning so damn fast!
+\end{proof}
+
+\end{enumerate}

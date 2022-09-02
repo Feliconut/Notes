@@ -1,8 +1,8 @@
 \lecture{6}{Thu 21 Apr 2022 00:09}{}
 \section{Noisy SP with examine}
-\subsection{Construction from R.V.s}
+\subsection{Problem Construction from R.V.s}
 
-We use notation from (Krieger and Samuel-Cahn, 2012) and (Garrod and Morris, 2013). Consider a set of items $P = \{x_1, \ldots, x_n\}$. Let $X_i$ be i.i.d. continuous R.V.s, and $Y_i = X_i + \varepsilon_i$, and the $\varepsilon_i$ are i.i.d. noise variables. The goal is to maximize the probability of selecting the $i$ for which the $X$ value is maximal.
+This is partly inspired by (\cite{kriegerNoisySecretaryProblem2012}). Consider a set of items $P = \{x_1, \ldots, x_n\}$. Let $X_i$ be i.i.d. continuous R.V.s, and $Y_i = X_i + \varepsilon_i$, and the $\varepsilon_i$ are i.i.d. noise variables. The goal is to maximize the probability of selecting the $i$ for which the $X$ value is maximal.
 
 Upon arrival of each item $x_i$, the player may choose to either reject the item, or to examine this item, forfeiting $k$ items. After examination the player must decide whether to accept or reject it. Hence if $t \ge n - k|S|$ where $S$ is the set of examined items, the game terminates and the current item at hand is selected. We denote the number of remaining items by $n_t = n - k |S_t|$.
 
@@ -23,7 +23,7 @@ We may limit the number of examinations throughout the game by $m$.
 
 
 
-\subsection{Construction from permutation group}
+\subsection{Problem Construction from permutation group}
 
 
 Let $S_n$ be the permutation group on $[n]$. We identify the \textit{swaps} $\tau_i: i \leftrightarrow i+1$, $i = 1\ldots n-1$. Define i.i.d. poisson R.V.s $N_i \sim \text{Po}(\lambda)$ to be the \textit{multiplicity} of $\tau_i$.

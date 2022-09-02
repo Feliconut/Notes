@@ -1,0 +1,334 @@
+\homework{2}{Mon 29 Aug 2022 21:32}{Week 2 due Sep 7}
+
+Herstein, section $2.1$, page 47 : Questions $8,9,18,26,27,28$
+\begin{enumerate}
+\item 8. If $G$ is an abelian group, prove that $(a * b)^n=a^n * b^n$ for all integers $n$.
+\begin{proof}
+Use induction. Clearly $(a*b)^1 = (a*b) = a^1 * b^1$. Now assume the statement if true for  $n$.
+\begin{align*}
+	(a*b)^{n+1}&= (a*b)^n *(a*b) & \text{Notation} \\
+		   &= (a^n * b^n)*(a*b) & \text{IH} \\
+		   &= \left( a^n * (b^n * a) \right)*b & \text{Associativity, multiple times}  \\
+		   &= \left( a^n * ( a*b^n) \right)*b & \text{Commutativity}  \\
+		   &= (a^n * a)*(b^n*b) & \text{Associativity, multiple times} \\
+		   &= (a^{n+1})*(b^{n+1}) & \text{Notation} 
+.\end{align*}
+\end{proof}
+
+\item 9. If $G$ is a group in which $a^2=e$ for all $a \in G$, show that $G$ is abelian.
+\begin{proof}
+\begin{align*}
+	(ab)(ba) &= a (bb) a \\
+	&= aea \\
+	&= aa \\
+	&= e \\
+	&= (ab)(ab)
+.\end{align*}
+By left cancellation, $ab = ba$.
+\end{proof}
+
+\item 18. If $G$ is a finite group of even order, show that there must be an element $a \neq e$ such that $a=a^{-1}$. (Hint: Try to use the result of Problem 17.)
+\begin{proof}
+Suppose $G$ has elements $e, a_1, a_2, \ldots, a_n$ where $e$ is the identity element, and all elements listed are distinct. Suppose for all element $a \neq e$, $a\neq a^{-1}$. $a_1^{-1}$ cannot be $e$, otherwise $a_1 = e$ which contradicts the assumption that elements are distinct. By our supposition, $a_1^{-1}\neq a_1$. Hence it must be some element in $a_2, \ldots, a_n$. Without loss of generality, we may call this element $a_2$.
+
+Now $a_2^{-1} = \left( a_1^{-1} \right) ^{-1} = a_1$ by Exercise 17. Continue in this fashion, we see that $a_3$ must have a inverse in $a_4, \ldots, a_n$, which we without loss of generality call $a_4$. In each step we consume two elements of $a_1, \ldots, a_n$. For the process to terminate without contradiction, $n$ must be even. Therefore $e, a_1, \ldots, a_n$ has an odd number of elements. Since it is assumed that  $G$ has even order, we have a contradiction.
+\end{proof}
+
+\item 26. If $G$ is a finite group, prove that, given $a \in G$, there is a positive integer $n$, depending on $a$, such that $a^n=e$.
+\begin{proof}
+Consider the orbit $O(a)=\{a^n : n \in \mathbb{Z}\} $. Since $O(a) \subset G$, it is finite. By pigeonhole principle, there exists dinstinct $n, m \in \mathbb{Z}$ such that $a^n = a^m$. Hence $a^n = a^m a^{n-m} = a^m$, so $a^{n-m} = e$. Also, $a^{m-n} = \left( a^{n-m} \right) ^{-1} = e^{-1} = e$. It is assumed that $n, m$ are distinct, so $n-m \neq  0$ and $m-n \neq 0$. By trichotomy of order, one of them must be positive.
+\end{proof}
+
+\item 27. In Problem 26, show that there is an integer $m>0$ such that $a^m=e$ for all $a \in G$.
+\begin{proof}
+For each element $a \in G$ we have $n_a \in \mathbb{N}$ where $a^n = e$ by the last exercise. For any $N \in \mathbb{N}$ such that $n_a | N$, we have $a^{N} = a^{cn_a} = \left( a^{n_a} \right) ^c = e^c = e$, where $c \in \mathbb{N}$ and $N = c n_a$.
+
+Now define $N = \prod_{a \in G} n_a  $. Since $G$ is finite, $N$ is finite. Clearly for each $a \in G$, $N = n_a \prod_{b \in G, b\neq a} n_b  $, hence $n_a | N$. Therefore $a^N = e$.
+\end{proof}
+
+\item 28. Let $G$ be a set with an operation $*$ such that:
+1. $G$ is closed under *.
+2. $*$ is associative.
+3. There exists an element $e \in G$ such that $e * x=x$ for all $x \in G$.
+4. Given $x \in G$, there exists a $y \in G$ such that $y * x=e$.
+Prove that $G$ is a group. (Thus you must show that $x * e=x$ and $x * y=e$ for $e, y$ as above.)
+\begin{proof}
+	We use property 4 to pick a left inverse $i(x)$ for each element $x \in G$, where $i(x) * x = e$. We use a right-associative convention to avoid cumbersome notation, so $x*y*z$ always means $x*(y*z)$ rather than $(x*y)*z$.
+
+First we show that $e$ is also a right identity.
+
+	\begin{align*}
+		x*e &= x*i(x)*x &\text{left inverse} \\
+		    &= e*x*i(x)*x &\text{left identity} \\
+		    &= \left( i(i(x))*i(x) \right) *x*i(x)*x &\text{left inverse} \\
+		    &=  i(i(x))*\left( i(x)  *x \right) *i(x)*x &\text{associativity} \\
+		    &=  i(i(x))*e  *i(x)*x &\text{left inverse} \\
+		    &=  i(i(x))*\left( e  *i(x) \right) *x &\text{associativity} \\
+		    &=  i(i(x))* i(x)  *x &\text{left identity} \\
+		    &=  \left( i(i(x))* i(x) \right)   *x &\text{associativity} \\
+		    &=   e  *x &\text{left inverse} \\
+		    &= x &\text{left identity} 
+	.\end{align*}
+
+	Then we prove the left inverse is also a right inverse.
+	\begin{align*}
+		x * i(x) &=  e * \left( x * i(x) \right) & \text{left identity} \\
+			 &= \left( i(i(x))*i(x) \right) * (x * i(x)) &\text{left inverse}\\
+			 &= i(i(x))*((i(x)*x)*i(x)) &\text{associativity} \\
+			 &= i(i(x))*(e*i(x)) &\text{left inverse} \\
+			 &= i(i(x))*i(x) &\text{left identity} \\
+			 &= e & \text{left inverse}
+	.\end{align*}
+
+	\end{proof}
+
+\end{enumerate}
+Herstein, section 2.2, page 50: Questions $1,3,5$
+\begin{enumerate}[resume]
+\item 1. Suppose that $G$ is a set closed under an associative operation such that\\
+1) given $a, y \in G$, there is an $x \in G$ such that $a x=y$, and\\
+2) given $a, w \in G$, there is a $u \in G$ such that $u a=w$.\\
+Show that $G$ is a group.
+\begin{proof}
+Pick any element $a \in G$. Use property 2 to obtain an element $e \in G$ such that $ea = a$. We verify that $e$ is a left identity. Pick any element $b \in G$, by property 1, there exists $c \in G$ such that $b = ac$. Now
+\[
+eb = e (ac) = (ea) c = ac = b
+.\] 
+Next we verify the existence of left inverse. For any element $b$, by property 2, there exists an element  $b^{-1}$ such that $b^{-1} b = e$. Now we are in the same situation as the last exercise, so this exercise can be considered solved.
+\end{proof}
+
+\item 3. If $G$ is a group in which $(a b)^i=a^i b^i$ for three consecutive integers $i$, prove that $G$ is abelian.
+\begin{proof}
+	Take a natural number $n$ and it is assumed that $(ab)^i = a^i b^i$ holds for $i = n, n+1, n+2$.
+	\begin{align*}
+	(ab)^{n+1} &= ab(ab)^n &\text{associativity} \\
+	(ab)^{n+1} &= ab(a^n b^n) & \text{assumption} \\
+	(ab)^{n+1} &= a^{n+1} b^{n+1} &\text{assumption}\\
+	ab a^n b^n &= a^{n+1} b^{n+1} &\text{equivalence transitivity}\\
+	b a^n b^n &= a^{n} b^{n+1} &\text{left cancellation}\\
+	b a^n &= a^{n} b &\text{right cancellation}
+	.\end{align*}
+Hence $a^n$ commutes with $b$. Make the same argument with $(ab)^{n+2}$, we conclude that $a^{n+1}$ commutes with $b$. Now
+\[
+b a ^{n+1} = b a^n a = a^n b a = a^{n+1} b
+.\] 
+Take the last equality and apply left cancellation, we have $ba = ab $.
+\end{proof}
+
+\item 5. Let $G$ be a group in which $(a b)^3=a^3 b^3$ and $(a b)^5=a^5 b^5$ for all $a, b \in G$. Show that $G$ is abelian.
+\begin{proof}
+	\begin{align*}
+		(ab)^{3} &= a^3 b^3 &\text{assumption}\\
+			 &= a(a^2b^2)b &\text{associativity, line 1} \\
+			 &= ababab &\text{notation} \\
+			 &= a(baba)b &\text{associativity, line 3}\\
+			 &= a((ba)(ba))b &\text{associativity, line 4}\\
+			 &= a((ba)^2)b &\text{notation, line 5}
+	.\end{align*}
+Hence, $a(a^2b^2)b = a((ba)^2)b $. By left and right cancellation,
+\begin{equation}\label{eqn:p2}
+	a^2b^2 = (ba)^2.
+\end{equation}
+
+Apply a similar argument to $(ab)^5$:
+\begin{align*}
+		(ab)^{5} &= a^5 b^5 &\text{assumption}\\
+			 &= a(a^4b^4)b &\text{associativity} \\
+			 &= ababababab &\text{notation} \\
+			 &= a(babababa)b &\text{associativity}\\
+			 &= a((ba)(ba)(ba)(ba))b &\text{associativity}\\
+			 &= a((ba)^4)b &\text{notation}
+	.\end{align*}
+Hence, $a(a^4b^4)b = a((ba)^4)b $. By left and right cancellation,
+\begin{equation}\label{eqn:p4}
+	a^4b^4 = (ba)^4
+\end{equation}
+.
+
+Now
+\begin{align*}
+	a^2(b^2a^2)b^2 &= (a^2b^2)(a^2b^2) &\text{associativity} \\
+		       &=  (ba)^2   (ba)^2   &\text{eqn. \eqref{eqn:p2}} \\
+	&= (ba)^4 &\text{notation} \\
+	&= a^4 b^4 &\text{eqn. \eqref{eqn:p4}}\\
+	&= a^2 (a^2 b^2) b^2 &\text{associativity}
+.\end{align*}
+Hence, $a^2(b^2a^2)b^2 = a^2(a^2b^2)b^2$. By left and right cancellation,
+\begin{equation}\label{eqn:2}
+	b^2a^2 = a^2b^2.
+\end{equation}
+
+
+
+Now
+\begin{align*}
+	(ab)^4 &= (ab)^2 (ab)^2 &\text{associativity} \\
+	       &=  (b^2 a^2)(b^2 a^2) &\text{eqn. \eqref{eqn:p2}}\\
+	       &=  (a^2 b^2)(a^2b^2) &\text{eqn. \eqref{eqn:2}}\\
+	       &= a^2 (b^2 a^2) b^2 &\text{associativity} \\
+	       &= a^2 (a^2 b^2) b^2 &\text{eqn. \eqref{eqn:2}}\\
+	       &= (a^2a^2)(b^2b^2) &\text{associativity} \\
+	       &= a^4b^4 &\text{associativity and notation}
+.\end{align*}
+
+Now we see that $(ab)^i = a^i b^i$ is true for $i = 3,4,5$, which are three consecutive integers. By using the last exercise we complete the proof.
+\end{proof}
+
+\end{enumerate}
+Herstein, section 2.3, page 54: Questions $3,12,14,24,26,29$
+\begin{enumerate}[resume]
+\item 3. Let $S_3$ be the symmetric group of degree 3. Find all the subgroups of $S_3$.
+\begin{proof}[Solution]
+	There are 6 elements in $S_3$, namely
+	\begin{enumerate}
+		\item $(123) = e$, the identity mapping
+		\item $(132)$, that maps $x_1$ to $x_1$, $x_2$ to $x_3$, and $x_3$ to $x_2$
+		\item $(231)$
+		\item $(213)$
+		\item $(312)$
+		\item $(321)$
+	\end{enumerate}
+
+	We first consider subgroup of order 1. Clearly the identity element forms a trivial subgroup. Any other element cannot form a subgroup because it is not the identity of $S_3$ (since the identity of a group must be the identity of its subgroup).
+
+Next we cosider subgroup of order 2. This can only be the identity element with an inversion (an element $a$ such that $a^2 = e$). There are three elements besides $e$ that satisfy this property:
+\begin{enumerate}
+	\item $(132)(132) = e$
+	\item $(321)(321) = e$
+	\item $(213)(213) = e$
+\end{enumerate}
+Therefore there are three subgroups of order 2: $\{e, (132)\}$, $\{e, (321)\}$, and$ \{e, (213)\}$
+
+Finally, subgroups of order 3. We write such a group as $\{e,a,b\} $ where $e$ is the identity. Note that $ab \neq a$, otherwise we have $ab = ae$ and $b = e$ by cancellation, which contradicts the assumption that  $a,b,e$ are distinct. By the same reasoning $ab \neq  b$, therefore $ab = e$. By the same reasoning we have $ba = e$. Therefore $b = a^{-1}$. Hence we are looking at two distinct elements from $S_3$ that are each other's inverse. There is only one such pairs in $S_3$:
+\begin{enumerate}
+	\item $\{(231),(312)\} $ 
+\end{enumerate}
+Therefore $\{e, (231),(312)\} $ is a subgroup of $S_3$ with order 3.
+
+By Lagrange's Theorem, there's no other proper subgroups with higher order, since $4$ and $5$ do not divide $6$. The last subgroup would be order $6$, which is $S_3$ itself.
+\end{proof}
+\item 12. Prove that a cyclic group is abelian.
+\begin{proof}
+Take some cyclic group $G$. Because $G$ is cyclic, there exists some element $x \in G$ such that $G = \left\langle x \right\rangle $. This means for any element $a,b \in G$ there exists $i, j \in \mathbb{Z}$ such that $a = x^i, b = x^j$. Now
+\begin{align*}
+	ab &= x^i x^j \\
+	&= x^{i+j} \\
+	&= x^{j+i} \\
+	&= x^j x^i \\
+	&= ba 
+.\end{align*}
+\end{proof}
+
+\item 14. If $G$ has no proper subgroups, prove that $G$ is cyclic.
+\begin{proof}
+We prove the contrapositive. Assume $G$ is not cyclic. Then there exists some $a \in G$ such that $\left\langle a \right\rangle $ is a proper subset of $G$. Because $\left\langle a \right\rangle $ is a cyclic group, it by definition is a proper subgroup of $G$.
+
+TODO add more detail
+\end{proof}
+
+\item 24. If $H$ is a subgroup of $G$, let $N=\cap_{x \in G} x^{-1} H x$. Prove that $N$ is a subgroup of $G$ such that $y^{-1} N y=N$ for every $y \in G$.
+\begin{proof}
+First we prove that $N$ is a subgroup of $G$. Take any $n, m \in N$. Let $x \in G$ be arbitrary. Then there exists $h_{n}$ and $h_{m}$ such that $n = x^{-1} h_n x$ and $m = x^{-1} h_m x$. Now
+\begin{align*}
+	nm &= (x^{-1}  h_n x) (x^{-1}  h_m) x \\
+	&= x^{-1} h_n (x x^{-1} ) h_m x \\
+	&= x^{-1} h_n h_m x \\
+	&= x^{-1} (h_n h_m) x\\
+	&\in x^{-1} H x
+.\end{align*}
+Because $H$ is a subgroup of $G$, $h_n h_m \in H$. Because $x$ is arbitrary, $nm \in \bigcap_{x \in G} x^{-1} H x = N$. Hence $N$ is closed under multiplication.
+
+Also, consider
+\begin{align*}
+	(x^{-1} h_n^{-1} x)n
+	&= (x^{-1} h_n^{-1} x)(x^{-1} h_n x) \\
+	&= x^{-1}  h_n^{-1} (x x^{-1} ) h_n x \\
+	&= x^{-1}  h_n^{-1} h_n x \\
+	&= x^{-1}  \left( h_n^{-1} h_n \right)  x \\
+	&= x^{-1}    x \\
+	&=  e \\
+	&= n^{-1}  n
+.\end{align*}
+Because $H$ is a group, $h_n^{-1} \in H$ exists. By cancellation we have $n^{-1} = x^{-1} h_n ^{-1} x \in x^{-1}  H x$. Because $x$ is arbitrary, $n^{-1} \in N$. We have verified that any element in $N$ has a inverse. By Lemma 2.3.1, $N$ is a subgroup of $G$.
+
+Fix some $y \in G$. Now we verify $y^{-1} N y \subset N$. Take any $n \in y^{-1}  N y$ and any $x \in G$. Now there exists some $h_n \in H$ such that \[
+	(xy^{-1} )^{-1} h_n (xy^{-1} ) = n
+.\] 
+Now
+\begin{align*}
+	y^{-1} ny &= y^{-1} \left( (xy^{-1} )^{-1} h_n (xy^{-1} ) \right) y \\
+	&= y^{-1} \left( (yx^{-1} )h_n (xy^{-1} ) \right) y \\
+	&= \left( y^{-1}  y \right) x^{-1} h_n x\left( y^{-1} y \right)  \\
+	&= e x^{-1} h_n x e\\
+	&= x^{-1} h_n x \\
+	&\in x^{-1} H x
+.\end{align*}
+Since $x $ is arbitrary, $y^{-1}  n y \in N$.
+
+Fix some $w \in G$. Finally we verify $N \subset w^{-1} N w$. Take any $n \in N$, then
+\begin{align*}
+	n &=
+	(w^{-1} w)n(w^{-1} w)\\
+	&= w^{-1} (wnw^{-1} )w   \\
+	&= w^{-1} \left(\left( w^{-1}  \right) ^{-1}n(w^{-1}) \right)w  
+.\end{align*}
+Now $w^{-1} \in G$ by existence of group inverse. Because $y^{-1} Ny\subset N$ for all $y\in G$, 
+\[
+\left(\left( w^{-1}  \right) ^{-1}n(w^{-1}) \right) \in N
+.\] 
+Therefore
+\[
+n \in w^{-1} Nw
+.\] 
+\end{proof}
+
+
+\item 26. Let $G$ be a group, $H$ a subgroup of $G$. Let $H x=\{h x \mid h \in H\}$. Show that, given $a, b \in G$, then $H a=H b$ or $H a \cap H b=\varnothing$.
+\begin{proof}
+Fix $a, b \in G$ and assume $Ha \cap Hb$ is nonempty. It suffices to show that $Ha = Hb$. Take an element $x \in Ha \cap Hb$. Now there $\exists h_{1}, h_{2} \in H$ such that $h_{1} a = h_{2} b = x$.
+
+Now we show that $Ha \subset Hb$, and $Hb \subset Ha$ will follow by symmetry. Take $y \in Ha$. By definition of $Ha$, there exists $h_{y} \in H$ such that $h_{y} a = y$. Because $H$ is a group, the $h_y h_1^{-1} h_1$ is an element of $H$ (by closure and existence of inverse) and equals $h_y$ (by associativity, identity and exietence of inverse).
+Now
+\begin{align*}
+	h_y a &= (h_y h_1^{-1}h_1) a \\
+	&= h_y h_1^{-1} (h_1 a)  \\
+	&= h_y h_1^{-1}(h_2 b) \\
+	&= (h_y h_1^{-1} h_2) b
+.\end{align*}
+By group closure of $H$, the element $(h_y h_1^{-1} h_2) \in H$. Hence $y = h_y a \in Hb$.
+\end{proof}
+
+\item 29. If $M$ is a subgroup of $G$ such that $x^{-1} M x \subset M$ for all $x \in G$, prove that actually $x^{-1} M x=M$
+\begin{proof}
+	For all $x \in G$, define
+	\begin{align*}
+		f_x: M &\longrightarrow M \\
+		y &\longmapsto f_x(y) = x^{-1} yx
+	.\end{align*}
+	In the definition above we used the assumption that $f_x(M) = x^{-1} Mx \subset M$.
+
+	Now for $y, z \in M$, whenever $f_x(y) = f_x(z)$, we have
+	\begin{align*}
+		f_x(y) &= f_x(z) \\
+		x^{-1} yx &= x^{-1} zx\\
+		x(x^{-1} yx)&= x(x^{-1} zx) \\
+		(x x^{-1} )yx &= (x x^{-1} )zx \\
+		eyx&= ezx \\
+		yx &= zx \\
+		yx x^{-1} &= zx x^{-1}  \\
+		y(x x^{-1}) &= z (x x^{-1} ) \\
+		ye &= ze \\
+		y &= z
+	.\end{align*}
+We have prove that $f_x$ is injective. Now we prove that $f_x$ is surjective. Fix any $y \in M$. Using the inverse axiom, we have $x^{-1}  \in M$. Using the assumption, we have $\left( x^{-1}  \right) ^{-1} M x^{-1} \subset M$, hence $\left( x^{-1}  \right) ^{-1} y x^{-1} \in  M$. Now
+\begin{align*}
+	&f_x\left(\left( x^{-1}  \right) ^{-1} y x^{-1}\right) \\
+	&= x^{-1} \left(\left( x^{-1}  \right) ^{-1} y x^{-1}\right) x \\
+	&= \left(x^{-1} \left( x^{-1} \right)  ^{-1} \right)y \left(x^{-1}x\right)  \\
+	&= eye \\
+	&= y
+.\end{align*}
+Since $f_x$ is both injective and surjective, it is bijective. Therefore it is a 1-1 mapping from $M$ to itself. In other words, $f_x(M) = x^{-1} Mx = M$.
+\end{proof}
+
+\end{enumerate}

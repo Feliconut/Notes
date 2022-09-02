@@ -1,0 +1,150 @@
+\lecture{2}{Tue 30 Aug 2022 19:05}{Groups}
+
+\begin{corollary}[Euclid]
+	There are infinitely many primes.
+\end{corollary}
+
+\begin{proposition}
+	Let $p_1 = 2$, $p_2 = 3, \ldots$ be a enumeration of primes. Then the smallest divisor of \[
+		\left( p_1\ldots p_n \right) ^{\left( p_1 \ldots p_n \right) ^{\left( p_1 \ldots p_n \right) }}
+	\] is $p_{n+1}$.
+\end{proposition}
+
+\section{Groups}
+\subsection{Definition and Examples}
+\begin{definition}
+	A \textit{binary operation} $\psi$ over a set $G$ is a function \[
+	\psi : G \times  G \to  G
+	.\] 
+\end{definition}
+
+\begin{definition}[Group]
+	A \textit{group} is a set $G$ equipped with a binary operation $\psi$ such that 
+	\begin{enumerate}
+		\item (G0)(closure) $\psi$ is closed in $G$,
+		\item (G1)(associativity) $\psi$ is associative,
+		\item (G2)(identity) Exists an identity $e \in G$ such that $ae = ea = a$ for $\forall a \in G$, and
+		\item (G3)(inverse) For $\forall a \in G$, there exists $a^{-1} \in G$ such that $a a^{-1} = a^{-1} a = e$.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	The \textit{trivial group} $\{e\} $.
+\end{example}
+
+\begin{example}
+	The \textit{symmetry group} $A(S)$ with \textit{composition} $\circ$ as the binary operation.
+\end{example}
+
+\begin{example}
+	$(\mathbb{Z}, +)$, $\left( \mathbb{R}^\times , \times  \right) $ are addition group over integers and multiplication group over nonzero reals.
+\end{example}
+
+\begin{example}
+	$\left( \mathbb{Z}_n, +_n \right)$ where $\mathbb{Z}_n = \{0,1,\ldots,n -1 \} $ is the group of addition mod $n$.
+\end{example}
+
+\begin{example}
+	$(\text{SL}_2(\mathbb{R}), *)$ is the \textit{special linear group} of $2\times 2$ matrices with determinant 1. This is precisely the positive isometries.
+\end{example}
+
+\begin{example}
+	$(D_{2n}, *)$ is the \textit{dihedral group} of symmetry of regular $n$-sided polygons.
+	
+	This group can be constructed explicitly by the $n$ th roots of unity. The group elements are then 
+	\[
+	\sigma : e^{2 \pi i \frac{a}{n}} \mapsto e^{2 \pi i \frac{a+1}{n}}
+	\] the counterclockwise rotation by $e^{\frac{2}{n} i \pi}$, and 
+	\[
+	\tau: e^{2 \pi i \frac{a}{n}} \mapsto e^{-2 \pi i \frac{a}{n}}
+	\] the reflection over real axis.
+
+	The mappings $1, \sigma, \sigma^2, \ldots, \sigma^{n-1}$ are distinct. The mappings $\tau, \tau\sigma, \ldots, \tau\sigma^{-1}$ are all distinct and distinct from $1, \sigma, \ldots, \sigma^{-1}$.
+
+	Check: $\sigma \tau = \tau \sigma^{-1} $. \[
+	\sigma\tau\left( e^{2 \pi \frac{a}{n}} \right)  = \sigma\left( e^{- 2 \pi i \frac{a}{n}} \right) = e^{-2 \pi i \frac{1-a}{n}}
+	.\] 
+	\[
+	\tau\sigma^{-1}(e^{2 \pi i \frac{a}{n}} = \tau\left( e^{2 \pi i \frac{a^{-1} }{n}} \right) =e^{2 \pi i \frac{a -1}{n}}
+	.\] 
+\end{example}
+
+\begin{remark}
+	Geometers often refer to the group $D_{2n}$ as $D_n$.
+\end{remark}
+
+\begin{definition}
+	A group $(G, *)$ is said to be a finite group if $\text{card }G < \infty $, in this case we say the \textit{order} of group $G$ is $|G| = \text{card } G$.
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+\item $|A(S)| = n!$ where $|S| = n$
+\item $|\mathbb{Z}| = +\infty $
+\item $|\mathbb{Z}_n| = n$
+\item $|\mathbb{R}^\times | = +\infty $
+\item $\left| \text{SL}_2(\mathbb{R}) \right| = +\infty $ 
+\item (harder) one can consider $\text{SL}_2 \left( \mathbb{Z}_p \right) $ has cardinality $(p -1) p (p +1)$
+\item $|D_{2n}| = 2n$
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	A group $(G, *)$ is called \textit{abelian} if $*$ is commutative, i.e.,  for all $a,b \in G$, we have $a*b = b*a$.
+\end{definition}
+\begin{example}
+	\begin{enumerate}
+		\item In general $A(S)$ is non-abelian
+		\item $(\mathbb{Z},+)$ is abelian
+		\item $(\mathbb{Z}_n,+)$ is abelian
+		\item $\left( \mathbb{R}^\times  ,\times  \right) $ is abelian
+		\item $\text{SL}_2 (\mathbb{R}) $ is non-abelian (matrices do not commute in general)
+		\item $D_{2n}$ is non-abelian when $n>1$
+	\end{enumerate}
+\end{example}
+
+\subsection{The most basic properties}
+
+\begin{lemma}[2.2.1]
+	Suppose that $G$ is a group, then
+	\begin{enumerate}
+		\item the identity element $e \in G$ is unique;
+		\item for every $a \in G$, the inverse $a^{-1} \in G$ is unique;
+		\item for all $\left( a^{-1}  \right)^{-1}=a $;
+		\item for all $a,b \in G$, $\left( ab  \right) ^{-1} = b^{-1} a^{-1} $.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+	\item Suppose $e_1, e_2 \in G$ satisfy identity axiom. Then \[
+	e_1e_2 = e_1 = e_2
+	\] where we applied the identity property twice. 
+\item Suppose $b_1, b_2 \in G$ are both inverses for $a \in G$. Then if $e$ is the identity of $G$,
+	\begin{align*}
+		b_1ab_2 &= b_1(ab_2) = b_1e=b_1 \\
+		&= (b_1a)b_2=eb_2=b_2
+		.
+	\end{align*}
+\item \[
+a^{-1} a = e = aa^{-1} 
+.\] So $a$ is the inverse of $a^{-1}$.
+\item Let $c = \left( ab  \right) ^{-1}$. Then $(ab)c = e$. Then $b^{-1} a^{-1} (ab)c = b^{-1} a^{-1} $. Use associativity, inverse and identity twice, we simplify the LHS to $c$.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[ancellation rule]
+	Suppose  $G$ is a group, and $a,b,c \in G$. Then
+	\begin{enumerate}
+		\item whenever $ab=ac$, one has $b=c$;
+		\item whenever $ba=ca$, one has $b=c$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+	\item Since $ab=ac$, $a^{-1} ab = a^{-1} ac$. Use associativity, inverse and identity axiom, and we simplify to $b=c$.
+	\item Similar.
+\end{enumerate}
+\end{proof}
+
+\subsection{Subgroups}
+

@@ -1,0 +1,223 @@
+\homework{1}{Mon 22 Aug 2022 12:54}{due August 31st}
+
+Herstein, section 1.3, page 13 : Questions 6,12,16,23,30
+\begin{enumerate}
+	\item 6. If $f: S \rightarrow T$ is onto and $g: T \rightarrow U$ and $h: T \rightarrow U$ are such that $g \circ f=h \circ f$, prove that $g=h$.
+\begin{proof}
+	To prove $g=h$, we need to show that for all $t \in T $, $g(t) = h(t)$. Now fix some $t $. Because $f $ is onto, there exists some $s \in  S $ such that $f(s) = t $. By assumption, $g \circ f (s) = h\circ f(s)$. Simplify and we get $g(t) = f(t)$, as desired.
+\end{proof}
+	\item 12. Let $S$ be the set of nonnegative rational numbers, that is, $S=\{m / n \mid m, n$ nonnegative integers, $n \neq 0\}$, and let $T$ be the set of all integers.\\
+(a) Does $f: S \rightarrow T$ defined by $f(m / n)=2^{m} 3^{n}$ define a legitimate function from $S$ to $T$ ?
+\begin{proof}[Solution]
+	No. There is no unique fractional representation of any rational number. For example, $\frac{2}{3} = \frac{4}{6}$ refer to the same rational number, say $q$. Hence $f(q)$ is not well-defined since we do not know whether it should be $2^2 3^3$ or $4^2 6^3$, or something else.
+\end{proof}
+(b) If not, how could you modify the definition of $f$ so as to get a legitimate function?
+\begin{proof}[Solution]
+	We can modify the definition of $f $ as follows: Let $f(0) = 0$, and for all $q>0$, let $f(q) := 2^m 3^n$ for the unique integers $m, n$ such that $m> 0$, $n>0$, $q = m / n$, and $m, n$ are relatively prime.
+\end{proof}
+	\item 16. If $f$ is a 1-1 mapping of $S$ onto itself, show that $\left(f^{-1}\right)^{-1}=f$.
+\begin{proof}
+	$\left(f^{-1}\right)^{-1} \circ f^{-1}=\iota_{f(S)}$ by Lemma 1.3.4. Similarly, $f \circ f^{-1} = \iota_{f(s)}$. Therefore $\left(f^{-1}\right)^{-1} \circ f^{-1} = f \circ f^{-1}$. Since $f$ is a bijection, so is $f^{-1}$, and in particular $f^{-1}$ is onto. Hence by Exercise 6, we have the result desired.
+	
+\end{proof}
+	\item 23. Let $S$ be the set of all integers of the form $2^{m} 3^{n}, m \geq 0, n \geq 0$, and let $T$ be the set of all positive integers. Show that there is a 1-1 correspondence of $S$ onto $T$.
+\begin{proof}
+	Because $2$ and  $3$ are prime numbers, for any integer $x$ of the form  $2^m 3^n, n\ge 0, m\ge 0$, there exists unique $m_x$ and $n_x \in \mathbb{N}$ such that $x = 2^{m_x}3^{n_x}$ (by unique factorization of integers). Conversely, it is obvious that for each $m \in T$ and $n \in T$ there exists a unique number $2^m 3^n \in S$ in the form $2^m 3^n$. We have shown that there is a bijection $\mu$ between $S$ and $T^2$.
+
+	Now we show that there is a  bijection between $T^2$ and $T $.
+	We use the standard bijection $\langle\cdot, \cdot\rangle: T^{2} \rightarrow T$ defined by $\langle x, y\rangle:=\frac{(x+y-2) \cdot(x+y-1)}{2}+x$. 
+	Combine $\langle\cdot, \cdot\rangle$ and $\mu$ and we have a bijection between $S $ and $T $.
+\end{proof}
+	\item 30. If $S$ is a finite set and $f$ is a $1-1$ mapping of $S$, show that for some integer $n>0$,
+\[
+\frac{f \circ f \circ f \circ \cdots \circ f}{n \text { times }}=i_{S} . 
+\]
+\begin{proof}
+	We call a $n$-tuple $u_1,u_2,\ldots,u_n$ of elements in $S$ a \textit{closed orbit wrt } $f$, if $f(u_1)=u_2,f(u_2)=u_3,\ldots$ and $f(u_n) = u_1$.
+	
+Fix some $x \in S$. Define $R(x):=\{f^{(n)}(x):n \in  \mathbb{N}\} \subset S$. Since $S$ is finite, so is $R(x)$. Hence, there exists some integers $i<j$ such that $f^{(i)}(x) = f^{(j)}(x)$ (if not, we can conclude that $R(x)$ is infinite, a contradiction). In other words, $\left( f^{i}(x), \ldots,f^{j-1}(x) \right) $ forms a closed orbit wrt $f $. We denote the underlying set of this orbit as $\overline{R}(x)$. Without loss of generality, we may assume that there is no duplication of elements in the orbit.
+
+Our next step is to prove that $R(x)\setminus \overline{R}(x) = \emptyset$. Suppose there is some element $y \in  R(x) \setminus \overline{R}(x)$. Then there exists some integer $k$ such that $f^{(k)}(y) \not\in \overline{R}(x)$ and $f^{(k+1)}(y) \in \overline{R}(x)$. By property of orbit, there exists some $z \in \overline{R}(x)$ such that $f(z) =  f^{(k+1)}(y)$. Hence $f^{(k)}(y)$ and $z$ are both mapped by $f $ to $f^{(k+1)}(y)$, but they are clearly distinct, since one is outside the orbit and the other is inside. This contradicts the assumption that $f$ is 1-1.
+
+Now let $n_x := |R(x)|$ be the orbit length of the point $x \in S$ wrt $f$. Note that $R(x)$ is a closed orbit. Therefore we can conclude that $f^{(n_x)}(x) = x$. Now define $N(S):=\prod_{x \in S } n_x $. Since $S$ is finite and $n_x$ is always finite, $N \in \mathbb{N}$ is well-defined. $N $ is the desired integer. 
+\end{proof}
+
+After meeting with Prof.~Wooley, I came up with a simpler proof, which I give below.
+
+\begin{proof}
+	(Simpler) Since $f$ is 1-1 and $S$ is finite, $f$ is a bijection and hence $f \in A(S)$. Take $x \in S$. We claim that there exists some integer $n_x \le |S|$ such that $f^{n_x}(x) = x$. If the claim is true, we take $N:= \text{factorial} |S|$. Note that $N$ is finite (since $S $ is finite), and is divided by each $n_x$. Hence $f^N$ will send each $x \in S $ to itself.
+
+	Now we verify the claim. Compute $f^1(x)$. If $f^1(x) = x$ then $n_x = 1$ and we are done. If $n_x \neq  x $, we move on and compute $f^2(x)$. If $f^2(x) = x$ we are also done. 
+	If not, then we must have $f^2(x) \neq f^1(x)$, otherwise we have two distinct elements both mapping to $f^1(x)$, a contradiction to the 1-1 property. Continue in this fashion. If we are still not done at step $|S|$, note that $x, f^1(x), f^2(x),\ldots f^{|S|-1}(x)$ are all distinct, and $f^{|S|}$ cannot map $x$ to any of $f^1(x), f^2(x),\ldots f^{|S|-1}(x)$, by the same argument applied $|S|-1$ times (if $f^{|S|}x = fx$ then 1-1 property is violated since $x$ also gets mapped to $fx$, etc). Hence $f^{|S|} = x$, $n_x = |S|$ and we are done.
+\end{proof}
+\end{enumerate}
+Herstein, section 1.4, page 19: Questions 4,16,23,27
+\begin{enumerate}[resume]
+	\item 4. If $f, g, h \in A(S)$, show that $\left(f^{-1} g f\right)\left(f^{-1} h f\right)=f^{-1}(g h) f$. What can you say about $\left(f^{-1} g f\right)^{n}$ ?
+\begin{proof}
+	We assume the notation for product in $A(S)$ is right-associative.
+	\begin{align*}
+		&\quad \left(f^{-1} g f\right)\left(f^{-1} h f\right)&\\
+		&= (f^{-1} (gf)) (f^{-1} (hf))& \text{Notation}\\
+		&= ((f^{-1} (gf))f^{-1}) (hf) & \text{Associativity}\\
+		&= (f^{-1} ((gf)f^{-1})) (hf) & \text{Associativity}\\
+		&= (f^{-1} (g(ff^{-1}))) (hf) & \text{Associativity}\\
+		&= (f^{-1} (g\iota_S)) (hf) & \text{Inverse}\\
+		&= (f^{-1} g) (hf) & \text{Identity}\\
+		&= ((f^{-1} g) h)f & \text{Associativity}\\
+		&= (f^{-1} (g h))f & \text{Associativity}\\
+		&= f^{-1} ((g h)f) & \text{Associativity}\\
+		&= f^{-1} (g h)f & \text{Notation}
+	.\end{align*}
+	By induction we can show that $(f^{-1}gf)^n = f^{-1}g^nf$.
+\end{proof}
+	\item 16. Let $S$ be an infinite set and let $M \subset A(S)$ be the set of all elements $f \in A(S)$ such that $f(s) \neq s$ for at most a finite number of $s \in S$. Prove that:\\
+(a) $f, g \in M$ implies that $f g \in M$.
+\begin{proof}[Proof of (a), simpler]
+	Since symmetry group is closed under element multiplication, $fg \in A(S)$. It remains to show that there is at most finitely many points in $S$ where $fg$ is nontrivial ($fg(s) \neq s)$.
+
+	Define $D_f := \{s \in S: f(s) \neq  s\} $ and $D_g$ similarly. Take any $s \in S\setminus \left( D_f \cup D_g \right) $. By definition, $f(s) = g(s) = s $, hence $fg(s) = s $. By assumption, $D_f$ and $D_g$ are both finite, so there union is finite. Therefore, $fg(s) = s $ on all but a finite subset of $S$. Hence, $fg(s)\neq s $ on an at most finite set. By definition, $fg \in M $.
+\end{proof}
+(b) $f \in M$ implies that $f^{-1} \in M$.
+\begin{proof}[Proof of (b), simpler]
+	Since  $f \in A(S)$, $f^{-1}$ exists and $\in  A(S)$.  It remains to show that there is at most finitely many points in $S$ where $f^{-1}$ is nontrivial ($f^{-1}(s) \neq s)$. Define $D_f$ as in the previous proof. Take any $s \in  S\setminus D_f$. Since $f(s) = s$ and $f$ is a bijection, we know that $f^{-1}(s) = s$. We have proved that $f^{-1}(s) = s$ on all but a finite subset of $S$, so $f^{-1}(s) \neq s$ on an at most finite subset of $S$. By definition, $f^{-1} \in  M $.
+	
+\end{proof}
+	\item 23. Call an element in $S_{n}$ a transposition if it interchanges two elements, leaving the others fixed. Show that any element in $S_{n}$ is a product of transpositions. (This sharpens the result of Problem 22.)
+	\begin{definition}[Union of functions with disjoint domain]
+		If $f: X\to A$ and $g:Y \to B$ where $X \cap Y = \emptyset$, we define $f \cup g $ to be the function
+		\begin{align*}
+			f \cup g : X \cup Y  &\longrightarrow A \cup B  \\
+			x  &\longmapsto f \cup g (x ) = \begin{cases}
+				f(x) & x \in X\\
+				g(x) & x \in Y
+			\end{cases}
+		.\end{align*}
+		
+	\end{definition}
+	\begin{lemma}
+	For any element $f$ in $S_{n}$, we can partition $S$ into $k$ non-empty disjoint closed orbits, where $k\le  n$, which we denote by  $R_1, R_2, \ldots, R_{k}$, such that \[
+	f = f|_{R_1} \cup f|_{R_2} \cup\ldots \cup f|_{R_k}
+	.\] 
+		
+	\begin{proof}[Proof of lemma]
+	We pick an element $x \in S$ and find a closed orbit \[
+	R_f(x) := \{f^k x: k \in \mathbb{Z}, k \ge 0\} \subset S
+	.\] 
+	$R_f(x)$ is nonempty since $x \in R_f(x)$. We may repeat the process with $S\setminus R_f(x)$ instead of $S$. The process must terminate because $S$ is finite and we take away at least one element in each repetition.
+ 	\end{proof}
+	\end{lemma}
+	\begin{lemma}
+	For any element $f$ in $A(R)$ where $|R| = n$, if $R$ is a closed orbit wrt $f$, $f$ can be decomposed into product of precisely $n-1$ transpositions.
+	\begin{proof}[Proof of lemma]
+	Fix some $x \in R$, and make the list
+	\[
+		\left( x, fx, f^2 x, \ldots, f^{n-1}x \right)
+	.\]
+	By properties of closed orbit, this is an exhaustive list of elements in $R$. Now we perform these $n-1$ transpositions sequentially:
+	\[
+		\left( 1\leftrightarrow 2 \right),
+		\left( 1\leftrightarrow 3 \right),
+		\ldots,
+		\left( 1\leftrightarrow n \right)
+	,\] where we use integer to represent location on the list. After the first transposition, $x$ moves to the second place, undisturbed thereafter. After $n-1$ transpositions, $n-1$ elements have moved to the right spot, and the last item automatically stays at where it belongs.
+ 	\end{proof}
+	\end{lemma}
+\begin{proof}
+	Apply the two lemmas above.
+\end{proof}
+	\item 27. If $f \in A(S)$, call, for $s \in S$, the orbit of $s$ (relative to $f$ ) the set $O(s)=$ $\left\{f^{j}(s) \mid j \in \mathbb{Z}\right\}$. Show that if $s, t \in S$, then either $O(s) \cap O(t)=\varnothing$ or $O(s)=O(t)$.
+\begin{proof}
+Assume $O(s) \cap O(t)$ is nonempty, and it suffices to show that $O(s) = O(t)$. Take $x \in O(s) \cap O(t)$. Now $x = f^j(s) = f^k(t)$  for $s, t \in  \mathbb{Z}$. Now $s = f^{-j }f^j(s) = f^{-j }f^k(t) = f^{k-j }(t)$. 
+\begin{align*}
+	y \in O(s) &\iff y = f^l(s), l \in \mathbb{Z}\\
+	&\iff y = f^l(f^{k-j}(t)), l \in \mathbb{Z}\\
+	&\iff y = f^{l+k-j}(t), l+k-j \in \mathbb{Z}\\
+	&\iff y \in  O(t)
+.\end{align*}
+\end{proof}
+\end{enumerate}
+Herstein, section 1.5, page 28: Questions 10, 14
+\begin{enumerate}[resume]
+	\item  10. To check that a given integer $n>1$ is a prime, prove that it is enough to show that $n$ is not divisible by any prime $p$ with $p \leq \sqrt{n}$.
+\begin{proof}
+	We assume $p<n$ throughout the proof. Assume some $p>\sqrt{n } $ divides $n$. Now we must have $n / p \le  \sqrt{n} $.
+	The contrapositive of this statement is: If all $p\le \sqrt{n} $ do not divide $n$, then there does not exist $p>\sqrt{n} $ that divide $n$. The claim is already proved.
+\end{proof}
+	\item 14. Adapt the proof of Theorem 1.5.9 to prove:\\
+(a) There is an infinite number of primes of the form $4 n+3$.
+\begin{proof}
+	Suppose there are only a finite number of primes of the form $4n+3$.
+	Let  $p_1 < p_2 < \ldots < p_n$ be all the primes of the form $4n+3$. Now we have all prime numbers less than or equal to $p_n$, $q_1 < q_2 < \ldots < q_m = p_n$. Consider the number $-1 + 2 q_1 q_2 \ldots q_m$. Clearly it is of the form $4n+3$ (note that $q_1 = 2$), and it is larger than $p_n$.
+
+	For any $q_j$, this number is not divisible by $q_j$ since this number plus 1 is divisible, i.e. it has a remainder of $q_j - 1$ when divided by $q_j$. Hence this number is not divisible by any prime. By Theorem 1.5.7, it is a prime.
+\end{proof}
+(b) There is an infinite number of primes of the form $6 n+5$.
+\begin{proof}
+	Replace `$4n+3 $' with `$6n+5$' in the previous proof, and note that $q_1 = 2$ and $q_2 = 3$.
+\end{proof}
+\end{enumerate}
+Herstein, section 1.6, page 31: Questions 3,7,12,15.
+\begin{enumerate}[resume]
+	\item 3. Show that $(\bar{z})^{-1}=\overline{\left(z^{-1}\right)}$.
+\begin{proof}
+	For any complex number $z = a+bi$, $z^{-1} = \frac{\overline{z}}{\left| z \right|^2 }$. Verification: $z z^{-1} = \frac{z \overline{z}}{|z|^2} = \frac{|z|^2}{|z|^2}= 1$.
+
+	\begin{align*}
+		\left( \overline{z} \right) ^{-1}
+		&= \frac{\overline{\overline{z}}}{|z|^2} & \text{use the claim above}\\
+		&= \overline{\overline{z}}\frac{1}{|z|^2} & \text{rewriting}\\
+		&= \overline{\overline{z}}\overline{\frac{1}{|z|^2}} &\text{conjugate of real number is trivial}\\
+		&= \overline{\overline{z}\frac{1}{|z|^2}} &\text{Lemma 1.7.1 (c)}\\
+		&= \overline{\left( \frac{\overline{z}}{|z|^2} \right) } &\text{rewriting}\\
+		&= \overline{z ^{-1}} & \text{use the claim above}
+	.\end{align*}
+\end{proof}
+
+	\item 7. Verify the commutative law of multiplication $z w=w z$ in $\mathbb{C}$.
+\begin{proof}
+	Let $z = a+bi $ and $w = c+di $.
+	\begin{align*}
+		zw &= (a+bi)(c+di) & \text{definition}\\
+		   &= (a+bi)c + (a+bi)di & \text{distributivity}\\
+		   &= (ac+bic) + (adi+bidi) & \text{distributivity}\\
+		   &= ac+bci + adi-bd & \text{associativity, property of $i$}\\
+		   &= ca+ dai+cbi -db & \text{reals form a commutative ring}\\
+		   &= (c+di)a+(c+di)bi &\text{distributivity}\\
+		   &= (c+di)(a+bi)&\text{distributivity}\\
+		   &= wz
+	.\end{align*}
+	
+\end{proof}
+	\item 12. Prove that $\left(\cos \left(\frac{1}{2} \theta\right)+i \sin \left(\frac{1}{2} \theta\right)\right)^{2}=\cos \theta+i \sin \theta$.
+\begin{proof}
+	\begin{align*}
+		\left(\cos \left(\frac{1}{2} \theta\right)+i \sin \left(\frac{1}{2} \theta\right)\right)^{2} 
+		&= \cos^2 \frac{1}{2} \theta + i^2 \sin^2 \frac{1}{2}\theta + 2 i \cos \frac{1}{2} \theta \sin \frac{1}{2} \theta \\
+		&= \left( \cos^2 \frac{1}{2}\theta - \sin^2 \frac{1}{2} \theta \right) +i\left( 2 \cos \frac{1}{2} \theta \sin \frac{1}{2} \theta \right) \\
+		&= \cos \theta + i \sin \theta
+	.\end{align*}
+	The last equality follows from the trignometric identities \[
+	\cos 2 \theta = \cos^2 \theta - \sin^2 \theta, \sin 2 \theta = 2 \sin \theta \cos \theta
+	.\] 
+\end{proof}
+	\item 15. Show that $(\cos \theta+i \sin \theta)^{r}=\cos (r \theta)+i \sin (r \theta)$ for all rational numbers $r$.
+\begin{proof}
+	Let $r = \frac{p}{q}$ where $p, q \in \mathbb{Z}$ and $q \neq  0$.
+	\begin{align*}
+		\left(\cos \left( \theta\right)+i \sin \left( \theta\right)\right)^{r} 
+		&= \left( \cos \theta + i \sin \theta \right) ^{\frac{p}{q}}\\
+		&= \left( \cos p\theta + i \sin p\theta \right) ^{\frac{1}{q}} &\text{Integer De Moivre Theorem}\\
+		\intertext{On the other hand,} 
+		\left( \cos p\theta + i \sin p\theta \right)
+		&= \cos qr \theta + i \sin qr \theta\\
+		&= \left( \cos r \theta + i \sin r \theta \right) ^{q} & \text{Integer De Moivre Theorem}	
+		\intertext{Hence}
+		\left( \cos r \theta + i \sin r \theta \right)
+		&= \left( \cos p\theta + i \sin p\theta \right)^{\frac{1}{q}}\\
+		&= 
+		\left(\cos \left( \theta\right)+i \sin \left( \theta\right)\right)^{r} 
+	.\end{align*}
+	
+\end{proof}
+\end{enumerate}

@@ -1,6 +1,12 @@
 \lecture{2}{Sun 30 Jan 2022 15:50}{Relaxed SP}
-\subsection{relaxed model PI}
-\subsubsection{calculation 1 (in meeting)}
+
+\subsection{Further relaxed model}
+Now we consider a relaxed version of classical SP. $n$ items have values i.i.d. uniformly distributed in $[0,1]$. We want to observe sequentially and choose the best item. 
+
+We explore the best result possible when we use a simple \textbf{thresholding scheme}: pick the first item with value $\ge T$.
+
+\subsection{relaxed model}
+\textbf{calculation 1 (discussed in meeting with zijie)}
 
 \begin{align*}
 &\sum_{i=1}^n \operatorname{Pr}\left[{\text{accept }i \cap i \text{ best}}\right]\\
@@ -27,11 +33,8 @@ Combining all terms,
 &=\frac{1}{n}\sum_{i=1}^n \frac{nT^{i-1}}{1-T^{n}} \frac{x^{n-i+1}}{n-i+1} \left(1-T^n\right)\\
 &=\sum_{i=1}^n T^{i-1} \frac{1-T^{n-i+1}}{n-i+1}\\
 \end{align*}
-\subsubsection{Calculation 2}
+\subsubsection{Calculation 2 (more compact, and considers edge case)}
 
-We have $n$ items with weights $X_1, \dots, X_n \sim \text{Unif}(0,1)$.
-Observed values are $\tilde X_i \sim \text{Unif}(X_i  - \delta, X_i + \delta)$.
-We adopt a thresholding scheme for $\text{ALG}$: We examine an item if $\tilde x_i > T$ and accept if $x_i > T$.
 
 {\color{red}If the player reaches $X_n$, then $X_n$ must be accepted.}
 
@@ -55,8 +58,9 @@ We adopt a thresholding scheme for $\text{ALG}$: We examine an item if $\tilde x
 \\
 &=\sum_{i=1}^{ n -1}\frac{1}{n-i+1} T^{i-1}(1-T^{n-i+1}) + \frac{1}{n}T^n + T^{n-1} \left( 1-T \right) 
 \end{align*}
-\section{Relaxed SP Prophet Inequality}
+%\section{Relaxed SP Prophet Inequality}
 \subsection{Lower Bound of $P^{\text{max}}$}
+This section is authored by Zijie~Zhou.
 
 In this section, we provide a lower bound of $P^{\text{max}}$, where
 \[
@@ -96,10 +100,7 @@ We have
 
 The nominator is a polynomial with order $k-1$ with respect to $i$. 
 
-\begin{exercise}
-\label{ex1}	
 {\color{red}  Show that $\sum_{i=1}^ni^k = \frac{1}{k+1}n^{k+1}+O(n^k)$}
-\end{exercise}
 
 By this property, we have 
 \[
@@ -115,18 +116,12 @@ Finally, we have the lower bound of $P^{\text{max}}$ is
 
 Consider there are only two secretaries in the arriving sequence. We have $X_1 \sim \text{Unif}(0,1)$, $X_2 \sim \text{Unif}(0,1)$. 
 
-\begin{exercise}
-\label{ex2}	
 {\color{red} Show that the upper bound of $P^{\text{max}}$ among all deterministic algorithms is $\frac{1}{2}$}
-\end{exercise}
 
 {\color{blue} Hint: Any deterministic algorithm can only choose $X_1$ or $X_2$. If $X_1=x$, what will happen? Then take integral. Another method is that think about a coupling random arrival instance $Y_1=X_1$, $Y_2=\text{Unif}(0,1)$. $Y$ obviously follows the arrival process distribution. When the first customer arrives, any algorithm cannot distinguish the arrival instance is $X$ or $Y$. Then for the first customer, if the algorithm accepts him, ...., if not accept,....}
 
 
-\begin{exercise}
-\label{ex3}
 {\color{red}  Show that the upper bound of $P^{\text{max}}$ among all randomized algorithms is $\frac{1}{2}$}
-\end{exercise}
 
 {\color{blue} Hint: Yao's principle. (or set a probability distribution on $X_1$ and $X_2$)}.
 

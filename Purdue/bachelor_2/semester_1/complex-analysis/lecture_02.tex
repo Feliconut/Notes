@@ -1,0 +1,92 @@
+\lecture{2}{Tue 30 Aug 2022 12:02}{Complex Functions}
+
+\begin{definition}[region]
+	A region is a open set $U$ such that each pair of points in $U$ can be connectd by a curve in $U$.
+\end{definition}
+
+\begin{proposition}
+	A pair of points in  $U$ can be connected by a curve iff can be connected  by a breaking curve (horizontal and vertical connected segments).
+\end{proposition}
+
+\subsubsection{Limits}
+
+\begin{definition}[Limits]
+	$\lim_{n \to \infty} z_n = a$ if for every $\varepsilon>0$ exists an integer $N$ such that $\forall n>N, \left| z_n - a \right| <\varepsilon$.
+\end{definition}
+
+\begin{proposition}[Convergence of complex limit]
+	$z_n \to a \iff \operatorname{Re} z_n \to  \operatorname{Re} a \land \operatorname{Im}  z_n \to  \operatorname{Im}  a$
+\end{proposition}
+\begin{proof}
+
+\[
+	\begin{cases}
+		|\operatorname{Im} z_n - a| \\
+		|\operatorname{Re} z_n - a|
+	\end{cases}
+	\le  |z_n - a| \le \left| \operatorname{Re} \left( z_n - a \right) \right| +\left| \operatorname{Im} \left( z_n - a \right)  \right| 
+	.\] 
+
+	Hence $z_n \to a \iff \operatorname{Re} z_n \to  \operatorname{Re} a \land \operatorname{Im}  z_n \to  \operatorname{Im}  a$.
+\end{proof}
+
+\begin{definition}[infinity]
+	$z_n \to  \infty $ if for every $M>0$ there is $N$ such that $\forall n>N$, $|z_n| >M$.
+
+	We call $\overline{\mathbb{C}}  = \mathbb{C} \cup  \{\infty \} $ the \textit{extended complex plane}.
+\end{definition}
+
+Also called the \textit{compactification} of complex plane.
+
+\subsubsection{Visualization of extended complex plane}
+
+The stereographic projection is a map $S \setminus \{N\} \to \mathbb{C}$. We can extend the map by letting $N \mapsto \infty $, so we have a continuous 1-1 map $S^2 \to \mathbb{C} \cup \{\infty \} $.
+
+The mapping can be written explicitly: \[
+x_1=\frac{2 \operatorname{Re} z}{|z|^2+1}, \quad x_2=\frac{2 \operatorname{Im} z}{|z|^2+1}, \quad x_3=\frac{|z|^2-1}{|z|^2+1} 
+.\] 
+
+\[
+x=\frac{x_1}{1-x_3}, \quad y=\frac{x_2}{1-x_3}
+.\] 
+
+
+\subsection{Functions}
+
+In this course we study functions of complex variables. We have a region $\mathcal{D} \subset \mathbb{C}$ and a function $f: \mathcal{D} \to  \mathbb{C}$.
+
+If $z = x+iy$ and $w = u+iv $, then $w = f(z) = u(x,y) + iv(x,y)$. In other words, a complex function can be represented by two real functions of two real variables.
+
+\begin{example}[complex functions]
+	\quad
+	\begin{enumerate}
+		\item (constant function) $f(z) = a$
+		\item (identity function) $f(z) = z$ 
+		\item (shift function) $f(z) = z + a$
+		\item (scaling function) $f(z) = \tau z, \tau \in \mathbb{R}^+$ 
+		\item (affine function) $f(z) = a z + b, a,b \in \mathbb{C}$
+		\item (rotation function) $f(z) = z e^{i \varphi}, \varphi \in \mathbb{R}$
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	The \textit{angle} between complex numbers $a$ and  $b$ is the angle from  $a$ to $b$ counterclockwise. More precisely, it's the quantity $\operatorname{arg} b - \operatorname{arg} a$ evaluated in $[0,2 \pi)$.
+\end{definition}
+
+\begin{definition}[conformality]
+	A complex function is called \textit{conformal map} if it preserves angles. A map is  \textit{antiformal} if it maps angle $\theta$ to $2\pi - \theta$.
+	
+\end{definition}
+
+\subsubsection{Visualize Functions}
+
+Since $(\mathbb{C},\mathbb{C}) \simeq \mathbb{R}^4$, we cannot directly visualize complex functions.
+
+\subsubsection{Exponential Functions}
+
+Consider the map $w = e^z$. This map is  $\infty $ to 1.
+To visualize this function, we split $\mathbb{C}$ into starands, and consider one of them: $-i \pi < y < i \pi, x \in \mathbb{R}$. Then consider the horizontal and vertical lines in this region. 
+
+Horizontal lines are mapped into rays. Vertical lines are mapped into circles.
+
+This function is conformal.

@@ -280,3 +280,7 @@ TSWLatexianTemp*
 *.latexmain
 
 current_course
+current_semester
+**/.DS_Store
+**/*.pdf
+**/*.pdf_tex

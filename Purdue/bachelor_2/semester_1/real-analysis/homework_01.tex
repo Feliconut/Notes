@@ -1,0 +1,104 @@
+\homework{1}{Sun 21 Aug 2022 23:38}{Week 1 due Aug 30}
+
+\begin{enumerate}
+	\item 4.H. If $\xi \in \mathbf{R}$ is irrational and $r \in \mathbf{R}, r \neq 0$, is rational, show that $r+\xi$ and $r \xi$ are irrational.
+\begin{proof}
+	We use, without proving, the fact that the rational numbers $\mathbb{Q}$ forms a field. In particular, it is closed under multiplication (and division, by existence of multiplicative inverse) and addition (and substraction, by existence of additive inverse).
+
+We prove the contrapositive. Suppose $r+\xi$ is not irrational. Then $r + \xi $ is rational. Because $r $ is rational, $\xi = \left( r + \xi  \right) -r$ is rational, which means it's not irrational.
+
+The same proof for $r \xi $. Modify the previous proof by exchanging addition and multiplication (substraction and division).
+\end{proof}
+	\item 5.A. If $a, b \in \mathbf{R}$ and $a^{2}+b^{2}=0$, show that $a=b=0$.
+\begin{proof}
+Suppose for the sake of contradiction that either $a\neq 0$ or $b\neq 0$. By symmetry, it suffices to only prove the case for $a \neq 0$. By Theorem 5.5(a), $a^2 >0$. 
+
+Now we want to prove $b^2 \ge 0$. If $b = 0$, it follows from Theorem 4.5(a) that $b^2 = 0 \cdot 0 = 0$. If $b \neq  0$, then $b^2 > 0$ by Theorem 5.5(a).
+
+In the first case, $a^2+b^2 = a^2 + 0 = a^2 > 0$. In the second case, $a^2 + b^2 > 0 + 0 = 0$ by Theorem 5.6(b). In both cases $a^2 + b^2 > 0$, but it is assumed that $a^2 + b^2 = 0$.
+\end{proof}
+	\item 5.C. If $a>-1, a \in \mathbf{R}$, show that $(1+a)^{n} \geq 1+n a$ for all $n \in \mathbf{N}$. This inequality is called Bernoulli's Inequality. (Hint: use mathematical induction.)
+\begin{proof}
+	Induct on $n$. 
+
+	Base case: We need to show $(1+a)^0 \ge 1+0 \cdot a$. This simplifies to  $1 \ge 1$ which is trivial.
+
+	Induction step: We need to show $(1+a)^{n+1}\ge 1+(n+1)a $.
+	\begin{align*}
+		(1+a)^{n+1} &= (1+a)^{n}(1+a)\\
+		\intertext{By induction hypothesis, $(1+a)^n \ge 1+na$. Apply Theorem 5.6(c) (note that $1+a>0$):}
+			 &\ge (1+na)(1+a)\\
+			 &= 1+a+na+na^2
+		\intertext{Since $a^2\ge 0$:}
+			 &\ge  1+(n+1)a 
+	.\end{align*}
+	
+\end{proof}
+
+	\item 5.O. If $x, y, z$ belong to ${\mathbf{R}}$, then $x \leq y \leq z$ {\color{red} or $z\le y\le x$} if and only if $|x-y|+|y-z|=|x-z|$.
+\begin{proof}
+	We split the goal into two subgoals, which together imply the goal:
+	\[
+	\begin{cases}
+		z\le y\le x \iff |x-y|+|y-z|=|x-z| \land x\ge z\\
+		x\le y\le z \iff |x-y|+|y-z|=|x-z| \land x\le  z
+	\end{cases}
+	.\] 
+	By symmetry, we only need to prove the first subgoal. 
+
+	 $\implies$:
+	Since $y\ge z$, $y-z \ge 0$, hence $|y-z| = y-z$. Similarly $|x-y| = x-y $ and $|x-z|=x-z $. The goal now simplifies to $(x-y)+(y-z)=x-z$, which follows by simplification.
+
+	$\impliedby$:
+	It suffices to show that both $y>x $ and $y<z $ cannot be true. By symmetry, we only show that $y>x $ is false.
+	
+	Suppose for the sake of contradiction that $y>x$. By similar reasoning, $|x-y|+|y-z| = (y-z)+(y-z)$. By assumption, $x\ge z$, so $|x-z| = x-z$. Since $y>x$, $y-z>x-z$. Therefore, $|x-y|+|y-z| > (y-z)+(x-z) = (y-z)+|x-z| > |x-z|$, a contradiction. 
+
+\end{proof}
+	\item 6.D. Give an example of a set of irrational numbers that has a rational supremum.
+\begin{proof}
+	Consider the set \[
+	\{-\sqrt{2}/n:n \in \mathbb{N} \} 
+	.\] 
+	
+\end{proof}
+	\item 6.G. If $S$ is a bounded set in $\boldsymbol{R}$ and if $S_{0}$ is a nonempty subset of $S$, then show that
+\[
+\inf S \leq \inf S_{0} \leq \sup S_{0} \leq \sup S .
+\]
+Sometimes it is more convenient to express this in another way. Let $D \neq \emptyset$ and let $f: D \rightarrow \boldsymbol{R}$ have bounded range. If $D_{0}$ is a non-empty subset of $D$, then
+\[
+\inf \{f(x): x \in D\} \leq \inf \left\{f(x): x \in D_{0}\right\} \leq \sup \left\{f(x): x \in D_{0}\right\} \leq \sup \{f(x): x \in D\} .
+\]
+\begin{proof}
+	The second inequality follows from definition, so we only need to prove the first and third inequalities. By symmetry, we only need to prove the first inequality.
+
+	It suffices to show that $\operatorname{inf}S$ is a lower bound of $S_0$. By definition, for all $x \in  S$, $x\ge \operatorname{inf}S$. Take $s \in  S_0$. Since $S_0 \subset S$, $s \in  S$. Therefore, $s\ge \operatorname{inf}S$.
+\end{proof}
+	\item 6.H. Let $X$ and $Y$ be non-empty sets and let $f: X \times Y \rightarrow R$ have bounded range in $\boldsymbol{R}$. Let
+\[
+f_{1}(x)=\sup \{f(x, y): y \in Y\}, \quad f_{2}(y)=\sup \{f(x, y): x \in X\} .
+\]
+Establish the Principle of Iterated Suprema:
+\[
+\begin{aligned}
+\sup \{f(x, y): x \in X, y \in Y\} &=\sup \left\{f_{1}(x): x \in X\right\} \\
+&=\sup \left\{f_{2}(y): y \in Y\right\} .
+\end{aligned}
+\]
+We sometimes express this in symbols by:
+\[
+\sup _{x, y} f(x, y)=\sup _{x} \sup _{y} f(x, y)=\sup _{y} \sup _{x} f(x, y) .
+\]
+\begin{proof}
+	By symmetry, it suffices to show \[
+	\sup \left\{ f(x, y): x \in X, y \in Y\right\}=\sup \left\{f_{1}(x): x \in X\right\}
+. \]
+	We first show $\sup \left\{ f(x, y): x \in X, y \in Y\right\}\le \sup \left\{f_{1}(x): x \in X\right\}$.
+	To show this, we need to show that $ \sup \left\{f_{1}(x): x \in X\right\}$ is an upper bound of $ \left\{ f(x, y): x \in X, y \in Y\right\}$. For any $(x_0,y_0) \in  X \times Y$, $f_1(x_0) = \sup \left\{ f(x_0,y):y \in  Y \right\} $. Now $f(x_0,y_0) \in \left\{ f(x_0,y):y \in  Y \right\}$, therefore $\sup \left\{ f(x_0,y):y \in  Y \right\} \ge f(x_0,y_0)$.
+
+	Next we show $\sup \left\{ f(x, y): x \in X, y \in Y\right\}\ge \sup \left\{f_{1}(x): x \in X\right\}$.
+	To show this, we need to show that $\sup \left\{ f(x, y): x \in X, y \in Y\right\}$ is an upper bound of $\left\{f_{1}(x): x \in X\right\}$.
+	Take  $x_0 \in  X$. Now $f_1(x_0) = \sup \left\{ f(x,y): x,y \in \{x_0 \} \times Y \right\} \le \sup \left\{ f(x,y): x,y \in X \times Y \right\} $, where the inequality comes from exercise 6G.
+\end{proof}
+\end{enumerate}

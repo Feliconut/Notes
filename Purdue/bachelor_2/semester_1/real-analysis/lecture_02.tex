@@ -1,0 +1,109 @@
+\lecture{2}{Sat 27 Aug 2022 13:14}{Completeness of $\mathbb{R}$ }
+\subsubsection{Archimedean Property}
+
+\begin{theorem}[Archimedean property]
+	For every $x \in \mathbb{R}$ there is $n \in  \mathbb{N}$ such that $x<n$.
+\end{theorem}
+\begin{proof}
+Suppose for the sake of contradiction that there exists some $x \in \mathbb{R}$ that bound $\mathbb{N}$ from above, i.e. $n\le x$ for any $n \in  \mathbb{N}$.
+
+Let $u = \operatorname{sup} \mathbb{N}$. Hence there exists $n_1 \in \mathbb{N}$ such that $u -1 < n_1\le u$. But $n+1 \in \mathbb{N}$ and $n+1 > u$, so  $u$ is not an upper bound of  $\mathbb{N}$.
+\end{proof}
+
+\begin{corollary}
+	For any $y>0, x \in \mathbb{R}$ there exists $n \in \mathbb{N}$ such that $ny>x$.
+\end{corollary}
+\begin{proof}
+There exists $n > \frac{x}{y}$.
+\end{proof}
+
+\begin{corollary}
+	For any $x>0$ there is $n \in \mathbb{N}$ such that $0<\frac{1}{n}<x$.
+\end{corollary}
+\begin{proof}
+There exists $n>\frac{1}{x}$.
+\end{proof}
+
+\begin{corollary}[of the previous corollary]
+	$\operatorname{inf} \{\frac{1}{n}:n \in \mathbb{N}\} =0$.
+\end{corollary}
+\begin{proof}
+Verify the definition of infimum.
+\begin{enumerate}
+	\item $0\le \frac{1}{n}$ for $n \in \mathbb{N}$.
+	\item For any $v>0$, by the previous corollary,
+		exists  $n$ such that  $0<\frac{1}{n}<v$.
+\end{enumerate}
+\end{proof}
+
+
+\begin{theorem}[Density of rationals in the reals.]
+	For any $a , b \in \mathbb{R}$, $a<b$, there exists $r \in \mathbb{Q}$ such that  $a<r<b$.
+\end{theorem}
+\begin{proof}
+Assume first that $a$ is a positive number. Choose step size $y = \frac{1}{n} < b-a$. By the first corollary there exists $m \in \mathbb{N}$ such that  $a< \frac{m}{n}$.
+
+Let $m$ be smallest such $m \in \mathbb{N}$ (well-ordered property of $\mathbb{N}$). Then $\frac{m -1}{n}\le a < \frac{m}{n}$. Now $\frac{m}{n}\le a+\frac{1}{n}<b$.
+
+If $a<0$ and  $b>0$ then  $0 = r \in \mathbb{Q}$. If $a<0$ and  $b\le 0$ then we flip sign. There exists $r \in \mathbb{Q}$ such that $-b <r < -a$ and hence  $a<-r<b$. 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{density-of-rationals}
+    \caption{density-of-rationals}
+    \label{fig:density-of-rationals}
+\end{figure}
+\end{proof}
+
+
+\begin{theorem}[Existence of $\sqrt{2}$ ]
+	There exists $\alpha \in \mathbb{R}$ such that
+	\[
+	\alpha\ge 0, \alpha^2=2
+	.\] 
+\end{theorem}
+\begin{proof}
+Let $S= \{s\ge 0:s^2<2\} $ Since  $S$ is nonempty and bounded from above by $2$, by Supremum Property, there is a supremum $\alpha = \operatorname{sup} S$. We claim that $\alpha^2 = 2$.
+
+Suppose not, then by Trichotomy, either $\alpha^2 >2 $ or $\alpha^2 <2$. Suppose $\alpha^2 <2$. Then we can find large $n$ such that  $\alpha + \frac{1}{n} < 2$. Suppose $\alpha^2 > 2$, we can find $\left( \alpha - \frac{1}{m} \right)  > 2$.
+In both cases $\alpha \neq \operatorname{sup} S$.
+\end{proof}
+
+\begin{remark}
+	We used $\frac{1}{n}$ instead of $\varepsilon \in \mathbb{R}$ in the proof. This is not strictly necessary. However, if we construct the reals using Dedekind cuts, we have to work with rationals.
+\end{remark}
+
+\subsection{Cantor Set and Nested Intervals}
+
+\begin{definition}[interval]
+	For $a,b$ in $\mathbb{R}$, define 
+	\begin{itemize}
+		\item (closed interval) $[a,b] = \{x \in \mathbb{R}: a \le x\le b\} $ 
+		\item (open interval)$(a,b) = \{x \in \mathbb{R}: a < x <  b$\} 
+		\item  (semi-open / semi-closed) $(a,b] = \{x \in \mathbb{R}\} : a < x \le  b$
+		\item  $[a,b) = \{x \in \mathbb{R}\} : a \le  x  < b$
+		\item (semi-infinite / rays) $[a,\infty ) = \{x \in \mathbb{R}: x \ge a\} $
+		\item  $(a,\infty ) = \{x \in \mathbb{R}: x > a\} $ 
+		\item (infinite) $(-\infty , \infty) = \mathbb{R}$
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}[Nested Interval Property]
+	Suppose we have a sequence of closed finite nonempty intervals $I_1, I_2, \ldots$, such that \[
+	I_1 \supset I_2 \supset \ldots \supset I_n \supset \ldots
+\]
+Then there exists $x \in \mathbb{R}$ such that $x \in I_n$ for any $n \in  \mathbb{N}$. In other words, $\bigcap_{n \in \mathbb{N}} I_n \neq  \emptyset  $
+\end{theorem}
+\begin{proof}
+	Let $I_n = \left[ a_n, b_n \right] $. Suppose WOLG that $a_n \le b_n$ then we have
+\begin{align*}
+	a_1\le a_2\le \ldots\le a_n \le \ldots \\
+	b_1\ge b_2\ge \ldots\ge b_n \ge \ldots 
+.\end{align*}
+\textbf{Claim.} $a_m \le  b_k $ for any $m, k \in \mathbb{N}$. \textit{Proof:} Let $n = \max \{m,k\} $. Then $a_m \le a_n \le b_n \le b_k$.
+
+$b_k$ is an upper bound for $A = \{a_n : n \in \mathbb{N}\} $. $A\neq \emptyset $, so there exists, by supremum property, some $\xi = \operatorname{sup} A$. By definition of supremum, $a_n \le  \xi$ for any $ n \in \mathbb{N}$.
+
+On the other hand, $b_k$ is an upper bound, so $\xi \le b_k$ for any $k \in \mathbb{N}$. Now $a_n \le \xi \le b_n$, so $\xi \in I_n$.
+\end{proof}
+
