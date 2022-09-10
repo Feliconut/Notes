@@ -91,18 +91,95 @@ Therefore all members except $1 $ or $p -1$ are not their own inverse. Hence the
 
 	\item 27. If $a H=b H$ forces $H a=H b$ in $G$, show that $a H a^{-1}=H$ for every $a \in G$.
 \begin{proof}
-	Take $a \in G$, $b \in H$. We want to show $ah \in Ha$. 
-	\begin{claim}
-		There exists $b \in G$ such that $a h \in b H$ and $b H = H b$.
-	\end{claim}
+	Note that 
+	\begin{align*}
+		& \quad a H = b H \\
+		& \iff a^{-1} b \in H \\
+		& \iff b^{-1}  a \in H
+	.\end{align*}
+	Using the assumption we also have
+	\[
+		\quad H a = H b 
+		\iff a b^{-1}  \in H
+		.
+	\]
+	We have proved that for all $a, b \in G$, \[
+		b^{-1} a \in H \implies a b^{-1}  \in H
+	.\] 
+	Therefore, for all $a, b \in G$, 
+	\[
+		a b \in H \iff b a \in H
+	.\] 
+	Fix any $a \in G$. We pick arbitrary $h \in H$ and let $b = a h$. Now $a^{-1} b = a^{-1} a h = h \in H$. Hence $b a^{-1} \in H$. Since $a(a^{-1} b) & \in a H$, we have
+	\begin{align*}
+		a(a^{-1} b)
+		&= (a a^{-1} ) b \\
+		&= b \\
+		&= b (a^{-1} a) \\
+		&= (b a^{-1} ) a \\
+		&\in H a
+	.\end{align*}
+	Since $h$ is picked arbitrarily, $b$ can take all elements from $aH$. Since $b \in Ha$, we have shown that $aH \subset  Ha$. Apply the same argument to the other side symmetrically, we obtain \[
+		aH = Ha
+	\] 
+	which means $aHa^{-1} = H$.
 \end{proof}
 
 	\item 31. If $o(a)=m$ and $a^s=e$, prove that $m \mid s$.
+\begin{proof}
+	We first introduce
+\begin{lemma}
+	For a cyclic group with order $n$ and generating element $a$, we have for all integers $q$ and $r$, \[
+		a^q = a^r \iff q \equiv r \pmod n
+	.\] 
+\end{lemma}
+\begin{proof}[Proof of lemma]
+	\begin{align*}
+		a^q = a^r &\iff (a^q)(a^r)^{-1} = e \\
+			  &\iff a^{q-r} = e
+	.\end{align*}
+	Now we apply euclidean's algorithm to $q-r$, and obtain $x$ and $y$ such that $0\le y<n$, and
+	\[
+		q-r = n x + y
+	.\] 
+	Now 
+	\[
+		a^{q-r} = a^{n x + y} =  \left( a^n \right) ^x a^y = e^x a^y = a^y = e
+	.\] 
+	Since $0\le y<n$, by properties of cyclic group, $y = 0$. Hence
+	\[
+		q - r = n x \equiv 0 \pmod n
+	.\] 
+
+	Now we prove the other direction, and assume $q \equiv r \pmod n$. Apply euclidean algorithm to both $q$ and $r$. We obtain integers $x_q, x_r, y_q, y_r$ such that $0\le y_q < n$, $0\le y_r < n$ and \[
+		q = n x_q + y_q, r = n x_r + y_r
+	.\] 
+	We have $q \equiv y_q \pmod n$ and $r \equiv y_r \pmod n$. Hence $y_q \equiv y_r \pmod n$. Since both of them are in $\mathbb{Z}_n$, $y_q = y_r$. Let $y = y_q$. Now
+	\begin{align*}
+		a^{q-r} &= a^{(n x_q + y)-(n x_r + y)}\\
+		&= a^{nx_q + nx_r} \\
+		&= a^{n(x_q + x_r)} \\
+		&= \left( a^n \right) ^{x_q + x_r} \\
+		&= e^{x_q + x_r} \\
+		&= e 
+	.\end{align*}
+\end{proof}
+
+By assumption we have $o(a) = |\left\langle a \right\rangle | = m$. By Theorem 2.4.5, $a^m = e$. Apply the last lemma. Since $a^s = e = a^m$, \[
+	s \equiv m \pmod m
+.\] 
+Hence
+\[
+	s \equiv 0 \pmod m
+.\] 
+Which means $m | s$.
+\end{proof}
+
 	\item 37. In a cyclic group of order $n$, show that for each positive integer $m$ that divides $n$ (including $m=1$ and $m=n$ ) there are $\varphi(m)$ elements of order $m$.
 \begin{proof}
 	An element $a^k \in \left\langle a \right\rangle = G$ has order $m$ iff
 	\begin{enumerate}
-		\item $(a^k)^m = a^{km} = e$. In other words, $n | k m$.
+		\item $(a^k)^m = a^{km} = e$. In other words, $n | k m$, and
 		\item $m$ is the smallest positive integer such that $ km $ is a multiple of $n$. In other words, for any $p < m$, we have $n \nmid kp$.
 	\end{enumerate}
 	Note that $1\le m\le n$ (since $m$ divides $n $), and $0\le k\le n-1$ (since $a^k$ are distinct elements of $G$).
@@ -114,38 +191,101 @@ Therefore all members except $1 $ or $p -1$ are not their own inverse. Hence the
 		.\] 
 	\end{claim}
 
-	With the claim proved, since
+	Note that
 	\[
-		\left( k, \frac{n}{n / m} \right) = \left( k,m \right) = 1 
-	,\] 
-	we have $o(a^k) = m \iff (k,m) = 1$, and there are $\varphi(m)$ choices of $k$ such that $(k,m) = 1$.
+			(k,n) = \frac{n}{m} \iff
+		\left( \frac{k}{n / m}, \frac{n}{n / m} \right) = \left( \frac{k}{n / m},m \right) = 1 
+	.\] 
+	Hence $o(a^k) = m \iff \left(\frac{k}{n / m},m\right) = 1$. Since $k < n$, $\frac{k}{n / m}< m$. 
+	There are precisely $\varphi(m)$ choices of $\frac{k}{n / m}$ such that $\left(\frac{k}{n / m},m\right) = 1$ and $\frac{k}{n / m}< m$. Each choice of $\frac{k}{n / m}$ then uniquely corresponds to a choice of $k$.
 \end{proof}
 	\begin{notation}
-		For integer $m$ and prime $x$, write  $d_x(m)$ for the \textit{multiplicity} of $x$ in the unique prime factorization of $m$.
+		For integer $m$ and prime $x$, write  $d_x(m)$ for the \textit{multiplicity} of $x$ in the unique prime factorization of $m$. For simplicity of notation, we may write $d_x(m,n)$ for $d_x((m,n))$.
 	\end{notation}
 	\begin{lemma}
 		(Properties of Multiplicity) The following statements hold:
 		\begin{enumerate}
-			\item $d_x(nm) = d_x(n) + d_x(m)$ 
+			\item $d_x(n)\ge  0$.
+			\item $d_x(n)\ge a \iff x^a | n$.
+			\item $d_x(nm) = d_x(n) + d_x(m)$ .
 			\item $d_x(\frac{n}{m}) = d_x(n) - d_x(m)$ if $m | n$.
-			\item  $d_x((m,n)) = \min(d_x(m), d_x(n))$.
-			\item If $m | n$, then one has $d_x(m) \le  d_x(n)$. Conversely, if $d_x(m) > d_x(n)$ then $m \nmid n$.
+			\item  $d_x(m,n) = \min(d_x(m), d_x(n))$.
+			\item If $m | n$, then for any prime $x$ one has $d_x(m) \le  d_x(n)$. Equivalently, if $d_x(m) > d_x(n)$ then $m \nmid n$.
+			\item $m | n$ if and only if for all prime $x$ such that $x | m$, $d_x(m) \le  d_x(n)$.
 		\end{enumerate}
 	\end{lemma}
 	\begin{proof}
-		
+		\begin{enumerate}
+			\item Explicitly stated in the definition of multiplicity.
+			\item Apply unique factorization to $n$. Then there exists primes  $p_1, p_2,\ldots,p_k$ (all distinct), where $k$ is a natural number, and positive integers $a_1, \ldots,a_k$. We have
+\begin{align*}
+	n &= p_1^{a_1}p_2^{a_2}\ldots p_k^{a_k}
+.\end{align*}
+Without loss of generality, let $x = a_1$.
+If $d_x(n)\ge a$, then $a_1 \ge  a$. Hence there exists a nonnegative integer $c$ such that $a_1 = a + c$. Now
+\[
+	n &= x^{a_1}p_2^{a_2}\ldots p_k^{a_k}= x^{a + c}p_2^{a_2}\ldots p_k^{a_k}= x^{a}x^cp_2^{a_2}\ldots p_k^{a_k}
+\] 
+Therefore $x^a | n$.
+
+Now assume $x^a | n$ and we want to show $d_x(n) \ge  a$. Since $p_2^{a_2}, \ldots, p_k^{a_k}$ are all prime factors other than $x$, we have \[
+	x^a \mid p_1^{a_1}
+.\] 
+Hence $x^{a_1} \ge  x^a$. Since $x>0$, we have $d_x(n) = a_1\ge a$, as desired.
+			\item We apply unique factorization to both $n$ and $m$. Then there exists primes  $p_1, p_2,\ldots,p_k$ (all distinct), primes $q_1,q_2,\ldots,q_l$ (all distinct), where $k, l$ are natural numbers, and positive integers $a_1, \ldots,a_k, b_1, \ldots,b_l$. We have
+\begin{align*}
+	n &= p_1^{a_1}p_2^{a_2}\ldots p_k^{a_k} \\
+	m &= q_1^{b_1}q_2^{b_2}\ldots q_k^{b_k}
+.\end{align*}
+Now choose some  $x$ out of the  $p$s and  $q$s. Without loss of generality we let  $x = p_1$. We have two cases.
+
+\textit{Case 1:} $q_1, \ldots, q_k \neq  x$. Now
+\[
+	nm = p_1^{a_1}p_2^{a_2}\ldots p_k^{a_k}q_1^{b_1}q_2^{b_2}\ldots q_k^{b_k}
+.\] 
+$p_2, \ldots, p_k, q_1, \ldots, q_l$ are not equal to $p_1$. Hence $d_x(nm) = a_1$. Since $d_x(m) = 0$, we have $d_x(nm) = d_x(n) + d_x(m)$.
+
+\textit{Case 2:} There exists some positive integer $i\le l$ such that $q_i = x$. Without loss of generality, we assume $i = 1$. Now we use commutativity to obtain
+\begin{align*}
+	nm &= p_1^{a_1}p_2^{a_2}\ldots p_k^{a_k}q_1^{b_1}q_2^{b_2}\ldots q_k^{b_k}\\
+	&= p_1^{a_1}q_1^{b_1}p_2^{a_2}\ldots p_k^{a_k}q_2^{b_2}\ldots q_k^{b_k}\\
+	&= x^{a_1}x^{b_1}p_2^{a_2}\ldots p_k^{a_k}q_2^{b_2}\ldots q_k^{b_k}\\
+	&= x^{a_1+b_1}p_2^{a_2}\ldots p_k^{a_k}q_2^{b_2}\ldots q_k^{b_k}
+.\end{align*}
+Now $d_x(nm) = a_1 + b_1 = d_x(n) + d_x(m)$, as desired.
+			\item Apply $\frac{n}{m}$ and $m$ to the last property. The assumption $m | n$ ensures that $\frac{n}{m}$ is an integer.
+			\item We have  $(m,n) \mid m$ and $(m,n) \mid n$. Hence $d_x(m,n)\le d_x(m)$ and $d_x(m,n) \le d_x(n)$. Hence $d_x(m,n) \le \min(d_x(m), d_x(n))$. Without loss of generality, let $\min(d_x(m), d_x(n)) = d_x(m)$. Suppose $d_x(m,n) < d_x(m)$, then there exists a positive integer $c$, such that $d_x(m,n) + c =  d_x(m)$. Now \[
+					x^{d_x(m)} = x^{d_x(m,n) + c}\mid m
+			.\] 
+$x^{d_x(m,n) + c}\mid  n$ also because  $d_x(n)\ge d_x(m)$.
+			This implies $(m,n)x^c | m$ and $(m,n)x^c | n$, which is a contradiction since $(m,n)$ is the greatest common diviser.
+
+			We have ruled out all other possibilities, so $d_x(m,n) = d_x(m) = \min(d_x(m), d_x(n))$.
+			\item Fix prime $x$. Use property (b) and taking $a = d_x(m)$, we have $x^{d_x(m)} | m$. By transitivity of divisibility, $x^{d_x(m)} | n$. Use property (b) again, we have $d_x(n) \ge  d_x(m)$.
+			\item suppose $d_x(m) \le  d_x(n)$ for all primes $x$ such that $x | m$. We write $m$ in terms of its unique factorization:
+		\[
+			m = q_1^{a_1}q_2^{a_2}\ldots q_r^{a_r}
+		\] 
+		where $q_1, \ldots, q_r$ are distinct primes, and $a_1, \ldots, a_r$ are positive integers. 
+
+		Now $a_1 = d_{q_1}(m) \le  d_{q_1}(n)$, hence $q_1^{a_1} \mid n$. Continue in this fashion, we see that $q_2^{a_2},\ldots,  q_r^{a_r}$ all divide $n$. Therefore,  $m | n$.
+
+		We now prove the other direction. Assume $m | n$, and let $x $ be a prime such that $x | m$. Because $m|n$, there exists positive integer $c$ such that $n = cm$. Hence \[
+			d_x(n) = d_x(cm) = d_x(c) + d_x(m)\ge d_x(m)
+		.\] 
+		\end{enumerate}
 	\end{proof}
 	
 	\begin{lemma}
 	If $p < m$, then there exists a prime $x>1$ such that $x|m $ and $d_x(m) > d_x(p)$.
 	\end{lemma}
 	\begin{proof}
-		
+		Fix $p$ and $m$. Suppose for contradiction that for all $x | m$ and $x>1$, we have $d_x(m) \le d_x(p)$. Then apply property (f) above, we obtain that $m | p$. This means $p \ge m$, a contradiction to the assumption $p < m$.
 	\end{proof}
 	
 	
-	\begin{proof}[Proof of claim]
-	Suppose $(k,n) = \frac{n}{m}$. Hence $(km, nm) = n$. This means that $n |km $, satisfying condition (a).  
+	\begin{proof}[\color{blue}Proof of claim]
+	Suppose $(k,n) = \frac{n}{m}$. Hence $(km, nm) = n$. This means that $n |km $.  
 
 	Suppose there exists positive integer $p$ such that  $ p<m$ and $n | k p$. Use the above lemma to choose prime $x$ such that  $x>1$, $x|m$ and $d_x(m) > d_x(p)$. We claim that \[
 		d_x(n) = d_x(m) + d_x(k)
@@ -167,16 +307,26 @@ Therefore all members except $1 $ or $p -1$ are not their own inverse. Hence the
 
 	For the other direction, assume that $a^k$ has order $m$ and hence satisfies the two conditions. We first introduce
 	\begin{lemma}
-		For any positive integer $n,k,m$, we have \[
-			n|km \implies n|(k,n) m
+		For any positive integer $n,m,k$, we have \[
+			n|mk \implies n|m(k,n) 
 		.\] 
 	\end{lemma}
 	\begin{proof}
-		TBD
+		Let $x$ be any prime. Since $n | mk$, 
+		\[
+			d_x(n) \le  d_x(mk) = d_x(m) + d_x(k)
+		.\] 
+		Now 
+		\begin{align*}
+			d_x(m (k,n)) &= d_x(m) + d_x(k,n)\\
+			&= d_x(m) + \min(d_x(k), d_x(n)) 
+		.\end{align*} 
+
+		When $\min(d_x(k), d_x(n)) = d_x(k)$, $d_x(m (k,n)) = d_x(m) + d_x(k) \ge d_x(n)$. When $\min(d_x(k), d_x(n)) = d_x(n)$, obviously we have $d_x(m (k,n)) = d_x(m) + d_x(n) \ge  d_x(n)$. Hence in both cases, $d_x(m (k,n)) \ge d_x (n)$. Since this is true for all $x$, we have  $n | m(k,n)$.
 	\end{proof}
 	
 
-	Then since $n | km$, we apply the previous lemma and conclude that $n | (k,n) m$. Hence there exists positive integer $c$ such that $cn = (k,n) m$. We claim that $c = 1$, which will conclude the proof.
+	Then since $n | mk$, we apply the previous lemma and conclude that $n | m(k,n) $. Hence there exists positive integer $c$ such that $cn = m(k,n) $. We claim that $c = 1$, which will conclude the proof.
 
 	To verify that $c=1$, suppose for the sake of contradiction that $c > 1$. Now $(k,n) = c \frac{n}{m}$ since $m | n$. Hence  $c$ is a factor of both $k$ and $n$, and we have \[
 		\left( \frac{k}{c}, \frac{n}{c} \right) = \frac{n}{m}
@@ -185,11 +335,84 @@ Therefore all members except $1 $ or $p -1$ are not their own inverse. Hence the
 		\frac{n}{m} \mid \frac{k}{c}
 	.\] 
 	Hence \[
-		n \mid \frac{k}{c} m
+		n \mid m \frac{k}{c} 
 	\]
-	where $\frac{k}{c}<k$, a contradiction to condition 2.
+	where $\frac{k}{c}<k$, a contradiction to the condition that $k$ is the smallest integer such that $n | mk$.
 \end{proof}
 
 
 \end{enumerate}
 Herstein, section 2.5, page 73 : Questions 2,6,7
+\begin{enumerate}[resume]
+	\item 2. Recall that $G \simeq G^{\prime}$ means that $G$ is isomorphic to $G^{\prime}$. Prove that for all groups $G_1, G_2, G_3$ :\\
+(a) $G_1 \simeq G_1$.\\
+(b) $G_1 \simeq G_2$ implies that $G_2 \simeq G_1$.\\
+(c) $G_1 \simeq G_2, G_2 \simeq G_3$ implies that $G_1 \simeq G_3$.
+\begin{proof}
+	\begin{enumerate}
+		\item Take the identity mapping $\iota_G: G \to  G$. Now $\iota$ is clearly bijective, and \[
+			\iota_G(a_1 a_2) = a_1 a_2 = \iota_G(a_1)\iota(a_2)
+		.\] 
+		\item Since $G_1 \simeq G_2$, there exists bijective mapping $\varphi: G_1 \to  G_2$ such that for all $a, b \in G_1$, $\varphi(ab) = \varphi(a) \varphi(b)$. Now consider the inverse mapping $\varphi^{-1}$. Clearly this mapping is bijective. For all elements $x, y \in G_2$, let  $a = \varphi^{-1} (x)$ and $b = \varphi^{-1} (y)$. Now $\varphi(a) = x$ and $\varphi(b) = y$. Now \begin{align*}
+		\varphi^{-1} (xy) &= \varphi^{-1} (\varphi(a)\varphi(b)) \\
+				  &= \varphi^{-1} (\varphi(ab)) \\
+				  &= ab \\
+				  &= \varphi^{-1} (\varphi(a)) \varphi^{-1}(\varphi(b)) \\
+				  &= \varphi^{-1} (x) \varphi^{-1} (y)
+		.\end{align*} 
+		\item  Since $G_1 \simeq G_2$, there exists bijective mapping $\varphi: G_1 \to  G_2$ such that for all $a, b \in G_1$, $\varphi(ab) = \varphi(a) \varphi(b)$. Since $G_2 \simeq G_3$, there exists bijective mapping $\psi: G_2 \to  G_3$ such that for all $a, b \in G_2$, $\varphi(ab) = \varphi(a) \varphi(b)$. 
+
+			Now consider the composition $\psi \circ \varphi: G_1 \to  G_3$. Clearly it is bijective since it's composition of two bijections. Now
+		\begin{align*}
+			\psi \circ \varphi (ab) &= \psi \left( \varphi(ab) \right)  \\
+			&= \psi\left( \varphi(a)\varphi(b) \right)  \\
+			&= \psi\left( \varphi(a) \right)\psi\left( \varphi(b) \right)  \\
+			&=  \psi \circ \varphi (a)\psi \circ \varphi (b)
+		.\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\item 6. Prove that if $\varphi: G \rightarrow G^{\prime}$ is a homomorphism, then $\varphi(G)$, the image of $G$, is a subgroup of $G^{\prime}$.
+\begin{proof}
+	\begin{enumerate}
+		\item (Closure) Take $x,y \in \varphi(G)$. Then there exists $a, b \in G$ such that $\varphi(a) = x$ and $\varphi(b) = y$. Now \[
+			xy = \varphi(a) \varphi(b) = \varphi(ab) \in \varphi(G)
+		.\]  
+	\item (Associativity) Inherited from $G$.
+	\item (Identity) Let $e \in G$ be the identity of $G$. Take $x \in \varphi(G)$. Now
+		\[
+			\varphi(e) x = \varphi(e)\varphi(a) = \varphi(ea) = \varphi(a) = x
+		.\] 
+		Similarly, $x \varphi(e) = x$. Hence $\varphi(e)$ is an identity of $\varphi(G)$.
+	\item (Inverse) Take $x \in \varphi(G)$. Then $x = \varphi(a)$ for some $a \in G$. Now
+		\[
+			\varphi(a)(\varphi(a^{-1} ))=(\varphi(a^{-1} ))\varphi(a)=\varphi(a a^{-1} ) = \varphi(e)
+		.\] 
+		Hence $\varphi(a^{-1})$ is a inverse for $\varphi(a)$.
+	\end{enumerate}
+\end{proof}
+\begin{proof}
+	(Simpler). Take $\varphi(a), \varphi(b) \in \varphi(G)$. We want to show $\varphi(a)\varphi(b)^{-1} \in \varphi(G)$. It suffices to show $\varphi(b)^{-1} = \varphi(b^{-1} )$, then
+	\[
+		\varphi(a)\varphi(b)^{-1} = \varphi(a)\varphi(b^{-1} ) = \varphi(ab^{-1} ) \in \varphi(G)
+	.\] 
+
+	To show this, note that \[
+		\varphi(b) \varphi(b^{-1} ) = \varphi(b b^{-1} ) = \varphi(e)
+	.\] 
+	Also, $\varphi(e)$ is the identity for $\varphi(G)$ since for any $c \in G$, 
+	\[
+		\varphi(e)\varphi(c) = \varphi(ec) = \varphi(c) = \varphi(ce) = \varphi(c)\varphi(e)
+	.\] 
+\end{proof}
+
+
+\item 7. Show that $\varphi: G \rightarrow G^{\prime}$, where $\varphi$ is a homomorphism, is a monomorphism if and only if $\operatorname{Ker} \varphi=(e)$.
+\begin{proof}
+	Let $e, e'$ be identity of $G$ and $G'$ respectively. If $\varphi$ is a monomorphism, then the mapping is injective. For any element $a \in G$ such that $a \neq e$, we must have $\varphi(a) \neq  \varphi(e) = e'$, hence $a \not\in \operatorname{Ker} \varphi$.
+
+	If $\varphi$ is not a monomorphism, then there exists two distinct elements $a, b \in G$ such that $\varphi(a) = \varphi(b)$. Now $\varphi(ba^{-1}) = \varphi(a a^{-1}) = \varphi(e) = e'$. But $ba^{-1} \neq e$ since $a \neq  b$. We have constructed a nonidentity element that is also in $\operatorname{Ker} \varphi$.
+\end{proof}
+
+\end{enumerate}
+	
