@@ -143,6 +143,24 @@ Herstein, section 1.5, page 28: Questions 10, 14
 \begin{proof}
 	We assume $p<n$ throughout the proof. Assume some $p>\sqrt{n } $ divides $n$. Now we must have $n / p \le  \sqrt{n} $.
 	The contrapositive of this statement is: If all $p\le \sqrt{n} $ do not divide $n$, then there does not exist $p>\sqrt{n} $ that divide $n$. The claim is already proved.
+
+\begin{correction}
+	We assume $p,q<n$ throughout the proof. Assume some $p>\sqrt{n } $ divides $n$. Now we must have $n / p \le  \sqrt{n} $. Let $q = \frac{n}{p}$, we have $q \mid n$ since $n = pq$. In other words,
+	\[
+		(\exists  p) \left(p> \sqrt{n} \land  p\mid n \right) \implies (\exists q)\left( q\le \sqrt{n} \land q\mid n\right)
+	.\] 
+	The contrapositive of this statement is: 
+\[
+	(\lnot \exists  q) \left( q\le \sqrt{n}  \land  q \mid n\right) \implies  (\lnot \exists  p )\left( p > \sqrt{n} \land  p\mid n \right) 
+.\] 
+
+By trichotomy of order we have $(\forall p)(p\le \sqrt{n} \lor p>\sqrt{n} )$, therefore
+\begin{align*}
+	(\lnot \exists  q) \left( q\le \sqrt{n}  \land  q \mid n\right) &\implies (\lnot \exists q)(q | n)\\
+									&\implies n \text{ is prime}
+.\end{align*} 
+
+\end{correction}
 \end{proof}
 	\item 14. Adapt the proof of Theorem 1.5.9 to prove:\\
 (a) There is an infinite number of primes of the form $4 n+3$.
@@ -150,14 +168,145 @@ Herstein, section 1.5, page 28: Questions 10, 14
 	Suppose there are only a finite number of primes of the form $4n+3$.
 	Let  $p_1 < p_2 < \ldots < p_n$ be all the primes of the form $4n+3$. Now we have all prime numbers less than or equal to $p_n$, $q_1 < q_2 < \ldots < q_m = p_n$. Consider the number $-1 + 2 q_1 q_2 \ldots q_m$. Clearly it is of the form $4n+3$ (note that $q_1 = 2$), and it is larger than $p_n$.
 
-	For any $q_j$, this number is not divisible by $q_j$ since this number plus 1 is divisible, i.e. it has a remainder of $q_j - 1$ when divided by $q_j$. Hence this number is not divisible by any prime. By Theorem 1.5.7, it is a prime.
+	For any $q_j$, this number is not divisible by $q_j$ since this number plus 1 is divisible, i.e. it has a remainder of $q_j - 1$ when divided by $q_j$. Hence this number is not divisible by  \correct{any prime}{any prime smaller than $p_n$. (This is not sufficient to show that this number of prime)}. By Theorem 1.5.7, it is a prime.
 \end{proof}
 (b) There is an infinite number of primes of the form $6 n+5$.
 \begin{proof}
 	Replace `$4n+3 $' with `$6n+5$' in the previous proof, and note that $q_1 = 2$ and $q_2 = 3$.
 \end{proof}
+\begin{problem}
+	\color{red}
+	If we only consider $N = 4p_1p_2\ldots p_n - 1$, how can we be sure that no prime that is not of the form $4n+3$ divides $N$?
+\end{problem}
+\begin{correction}
+If $N:=4p_1p_2 \ldots p_m - 1$ is divisible by some prime factor of the shape $q = 4n+3$, then the claim is proved since $q\neq  p_1, p_2, \ldots, p_m$. 
+\linebreak
+
+Now suppose that $N$ is not divisible by any prime factor of shape $4n+3$. This means that all its prime factors are of the shape $4n+1$. Therefore,
+\[
+N \equiv \prod_{\text{factors}} (4k+1) \equiv 1 \pmod 4  
+.\] 
+But clearly we have \[
+	N \equiv -1 \equiv 3 \pmod 4
+\]
+which is a contradiction. Hence $N$ has some prime factor of the shape $q = 4n+3$.
+\end{correction}
 \end{enumerate}
 Herstein, section 1.6, page 31: Questions 3,7,12,15.
+\begin{enumerate}[resume]
+	\item 3. Prove that a set having $n \geq 2$ elements has $\frac{1}{2} n(n-1)$ subsets having exactly two elements.
+\begin{proof}
+	Prove by induction. First consider $n = 2$, then the only subset it can have with $2$ elements is the set itself. Therefore there's exactly one such subset, and $\frac{1}{2}n(n-1) = \frac{1}{2}(2)(2-1) = 1$, as desired.
+
+	Now let $S$ be a set with $n$ elements, where $n \in \mathbb{N}$, and assume inductively that $S$ has exactly $\frac{1}{2}n(n-1)$ subsets with exactly two elements. Now let $x \not\in S$ and consider the set $S \cup \{x\} $ with $n+1$ elements.
+
+	For any subset $\{a,b\} \subset S \cup \{x\} $ such that $a \neq  b$, we have $\{a,b\} \subset S \iff a\neq x \land b\neq x$. Therefore, any subset of $S \cup \{x\} $ that does not contain $x$ is not a "new" subset, i.e. it is also a subset of $S$. Therefore the new subsets are exactly those containing $x$ and one other element from $S$.
+
+	Hence the number of new subsets is exactly $|S| = n$. Apply the induction hypothesis, we have the number of subsets of $S \cup \{x\} $ with exactly two elements $= \frac{1}{2}n(n-1) + n = \frac{1}{2}n(n+1) = \frac{1}{2} (n+1)((n+1)-1)$, as desired.
+\end{proof}
+
+	\item 7. If $a \neq 1$, prove that $1+a+a^2+\cdots+a^n=\left(a^{n+1}-1\right) /(a-1)$ by induction.
+\begin{proof}
+	Use induction. The base case is $n = 0$. In this case, the left hand side equals  $1$, and the right hand side is \[
+		\frac{a^{0+1}-1}{a-1} = \frac{a-1}{a - 1} = 1
+	.\] 
+
+	Now assume inductively that for some fixed $n$, $1+a+a^2+\cdots+a^n=\left(a^{n+1}-1\right) /(a-1)$ for all $a \neq  0$.  Now
+	\begin{align*}
+		1+a+a^2+\cdots+a^n + a^{n+1}
+		&= (1+a+a^2+\cdots+a^n)+ a^{n+1} \\
+		&= \left(a^{n+1}-1\right) /(a-1) + a^{n+1} \\
+		&= \frac{a^{n+1} - 1 + a^{n+1}(a-1)}{a-1} \\
+		&= \frac{a^{n+1}a -1}{a-1} \\
+		&= \frac{a^{(n+1)+1} -1}{a-1}
+	.\end{align*}
+\end{proof}
+
+	\item 12. Prove by induction that a set having $n$ elements has exactly $2^n$ subsets.
+\begin{proof}
+	Base case: a set having $0$ element has exactly $1$ subset, which is itself (the empty set). Now $2^0 = 1$ as desired.
+
+	Let $S$ be some set with $n$ elements, and assume inductively that  $S$ has $2^n$ subsets. Let $x \not\in S$ and consider the set $S \cup \{x\} $ with $n+1$ elements.
+
+	We examine the subsets of $S \cup \{x\} $. Now we construct a 1-1 correspondendce between subsets containing $x$ and subsets not containing $x$. For each subset $A \subset S$, the set $A \cup \{x\} \subset S \cup \{x\} $. Conversely, for each subset $B \subset S \cup \{x\} $ such that $x \in B$, we have $B\setminus \{x\} \subset S$.
+
+	Since there is a correspondence, there are same number of subsets containing and not containing $x$. Now that the subsets of $S$ are exactly those subsets of $S \cup \{x\} $ not containing $x$. Now the number of subsets of $S \cup \{x\} $ is:
+
+	\[
+		2^n + 2^n = 2^{n+1}
+	.\] 
+\end{proof}
+
+	\item 15. Prove by induction that for a set having $n$ elements the number of $1-1$ mappings of this set onto itself is $n !$.
+\begin{proof}
+	We skip the degenerate case $n = 0$ and start proving at base case $n = 1$. A  $1-1$ mapping of a singleton set must map the only element to itself, hence there is only one such mapping. Note that $1! = 1$, as desired.
+
+	Now consider a set $S$ with $n$ elements, and $x \not\in S$. Assume inductively that there are exactly $n!$ 1-1 mappings $S \to  S$. Now for each such mapping $\varphi : S \to  S$ and each element $s \in S$, define
+\begin{align*}
+	\varphi_s: S \cup \{x\}  &\longrightarrow S \cup \{x\}  \\
+	a &\longmapsto \varphi_s(a) = \begin{cases}
+		x & a = s \\
+		\varphi(s) & a = x \\
+		\varphi(a) & \text{otherwise}
+	\end{cases}
+\end{align*}
+and 
+\begin{align*}
+	\varphi': S \cup \{x\}  &\longrightarrow S \cup \{x\}  \\
+	a &\longmapsto \varphi'(a) = \begin{cases}
+		x & a = x \\
+		\varphi(a) & \text{otherwise}
+	\end{cases}
+.\end{align*}
+\begin{claim}
+	$\varphi_s$ is 1-1. Proof: (injectivity) Let $a,b$ be distinct elements from $S \cup \{x\} $. If one of them equals  $s$, say $a = s$, then $\varphi_s(a) = x$. If $b = x$, then $\varphi_s(b) = \varphi(s) \in S$. If $b \neq  x$, then $\varphi_s(b) = \varphi(b) \in S$. In both cases $\varphi_s(a) \neq  \varphi_s(b)$. If $a,b \in S$, then their images are not equal  since  $\varphi$ is 1-1. 
+	Surjectivity follows since  $S$ is assumed to be finite.
+\end{claim}
+
+\begin{claim}($( \varphi, s ) \mapsto \varphi_s$ is injective)
+	If $\varphi, s$ and $\psi, t$ are distinct (either $\varphi \neq  \psi$ or $s \neq t$), then $\varphi_s \neq  \psi_t$. Proof: 
+	\begin{enumerate}
+		\item in the first case, there exists $a \in S$ such that $\varphi(a) \neq \psi(a)$. Now if $a = s$, $\varphi_s$ and $\psi_s$ map $x$ to different elements; if $a\neq s$, then $\varphi_s$ and $\psi_s$ map $a$ to different elements.
+		\item in the second case, we assume without loss of generality that $\varphi = \psi$. Now since $s \neq t$, note that $\varphi_s(x) = s \neq t = \psi_t(x)$.
+	\end{enumerate}
+\end{claim}
+\begin{claim}($(\varphi, s) \mapsto \varphi_s$ is surjective)
+	For any 1-1 map $f:S \cup \{x\} \to S \cup \{x\} $ such that $f(x)\neq x$ , there exists some $\varphi: S\to S$ and $s \in S$ such that $f = \varphi_s$. Proof: Define $\varphi$ by \begin{align*}
+		\varphi: S &\longrightarrow S \\
+		x &\longmapsto \varphi(x) = \begin{cases}
+			f(x) & f(s) = x \\
+			f(s) & \text{otherwise}
+		\end{cases}
+	\end{align*}
+	and then verify $\varphi_s = f$.
+\end{claim}
+
+\begin{claim}
+	$\varphi'$ is 1-1. Proof: (injectivity) Consider $a,b \in S \cup \{x\} $. If both do not equal $x$ then the claim follows from the fact that $\varphi$ is 1-1. If one of them equals $x$, say $a=x$, then $\varphi'(a) = \varphi'(x) = x$ and $\varphi'(b) = \varphi(b) \in S$. Hence their images are not equal. Surjectivity follows since $S$ is finite.
+\end{claim}
+
+\begin{claim}($\varphi \mapsto \varphi'$ is injective)
+	For any $\varphi \neq  \psi$, $\varphi' \neq  \psi'$. Proof: There exists $s \in S$ such that  $\varphi(s) \neq  \psi(s)$. Now $\varphi'(s) = \varphi(s) \neq  \psi(s) = \psi'(s)$.
+\end{claim}
+
+\begin{claim}($\varphi \mapsto \varphi'$ is surjective)
+	For any 1-1 map $f:S \cup \{x\} \to S \cup \{x\} $ such that $f(x)= x$ , there exists some $\varphi:S\to S$ such that $f = \varphi'$. Proof: define $\varphi$ as \begin{align*}
+		\varphi: S &\longrightarrow S \\
+		x &\longmapsto \varphi(x) = f(x)
+	\end{align*}
+	and verify that $\varphi' = f$.
+\end{claim}
+
+
+By the above claims, the set of all 1-1 mappings on $S \cup \{x\} $ is isomorphic to the set of all the $\varphi_s$ and  $\varphi'$. The number of $\varphi_s$ is $n! \times |S| = n! n$. The number of $\varphi'$ is $n!$. Summing them up we have $n!n + n! = n!(n+1) = (n+1)!$, as desired.
+
+\end{proof}
+
+\end{enumerate}
+\begin{remark}
+	\color{red}
+	The problems below are not originally assigned. They are actually from section 1.7.
+\end{remark}
 \begin{enumerate}[resume]
 	\item 3. Show that $(\bar{z})^{-1}=\overline{\left(z^{-1}\right)}$.
 \begin{proof}

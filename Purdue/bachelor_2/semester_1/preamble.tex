@@ -115,11 +115,14 @@
 \newtheorem*{observation}{Observation}
 \newtheorem*{excercise}{Excercise}
 \newtheorem*{remark}{Remark}
+\newtheorem*{fact}{Fact}
+\newtheorem*{claim}{Claim}
 \newtheorem*{practice}{Practice}
 \newtheorem*{problem}{Problem}
 \newtheorem*{terminology}{Terminology}
 \newtheorem*{application}{Application}
 \newtheorem*{example}{Example}
+\newtheorem*{nonexample}{Nonexample}
 \newtheorem*{question}{Question}
 \newtheorem*{previouslyseen}{As previously seen}
 
@@ -232,6 +235,8 @@
     \marginpar{\small\textsf{\mbox{#2}}}
 }
 
+\newcommand{\submit}[3]
+
 
 
 % These are the fancy headers
@@ -275,7 +280,7 @@
     arc=0mm,
     colback=white,
     colframe=green!60!black,
-    title=Remark,
+    title=Correction,
     fonttitle=\sffamily,
     breakable
 ]}{\end{tcolorbox}}
@@ -320,3 +325,6 @@
 	\color{lightgray}{\texttt{\!]\!]}}
 }}
 
+\newcommand{\disclaimer}[2]{
+    \textbf{Disclaimer.} These are lecture notes taken in #1's course, #2. Correctness of material is not guaranteed. These notes are treated as derived work of #1, and distribution of the material to people unaffliated to the class without the professor's written permission is prohibited.
+}

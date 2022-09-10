@@ -1,0 +1,193 @@
+\lecture{6}{Thu 08 Sep 2022 12:00}{}
+
+General Principle:
+\begin{theorem}
+	If $u$ is harmonic, $f$ is analytic, then $u(f)$ is harmonic.
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Show directly that $\Delta u =0$ and CR condition imply \[
+			\Delta \left( u(f) \right)  = 0
+		.\] 
+	\item Locally, $u = \operatorname{Re}  F$, then $u(f) = \operatorname{Re} F(f)$. $F(f)$ is analytic, since $F$, $f$ are.
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+	If $\Delta u =0$ and $\Delta v =0$, then $\Delta\left( c_1 u + c_2 v \right) =0$, where $c_1, c_2$ are constants.
+\end{theorem}
+
+\begin{example}
+	$\mathcal{D} = \{x+iy:0<y<1\} $. We have $u: \overline{\mathcal{D}} \to \mathbb{R}$. Find $u(x,y)$ such that $u(x,0) = 3$ and $u(x,1) = -1$.
+
+	Look for $u(x,y) = a y + b$. This satisfies the boundary conditions: For $y = 0$, $u(x,y) = b = 3$. For  $y = 1$, $u(x,y) = a+b = -1$, so $a = -4$.
+\end{example}
+
+\begin{example}
+	\begin{problem}
+\begin{figure}[H]
+    \centering
+    \incfig{dirich3}
+    \caption{dirich3}
+    \label{fig:dirich3}
+\end{figure}
+	\end{problem}
+	We construct a function \[
+		\varphi(z) = (1+i)z
+	\] 
+	that is a linear transformation equating this problem and the last problem. We simply apply transformation to the previous solution:
+	 \[
+		u(x,y) = 2 \operatorname{Im} \varphi(z)
+	.\] 
+\end{example}
+
+\begin{definition}
+	A \textit{curve} is a continuous map $\gamma : [a,b] \to  \mathbb{C}$.
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{curve}
+    \caption{curve}
+    \label{fig:curve}
+\end{figure}
+
+
+\begin{definition}[piecewise smooth]
+	Exists $a\le t_1<t_2<\ldots<t_n = b$ such that for each $i$, exists $\gamma': [t_i, t_{i+1}] \to \mathbb{C}$ such that $\gamma'(t) \neq 0$.
+\end{definition}
+
+
+
+Let $\gamma$ be a curve, $f(z)$ be a analytic function. Now \[
+	\frac{\partial }{\partial t} f(\gamma(t)) = f'(\gamma(t))\gamma(t)
+.\] 
+Geometric meaning: tangent vector $\gamma'(t)$ of $\gamma(t)$ is multiplied by complex number $f'(\gamma(t))$.
+
+\begin{definition}
+We define the \textit{angle} between two intersecting curves at a point to be the angle between their tangent vectors at this point.
+\end{definition}
+
+\begin{theorem}
+	Analytic functions preserve angles between curves where $f'(z) \neq  0$. Hence analytic functions are \textbf{conformal}.
+\end{theorem}
+
+\begin{example}
+	\begin{itemize}
+		\item 
+	$f(z) = z^2$ (nonexample) increases angle by factor of $2$ at $0$.
+\item $\overline{z}$ is not conformal.
+	\end{itemize}
+\end{example}
+
+\begin{remark}
+	In this course we only consider \textit{real harmonic functions}.
+
+\end{remark}
+\section{Elementary Functions}
+
+\subsection{Polynomials}
+
+\begin{definition}
+	A polynomial is of the form \[
+		f(z) = a_d z^d + a_{d-1} z^{d-1} + \ldots+a_0
+	.\] where $a_j \in \mathbb{C}$ and $a_d \neq  0$.
+	Define the \textit{degree} of polynomial as \[
+		\operatorname{deg} f = d
+	.\] 
+	Sometimes it's convenient to let $\operatorname{deg} (0) = -\infty $.
+\end{definition}
+
+Note that $\operatorname{deg} (fg) = \operatorname{deg} f \operatorname{deg} g$.
+
+\begin{theorem}[Division algorithm for polynomials]
+	If $f,g$ are polymials, then $f = q g + r$ where $q$ and $r$ are polynomials and $\operatorname{deg}  r < \operatorname{deg} g$. If $r = 0$, we say $f$ is \textit{divisible} by $g$.
+\end{theorem}
+
+\begin{definition}[root]
+	If $P(z_0) = 0$ and $P\neq 0$, then we say $z_0$ is a \textit{root} of $P$.
+\end{definition}
+
+\begin{proposition}
+	If $P$ has a root $z_0$, then $(z-z_0) \mid P$.
+\end{proposition}
+\begin{proof}
+Apply the division algorithm, $P = Q(z-z_0) + r(z)$, $\operatorname{deg} r < 1 \implies r $ is constant. Plug $z = z_0$, now $r = 0$. 
+\end{proof}
+
+$P = (z - z_0)^m Q^*, Q^*(z_0) \neq  0$ is called the \textit{canonical representation} of $P$ at $z_0$. $m$ is the \textit{multiplicity} of the root $z_0$ of $P$.
+
+If $m = 1$ then it's called a \textit{simple root}.
+
+\begin{definition}
+	The \textit{Maclaurin Formula} is \[
+		f(z) = \sum_{n=0}^{\infty} \frac{1}{n!}f^{(n)}(0)
+	.\] 
+\end{definition}
+
+\begin{proposition}
+	If $a \in \mathbb{C}$ and $P - a$ is a polynomial, then $P(z-a)$ is a polynomial.
+\end{proposition}
+Now let $b_n = P^{(n)}(a) / n!$ and we have the \textit{Taylor formula}: \[
+	f(z) = \sum_{n=0}^{\infty} b_n (z-a)^n
+.\] 
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+	Every (complex) polynomial of degree $\ge 1$ has a (complex) root.
+\end{theorem}
+\begin{corollary}
+	Every polynomial completely factors: \[
+		P(z) = a(z-z_1)(z-z_2)\ldots(z-z_d)
+	\] where $a, z_1, \ldots, z_d$ are complex. 
+	We may write it in distinct roots to power of multiplicity:
+	\[
+		P(z) = a(z-z_1)^{m_1}\ldots(z-z_k)^{m_k}
+	\] where $z_1, \ldots, z_k$ are distinct, and $m_1 + \ldots + m_k = d$.
+\end{corollary}
+
+\subsection{Rational Functions}
+
+\begin{definition}[Rational Function]
+	A \textit{rational function} is a ratio of polynomials: \[
+		R = \frac{P}{Q}
+	.\] 
+	If $P$ and $Q$ have no common roots, then $\frac{P}{Q}$ is a \textit{reduced representation} of $R$.
+\end{definition}
+
+\begin{remark}
+	to find out if $P$ and $Q$ have common roots is simple (GCD algorithm). TO factorize a polynomial is difficult. The same is for integers.
+\end{remark}
+
+If $Q(b) = 0$, then $\lim_{z \to b} \frac{P}{Q} = \infty $. We can view $R$ as a map $\mathbb{C} \to \overline{\mathbb{C}} = \mathbb{C}\cup \{\infty \}  $.
+
+$b$ is called a  \textit{pole} of multiplicity $m$ of $R$ if $b$ is a root of multiplicity $m$ of $Q$.
+
+We further extend rational functions to $R:\overline{\mathbb{C}} \to \overline{\mathbb{C}} $.
+
+Define \[
+	R(\infty ) = \lim_{z  \to 0} R(\frac{1}{z})
+.\] This can be finite or infinite.
+
+\begin{example}
+	$f(z) = \frac{1}{z} $ has simple pole at $0$ and equals $0$ at $\infty $.
+\end{example}
+
+\begin{definition}
+	We say $R$ is analytic at $\infty $ if $R(\frac{1}{z})$ is analytic at $z=0$.
+\end{definition}
+
+\begin{example}
+	Polynomial with degree $d$ has a pole of multiplicity $d$ at $\infty $.
+\end{example}
+
+\begin{example}
+	\[
+		\frac{z(z-1)^2(z+3)}{(z+1)^2}
+	\]
+	has 
+	\begin{enumerate}
+		\item pole of multiplicity $2$ at $-1$ 
+		\item simple roots at $0, -3$ 
+		\item double root at $1$ 
+		\item double pole at $\infty $
+	\end{enumerate}
+\end{example}

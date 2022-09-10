@@ -1,0 +1,142 @@
+\lecture{4}{Wed 07 Sep 2022 11:38}{Finite, Countable and Uncountable Sets}
+
+\subsection{Finite and countable sets}
+\begin{definition}
+	We say that two sets $A,B$ are \textit{equivalent} (or have the same number of elements) if there is a bijection \[
+	\varphi : A\to B
+.\] We write $A\sim B$ for this equivalence relation.
+
+\end{definition}
+
+\begin{proposition}
+	Reflexivity: $A\sim A$ ($\iota_A)$
+
+	Symmetry: If $A\sim B$ then $B\sim A$. ($\varphi^{-1}:B\to A$ is a bijection)
+
+	Transitivirty: If $A\sim B$ and $B\sim C$ then $A\sim C$. We compose the bijections for the proof.
+\end{proposition}
+
+
+Define $S_n = \{1,2,3,\ldots,n\} $ be the initial segment of $\mathbb{N}$, and let $S_0 = \emptyset $. We say that a set $E$ is finite if there is a bijection $  S_n\to E$ for some $n \in \mathbb{N}$. In other words, $E \sim S_n$.
+
+We say that $E$ is \textit{denumerable} if there is abijection $\mathbb{N}\to E$, i.e., $E\sim \mathbb{N}$. If the set is not finite, it is called infinite. 
+
+
+Note $\mathbb{N}$ is infinite: does not exist bijection $S_n \to \mathbb{N}$.
+
+But there is a bijection between $\mathbb{N}$ and its proper subset.
+
+We say set is \textit{countable} if it is finite or denumerable. The infinite sets that are not countable are called \textit{uncountable}.
+
+\begin{proposition}
+	$S_{n}\sim S_m \iff n = m$ for $n, m \in \{0\} \cup \mathbb{N}\cup \{\infty \} $.
+\end{proposition}
+\begin{proof}
+	(partial) Show if $n \in \mathbb{N}$ then $S_n$ is not equivalent to $\mathbb{N}$. Suppose the countary and \[
+		S_n \to \mathbb{N}
+	\]
+	is a bijection. Then look at $N = \max \{\varphi(1), \ldots, \varphi(n)\} + 1$ . Now  $N > \varphi(k)$ for any $k$. Therefore $N \not\in \varphi(S_n)$. Therefore $\varphi(S_n) \neq  \mathbb{N}$.
+\end{proof}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item Any subset of a finite set is finite.
+		\item Any infinite subset of a denumerable set is denumerable.
+		\item Any subset of a countable set is countable.
+	\end{enumerate}
+	Note that (1) and (2) imply (3).
+\end{proposition}
+\begin{proof}
+	(of (2)). Enough to show that if $E \subset \mathbb{N}$ then $E$ is countable. We use the Well-ordering property of $\mathbb{N}$: any non-empty subset has a minimum element.
+
+	$E$ is infinite, so $E$ is nonempty. Therefore exists minimal $n_1 \in E$. $E$ is not finite, so $E \setminus \{n_1\} $ is nonempty. Then there exists $n_2 \in E \setminus \{n_1\} $.
+
+	Continue in this fashion. If we constructed $n_1, \ldots, n_k \in E$, such that $n_1 < n_2 <\ldots<n_k$, then $E\setminus \{n_1, \ldots, n_k\} $ is nonempty since $E$ is infinite. Therefore there exists $n_{k+1}$ be the smallest element of $E\setminus \{n_1, \ldots, n_k\} $.
+
+\begin{claim}
+	$E = \{n_1, \ldots, n_k, \ldots\} $
+\end{claim}
+\begin{proof}
+
+
+\begin{lemma}
+	$n_k \ge k$ for any $k \in \mathbb{N}$.
+	proof by induction.
+\end{lemma}
+
+Note that by construction, $n_1, \ldots, n_k, \ldots \subset E$. We need to show that other direction.
+
+Let $m \in E$. By Archimedean property, $\exists k \in \mathbb{N}$ s.t. $m<k\le n_k$.
+
+Let $k_0$ be the smallest number such that  $m < n_{k_0}$. This means that $n_{k_0-1}\le m$. If $n_{k_0-1}\le m$ then we are done. If $n_{k_0-1}< m$, then $m \in E\setminus \{n_1, .., n_{k_{0}-1}\} $, hence $m < n_{k_0}$, a contradiction with construction of $n_{k_0}$.
+\end{proof}
+\end{proof}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item Finite union of finite sets is finite.
+		\item Denumerable union of denumerable sets is denumerable.
+		\item Countable union of countable sets is countable.
+	\end{enumerate}
+\end{proposition}
+To prove (2) of this proposition, we need
+\begin{proof}
+	
+\begin{lemma}
+	$\mathbb{N}\times \mathbb{N}\sim \mathbb{N}$.
+\end{lemma}
+\begin{proof}
+	Use diagonal construction.
+\end{proof}
+
+
+Let
+\[
+	E = \bigcup_{n \in \mathbb{N}} E_n
+\]
+Note that $E_n $ might overlap. We define
+\[
+	\varphi_n: \mathbb{N} \to  E_n
+.\] 
+and define 
+
+\begin{align*}
+	\varphi: \mathbb{N}\times \mathbb{N} &\longrightarrow \bigcup_{n \in \mathbb{N}} E_n = E \\
+	n,m &\longmapsto \varphi(n,m) =  \varphi_n(m)
+.\end{align*}
+
+We may view $\varphi$ as $\varphi: \mathbb{N} \to E$ due to isomorphism between $\mathbb{N}\times \mathbb{N}$ and $\mathbb{N}$.
+
+Now for $e \in E$, pick the smallest element in $\varphi^{-1}(e)$, call it $f(e)$. $f: E \to  \mathbb{N}$ and $\varphi \circ f = 1_E$. Hence $E \sim f(E) \subset \mathbb{N}$, hence $E$ is countable and infinite, hence $E$ is denumerable.
+
+\end{proof}
+
+\begin{corollary}
+	$\mathbb{Q}$ is countable, since \[
+		\mathbb{Q} = \bigcup_{n \in \mathbb{N}} \frac{1}{n} \mathbb{Z}
+	.\] 
+\end{corollary}
+
+\begin{theorem}[Cantor]
+	$\mathcal{P}$ is uncountable, hence $F$ is uncountable.
+\end{theorem}
+\begin{proof}
+	By Cantor's diagonal argument.
+	Suppose $\mathcal{P}$ is countable, then \[
+		\mathcal{P} = \{\alpha^{(1)}, \alpha^{(2)}, \ldots,\alpha^{(n)},\ldots \} 
+	.\] 
+	and \[
+		\alpha_1^{(1)} = \{\alpha_1^{(1)}, \alpha_2^{(1)}, \ldots,\alpha_1^{(n)},\ldots \} 
+	.\] 
+
+	We construct $\beta \in \mathcal{P}$ such that $\beta \neq  \alpha^{(n)}$ for any $n$.
+	Take $\beta_1 = \overline \alpha_1^{(1)} = 1- \alpha_1^{(1)}$, and $\beta_n = \overline \alpha_n^{(n)} = 1- \alpha_n^{(n)}$.
+
+	Claim: $\beta$ does not equal to $\alpha^{(n)}$ for any $n$. Proof: Note that $\beta$ and $\alpha^{(n)}$ differ at the $n$-th element. 
+
+	Now we have a contradiction since $\beta \in \mathcal{P}$. Hence $\mathcal{P}$ cannot be countable.
+\end{proof}
+
+\begin{corollary}
+	$\mathbb{R}$ is uncountable. $\mathbb{R}\setminus \mathbb{Q}$ is uncountable.
+\end{corollary}

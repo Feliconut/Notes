@@ -26,46 +26,33 @@ A_{nk} = [\frac{k}{2^n}, \frac{k+1}{2^n})
 
 We use induction to verify the following properties:
 \begin{enumerate}
-	\item for all $n$ and all distinct  $k, l$, 
+	\item for all $n$ there are exactly $2^n$ disjoint sets of the form $A_{nk }$.
+	\item (disjoint segmentation) for all $n$ and all distinct  $k, l$, 
 		\[
 		A_{nk}\cap A_{nl} = \emptyset 
 		.\] 
-	\item for all $n$ there are exactly $2^n$ disjoint sets of the form $A_{nk }$.
-	\item for all $n$, \[
+	\item (filling) for all $n$, \[
 \bigcup_{0\le k\le n} A_{nk} = [0,1)
 .\] 
 
-\item Also, for any $n, k$, $A_{n+1, l} \subset A_{nk}$ if and only if \[
+\item (branch split) for any $n, k$, $A_{n+1, l} \subset A_{nk}$ if and only if \[
 2k \le l \le 2k+1
 .\] 
+\item (cascading property) whenver $x \in A_{nk}$ and $x \in A_{ml}$ where $n \le  m$, we have $A_{ml} \subset  A_{nk}$.
 \end{enumerate}
 
-Now define the sequence $(x_n)_{n=0}^{\infty }$ as
-\begin{align*}
-	x_0 &= \begin{cases}
-		0 & x \in A_{00} \\
-		1 & x \in A_{01}
-	\end{cases}\\
-	x_n &= \begin{cases}
-		0 & x \in A_{n, 2k} \text{ where } x \in A_{n -1, k}\\
-		1 & x \in A_{n, 2k+1} \text{ where } x \in A_{n -1, k}\\
-	\end{cases}
-\end{align*}
+Now for each $n$, we can construct a bijection $G:\bigcup_{0\le k\le n} A_{nk} \to F_n^*$, where $F_n$ is as defined in the textbook, and $F_n^*$ is  $F_n$ with right endpoints removed. 
+There are exactly $2^n$ disjoint half-open intervals $A_{nk }$. There are also exactly $2^n$ disjoint half-open intervals in $F_n^*$. We map the $k$-th interval $A_{nk }$ to the $k$-th interval in $F_n^*$. Note that any two half-open intervals on $\mathbb{R}$ have a bijection between them.
 
-Now the function $F$ defined below is a bijection between all 0-1 sequences that are not fully 1 and  $[0,1)$:
- \begin{align*}
-	F: \{0,1\}^\omega\setminus (1)_{n\in\N} &\longrightarrow [0,1) \\
-	(x_n)_{n\ge 0} &\longmapsto F((x_n)_{n\ge 0}) = \sum_{n=0}^{\infty} \frac{x_n}{2^{n+1}}
-.\end{align*}
+Now we show that there exists a bijection $\mathcal{F}:[0,1) \to F^*$ where $F^*$ is the Cantor set with right endpoints removed. Take any $x \in [0,1)$. For any $n \in \mathbb{N}$, let $A_{nk}$ be the unique half-open interval in the construction that contains $x$. Now $G$ maps $A_{nk }$ to some half-interval $B_n$ in the construction of $F_n^*$. 
+Now $B_{n+1}\subset B_n$ and  $B_n \neq \emptyset $. Denote $b_n$ as the left endpoint of $B_n$. Now $y = \operatorname{sup}_{n \in \mathbb{N}} b_n $ is the unique element in $\bigcap_{n \in \mathbb{N}} B_n \subset F^*$.
 
-Now we introduce a function $G $:
-\begin{align*}
-	G: \{0,1\}^\omega\setminus (1)_{n\in\N} &\longrightarrow [0,1) \\
-	(x_n)_{n\ge 0}  &\longmapsto G((x_n)_{n\ge 0} ) = \sum_{n=0}^{\infty} \frac{2x_n}{3^{n+1}} 
-.\end{align*}
-We verify that $G$ is a bijection between all not-all-one 0-1 sequences and the cantor set. Then we have a bijection between $[0,1)$ and the cantor set.
+
+Such map is injective: if $x_1<x_2$ are distinct point in $[0,1)$, then there exists $n$ such that $\frac{1}{2^n}\le \frac{1}{n} < x_2-x_1$. Then $x_1 \in A_{nk }$ and $x_2 \in A_{nl }$ where $n\neq l$, hence they are mapped to disjoint half-open intervals $B_1$ and $B_2$ in $F_n^*$. Now $\mathcal{F}(x_1) \in B_1$ and $\mathcal{F}(x_2) = B_2$, so they must not be equal. 
+
+Such map is surjective: if $y \in F^*$, then for any $n \in \mathbb{N}$, $y \in B_n \subset F_n^*$ where $B_n$ is a half-open interval in the construction of $F_n^*$. $\mathcal{F}^{-1}$ then maps $B_n$ to some $A_n$. Since $B_{n+1} \subset B_n$, $A_{n+1} \subset A_n$. Let $a_n$ be the endpoint of $A_n$, and $b_n$ the left endpoint of $B_n$. Now $x = \operatorname{sup}_{n \in \mathbb{N}}a_n$ is the unique element in $\bigcap_{n \in \mathbb{N} }A_n $. By definition $\mathcal{F}(x) = \operatorname{sup} _{n \in \mathbb{N}} b_n$. This is the unique element in $\bigcap_{n \in \mathbb{N}} B_n$. Since $y \in \bigcap_{n \in \mathbb{N}} B_n$, $\mathcal{F}(x) = y$.
 \end{proof}
-
+          
 
 6.M, 7.F, 7.G, 7.J, 7.L, 3.F, 3.J
 
@@ -119,13 +106,13 @@ Next we show that $[\xi, \eta]\supset \bigcap_{n \in N} I_{n}$. Take $x \in \big
 	3^n > \max(\frac{1}{x-a}, \frac{1}{b-x})
 	.\] 
 	To justify this, note that by Bernoulli's Inequality\[
-	3^n = (1+2)^n \ge  1 + 2n
+	3^n = (1+2)^n \ge  1 + 2n > n
 	\]
-	and by Archimedean property we can choose $n$ such that  $n> \frac{\max(\frac{1}{x-a}, \frac{1}{b-x}) - 1}{2}$.
+	and by Archimedean property we can choose $n$ such that  $n> \max(\frac{1}{x-a}, \frac{1}{b-x}) $.
 
 	By Corollary 6.7(c) of the Archimedean property, there exists $k \in \mathbb{N}$ such that $k \le  3^n x < k+1$. Since $3^n x - 3^n a > 1$, we have $k > 3^n x -1 > 3^n a$. Since $3^nb - 3^nx > 1$, we have $k+1 \le 3^n x + 1<3^n b$. Therefore $\left[ \frac{k}{3^n}, \frac{k+1}{3^n} \right]  \subset  \left( a,b \right) $.
 
-	By definition and construction, $x \in \left[ \frac{k}{3^n}, \frac{k+1}{3^n} \right] \subset F_n$. $F_{n+1}$ takes the middle third from this interval, which is $\left[ \frac{3k}{3^{n+1}}, \frac{3k+1}{3^{n+1}} \right]\cup \left[ \frac{3k+2}{3^{n+1}}, \frac{3k+3}{3^{n+1}} \right] \subset F_{n+1}$. The middle-third $M = \left( \left[ \frac{3k+1}{3^{n+1}}, \frac{3k+2}{3^{n+1}} \right] \right)$ satisfies the properties $M \subset F_n $ and $M \subset (a,b)$.
+	By definition and construction, $x \in \left[ \frac{k}{3^n}, \frac{k+1}{3^n} \right] \subset F_n$. $F_{n+1}$ takes the middle third from this interval, which is $\left[ \frac{3k}{3^{n+1}}, \frac{3k+1}{3^{n+1}} \right]\cup \left[ \frac{3k+2}{3^{n+1}}, \frac{3k+3}{3^{n+1}} \right] \subset F_{n+1}$. The middle-third $M = \left(  \frac{3k+1}{3^{n+1}}, \frac{3k+2}{3^{n+1}}  \right)$ satisfies the properties $M \subset F_n $ and $M \subset (a,b)$.
 \end{proof}
 
 	\item 7.L. Show that $\boldsymbol{F}$ is not the union of a countable collection of closed intervals.

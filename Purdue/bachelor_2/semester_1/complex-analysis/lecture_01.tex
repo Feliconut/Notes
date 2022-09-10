@@ -1,9 +1,10 @@
-\lecture{1}{Thu 25 Aug 2022 12:01}{lecture}
+\lecture{1}{Thu 25 Aug 2022 12:01}{Properties of Complex Numbers}
 
-\[
-e^{x+iy } = e^x \left( \cos y + i \sin y \right) 
-.\] 
+\section{Review}
+\subsection{Complex Numbers}
+\subsubsection{Basic Properties}
 \begin{itemize}
+	\item $e^{x+iy } = e^x \left( \cos y + i \sin y \right)$ 
 	\item $e^0 = 1$
 	\item $e^{2\pi i} = 1$
 	\item $e^{z + 2\pi i} = e^z$ for every $z$. Smallest period $2 \pi i$
@@ -29,57 +30,47 @@ Argument.
 
 Algebraic form is good for addition, exponential form for multiplication.
 
-Raise to power.
+\subsubsection{ Complex exponentiation and applications } 
 \begin{itemize}
-	\item $\left( \cos \theta + i \sin \theta \right) ^{n} = e^{i n \theta} = \cos n \theta + i \sin n \theta$, $n$ integer
-	\item An application
-		\begin{align*}
+	\item 
+		\begin{theorem}[De Moivre]
+			$\left( \cos \theta + i \sin \theta \right) ^{n} = e^{i n \theta} = \cos n \theta + i \sin n \theta$, $n$ integer
+		\end{theorem}
+	\item 	\begin{example}[Application to trignometric identities]
+			\begin{align*}
 			\cos 3 \theta &= \text{Re}\left( \cos \theta + i \sin \theta \right) ^{3}\\
 				      &= \text{Re}\cos^3 \theta + 3 i \cos^2 \theta \sin \theta - 3 \cos \theta \sin ^2 \theta - i \sin ^3 \theta\\
 				      &= \cos^3 \theta - 3 \cos \theta \sin^2 \theta
 		\end{align*}
-	\item 
-		\begin{equation}
+		\end{example}
+		
+	\item  Definition of trignometric functions in term of complex exponentiation
+		\begin{equation*}
 			\begin{cases}
 				\cos \theta = \frac{1}{2}(e^{i \theta} + e ^{- i \theta}) \\
 				\sin \theta = \frac{1}{2i}(e^{i \theta} - e ^{- i \theta}) 
 			\end{cases}
-		\end{equation}
+		\end{equation*}
+We may define complex values of trig functions by extending $\theta$ from real number to complex number.
 \end{itemize}
 
-We may define complex exponentiation by extending $\theta$ from real number to complex number.
 
 \begin{example}
 	Solve $z^n = 1$.
-\end{example}
 \begin{proof}[Solution]
 \begin{align*}
 	z &= r e^{i \theta}\\
 	z^n &= r^n e^{i n \theta} = e^{2 \pi i k}\\
-	\intertext{$r = 1$ by comparing abs vlaues.}
+	\intertext{$r = 1$ by comparing abs values.}
 	i n \theta &= 2 \pi i k\\
 	\theta &= \frac{2 \pi k }{n }, k \in  \mathbb{Z}\\
 	z_k &= e^{i \theta_k} = e^{\frac{2 \pi i }{n}k}, k = 0,1,\ldots,n-1
 .\end{align*}
-
 We have $n $ distinct solutions. 
 \end{proof}
-
+\end{example} 
 \begin{example}
-	\begin{align*}
-		&n=1 &z=1 \text{one sol.}\\
-		&n=2 &z=1,-1 &z^{2}-1 = 0\\
-		&n=3 &z^3-1 = 0 &z=1, z_2,z_3 \text{are solution of } z^2+z+1 = 0. $z_{2,3} = \frac{1}{2} \pm \frac{\sqrt{-3} }{2} = -\frac{1}{2} \pm i \frac{\sqrt{3} }{2}$.\\
-		&n=4 &z^{4}-1 = 0 &z = 1,-1,i,-1
-	.\end{align*}
-
-\end{example}
-
-\subsubsection{More general solution}
-
-We solve the equation \[
-z^n = w, w \text{given complex number}.
-\] 
+Solve the equation $z^n = w$ where $w$ is a given complex number.
 \begin{proof}[Solution]
 \begin{align*}
 	r^n e ^{i n \theta} &= \rho e^{i \phi}\\
@@ -89,4 +80,4 @@ z^n = w, w \text{given complex number}.
 	z_k &= \rho^{\frac{1}{n } } e^{i \theta_k}
 .\end{align*}
 \end{proof}
-
+\end{example}

@@ -1,0 +1,83 @@
+\lecture{3}{Fri 02 Sep 2022 12:19}{}
+
+\begin{definition}[Cantor set]
+	Let
+	\begin{enumerate}
+		\item $F_0 = [0,1]$
+		\item Remove middle  $\frac{1}{3}$ of the interval, to obtain \[
+			F_1 = [0,\frac{1}{3}], [\frac{2}{3}, 1]
+		.\] 
+	\item Continue in this fashion, we obtain $F_n$ as a union of $2^n$ intervals of length $\frac{1}{3^n}$.
+	\end{enumerate}
+	\[
+	F = \bigcap_{n = 0} ^\infty  F_n
+	\] 
+	is called the Cantor Set.
+\end{definition}
+
+Note: $F_n$ become "smaller" in the linear measure sense. Sum of the length of intervals in $F_n$ is \[
+\frac{2^n}{3^n} = (\frac{2}{3})^n \to 0
+.\] (we have not defined limits yet) Hence $F$ has linear measure 0.
+
+\begin{theorem}
+	The Cantor set $F$ is uncountable.
+\end{theorem}
+\begin{claim}
+$F \neq \emptyset $ because any endpoint of any interval in any of $F_n$ is in $F$.
+\end{claim}
+\begin{proposition}
+	Let $\mathcal{P}=\{\left( \alpha_1,\alpha_2,\ldots\alpha_n,  \ldots \right) \alpha=0,1 \} $ be the power set of  $\mathbb{N}$.
+	Then there is a 1-1 correspondence between $\mathcal{P}$ and Cantor set $F$.
+\end{proposition}
+\begin{proof}
+Let 
+\begin{enumerate}
+	\item $F_0 = [0,1] =: I$
+	\item $F_1 = [0,1/3] \cup [\frac{2}{3}, 1] =: I_0 \cup  I_1$
+	\item $F_2 = I_{00}\cup I_{01} \cup I_{10}\cup I_{11}$
+	\item $F_n = \bigcup_{\alpha_1 \alpha_2 \ldots \alpha_n = 0,1} I_{\alpha_1 \alpha_2 \ldots \alpha_n}$ 
+	\item  \[
+	I_{\alpha_1 \alpha_2 \ldots\alpha_n \alpha_{n+1}}=\begin{cases}
+		\text{left }\frac{1}{3} \text{ of } I_{\alpha_1\ldots \alpha_n} & \alpha_{n+1} = 0\\
+		\text{right }\frac{1}{3} \text{ of } I_{\alpha_1\ldots \alpha_n} & \alpha_{n+1} = 1
+	\end{cases}
+	.\] 
+\end{enumerate}
+Now we prove the proposition.
+\begin{enumerate}
+	\item
+Take any $\left( a_i \right)_{i \in \mathbb{N}} \in \mathcal{P}$. Then \[
+I_{\alpha_1} \supset I_{\alpha_1\alpha_2} \supset \ldots
+.\] 
+By nested interval property, $\bigcap_{n \in \mathbb{N}} I_{\alpha_1\alpha_2\ldots\alpha_n} \neq \emptyset$. Take an element $x_\alpha$ from the intersection.
+
+In fact $x_\alpha$ is the unique element in the intersection.  Suppose there is $y \neq  x_{\alpha}$ and $y \in I_{\alpha_1\alpha_2\ldots \alpha_n}$ for all $n$. Now \[
+|x\alpha-y| \le  m\left( I_{\alpha_1 \ldots \alpha_n} \right) 
+.\] 
+Hence for all $n \in \mathbb{N}$, $|x\alpha-y|\le \frac{1}{3^n}$. By bernoulli's inequality, \[
+3^n = (1+2)^n \ge 1+2n > n
+.\] 
+So for any $n \in \mathbb{N}$, 
+\[
+0\le |x_\alpha - y | < \frac{1}{n}
+.\] 
+This is impossible since $|x_\alpha-y| >0$ so there is $n \in \mathbb{N}$ such that \[
+\frac{1}{n} < |x-y|
+.\] We have a contradiction.
+
+\item 
+	For any $x \in F$ we know \[
+	x \in F_n \implies x \in I_{\alpha_1^n \alpha_2^n \ldots \alpha_n^n}
+	.\] 
+
+	Claim. $I_{\beta_1\beta_2 \ldots \beta_{n+1}} \cap I_{\alpha_1\alpha_2 \ldots \alpha_n} \neq \emptyset \iff \beta_1=\alpha_1, \ldots, \beta_n = \alpha_n$.
+
+	Hence $\alpha_k^n = \alpha_k^{n+1} =: \alpha_k$.
+
+	Hence there exists $(\alpha_n)_{n\in \mathbb{N}} \in \mathcal{P}: x \in I_{\alpha_1\alpha_2 \ldots \alpha_n}, n \in \mathbb{N}$. Hence the mapping $\alpha \mapsto x_\alpha$ is onto. 
+
+	It is easy to see that $\alpha \mapsto x_\alpha$ is injective, so it is a bijection.
+\end{enumerate}
+\end{proof}
+
+

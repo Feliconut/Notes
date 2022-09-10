@@ -1,0 +1,148 @@
+\lecture{5}{Fri 09 Sep 2022 11:32}{Vector Spaces}
+
+\section{Vector Spaces}
+\subsection{Definitions and Examples}
+
+\begin{definition}
+	$(V, +, \cdot)$, $+: V\times V \to  V$, $\cdot: \mathbb{R} \times  V \to  V$. We say $V$ is a \textit{vector space} (elements called \textit{vectors}) if
+	\begin{enumerate}
+		\item (A1) $u + v = v + u$
+		\item (A2) $(u + v) + w = u + (v + w)$ 
+		\item (A3) $\exists  0 \in V: \quad u+0 = 0+u = u$ for all $u \in V$
+		\item (A4) For all $u \in V$, there is $-u \in V$ such that $u + (-u) = (-u) + u = 0$ 
+		\item (M1) $\alpha(\beta v) = (\alpha\beta) v$ 
+		\item (M2) $1 v = v$
+		\item (D1)  $\alpha(u+v) = \alpha u + \alpha v$
+		\item (D2) $(\alpha+\beta)u = \alpha u + \beta u$
+	\end{enumerate}
+	These are the axioms of vector space. (A1)-(A4) are axioms of abelian group.
+\end{definition}
+
+\begin{example}
+	(trivial) $V = \{0\} , V = \mathbb{R}$ are vector spaces.
+\end{example}
+
+\begin{definition}
+	Cartesian (Euclidean) space $R^p$ is defined as
+	 \[
+		\mathbb{R}^p, p \in \mathbb{N}
+	.\] 
+	where $\mathbb{R}^p$ is set of all $p$-tuples from elements in $\mathbb{R}$.
+
+	Addition and multiplication by scalar are defined componentwise: 
+	\begin{align*}
+		x &= (x_1, x_2, \ldots, x_p) \\
+		y &= (y_1, y_2, \ldots, y_p) \\
+		\intertext{Define}
+		x+y &:= (x_1+y_1, \ldots,x_1+x_p)\\
+		\alpha x &:= (\alpha x_1, \alpha x_2, \ldots, \alpha x_p)
+	.\end{align*}
+\end{definition}
+\begin{remark}
+	
+Generalize the notion, we can let $S $ be some set, define \[
+	\mathbb{R}^S = \{f: S \to  R\} 
+.\] 
+Define the operations point-wise:
+\begin{align*}
+	(f+g)(s) &=  f(s) + g(s) \\
+	(\alpha f)(s) &= \alpha f(s) 
+.\end{align*}
+\end{remark}
+
+\subsection{Inner products}
+
+\begin{definition}
+	Suppose $V$ is a vector space, and we have a product $\cdot: V \times V \to \mathbb{R}$.
+	We say $\cdot$ is an \textit{inner product} if it satisfies:
+	\begin{itemize}
+		\item (I1) $u \cdot u \ge 0$ for any $u \in V$. Moreover, $u \cdot u = 0 \iff u = 0$.
+		\item (I2) $u\cdot v = v \cdot u$ 
+		\item (I3) (bilinearity) $u \cdot (\alpha v + \beta w) = \alpha(u \cdot v) + \beta (u \cdot w)$
+		\item (I3, cont.) $ (\alpha v + \beta w) \cdot u = \alpha(v \cdot u) + \beta (w \cdot u)$
+	\end{itemize}
+\end{definition}
+
+\begin{example}
+	(trivial) $\mathbb{R}$ with usual addition and multiplication is an inner product space.
+\end{example}
+
+In Cartesian spaces, for $x, y \in \mathbb{R}^p$, define
+\[
+	x \cdot y = \sum_{k=1}^{p} x_k y_k
+.\] 
+This is the \textit{standard inner product on} $\mathbb{R}^p$.
+
+\begin{definition}[Norm]
+	Suppose $V$ is a vector space, and we have $\|\cdot\|: V \to \mathbb{R}$. We say $\|\cdot\|$ is a \textit{norm} if the following properties are satisfied:
+	\begin{itemize}
+		\item (N1) $\|u\|>0$ for any $u \in V$. Moreover, $\|u\|=0 \iff u=0$.
+		\item (N2) $\|\alpha u\| = \alpha \|u\|$ where $\alpha \in \mathbb{R}, u \in V$.
+		\item (N3) (triangle inequality) $\|u+v\|\le   \|u\|+\|v\|$
+	\end{itemize}
+\end{definition}
+
+\begin{example}
+	(trivial) $\|\cdot\| $ on $\mathbb{R}$ is a norm.
+\end{example}
+
+\begin{example}[Euclidean Norm]
+	For $x \in \mathbb{R}^p$ let \[
+		\|x\| = \left( x \cdot x \right) ^{\frac{1}{2}} = \sqrt{x_1^2 + x_2^2 + \ldots + x_p^2} 
+	.\] 
+\end{example}
+
+\begin{proposition}
+	\label{thm:inner-product-norm}
+	Let $V $ be an inner product space. Define \[
+		\|u\| = \left( u \cdot u \right) ^{\frac{1}{2}}
+	\]  for any $u \in V$. Then $\|\cdot\|$ is a norm.
+\end{proposition}
+
+\begin{lemma}[Cauchy-Schwartz Inequality]
+	If $V$ is an inner product space, then \[
+		u \cdot v \le  \| u\| \| v\|
+	\] where $\| u\| = (w \cdot w) ^{\frac{1}{2}}$.
+\end{lemma}
+\begin{proof}
+	Let \[
+		w = \alpha u - \beta v
+	\] where $\alpha, \beta \in \mathbb{R}$. Then $w \cdot w \ge  0$. Hence
+	\begin{align*}
+		&(\alpha u - \beta v)\cdot(\alpha u - \beta v) \ge  0 \\
+		&\alpha^2 \|u\|^2 + \beta^2 \|v\|^2 - 2 \alpha \beta (u \cdot v) \ge  0
+	.\end{align*}
+	Take $\alpha = \|v\|$ and $\beta = \|u\|$. Then \begin{align*}
+		&2 \|u\|^2 \|v\|^2 - 2 \|u\| \|v\| (u \cdot v) \ge 0\\
+		&2 \|u\| \|v\|\left( \|u\|\|v\|- u\cdot v \right) \ge  0
+	.\end{align*} 
+	Now, if $\|u\| = 0$ or $\|v\|=0$, then $u = 0$ or $v = 0$, hence $u \cdot v = 0 =  \|u\| \|v\|$.
+
+	If both $\|u\|$ and $\|v\|$ are positive, then \[
+		 \|u\|\|v\|- u\cdot v \ge 0
+	\] as required.
+\end{proof}
+
+\begin{problem}
+	If $u \cdot v = \| u\| \|v\|$, what can say about $u$ and $v$?
+\end{problem}
+
+\begin{proof}[Solution]
+	$u \cdot v = \|u\|\|v\| \implies \|\alpha u - \beta v\| = 0 \iff \alpha u - \beta v = 0$.
+
+	This is called the \textit{Case of equality in Cauchy-Schwartz}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{thm:inner-product-norm}]
+	Show $\|u\| = \left( u\cdot u \right) ^{\frac{1}{2}}$ is a norm. We check triangle inequality only.
+We need to show $\|u+v\| \le  \|u\| + \|v\|$.
+\begin{align*}
+	&\iff \|u+v\|^2 \le  \left( \|u\| + \|v\| \right) ^2 \\
+	&\iff \left( u+v \right) \cdot (u+v) \le  \|u\|^2 + \|v\|^2 + 2 \|u\|\|v\|\\
+	&\iff  2 (u\cdot v) \le  2 \|u\|\|v\|\\
+	&\iff   (u\cdot v) \le   \|u\|\|v\|
+.\end{align*}
+This is same as Cauchy-Schwartz, so we finished the proof.
+\end{proof}
+
+

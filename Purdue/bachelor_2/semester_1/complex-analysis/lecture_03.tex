@@ -1,4 +1,5 @@
-\lecture{3}{Thu 01 Sep 2022 12:10}{}
+\lecture{3}{Thu 01 Sep 2022 12:10}{Images of Complex Functions}
+\subsection{Finding Image of Functions}
 
 \begin{example}
 	Find the image of vertical line $x=1$ under $f(z) = z^2$.
@@ -13,14 +14,14 @@
 \end{example}
 \begin{example}
 	Find the preimage of vertical line $\operatorname{Re} w = 1$ under $f(z) = z^2$.
-	\begin{align}
+	\begin{align*}
 		w &=  u + iv, \operatorname{Re} w = 1 \\
 		z &=  x + iy \\
 		w &=  (x+iy) \\
 		&= x^2 - y^2 + 2 i xy \\
 		\operatorname{Re}  w &= x^2 - y^2\\
 		\operatorname{Im}  w &=  2x y
-	\end{align}
+	\end{align*}
 	This is a hyperbola.
 	
 \end{example}
@@ -62,85 +63,3 @@
 
 \end{example}
 
-
-\begin{definition}[Continuity]
-	$f$ is continuous at a point $a$ in the domain if \[
-	\lim_{z \to a} f(z) = f(a)
-	.\] 
-\end{definition}
-
-\begin{example}
-	\begin{itemize}
-		\item $f(z) = c$ 
-		\item $f(z) = z$
-		\item  $fg, f+g$ are continuous when $f$ and $g$ are continuous
-		\item $\frac{f}{g}$ continous when $f, g$ continous and $g(z) \neq  0$
-
-	\end{itemize}
-	
-\end{example}
-
-\begin{proposition}
-	 
-	$\lim_{z \to a} f(z) = f(a)  \iff u, v$ are continous at $(a_1, a_2)$ where $f = u + iv $ and $a = a_1 + i a_2$	
-\end{proposition}
-
-Let $a \in \partial \mathcal{D}$ ,where the $\mathcal{D}$ is domain of $f$. If $\lim_{z \to a} f(z)= b$, define $f(a) = b$. The extended function $\overline{f} : \overline{\mathcal{D}} \to \mathbb{C}$ is continous by definition.
-
-\begin{example}[Removable Singularity]
-	$f(x) = \frac{z^2 - 1}{z_-1}$ is defined for $z \neq  1$. The function $z+1$ is defined everywhere, and continous. Such a sigularity is removable.
-\end{example}
-\begin{example}[Nonremovable Singularity]
-	$u(x,y) = \frac{x+y}{x-y}$, $x \neq y$. The limit $\lim_{x,y \to 0} u(x,y)$ does not exist. Verified by choosing different paramaterizations and yield different limits.
-
-	$\lim_{z \to 0} \frac{\overline{z} }{z}$ does not exist.
-\end{example}
-
-\begin{remark}
-	It only makes sense to put approximate value into \textit{continuous} functions, since a little change in input should result in a little change in result.
-	
-\end{remark}
-
-\begin{definition}
-	Let $f$ be a complex function defined in a region (open, connected set) $\mathcal{D}$. We say that $f$ is $\mathbb{C}$-\textit{differentiable} at $a \in \mathcal{D}$ if \[
-	\lim_{h \to 0} \frac{f(a+h)-f(a)}{a}
-	\] 
-	exists. We define $f'(a)$ to be the limit.
-\end{definition}
-
-\begin{remark}
-	Differentiability in real and imaginary parts do not imply $\mathbb{C}$-differentiability in general.
-\end{remark}
-
-\begin{theorem}
-	If $f, g$ are differentiable, then $(f+g)' = f' + g'$. Also, $(fg)' = f'g + fg'$.
-\end{theorem}
-
-\begin{definition}
-	$d = \operatorname{deg} P$ is the degree of polynomial $P$ if $d$ is the largerst natural number such that $a_d \neq  0$.
-\end{definition}
-
-Formal consequences:
-\begin{enumerate}
-	\item Constant functions are differentiable.
-	\item Identity function is differentiable, $f'(z) = 1$.
-	\item Polynomials are differentiable. (using the theorem) $(z^n)' = n z^{n^{-1} }$
-\end{enumerate}
-
-\begin{theorem}[factoring, FTA]
-	$P(z_0) = 0 \implies P(z) = Q(z) (z-z_0)$. A polynomial of degree $d$ has at most $d$ distinct zeros.
-\end{theorem}
-
-
-\begin{definition}
-	Ratios of polynomials are called \textit{rational functions}.
-	
-\end{definition}
-
-Singularity of a rational function is called a  \textit{pole}. The limit of rational function at a pole is infinity. Rational functions are differentiable everywhere except finitely many point, which are its poles.
-
-Consequence of differentiability
-
-\begin{remark}
-	Differentiability does not imply smoothness. For example $f(z) = \overline{z} $ is not differentiable at $0$. Differentiability in complex analysis implies something very different from real analysis.
-\end{remark}

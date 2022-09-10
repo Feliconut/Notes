@@ -1,0 +1,80 @@
+\assignment{2}{Tue 06 Sep 2022 15:08}{Assignment 2 due Sep 9}
+
+1. Observer $O$ fires a light beam in the $y$-direction. Use the Lorentz velocity transformation to find $v^{\prime}_x$ and $v^{\prime}_y$ and show that $O^{\prime}$ also measures a value c for the speed of light. Assume $O^{\prime}$ moves relative to $O$ with a velocity $u$ in the $x$-direction.
+\begin{proof}[Solution]
+	Apply the equation of Lorentz Transformation where $u$ is confined to the positive $x$ direction:
+	\[
+		v_y^{\prime}=\frac{v_y \sqrt{1-u^2 / c^2}}{1-v_x u / c^2}
+	\]
+	Plug in  $v_y = c$ and $v_x = 0$:
+	 \begin{align*}
+		 v_{y'} &= \frac{c \sqrt{1-u^2 / c^2} }{1 - 0}\\
+		 &= c \sqrt{1-u^2 / c^2}\\
+		 v_{x'} &= \frac{v_{x}- u}{1-v_x \frac{u}{c^2}} \\
+		 &= \frac{-u}{1-0}\\
+		 &= -u \\
+	 \sqrt{v_{x'}^2 + v_{y'}^2} &= \sqrt{ c^{2}\left( 1-\frac{u^2}{c^2} \right) + u^2 }   \\ 
+		 &= c
+	.\end{align*} 
+\end{proof}
+
+
+2. Electrons are accelerated to high speeds by a two-stage machine. The first stage accelerates the electrons from rest to $v=0.99 c$. The second stage accelerates the electrons from $0.99 c$ to $0.999 c$. (a) How much energy does the first stage add to the electrons? (b) How much energy does the second stage add in increasing the velocity by only $0.9 \%$ ?
+\begin{proof}[Solution]
+	Apply the formula for relativistic kinetic energy: \[
+		K=\frac{m c^2}{\sqrt{1-v^2 / c^2}}-m c^2
+	.\] 
+	
+	The kinetic energy at rest is $0$.
+
+	The kinetic energy at $v = 0.99 c$ is
+	\[
+		K=\frac{m c^2}{\sqrt{1-(0.99 c)^2 / c^2}} -m c^2 = \left( \frac{1}{\sqrt{ 0.0199}}-1 \right) mc^2 = 6.089 m c^2
+	.\] 
+	The kinetic energy at $v = 0.999 c $ is 
+	\[
+		K=\frac{m c^2}{\sqrt{1-(0.999 c)^2 / c^2}}-m c^2 = \left( \frac{1}{\sqrt{ 0.001999}}-1 \right) mc^2 = 21.366 m c^2
+	.\] 
+
+	Take the electron mass $m = \SI{9.1094e-31}{\kilogram}$. The energy added in the first stage is 
+	\[
+		6.089 m c^2 = \SI{4.992e-13}{\joule}
+	.\] 
+	The energy added in the second stage is \[
+		21.366 m c^2 -6.089 m c^2 = \SI{1.252e-12}{\joule} 
+	.\] 
+\end{proof}
+
+3. A "cause" occurs at point $1\left(x_1, t_1\right)$ and its "effect" occurs at point $2\left(x_2, t_2\right)$. Use the Lorentz transformation to find $t_2^{\prime}-t_1^{\prime}$ and show that $t_2^{\prime}-t_1^{\prime}>0$; i.e. $O$ ' can never see the "effect" coming before its "cause".
+\begin{proof}[Solution]
+	By assumption we have $t_1 < t_2$, since the cause must precede the effect. Now
+
+	 \begin{align*}
+		t'_2 - t'_1 &= 
+		\frac{t_2-\left(u / c^2\right) x_2}{\sqrt{1-u^2 / c^2}} 
+		- \frac{t_1-\left(u / c^2\right) x_1}{\sqrt{1-u^2 / c^2}} \\
+		&= \frac{t_2 - t_1}{\sqrt{1-u^2 / c^2}} - 
+		\frac{(x_2-x_1) u / c^2}{\sqrt{1-u^2 / c^2}}
+	.\end{align*}
+	Since causality cannot propogate faster than $c$, 
+	\[
+		(t_2 - t_1) \ge (x_2 - x_1) / c
+	.\] 
+	By $u \le c$,
+	\[
+		(x_2 - x_1)/c \ge  (x_2 - x_1) u / c^2
+	.\] 
+	When $u<c$,
+	\[
+		(x_2 - x_1)/c >  (x_2 - x_1) u / c^2
+	.\] 
+	Hence \[
+		t_2 - t_1 > (x_2 - x_1) u / c^2
+	.\] 
+	Therefore $t'_2 - t'_1 >  0$.
+	
+	When $u = c$, we are in the degenerate situation. The spacetime collapses to a single point (since both axis of the spacetime diagram becomes the \SI{45}{\deg} line). Therefore we neglect this situation. In conclusion, we have shown that $t'_2 > t'_1$ whenever $t_2 > t_1$.
+
+	The discussion of the $u = c$ case resulted from discussion with TA Dillon on Sep 6, 2022.
+\end{proof}
+

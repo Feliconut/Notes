@@ -1,0 +1,122 @@
+\lecture{3}{Wed 07 Sep 2022 10:31}{}
+
+\begin{enumerate}[resume]
+	\item (Conjugate Subgroup) Suoise $H\le G$. Then, for each $g \in G$, the subset \[
+		g^{-1} H g = \{g^{-1} hg: h \in H\} 
+	\] 
+	is a subgroup of $G$.
+\item (Normalizer) When $A \subset G$, define \[
+	N(A) := \{g \in G: g A = A g\} 
+\] 
+	is a subgroup of $G$.
+\end{enumerate}
+
+\subsection{Lagrange's Theorem}
+
+\begin{theorem}[Lagrange]
+	If $G$ is finite and $H \le G$, then \[
+		|H| \quad\big| \quad|G|
+	.\] 
+	
+\end{theorem}
+
+\begin{definition}
+	A \textit{relation} $R$ on a set $S $ is a statement concerning a pair of elements $a,b \in S$ of the shape $aRb$, which may be true or false. We write $aRb$ to denote that the statement is true.
+	\[
+		R: S \times S \to  \{T,F\} 
+	.\] 
+\end{definition}
+
+\begin{example}
+	 \begin{enumerate}
+		\item On $\mathbb{Z}$, one has relation $=, \le , >$
+	\end{enumerate}
+\end{example}
+
+\begin{definition}[Equivalence Relation]
+	An \textit{equivalence relation} $\sim $ on a set $S$ is a relation satisfying:
+	\begin{enumerate}
+		\item (reflexive) $a ~ a$ for $\forall a \in S$
+		\item (symmetry) if $a\sim b$ then $b\sim a$ 
+		\item (transitivity) if $a\sim b$ and $b\sim c$ then $a \sim c$.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item 
+	The usual $=$ is an equivalence relation on any set $S$. Equivalence relation is a \textbf{generalization} of the notion of \textit{equality}.
+\item (Congruence modulo $n$) The set $\mathbb{Z}$ and ``$\equiv$  mod  $n$''.
+	\begin{itemize}
+		\item $a \equiv a $ (mod n) since $n | (a-a)$
+		\item if  $a \equiv b$ then $b \equiv a$ since $n|(a-b) \implies n|(b-a)$
+		\item if $a\equiv b$ and $b \equiv c$ then $a \equiv c$, since if $n|(a-b)$ and $n|(b-c)$ then $n|(a-b+b-c)$
+	\end{itemize}
+\item Let $G$ be a group and suppose $H \le G$.
+	Then when $a,b \in G$, define $a\sim b$ when $ab^{-1} \in H$. Check properties of equivalence relation:
+	\begin{itemize}
+		\item We have $a \sim a$ if and only if $aa^{-1}  = e \in H$.
+		\item If $a\sim b$, then $ab^{-1} \in H$. Hence $\left( ab^{-1}  \right) ^{-1} = ba^{-1}  \in H$. Hence $b \sim a$.
+		\item If  $a \sim b$ and $b\sim c$, then $ab^{-1}  \in H$, and $bc^{-1} \in H$. Hence $(ab^{-1} )(bc^{-1} ) = (ac^{-1} ) \in H$. Hence $a \sim c$.
+	\end{itemize}
+	\begin{remark}
+		Congruence modulo $n$ is a \textbf{special case} of the equivalence defined here: Let $G = (\mathbb{Z}, +)$ and $H = n\mathbb{Z}$.
+	\end{remark}
+\item Define $a\sim b$ if there exists $b$ such that $b = x^{-1} ax$. This equivalence relation is called \textit{conjugacy}.
+	\begin{intuition}
+		In linear algebra, two linear maps that are identical up to a change of base are conjugate. Note how the definition looks like the change of base formulae.
+	\end{intuition}
+	\end{enumerate}
+\end{example}
+
+\begin{definition}[Equivalence Class]
+	The equivalence class of elements in a set $S$ equipped with an equivalence relation $\sim $ is \[
+		[a]:=\{b \in S: b\sim a\} 
+	.\] 
+\end{definition}
+\begin{lemma} Equivalence classes are either coincidental or disjoint.
+\end{lemma}
+\begin{theorem}
+	Suppose that $\sim $ is an equivalence relation on $S$, then $\sim $ partitions $S$ into equivalence classes. Thus  \[
+		S = \cup \left[ a \right] 
+	\] 
+	where the union is over representatives of equivalence classes.
+	
+\end{theorem}
+\begin{proof}
+	Since $a \in [a]$ for all $a \in S$, since $a\sim a$, so $S = \bigcup_{a \in S} \{a\}\subset \bigcup_{a \in S}  [a]$.
+
+	Also, $[a] \subset S$, then $\bigcup_{a \in S} [a] \subset S$, and thus $S = \bigcup_{a \in S} [a]$. But in view of above note, we have that $S $ is the union over representatives of each equivalence class.
+\end{proof}
+\begin{definition}[Coset]
+Consider now $\sim $ defined y $a\sim b$ iff $ab^{-1} \in H$. $[a] = \{a \in G: ba^{-1}  \in H\} = \{b \in G: b \in Ha\}  = Ha$. The set $Ha$ (equivalence class) is called a  \textit{right coset} of $H$.
+
+\textit{Left coset} is defined in a symmetric manner.
+\end{definition}
+Because $G$ can be partitioned into equivalence classes and  $Ha$ is a equivalence class,
+\[
+	G = \bigcup_{a \in G, \text{representatives}}  Ha
+\] 
+where the union is taken over representatives from each equivalence class.
+
+\begin{claim}
+	When $G$ is finite, for any $a \in G$, each right coset $Ha$ contains exactly $|H|$ elements.
+\end{claim}
+\begin{proof}
+To confirm this, construct a bijection: \begin{align*}
+	\phi: H &\longrightarrow Ha \\
+	h &\longmapsto \phi(h) = ha
+.\end{align*}
+Injective: $\phi(h_1) = \phi(h_2) \iff h_1a = h_2a \iff h_1 = h_2$
+
+Surjective: If $g \in Ha$, then $g = ha $ for some $h \in H$. Now $\phi(h) = ha = g$.
+
+Hence $\phi$ is a bijection and $|H| = |Ha|$.
+\end{proof}
+
+Now $|G| = \sum_{\text{rep}} |Ha| = \sum_{\text{rep}} |H| = n|H|$ for some $n=$ number of equivalence classes. We have proved
+\begin{theorem}[Lagrange's Theorem]
+	Suppose $H \le G$, then \[
+		|H| \mid |G|
+	.\] 
+\end{theorem}

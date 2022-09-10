@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="240mm" height="120mm" viewBox="0 0 240 120" version="1.1" id="svg8" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="hw2fig4.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs id="defs2">
+    <inkscape:path-effect effect="spiro" id="path-effect741" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect741-9" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect741-5" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect741-2" is_visible="true" lpeversion="1" />
+    <marker id="marker-arrow-2.654" orient="auto-start-reverse" refY="0" refX="0" markerHeight="3" markerWidth="2">
+      <g transform="scale(0.85737252)" id="g1337"><path d="M -1.55415,2.0722 C -1.42464,1.29512 0,0.1295 0.38852,0 0,-0.1295 -1.42464,-1.29512 -1.55415,-2.0722" style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" id="path1335" />
+0&quot; /&gt; 
+    </g>
+    </marker>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.1029421" inkscape:cx="459.2263" inkscape:cy="197.65318" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" showborder="true" width="200mm" showguides="true" inkscape:guide-bbox="true" inkscape:window-width="1512" inkscape:window-height="922" inkscape:window-x="0" inkscape:window-y="32" inkscape:window-maximized="0" inkscape:showpageshadow="0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid type="xygrid" id="grid815" units="mm" spacingx="10" spacingy="10" empspacing="4" dotted="false" />
+  </sodipodi:namedview>
+  <metadata id="metadata5">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-177)">
+    <path style="fill:none;stroke:#000000;stroke-width:0.702204;stop-color:#000000" d="M 39.821524,218.26086 H 203.90539" id="path739" inkscape:path-effect="#path-effect741" inkscape:original-d="m 39.821524,218.26086 c 54.694886,2.6e-4 109.389506,2.6e-4 164.083866,0" />
+    <path style="fill:none;stroke:black;stroke-width:0.70220417;stop-color:#000000;fill-opacity:1;stroke-dasharray:none;marker-end:url(#marker-arrow-2.654);marker-start:none;stroke-opacity:1" d="M 39.821525,233.37385 H 203.90539" id="path739-0" inkscape:path-effect="#path-effect741-9" inkscape:original-d="m 39.821525,233.37385 c 54.694886,2.6e-4 109.389505,2.6e-4 164.083865,0" />
+    <path style="fill:none;stroke:black;stroke-width:0.70220417;stop-color:#000000;fill-opacity:1;stroke-dasharray:0.70220417,0.70220417;marker-end:none;marker-start:none;stroke-opacity:1" d="M 39.821524,248.48684 H 203.90539" id="path739-2" inkscape:path-effect="#path-effect741-5" inkscape:original-d="m 39.821524,248.48684 c 54.694885,2.6e-4 109.389506,2.6e-4 164.083866,0" />
+    <path style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#marker-arrow-2.654);stop-color:#000000" d="M 121.86346,285.48478 V 182.33265" id="path739-7" inkscape:path-effect="#path-effect741-2" inkscape:original-d="m 121.86346,285.48478 c -2.6e-4,-34.38421 -2.6e-4,-68.76825 0,-103.15213" />
+    <rect style="fill:#000000;fill-opacity:0.12;stroke:none;stroke-width:0.684896;stroke-dasharray:0.684896, 0.684896;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" id="rect1424" width="156.09518" height="30.225979" x="44.083302" y="218.26086" />
+    <text xml:space="preserve" style="font-size:3.175px;fill:black;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:0.702204, 0.702204;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="210.38239" y="231.82526" id="text1538"><tspan sodipodi:role="line" id="tspan1536" style="stroke-width:0.702204;fill-opacity:1;marker-end:none;fill:black;marker-start:none;stroke-opacity:1;stroke:none" x="210.38239" y="231.82526">Re</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:0.702204, 0.702204;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="127.86068" y="185.63599" id="text1650"><tspan sodipodi:role="line" id="tspan1648" style="stroke-width:0.702204" x="127.86068" y="185.63599">Im</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:0.702204, 0.702204;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="48.217628" y="193.31244" id="text1654"><tspan sodipodi:role="line" id="tspan1652" style="stroke-width:0.702204" x="48.217628" y="193.31244">$\mathbb{C}$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:0.702204, 0.702204;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="132.01082" y="213.22319" id="text1708"><tspan sodipodi:role="line" id="tspan1706" style="stroke-width:0.702204" x="132.01082" y="213.22319">$Im(z)=1$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:0.702204, 0.702204;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="130.04195" y="254.24416" id="text1712"><tspan sodipodi:role="line" id="tspan1710" style="stroke-width:0.702204" x="130.04195" y="254.24416">$Im(z)=-1$</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,99 @@
+\lecture{5}{Fri 09 Sep 2022 14:33}{Relativistic Dynamics}
+
+\begin{example}[Classical Collision]
+	In some reference frame $O'$:
+	 \begin{align*}
+		m_1 &=  2m \\
+		v_1 &=  0 \\
+		m_2 &= m \\
+		v_2 &= -0.75 c \hat{x} 
+	.\end{align*}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{classical-collision}
+    \caption{classical-collision}
+    \label{fig:classical-collision}
+\end{figure}
+
+Apply conservation of momentum:
+\begin{align*}
+	p_i' &= m_1v_{1i}'+m_2 v_{2i}' = -0.75 m c \\
+	p_f' &=  -m_1 v_{1f}' + m_2 v_{2f}'  = -0.75mc
+.\end{align*}
+Assume elastic collision and apply conservaton of energy:
+\[
+	\frac{1}{2} m_1 v_{1i}'^2 + 
+\frac{1}{2} m_2 v_{2i}'^2 = 
+\frac{1}{2} m_1 v_{1f}'^2 + 
+\frac{1}{2} m_2 v_{2f}'^2 
+.\] 
+
+Solutions:
+\begin{align*}
+	v_{1f}'&=-0.5c\\
+	v_{2f}'&=0.25c
+.\end{align*}
+
+\end{example}
+
+\begin{problem}
+	If we apply special relativity to transform the velocities into a different reference frame, we do not conserve momentum and energy.
+\end{problem}
+
+\begin{definition}[Relativistic momentum]
+	\[
+		\vec{p} = \gamma m \vec{v} 
+	.\] 
+\end{definition}
+Using this definition, we conserve momentum in both frames, but do not get the same momentum in both frames.
+
+
+\begin{theorem}[Work-Energy Theorem]
+	\[
+		W = \int F \cdot d x = \int \frac{\partial p}{\partial t} dx = \int \frac{\partial x}{\partial t} dp = \int v dp = pv - \int p dv
+	.\] 
+\end{theorem}
+
+Assume this works relativistically:
+
+ \begin{align*}
+	 K &= (\gamma mv)v - \int_0^v (\gamma mv) dv\\
+	 &= \gamma m v^2 + \gamma^{ -1 } m c^2 - m c^2 \\
+	 &= \gamma m c^2 - m c^2
+.\end{align*} 
+
+\begin{definition}[Relativistic Kinetic Energy]
+	\[
+		K = \gamma m c^2 - m c^2
+	\]
+	where we define
+	\[
+		E = \gamma m c^2
+	.\]  to be the \textit{relativistic total energy}, and define \[
+		E_0 = m c^2
+	\] to be the \textit{relativistic rest energy}.
+
+\end{definition}
+The \textit{total energy} is conserved under frame transformation.
+
+Let $v\ll c$ and do Taylor Expansion:
+\[
+	K \approx m c^2 (1 + \frac{1}{2}\frac{v^2}{c^2}) - m c^2 = \frac{1}{2} m v^2
+.\]
+So this reduces into Newton Mechanics at low speed.
+
+\begin{remark}
+	Alternative forms: 
+	\begin{itemize}
+		\item $E^2 = (pc)^2 + \left(mc^2\right)^2$
+		\item $E^2 = p^2 + m^2$ when we take $c=1$ 
+		\item $E = pc$ when we take $m=0$
+	\end{itemize}
+\end{remark}
+
+\begin{remark}[Units]
+	proton has rest energy of  \SI{938}{\mega\electronvolt}. It has mass \SI{938}{\mega\electronvolt\per c \squared}. The unit for momentum is \SI{}{\mega \electronvolt \per c}. \color{blue} Pick the unit that make everything look nice!
+\end{remark}
+
+

@@ -1,0 +1,322 @@
+\homework{2}{Sat 03 Sep 2022 19:16}{Week 2 due Sep 6}
+
+Course and Instructor: MA425, Prof. Alexandre Eremenko
+
+PUID: 032689357
+\begin{enumerate}
+\item 
+ p. 37: 5d Find \begin{align*}
+(i-1)^{1 / 2}
+\end{align*}
+\begin{proof}[Solution]
+	The polar form of $i - 1$ is \[
+	\sqrt{2} \operatorname{cis} \frac{3 \pi}{4}
+	.\] 
+Apply the formula \begin{align*}
+z^{1 / m}=\sqrt[m]{|z|} e^{i(\theta+2 k \pi) / m} \quad(k=0,1,2, \ldots, m-1)
+\end{align*}
+We obtain\begin{align*}
+	\left( i - 1 \right) ^{1 / 2}&=
+	\sqrt{r} e^{i(\theta+2 k \pi) / 2} \quad(k=0,1)\\
+				     &= \sqrt[4]{2} e^{i(\frac{3 \pi}{4}+2 k \pi) / 2} \quad(k=0,1)
+\end{align*}
+Therefore two square roots of $i-1 $ is $\sqrt[4]{2} e^{i(\frac{3 \pi}{8}) }$, $\sqrt[4]{2} e^{i(\frac{3 \pi}{8}+  \pi) }$.
+
+\end{proof}
+
+\item 7a Solve $2 z^2+z+3=0$.
+\begin{proof}[Solution]
+	$b^2- 4ac = 1-4\times 2\times 3 = -23$. Hence $\sqrt{b^2-4ac}  = \sqrt{23}  = \pm i\sqrt{23} $.
+	Now apply the quadratic formula: \[
+	z=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
+	=\frac{-1 \pm i\sqrt{23}}{4}
+	.\] 
+\end{proof}
+
+
+\item 10 Find all four roots of the equation $z^4+1=0$ and use them to deduce the factoriza$\operatorname{tion} z^4+1=\left(z^2-\sqrt{2} z+1\right)\left(z^2+\sqrt{2} z+1\right)$
+\begin{proof}[Solution]
+	$z^4 = -1 = \operatorname{cis} \pi$, hence \[
+		z_k = \sqrt[4]{|-1|} e^{i(\pi+2 k \pi) / 4} = e^{i\frac{2k+1}{4}\pi} \qquad k = 0,1,2,3
+	.\] 
+	Hence 
+	\begin{align*}
+		z^4 + 1 &= (z-z_0)(z-z_1)(z-z_2)(z-z_3)\\
+		&= \left( (z-z_0)(z-z_3) \right) \left( (z-z_1)(z-z_2) \right)  \\
+		&= \left( z^2 + z_0z_3-z(z_0+z_3) \right)\left( z^2 + z_1z_2-z(z_1+z_2) \right)  \\
+	\end{align*}
+	Where
+	\begin{align*}
+		z_0z_3&= \left( \frac{\sqrt{2} }{2}+i \frac{\sqrt{2} }{2} \right)\left( \frac{\sqrt{2} }{2}-i \frac{\sqrt{2} }{2} \right)  = 1 \\
+		z_0+z_3&= \left( \frac{\sqrt{2} }{2}+i \frac{\sqrt{2} }{2} \right)+\left( \frac{\sqrt{2} }{2}-i \frac{\sqrt{2} }{2} \right)  = \sqrt{2}  \\
+		z_1z_2&= \left( \frac{-\sqrt{2} }{2}+i \frac{\sqrt{2} }{2} \right)\left( \frac{-\sqrt{2} }{2}-i \frac{\sqrt{2} }{2} \right)  = 1 \\
+		z_1+z_2&= \left( \frac{-\sqrt{2} }{2}+i \frac{\sqrt{2} }{2} \right)+\left( \frac{-\sqrt{2} }{2}-i \frac{\sqrt{2} }{2} \right)  = -\sqrt{2}
+	.\end{align*}
+\end{proof}
+
+
+\item p. 42: 2 Sketch the given sets. 
+	\begin{enumerate}
+		\item  $|z-1+i| \leq 3$
+			This is the closed ball centered at $1-i$ with radius $3$. 
+\begin{figure}[H]
+    \centering
+    \incfig{closed-ball-centered-at--i$-with-radius-$}
+    \caption{closed ball centered at $1-i$}
+    \label{fig:closed-ball-centered-at-with-radius}
+\end{figure}
+		\item  $|\operatorname{Arg} z|<\pi / 4$
+			This is the area between (exclusive) $y=x$ and $y=-x$ in the open right half plane.
+\begin{figure}[H]
+    \centering
+    \incfig{hw2fig2}
+    \caption{hw2fig2}
+    \label{fig:hw2fig2}
+\end{figure}
+		\item  $0<|z-2|<3$
+			This is the open ball centered at $2$ with radius $3$ and center removed.
+\begin{figure}[H]
+    \centering
+    \incfig{hw2fig3}
+    \caption{hw2fig3}
+    \label{fig:hw2fig3}
+\end{figure}
+		\item  $-1<\operatorname{Im} z \leq 1$
+			This is the area bounded by horizontal lines $y=-1$ (exclusive) and $y=1$ (inclusive).
+\begin{figure}[H]
+    \centering
+    \incfig{hw2fig4}
+    \caption{hw2fig4}
+    \label{fig:hw2fig4}
+\end{figure}
+		\item  $|z| \geq 2$
+			This is the whole plane except the open ball centered at origin with radius $2$.
+\begin{figure}[ht]
+    \centering
+    \incfig{hw2fig5}
+    \caption{hw2fig5}
+    \label{fig:hw2fig5}
+\end{figure}
+		\item  $(\operatorname{Re} z)^2>1$
+			This is the whole plane except the area bounded by vertical lines $x=-1 $ (inclusive) and $x=1$ (inclusive).
+\begin{figure}[H]
+    \centering
+    \incfig{hw2fig6}
+    \caption{hw2fig6}
+    \label{fig:hw2fig6}
+\end{figure}
+	\end{enumerate}
+
+\item 3 Which of the sets are open?
+\begin{proof}[Solution]
+	b,c,f
+\end{proof}
+
+\item 4 Which of the sets are domains?
+\begin{proof}[Solution]
+	b, c
+\end{proof}
+
+\item 5 Which of the sets are bounded?
+\begin{proof}[Solution]
+	a, c
+\end{proof}
+
+\item 6 Describe the boundary of each of the given sets.
+\begin{proof}[Solution]
+	a: Circle centered at $1-i$ with radius $3$.\\
+	b: The rays $\operatorname{Arg} z = \frac{\pi}{4}$ and $\operatorname{Arg} z = -\frac{\pi}{4}$ together with the origin.\\
+	c: Circle centered at $2$ with radius $3$, together with the point $2$.\\
+	d: Horizontal lines $\operatorname{Im} z = 1$ and $\operatorname{Im} z = -1$.\\
+	e: Circle centered at origin with radius $2$.\\
+	f: Vertical lines $\operatorname{Re} z=1$ and $\operatorname{Re} z = -1$.
+\end{proof}
+
+\item 7 Which of the sets are regions?
+\begin{proof}[Solution]
+	a,b,c,d,e
+\end{proof}
+
+\item 8 Which of the given sets are closed regions?
+\begin{proof}[Solution]
+	a, e
+\end{proof}
+
+\item 11 Let $S$ be the set consisting of the points $1,1 / 2,1 / 3, \ldots .$ What is the boundary of $S$ ?
+\begin{proof}[Solution]
+	The boundary of $S$ is all its elements together with the point $0$.
+\end{proof}
+
+\item 15m Problems $15-18$ refer to the following definitions: Let $S$ and $T$ be sets. The set consisting of all points belonging to $S$ or $T$ or both $S$ and $T$ is called the union of $S$ and $T$ and is denoted by $S \cup T$. The set consisting of all points belonging to both $S$ and $T$ is called the intersection of $S$ and $T$ and is denoted by $S \cap T$. \\
+15. Let $S$ and $T$ be the sets described by $|z+1|<2$ and $|z-i|<1$, respectively. Sketch the sets $S \cup T$ and $S \cap T$.
+\begin{proof}[Solution]
+\begin{figure}[H]
+    \centering
+    \incfig{hw2fig7}
+    \caption{hw2fig7}
+    \label{fig:hw2fig7}
+\end{figure}
+\end{proof}
+
+\item 17 If $S$ and $T$ are domains, is $S \cap T$ necessarily a domain?
+\begin{proof}[Solution]
+	No. The intersection of two domains need not be connected. Consider the following figure.
+\begin{figure}[ht]
+    \centering
+    \incfig{hw2fig8}
+    \caption{hw2fig8}
+    \label{fig:hw2fig8}
+\end{figure}
+\end{proof}
+\item p. 56: 1 Write each of the following functions in the form $w=u(x, y)+i v(x, y)$.
+(a) $f(z)=3 z^2+5 z+i+1$
+\begin{proof}[Solution]
+	\begin{align*}
+		f(z) &= f(x,y) \\
+		&= 3(x+iy)^2+5(x+iy)+i+1 \\
+		&= 3(x^2-y^2+2ixy)+5(x+iy)+i+1 \\
+		&= (3x^2-3y^2+5x+1)+(6ixy+5iy+i) \\
+		&= (3x^2-3y^2+5x+1)+i(6xy+5y+1)
+	.\end{align*}
+	
+\end{proof}
+
+(b) $g(z)=1 / z$
+\begin{proof}[Solution]
+	\begin{align*}
+		g(z) &= g(x,y) \\
+		&= \frac{1}{x+iy} \\
+		&= \frac{1}{x^2+y^2} \left( x-iy \right)  \\
+		&= \frac{x}{x^2+y^2} -i \frac{y}{x^2+y^2}
+	.\end{align*}
+\end{proof}
+
+(c) $h(z)=\frac{z+i}{z^2+1}$
+\begin{proof}[Solution]
+	\begin{align*}
+		h(z)&= h(x,y) \\
+		&= \frac{x+iy+i}{(x+iy)^2+1} \\
+		&= \frac{x+iy+i}{(x+iy)^2- i^2} \\
+		&= \frac{x+iy+i}{(x+iy+i)(x+iy-i)} \\
+		&= \frac{1}{x+iy-i} \\
+		&= \frac{x-iy+i}{x^2 + (y-1)^2} \\
+		&= \frac{x}{x^2 + (y-1)^2} 
+		+ i\frac{-y+1}{x^2 + (y-1)^2}
+	.\end{align*}
+\end{proof}
+
+(d) $q(z)=\frac{2 z^2+3}{|z-1|}$
+\begin{proof}[Solution]
+	\begin{align*}
+		q(z)&= q(x,y) \\
+		&= \frac{2(x+iy)^2+3}{\sqrt{(x-1)^2+y^2} } \\
+		&= \frac{2 x^2+4 i x y-2 y^2+3}{\sqrt{x^2-2 x+y^2+1}} \\
+		&= \frac{2 x^2-2 y^2+3}{\sqrt{x^2-2 x+y^2+1}}
+		+ i\frac{4 x y}{\sqrt{x^2-2 x+y^2+1}} 
+	.\end{align*}
+\end{proof}
+
+(e) $F(z)=e^{3 z}$
+\begin{proof}[Solution]
+	\begin{align*}
+		F(z) &= F(x,y) \\
+		&= e^{3(x+iy)} \\
+		&= e^{3x} e^{3iy} \\
+		&= e^{3x} \left( \cos 3y + i \sin 3y \right)  \\
+		&= e^{3x}  \cos 3y + i e^{3x}\sin 3y  
+	.\end{align*}
+\end{proof}
+
+(f) $G(z)=e^z+e^{-z}$
+\begin{proof}[Solution]
+	\begin{align*}
+		G(z) &= G(x,y) \\
+		&= e^{x+iy } + e^{-x-iy} \\
+		&= e^{x}\left( \cos y + i \sin y \right)+ e^{-x}\left( \cos -y + i \sin -y \right)  \\
+		&= e^{x}\left( \cos y + i \sin y \right)+ e^{-x}\left( \cos y - i \sin y \right)  \\
+		&= \left( e^x+e^{-x} \right) \cos y + i \left( e^{x} - e^{-x}  \right) \sin y
+	.\end{align*}
+\end{proof}
+
+\item 3 3. Describe the range of each of the following functions.
+(a) $f(z)=z+5$ for $\operatorname{Re} z>0$
+\begin{proof}[Solution]
+	$\text{Range} f = \{z \in \mathbb{C}: \operatorname{Re} z > 5\} $
+\end{proof}
+
+(b) $g(z)=z^2$ for $z$ in the first quadrant, $\operatorname{Re} z \geq 0, \operatorname{Im} z \geq 0$
+\begin{proof}[Solution]
+	The upper half plane together with the real axis.
+\end{proof}
+
+(c) $h(z)=\frac{1}{z}$ for $0<|z| \leq 1$
+\begin{proof}[Solution]
+	$\{z \in \mathbb{C}: |z| \ge  1\} $
+\end{proof}
+
+(d) $p(z)=-2 z^3$ for $z$ in the quarter-disk $|z|<1,0<\operatorname{Arg} z<\frac{\pi}{2}$
+\begin{proof}[Solution]
+	The range of $q(z):= z^3$ of the region is  $\{z \in \mathbb{C}: |z| < 1, 0<\operatorname{Arg} z < \frac{3 \pi}{2}\} $. Hence range of $p$ is
+	\[
+		-2 \{z \in \mathbb{C}: |z| < 1, 0<\operatorname{Arg} z < \frac{3 \pi}{2}\} = \{z \in \mathbb{C}: |z|< 2, \operatorname{Arg} z \in [0,\frac{\pi}{2}) \cup  (\pi, 2 \pi)\} 
+	.\] 
+\end{proof}
+
+\item p. 63: 7
+	7. Decide whether each of the following sequences converges, and if so, find its limit.
+(a) $z_n=\frac{i}{n}$
+\begin{proof}[Solution]
+	Converges. $\lim_{n \to \infty} \frac{i}{n} = i \lim_{n \to \infty} \frac{1}{n} = i \cdot 0 = 0$ 
+\end{proof}
+
+(b) $z_n=i(-1)^n$
+\begin{proof}[Solution]
+	Diverges. For any $N$, $d(z_N, z_{N+1}) = |i| = 1>0$.
+\end{proof}
+
+(c) $z_n=\operatorname{Arg}\left(-1+\frac{i}{n}\right)$
+\begin{proof}[Solution]
+	 \begin{align*}
+		\operatorname{Re} (-1+\frac{i}{n}) &=  -1 \\
+		\operatorname{Im} (-1+\frac{i}{n})&= \frac{i}{n} \to 0 
+	.\end{align*}
+	Hence 
+	\begin{align*}
+		(-1+\frac{i}{n}) &\to -1\\
+		z_n = \operatorname{Arg}  
+		(-1+\frac{i}{n}) &\to \operatorname{Arg} (-1) = \pi
+	.\end{align*}
+\end{proof}
+
+(d) $z_n=\frac{n(2+i)}{n+1}$
+\begin{proof}[Solution]
+	\begin{align*}
+		z_n &= (2+i) - \frac{2+i}{n+1}\\
+		    &\to 2+i
+	.\end{align*}
+\end{proof}
+
+(e) $z_n=\left(\frac{1-i}{4}\right)^n$
+\begin{proof}[Solution]
+	Since $\left| \frac{1-i}{4} \right| = \frac{\sqrt{2} }{4}  < 1$,
+	\[
+		\lim_{n \to \infty} |z_n| = \lim_{n \to \infty} \left| \frac{1-i}{4} \right|^n = \left( \frac{\sqrt{2}}{4}  \right) ^n \to 0
+	.\] 
+	Hence $z_n \to  0$.
+\end{proof}
+
+(f) $z_n=\exp \left(\frac{2 n \pi i}{5}\right)$
+\begin{proof}[Solution]
+Diverge. $z_n$ is oscillating. Consider $z_N$ and $z_{N+5}$:
+\begin{align*}
+	z_N &= \exp \left( \frac{2 N \pi i}{5} \right)  \\
+	 &= \exp \left( \frac{2 N \pi i}{5} + 2 \pi i \right)  \\
+	 &= \exp \left( \frac{(2 N + 10) \pi i}{5}  \right)  \\
+	 &= \exp \left( \frac{2 (N + 5) \pi i}{5}  \right)  \\
+	 &= z_{N+5}
+.\end{align*}
+
+To add more detail, $z_n$ cycles among the 5th roots of unity.
+\end{proof}
+
+\end{enumerate}

@@ -1,0 +1,257 @@
+\homework{3}{Thu 08 Sep 2022 10:06}{Homework 3 due Sep 13}
+
+\begin{enumerate}
+	\item p. 56: 6(a-c) The Joukowski mapping is defined by
+\[
+w=J(z)=\frac{1}{2}\left(z+\frac{1}{z}\right) .
+\]
+Show that
+(a) $J(z)=J(1 / z)$.
+\begin{proof}[Solution]
+	\[
+		J(\frac{1}{z}) = \frac{1}{2}\left( \frac{1}{z} + \frac{1}{\frac{1}{z}} \right) =\frac{1}{2}\left( \frac{1}{z} + z \right)  = \frac{1}{2} (z + \frac{1}{z}) = J(z)
+	.\] 
+\end{proof}
+
+(b) $J$ maps the unit circle $|z|=1$ onto the real interval $[-1,1]$.
+\begin{proof}[Solution]
+	Let $z = x + iy$. Now
+	\begin{align*}
+		J(z) &= \frac{1}{2}\left(z + \frac{1}{z}\right) \\
+		&= \frac{1}{2}\left(z + \frac{\overline{z} }{|z| } \right)\\
+		&= \frac{1}{2}\left(z + \overline{z}\right) \\
+		&= \frac{1}{2}\left(x+iy + x - iy\right) \\
+		&= \frac{1}{2}\left(2x\right) \\
+		&= x
+	.\end{align*}
+	Since $|z| = 1$, $-1\le x\le 1$, hence $J(z) \in [-1,1]$.
+\end{proof}
+
+(c) $J$ maps the circle $|z|=r \quad(r>0, r \neq 1)$ onto the ellipse
+\[
+\frac{u^2}{\left[\frac{1}{2}\left(r+\frac{1}{r}\right)\right]^2}+\frac{v^2}{\left[\frac{1}{2}\left(r-\frac{1}{r}\right)\right]^2}=1,
+\]
+which has foci at $\pm 1$.
+\begin{proof}[Solution]
+		Paramaterize: $z = r e^{it}$, $0\le t< 2\pi$, where $r \in (0,1)$. 
+
+		Plug: \[
+		w = \frac{1}{2}\left( r e^{it }+r^{-1}e^{-it} \right) 
+		= \frac{1}{2}\left( r + \frac{1}{r} \right) \cos(t) + i \frac{1}{2} (r - \frac{1}{r}) \sin(t).
+	\]
+	Eliminate $t$:
+	\[
+	\frac{u^2}{\left(\frac{1}{2} \left( r + \frac{1}{r} \right)  \right) ^2} 
+	+ \frac{v^2}{\left(\frac{1}{2} \left( r - \frac{1}{r} \right)  \right) ^2} = \sin^2 t + \cos^2 t = 1
+	.\] 
+
+	The image of a circle of radius $r$ centered at the origin is an ellipse with half-axis $\left(\frac{1}{2} \left( r + \frac{1}{r} \right)  \right) $ and $\left(\frac{1}{2} \left( r - \frac{1}{r} \right)  \right)$.
+
+
+\end{proof}
+
+	\item 13(a-c) Show that the function $w=z^2$ maps
+(a) the line $x=1$,
+(b) the hyperbola $x y=1$, and
+(c) the circle $|z-1|=1$
+into a parabola, a straight line, and the cardioid $w=2(1+\cos \theta) e^{i \theta}$, respectively, in the $w$-plane.
+\begin{proof}[Solution]
+	\begin{enumerate}
+		\item $x=1$ 
+		Paramaterize: $z = 1 + it, t \in \mathbb{R}$. Plug in: \[
+		w = (1+it)^2 = 1 - t^2 + 2 i t =: u + i v
+		.\] 
+Eliminate: $u = - (\frac{v}{2})^2 + 1$. This is a parabola.
+		\item $xy=1$ 
+		Parameterize: $z = t + \frac{i}{t}, t \in \mathbb{R}$. Plug in: \[
+		w = (t + it)^2 =  t^2 - t^2 + 2 it = 2 it
+		.\] 
+Eliminate: $u = 0, v \in \mathbb{R}$. This is a vertical straight line.
+		\item $|z-1|=1$
+		Parameterize: $z = 1 + e^{it}, 0\le t<2 \pi$. Plug in: \begin{align*}
+		w &= (1 + e^{it})^2 \\
+		  &= 1 + e^{2 i t} + 2 e ^{it} \\
+		  &= 1 + (\cos 2t + i\sin 2t) + 2 \cos t + 2 i \sin t \\
+		  &= (1 + \cos 2t + \cos t) + i (\sin 2 t + \sin t) \\
+		  &= (1 + \cos^2 t - \sin^2 t) + i (2 \sin t \cos t + \sin t)\\
+		  &= (2 \cos^2 t + 2 \cos t) + i (2 \sin t \cos t + \sin t) \\
+		  &= 2(\cos t + 1) (\cos t + i \sin t) \\
+		  &= 2(\cos t + 1) e^{it}
+		.\end{align*} 
+	\end{enumerate}
+\end{proof}
+
+	\item p. 63: 11(a-c) Find each of the following limits.
+(a) $\lim _{z \rightarrow 2+3 i}(z-5 i)^2$
+\begin{proof}[Solution]
+	\begin{align*}
+		&= (2+3i - 5i)^2 \\
+		&= (2-2i)^{2} \\
+		&= 4 - 4 - 8i \\
+		&= -8i
+	.\end{align*}
+\end{proof}
+
+(b) $\lim _{z \rightarrow 2} \frac{z^2+3}{i z}$
+\begin{proof}[Solution]
+	\begin{align*}
+		&= \frac{2^2 + 3}{2 i} \\
+		&= \frac{7}{2i} \\
+		&= -\frac{7}{2}i
+	.\end{align*}
+	
+\end{proof}
+
+(c) $\lim _{z \rightarrow 3 i} \frac{z^2+9}{z-3 i}$
+\begin{proof}[Solution]
+	\begin{align*}
+		&= \lim_{z \to  3 i}\frac{(z+3i)(z-3i)}{z-3i} \\
+		&= \lim_{z \to  3 i}z+3i \\
+		&= 3i+3i \\
+		&= 6i 
+	.\end{align*}
+\end{proof}
+
+	\item p. 71: 7(a-e)
+	Use rules $(5)-(9)$ to find the derivatives of the following functions.
+(a) $f(z)=6 z^3+8 z^2+i z+10$
+\begin{proof}[Solution]
+	\begin{align*}
+		f'(z) &= \left( 6z^3 + 8z^2 + iz + 10 \right)'  \\
+		      &= (6z^3)' + (8z^2)' + (iz)' + (10)' & \text{by (5)} \\
+		      &= 6(z^3)' + 8(z^2)' + i(z)' + (10)' & \text{by (6)} \\
+		      &= 6(z^3)' + 8(z^2)' + i(z)'  \\
+		      &= 6(3z^2) + 8(2z) + i  & \text{by Example 3} \\
+		      &= 18z^2 + 16z + i
+	.\end{align*}
+\end{proof}
+
+(b) $f(z)=\left(z^2-3 i\right)^{-6}$
+\begin{proof}[Solution]
+	Let $g,h,m$ be defined as 
+	\begin{align*}
+		g(z)&= z^2 \\
+		h(z)&= z-3i \\
+		m(z)&= z^{-6}
+	.\end{align*}
+	Now $m(h(g(z))) = m(h(z^2)) = m(z^2-3i) = (z^2-3i)^{-6}) = f(z)$.
+	By Chain Rule (9),
+	\begin{align*}
+		\frac{\partial m \circ h \circ g}{\partial z}(z) &= m' (h(g(z))) \frac{\partial h \circ g}{\partial z} (z) \\ 
+		 &= m' (h(g(z))) h' (g(z)) g' (z)
+	.\end{align*}
+	Now we have
+	\begin{align*}
+		m' (z) &= -6 x^{-7}  \text{by Example 3}\\
+		h' (z) &= 1 \text{by Example 3} \\
+		g' (z) &= 2z \text{by Example 3}  \\
+		h(g(z)) &= h(z^2) = z^2 -3i
+	.\end{align*}
+	Therefore
+	\begin{align*}
+		&m' (h(g(z))) h' (g(z)) g' (z)\\
+		&=  -6(z^2-3i)^{-7} (1) (2z)\\
+		&=  -12z(z^2-3i)^{-7}
+	.\end{align*}
+\end{proof}
+
+(c) $f(z)=\frac{z^2-9}{i z^3+2 z+\pi}$
+\begin{proof}[Solution]
+	Define 
+	\begin{align*}
+		g(z)&= z^2 - 9 \\
+		h(z)&=  i z^3+2 z+\pi
+	.\end{align*}
+	We have $f = \frac{g}{h}$. Apply rule (8),
+	\[
+		f^\prime(z) = \left(\frac{g}{h}\right)^{\prime}(z)=\frac{h(z) g^{\prime}(z)-g(z) h^{\prime}(z)}{h(z)^2}
+	\]
+	Compute
+	\begin{align*}
+		g'(z) &= 2z \\
+		h'(z) &= 3 i z^2 + 2
+	.\end{align*}
+	Hence
+\begin{align*}
+	f^\prime(z) &= \frac{h(z) g^{\prime}(z)-g(z) h^{\prime}(z)}{h(z)^2}\\
+		 &= \frac{(i z^3+2 z+\pi) (2z)-(z^2-9) \left( 3 i z^2 + 2 \right) }{\left( i z^3+2 z+\pi \right) ^2}\\
+		 &= \frac{-i z^4+(2+27 i) z^2+2 \pi z+18}{-z^6+4 i z^4+2 i \pi z^3+4 z^2+4 \pi z+\pi^2}
+.\end{align*}
+\end{proof}
+
+(d) $f(z)=\frac{(z+2)^3}{\left(z^2+i z+1\right)^4}$
+\begin{proof}[Solution]
+	Define
+	\begin{align*}
+		g(z) &= (z+2)^3 \\
+		h(z) &=  \left(z^2+i z+1\right)^4
+	.\end{align*}
+	Compute
+	\begin{align*}
+		g'(z) &=  3(z+2)^2 \\
+		h'(z) &= 4(z^2+iz+1)^3(2z+i)
+	.\end{align*}
+	Apply rule (8),
+\begin{align*}
+	f^\prime(z) &= \left(\frac{g}{h}\right)^{\prime}(z)=\frac{h(z) g^{\prime}(z)-g(z) h^{\prime}(z)}{h(z)^2}\\
+	&= \frac{\left(z^2+i z+1\right)^4 3(z+2)^2-(z+2)^3 \left( 4(z^2+iz+1)^3(2z+i) \right) }{\left(z^2+i z+1\right)^8} \\
+	&= \frac{-5 z^4-(36+i) z^3-(81+12 i) z^2-(52+36 i) z+(12-32 i)}{z^{10}+5 i z^9-5 z^8+10 i z^7-15 z^6+11 i z^5-15 z^4+10 i z^3-5 z^2+5 i z+1}
+.\end{align*}
+\end{proof}
+
+(e) $f(z)=6 i\left(z^3-1\right)^4\left(z^2+i z\right)^{100}$
+\begin{proof}[Solution]
+	Define
+	\begin{align*}
+		g(z) &= 6i(z^3 - 1)^4 \\
+		h(z) &= \left( z^2+iz  \right) ^{100} 
+	.\end{align*}
+	Compute
+	\begin{align*}
+		g'(z) &= 24i(z^3-1)^3 (3z^2) \\
+		h'(z) &= 100(z^2+iz)^{99} (2z + i)
+	.\end{align*}
+	Apply rule (7):
+	\begin{align*}
+		f'(z) &= (gh)'(z)\\
+		      &= g(z)h'(z) + g'(z) h(z)\\
+		      &= \left( 6i(z^3 - 1)^4 \right) \left( 100(z^2+iz)^{99} (2z + i) \right) + \left( 24i(z^3-1)^3 (3z^2) \right) \left( \left( z^2+iz  \right) ^{100} \right)  \\
+		      &= 24(z-1)^3\left(z^2+z+1\right)^3 z^{99}(z+i)^{99}\left(i 53 z^4-28 z^3-50 i z+25\right)
+	.\end{align*}
+\end{proof}
+
+	\item 13 (a-f).
+		Let $f(z)$ and $g(z)$ be entire functions. Decide which of the following statements are always true.
+(a) $f(z)^3$ is entire.
+\begin{proof}[Solution]
+	True. $(f(z)^3)' = 3f(z)^2 f'(z)$ which exists whenever $f'(z)$ exists.
+\end{proof}
+
+(b) $f(z) g(z)$ is entire.
+\begin{proof}[Solution]
+	True. $\left( f(z)g(z) \right) ' = f'(z)g(z)+ f(z) g'(z)$ which exists whenever $f'(z)$ and $g'(z)$ exists.
+\end{proof}
+
+(c) $f(z) / g(z)$ is entire.
+\begin{proof}[Solution]
+	Not Always True. The derivative of $\frac{f(z)}{g(z)}$ exists only when $g(z)\neq 0$.
+\end{proof}
+
+(d) $5 f(z)+i g(z)$ is entire.
+\begin{proof}[Solution]
+	True. The derivative $5f'(z) + i g'(z)$ exists whenever $f'(z)$ and $g'(z)$ both exist.
+\end{proof}
+
+(e) $f(1 / z)$ is entire.
+\begin{proof}[Solution]
+	Not Always True. This function is may not be defined at $z = 0$, hence not analytic at $z = 0$.
+\end{proof}
+
+(f) $g\left(z^2+2\right)$ is entire.
+\begin{proof}[Solution]
+	True. The derivative $g'(z^2+2)(2z)$ exists whenever  $g'(z^2 +2)$ exists. Because $g$ is entire, $g'$ exists everywhere, so $g'(z^2+2)$ exists for any $z$.
+
+	Also, for any $a \in \mathbb{Z}$, there exists $z \in \mathbb{Z}$ such that $a = z^2 + 2$. Hence this function is everywhere defined on $\mathbb{C}$.
+\end{proof}
+
+\end{enumerate}

@@ -7,7 +7,7 @@ Herstein, section $2.1$, page 47 : Questions $8,9,18,26,27,28$
 Use induction. Clearly $(a*b)^1 = (a*b) = a^1 * b^1$. Now assume the statement if true for  $n$.
 \begin{align*}
 	(a*b)^{n+1}&= (a*b)^n *(a*b) & \text{Notation} \\
-		   &= (a^n * b^n)*(a*b) & \text{IH} \\
+		   &= (a^n * b^n)*(a*b) & \text{Induction Hypothesis} \\
 		   &= \left( a^n * (b^n * a) \right)*b & \text{Associativity, multiple times}  \\
 		   &= \left( a^n * ( a*b^n) \right)*b & \text{Commutativity}  \\
 		   &= (a^n * a)*(b^n*b) & \text{Associativity, multiple times} \\
@@ -53,30 +53,30 @@ Now define $N = \prod_{a \in G} n_a  $. Since $G$ is finite, $N$ is finite. Clea
 4. Given $x \in G$, there exists a $y \in G$ such that $y * x=e$.
 Prove that $G$ is a group. (Thus you must show that $x * e=x$ and $x * y=e$ for $e, y$ as above.)
 \begin{proof}
-	We use property 4 to pick a left inverse $i(x)$ for each element $x \in G$, where $i(x) * x = e$. We use a right-associative convention to avoid cumbersome notation, so $x*y*z$ always means $x*(y*z)$ rather than $(x*y)*z$.
+	We use property 4 to pick a left inverse $f(x)$ for each element $x \in G$, where $f(x) * x = e$. We use a right-associative convention to avoid cumbersome notation, so $x*y*z$ always means $x*(y*z)$ rather than $(x*y)*z$.
 
 First we show that $e$ is also a right identity.
 
 	\begin{align*}
-		x*e &= x*i(x)*x &\text{left inverse} \\
-		    &= e*x*i(x)*x &\text{left identity} \\
-		    &= \left( i(i(x))*i(x) \right) *x*i(x)*x &\text{left inverse} \\
-		    &=  i(i(x))*\left( i(x)  *x \right) *i(x)*x &\text{associativity} \\
-		    &=  i(i(x))*e  *i(x)*x &\text{left inverse} \\
-		    &=  i(i(x))*\left( e  *i(x) \right) *x &\text{associativity} \\
-		    &=  i(i(x))* i(x)  *x &\text{left identity} \\
-		    &=  \left( i(i(x))* i(x) \right)   *x &\text{associativity} \\
+		x*e &= x*f(x)*x &\text{left inverse} \\
+		    &= e*x*f(x)*x &\text{left identity} \\
+		    &= \left( f(f(x))*f(x) \right) *x*f(x)*x &\text{left inverse} \\
+		    &=  f(f(x))*\left( f(x)  *x \right) *f(x)*x &\text{associativity} \\
+		    &=  f(f(x))*e  *f(x)*x &\text{left inverse} \\
+		    &=  f(f(x))*\left( e  *f(x) \right) *x &\text{associativity} \\
+		    &=  f(f(x))* f(x)  *x &\text{left identity} \\
+		    &=  \left( f(f(x))* f(x) \right)   *x &\text{associativity} \\
 		    &=   e  *x &\text{left inverse} \\
 		    &= x &\text{left identity} 
 	.\end{align*}
 
 	Then we prove the left inverse is also a right inverse.
 	\begin{align*}
-		x * i(x) &=  e * \left( x * i(x) \right) & \text{left identity} \\
-			 &= \left( i(i(x))*i(x) \right) * (x * i(x)) &\text{left inverse}\\
-			 &= i(i(x))*((i(x)*x)*i(x)) &\text{associativity} \\
-			 &= i(i(x))*(e*i(x)) &\text{left inverse} \\
-			 &= i(i(x))*i(x) &\text{left identity} \\
+		x * f(x) &=  e * \left( x * f(x) \right) & \text{left identity} \\
+			 &= \left( f(f(x))*f(x) \right) * (x * f(x)) &\text{left inverse}\\
+			 &= f(f(x))*((f(x)*x)*f(x)) &\text{associativity} \\
+			 &= f(f(x))*(e*f(x)) &\text{left inverse} \\
+			 &= f(f(x))*f(x) &\text{left identity} \\
 			 &= e & \text{left inverse}
 	.\end{align*}
 
@@ -199,13 +199,13 @@ Next we cosider subgroup of order 2. This can only be the identity element with 
 \end{enumerate}
 Therefore there are three subgroups of order 2: $\{e, (132)\}$, $\{e, (321)\}$, and$ \{e, (213)\}$
 
-Finally, subgroups of order 3. We write such a group as $\{e,a,b\} $ where $e$ is the identity. Note that $ab \neq a$, otherwise we have $ab = ae$ and $b = e$ by cancellation, which contradicts the assumption that  $a,b,e$ are distinct. By the same reasoning $ab \neq  b$, therefore $ab = e$. By the same reasoning we have $ba = e$. Therefore $b = a^{-1}$. Hence we are looking at two distinct elements from $S_3$ that are each other's inverse. There is only one such pairs in $S_3$:
+Finally, subgroups of order 3. We write such a group as $\{e,a,b\} $ where $e$ is the identity. Note that $ab \neq a$, otherwise we have $ab = ae$ and $b = e$ by cancellation, which contradicts the assumption that  $a,b,e$ are distinct. By the same reasoning $ab \neq  b$, therefore $ab = e$. By the same reasoning we have $ba = e$. Therefore $b = a^{-1}$. Hence we are looking at two distinct elements from $S_3$ that are each other's inverse. There is only one such pair in $S_3$:
 \begin{enumerate}
 	\item $\{(231),(312)\} $ 
 \end{enumerate}
 Therefore $\{e, (231),(312)\} $ is a subgroup of $S_3$ with order 3.
 
-By Lagrange's Theorem, there's no other proper subgroups with higher order, since $4$ and $5$ do not divide $6$. The last subgroup would be order $6$, which is $S_3$ itself.
+By Lagrange's Theorem, there's no other proper subgroup with higher order, since $4$ and $5$ do not divide $6$. The last subgroup would be order $6$, which is $S_3$ itself.
 \end{proof}
 \item 12. Prove that a cyclic group is abelian.
 \begin{proof}
@@ -221,9 +221,7 @@ Take some cyclic group $G$. Because $G$ is cyclic, there exists some element $x 
 
 \item 14. If $G$ has no proper subgroups, prove that $G$ is cyclic.
 \begin{proof}
-We prove the contrapositive. Assume $G$ is not cyclic. Then there exists some $a \in G$ such that $\left\langle a \right\rangle $ is a proper subset of $G$. Because $\left\langle a \right\rangle $ is a cyclic group, it by definition is a proper subgroup of $G$.
-
-TODO add more detail
+We prove the contrapositive. Assume $G$ is not cyclic. Then for any $a \in G$, we have $\left\langle a \right\rangle \neq G$, otherwise $G$ is by definition cyclic. But $\left\langle a \right\rangle \le G$ (as proved on p.53 of the textbook), so $\left\langle a \right\rangle <G$. This is true for arbitrary $a$, so we can pick a non-identity $a$ so that $a \in \left\langle a \right\rangle $ and $e \in \left\langle a \right\rangle $, making $\left\langle a \right\rangle $ nontrivial. Now $\left\langle a \right\rangle $ is a proper subgroup of $G$.
 \end{proof}
 
 \item 24. If $H$ is a subgroup of $G$, let $N=\cap_{x \in G} x^{-1} H x$. Prove that $N$ is a subgroup of $G$ such that $y^{-1} N y=N$ for every $y \in G$.
@@ -236,7 +234,7 @@ First we prove that $N$ is a subgroup of $G$. Take any $n, m \in N$. Let $x \in 
 	&= x^{-1} (h_n h_m) x\\
 	&\in x^{-1} H x
 .\end{align*}
-Because $H$ is a subgroup of $G$, $h_n h_m \in H$. Because $x$ is arbitrary, $nm \in \bigcap_{x \in G} x^{-1} H x = N$. Hence $N$ is closed under multiplication.
+Because $H$ is a subgroup of $G$, $h_n h_m \in H$, so the last line holds. Because $x$ is arbitrary, $nm \in \bigcap_{x \in G} x^{-1} H x = N$. Hence $N$ is closed under multiplication.
 
 Also, consider
 \begin{align*}
@@ -287,7 +285,7 @@ n \in w^{-1} Nw
 \begin{proof}
 Fix $a, b \in G$ and assume $Ha \cap Hb$ is nonempty. It suffices to show that $Ha = Hb$. Take an element $x \in Ha \cap Hb$. Now there $\exists h_{1}, h_{2} \in H$ such that $h_{1} a = h_{2} b = x$.
 
-Now we show that $Ha \subset Hb$, and $Hb \subset Ha$ will follow by symmetry. Take $y \in Ha$. By definition of $Ha$, there exists $h_{y} \in H$ such that $h_{y} a = y$. Because $H$ is a group, the $h_y h_1^{-1} h_1$ is an element of $H$ (by closure and existence of inverse) and equals $h_y$ (by associativity, identity and exietence of inverse).
+Now we show that $Ha \subset Hb$, and $Hb \subset Ha$ will follow by symmetry. Take $y \in Ha$. By definition of $Ha$, there exists $h_{y} \in H$ such that $h_{y} a = y$. Because $H$ is a group, the $h_y h_1^{-1} h_1$ is an element of $H$ (by closure and existence of inverse) and equals $h_y$ (by associativity, identity and existence of inverse).
 Now
 \begin{align*}
 	h_y a &= (h_y h_1^{-1}h_1) a \\
@@ -307,7 +305,7 @@ By group closure of $H$, the element $(h_y h_1^{-1} h_2) \in H$. Hence $y = h_y 
 	.\end{align*}
 	In the definition above we used the assumption that $f_x(M) = x^{-1} Mx \subset M$.
 
-	Now for $y, z \in M$, whenever $f_x(y) = f_x(z)$, we have
+	We prove that $f_x$ is injective. For $y, z \in M$, whenever $f_x(y) = f_x(z)$, we have
 	\begin{align*}
 		f_x(y) &= f_x(z) \\
 		x^{-1} yx &= x^{-1} zx\\
@@ -320,7 +318,7 @@ By group closure of $H$, the element $(h_y h_1^{-1} h_2) \in H$. Hence $y = h_y 
 		ye &= ze \\
 		y &= z
 	.\end{align*}
-We have prove that $f_x$ is injective. Now we prove that $f_x$ is surjective. Fix any $y \in M$. Using the inverse axiom, we have $x^{-1}  \in M$. Using the assumption, we have $\left( x^{-1}  \right) ^{-1} M x^{-1} \subset M$, hence $\left( x^{-1}  \right) ^{-1} y x^{-1} \in  M$. Now
+Now we prove that $f_x$ is surjective. Fix any $y \in M$. Using the inverse axiom, we have $x^{-1}  \in M$. Using the assumption, we have $\left( x^{-1}  \right) ^{-1} M x^{-1} \subset M$, hence $\left( x^{-1}  \right) ^{-1} y x^{-1} \in  M$. Now
 \begin{align*}
 	&f_x\left(\left( x^{-1}  \right) ^{-1} y x^{-1}\right) \\
 	&= x^{-1} \left(\left( x^{-1}  \right) ^{-1} y x^{-1}\right) x \\

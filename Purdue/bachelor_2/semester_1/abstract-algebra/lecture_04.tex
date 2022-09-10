@@ -1,0 +1,145 @@
+\lecture{4}{Fri 09 Sep 2022 10:29}{Consequences of Lagrange's Theorem}
+
+\begin{corollary}
+	(Theorem 2.4.3) Any group of prime order has no proper subgroups, and in particular is cyclic.
+\end{corollary}
+\begin{proof}
+	Say $|G| = p$ is some prime number, suppose $H\le G$. Then $|H| \mid p$, so $|H| = 1$ or $p$, whence $H$ must be $G$ or $\{e\} $.
+
+	But if $H = \left\langle a \right\rangle $ for some nonidentity $a$, then $H \le G$. We have $H \neq \{e\} $. Hence $H = G$. Thus $G$ is cyclic.
+\end{proof}
+\begin{remark}
+	This means groups of prime order are \textbf{abelian} as well.
+\end{remark}
+
+\begin{definition}[Order of an element]
+	Let $G$ be a group. The smallest positive integer $n$ such that $a^n = e$, if one exists, is called the \textit{order} of $a \in G$, and is written $o(a)$. If no such integer exists, we define $o(a) = +\infty $.
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item In $\left( \mathbb{R}^\times  \right) $, one has $o(-1) = 2$, because $(-1)^{2} = 1$.
+		\item In $\mathbb{Z}$, $o(1) = +\infty$.
+		\item In $\mathbb{Z}_3$, $o(1) = 3$ since $1+1+1 \equiv_3 0$.
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}
+	When $G$ is a finite group, we have $o(a) \mid |G|$ for all $a \in G$.
+\end{theorem}
+\begin{proof}
+If $a \in G$, we have $o(a) = |\left\langle a \right\rangle |$. Thus, by Lagrange's Theorem, we have $o(a) \mid |G|$ since $|\left\langle a \right\rangle | \mid |G|$.
+\end{proof}
+
+\begin{corollary}
+	Suppose that  $G$ is a finite group. Then for all $a \in G$, \[
+		a^{|G|} = e
+	.\] 
+\end{corollary}
+\begin{proof}
+	Since $o(a) \mid |G|$, we have $|G| = m o(a)$. Now \[
+		a^{|G|} = \left( a^{o(a)} \right) ^{m} = e^{m} = e
+	.\] 
+\end{proof}
+
+\subsubsection{Elementary Number Theory}
+
+We've seen $\left( \mathbb{Z}_n, + \right) $. We think of it a equivalence class of integers: \[
+	\mathbb{Z}_n = \{[0],[1],\ldots,[n-1]\} 
+\] 
+where the equivalence relation is integers modulo $n$.
+
+$[a]+[b] = [a+b]$
+
+We can also consider multiplication (mod n).
+ \[
+	 [a] \times [b] = [ab]
+.\] 
+
+\begin{itemize}
+	\item (identity) $[1]$ is identity.
+	\item (inverse) $[2]^{-1}$ does not exist in $\mathbb{Z}_6$. 
+\end{itemize}
+
+Define
+\[
+	U_n = \{[a]:(a,b) = 1\} 
+.\]
+\begin{notation}
+	In number theory we often write $U_n$ as  $\left( \mathbb{Z}/ n\mathbb{Z} \right) ^{\times }$
+\end{notation}
+\begin{claim}
+	$U_n$ forms a group with multiplication mod $n$.
+\end{claim}
+\begin{proof}
+	\begin{itemize}
+		\item (closure)
+	If $(a,n) = 1$ and $(b,n) = 1$ then $(ab, n) = 1$. Hence $[a][b] = [ab] \in U_n$.
+\item (identity) $[1]$ is identity.
+\item (associativity) Inherited from $\left( \mathbb{Q}^{x}, \times  \right) $
+\item (inverse) If $(a,n) = 1$, then there exists integers $x, y \in \mathbb{Z}$ such that $ax + ny = 1$ (Euclidean Algorithm), whence $ax\equiv_n 1$.
+
+	Then $[x] = [a]^{-1}$.
+	So $\left( U_n, \times  \right) $ is indeed a group.
+	\end{itemize}
+\end{proof}
+
+Hence if $a \in U_n$, then $a^{|U_n|} \equiv_n 1$. 
+
+\begin{definition}[Euler  $\varphi$-funtion]
+The Euler $\varphi$-function is defined for each $n \in \mathbb{N}$ by \[
+	\varphi(n) = \left| \{1\le a\le n: (a,n) = 1\}  \right| 
+.\] 
+\end{definition}
+\begin{fact}
+	\[
+		\phi(n) = n \prod_{p^4 \mid n, p \text{prime}} (1-\frac{1}{p})  
+	\]
+\end{fact}
+
+\begin{corollary}[Euler's Theorem]
+	When $(a,n) = 1$ one has $a^{\phi(n)} \equiv_n 1$.
+\end{corollary}
+
+\begin{corollary}[Fermat's Little Theorem]
+	When $p$ is prime, one has $a^p \equiv_p a$ for all  $a \in \mathbb{Z}$.
+\end{corollary}
+\begin{proof}
+	Apply Euler's Theorem when $(a,p) = 1$.
+	When $(a,p) = 1$, If $p|a$, then $a^p \equiv a \equiv 0$ (mod $p$ ).
+\end{proof}
+
+Which $U_n$ are cyclic?
+
+Onserve: $U_n$ is abelian. 
+
+\begin{fact}
+	Every finite abelian group is "isomorphic" to a group of the shape \[
+		U_n^{(d)} = \{a^d: a \in U_n\} 
+	\] 
+	for some $d, n \in \mathbb{N}$.
+\end{fact}
+
+\subsection{Homomorphisms and normal subgroups}
+
+\begin{definition}[Homomorphism]
+	Let $G$ and $G'$ be two groups. The mapping \[
+		\phi: G \to  G'
+	\] 
+	is called a \textit{homomorphism} when for all $a,b \in G$, one has $\phi(ab) = \phi(a)\phi(b)$.
+
+	\begin{itemize}
+		\item 
+	Injective homomorphism is called \textit{monomorphism}. 
+\item Surjective homomorphism is called \textit{epimorphism}. 
+\item Bijective homomorphism is called \textit{isomorphism}.
+\item Bijective self-mapping homomorphism is called an \textit{automorphism}.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	We say that two groups $G$ and $G'$ are \textit{isomorphic} if there exists a mapping $\phi: G \to G'$ such that $\phi$ is an isomorphism. We write \[
+		G \cong G'
+	.\] 
+\end{definition}
+

@@ -1,0 +1,215 @@
+\lecture{5}{Tue 06 Sep 2022 12:04}{Analytic and Harmonic Functions}
+
+\begin{theorem}[Chain Rule]
+	If $f$ can be differentiated at $a$ and $g$ can be differentiated at $f(a)$, then $g \circ f$ can be differentiated at $a$ and \[
+		\left( g(f) \right) ' (a) = f'(a) g'(f(a))
+	.\] 
+\end{theorem}
+
+\begin{corollary}[Inverse function theorem]
+	Suppose $f'(a)\neq 0$, then there exists an inverse function $ \varphi$ defined in some neighborhood of $f(a)$, such that $f(\varphi(w)) = w$ for all $w$ in this neighborhood, and $\varphi'(f(a)) = \frac{1}{f'(a)}$.
+\end{corollary}
+
+\subsection{Analyticity}
+
+\begin{definition}[Analytic Function]
+	A function $f$ is called \textit{analytic} in a region $\mathcal{D}$ if it is $\mathbb{C}$-differentiable at every point $a \in \mathcal{D}$.
+\end{definition}
+
+Write $f(z) = u(x,y) + iv(x,y)$ where $z = x+iy$, and let $a = a_1 + a_2 i$. We rewrite the definition for differentiability:
+
+\begin{enumerate}
+	\item Suppose $h$ is real.
+	\begin{align}
+		&\frac{1}{h}\left( u(a_1+h, a_2) + i v(a_1 + h, a_2) - u(a_1, a_2) - iv(a_1, a_2) \right)\nonumber \\
+		&\to \frac{\partial u}{\partial x} (a_1, a_2) 
+		+ i\frac{\partial v}{\partial x} (a_1, a_2)\label{eqn:part1}
+	.\end{align} 
+\item Suppose $h$ is imaginary. Write $h = ik$
+\begin{align}
+		&\frac{1}{ik}\left( u(a_1, a_2+k) + i v(a_1, a_2+k) - u(a_1, a_2) - iv(a_1, a_2) \right)\nonumber \\
+		&\to - i \frac{\partial u}{\partial y} (a_1, a_2) 
+		+ i\frac{\partial v}{\partial y} (a_1, a_2)\label{eqn:part2}
+	.\end{align}
+\item $\mathbb{C}$-derivative exists implies all partials exists, AND \eqref{eqn:part1} equals \eqref{eqn:part2}.
+\end{enumerate}
+
+\begin{theorem}[Cauchy-Riemann Condition]
+	A necessary condition for $\mathbb{C}$-differentiability is
+	\[
+		\begin{cases}
+			\frac{\partial u}{\partial x} =\frac{\partial v}{\partial y} \\
+			\frac{\partial u}{\partial y} =-\frac{\partial v}{\partial x} 
+		\end{cases}
+	\] everywhere on some open set $G$.
+
+	Conversely, if partial derivatives exists everywhere on $G$, \textbf{are continuous} on $G$, and satisfy Cauchy-Riemann Condition, then the $f$ is $\mathbb{C}-$ differentiable on $G$.
+\end{theorem}
+
+\begin{example}
+	\begin{enumerate}
+		\item 
+	Consider $z^2 = x^2-y^2+2ixy$. Now
+	\begin{align*}
+		u_x &=  2x = v_y \\
+		u_y &= -2y = -v_x
+	.\end{align*}
+\item $\overline{z} = x - iy$. now
+	\begin{align*}
+		u &=  x\\
+		v &=  -y
+	.\end{align*}
+	The C-R condition is not satisfied.
+\item $e^z = e^{x+iy} = e^x \cos y + i e^x \sin y$ 
+	\begin{align*}
+		u_x &=  e^x \cos y \\
+		v_y &=  e^x \cos y = u_x \\
+		u_y &= -e^x \sin y \\
+		v_x &= e^x \sin y = -u_y
+	.\end{align*}
+	Conclusion: complex exponential is analytic on the whole plane.
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	A function analytic in $\mathbb{C}$ is called \textit{entire}.
+\end{definition}
+
+\begin{example}
+	Polynomials, exp are entire. Rational functions are not in general entire because some of them have zeros where they are not analytic.
+\end{example}
+
+\subsubsection{Consequences of the Cauchy-Riemann condition}
+
+\begin{enumerate}
+	\item If $f$ is analytic in a region $\mathcal{D}$, and $f' = 0$ everywhere, then $f$ is constant.
+	\begin{proof}
+		\begin{align*}
+			f'&= u_x + iv_x = u_y - iv_y = u_x - iu_y = v_y + iu_x
+		.\end{align*}
+		We draw a zig-zag line between $z_1$ and $z_2$.  Now we apply single-variable-calculus argument to show that the function is constant on each segment. Since the region is connected, $z_1 = z_2$.
+	\end{proof}
+\item (Recovery of $u$ from $v $) 
+		Real or imaginary part define an analytic function up to additive constant.
+	\begin{align*}
+		u_x &= v_y \\
+		u &= \int v_y dx + C(y)\\
+		u_y &=  \frac{\partial }{\partial y} \int v_y dx + C'(y) = -v_x
+	.\end{align*}
+	From this we can recover $C$, and hence $u$, up to a constant.
+	\begin{example}
+		\begin{align*}
+			v &=  xy \\
+			u_x &=  v_y = x \\
+			u &=  \frac{1}{2}x^2 + C(y) \\
+			u_y &= C'(y) = -v_x = - y\\
+			C(y) &= -\frac{1}{2}y^2 + C_0 \\
+			u(x,y) &=  \frac{1}{2}\left( x^2 - y^2 \right) +C_0
+		\end{align*}
+		where $C_0$ is an arbitrary constant.
+
+	\end{example}
+	
+\end{enumerate}
+
+	\subsubsection{Necessary condition for Analyticity}
+	Can we assign $u$ or $v$ arbitarily? NO. 
+\begin{example}
+	Suppose $u = x^2 - 2y^2$. Now
+	\begin{align*}
+		u_x &= 2x = v_y \\
+		v &= 2xy + C(x) \\
+		v_x &= 2y + C'(x) = -u_y = 4y
+	.\end{align*}
+	We cannot find an appropriate $C'(x)$ to satisfy the equality. Hence the C-R condition can never be met.
+\end{example}
+
+
+
+We use the following theorem from real calculus:
+\begin{theorem}[Clairaut's Theorem]
+	If $u$ is twice continuously differentiable, then \[
+		u_{xy} = u_{yx}
+	.\] 
+\end{theorem}
+
+Now by taking partial derivatives on both sides of the C-R condition,
+
+\begin{align*}
+	&\phantom{\implies}\begin{cases}
+		u_{x x} = v_{y x} \\
+		u_{y y} = -v_{x y}
+	\end{cases}\\
+	&\implies \begin{cases}
+		u_{x x} + u_{y y} = 0\\
+		v_{x x} + v_{y y} = 0
+	\end{cases}
+.\end{align*}
+This is called the \textit{Laplace Equations}, and the solutions are called \textit{Harmonic Functions}.
+
+Hence the C-R condition requires that $u$ and $v$ are both harmonic.
+
+In complex regions, e.g. with a hole, different paths may yield different results. But for simple regions, e.g. a disk, this does not happen.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{region-with-hole}
+    \caption{region-with-hole}
+    \label{fig:region-with-hole}
+\end{figure}
+
+\begin{definition}
+	If $u$ and $v$ are harmonic satisfy C-R, they are called \textit{conjugate}.
+\end{definition}
+
+
+\subsection{Harmonic Functions}
+
+
+\begin{definition}[Laplacian]
+	For example, with three variables, 
+	\[
+		\Delta \mathbf{u} = \mathbf{u}_{x_1x_1}+\mathbf{u}_{x_2x_2}+\mathbf{u}_{x_3x_3}
+	.\] 
+
+	The equation $\Delta \mathbf{u} = \mathbf{0}$ is called a \textit{Laplace equation}. We say a function is \textit{harmonic} if it is a solution to some Laplace equation.
+\end{definition}
+
+
+If $u$ is harmonic, then its scalar multiples are harmonic; sum of harmonic functions are harmonic.
+
+
+
+\begin{example}
+	(from physics) In $\mathbb{R}^3$, $\frac{1}{r} = \frac{1}{\sqrt{x_1^2 + x_2^2 + x_3^2} }$ is the gravitational potential. This function is harmonic.
+	
+	The force is the gradient of potential: \[
+		\vec{F} =\Delta(\frac{1}{r})
+	.\] 
+\end{example}
+\subsubsection{Dirichlet Problem}
+\begin{problem}
+	We have $\varphi(z)$, $z \in \partial \mathcal{D}$. 
+
+We want to find $u(x,y)$, $(x,y) \in \mathcal{D}$, such that 
+\[
+	\Delta u = u_{x x}+u_{y y} =0, \lim_{z \to \zeta} u(z) = \varphi(\zeta), \zeta \in \partial \mathcal{D}
+.\] 
+\end{problem}
+
+For a nice bounded region and continuous $\varphi$, the solution exists and is unique.
+
+If $\mathcal{D}$ is unbounded, or $\varphi$ is discontinuous, then we need additional assumption that $u$ is bounded to ensure uniqueness.
+
+
+If $\varphi$ is piecewise continuous, a bounded solution exists and is unique.
+\begin{example}
+	The time-independent temperature (stationary) over a 2-D plate: $u(x,y)$. If we can determine the boundary condition of a region that is time-independent (stationary), we can determine the interior temperature that is stationary. In other words, we are able to predict the temperature at any interior point of the enclosed region.
+\end{example}
+
+
+\begin{example}
+	$\mathcal{D} = \{x+iy:0<y<1\} $. We have $u: \overline{\mathcal{D}} \to \mathbb{R}$. Find $u(x,y)$ such that $u(x,0)=0$ and $u(x,1) = 2$.
+
+	Answer: $u(x,y) = 2y = 2 \operatorname{Im} z$.
+\end{example}
