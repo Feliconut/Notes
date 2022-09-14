@@ -96,6 +96,11 @@ If we put $\xi=\sup \left\{a_{n}: n \in \mathbf{N}\right\}$ and $\eta=\inf \left
 	.\] 
 Suppose that $a_m < a_n$. Then there exists some $x$ such that $a_m < x < x_n$, such that $a_n \le x\le b_n$ is not true, therefore the implication is not true for the specific $x$, a contradiction to the universally quantified statement. By trichotomy of real order, we have $a_m \ge a_n$. By the same reasoning we have $b_m \le  b_n$.
 
+\begin{correction}
+	We still need to verify that $a_n\le  b_m$ for all $n, m \in  \mathbb{N}$. To do this, take $N = \max(n,m)$. Now \[
+		a_n \le a_N \le b_N \le b_m
+	.\] 
+\end{correction}
 Now we show that $[\xi, \eta]=\bigcap_{n \in N} I_{n}$. We first show that $[\xi, \eta]\subset \bigcap_{n \in N} I_{n}$. Take $x \in  \left[ \xi, \eta \right] $, and take an arbitrary $n \in \mathbb{N}$. It suffices to show that $x \in I_n$. Since $\xi$ is a supremum, we must have $\xi \ge a_n$. Therefore $x \ge  \xi \ge  a_n$. Similarly we have $x \le  b_n$. By definition of $I_n$, we have $x \in  I_n$.
 
 Next we show that $[\xi, \eta]\supset \bigcap_{n \in N} I_{n}$. Take $x \in \bigcap_{n \in N} I_{n}$. Then $x \in I_n$ for all $n \in \mathbb{N}$. Suppose that $x < \xi$. Then there exists some $m \in \mathbb{N}$ such that $x<a_m \le  \xi$. Clearly $x \in I_m$ is not true, a contradiction. Therefore we must have $x \ge \xi$. By the same reasoning we have $x\le \eta$, so $x \in  \left[ \xi, \eta \right] $.

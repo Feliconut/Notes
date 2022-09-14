@@ -20,7 +20,7 @@ Herstein, section 2.4, page 64 : Questions 8,13,16,18,27,31,37
 	$U_{18} = \{[1],[5],[7],[11],[13],[17]\} $.
 We find order of each element:
 \begin{align*}
-	\left\langle 1 \right\rangle &= \{[1]\}  \\
+	\left\langle [ 1  ]\right\rangle &= \{[1]\}  \\
 	\left\langle [5] \right\rangle &= \{[5],[7],[17],[13],[11],[1]\}  \\
 	\left\langle [7] \right\rangle &= \{[7],[13],[1]\}  \\
 	\left\langle [ 11 ] \right\rangle &= \{[11],[13],[17],[7],[5],[1]\}  \\
@@ -151,18 +151,17 @@ Therefore all members except $1 $ or $p -1$ are not their own inverse. Hence the
 		q - r = n x \equiv 0 \pmod n
 	.\] 
 
-	Now we prove the other direction, and assume $q \equiv r \pmod n$. Apply euclidean algorithm to both $q$ and $r$. We obtain integers $x_q, x_r, y_q, y_r$ such that $0\le y_q < n$, $0\le y_r < n$ and \[
-		q = n x_q + y_q, r = n x_r + y_r
+	Now we prove the other direction, and assume $q \equiv r \pmod n$. Apply euclidean algorithm to $q - r$. We obtain integers $x, y$ such that $0\le y < n$  and \[
+		q - r = n x + y
 	.\] 
-	We have $q \equiv y_q \pmod n$ and $r \equiv y_r \pmod n$. Hence $y_q \equiv y_r \pmod n$. Since both of them are in $\mathbb{Z}_n$, $y_q = y_r$. Let $y = y_q$. Now
+	We have $q-r \equiv y \pmod n$. Since $q -r \equiv 0 \pmod n$, $y \equiv 0 \pmod n$. Because it is assumed that  $0\le y<n$, we have $y = 0$. Hence $q - r = nx$. Now
 	\begin{align*}
-		a^{q-r} &= a^{(n x_q + y)-(n x_r + y)}\\
-		&= a^{nx_q + nx_r} \\
-		&= a^{n(x_q + x_r)} \\
-		&= \left( a^n \right) ^{x_q + x_r} \\
-		&= e^{x_q + x_r} \\
-		&= e 
+		a^{q-r} &= a^{nx}\\
+		&= (a^n)^x \\
+		&= e^x \\
+			&= e 
 	.\end{align*}
+	Hence $a^q = a^r $.
 \end{proof}
 
 By assumption we have $o(a) = |\left\langle a \right\rangle | = m$. By Theorem 2.4.5, $a^m = e$. Apply the last lemma. Since $a^s = e = a^m$, \[
@@ -172,7 +171,7 @@ Hence
 \[
 	s \equiv 0 \pmod m
 .\] 
-Which means $m | s$.
+Which implies $m | s$.
 \end{proof}
 
 	\item 37. In a cyclic group of order $n$, show that for each positive integer $m$ that divides $n$ (including $m=1$ and $m=n$ ) there are $\varphi(m)$ elements of order $m$.
@@ -224,7 +223,7 @@ Which means $m | s$.
 Without loss of generality, let $x = a_1$.
 If $d_x(n)\ge a$, then $a_1 \ge  a$. Hence there exists a nonnegative integer $c$ such that $a_1 = a + c$. Now
 \[
-	n &= x^{a_1}p_2^{a_2}\ldots p_k^{a_k}= x^{a + c}p_2^{a_2}\ldots p_k^{a_k}= x^{a}x^cp_2^{a_2}\ldots p_k^{a_k}
+	n = x^{a_1}p_2^{a_2}\ldots p_k^{a_k}= x^{a + c}p_2^{a_2}\ldots p_k^{a_k}= x^{a}\left( x^cp_2^{a_2}\ldots p_k^{a_k} \right) 
 \] 
 Therefore $x^a | n$.
 
@@ -353,7 +352,7 @@ Herstein, section 2.5, page 73 : Questions 2,6,7
 		\item Take the identity mapping $\iota_G: G \to  G$. Now $\iota$ is clearly bijective, and \[
 			\iota_G(a_1 a_2) = a_1 a_2 = \iota_G(a_1)\iota(a_2)
 		.\] 
-		\item Since $G_1 \simeq G_2$, there exists bijective mapping $\varphi: G_1 \to  G_2$ such that for all $a, b \in G_1$, $\varphi(ab) = \varphi(a) \varphi(b)$. Now consider the inverse mapping $\varphi^{-1}$. Clearly this mapping is bijective. For all elements $x, y \in G_2$, let  $a = \varphi^{-1} (x)$ and $b = \varphi^{-1} (y)$. Now $\varphi(a) = x$ and $\varphi(b) = y$. Now \begin{align*}
+		\item Since $G_1 \simeq G_2$, there exists bijective mapping $\varphi: G_1 \to  G_2$ such that for all $a, b \in G_1$, $\varphi(ab) = \varphi(a) \varphi(b)$. Now consider the inverse mapping $\varphi^{-1}$. We know that a bijective mapping has a bijective inverse, so $\varphi^{-1}$ is bijective. For all elements $x, y \in G_2$, let  $a = \varphi^{-1} (x)$ and $b = \varphi^{-1} (y)$. Now $\varphi(a) = x$ and $\varphi(b) = y$. Now \begin{align*}
 		\varphi^{-1} (xy) &= \varphi^{-1} (\varphi(a)\varphi(b)) \\
 				  &= \varphi^{-1} (\varphi(ab)) \\
 				  &= ab \\

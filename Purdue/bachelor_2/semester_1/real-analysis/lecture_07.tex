@@ -1,0 +1,98 @@
+\lecture{7}{Wed 14 Sep 2022 11:31}{Closed Sets}
+
+\begin{example}
+	(countable union of open sets need not be open)
+	If $U_n = B_{\frac{1}{n}}(x), x \in \mathbb{R}^p$. Then \[
+		\bigcap_{n = 1}^\infty  B_{\frac{1}{n}}(x) = \{x\} 
+	.\] 
+	\begin{proof}
+		If $y \neq x$ then $\|y-x\| >0$. Exists $n \in \mathbb{N}: 0 < \frac{1}{n} < \|y-x\|$. Hence $y \not\in B_{\frac{1}{n}}(x)$.
+	\end{proof}
+\end{example}
+
+\begin{proposition}
+	A set $E \subset \mathbb{R}^p$ is open if and only if $E$ is a union of open balls.
+\end{proposition}
+\begin{proof}
+	($\impliedby$) is clear by the previous proposition, since open balls are open.
+
+	Now we prove ($\implies$ ). For any $x \in E$, there exists $r = r_x > 0$ such that \[
+		G_x = B_{r_x}(x) \subset E
+	.\] 
+	Then $E = \bigcup_{x \in E} G_x$. Indeed, since $G_x \subset E$, the union is $\subset E$. For any $x_0 \in E$, we have $x_0 \in G_{x_0} \subset \bigcup_{x \in E} G_x$, hence $E \subset \bigcup_{x \in E} G_x$.
+\end{proof}
+
+\begin{definition}[Closed Set]
+	$F \subset \mathbb{R}^p$ is called closed if and only if $F^c$ is open.
+\end{definition}
+
+\begin{proposition}
+	$F \subset \mathbb{R}^p$ is closed if and only if it contains all its boundary points.
+\end{proposition}
+\begin{proof}
+	($\implies$ ) Let $F$ be closed and $x$ is boundary point of $F$. If $x \not\in F$, $x \in F^c$. Hence $x$ is an exterior point. Hence $x \in F$.
+	
+	($\impliedby$ ) Suppose now $F$ contains all its boundary points. Let $x \not\in F$. Hence $x$ is not interior point of $F$. $x$ is not boundary by assumption. Hence $x$ is exterior. This means $x \in F^c \implies x $ is interior to $F^c$. Hence $F^c$ is open.
+\end{proof}
+
+\subsection{Properties of closed sets}
+
+\begin{proposition}
+	\quad
+	\begin{enumerate}
+		\item $R^{p}, \emptyset $ are closed.
+		\item Union of a finite family of closed sets is closed.
+		\item Intersection of any family of closed sets is closed.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item $(R^p)^c = \emptyset , \emptyset ^c = \mathbb{R}^p$.
+		\item $F_1, \ldots, F_N$ are closed. Then \[
+		\left( \bigcup_{i = 1} ^N F_i \right) ^c = \bigcap_{i = 1} ^N F_i^c
+		.\] 
+		Therefore  $ \left( \bigcup_{i = 1} ^N F_i  \right) ^c$ open by property of open sets. Hence $ \bigcup_{i = 1} ^N F_i  $ closed.
+	\item Similarly,
+		 \[
+			 \left( \bigcap_{\alpha \in A} F_\alpha \right) ^c = \bigcup_{\alpha \in A} F_\alpha^c
+		.\] 
+	\end{enumerate}
+\end{proof}
+
+\begin{example}
+	\begin{enumerate}
+		\item $\{x\} $ is a closed set. 
+		\item More generally, any closed ball \[
+			\overline{B_r(x)}  = \{y: \|y-x\|\le r\} , r\ge 0
+		\] is closed.
+		\begin{proof}
+			$\overline{B_r(x)}^c$ is the exterior of the ball which we know is open.
+		\end{proof}
+	\item Cantor set is closed. 
+		\begin{proof}
+		Each $F_n$ is a finite union of closed union of closed balls, which is closed. $F$ is a countable intersection of closed sets, which is again closed.
+		\end{proof}
+	\end{enumerate}
+\end{example}
+
+\subsection{Nested cells}
+
+\begin{definition}
+	\textit{Open cells} in $\mathbb{R}^p$ are Cartesian products of open intervals.
+	\textit{Closed cells} in $\mathbb{R}^p$ are Cartesian products of closed intervals.
+
+	Products of all types of intervals are also called \textit{cells}.
+\end{definition}
+
+\begin{theorem}
+	Suppose we have a nested family of nonempty closed cells: \[
+		I_1 \supset I_2 \supset \ldots\supset I_n \supset \ldots
+	\] 
+	Then \[
+		\bigcap_{n = 1} ^{\infty } I_n \neq  \emptyset 
+	.\] 
+\end{theorem}
+\begin{proof}
+	look at the projections.
+\end{proof}
+

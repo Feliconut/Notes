@@ -1,0 +1,89 @@
+\lecture{6}{Wed 14 Sep 2022 10:32}{}
+
+\begin{lemma}
+	If $\varphi:G \to  G'$ is a homomorphism of groups, then $\varphi(G)\le G'$.
+\end{lemma}
+\begin{proof}
+	Homework exercise.
+\end{proof}
+
+\begin{theorem}
+	If $\varphi:G \to G'$ is a homomorphism of groups, then: 
+	\begin{enumerate}
+		\item $\operatorname{ker} \varphi \le G$
+		\item For all $g \in G$, one has $g^{-1} \left( \operatorname{ker} \varphi \right) g \subset \operatorname{ker} \varphi$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Suppose $a,b \in \operatorname{ker} \varphi$. Then \[
+		\varphi(ab^{-1} )=\varphi(a)\varphi(b)^{-1} = e' (e')^{-1} = e'
+	.\] 
+	So $ab^{-1}  \in \operatorname{ker} \varphi$. Thus $\operatorname{ker} \varphi \le G$ by subgroup criterion.
+	Whenever $k \in \operatorname{ker} \varphi$, one has for all $g \in G$, \[
+		\varphi(g^{-1} kg) = \varphi(g)^{-1} \varphi(k)\varphi(g) = \varphi(g)^{-1} e' \varphi(g) = \varphi(g)^{-1} \varphi(g) = e'
+	.\] 
+\end{proof}
+
+\begin{remark}
+	The kernel is \textbf{fixed under conjugation}, and forms a \textit{normal subgroup}. Also note: we actually have $g^{-1} \left( \operatorname{ker} \varphi \right) g = \operatorname{ker} \varphi$.
+\end{remark}
+
+\begin{definition}[Normal Subgroup]
+	Suppose $N\le G$, then $N$ is a \textit{normal subgroup} of $G$ when \[
+		g^{-1} N g \subset N
+	\]
+	for all $g \in G$. We then write $N \triangleleft  G$.
+\end{definition}
+
+If $g^{-1} Ng \subset N$, then $g^{-1} Ng = N$ (exercise). Then $N = g N g^{-1}$. So if these relations hold for all $g \in G$, we have \[
+	g N = N g
+\] for all $g \in G$.
+
+\begin{example}
+	\begin{enumerate}
+		\item If $G$ is abelian and $H\le G$ then $H \triangleleft G$. Observe that for all $G \in G$,and $h \in H$, one has $g^{-1} hg=hg^{-1} g = he = h$, so $g^{-1} Hg = H$ for all $g \in G$.
+		\item Recall $Z(G) = \{z \in G: \forall x \in G, z x = xz\} $. Thus, for all $g \in G$, one has $g^{-1} Z(G) g = Z(G)$. Hence $Z(G) \triangleleft G$.
+		\item Consider the group
+			\[
+				G = D_{2n} = \left\langle \sigma, \tau: \sigma^n = \tau^2, \sigma\tau = \tau\sigma \right\rangle
+			.\]
+		Consider $H = \left\langle \sigma \right\rangle $. We check that $H\triangleleft G$. We have \[
+			\sigma^{-m} (\sigma^{l})\sigma^{m}= \sigma^{l} \in H.
+		.\] 
+		\begin{align*}
+			(\tau\sigma^m)^{-1}\sigma^l(\tau\sigma^m) &= \sigma^{-m}\tau^{-1} \left( \sigma^l \tau \right)  \sigma^{m}\\
+			 &= \sigma^{-m}\tau^{-1} \left( \tau \sigma^l \right)  \sigma^{m}\\
+			 &= \sigma^{-m}\sigma^{-l}\sigma^m \\
+			 &= \sigma^{-l} \in H 
+		.\end{align*} 
+		Thus $g^{-1} H g \subset H$ for all $g \in D_{2n}$. Hence $H \triangleleft D_{2n}$.
+	\end{enumerate}
+\end{example} 
+
+
+\subsection{Quotient Groups (or Quotient Groups)}
+
+\[
+	(\mathbb{Z}_n, +) \cong \mathbb{Z} / n \mathbb{Z}
+.\] 
+
+Recall that when $H \le G$, we can define $a\sim b$ when $ab^{-1} \in H$. Then $[a] = Ha$. 
+
+\begin{theorem}
+	Suppose $N \triangleleft G$. Define \[
+		G / N = \{Na: a \in G\} 
+	.\] 
+	Then $G / N$ is a group relative to the group operation \[
+		Na \cdot Nb = N(ab)
+	.\] 
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item (well-defined operation)
+		\item (closure)
+		\item (associativity)
+		\item (identity)
+		\item (inverse)
+	\end{itemize}
+\end{proof}
+

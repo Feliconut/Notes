@@ -171,7 +171,7 @@ is not convex.
 	.\] Note that $\mathcal{O}_X$ is at most countable.
 	We claim that $\cup \mathcal{O}_X = X$. First we show that $\cup \mathcal{O}_X \subset  X$. Take $x \in \cup \mathcal{O}_X$. So $x \in A$ for some $a \in \mathcal{O}_X$. Since $A\subset X$, $x \in X$.
 
-	Now we show $ X \subset \cup \mathcal{O}_X $. Take any $x \in X$. Since $X$ is open, there exists some positive real $a$ such that $B_a(x) \subset X$. Now we can choose two rational numbers $x'$ and $a'$, where $a'>0$, such that \[
+	Now we show $ X \subset \cup \mathcal{O}_X $. Take any $x \in X$. Since $X$ is open, there exists some positive real $a$ such that $B_a(x) \subset X$. Using the lemma below, we can choose two rational numbers $x'$ and $a'$, where $a'>0$, such that \[
 		x \in B_{a'}(x') \subset B_a(x)
 	.\] 
 	Thus \[
@@ -184,12 +184,10 @@ is not convex.
 	\[
 		x \in \cup \mathcal{O}_X
 	\] 
-	which concludes the proof.
+	which concludes the proof. Now we supplement the lemma and proof.	
 
-	To verify how to select the two rational numbers $x'$ and $a'$, we need the following lemmas:
-	
 	\begin{lemma}[Density of rational points in Euclidean space]
-		In Euclidean space $\mathbb{R}^p$, every open ball contains a point whose coordinates are all rational numbers.
+		In Euclidean space $\mathbb{R}^p$, every open ball contains a point whose coordinates are all rational numbers, i.e., $q \in \mathbb{Q}^p$.
 	\end{lemma}
 	\begin{proof}
 		Since we are working with euclidean space, we assume that the norm is euclidean norm. By doing this we can avoid certain topological arguments.
@@ -248,7 +246,7 @@ is not convex.
 Also, $A \subset  B_x(r) \in \mathcal{O}_X$ since all the points $y$ in $A$ satisfies $\|y-x\|\le \frac{r}{2} < r$.
 Hence  $A \subset X$, and in particular $x \in X$.
 
-	Now we show $ X \subset \cup \overline{\mathcal{O}_X}$. Take any $x \in X$. Since $X$ is open, there exists some positive real $a$ such that $B_a(x) \subset X$. Now we can choose two rational numbers $x'$ and $a'$, just like in the last exercise, where $a'>0$, such that \[
+	Now we show $ X \subset \cup \overline{\mathcal{O}_X}$. Take any $x \in X$. Since $X$ is open, there exists some positive real $a$ such that $B_a(x) \subset X$. Now we can choose two rational numbers $x'$ and $a'$, just like in the last exercise, where $a'>0$, such that 
 		\[
 		x \in B_{a'}(x') \subset B_a(x)
 		.\] 
@@ -282,7 +280,7 @@ Give an example to show that $(A \cap B)^{-}=A^{-} \cap B^{-}$may not hold.
 		\item ($\left( A^- \right) ^- = A^-$)
 			$\left( A^- \right) ^- \supset A^-$ is obvious. We prove $\left( A^- \right) ^- \subset A^-$. It suffices to show $\left( \left( A^- \right) ^- \right) ^c \supset \left( A^- \right) ^c$. First of all, not that $\left( A^- \right) ^c$ is open since $A^-$ is closed. For any $x \in \left( A^- \right) ^c$, there exists a open neighborhood $B$ such that $x \in B$ and $B \subset \left( A^{-}\right^c  $. Now the set  $B^c$ is closed, and $A^- \subset B^c$. Hence $B^c \in \mathcal{C}(A^-)$. Therefore $x \not\in \cap \mathcal{C}(A^-)$ since $x \not\in B^c$. In other words, $x \in \left( \left( A^- \right) ^- \right) ^c$.
 		\item ($\left( A \cup B \right) ^- = A^- \cup B^-$ ) 
-		We first prove $\left( A \cup B \right) ^- \supset A^- \cup B^-$. Without loss of generality, assume $x \in A^-$. Take arbitrary $X \in C(A \cup B)$. To prove the result we need to show $x \in X$. Now $A \cup B \subset X$ by definition, so in particular $A \subset X$. This means that $X \in C(A)$. Hence $x \in X$.
+		We first prove $\left( A \cup B \right) ^- \supset A^- \cup B^-$. Let $x \in A^- \cup B^-$. Without loss of generality, assume $x \in A^-$. Take arbitrary $X \in C(A \cup B)$. To prove the result we need to show $x \in X$. Now $A \cup B \subset X$ by definition, so in particular $A \subset X$. This means that $X \in C(A)$. Hence $x \in X$.
 
 		Now we prove $\left( A \cup B \right) ^- \subset A^- \cup B^-$. It suffices to show $\left( \left( A \cup B \right) ^- \right) ^c \supset \left( A^- \right) ^c \cap \left( B^- \right) ^c$. 
 		Take $x \in \left( A^- \right) ^c \cap \left( B^- \right) ^c$.
