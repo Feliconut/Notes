@@ -1,0 +1,110 @@
+\lecture{6}{Mon 12 Sep 2022 11:36}{Point set topology in Euclidean space}
+
+\begin{proposition}[Reverse Triangle Inequality]
+	In any normed space, \[
+		|\|x\|-\|y\| |  \le \|x-y\|
+	.\] 
+\end{proposition}
+\begin{proof}
+	\begin{align*}
+		&\iff -\|x-y\|\le \|x\| - \|y\| \le  \|x-y\| \\
+		&\iff \|y\|\le \|y-x\| + \|x\| \land \|x\| \le  \|x-y\| + \|y\|
+	.\end{align*}
+	Now this follows from triangle inequality.
+\end{proof}
+
+
+\subsection{Topology in Cartesian space $\mathbb{R}^p$ }
+
+For any $x,y \in \mathbb{R}^p$, define the \textit{Euclidean distance} $d(x,y) = \|x-y\|$.
+
+Check $d(x,y)$ is a distance.
+
+\begin{definition}[Open and closed balls]
+	For $x \in \mathbb{R}^p, r = 0$, define \[
+		B_r(x) = \{y \in \mathbb{R}^p: \|y-x\|< r\} 
+	\] to be the \textit{open ball} centered at $x$ with \textit{radius} $r$.
+
+	Similarly, define the \textit{closed ball}, or \textit{closure} of the open ball as \[
+		\overline{B_r(x)} = \{y \in \mathbb{R}^p: \|y-x\|\le r\} 
+	.\] 
+
+	A \textit{sphere}, or \textit{boundary} of ball is \[
+		S_r(x) = \partial B_r (x) = \{y \in R^{p}: \|y-x\|= r\} 
+	.\] 
+\end{definition}
+
+
+\begin{definition}
+	Let $E \subset \mathbb{R}^p$, $x \in \mathbb{R}^p$. 
+	\begin{enumerate}
+		\item We say $x$ is an \logseq{interior point} of $E$ is there is a positive $r$ s.t.$B_r(x) \subset E$.
+
+			We also say $E$ is a \textit{neighorhood} of $x$.
+		\item We say that $x$ is an \textit{exterior point} of $E$ if there exists a positive $r$ s.t. $B_r(x) \cap E =\emptyset $, i.e. $B_r(x) \subset E^c$.
+
+		$x$ is exterior point of $E$ iff $x$ is interior point of $E^c$.
+	\item We say that $x$ is a \logseq{boundary point} of $E$, if for every $r > 0$, $B_r(x) \cap E\neq \emptyset $ and $B_r(x)\cap E^c \neq \emptyset $.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Open Set]
+	We say $E \subset R^p$ is \textit{open} if every $x \in E$ is an interior point of $E$.
+\end{definition}
+\begin{example}
+	\begin{enumerate}
+		\item $\emptyset $, $\mathbb{R}^p$ are trivial examples of open sets.
+		\item Open balls.
+\begin{proposition}
+	Open balls are open.
+\end{proposition}
+\begin{proof}
+	Let $E = B_R(a)$, $R>0$, $a \in \mathbb{R}^p$. We want to show: if $x \in B_R(a)$ then there exists $r>0$ such that $B_r(x) \subset B_R(a)$.
+
+	Let $r = R - \|a-x\|$
+	Take $y \in B_r(x)$. Then $\|y-x\|<r = R - \|a-x\|$. By triangle inequality,
+	\begin{align*}
+		\|a-y\|&\le \|a-x\| + \|y-x\|\\
+		&< \|a-x\| + r \\
+		&= \|a-x\| + R - \|a-x\| \\
+		&= R
+	.\end{align*} 
+	Hence $B_r(x) \subset B_R(a)$. Hence $B_R(a)$ is open.
+\end{proof}
+\item Exterior of the ball
+	\[
+		\mathbb{R}^P \setminus \overline{B_r(a)}  = \{x \in \mathbb{R}^p: \|x-a\|>R\}
+	\]
+	is open, by using the same argument as above.
+
+\item $x$ is a boundary point of $B_R(a) \iff \|x-a\|=R$.
+	\end{enumerate}
+\end{example}
+
+\subsection{Properties of Open sets}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item $\emptyset , \mathbb{R}^p$ are open.
+		\item Finite intersection of open sets is open.
+		\item Arbitrary union of open sets is open. If $\{U_\alpha\}_{\alpha\in A}$ is any collection of sets such that $U_\alpha$ is open for any $\alpha \in A$, then \[
+			\bigcup_{a \in A} U_\alpha \text{ is open.}
+		.\]
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	(2):
+	Let $x \in \bigcap_{i=1}^N U_i$. Then for any $1\le i\le N$, $x \in U_i$. Then there exists positive $r_i>0$ such that $B_{r_i}(x) \subset U_i$. Take \[
+		r = \operatorname{inf} \{r_i: 1\le i\le N\}
+	.\] 
+	Since $N$ is finite, $r > 0$. Now for any $i$, $r\le r_i$, so $B_{r}(x)\subset B_{r_i}(x)$. This is true for all $i$, so $B_r(x) \subset \bigcap_{i=1}^N U_i$.
+
+	(3): 
+	Let $x \in \bigcup_{a \in A} U_\alpha$. Now $x \in U_{\alpha_0}$ for some $\alpha_0 \in A$. Then there exists $r_0>0$ such that $B_{r_0}(x) \subset U_{\alpha_0}$.
+Now
+\[
+	B_{r_0}(x) \subset U_{\alpha_0} \subset \bigcap_{i=1}^N U_i
+.\] 
+Hence  $\bigcap_{i=1}^N U_i$ is open.
+\end{proof}
+

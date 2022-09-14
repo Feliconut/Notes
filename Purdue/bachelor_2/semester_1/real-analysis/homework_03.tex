@@ -1,3 +1,319 @@
 \homework{3}{Fri 09 Sep 2022 16:50}{Week 3 due Sep 16}
 
 8.F, 8.G, 8.M, 8.Q, 9.G, 9.H, 9.L, 9.Q(a,b,c,d)
+\begin{enumerate}
+	\item 8.F. If $x=\left(x_1, x_2, \ldots, x_p\right) \in \boldsymbol{R}^p$, define $\|x\|_1$ by
+\[
+\|x\|_1=\left|x_1\right|+\left|x_2\right|+\cdots+\left|x_p\right| .
+\]
+Prove that $x \mapsto\|x\|_1$ is a norm on $\boldsymbol{R}^p$.
+\begin{proof}
+	\begin{enumerate}
+		\item Take any $x = (x_1, \ldots, x_p) \in \mathbb{R}^p$. For any $1\le i\le p$, $|x_i| \ge 1$ by property of absolute value. Now
+			\[
+				\|x\|_1 = |x_1| + \ldots | x_p| \ge 0 + \ldots + 0 = 0
+			.\] 
+		If $x = 0$, then $x_1 = \ldots = x_p = 0$, hence $|x_1| = |x_2| = \ldots = |x_p| = 0$. Hence $\|x\|_1 = 0$. Conversely, if $\|x\|_1 = 0$, then any  $|x_i|$ must be $0$ which means $x = 0$. Otherwise, the sum $|x_1| + \ldots | x_p|$ will be greater than zero, a contradiction.
+	\item  $ax = (ax_1, ax_2, \ldots,ax_p)$ by definition. Now
+		\begin{align*}
+			\|ax_1\| &= |ax_1| + \ldots + |ax_p|\\
+			&= |a||x_1| + \ldots + |a| |x_p| \\
+			&= |a|(|x_1| + \ldots | x_p|) \\
+			&= |a| \|x\|_1
+		.\end{align*} 
+	\item Recall the triangle inequality for absolute value: for any $a, b \in \mathbb{R}$, \[
+		|a + b|\le |a| + |b|
+	.\] 
+	Now
+	\begin{align*}
+		\|x+y\|_1 &= |x_1+y_1| + |x_2+y_2| + \ldots + |x_p + y_p| \\
+		&\le (|x_1| + |y_1|)+(|x_2| + |y_2|)+\ldots+(|x_p| + |y_p|)\\
+		&= (|x_1| + \ldots + |a| |x_p|) + (|y_1| + \ldots + |a| |y_p|) \\
+		&= \|x\|_1 + \|y\|_1
+	.\end{align*}
+	\end{enumerate}
+	We have verified all the norm properties in the definition, so $\|\cdot\|_1$ is a norm.
+\end{proof}
+
+\item 8.G. If $x=\left(x_1, x_2, \ldots, x_p\right) \in \mathbf{R}^p$, define $\|x\|_{\infty}$ by
+\[
+\|x\|_{\infty}=\sup \left\{\left|x_1\right|,\left|x_2\right|, \ldots,\left|x_p\right|\right\} .
+\]
+Prove that $x \mapsto\|x\|_{\infty}$ is a norm on $\mathbf{R}^p$.
+\begin{proof}
+	Consider $x=\left(x_1, x_2, \ldots, x_p\right) \in \mathbb{R}^p$, and we verify each property in the definition.
+	\begin{itemize}
+		\item Since for all $1\le i\le p$, $|x_i| \ge 0$, $\|x\|_\infty = \operatorname{sup}_i |x_i| \ge 0$. 
+
+		If $x = 0$, then for all $i$, $x_i = 0$, hence  $|x_i| = 0$. Therefore $\|x\|_\infty = \operatorname{sup}_i |x_i| = \operatorname{sup}_i 0=  0$.
+			Now suppose $\|x\|_\infty = \operatorname{sup}_i |x_i| = 0$. If $x\neq 0$, then there exists some $1<j\le p$ such that $x_j \neq 0$, hence $|x_j| > 0$. Since $0$ is a supremum, we have $0 \ge |x_j| > 0$, a contradiction.
+		\item Consider \begin{align*}
+				\|ax \|_\infty &= \operatorname{sup} \{|a x_1|, |a x_2|, \ldots, |a x_p|\} \\
+		&= \operatorname{sup} \{|a| |x_1|, \ldots, |a| |x_p|\} 
+		.\end{align*} 
+		Since $|a| \ge 0$, we have $|x_i| \ge  |x_j| \iff |a| |x_i| \ge |a| |x_j|$. Therefore
+		\begin{align*}
+			\|ax \|_\infty &=  |a| \operatorname{sup} \{ |x_1|, \ldots, |x_p|\} \\
+			&= |a| \|x\|
+		.\end{align*}
+	\item We need to show \[
+		\operatorname{sup} \{|x_1+y_1|, \ldots, |x_p+y_p|\}  \le  \operatorname{sup} \{|x_1|,\ldots,|x_p|\} + \operatorname{sup} \{|y_1|,\ldots,|y_p|\}
+	.\] 
+	We first show that
+\[
+		\operatorname{sup} \{|x_1+y_1|, \ldots, |x_p+y_p|\}  \le 
+		\operatorname{sup} \{|x_1|+|y_1|,\ldots,|x_p|+|y_p|\}
+	\]
+	which comes from triangle inequality for absolute values. Since $p$ is finite, there exists some $1\le i\le p$ such that $\operatorname{sup} \{|x_1+y_1|, \ldots, |x_p+y_p|\} = |x_i+y_i|$. But $|x_i+y_i| \le  |x_i| + |y_i| \le \operatorname{sup} \{|x_1|+|y_1|,\ldots,|x_p|+|y_p|\}$.
+
+	Next we verify that \[
+		\operatorname{sup} \{|x_1|+|y_1|,\ldots,|x_p|+|y_p|\}\le 
+\operatorname{sup} \{|x_1|,\ldots,|x_p|\} + \operatorname{sup} \{|y_1|,\ldots,|y_p|\}
+.\]
+	To demonstrate this, first notice that there exists $1\le i\le p$ such that  $\operatorname{sup} \{|x_1|+|y_1|,\ldots,|x_p|+|y_p|\} = |x_i| + |y_i|$. Now $|x_i| \le \operatorname{sup} \{|x_1|,\ldots,|x_p|\}$ and $|y_i| \le \operatorname{sup} \{|y_1|,\ldots,|y_p|\}$, so the claim follows.
+	\end{itemize}
+\end{proof}
+
+
+\item 8.M. If $x, y$ belong to $\boldsymbol{R}^p$, is it true that
+\[
+|x \cdot y| \leq\|x\|_1\|y\|_1 \quad \text { and } \quad|x \cdot y| \leq\|x\|_{\infty}\|y\|_{\infty} ?
+\]
+\begin{proof}
+	To verify the first statement, consider
+	\begin{align*}
+		|x \cdot y| &=  \left| x_1y_1 + \ldots+x_ny_n \right|  \\
+			    &\le |x_1||y_1| + \ldots+|x_n||y_n|\\
+			    &\le \sum_{i, j=1,\ldots,n} |x_i| |y_j| \\
+			    &= \left( |x_1|+\ldots+|x_n| \right)\left( |y_1|+\ldots+|y_n| \right)  \\
+			    &= \|x\|_1 \|y\|_1
+	.\end{align*}
+
+	The second statement is not true in general. 
+
+	Consider $x,y \in \mathbb{R}^3$ where \[
+		x = (1,1,1), y = (1,1,1)
+	.\] 
+	Now $x  \cdot y = 1\times 1 + 1\times 1 + 1\times 1 = 3$ and $\|x\|_{\infty }\|y\|_{\infty } = 1 \times  1 = 1$. We have a counterexample for the statement now.
+\end{proof}
+
+\item 8.Q. A subset $K$ of $\boldsymbol{R}^p$ is said to be convex if, whenever $x, y$ belong to $K$ and $t$ is a real number such that $0 \leq t \leq 1$, then the point
+\[
+(1-t) x+t y=x+t(y-x)
+\]
+also belongs to $K$. Interpret this condition geometrically and show that the subsets
+\[
+\begin{aligned}
+&\boldsymbol{K}_1=\left\{x \in \boldsymbol{R}^2:\|x\| \leq 1\right\} \\
+&\boldsymbol{K}_2=\left\{(\xi, \eta) \in \boldsymbol{R}^2: 0<\xi<\eta\right\} \\
+&\boldsymbol{K}_3=\left\{(\xi, \eta) \in \boldsymbol{R}^2: 0 \leq \eta \leq \xi \leq 1\right\}
+\end{aligned}
+\]
+are convex but that the subset
+\[
+\boldsymbol{K}_4=\left\{x \in \boldsymbol{R}^2:\|x\|=1\right\}
+\]
+is not convex.
+\begin{proof}
+	The geometrical interpretation is: any line segment between elements of $K $ is itself entirely contained in $K$. 
+	\begin{enumerate}
+		\item Take $x, y \in \mathbf{K}_1$. And let  \[
+			z = (1-t)x + ty
+		\] 
+		where $t$ is arbitrary fixed real number between $0$ and $1$ inclusive. Now
+		\begin{align*}
+			\|z\| &= \|(1-t)x + ty\| \\
+			&\le  \|(1-t)x \|+ \|ty\|\\
+			&=  (1-t)\|x \|+ t\|y\|
+		.\end{align*}
+		Without loss of generality we may assume $\|x\|\le \|y\|$. Hence 
+		\begin{align*}
+			\|z\|
+			&=  (1-t)\|x \|+ t\|y\|\\
+			&\le (1-t)\|y\| + t \|y\|\\
+			&= \|y\|\\
+			&\le 1
+		.\end{align*}
+		Therefore $z \in \mathbf{K}_1$, as desired.
+	\item Take $x, y \in \mathbf{K}^2$ and $t \in [0,1]$. Now define  $z = (1-t)x + ty = (x_1 + y_1, x_2 + y_2)$.
+	Since $x_1>0, x_2>0$, we have $z_1 = (1-t)x_1+ty_1 > 0+0 = 0$. Also,
+	\begin{align*}
+		z_1 &= (1-t)x_1 + ty_1 \\
+		    &< (1-t)x_1 + ty_2 &\text{since}y_1<y_2 \\
+		    &< (1-t)x_2 + ty_2 &\text{since}x_1 < x_2 \\
+		    &= z_2 \\
+	.\end{align*}
+	Therefore $z \in \mathbf{K}_2$.
+	\item Take $x, y \in \mathbf{K}^3$ and $t \in [0,1]$. Now define  $z = (1-t)x + ty = (x_1 + y_1, x_2 + y_2)$.
+	Since $x_1\ge 0, x_2\ge 0$, we have $z_1 = (1-t)x_1+ty_1 \ge  0+0 = 0$. 
+	Since $x_1\le 1, x_2\le 1$, we have $z_1 = (1-t)x_1+ty_1 \le  (1-t)\times 1+t \times 1 = 1$. 
+	Also,
+	\begin{align*}
+		z_1 &= (1-t)x_1 + ty_1 \\
+		    &\ge  (1-t)x_1 + ty_2 &\text{since}y_1\ge y_2 \\
+		    &\ge  (1-t)x_2 + ty_2 &\text{since}x_1 \ge  x_2 \\
+		    &= z_2 \\
+	.\end{align*}
+	Therefore $z \in \mathbf{K}_3$.
+\item It suffices to provide a counterexample. Take $x = (1,0)$ and $y = (-1,0)$. Now they are both elements of $\mathbf{K}_4$ since $\|x\|=\|1\| = 1$ and $\|y\|=\|-1\| = 1$.
+	Now take $t = \frac{1}{2}$ and note that $(1-t)x + ty = \frac{1}{2} x + \frac{1}{2} y = \frac{1}{2} (1-1) = 0$. However $\|0\| = 0$ which does not satisfy the condition for being an element of $\mathbf{K}_4$. Hence $\mathbf{K}_4$ is not convex.
+	\end{enumerate}
+\end{proof}
+
+\item 9.G. Show that a subset of $\boldsymbol{R}^p$ is open if and only if it is the union of a countable collection of open balls. (Hint: the set of all points in $\boldsymbol{R}^{\mathrm{p}}$ all of whose coordinates are rational numbers is countable.)
+\begin{proof}
+	We already know $\mathbb{Q}^p$ is countable. By property of countability, $\mathbb{Q}^p \times \mathbb{Q}$ is countable. Now consider the family of open balls with rational center and rational radius:
+	\[
+		\mathcal{O} = \{B_x(r):(x,r) \in \mathbb{Q}^p \times \mathbb{Q}\}
+	.\] 
+	Thus $\mathcal{O}$ is countable. Let $X$ be an arbitrary open subset of $\mathbb{R}^p$. Take a subcollection $\mathcal{O}_X$ of $\mathcal{O}$: \[
+		\mathcal{O}_X = \{A \in \mathcal{O}: A \subset X\} 
+	.\] Note that $\mathcal{O}_X$ is at most countable.
+	We claim that $\cup \mathcal{O}_X = X$. First we show that $\cup \mathcal{O}_X \subset  X$. Take $x \in \cup \mathcal{O}_X$. So $x \in A$ for some $a \in \mathcal{O}_X$. Since $A\subset X$, $x \in X$.
+
+	Now we show $ X \subset \cup \mathcal{O}_X $. Take any $x \in X$. Since $X$ is open, there exists some positive real $a$ such that $B_a(x) \subset X$. Now we can choose two rational numbers $x'$ and $a'$, where $a'>0$, such that \[
+		x \in B_{a'}(x') \subset B_a(x)
+	.\] 
+	Thus \[
+		x \in B_{a'}(x') \subset X
+	.\] 
+	Hence \[
+		x \in B_{a'}(x') \in \mathcal{O}_X
+	.\] 
+	Therefore 
+	\[
+		x \in \cup \mathcal{O}_X
+	\] 
+	which concludes the proof.
+
+	To verify how to select the two rational numbers $x'$ and $a'$, we need the following lemmas:
+	
+	\begin{lemma}[Density of rational points in Euclidean space]
+		In Euclidean space $\mathbb{R}^p$, every open ball contains a point whose coordinates are all rational numbers.
+	\end{lemma}
+	\begin{proof}
+		Since we are working with euclidean space, we assume that the norm is euclidean norm. By doing this we can avoid certain topological arguments.
+
+		Let $B_r(x)$ be the open ball. Define \[
+			d = r / \sqrt{p} 
+		.\] 
+		Let $B$ be the open box \[
+			B = \{y \in \mathbb{R}^p: \forall i \in \{1,\ldots,p\}, \left| y_i - x_i \right| < d\} 
+		.\] 
+		Now take any element $y \in B$. Its distance to $x$ is
+		 \begin{align*}
+			\|y-x\| &= \sqrt{ \sum_{i=1}^{p} \left( y_i - x_i \right) ^2} \\
+				&\le \sqrt{\sum_{i=1}^{p} d^2} \\
+				&= \sqrt{pd^2}  \\
+				&= r
+		.\end{align*}
+		Hence $B \subset B_r(x)$. Now for each $1\le i\le p$, we use density of rational in $\mathbb{R}$ to choose some rational number $q_i$ such that
+		\[
+			x_i - d < q_i < x_i + d
+		.\] 
+		Such choice is always possible because $d$ is positive. Now we define \[
+			q = (q_1, \ldots, q_p)
+		.\] 
+		Note that $q \in B$ by construction. Hence $q \in B_r(x)$.
+
+	\end{proof}
+	Use the last lemma to choose some rational $x' \in B_{\frac{a}{3}}(x)$. Then use density of rational in $\mathbb{R}$ to choose rational $a'$ such that  \[
+		\frac{a}{3} < a' < \frac{2a}{3}
+	.\] 
+	Now $x \in B_{a'}(x')$ since 
+	\[
+		\|x-x'\| < \frac{a}{3} < a
+	.\] 
+	$B_{a'}(x') \subset B_a(x)$ since for any $y \in B_{a'}(x')$, \[
+		\|y-x'\|\le \|y-a'\|+\|a-x'\|< a' + \frac{a}{3} < \frac{2a}{3}+\frac{a}{3} = a
+	.\] 
+	
+\end{proof}
+
+
+\item 9.H. Every open subset of $\boldsymbol{R}^{\mathrm{p}}$ is the union of a countable collection of closed sets.
+\begin{proof}
+	We already know $\mathbb{Q}^p$ is countable. By property of countability, $\mathbb{Q}^p \times \mathbb{Q}$ is countable. Now consider the family of open balls with rational center and rational radius:
+	\[
+		\mathcal{O} = \{B_x(r):(x,r) \in \mathbb{Q}^p \times \mathbb{Q}\}
+	.\] 
+	Thus $\mathcal{O}$ is countable. Let $X$ be an arbitrary open subset of $\mathbb{R}^p$. Take a subcollection $\mathcal{O}_X$ of $\mathcal{O}$: \[
+		\mathcal{O}_X = \{A \in \mathcal{O}: A \subset X\} 
+	.\] Note that $\mathcal{O}_X$ is at most countable.
+	Now define $\overline{\mathcal{O}_X}$ as
+	\[
+		 \overline{\mathcal{O}_X}= \{\overline{B}_x(\frac{r}{2}): B_x(r) \in \mathcal{O}_X\} 
+	.\] 
+	We claim that $\cup  \overline{\mathcal{O}_X}= X$. First we show that $\cup \overline{\mathcal{O}_X} \subset  X$. Take $x \in \cup \overline{\mathcal{O}_X}$. So $x \in A$ for some $A = \overline{B}_x(\frac{r}{2}) \in \overline{\mathcal{O}_X}$. Hence $B_x(r) \in \mathcal{O}_X$ by definition of $\overline{\mathcal{O}_X}$.
+Also, $A \subset  B_x(r) \in \mathcal{O}_X$ since all the points $y$ in $A$ satisfies $\|y-x\|\le \frac{r}{2} < r$.
+Hence  $A \subset X$, and in particular $x \in X$.
+
+	Now we show $ X \subset \cup \overline{\mathcal{O}_X}$. Take any $x \in X$. Since $X$ is open, there exists some positive real $a$ such that $B_a(x) \subset X$. Now we can choose two rational numbers $x'$ and $a'$, just like in the last exercise, where $a'>0$, such that \[
+		\[
+		x \in B_{a'}(x') \subset B_a(x)
+		.\] 
+	Now consider the closed ball \[
+		A_x = \overline{B} _{\frac{a'}{2}}(x')
+	.\] 
+	Since both $a'$ and $x'$ are rational numbers, $B_{a'}(x') \in \mathcal{O}_X$. Hence $A_x \in \overline{\mathcal{O}_X}$. Hence $x \in \cup  \overline{\mathcal{O}_X}$.
+\end{proof}
+
+	
+\item 9.L. If $A$ is any subset of $\boldsymbol{R}^{\mathrm{p}}$, let $A^{-}$denote the intersection of all closed sets containing $A$; the set $A^{-}$is called the closure of $A$. Note that $A^{-}$is a closed set; prove that it is the smallest closed set containing $A$. Prove that
+\[
+\begin{aligned}
+A & \subseteq A^{-}, \quad\left(A^{-}\right)^{-}=A^{-} \\
+(A \cup B)^{-} &=A^{-} \cup B^{-}, & \emptyset^{-} &=\emptyset .
+\end{aligned}
+\]
+Give an example to show that $(A \cap B)^{-}=A^{-} \cap B^{-}$may not hold.
+\begin{proof}
+	Define \[
+			\mathcal{C}(A) = \{B\subset \mathbb{R}^p: A\subset B, B \text{ closed}\} 
+		.\] 
+		Now $A^-$ is defined as \[
+			A^- = \cap \mathcal{C}(A) 
+		.\] 
+
+	\begin{enumerate}
+		\item (smallest) Suppose there is a set $B$ such that $B$ is closed, $A \subset B$, and $B \subsetneq A^-$. Now there exists $x \in A^- \setminus B$. But since $B$ is a closed set containing $A$, it's one of the intersecting sets defining $A^-$, so $x \in B$, a contradiction.
+		\item ($A \subset A^-$ ) 
+			Take any element $x \in A$. Take any $B \in \mathcal{C}(A)$. By definition $A \subset B$, so $x \in B$. Since this is true for all $B \in \mathcal{C}(A)$, $x \in \mathcal{C}(A)$.
+		\item ($\left( A^- \right) ^- = A^-$)
+			$\left( A^- \right) ^- \supset A^-$ is obvious. We prove $\left( A^- \right) ^- \subset A^-$. It suffices to show $\left( \left( A^- \right) ^- \right) ^c \supset \left( A^- \right) ^c$. First of all, not that $\left( A^- \right) ^c$ is open since $A^-$ is closed. For any $x \in \left( A^- \right) ^c$, there exists a open neighborhood $B$ such that $x \in B$ and $B \subset \left( A^{-}\right^c  $. Now the set  $B^c$ is closed, and $A^- \subset B^c$. Hence $B^c \in \mathcal{C}(A^-)$. Therefore $x \not\in \cap \mathcal{C}(A^-)$ since $x \not\in B^c$. In other words, $x \in \left( \left( A^- \right) ^- \right) ^c$.
+		\item ($\left( A \cup B \right) ^- = A^- \cup B^-$ ) 
+		We first prove $\left( A \cup B \right) ^- \supset A^- \cup B^-$. Without loss of generality, assume $x \in A^-$. Take arbitrary $X \in C(A \cup B)$. To prove the result we need to show $x \in X$. Now $A \cup B \subset X$ by definition, so in particular $A \subset X$. This means that $X \in C(A)$. Hence $x \in X$.
+
+		Now we prove $\left( A \cup B \right) ^- \subset A^- \cup B^-$. It suffices to show $\left( \left( A \cup B \right) ^- \right) ^c \supset \left( A^- \right) ^c \cap \left( B^- \right) ^c$. 
+		Take $x \in \left( A^- \right) ^c \cap \left( B^- \right) ^c$.
+		Now since $\left( A^- \right) ^c$ and $\left( B^- \right) ^c$ are open, we can choose neighbors $X_A$ and $X_B$ such that \[
+			x \in X_A \subset \left( A^- \right) ^c, x \in X_B \subset \left( B^- \right) ^c
+		.\] 
+		So $x \in X_A \cap X_B =: X$. Consider the set $X^c$ now. $X^c$ is closed because $X$ is open. Because $A \subset A^- \subset X_A^c$ and $B \subset B^- \subset X_B^c$, we have $A \cup B \subset X_A^c \cup A_B^c = (X_A \cap X_B)^c = X^c$. Now $X^c $ is closed and contains $A \cup B$, so $X^c \in \mathcal{C}(A \cup B)$. But $x \not\in X^c$, so $x \not\in \cup \mathcal{C}(A \cup B) = (A \cup B)^-$, which means $x \in \left( \left( A \cup B \right) ^- \right) ^c$.
+
+	\item The empty set $\emptyset $ is closed and contains $\emptyset $, so $\emptyset \in \mathcal{C}(\emptyset )$ . Hence $\emptyset ^- = \emptyset $.
+
+	\end{enumerate}
+\end{proof}
+
+
+\item 9.Q. Interpret the concepts introduced in this section for the Cantor set $F$ of Definition 7.4. In particular:
+(a) Show that $\boldsymbol{F}$ is closed in $\boldsymbol{R}$.
+(b) There are no interior points in $\boldsymbol{F}$.
+(c) There are no non-empty open sets contained in $\boldsymbol{F}$.
+(d) Every point of $\boldsymbol{F}$ is a boundary point.
+(e) The set $\boldsymbol{F}$ cannot be expressed as the union of a countable collection of closed intervals.
+(f) The complement of $\boldsymbol{F}$ can be expressed as the union of a countable collection of open intervals.
+\begin{proof}
+	\begin{enumerate}
+		\item Each $F_n$ is closed, so $F = \cap F_n$ is closed.
+		\item Any interval $(a,b)$ that contains at least one element from $F$ also contains a full "middle third" set, so in particular  $(a,b) \not \subset F$. For a point $x \in F$ to be an interior point we need to find open ball $A$ such that $x \in A \subset F$, but no such $A$ exists.
+		\item Same as (b)
+		\item Same as (b)
+		\item  It's a countable intersection of closed intervals. I have shown this in the last homework. What do you even expect me to say??????
+			BAD
+		\item The complement is exactly the union of the "middle third" sets, while the middle third sets are open and countable.
+	\end{enumerate}
+\end{proof}
+
+\end{enumerate}

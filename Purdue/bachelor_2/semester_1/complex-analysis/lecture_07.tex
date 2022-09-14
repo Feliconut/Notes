@@ -1,0 +1,131 @@
+\lecture{7}{Tue 13 Sep 2022 12:02}{}
+
+$f'(z) = m(z-a)^{m-1 }g(z) + (z-a)^mm g'(z)$ 
+Rule: a zero of multiplicity $m$ if \[
+	f(a) = f'(a) = \ldots = f^{(m-1)}(a) = 0
+.\] 
+but $f^{(m)}(a) \neq  0$
+
+\subsection{Partial Fractions Decomposition}
+
+For any $\frac{p}{q}$, if $\operatorname{deg} p \ge \operatorname{deg} q$, we can divide with remainder to obtain \[
+	\frac{p}{q} = g + \frac{r}{q}, \operatorname{deg} r < \operatorname{deg} q
+.\] 
+In other words, $\frac{r}{q}(\infty ) = 0$. Such rational functions are \textit{proper}.
+
+Now we decompose the proper rational functions to sum of \textit{simple} fractions.
+
+\[
+	\frac{p}{q} = g + \sum_{j=1}^{k} \sum_{i =1}^{mj } \frac{c_{j i}}{\left( z - a_j \right) ^i}
+.\] 
+We could treat  $c_{ji }$ as \textit{undetermined coefficients}, and obtain a linear system of equations. There's a simpler way to get the coefficients, though.
+
+\begin{example}
+	\begin{enumerate}
+		\item 
+	\[
+		\frac{1}{z\left( z-1 \right) (z-2)} = \frac{A}{z}+\frac{B}{z-1}+\frac{C}{z-2}
+	.\] 
+
+	To find $A$, multiply by $z$, and plug $z = 0$.
+	\[
+		\frac{1}{(z-1)(z-2)} = A \implies A = \frac{1}{(-1)(-2) }= \frac{1}{2}
+	.\] 
+	Similarly $B = -1$ and $C = \frac{1}{2}$.
+\item \[
+	\frac{z^3}{z^2 - 1} = z + \frac{z}{(z-1)(z+1)} = z + \frac{A}{z-1}+\frac{B}{z+1}
+.\] 
+\item \[
+	\frac{z}{z^2 + 1} = \frac{A}{z-i} + \frac{B}{z+i}
+.\] 
+We have $A = B = \frac{1}{2}$
+\item \[
+	\frac{z}{(z+i)^2} = \frac{A}{z+i} + \frac{B}{(z+i)^2}
+.\] 
+pole at $-1$, with multiplicity $2$.
+
+To find $B$, multiply by $(z+i)^2$ and plug  $z=-i$. To find $A$, multiply by $(z+i)^2$, differentiate, and plug $z = -i$.
+\[
+	A = \frac{d}{dz}(z) |_{z = -i} = 1
+.\] 
+	\end{enumerate}
+\end{example}
+
+Now we find the general formula.
+\[
+	c_{j,k} = \frac{1}{(k-1)!}\frac{d^{(k-1)}}{dz^{k-1}} \left. \left( (z-a_j)^{mj }f(z) \right) \right|_{z = a_j}
+.\] 
+
+\subsection{Trigonometric, Hyperbolic and Logarithmics Function}
+
+$e^z$, $\cos z = \frac{1}{2}(e^{iz} + e^{-iz })$, $\sin z = \frac{1}{2i } \left( e^{iz }- e^{-iz } \right) $ are entire.
+
+ $\tan z = \frac{\sin z}{\cos z}$, poles where $\cos z = 0$ 
+
+\begin{example}
+	$\cos iz = \frac{1}{2}(e^{-z} + e^z) =: \text{ch} z (\cosh z)$ 
+
+	$\sin iz = \frac{i}{2}(e^{-z} - e^z) =:i \text{sh} z (\sinh z)$ 
+
+	$\cos z = \frac{1}{2} (e^y + e^{-y}) \cos x - i \frac{1}{2} (e^y - e^{-y}) \sin x = \text{ch} y \cos x - i \text{sh} y \sin x$
+
+\end{example}
+
+$e^z = w$ (no solutions when $w = 0$, infinitely many solution for $w \neq  0$ )
+
+$e^{x+iy } = |w| e^{i \operatorname{arg} w}$, $\varphi = \operatorname{arg}  w $ (infinitely many)
+
+$e^x = |w|$, $x = \operatorname{Log} w$ (real number, "high school" log)
+
+$y = \operatorname{arg} w = \operatorname{Arg} w + 2 \pi k, k \in \mathbb{Z}$, 
+
+$\operatorname{Arg} w = (-\pi, \pi] \cap  \operatorname{arg} w$ (single number)
+
+\begin{remark}
+	 Main disadvantage of $\operatorname{Arg}$ is its \textbf{dis-continuity} at $-\pi$. We need functions to be continuous in order to plug values into them.
+
+	 We may even make $Arg w \in (-\pi, \pi)$ to avoid dealing with the nagetive real line. We have made a branch cut.
+\end{remark}
+
+Now we want to define $\log$ such that $z = \log w$ contains all solutions, infinity many of them.
+
+\begin{align*}
+	z &= \log w \\
+	&= \operatorname{Log} |w| + i \operatorname{Arg} w + 2 \pi i k,\qquad k \in \mathbb{Z}\\
+	\operatorname{Log} w &:= \operatorname{Log} |w| + i \operatorname{Arg}  w
+.\end{align*}
+
+$\operatorname{Log} w $ is the  \textit{principal branch} of the $\log$.
+
+
+\begin{example}
+	Solve $\cos z = 2$.
+	
+	If want to solve $f(g(z)) = w$, first solve for $g(z)$, and then solve for $z$.
+
+	\[
+		\cos z = \frac{1}{2} (e^{iz} + e^{-iz}) = J\left( e^{i z} \right)
+	.\] 
+	\begin{enumerate}
+		\item Let $\zeta = e^{iz}$ and we now solve $J(\zeta) = 2$, which is a quadratic.
+	\begin{align*}
+		\zeta^2 + 4 \zeta + 1 &= 0\\
+		\zeta = 2 \pm \sqrt{3} 
+	.\end{align*} 
+
+\item Solve $e^{iz } = \zeta$.
+	\begin{align*}
+		e^{i z = 2 + \sqrt{3} } \implies i z_{1,k} &= Log \zeta_1 + 2 \pi i k, \quad k \in \mathbb{Z}\\
+ z_{1,k} &= - i Log \left( 2 + \sqrt{ 3}  \right)  + 2 \pi k, \quad k \in \mathbb{Z}\\
+ e^{i z = 2 - \sqrt{3} } \implies i z_{2,k} &= Log \left( 2 - \sqrt{3}  \right)  + 2 \pi i k, \quad k \in \mathbb{Z}\\
+ z_{2, k} &= - i Log(2 - \sqrt{3} ) + 2 \pi k
+	.\end{align*}
+	Now we make a picture of the solutions.
+	\end{enumerate}
+	Since $\zeta_1 \zeta_2 = 1$, $\operatorname{Log} \zeta_1 = - \operatorname{Log} \zeta_2 $. So the solutions are in pairs symmetric by the $x$ axis.
+
+	How does the solution to $\cos z = t$ evolve when $t $ changes? See visualization:
+		
+\end{example}
+
+

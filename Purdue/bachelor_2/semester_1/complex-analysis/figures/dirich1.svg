@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="240mm" height="120mm" viewBox="0 0 240 120" version="1.1" id="svg8" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="dirich1.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs id="defs2">
+    <inkscape:path-effect effect="spiro" id="path-effect187" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect187-0" is_visible="true" lpeversion="1" />
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.99437388" inkscape:cx="334.8841" inkscape:cy="139.78646" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" showborder="true" width="200mm" showguides="true" inkscape:guide-bbox="true" inkscape:window-width="1390" inkscape:window-height="922" inkscape:window-x="0" inkscape:window-y="32" inkscape:window-maximized="0" inkscape:showpageshadow="0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid type="xygrid" id="grid815" units="mm" spacingx="10" spacingy="10" empspacing="4" dotted="false" />
+  </sodipodi:namedview>
+  <metadata id="metadata5">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-177)">
+    <path style="stroke-width:0.70220417;stop-color:#000000;fill-opacity:1;stroke-dasharray:none;marker-end:none;fill:none;marker-start:none;stroke:black;stroke-opacity:1" d="M 56.675109,212.92084 H 139.69217" id="path185" inkscape:path-effect="#path-effect187" inkscape:original-d="m 56.675109,212.92084 c 27.67262,2.7e-4 55.344971,2.7e-4 83.017061,0" />
+    <path style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" d="M 56.675113,232.87687 H 139.69217" id="path185-5" inkscape:path-effect="#path-effect187-0" inkscape:original-d="m 56.675113,232.87687 c 27.672619,2.7e-4 55.344967,2.7e-4 83.017057,0" />
+    <rect style="fill:black;fill-opacity:0.12;stroke:none;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" id="rect617" width="83.017059" height="19.956028" x="56.67511" y="212.92084" />
+    <text xml:space="preserve" style="font-size:3.175px;fill:black;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="44.435417" y="232.87686" id="text731"><tspan sodipodi:role="line" id="tspan729" style="stroke-width:0.702204;fill-opacity:1;marker-end:none;fill:black;marker-start:none;stroke-opacity:1;stroke:none" x="44.435417" y="232.87686">$y=0$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="42.838936" y="212.56973" id="text793"><tspan sodipodi:role="line" id="tspan791" style="stroke-width:0.702204" x="42.838936" y="212.56973">$y = 1$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="145.81203" y="212.56973" id="text847"><tspan sodipodi:role="line" id="tspan845" style="stroke-width:0.702204" x="145.81203" y="212.56973">$u((x,1)=2$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.702204;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none;stop-color:#000000" x="146.34119" y="232.87686" id="text847-9"><tspan sodipodi:role="line" id="tspan845-5" style="stroke-width:0.702204" x="146.34119" y="232.87686">$u((x,0)=1$</tspan></text>
+  </g>
+</svg>

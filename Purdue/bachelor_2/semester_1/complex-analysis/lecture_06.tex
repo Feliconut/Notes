@@ -9,7 +9,7 @@ General Principle:
 		\item Show directly that $\Delta u =0$ and CR condition imply \[
 			\Delta \left( u(f) \right)  = 0
 		.\] 
-	\item Locally, $u = \operatorname{Re}  F$, then $u(f) = \operatorname{Re} F(f)$. $F(f)$ is analytic, since $F$, $f$ are.
+	\item Locally, $u = \operatorname{Re}  F$ for some analytic $F$, then $u(f) = \operatorname{Re} F(f)$. $F(f)$ is analytic, since $F$, $f$ are.
 	\end{enumerate}
 \end{proof}
 
@@ -24,14 +24,13 @@ General Principle:
 \end{example}
 
 \begin{example}
-	\begin{problem}
+	See problem in the figure.
 \begin{figure}[H]
     \centering
     \incfig{dirich3}
     \caption{dirich3}
     \label{fig:dirich3}
 \end{figure}
-	\end{problem}
 	We construct a function \[
 		\varphi(z) = (1+i)z
 	\] 
@@ -71,13 +70,13 @@ We define the \textit{angle} between two intersecting curves at a point to be th
 	Analytic functions preserve angles between curves where $f'(z) \neq  0$. Hence analytic functions are \textbf{conformal}.
 \end{theorem}
 
-\begin{example}
+\begin{nonexample}
 	\begin{itemize}
 		\item 
-	$f(z) = z^2$ (nonexample) increases angle by factor of $2$ at $0$.
+	$f(z) = z^2$ increases angle by factor of $2$ at $0$.
 \item $\overline{z}$ is not conformal.
 	\end{itemize}
-\end{example}
+\end{nonexample}
 
 \begin{remark}
 	In this course we only consider \textit{real harmonic functions}.
@@ -154,7 +153,7 @@ Now let $b_n = P^{(n)}(a) / n!$ and we have the \textit{Taylor formula}: \[
 \end{definition}
 
 \begin{remark}
-	to find out if $P$ and $Q$ have common roots is simple (GCD algorithm). TO factorize a polynomial is difficult. The same is for integers.
+	to find out if $P$ and $Q$ have common roots is simple (GCD algorithm). On the contrary, to factorize a polynomial is difficult. The same is for integers.
 \end{remark}
 
 If $Q(b) = 0$, then $\lim_{z \to b} \frac{P}{Q} = \infty $. We can view $R$ as a map $\mathbb{C} \to \overline{\mathbb{C}} = \mathbb{C}\cup \{\infty \}  $.

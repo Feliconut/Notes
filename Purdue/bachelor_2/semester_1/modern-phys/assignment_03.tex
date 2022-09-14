@@ -1,0 +1,146 @@
+\assignment{3}{Mon 12 Sep 2022 14:20}{Week 3 due Sep 16}
+
+1. Two spaceships approach the Earth from opposite directions. According to an observer on the Earth, ship $\mathrm{A}$ is moving at a speed $0.743 c$ and ship $\mathrm{B}$ is moving at a speed of $0.831 c$. What is the speed of ship $A$ as observed from ship B? Of ship B as observed from ship A?
+\begin{proof}[Solution]
+	We take frame $O x y z$ to be the earth's frame, and in particular let the $x$ direction be the direction of ship $A$ 's motion. Now the speeds observed in frame $O$ is
+	\begin{align*}
+		v_A^O &= 0.743 c \hat{x} \\
+		v_B^O &= - 0.831 c \hat{x} 
+	.\end{align*} 
+	Now take $O_A x y z$ to be the frame of ship $A$. We have $u_{A}^O = v_A =  0.743 c \hat{x} $ which is the speed of reference frame $O_A$ moving as observed in frame $O$. Consequently, $u_{O}^A = - u_A^O = - 0.743 c \hat{x} $ which is the speed of reference frame $O$ moving as observed in frame $O'$. Denote the speed of $B$ moving in frame $A$ as $v_B^A$, we have the velocity transformation
+	\[
+		(v_B^O, u_O^A) \mapsto v_B^A
+	.\] 
+	\[
+		v_B^A = \frac{v_B^O - u_O^A}{1- \frac{v_B^O u_{O}^A}{c^2}}
+	.\] 
+
+	Do the calculation:
+	\begin{align*}
+		v_B^A &= \frac{v_B^O + u_O^A}{1+ \frac{v_B^O u_{O}^A}{c^2}}\\ 
+		&= \frac{-0.831 c + (-0.743 c)}{1 + \frac{( -0.831c )   (-0.743 c)}{c^2}} \\
+		&= \frac{-0.831  + (-0.743 )}{1 + ( -0.831 )   (-0.743 )}c \\
+		&= \frac{-1.574 }{1.6174} c\\
+		&= -0.973 c \hat{x} 
+	.\end{align*}
+
+	The situation of ship $B$ is similar:
+\begin{align*}
+		v_A^B &= \frac{v_A^O + u_O^B}{1+ \frac{v_A^O u_{O}^B}{c^2}}\\ 
+		&= \frac{0.743 c + 0.831 c}{1 + \frac{(0.743 c)( 0.831c )   }{c^2}} \\
+		&= \frac{1.574 }{1.6174} c\\
+		&= 0.973 c \hat{x} 
+	.\end{align*}
+\end{proof}
+
+2. A pion has a rest energy of $135 \mathrm{MeV}$. It decays into two gamma-ray photons which travel at the speed of light. Consider a pion that is moving through the laboratory at a speed of $0.98 c$ which decays into two gamma-ray photons of equal energies, making equal angles $\theta$ with the pion's original direction of motion. Find the angle $\theta$ and energies of the gamma-ray photons.
+\begin{proof}[Solution]
+	The rest energy is $E_0 = mc^2 = \SI{135}{\mega\electronvolt}$
+	The relativistic total energy of the pion is 
+	\begin{align*}
+		E &=  \gamma m c^2 \\
+		  &= \left( 1 - v^2 / c^2 \right) ^{-\frac{1}{2}} mc^2 \\
+		  &=  (1 - (0.98c)^2 / c^2)^{-\frac{1}{2}} (\SI{135}{\mega\electronvolt})\\
+		  &= \SI{678.401}{\mega\electronvolt}
+	\end{align*}
+
+	By conservation of relativistic total energy, and the assumption that the two protons have equal energy, hence each proton has relativistic energy $E / 2 =\SI{339.200}{\mega\electronvolt} $
+
+	The momentum of the pion is
+	\begin{align*}
+		p &= \frac{1}{c}\sqrt{E^2 - m^2 c^4}\\ 
+		&= \frac{1}{c}\sqrt{
+			\left( \SI{678.401}{\mega\electronvolt} \right)^2 -  \left( \SI{135}{\mega\electronvolt} \right) ^2
+		}  \\
+		&= \SI{664.833}{\mega\electronvolt \per c}
+	.\end{align*}
+
+	Proton only has kinetic energy since it has zero mas. Therefore its momentum is
+	\begin{align*}
+		p &= \frac{1}{c}\sqrt{E^2 - m^2 c^4}\\ 
+		&= \frac{E}{c}  \\
+		&= \SI{339.200}{\mega\electronvolt\per c} 
+	.\end{align*}
+
+	Now we solve the angle of emitted protons by using conservation of relativistic momentum in the vector form.
+	\begin{align*}
+		\vec{p} _i &= \vec{p} _{1f} + \vec{p} _{2f}\\
+		p_i \hat{x} &= p_{1f} e^{i \theta} + p_{2 f} e^{- i \theta} \\
+		p_i \hat{x}  &= 2 p_f \cos \theta \hat{x}  \\
+		\cos \theta &= \frac{p_i}{2 p_f} \\
+		&=  \frac{664.833}{2 \times 339.200}\\
+		&= 0.98
+	.\end{align*}
+	Hence $\theta = \arccos(0.98) = \SI{0.200}{\radian}$
+\end{proof}
+
+3. An electron and a positron are traveling toward each other, the electron with velocity $+0.834 \mathrm{c}$ and the positron with velocity $-0.428 \mathrm{c}$. They collide and stick together to form a new composite particle. (a) Find the momentum and energy of the new particle. (b) What is the mass of the new particle? (c) Find the change in kinetic energy in the collision. How is the change in kinetic energy related to the mass of the new particle? (d) Which of the above answers would be different according to an observer in a different reference frame?
+\begin{proof}[Solution]
+	Rest energy of electron is \SI{0.511}{\mega\electronvolt}.
+	The relativistic total energy of the particles are
+	\begin{align*}
+		E_1 &=  \gamma_1 m c^2 \\
+		&=  \left( 1- (0.834)^2\right)^{-\frac{1}{2}} mc^2\\
+		&= 1.8124 m c^2 \\
+		E_2 &=  \gamma_2 m c^2\\
+		&= 1.1065 m c^2  \\
+		E &= \gamma_1 m c^2 +\gamma_2 m c^2 \\
+		&=  2.9188 m c^2\\
+		&= \SI{1.4915}{\mega\electronvolt} 
+	.\end{align*}
+
+	The momentum of the electrons are then
+	\begin{align*}
+		\hat{p} _1  &= \frac{1}{c} \sqrt{E_1^2 - m^2 c^4} \\
+		&= \frac{1}{c}\sqrt{\left( 1.8124 m c^2 \right)^2 - (mc^2)^2 }  \\
+		&= \frac{1}{c}(2.2848)mc^2 \\
+		&= \SI{0.7724}{\mega\electronvolt \per c} \hat{x} \\
+		\hat{p} _2 &= \frac{1}{c} \sqrt{E_2^2 - m^2 c^4} \\
+		&= \frac{1}{c}\sqrt{\left( 1.1065 m c^2 \right)^2 - (mc^2)^2 }  \\
+		&= \frac{1}{c}(0.2243)mc^2 \\
+		&= \SI{0.2420}{\mega\electronvolt \per c} (-\hat{x})
+	.\end{align*}
+
+	Hence the total momentum, i.e. the momentum of generated particle, is
+	\[
+		\hat{p}  = \hat{p} _1 + \hat{p} _2 =   \SI{0.5303}{\mega \electronvolt \per c}  \hat{x} 
+	.\] 
+
+	To find the mass $M$ and velocity $v$ of the new particle, we solve
+	\begin{align*}
+		p^2 c^2 &= E^2 - M^2 c^4 \\
+		E &= (1- v^2 / c^2)^{-\frac{1}{2}} M c^2
+	\end{align*} 
+	Where we know $p, E$ and $c$, and do not know $v$ and $m$. Solving gives the following result:
+	\begin{align*}
+		M^2 &= \frac{E^2 - p^2 c^2}{c^4} \\
+		M &= \SI{1.3940}{\mega\electronvolt\per c\squared} \\
+		\gamma &= \frac{E}{Mc^2} = 1.0699 \\
+		v &= c \sqrt{1 - \frac{1}{\gamma^2}} = v = 0.3556 c
+	.\end{align*}
+
+
+	The change in kinetic energy is
+	\begin{align*}
+		K_f - K_i &= (E - E_{0f}) - (E - E_{0i})\\
+		&= E_{0i} - E_{0f} \\
+		&= 2 \times 0.511 -  M c^2 \\
+		&= 1.022 - 1.3940 \\
+		&= \SI{-0.3720}{\mega\electronvolt}
+	.\end{align*} 
+
+	The change in mass is
+
+	\[
+		M - 2 \times m = \SI{0.3720}{\mega\electronvolt \per c\squared}
+	.\] 
+	
+	So the change is mass and kinetic energy is related by
+	\[
+		\Delta K + \Delta M c^2 = 0
+	.\] 
+	
+	The exact value for momentum and energy would be different in different frames, but conservation laws holds in all frames. The mass is an invariant in special relativity, so we get the same value for the new particle's mass.
+
+\end{proof}
+

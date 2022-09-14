@@ -234,6 +234,15 @@
     \subsection*{\@doctype}
     \marginpar{\small\textsf{\mbox{#2}}}
 }
+\newcommand{\studynote}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Note #1}%
+    }{%
+        \def\@doctype{Note #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
 
 \newcommand{\submit}[3]
 

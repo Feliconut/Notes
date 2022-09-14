@@ -1,0 +1,134 @@
+\studynote{1}{Sun 11 Sep 2022 10:19}{Basic definitions and facts}
+
+\section{Background Knowledge}
+\subsection{Random Walk}
+
+The probability space of consideration is
+\begin{align}
+\begin{aligned}
+&\Omega=\left\{\left(\omega_1, \omega_2, \ldots\right): \omega_i \in S\right\} \\
+&\mathcal{F}=\mathcal{S} \times \mathcal{S} \times \ldots \quad \\
+&P=\mu \times \mu \times \ldots \quad \mu \text { is the distribution of } X_i \\
+&X_n(\omega)=\omega_n
+\end{aligned}
+\end{align}
+
+\begin{definition}[Recurrence]
+	The number $x \in \mathbf{R}^d$ is said to be a recurrent value for the random walk $S_n$ if for every $\epsilon>0, P\left(\left\|S_n-x\right\|<\epsilon\right.$ i.o. $)=1 .$ Here $\|x\|=\sup \left|x_i\right|$.
+
+	A random walk is said to be \textit{recurrent} if the set of recurrent values is nonempty. A random walk is said to be \textit{transient} if it is not recurrent.
+
+	ref: \cite{durettProbabilityTheory}
+\end{definition}
+
+\begin{theorem}
+	The set $\mathcal{V}$ of recurrent values is either $\emptyset$ or a closed subgroup of $\mathbf{R}^d$. In the second case, $\mathcal{V}=\mathcal{U}$, the set of possible values.
+\end{theorem}
+
+
+\begin{theorem}[Hewitt-Savage 0-1 law]
+	Exchangeable events (events unaffected by any finite permutation of $X_1, \ldots, X_n$) are trivial.
+
+	If $X_1, X_2, \ldots$ are i.i.d. and $A \in \mathcal{E}$ then $P(A) \in\{0,1\}$.
+\end{theorem}
+
+\begin{theorem}
+	For any random walk, the following are equivalent: \\
+(i) $P\left(\tau_1<\infty\right)=1$,\\ (ii) $P\left(S_m=0\right.$ i.o. $)=1$, and\\(iii) $\sum_{m=0}^{\infty} P\left(S_m=0\right)=\infty$.
+\end{theorem}
+
+
+\subsection{Facts about Recurrence of Random Walk}
+
+\begin{definition}
+	A \textit{simple symmetric random walk} on $\mathbf{Z}^d$ is a random walk such that
+\[
+P\left(X_i=e_j\right)=P\left(X_i=-e_j\right)=1 / 2 d
+\]
+for each of the $d$ unit vectors $e_j$.
+\end{definition}
+
+\begin{theorem}
+	Simple symmetric random walk is recurrent in $d \leq 2$ and transient in $d \geq 3$.
+\end{theorem}
+\begin{remark}
+	Quotation from \cite{durettProbabilityTheory}:
+		To steal a joke from Kakutani (U.C.L.A. colloquium talk): “A drunk man will eventually find his way home but a drunk bird may get lost forever.”
+\end{remark}
+
+Sufficient conditions for recurrence/transience in 1D, 2D and 3D random walk:
+
+\begin{theorem}[Chung-Fuchs theorem]
+	Suppose $d=1$. If the weak law of large numbers holds in the form $S_n / n \rightarrow 0$ in probability, then $S_n$ is recurrent.
+\end{theorem}
+
+\begin{theorem}
+	If $S_n$ is a random walk in $\mathbf{R}^2$ and $S_n / n^{1 / 2} \Rightarrow$ a nondegenerate normal distribution then $S_n$ is recurrent.
+\end{theorem}
+
+\begin{theorem}
+	A random walk in $\mathbf{R}^3$ is truly three-dimensional if the distribution of $X_1$ has $P\left(X_1 \cdot \theta \neq 0\right)>0$ for all $\theta \neq 0$.
+No truly three-dimensional random walk is recurrent.
+\end{theorem}
+
+\subsection{Simple Random Walks}
+
+\begin{definition}
+	A \textit{simple (asymmetric) random walk} on $\mathbb{Z}$ is a random walk such that
+	\begin{align*}
+		&P(X_i = 1) = p \\
+		&P(X_i = -1)= 1-p
+	.\end{align*}
+	 
+\end{definition}
+
+	A simple random walk $\left(W_n\right)_{n \geq 0}$ can be also view as a Markov chain with transition probabilities
+\[
+p(j, k)=\mathrm{P}\left(W_n=k \mid W_{n-1}=j\right)= \begin{cases}p & k=j+1 \\ 1-p & k=j-1 \\ 0 & \text { otherwise }\end{cases}
+\]
+
+\begin{definition}[Limiting Speed]
+	The limiting speed is defined as
+	\[
+		\lim _{n \rightarrow \infty} \frac{S_n}{n}
+	\]
+\end{definition}
+
+\begin{theorem}
+	The limiting speed of a simple random walk $\left(W_n\right)_{n \geq 0}$ with probability $p$ of stepping to the right is $2 p-1$. 
+
+	ref: \cite{cinkoskeSpeedExcitedAsymmetric2018}
+\end{theorem}
+
+\begin{definition}[Limiting Distribution]
+	If $S_n$ converges in distribution to some $S$, then the distribution function $F$ of $S$ is the \textit{limiting distribution} of the random walk.
+\end{definition}
+
+
+
+\begin{theorem}[Central Limit Theorem for i.i.d sequences]
+	Let $X_1, X_2, \ldots$ be i.i.d. with $E X_i=\mu, \operatorname{var}\left(X_i\right)=\sigma^2 \in(0, \infty)$. If $S_n=X_1+\cdots+X_n$ then
+\[
+\left(S_n-n \mu\right) / \sigma n^{1 / 2} \Rightarrow \chi
+\]
+where $\chi$ has the standard normal distribution.
+\end{theorem}
+
+\begin{example}
+	(Limiting Distribution for Simple Random Walk)
+
+	Since $X_1, \ldots, X_n$ are all i.i.d, we can use central limit theorem for i.i.d sequences. Assume $p\neq \frac{1}{2}$, 
+	\[
+		S_n - n(2p-1)/ \sqrt{4p(1-p)n}  \Rightarrow \chi
+	.\] 
+	Where $\mathcal{N}(\mu,\sigma^2)$ is normal distribution with mean $\mu$ and variance $\sigma^2$.
+
+	When $p = \frac{1}{2}$, we are in the symmetrical case. The limiting distribution is
+\[
+		S_n/ \sqrt{n}  \Rightarrow \chi
+	.\]
+\end{example}
+
+%\subsection{Edge Reinforced Random Walks}
+
+
