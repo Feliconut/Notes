@@ -140,9 +140,25 @@ $\operatorname{Log} w $ is the  \textit{principal branch} of the $\log$.
 \textbf{Properties of }$\exp(z)$ 
 \begin{enumerate}
 	\item \textbf{Definition:}
+		\[
+			e^z=e^x(\cos y+i \sin y)
+		\]
+		The polar componenets are given by
+		\[
+\begin{gathered}
+\left|e^z\right|=e^x \\
+\arg e^z=y+2 k \pi \quad(k=0, \pm 1, \pm 2, \ldots)
+\end{gathered}
+\]
 	\item \textbf{Domain/Range:} 
+		\begin{theorem}
+(i) The equation $e^z=1$ holds if, and only if, $z=2 k \pi i$, where $k$ is an integer.
+(ii) The equation $e^{z_1}=e^{z_2}$ holds if, and only if, $z_1=z_2+2 k \pi i$, where $k$ is an integer.
+		\end{theorem}
+		
 	\item \textbf{Derivative/Antiderivative:} 
-	\item \textbf{Branch cut:} 
+		$\frac{d}{d z} e^z=e^z$, $\int e^z d z=e^z+ C$
+	\item \textbf{Branch cut:} $e^z$ is \textit{entire}. $e^x$ is periodic with period $2 \pi i$. It is 1-1 on every \textit{fundamental region}.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -176,7 +192,18 @@ $\operatorname{Log} w $ is the  \textit{principal branch} of the $\log$.
 		\end{corollary}
 	\item \textbf{Derivative/Antiderivative:} 
 		$\begin{aligned} \frac{d}{d z} \log _b z &=\frac{1}{z \ln b} \\ \int \log _b z d z &=\frac{z(\ln z-1)}{\ln b}+C . \end{aligned}$
-	\item \textbf{Branch cut:} $\log z:=\log |z|+i \operatorname{Arg} z$
+	\item \textbf{Branch cut:} $\log z:=\log |z|+i \operatorname{Arg} z$.
+
+		$\mathcal{L}_\tau(z):=\log |z|+i \arg _\tau z$ results in a single-valued function whose imaginary part lies in the interval $(\tau, \tau+2 \pi]$. Moreover, this function is analytic in the complex plane excluding the ray $\theta=\tau$ and the origin, and in this domain,
+\[
+\frac{d}{d z} \mathcal{L}_\tau(z)=\frac{1}{z}
+\]
+
+no branch of
+log z is analytic at the origin, which is called a \textit{branch point} for log z.
+
+
+		
 	\item \textbf{Identities:}
 \end{enumerate}
 \subsubsection{Trigonometric Functions}
@@ -202,7 +229,9 @@ The multiplicative inverse of the sine function is the cosecant, defined as
 \[
 \csc x \equiv \frac{1}{\sin x} .
 \]
-	\item \textbf{Domain/Range:} 
+	\item \textbf{Domain/Range:} $\sin$ is \textit{entire}. Periodic with period $2 \pi$.
+
+		$\sin z=0$ if, and only if, $z=k \pi$, where $k$ is an integer.
 	\item \textbf{Derivative/Antiderivative:} 
 		The derivative of $\sin x$ is
 \[
@@ -214,7 +243,7 @@ and its indefinite integral is
 \]
 where $C$ is a constant of integration.
 	\item \textbf{Branch cut:} 
-	\item \textbf{Identities:}
+	\item \textbf{Identities:} Familiar trig identities remain hold.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -234,9 +263,11 @@ where $C$ is a constant of integration.
 &=1-\frac{x^2}{2 !}+\frac{x^4}{4 !}-\frac{x^6}{6 !}+\ldots,
 \end{aligned}
 \]
-	\item \textbf{Domain/Range:} 
+	\item \textbf{Domain/Range:}  $\cos$ is \textit{entire}. Periodic with period $2 \pi$.
+
+		$\cos z=0 \quad$ if and only if $z=\frac{\pi}{2}+k \pi$,
 	\item \textbf{Derivative/Antiderivative:} 
-	\item \textbf{Branch cut:} 
+	\item \textbf{Branch cut:}
 	\item \textbf{Identities:}
 \end{enumerate}
 
@@ -424,6 +455,9 @@ where $\sinh z$ is the hyperbolic sine, and the indefinite integral by
 where $C$ is a constant of integration.
 	\item \textbf{Branch cut:} 
 	\item \textbf{Identities:}
+		$\sin i z=i \sinh z, \sinh i z=i \sin z, \cos i z=\cosh z, \cosh i z=\cos z$
+
+		$\cosh ^2 z-\sinh ^2 z=1$
 \end{enumerate}
 
 \begin{figure}[H]
