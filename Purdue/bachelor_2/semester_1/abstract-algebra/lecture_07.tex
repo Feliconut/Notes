@@ -1,0 +1,63 @@
+\lecture{7}{Fri 16 Sep 2022 10:31}{}
+
+\begin{theorem}(2.6.2)
+	Suppose $N \triangleleft G$. Then there exists a surjective homomorphism $\psi: G \to  G / N$, such that $\operatorname{ker} \psi = N$.
+\end{theorem}
+\begin{proof}
+	We define the \textit{canonical} mapping:
+	\begin{align*}
+		\psi: G &\longrightarrow G / N \\
+		a &\longmapsto \psi(a) = N a
+	.\end{align*}
+	Properties to check:
+	\begin{itemize}
+		\item (Homomorphism) For all $a,b \in  G$, \[
+			\psi(ab) = Nab = NaNb = \psi(a)\psi(b)
+		.\] 
+		\item (surjective) Given any $Na \in G / N$, we have $\psi(a) = Na$.
+		\item (kernel) $\operatorname{ker} \psi = \{a \in G: \psi(a) = Ne = N\} $. But $\psi(a) = Na = N$ if and only of $a \in N$. Thus $\operatorname{ker} \psi = N$. 
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	If $G$ is a (finite) group and $H \le G$, the number of right cosets of $H$ in $G$ is called the \textit{index} of $H$ in $G$, written $i_G(H)$.
+\end{definition}
+\begin{notation}
+	Also written as $[G:H]$
+\end{notation}
+
+\begin{theorem}(2.6.3)
+	When $G$ is a finite group and $N \triangleleft G$, then one has \[
+		\left| G / N \right| = |G| / |N|
+	.\] 
+\end{theorem}
+\begin{proof}
+	Use the proof of Lagrange's Theorem: $|G / N|$ is equal to the right cosets of $N$ in $G$, which is $|G| / |N|$. 
+\end{proof}
+
+\begin{observation}
+	A group may have no non-trivial normal subgroups. Example: $(\mathbb{Z}_p, +)$ for $p$ prime. 
+
+\end{observation}
+\begin{definition}[Simple Groups]
+	A group with no non-trivial normal subgroups is called \textit{simple}.
+\end{definition}
+\begin{remark}
+	The classification of simple groups.
+\end{remark}
+
+\begin{theorem}[Cauchy's Theorem for Abelian Groups]
+	(2.6.4)
+	Suppose $G$ is an abelian finite group of order $|G|$, and $p \mid |G|$ with $p$ prime. Then $G$ has an element of order $p$.
+\end{theorem}
+\begin{proof}
+	Proceed by induction on $n = |G|$. The conclusion if trivial for $n = 1$. We suppose $n > 1$ and that the conclusion holds for \textbf{all} abelian groups $G$ with order $1\le |G|<n$. We now consider an abelian group $G$ of order $n$.
+
+	Possibly, we have that $G$ has no non-trivial subgroups. In this case, $G = \left\langle a \right\rangle $ for some $a \in G\setminus \{e\} $, and $|G|$ is prime. Then the order of $a$ is equal to $|G|$, and $G$ has an element of prime order.
+
+	Thus $G$ has a non-trivial subgroup $N$. Since $G$ is abelian, one has $N \triangleleft G$. Then \[
+		|G / N| \cdot |N| = |G| \equiv 0 \pmod p
+	.\] 
+	So $p \mid |N|$ or $p \mid |G / N|$. In the first case we are done. In the second case, (to be filled in the next class)
+\end{proof}
+

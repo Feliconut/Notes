@@ -1,0 +1,110 @@
+\lecture{8}{Fri 16 Sep 2022 11:34}{}
+
+\subsection{Nested cells}
+
+\begin{definition}
+	\textit{Open cells} in $\mathbb{R}^p$ are Cartesian products of bounded open intervals.
+	\textit{Closed cells} in $\mathbb{R}^p$ are Cartesian products of bounded closed intervals.
+
+	Products of all types of bounded intervals are also called \textit{cells}.
+\end{definition}
+
+\begin{theorem}[Nested Cells Property]
+	Suppose we have a nested family of nonempty closed cells: \[
+		I_1 \supset I_2 \supset \ldots\supset I_n \supset \ldots
+	\] 
+	Then \[
+		\bigcap_{n = 1} ^{\infty } I_n \neq  \emptyset 
+	.\] 
+\end{theorem}
+\begin{proof}
+	look at the projections.
+	Let $I_n = [a_{n_1}, b_{n_1}] \times [a_{n_2},b_{n_2}] \times  \ldots \times [a_{np },b_{np }]$. 
+	Let \[
+		I_n^{(k)} = [a_{nk }, b_{nk }]
+	\] be the "k-th projection" of $I_n$. 
+	Then we have nested sequence of intervals \[
+		I_1^{(k)}\supset I_2^{(k)} \supset \ldots\supset I_n^{(k)} \supset \ldots
+	.\] 
+	By Nested Interval Property, there exists $\xi_k \in \bigcap_{n = 1} ^\infty I_n^{(k)}$, where \[
+		a_{nk} \le \xi_k \le b_{nk}, n \in \mathbb{N}
+	.\] 
+	Let $\xi = (\xi_1, \ldots, \xi_p)$.
+	Now
+	\begin{align*}
+		\xi \in \bigcap_{n=1} ^\infty  I_n &\iff \xi \in I_n, n \in \mathbb{N} \\
+	&\iff \xi_k \in I_n^{(k)}, k = 1,\ldots,p, \quad n \in N.
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Cluster Point]
+	Let $E \subset \mathbb{R}^p$, $x \in \mathbb{R}^p$. We say that $x$ is a \textit{cluster point} of $E$ if every ball $B_\delta(x)$ contains a point from $E$, different from $x$. In other words, \[
+		(B_{\delta}(x) \setminus \{x\} ) \cap E \neq \emptyset 
+	.\] 
+\end{definition}
+
+\begin{proposition}
+	$x$ is a cluster point of $E$ if and only if $B_{\delta}(x) \cap E$ is \textbf{infinite} for any  $\delta>0$.
+\end{proposition}
+\begin{proof}
+	If $B_\delta(x) \cap E$ is infinite, then $ (B_{\delta}(x) \setminus \{x\} ) \cap E$ is infinite, hence nonempty.
+
+	Suppose $x$ is a cluster point, but $B_{\delta}(x)  \cap E$ is finite. This is to say that $(B_{\delta}(x) \setminus \{x\} ) \cap E$ is finite. 
+	Let $(B_{\delta}(x) \setminus \{x\} ) \cap E = \{ y_1,y_2,\ldots,y_N\}$. Then \[
+		r = \min \{\|x-y_1\|, \|x-y_2\|,\ldots,\|x-y_N\|\}
+	\]
+	is positive.
+	
+	Now:  
+	$(B_{r}(x) \setminus \{x\} ) \cap E = \emptyset $, since $y_i \not\in B_r(x)$. This is a contradiction.
+\end{proof}
+
+\begin{remark}
+	\begin{enumerate}
+		\item Every interior point is a cluster point. 
+		\item If $x \not\in E$, then $x$ is a cluster point $\iff x$ is a boundary point of $E$.
+	\end{enumerate}
+\end{remark}
+
+\begin{proposition}
+	$F \subset \mathbb{R}^p$ is closed if and only if $F$ contains all its cluster points.
+\end{proposition}
+\begin{proof}
+	Follows from remark 2.
+\end{proof}
+
+\begin{definition}
+	We say that $E$ is bounded if it is contained in a (closed) cell.
+\end{definition}
+\begin{remark}
+	"cells" and "balls" are interchangeable in the definition (they are equivalent).
+\end{remark}
+
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+	Every bounded infinite set in $\mathbb{R}^p$ has a cluster point.
+\end{theorem}
+\begin{proof}
+	(Bisection argument) Let $I_0$ be a closed cell with contains $E$. 
+	For a cell $I$, let $l(I)$ be the length of the largest side.
+
+	Divide each side of $I_0$ into 2 subintervals of same length, and form $2^p$ closed subcells of $I_0$.
+
+	At least one of $2^p$ subcells has infinite intersection with $E$ (otherwise $E$ is finite). Pick $I_1$ as one of the subcells of $I_0$ such that $I_1 \cap E$ is infinite. We have $l(I_1) = \frac{1}{2} l(I_0)$, and $I_1 \subset I_0$.
+	
+	Then repeat the process on $I_1$. Continue in this fashion, we obtain the cascading sequence of cells: \[
+		I_1 \supset I_2 \supset \ldots \supset I_n \supset \ldots
+	\] 
+	where $I_n \cap E$ is infinite, and $l(I_n) = \frac{1}{2^n}l(I_1)$. By the nested cells property, there $\exists  \xi \in \mathbb{R}^p$ such that \[
+		\xi \in \bigcap_{n=1} ^\infty  I_n
+	.\] 
+	We claim that $\xi$ is a cluster point.
+	Need to show that $B_\delta(\xi) \cap E$ is infinite for any $\delta>0$. This will follow if we show that $B_\delta(\xi)$ contains $I_n$ for some large $n$.
+	If $x \in I_n$ and $\xi \in I_n$, then \[
+		|x_i - \xi_i| \le b_i - a_i \le l(I_n)
+	.\] 
+	Hence \[
+		\|x - \xi\| \le \sqrt{|x_1-\xi_1|^2 + \ldots+ |x_p - \xi_p|}  \le  \sqrt{p} \,  l(I_n)
+	.\] 
+	So if $\sqrt{p} \, l(I_n) < \delta$ then $I_n\subset B_{\delta}(x)$. Take $n$ such that $2^n > \frac{\sqrt{p} \,l(I_0)}{\delta} $. Such $n$ exists by Archimedean Property.
+\end{proof}
+

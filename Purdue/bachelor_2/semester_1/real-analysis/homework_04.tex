@@ -1,0 +1,54 @@
+\homework{4}{Sun 18 Sep 2022 12:54}{}
+
+10.C, 10.D, 10.F, 11.A, 11.C, 11.G, 11.K
+
+\begin{enumerate}
+	\item 10.C. A point $x$ is a cluster point of a set $A \subseteq \boldsymbol{R}^{\mathrm{p}}$ if and only if every neighborhood of $x$ contains infinitely many points of $A$.
+\begin{proof}
+	In the class we have shown
+\begin{proposition}
+	$x$ is a cluster point of $E$ if and only if $B_{\delta}(x) \cap E$ is \textbf{infinite} for any  $\delta>0$.
+\end{proposition}
+\begin{proof}
+	If $B_\delta(x) \cap E$ is infinite, then $ (B_{\delta}(x) \setminus \{x\} ) \cap E$ is infinite, hence nonempty.
+
+	Suppose $x$ is a cluster point, but $B_{\delta}(x)  \cap E$ is finite. This is to say that $(B_{\delta}(x) \setminus \{x\} ) \cap E$ is finite. 
+	Let $(B_{\delta}(x) \setminus \{x\} ) \cap E = \{ y_1,y_2,\ldots,y_N\}$. Then \[
+		r = \min \{\|x-y_1\|, \|x-y_2\|,\ldots,\|x-y_N\|\}
+	\]
+	is positive.
+	
+	Now:  
+	$(B_{r}(x) \setminus \{x\} ) \cap E = \emptyset $, since $y_i \not\in B_r(x)$. This is a contradiction.
+\end{proof}
+
+It remains to verify that the two statements are equivalent:
+\begin{enumerate}
+	\item $B_{\delta}(x) \cap A$ is infinite for any  $\delta>0$
+	\item every neighborhood of $x$ contains infinitely many points of $A$
+\end{enumerate}
+From (a) to (b): 
+Let $N$ be some neighborhood of $x$. By definition $x$ is an interior point of $N$. Hence there exists $\delta>0$ such that $B_\delta(x) \subset N$, so that $B_\delta(x) \cap A \subset N \cap A$. By (a),  $B_\delta(x) \cap A$ is infinite, so $N \cap A$ is infinite.
+
+From (b) to (a):
+Let $\delta>0$. Note that $B_{\frac{\delta}{2}}(x) \subset B_\delta(x)$, so $x$ is an interior point of $B_\delta(x)$. In other words, $B_\delta(x)$ is a neighborhood of $x$. By (b), $B_\delta(x) \cap A$ is infinite.
+\end{proof}
+
+	\item 10.D. Let $A=\{1 / n: n \in \mathbf{N}\}$. Show that every point of $A$ is a boundary point in $\boldsymbol{R}$, but that 0 is the only cluster point of $A$ in $R$.
+\begin{proof}
+	Let $n \in \mathbb{N}$ and $\delta \in \mathbb{R}$ such that  $\delta>0$. Let $B$ be the ball \[
+		B =   B_{|\frac{1}{2n}|}\left(\frac{1}{n}\right)
+	.\] We claim that the set $A \cap B$ is finite. 
+	By Archimedean Property, there exists a positive integer $N$ such that $\frac{1}{N}< |\frac{1}{2n}|$. Moreover, for all $m \ge  N$, we have $\frac{1}{m}\le \frac{1}{N}$. Hence for all $m \ge N$, we have $\|\frac{1}{n} - \frac{1}{m}\| \ge \|\frac{1}{n}\|-\|\frac{1}{m}\| \ge \frac{1}{n} - \frac{1}{N} >\frac{1}{n} - \frac{1}{2n} = \frac{1}{2n}$. Hence $\frac{1}{m} \not\in B$ for all $m \ge N$. Therefore $A \cap B \subset \{1/ n: 1\le n\le N\} \cap B$, which is finite.
+
+	Now let $r = \min\left(\delta, \left| \frac{1}{2n} \right| \right)$. We have in particular $r \le \left(\delta, \left| \frac{1}{2n} \right| \right)$, so $B_r(\frac{1}{n}) \subset B$. Now $B_r(\frac{1}{n}) \cap A \subset B \cap A$, so  $B_r(\frac{1}{n}) \cap A$ is finite. But since  $B_r(\frac{1}{n})$ is infinite, we have in particular $B_r(\frac{1}{n}) \setminus  A$ is nonempty. 
+
+	We choose $x \in B_r(\frac{1}{n}) \setminus  A$. Note that $x \in B_\delta(\frac{1}{n})$, and $x \in N^c$. We also have $\frac{1}{n} \in B_\delta(\frac{1}{n})$. Hence $B_\delta(\frac{1}{n})$ has nonempty intersection with both $N$ and $N^c$, showing $\frac{1}{n}$ is a boundary point.
+	\end{proof}
+
+	\item 10.F. Let $A, B$ be subsets of $\boldsymbol{R}^p$ and let $x$ be a cluster point of $A \cup B$ in $\boldsymbol{R}^p$. Prove that $x$ is either a cluster point of $A$ or of $B$.
+	\item 11.A. Show directly from the definition (i.e., without using the Heine-Borel Theorem) that the open ball given by $\left\{(x, y): x^2+y^2<1\right\}$ is not compact in $R^2$.
+	\item 11.C. Prove directly that if $K$ is compact in $\boldsymbol{R}^p$ and $F \subseteq K$ is a closed set, then $F$ is compact in $\boldsymbol{R}^p$.
+	\item 11.G. Prove the Cantor Intersection Theorem by selecting a point $x_n$ from $F_n$ and then applying the Bolzano-Weierstrass Theorem $10.6$ to the set $\left\{x_n: n \in \mathbf{N}\right\}$.
+	\item 11.K. If $K$ is a compact subset of $\mathbf{R}^p$ and $x$ is a point of $\mathbf{R}^p$, then the set $K_x=\{x+y: y \in K\}$ is also compact. (This set $K_x$ is sometimes called the translation of the set $K$ by $x$.)
+\end{enumerate}

@@ -1,0 +1,302 @@
+\homework{4}{Sat 17 Sep 2022 09:52}{Homework 4 due Sep 21}
+
+Herstein, section 2.5, page 74 : Questions 12,15,20,26,34,40,44
+\begin{enumerate}
+	\item 12. Prove that if $Z(G)$ is the center of $G$, then $Z(G) \triangleleft  G$. 
+\begin{proof}
+	$Z(G)$ is defined as \[
+		Z(G) = \{z \in G: zx = xz \text{ for all }x \in G\} 
+	.\] From previous exercises we know that $Z(G)$ is a subgroup of $G$. It remains to verity that $Z(G)$ is a normal subgroup, i.e., \[
+		\forall g \in G, g^{-1} Z(G) g \subset Z(G)
+	.\] 
+	Take $g^{-1} z g \in g^{-1} Z(G) g$. Now
+	\begin{align*}
+		g^{-1} z g &= (g^{-1} z)g \\
+		&= (z g^{-1} )g \\
+		&= z(g^{-1} g) \\
+		&= z e \\
+		&= z \\
+		&\in Z(G)
+	.\end{align*}
+	Hence $Z(G)$ is a normal subgroup of $G$.
+\end{proof}
+
+	\item 15. If $G$ is any group, $N \triangleleft G$, and $\varphi: G \rightarrow G^{\prime}$ a homomorphism of $G$ onto $G^{\prime}$, prove that the image, $\varphi(N)$, of $N$ is a normal subgroup of $G^{\prime}$.
+\begin{proof}
+	We have verified previously that $\varphi(N) \le G'$. It remains to verify that $\varphi(N) \triangleleft G'$. We have to show that for $\forall x \in G'$, $x^{-1} \varphi(N) x \subset \varphi(N)$.
+
+	Take any $n \in N$. Fix some $x \in G'$. Because  $\varphi$ is onto, there exists $g \in G$ such that $\varphi(g) = x$. Now
+	\begin{align*}
+		x^{-1} \varphi(n) x &= \varphi(g)^{-1} \varphi(n) \varphi(g) \\
+		&= \varphi(g^{-1} )\varphi(n)\varphi(g) \\
+		&= \varphi(g^{-1} n)\varphi(g) \\
+		&= \varphi(ng^{-1} )\varphi(g) \\
+		&= \varphi(n)\varphi(g^{-1} )\varphi(g) \\
+		&= \varphi(n)\varphi(g)^{-1}\varphi(g) \\
+		&= \varphi(n) e' \\
+		&= \varphi(n) \\
+		&\in \varphi(N)
+	.\end{align*}
+Thus for $\forall  n \in N$ and  $\forall x \in G'$, we have$x^{-1} \varphi(n)x \in \varphi(N)$. Therefore $x^{-1} \varphi(N) x \subset \varphi(N)$, as desired.
+\end{proof}
+
+	\item 20. If $M  \triangleleft G, N \triangleleft  G$, and $M \cap N=(e)$, show that for $m \in M, n \in N, m n=n m$.
+\begin{proof}
+	$m^{-1} n m \in m^{-1} N m \subset N$, hence $m^{-1}  n m \in N$, therefore $m^{-1}  n m n^{-1}  \in N$.
+
+	$n m n^{-1}  = (n^{-1} )^{-1} m n^{-1} \in (n^{-1} )^{-1}Mn^{-1} \subset M$, hence $n m n^{-1} \in M$, therefore $m^{-1}  n m n^{-1}  \in M$.
+
+	Therefore $m^{-1}  n m n^{-1} \in  N \cap  M$. Because it is assumed that $ N \cap  M = \{e\} $, we have $ m^{-1}  n m n^{-1}  = e$. It follows that $n m = m n$.
+\end{proof}
+
+	\item 26. If $G$ is a group and $a \in G$, define $\sigma_a: G \rightarrow G$ by $\sigma_a(g)=a g a^{-1}$. We saw in Example 9 of this section that $\sigma_a$ is an isomorphism of $G$ onto itself, so $\sigma_n \in A(G)$, the group of all 1-1 mappings of $G$ (as a set) onto itself. Define $\psi: G \rightarrow A(G)$ by $\psi(a)=\sigma_a$ for all $a \in G$. Prove that:\\
+(a) $\psi$ is a homomorphism of $G$ into $A(G)$.
+\begin{proof}
+	We only need to verify \[
+		\varphi(ab) = \varphi(a)\varphi(b)
+	\] 
+	for all $a, b \in G$.
+	Take any $ g \in G$. Now
+	\begin{align*}
+	\varphi(ab)g &= \sigma_{ab}(g) \\
+	&= (ab)g(ab)^{-1} \\
+	&= a(bgb^{-1} )a-1 \\
+	&= \sigma_a(bgb^{-1} ) \\
+	&= \sigma_a(\sigma_b(g)) \\
+	&= (\sigma_a\sigma_b)(g)\\
+	&= (\varphi(a)\varphi(b))(g)
+	.\end{align*}
+	Since this is true for all $g \in G$, we have $\varphi(ab) = \varphi(a)\varphi(b)$.
+\end{proof}
+
+(b) $\operatorname{Ker} \psi=Z(G)$, the center of $G$.
+\begin{proof}
+	\begin{align*}
+		g \in Z(G) &\iff \forall x \in G, x g = g x\\
+		&\iff \forall x \in G, g x g^{-1}  = x\\
+		&\iff \forall x \in G, \sigma_g(x) = x \\
+		&\iff \sigma_g = \iota_G\\
+		&\iff \varphi(g) = \iota_G \\
+		&\iff g \in \operatorname{ker} \varphi
+	.\end{align*}
+	Where $\iota_G$ is the identity map, which serves as the ideneity element in $A(G)$.
+\end{proof}
+
+	\item 34. Let $G$ be a group, $\mathscr{A}(G)$ the group of all automorphisms of $G$. (See Problem 28.) Let $I(G)=\left\{\sigma_a \mid a \in G\right\}$, where $\sigma_a$ is as defined in Problem $26 .$ Prove that $I(G) \triangleleft \mathscr{A}(G)$.
+\begin{proof}
+	We first prove $I(G) \le \mathscr{A}(G)$. We verify that $(\sigma_b)^{-1} = \sigma_{b^{-1} }$.
+	\begin{align*}
+		(\sigma_b \sigma_{b^{-1}}) g 
+		&= \sigma_b (b^{-1}  g (b^{-1} )^{-1}) \\
+		&= \sigma_b(b^{-1} gb) \\
+		&= b(b^{-1} gb) b^{-1} \\
+		&= (bb^{-1} )g(bb^{-1} ) \\
+		&= e g e \\
+		&= g
+	.\end{align*}
+	Hence $\sigma_b \sigma_{b^{-1} } = \iota_G$, which is the identity in $\mathscr{A}(G)$. Similarly, $\sigma_{b^{-1} }\sigma_b = \iota_G$. Therefore $\sigma_{b^{-1} }$ is the inverse of $\sigma_b$.
+	Now
+	\begin{align*}
+		\sigma_a(\sigma_b)^{-1} (g)
+		&= \sigma_a(\sigma_{b^{-1} })g \\
+		&= \sigma_a (b^{-1} g (b^{-1} )^{-1}) \\
+		&= \sigma_a (b^{-1} g b) \\
+		&= a (b^{-1} g b)a^{-1}  \\
+		&= (ab^{-1} )g (ab^{-1} )^{-1} \\
+		&= \sigma_{ab^{-1} }(g)
+	.\end{align*}
+	Hence $\sigma_a (\sigma_b)^{-1} = \sigma_{ab^{-1} } \in I(G)$. By subgroup criterion,  $I(G)$ is a subgroup of $\mathscr{A}(G)$.
+
+	Now we prove $I(G) \triangleleft \mathscr{A}(G)$. It suffices to show that for all $\varphi \in \mathscr{A}(G)$, $\varphi^{-1} I(G) \varphi \subset I(G)$.
+	Take any $a \in G$ and $\varphi \in \mathscr{A}(G)$, 
+	\begin{align*}
+		(\varphi^{-1} \sigma_a \varphi)(g)
+		&= \varphi^{-1} \left( \sigma_a(\varphi(g)) \right)  \\
+		&= \varphi^{-1} \left(a\varphi(g)a^{-1} \right) \\
+		&= \varphi^{-1} (a)\varphi^{-1} (\varphi(g))\varphi^{-1} (a^{-1} ) 
+		& \text{since $\varphi^{-1} $ is homomorphism}\\
+		&= \varphi^{-1} (a)g\varphi^{-1} (a^{-1} ) 
+		& \text{since $\varphi^{-1} \varphi=\iota_G$}\\
+		&= \varphi^{-1} (a)g\left( \varphi^{-1} (a ) \right) ^{-1} 
+		& \text{by property of homomorphism}\\
+		&= \sigma_{\varphi^{-1} (a)}(g)
+	.\end{align*}
+Hence $\varphi^{-1} \sigma_a\varphi = \sigma_{\varphi^{-1} (a)} \in I(G)$. Therefore $\varphi^{-1} I(G) \varphi \subset I(G)$.
+\end{proof}
+
+\item 38. Let $G$ be a group and $H$ a subgroup of $G$. Let $S=\{H a \mid a \in G\}$ be the set of all right cosets of $H$ in $G$. Define, for $b \in G, T_b: S \rightarrow S$ by $T_b(H a)$ $=H a b^{-1}$.
+\begin{note}{Note}
+	\color{blue} This exercise is proven in extra because it is used in another proof.
+\end{note}
+(a) Prove that $T_b T_c=T_{b c}$ for all $b, c \in G$ [therefore the mapping $\psi: G \rightarrow A(S)$ defined by $\psi(b)=T_b$ is a homomorphism].
+\begin{proof}
+	\begin{align*}
+		T_b T_c (Ha)&=Tb(Tc(Ha))  \\
+		&= Tb((Ha)c^{-1} ) \\
+		&= (Hac^{-1} )b^{-1}  \\
+		&= Ha(bc)^{-1} \\
+		&= T_{bc}
+	.\end{align*}
+\end{proof}
+
+(b) Describe Ker $\psi$, the kernel of $\psi: G \rightarrow A(S)$.
+\begin{proof}
+	Denote the identity of $A(S)$ as $\iota$.
+	\begin{align*}
+		a \in \operatorname{ker} \varphi \\
+		&\iff \varphi(a) = \iota\\
+		&\iff T_a = \iota\\
+		&\iff \forall b \in G, T_a(Hb) = Hb\\
+		&\iff \forall b \in G, Hba^{-1} =Hb\\
+		&\iff \forall b \in G, bab^{-1} \in H
+	.\end{align*}
+	Hence $a \in H$, otherwise we can take $b = e$ and arrive at a contradiction. Also, $\operatorname{ker} \varphi$ has a normal-like property, that any group conjugation cannot make it larger than $H$. We put this precisely in the next proof.
+\end{proof}
+
+(c) Show that Ker $\psi$ is the largest normal subgroup of $G$ lying in $H$ [largest in the sense that if $N \triangleleft G$ and $N \subset H$, then $N \subset \operatorname{Ker} \psi$ ].
+\begin{proof}
+	We already know that $\operatorname{ker} \varphi \subset H$ and $\operatorname{ker} \varphi \le G$. We first show that $\operatorname{ker} \varphi \triangleleft  G$. Take $a \in \operatorname{ker} \varphi$ and $g \in G$. Now
+	\begin{align*}
+	g^{-1} a g \in \operatorname{ker} \varphi\\	
+	&\iff \varphi(g^{-1} ag) = \iota \\
+	&\iff \forall b \in G, T_{g^{-1} ag}(Hb) = Hb \\
+	&\iff \forall b \in G, Hb(g^{-1} a^{-1}g) = Hb \\
+	&= \forall b \in G, Hbg^{-1}a^{-1}   = Hbg^{-1} \\
+	&= \forall b \in G,  T_{a}(Hbg^{-1} )= Hbg^{-1}  \\
+	&= \forall b \in G,  \iota(Hbg^{-1} )= Hbg^{-1} 
+	.\end{align*}
+	The last statement is true because  $\iota$ is the identity in $S$.
+
+	Now suppose $N \triangleleft G$ and $N \subset H$. Take $n \in N$, and we need to show $n \in \operatorname{ker} \varphi$. 
+	\begin{align*}
+		&n \in \operatorname{ker} \varphi\\
+		&\iff \varphi(n) = T_n = \iota \\
+		&\iff \forall b, H b n^{-1}   = H b \\
+		&\iff \forall b,H  b = H bn \\
+		&\iff \forall b,H  b = nH b 
+		& \text{$n$ commutes with $Hb$ since $N$ is normal}\\
+		&\iff \forall b,H  b = H b 
+		& \text{$nH=H$ since $n \in H$}
+	.\end{align*}
+	The last statement is true, hence $n \in \operatorname{ker} \varphi$.
+\end{proof}
+
+	\item 40. If $G$ is a finite group, $H$ a subgroup of $G$ such that $n \nmid i_G(H)$ ! where $n=|G|$, prove that there is a normal subgroup $N \neq(e)$ of $G$ contained in $H$.
+\begin{proof}
+	We use everything from exercise 38. We have established that $\operatorname{ker} \varphi$ is a normal subgroup of $G$ lying in $H$. Let $N = \operatorname{ker} \varphi$. It remains to show that $N \neq  (e)$.
+
+	Suppose the opposite, that $N = (e)$. 
+	We claim that $\varphi(G)$ forms a subgroup of $A(S)$ with order exactly $G$, where the group operation is $\varphi$ restricted to $\varphi(G)$. We need to show that $\varphi$ is an isomorphism between $G$ and $\varphi(G)$. It suffices to verify that $\varphi$ is bijective.
+	Surjectivity is trivial, since for any element in $\varphi(G)$, there exist by definition some $g \in G$ mapping to it. Therefore we only have to verify injectivity.
+
+	To establish injectivity, take arbitrary $x, y \in G$. Suppose $\varphi(x) = \varphi(y)$. Now for all $a \in G$, we have
+	\begin{align*}
+		T_x(Ha) = T_y(Ha)\\
+		&\iff Hax^{-1} =Hay^{-1} \\
+		&\iff (Ha)(x^{-1} y) = Ha \\
+		&\iff T_{xy^{-1} }(Ha) = Ha
+	\end{align*}
+	This is true for all $a \in G$, so $T_{xy^{-1}}$ is the identity in $A(S)$. But since $\operatorname{ker} \varphi = \{e\} $, we have $xy^{-1}  = e$. This implies $x = y$.
+
+
+	Now by Lagrange's Theorem, $|\varphi(G)| \mid |A(S)|$. But note that $|\varphi(G)| = |G| = n$ and $|A(S)| = |S|! = i_G(H)!$. So we have \[
+		n | i_G(H)!
+	\] 
+	which is a contradiction with the assumption. Therefore we must have  $N \neq  (e)$.
+\end{proof}
+
+\newpage
+	\item 44. Prove that a group of order $p^2, p$ a prime, has a normal subgroup of order $p$.
+\begin{proof}
+	Let the group be $G$. We claim that there exists a subgroup of $p$ with order $p$. Take $a \in G$ where $a \neq e$. By Lagrange theorem, we have $o(a) | |G|$. Since $|G| = p^2$ where $p $ prime, we have $o(a) = 1$, $o(a) = p$, or $o(a) = p^2$. Since $a \neq e$, $o(a)\neq 1$. If $o(a) = p$ then $\left\langle a \right\rangle $ is the desired subgroup. Now assume $o(a) = p^2$, then $G$ is cyclic. Use exercise 37 from Chapter 2.4 taking $m = p$, we have that there are exactly $\varphi(p) = p$ elements in $G$ of order $p$. Take any of these elements and it will generate a cyclic subgroup of order $p$.
+
+	Let $H$ be some subgroup of  $G$ with order $p$. Now use Exercise 40. Indeed, $n = p^2 \nmid i_G(H)! = p!$. Now there is a nontrivial normal subgroup $N$ of $G$ contained in $H$. By Lagrange's Theorem, $|N| \mid |G|$. But $|N| >1$ (since it is nontrivial) and $|N| \le |H|=p$ (since it is contained in $H$ ). Therefore $|N| = p$, since $p$ is the only divisor of $p^2$ in $2, \ldots, p$.
+\end{proof}
+
+\end{enumerate}
+\newpage
+Herstein, section 2.6, page 83: Questions 7,11,13,14,15
+\begin{enumerate}[resume]
+	\item 7. If $G$ is a cyclic group and $N$ is a subgroup of $G$, show that $G / N$ is a cyclic group.
+\begin{proof}
+	Take some generator $a$ of $G$. We claim that $G / N = \left\langle Na \right\rangle $.
+
+	We first prove $G / N \supset \left\langle Na \right\rangle $. For any integer $m$, 
+	\[
+		(Na)^m = N(a^m)
+	.\] 
+	And since $a^m \in G$, $N(a^m)$ is a right coset of $N$, hence $N(a)^m \in G / N$.
+
+	Next we prove $G / N \subset \left\langle Na \right\rangle $. Take any $Nb \in G / N$. Since  $G$ is cyclic, there exists some integer $m$ such that $b = a^m$. Now
+	\[
+		Nb = N(a^m) = (Na)^m \in \left\langle Na \right\rangle 
+	.\] 
+\end{proof}
+
+	\item 11. If $G$ is a group and $Z(G)$ the center of $G$, show that if $G / Z(G)$ is cyclic, then $G$ is abelian.
+\begin{proof}
+	Take some generator of $G / Z(G)$, say $Z(G)a$. Therefore, for all $b \in  G$, there exists some integer $m$ such that $\left(Z(G)a\right)^m = Z(G)a^m = Z(G)b$. This is to say that for all $b \in G$, there exists integer  $m$ such that $b a^{-m} \in Z(G)$.
+
+	Now take arbitrary $x, y \in G$. Then there exists integers $n_x$ and  $n_y$ such that $x a^{-n_x}\in Z(G)$ and $y a^{- n_y} \in Z(G)$. We have
+	\begin{align*}
+		xy 
+		&=  
+		\left((xa^{-n_x})a^{n_x}\right)
+		\left((ya^{-n_y})a^{n_y}\right) \\
+		&=  
+		(xa^{-n_x})a^{n_x}
+		(ya^{-n_y})a^{n_y} \\
+		&=  
+		(xa^{-n_x})a^{n_x}
+		a^{n_y}(ya^{-n_y}) \\
+		&=  
+		(xa^{-n_x})a^{n_x+n_y}(ya^{-n_y}) \\
+		&=  
+		(ya^{-n_y})a^{n_y+n_x}(xa^{-n_x}) \\
+		&= 
+		(ya^{-n_y})a^{n_y} 
+		a^{n_x}(xa^{-n_x})\\
+		&= 
+		(ya^{-n_y})a^{n_y} 
+		(xa^{-n_x})a^{n_x}\\
+		&= 
+		\left((ya^{-n_y})a^{n_y}\right) 
+		\left((xa^{-n_x})a^{n_x}\right)\\
+		&= yx
+	.\end{align*}
+\end{proof}
+
+	\item 13. If $G$ is a group and $N \triangleleft G$ is such that
+\[
+a b a^{-1} b^{-1} \in N
+\]
+for all $a, b \in G$, prove that $G / N$ is abelian.
+\begin{proof}
+	Take arbitrary $a, b \in G$. Now
+	\begin{align*}
+		& a b a^{-1} b^{-1} \in N \\
+		&\iff  a b (ba)^{-1} \in N \\
+		&\iff N(ab) = N(ba) \\
+		&\iff NaNb=NbNa
+	.\end{align*}
+\end{proof}
+
+	\item 14. If $G$ is an abelian group of order $p_1 p_2 \cdots p_k$, where $p_1, p_2, \ldots, p_k$ are distinct primes, prove that $G$ is cyclic. (See Problem 15.)
+\begin{proof}
+	Since $p_1 \mid |G|$ and $p_1$ prime, by Cauchy's Theorem, there exists an element $a_1 \in G$ such that $o(a_1) = p_1$. Similarly, we can choose $a_2, \ldots, a_k \in G$ such that $o(a_2) = p_2, \ldots, o(a_k) = p_k$.
+
+	Now use exercise 15. Since $p_1$ and $p_2$ are relative prime, there exists an element $a_{12} \in G$ such that $o(a_{12}) = p_1p_2$. Now $p_1p_2$ is relatively prime to $p_3$, so apply exercise 15 again we obtain an element $a_{123} \in G$ such that $o(a_{123}) = (p_1p_2)p_3$. Continue in this fashion and we can obtain an element with order $p_1p_2\ldots p_k = |G|$, showing $G$ cyclic.
+\end{proof}
+
+	\item 15. If $G$ is an abelian group and if $G$ has an element of order $m$ and one of order $n$, where $m$ and $n$ are relatively prime, prove that $G$ has an element of order $m n$.
+\begin{proof}
+	Let $a, b \in G$ such that $o(a) = m$ and $o(b) = n$. We claim that $o(ab) = mn $.
+
+	Suppose $(ab)^k = a^k b^k = e$ for some $k \in \mathbb{Z}$. Then $a^k = (b^k)^{-1}$. However we know that two orbits are either coincident or almost disjoint (either $\left\langle a \right\rangle = \left\langle b \right\rangle $ or $\left\langle a \right\rangle \cap \left\langle b \right\rangle  = \{e\} $.
+	Since $\left\langle a \right\rangle $ and $\left\langle b \right\rangle $ have different order, they cannot be coincident. Hence their intersection contains only $e$.
+	From $a^k = (b^k)^{-1}$ we know that $a^k \in \left\langle a \right\rangle \cap \left\langle b \right\rangle $, so $a^k = e$, whence  $b^k = e$. Now $m|k$ and $n|k$, so $mn | k$. 
+
+	Now we verify $(ab)^{mn} = e$. This follows easily since $(ab)^{mn }=\left( a^m \right) ^n \left( b^n \right) ^m = e^n e^m = e$. Also, for any positive integer $k< mn$, we must have $mn \nmid k$, therefore $(ab)^k = e$ cannot be true. Hence $mn $ is the smallest positive integer $k$ such that $(ab)^k  = e$. By definition, $o(ab) = mn $.
+\end{proof}
+
+\end{enumerate}

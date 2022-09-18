@@ -79,11 +79,34 @@ Recall that when $H \le G$, we can define $a\sim b$ when $ab^{-1} \in H$. Then $
 \end{theorem}
 \begin{proof}
 	\begin{itemize}
-		\item (well-defined operation)
+		\item (well-defined group operation) If $Na = Na'$ and $Nb = Nb'$, then $Na \cdot Nb = Na' \cdot Nb'$.
+
+		If $Na = Na'$, then $a' = n_1a$ for some $n_1\in N$. And if  $Nb=Nb'$, then $b'=n_2b$ for some $n_2\in N$.
+		Thus
+		\begin{align*}
+			a'b'&=n_1an_2b\\
+			    &=n_1(an_2a^{-1} )ab \\
+			    &\in n_1(aNa^{-1} )ab\\
+			    &= n_1Nab \\
+			    &= Nab \\
+		\end{align*}
+		Hence $Na'b'  \subset Nab$. By symmetry $Nab \subset Na'b'$, hence $Nab = Na'b'$. 
+		Thus the putative group operation on $ G / N$ is well-defined.
+
 		\item (closure)
+		follows from definition of the product.
 		\item (associativity)
+		inherited from the group $G$. \[
+			(Na)(Nb Nc) = Na(Nbc) = Na(bc) = N(ab)c = (Nab)Nc = (Na Nb) Nc
+		.\] 
 		\item (identity)
+			$Ne = N$ serves as identity:
+			\[
+			Na Ne = Nae = Na = Nea = Ne Na
+			.\] 
 		\item (inverse)
+			$Na^{-1} $ serves as inverse of $Na$. Similar argument.
 	\end{itemize}
+	So $G / N$ is indeed a group.
 \end{proof}
 
