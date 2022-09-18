@@ -36,19 +36,195 @@ Let $\delta>0$. Note that $B_{\frac{\delta}{2}}(x) \subset B_\delta(x)$, so $x$ 
 
 	\item 10.D. Let $A=\{1 / n: n \in \mathbf{N}\}$. Show that every point of $A$ is a boundary point in $\boldsymbol{R}$, but that 0 is the only cluster point of $A$ in $R$.
 \begin{proof}
-	Let $n \in \mathbb{N}$ and $\delta \in \mathbb{R}$ such that  $\delta>0$. Let $B$ be the ball \[
-		B =   B_{|\frac{1}{2n}|}\left(\frac{1}{n}\right)
-	.\] We claim that the set $A \cap B$ is finite. 
-	By Archimedean Property, there exists a positive integer $N$ such that $\frac{1}{N}< |\frac{1}{2n}|$. Moreover, for all $m \ge  N$, we have $\frac{1}{m}\le \frac{1}{N}$. Hence for all $m \ge N$, we have $\|\frac{1}{n} - \frac{1}{m}\| \ge \|\frac{1}{n}\|-\|\frac{1}{m}\| \ge \frac{1}{n} - \frac{1}{N} >\frac{1}{n} - \frac{1}{2n} = \frac{1}{2n}$. Hence $\frac{1}{m} \not\in B$ for all $m \ge N$. Therefore $A \cap B \subset \{1/ n: 1\le n\le N\} \cap B$, which is finite.
-
-	Now let $r = \min\left(\delta, \left| \frac{1}{2n} \right| \right)$. We have in particular $r \le \left(\delta, \left| \frac{1}{2n} \right| \right)$, so $B_r(\frac{1}{n}) \subset B$. Now $B_r(\frac{1}{n}) \cap A \subset B \cap A$, so  $B_r(\frac{1}{n}) \cap A$ is finite. But since  $B_r(\frac{1}{n})$ is infinite, we have in particular $B_r(\frac{1}{n}) \setminus  A$ is nonempty. 
-
-	We choose $x \in B_r(\frac{1}{n}) \setminus  A$. Note that $x \in B_\delta(\frac{1}{n})$, and $x \in N^c$. We also have $\frac{1}{n} \in B_\delta(\frac{1}{n})$. Hence $B_\delta(\frac{1}{n})$ has nonempty intersection with both $N$ and $N^c$, showing $\frac{1}{n}$ is a boundary point.
+	We first prove the 
+	\begin{claim}
+		For any positive $\delta \in \mathbb{R}$, the set $A \setminus B_\delta(0)$ is finite.
+	\end{claim}
+	\begin{proof}[Proof of claim]
+		By Archimedean property, there exists $N \in \mathbb{N}$ such that $\frac{1}{N} < \delta$. But now for all $n \in \mathbb{N}$ where $n \ge N$, we have \[
+			\frac{1}{n}\le \frac{1}{N}<\delta
+		.\] 
+		Hence $\frac{1}{n} \in B_\delta(0)$ for all $n \ge N$. Now
+		\begin{align*}
+			A \setminus  B_\delta(0)
+			&=\left(\{\frac{1}{n}:n \in \mathbb{N}, n <N\} \cup \{\frac{1}{n}:n \in \mathbb{N}, n \ge N\}\right) \setminus  B_\delta(0)\\
+			&=\left(\{\frac{1}{n}:n \in \mathbb{N}, n <N\} \setminus  B_\delta(0)\right) \cup \left(\{\frac{1}{n}:n \in \mathbb{N}, n \ge N\} \setminus  B_\delta(0)\right)\\
+			&=\left(\{\frac{1}{n}:n \in \mathbb{N}, n <N\} \setminus  B_\delta(0)\right) \cup \emptyset \\
+			&=\left(\{\frac{1}{n}:n \in \mathbb{N}, n <N\} \setminus  B_\delta(0)\right)\\
+			&\subset \{\frac{1}{n}:n \in \mathbb{N}, n <N\}
+			.
+		\end{align*}
+		Hence $A \setminus  B_\delta(0)$ is finite.
 	\end{proof}
+	
+	Now we continue the proof. Take any $x = \frac{1}{n} \in A$. Let $d = \left| \frac{1}{2n} \right| $. Now $A \cap B_d(x) \subset A\setminus B_d(0)$. To verify, note that for any $a \in A$, \[
+		|a - 0| \ge |x-0| - |a-x| = \frac{1}{n} - |a-x| > \frac{1}{n} - \frac{1}{2n} = \frac{1}{2n} = d
+	.\] 
+	Hence $a \not\in B_d(0)$, meaning $a \in A \setminus B_d(0)$.
+	
+	By the claim above, $A \cap B_d(x)$ is finite. But $B_d(x)$ is an open interval, which is infinite. Hence in particular $B_d(x) \setminus  A$ is nonempty. We can therefore choose some $y \in B_d(x) \setminus  A$. Now $x \in B_d(x) \cap A$ and $y \in B_d(x)\cap A^c$.
+
+	Let $\delta>0$ be arbitrary. If $\delta \ge  d$, then $y \in B_d(x) \cap A^c \subset B_\delta(x) \cap A^c$, and $x \in B_\delta(x) \cap A$. 
+	If $\delta< d$, then $B_\delta(x) \subset B_d(x)$. Hence $A \cap B_\delta(x)$ is finite. By the same reasoning we can find $y' \in B_\delta(x) \cap A^c$. In both cases $B_\delta(x)$ has nonempty intersection with both $A$ and $A^c$, so $x$ is a boundary point of $A$.
+
+Now we prove that $0$ is a cluster point. Take any $\delta>0$, and by the claim above, $A \setminus B_\delta(0)$ is finite. Since $A$ is infinite, $A \cap B_\delta(0)$ is infinite, and we are done.
+
+Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}$ such that $x \neq 0$. Now let $\delta = \frac{|x|}{2}$. Now we have $B_\delta(x) \subset A \setminus B_\delta(0)$. Hence $B_\delta(x)$ is finite, which means that $x$ is not a boundary point.
+\end{proof}
 
 	\item 10.F. Let $A, B$ be subsets of $\boldsymbol{R}^p$ and let $x$ be a cluster point of $A \cup B$ in $\boldsymbol{R}^p$. Prove that $x$ is either a cluster point of $A$ or of $B$.
+\begin{proof}
+	We prove the contrapositive. Assume $x$ is neither a cluster point of $A $ nor a cluster point of $B$. Then there exists positive $\delta, \delta' \in \mathbb{R}$ such that \[
+		|B_\delta(x) \cap A| < \infty , 
+	|B_{\delta'}(x) \cap B| < \infty 
+	.\] 
+	Without loss of generality, assume $\delta<\delta'$. Now $B_\delta(x) \cap B \subset B_{\delta'}(x) \cap B$, so \[
+		|B_\delta(x) \cap B| < \infty , 
+	.\] 
+
+	Therefore \begin{align*}
+		|B_\delta(x) \cap (A \cup B)|
+		&= \left|\left( B_\delta(x) \cap A \right) 
+		\cup  \left( B_\delta(x) \cap B \right) \right|\\
+		&\le |B_\delta(x) \cap A|
+		+ |B_\delta(x) \cap B|\\
+		&< \infty 
+	.\end{align*}
+	This show that $x$ is not a boundary point of $A \cup B$.
+\end{proof}
+
 	\item 11.A. Show directly from the definition (i.e., without using the Heine-Borel Theorem) that the open ball given by $\left\{(x, y): x^2+y^2<1\right\}$ is not compact in $R^2$.
+\begin{proof}
+	Denote the open ball as $S$. For any $n \in \mathbb{N}$, define $a_n = (1-\frac{1}{n}, 0)$. We consider the infinite subset
+	\[
+		A = \{a_n: n \ge 1, n \in \mathbb{N}\} 
+	.\] 
+	For any $n \in \mathbb{N}$, we have
+	\[
+		\left(1-\frac{1}{n}\right)^2 + 0^2 
+		=\left(1-\frac{1}{n}\right)^2 
+		< \left(1\right)^2 
+		=1
+	.\] 
+	Therefore $A \subset S$. We now claim that $A$ does not have a cluster point in $S$. To do this, we show that
+	\begin{claim}
+		Let $a = (1,0) \in \mathbb{R}^2$. For any positive $\delta \in \mathbb{R}$, the set $A \setminus B_\delta(a)$ is finite.
+	\end{claim}
+	\begin{proof}[Proof of claim]
+		By Archimedean property, there exists $N \in \mathbb{N}$ such that $\frac{1}{N} < \delta$. But now for all $n \in \mathbb{N}$ where $n \ge N$, we have \[
+			\|a_n-a\|
+			=\left|\left(  1-\frac{1}{n} \right)  - 1 \right| 
+			= \frac{1}{n}
+			\le \frac{1}{N}<\delta
+		.\] 
+		Hence $a_n  \in B_\delta(a)$ for all $n \ge N$. Now
+		\begin{align*}
+			A \setminus  B_\delta(a)
+			&=\left(\{a_n:n \in \mathbb{N}, n <N\} \cup \{a_n:n \in \mathbb{N}, n \ge N\}\right) \setminus  B_\delta(a)\\
+			&=\left(\{a_n:n \in \mathbb{N}, n <N\} \setminus  B_\delta(a)\right) \cup \left(\{a_n:n \in \mathbb{N}, n \ge N\} \setminus  B_\delta(a)\right)\\
+			&=\left(\{a_n:n \in \mathbb{N}, n <N\} \setminus  B_\delta(a)\right) \cup \emptyset \\
+			&=\{a_n:n \in \mathbb{N}, n <N\} \setminus  B_\delta(a)\\
+			&\subset \{a_n:n \in \mathbb{N}, n <N\}
+			.
+		\end{align*}
+		Hence $A \setminus  B_\delta(a)$ is finite.
+	\end{proof}
+	Now take arbitrary $b \in S$. Let $\delta = \frac{1}{2}\|b - a\|$. Then $\delta>0$. We have 
+\[
+		B_\delta(b) \cap B_\delta(a) = \emptyset 
+	.\]
+	Hence \[
+		B_\delta(b) \cap A \subset A \setminus B_\delta(a)
+	.\] 
+	Therefore $B_\delta(b) \cap A $ is finite. Hence  $b$ cannot be a cluster point.
+\end{proof}
+
 	\item 11.C. Prove directly that if $K$ is compact in $\boldsymbol{R}^p$ and $F \subseteq K$ is a closed set, then $F$ is compact in $\boldsymbol{R}^p$.
+\begin{proof}
+	Let $A\subset F$ be infinite. Then $A \subset K$. Because $K$ is compact, there exists $x \in K$ such that $x$ is a cluster point of $A$. Because $F$ is closed, it contains all its cluster point. Hence $x \in F$.
+\end{proof}
+
 	\item 11.G. Prove the Cantor Intersection Theorem by selecting a point $x_n$ from $F_n$ and then applying the Bolzano-Weierstrass Theorem $10.6$ to the set $\left\{x_n: n \in \mathbf{N}\right\}$.
+\begin{proof}
+	From each  $F_n$ choose $x_n \in F_n$. Now consider the set \[
+		X = \{x_n: n \in \mathbb{N}\} 
+	.\]
+	Suppose $X$ is finite. Then there exists some $x \in X$ such that $x \in F_n$ infinitely often. Thus for any $m \in \mathbb{N}$, one can find $n>m$ such that $x \in F_n \subset F_m$. Hence $x \in F_m$ for all $m \in \mathbb{N}$.
+
+	Suppose $X$ is infinite. Then by the Bolzano-Weierstrass Theorem we can find a cluster point $x \in \mathbb{R}^p$ of $X$. Let $m \in \mathbb{N}$, we want to prove $x \in F_m$.
+	We define the "tail set" as  \[
+		X_m = \{x_n: n \in N, n \ge m\} 
+	.\] 
+	Note that $X_m \subset X \cap F_m$. Since $x$ is a cluster point of $X$, it is a cluster point of  $X_m$. Since $X_m \subset F_m$, $x$ is a cluster point of $F_m$. Since $F_m$ is closed, it contains all its cluster points. Hence $x \in F_m$.
+\end{proof}
+
 	\item 11.K. If $K$ is a compact subset of $\mathbf{R}^p$ and $x$ is a point of $\mathbf{R}^p$, then the set $K_x=\{x+y: y \in K\}$ is also compact. (This set $K_x$ is sometimes called the translation of the set $K$ by $x$.)
+\begin{proof} 
+	We first prove a lemma.
+	\begin{lemma}(Translation is a bijection)
+		For any $K \subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, the mapping \begin{align*}
+			f_x: K &\longrightarrow K_x \\
+			k &\longmapsto f(k) = k_x = k + x
+		\end{align*}
+		is a bijection.
+	\end{lemma}
+	\begin{proof}
+		To verify injectivity, assume there are  $a, b \in \mathbb{R}^p$ such that $a_x = b_x$. Hence $a + x = b + x$, and thus $a = b$.
+		To verify surjectivity, consider any member of $K_x$ of the form $k + x$. Then $f_x(k) = k_x = k+x$.
+	\end{proof}
+	
+	\begin{lemma}(Translation is distributive over set intersection)
+		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$,\[
+			K_x \cap F_x = (K \cap F)_x
+		.\] 
+	\end{lemma}
+	\begin{proof}
+		For any $a \in \mathbb{R}^p$,
+		\begin{align*}
+			&a \in K_x \cap F_x \\
+			&\iff a \in K_x \land a \in F_x \\
+			&\iff \exists k \in K, a = k + x \land  \exists p \in F, a = p + x \\
+			&\iff \exists k \in K \cap F, a = k + x \\
+			&\iff a \in  (K \cap F)_x
+		.\end{align*}
+	\end{proof}
+	
+	\begin{lemma}(Translation preserves set ordering).
+		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, $F \subset K$ if and only if $F_x \subset K_x$.
+	\end{lemma}
+	\begin{proof}
+		For any $k \in \mathbb{R}^p$, one has by definition \[
+			k \in F \iff k+x \in F_x
+		.\] 
+		Similarly, \[
+			k \in K \iff  k + x \in K_x
+		.\] 
+		Hence for all $k$, \[
+			(k \in F \implies k \in K)
+			\iff 
+			(k + x \in F_x \implies k+x \in K_x)
+		.\] 
+		Therefore
+		\[
+			F\subset K \iff  F_x \subset K_x
+		.\] 
+	\end{proof}
+	
+	
+	
+	\begin{corollary}(Translation preserves set membership).
+		For any $K \subset \mathbb{R}^p$ and $a, x \in \mathbb{R}^p$, $a \in  K$ if and only if $a_x \in  K_x$.
+	\end{corollary}
+	\begin{proof}
+		Apply the previous lemma with $F = \{a\}$.
+	\end{proof}
+	Take $A_x$ to be an infinite subset of $K_x$. Define $A$ to be \[
+		A = \{y -x: y \in A_x\}
+	.\] 
+	Thus $A \subset K$ (by preservation of set ordering). Then by compactness of $K$, there exists a cluster point $a$ of $A$ in $K$. Thus $a_x :=a + x \in K_x$ (by preservation of set membership). For any $\delta\in \mathbb{R}$ such that $\delta>0$, the intersection $B_\delta(a) \cap A$ is infinite. 
+	Hence the intersection $B_{\delta}(a_x) \cap A_x = \left( B_\delta(a) \cap A \right)_x $ is infinite (by distributivity and bijectivity). Hence $a_x$ is a cluster point of $A_x$.
+
+
+\end{proof}
+
 \end{enumerate}
