@@ -1,0 +1,39 @@
+\lecture{9}{Sun 18 Sep 2022 21:01}{Upper Bound}
+
+\begin{claim}
+	When $c = 1$, there exists a family of problem instances where the best CR possible is $\frac{1}{2e}$.
+\end{claim}
+\begin{proof}
+	For any outcome $\omega \in \Omega$, the problem instance is uniquely identified with $\sigma(\omega)$. We consider all problem instances where the best and second best items are next to each other. More precisely, we restrict the probablity space to the following event: \[
+		|\sigma(\omega)(1)-\sigma(\omega)(2)| = 1
+	.\] 
+	Which in term gives the restricted range for $\sigma$ :
+	\[
+		\mathcal{S} = \{\sigma \in S_n: |\sigma(1) - \sigma(2)| = 1\}
+	.\]
+
+	As discussed before, in the restricted probability space, items $1$ and $2$ are not distinguishable by any algorithm. Therefore, we can treat these two items as a unit, and construct the coupling problem instance below:
+
+	Let $\sigma' $ be a random permutation taking value in $ S_{n-1}$. We additionally require
+	\begin{equation*}
+		\sigma'(i) < \sigma'(j) \iff \sigma(i+1)<\sigma(j+1)
+	\end{equation*}
+	for all $i, j \in \{2, 3, \ldots, n-1\} $. We may verify that this uniquely defines $\sigma'$ in terms of $\sigma$, and 
+	$\sigma'$ is uniformly distributed in $S_{n - 1}$. 
+
+	Now consider the game instance with $n -1$ items and $c = 0$, identified by $\sigma'$. This coupling game is same as a classical SP with $n - 1$ items, where any algorithm has CR $\le \frac{1}{e}$. Also, for any fixed algorithm $\tau$ with $\sigma$ as an input, winning outcomes in the two coupling games are related by
+	\[
+		 \tau(\sigma) = \sigma(1) \lor \tau(\sigma)=\sigma(2) \iff \tau(\sigma') = \sigma'(1) 
+	.\]
+	Since any algorithm cannot make a distinction between the events $\tau=\sigma(1)$ and $\tau = \sigma(2)$,
+\[
+	\operatorname{Pr} \left[ \tau(\sigma) = \sigma(1) \right] =
+	\operatorname{Pr} \left[ \tau(\sigma) = \sigma(2) \right] 
+.\] 
+To justify this, note that for any problem instance $\sigma \in \mathcal{S}$, there exists $\overline{\sigma} \in \mathcal{S}$ where $\overline{\sigma} (1) = \sigma(2)$ and $\overline{\sigma} (2) = \sigma(1)$. We must have $\tau(\sigma) = \tau(\overline{\sigma} )$, so $\tau$ makes the correct decision half of the time on average.
+
+	Hence we have the probability of winning bounded by
+	\[
+		\operatorname{Pr} \left[ \tau = \sigma(1) \right]  = \frac{1}{2}\operatorname{Pr} \left[ \tau' = \sigma'(1) \right]  \le  \frac{1}{2e}
+	.\] 
+\end{proof}
