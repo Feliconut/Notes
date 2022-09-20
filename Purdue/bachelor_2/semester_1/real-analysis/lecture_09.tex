@@ -1,0 +1,127 @@
+\lecture{9}{Mon 19 Sep 2022 11:32}{Compactness and Heine-Borel theorem}
+
+Suppose we have $E \subset \mathbb{R}^p$ and a family $\mathscr{G} = \{G_\alpha\} _{\alpha\in A}$ where $G_\alpha \subset \mathbb{R}^p$ is open for every $\alpha \in A$.
+We say that $\mathcal{G}$ is an \textit{open cover} of $E$ if \[
+	E \subset \bigcup_{\alpha \in A} G_\alpha
+.\] 
+
+We say that $\mathcal{G}' \subset \mathcal{G}$ is a subcover if we still have \[
+	E \subset \bigcup_{G \in \mathcal{G}'} G
+.\] 
+
+\begin{definition}[Compact]
+	\label{thm:heine-borel}
+	$E \subset \mathbb{R}^p $ is called \textit{compact} if every open cover $\mathcal{G}$ of $E$ has a finite subcover.
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item If $E$ is finite, then $E$ is compact.
+			\begin{proof}
+				Let $E = \{x_1,x_2,\ldots,x_N\} $. Let $\mathcal{G}$ be an open cover. 
+				For $x_1, \exists G_1 \in \mathcal{G}$ such that $x_1 \in G_1$.
+				For $x_2, \exists G_2 \in \mathcal{G}$ such that $x_2 \in G_2$. Continue in this fashion, we have a finite family of open sets \[
+				E \subset \bigcup_{i = 1} ^N G_i
+				.\] 
+				Hence $\{G_1, \ldots, G_N\} $ is a subcover of $\mathcal{G}$.
+			\end{proof}
+		\item $\mathbb{R}^p$ is not compact. 
+		\begin{proof}
+		Let $G_n = B_n(0)$. Then 
+		\[
+			\mathbb{R}^p \subset \bigcup_{n= 1} ^\infty G_n
+		.\] 
+		But \begin{align*}
+			\mathbb{R}^p &\not \subset G_{n_1} \cup \ldots \cup G_{n_N}\\
+			&= B_{n_1}(0) \cup  \ldots \cup B_{n_N}(0)\\
+			&= B_{\max n_i}(0)
+		.\end{align*} 
+			
+		\end{proof}
+		
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}[Heine-Borel Theorem]
+	$E\subset \mathbb{R}^p$ is compact if and only if $E$ is closed and bounded.
+\end{theorem}
+\begin{remark}
+	True only in $\mathbb{R}^p$, finite-dimensional Euclidean space. Might not be true in spaces other than $\mathbb{R}^p$.
+\end{remark}
+
+\begin{lemma}
+	If $E$ compact, then $E$ bounded.
+\end{lemma}
+\begin{proof}
+	Take $G_{n} = B_n(0) , n = 1,2,\ldots$
+	Then $\{G_n\} $ is an open cover of $E$: \[
+		E \subset \bigcup_{n=1} ^\infty G_n = \mathbb{R}^p
+	.\] 
+	By compactness, there are $G_{n_1}, \ldots, G_{n_N}$ such that \begin{align*}
+		E &\subset G_{n_1}\cup \ldots \cup G_{n_N}\\
+		&= B_{\max \{n_1, \ldots, n_N\} }(0)
+	.\end{align*} 
+	Hence $E$ bounded.
+\end{proof}
+\begin{lemma}
+	If $E$ compact, then $E $ closed.
+\end{lemma}
+\begin{proof}
+	Suppose $x$ is a cluster point of $E$ and $x \not\in E$. Let \[
+		G_n = \overline{B_{\frac{1}{n}}(x)} ^c = \{y : \|y - x\| >  \frac{1}{n}\} 
+	.\] 
+	Then \[
+		\bigcup_{n = 1} ^\infty G_n = \mathbb{R}^p \setminus \{x\} 
+		\supset E
+	.\] 
+	If there exists a finite subcover $G_{n_1}, \ldots, G_{n_N}$ such that \[
+		E \subset G_{n_1} \cup \ldots \cup G_{n_N} = G_{\max \{n_1, \ldots, n_N\} } =: G_R
+	.\] 
+	Then $B_R(x) \cap E = \emptyset $. This is a contradiction since $x$ is a cluster (or boundary) point. Hence for every cluster point $x$ of $E$ we have $x \in E$.
+	Hence $E$ closed.
+\end{proof}
+\begin{remark}
+	The two lemmas above are true in every topological space. It's the reverse statement (closed and bounded implies compactness) that isn't universal.
+\end{remark}
+
+\begin{lemma}
+	Closed cellls are compact.
+\end{lemma}
+\begin{proof}
+	(Bisection argument) Let $I$ be a closed cell and $\mathcal{G}$ an open cover of $I$.
+	Suppose $\mathcal{G}$ does not have finite subcover.
+	\begin{enumerate}
+		\item Bisect the sides of $I$ to form $2^p$ closed cells. If all $2^p$ subcells have finite subcover of $\mathcal{G}$,  $\mathcal{G}$ would have a finite subcover of $I$.
+			Hence there exists a cell, call it $I_1$, such that $I_1$ cannot be covered by finitely many elements of $\mathcal{G}$. We have $l(I_1) = \frac{1}{2}l(I)$.
+		\item Bisect $I_1$ to find $I_2$, in the same fashion. By induction, we construct \[
+			I_1 \supset I_2 \supset \ldots \supset I_n \supset \ldots
+		.\] 
+		Such that $l(I_n) = \frac{1}{2^n}l(I)  $, and $I_n$ cannot be covered by finitely many elements of $\mathcal{G}$.
+		\item
+		Now take $\xi \in \bigcap_{n=1} ^\infty I_n$ (nonempty by Nested Cells Lemma). $\xi \in I$, so there $\exists G \in \mathcal{G}$ suc that $\xi \in G$. Since $G$ is open, there $\exists \delta>0$ such that $B_\delta(\xi)\subset G$.
+
+		As we have shown in the proof of Bolzano-Weierstrass, there exists an $n$ such that $I_n \subset B_\delta(\xi) \subset G$.
+		This means $I_n$ is covered by $1$ element of $\mathcal{G}$, contrary to the assumption that $I_n$ cannot be covered by finite subcover of $\mathcal{G}$.
+		Hence $I$ is compact.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+	If $F$ is compact, then $E\subset F$ is compact iff it is closed.
+\end{lemma}
+\begin{proof}
+	Let $\mathcal{G}$ be open cover of $E$. Add $E^c$ to $\mathcal{G}$, and  \[
+		\tilde {\mathcal{G}} = \mathcal{G} \cup \{E^c\} 
+	.\] 
+	Now \[
+		\bigcup_{G \in \tilde{\mathcal{G}}} G = \left( \bigcup_{G \in \mathcal{G}} G \right) \cup  E^c = \mathbb{R}^p \supset F
+	.\] 
+	Hence $\tilde{\mathcal{G}}$ is an open cover of $F$. Hence there exists a finite subcover of $F$.
+	
+	If $\{G_1, \ldots, G_N\} $ contains $E^c$, throw it out and call the remaining finite set $\mathcal{G}'$. Then $\mathcal{G}'$ covers $E$, and $\mathcal{G}' \subset \mathcal{G}$. Therefore $E$ is compact.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:heine-borel}]
+	By the four lemmas.
+\end{proof}
+

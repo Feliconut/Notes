@@ -9,7 +9,7 @@
 		\psi: G &\longrightarrow G / N \\
 		a &\longmapsto \psi(a) = N a
 	.\end{align*}
-	Properties to check:
+\	Properties to check:
 	\begin{itemize}
 		\item (Homomorphism) For all $a,b \in  G$, \[
 			\psi(ab) = Nab = NaNb = \psi(a)\psi(b)
@@ -55,9 +55,17 @@
 
 	Possibly, we have that $G$ has no non-trivial subgroups. In this case, $G = \left\langle a \right\rangle $ for some $a \in G\setminus \{e\} $, and $|G|$ is prime. Then the order of $a$ is equal to $|G|$, and $G$ has an element of prime order.
 
-	Thus $G$ has a non-trivial subgroup $N$. Since $G$ is abelian, one has $N \triangleleft G$. Then \[
+	If $G$ has a non-trivial subgroup $N$. Since $G$ is abelian, one has $N \triangleleft G$. Then \[
 		|G / N| \cdot |N| = |G| \equiv 0 \pmod p
 	.\] 
-	So $p \mid |N|$ or $p \mid |G / N|$. In the first case we are done. In the second case, (to be filled in the next class)
+	So $p \mid |N|$ or $p \mid |G / N|$. In the first case we are done by using induction hypothesis. 
+
+	At this point we can assume that $N \triangleleft  G$, $1 < |N| < |G|$, and $p \nmid |N|$. But $|G / N| |N| = |G|$ and $p \mid  |G|$, we have $p \mid |G / N|$. By the induction hypothesis, since $1 < |G / N|< |G|$, the group  $G / N$ contains an element of order $p$, say $Na$.
+	Suppose that $a$ has order $m$ in $G$. Then \[
+		(Na)^m = N a^m = Ne = N
+	,\] 
+	so since $Na$ has order $p$, we must have $p | m$. We write $m  = k p$ with $ k \in \mathbb{N}$, and observe that $a^k$ has order $p$ in $G$.
+
+	So $G$ does indeed have an element of order $p$, completing the induction.
 \end{proof}
 

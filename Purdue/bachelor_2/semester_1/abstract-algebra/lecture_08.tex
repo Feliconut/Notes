@@ -1,0 +1,62 @@
+\lecture{8}{Mon 19 Sep 2022 10:46}{}
+
+\subsection{The homomorphism theorems}
+
+\begin{theorem}
+	If $N \triangleleft G$, then there exists a surjective homomorphism $\varphi: G \to  G \ N$ with $N = \operatorname{ker} \varphi$.
+\end{theorem}
+
+\begin{theorem}[First Homomorphism Theorem]
+	(2.7.1)
+	Let $\varphi: G \to  G'$ be a surjective homomorphism of groups with kernel $K$. Then $G' \cong G / K$.
+\end{theorem}
+\begin{proof}
+	Define the map  \begin{align*}
+		\psi: G / K &\longrightarrow G' \\
+		Ka &\longmapsto \psi(Ka) = \varphi(k)
+	.\end{align*}
+	Check this gives an  isomorphism:
+
+	\begin{itemize}
+	\item (Well-defined property)
+		We check that if $Ka = Kb$ then $\psi(Ka) = \psi(Kb)$. But $\psi(Ka) = \varphi(a)$ and  $\psi(Kb) = \varphi(b)$. Then if $Ka = Kb$, then $K = K b a^{-1} $, whence $ba^{-1}  \in K$, so that \[
+			\varphi(b)\varphi(a)^{-1} = \varphi(ba^{-1} ) = e' \implies \varphi(b) = \varphi(a)
+		.\] 
+		Thus $\psi(Ka) = \psi(Kb)$.
+	\item (Homomorphism)
+		Whenever $a, b \in G$, \[
+			\psi(Ka) \psi(Kb) 
+			=\varphi(a)\varphi(b)
+			=\varphi(ab)
+			=\psi(Kab)
+			=\psi(Ka \cdot Kb)
+		.\] 
+	\item ($\psi$ surjective)
+		Whenever $g \in G'$, by the surjective property of $\varphi$, there exists $a \in G$ such that $\varphi(a) = g$, and $\psi(Ka) = \varphi(a)$, so there exists $Ka \in G / K$ such that $\psi(Ka) = g$.
+	\item ($\psi$ injective)
+		Whenever $\psi(Ka) = \psi(Kb)$, one has $\varphi(a) = \varphi(b)$, so $\varphi(ab^{-1} )=\varphi(a) \varphi(b)^{-1}= e'$, whence $ab^{-1} \in \operatorname{ker} \varphi = K$.
+		Thus $a \in K b$, whence $Ka = Kb$. Thus $\psi$ injective.
+	\end{itemize}
+	So, $\psi$ is a well-defined bijective homomorphism from $G / K$ to $G'$, and thus $G / K \cong G'$.
+\end{proof}
+
+\begin{theorem}[Correspondence Theorem]
+	(2.7.2)
+	Let $\varphi: G \to  G'$ be a surjective homomorphism of groups with kernel $K$. Suppose $H' \le G'$ and \[
+		H = \{a \in G: \varphi(a) \in H'\} 
+	.\] 
+	Then $H \le G$, $K \subset H$, and $H / K \cong H'$. Also, whenever $H' \triangleleft G'$ then $H \triangleleft G$.
+\end{theorem}
+\begin{remark}
+	When $H' = \{e\} $, $H$ is the kernel. We have $\varphi$ condensing information from $H$ to $H'$, forgetting about the kernel. We can still work back and understand what is going on.
+\end{remark}
+\begin{proof}
+	Check: 
+	\begin{enumerate}
+		\item $H\le G$ :
+		We have $e \in H$, so $H \neq  \emptyset $. Also, whenever $a, b \in H$, one has $\varphi(ab^{-1} ) = \varphi(a)\varphi(b)^{-1} \in H'$, and hence
+		$ab^{-1} \in H$. So $H \le G$.
+	\end{enumerate}
+	Then we use the first homomorphism theorem.
+\end{proof}
+
