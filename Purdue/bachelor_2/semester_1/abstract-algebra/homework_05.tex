@@ -1,0 +1,163 @@
+\homework{5}{Mon 19 Sep 2022 16:11}{Week 5 due Sep 28}
+Herstein, section 2.6, page 84: Questions 16,18
+\begin{enumerate}
+	\item 16. Let $G$ be an abelian group of order $p^n m$, where $p$ is a prime and $p \nmid m$. Let $P=\left\{a \in G \mid a^{p^k}=e\right.$ for some $k$ depending on $\left.a\right\}$. Prove that:
+(a) $P$ is a subgroup of $G$.
+\begin{proof}
+	Associativity is inherited from $G$. We first verify closure of $P$. Take $a, b \in P$. Then there exists integers $k, l$ such that $a^{p^k} = b^{p^l} = e$. Now
+	\begin{align*}
+		(ab)^{p^{k+l}}
+		&= a^{p^{k+l}}b^{p^{k+l}} \\
+		&= a^{p^kp^l} b^{p^kp^l} \\
+		&= \left( a^{p^k} \right)^{p^l}  \left( b^{p^l} \right)^{p^k}  \\
+		&= e^{p^l}  e^{p^k}  \\
+		&= e
+	.\end{align*}
+	Hence $ab \in P$. Next we verify identity.  Take arbitrary $k$ and we see that
+	\[
+		e^{p^k} = e
+	.\]
+	Hence $e \in P$. Finally, for any element $a \in P$, we verify that $a^{-1}  \in P$. Let $k$ be the integer such that $a^{p^k} = e$. Now
+	\begin{align*}
+		(a^{-1} )^{p^{k}} &= a^{-p^k} \\
+		&= \left( a^{p^k} \right) ^{-1} \\
+		&= e^{-1} \\
+		&= e
+	.\end{align*}
+	Hence $a^{-1} \in P$. We have verified all group properties in the definition, so $P$ is a subgroup of $G$.
+\end{proof}
+
+(b) $G / P$ has no elements of order $p$.
+\begin{proof}
+	Suppose there exists $a \in G$ such that $o(Pa) = p$. Then $\left( Pa \right) ^p = P(a^p) = P$, hence $a^p \in P$. By definition of $P$, there exists integer $k$ such that $\left( a^p \right) ^{p^k} = e$. But this means $a^{p^{k+1}} = e$, whence $a \in P$. Therefore $Pa = P$, meaning $o(Pa) = 1$, so $p = 1$. However it is assumed that $p \nmid m$, but $1 | m$, so we have a contradiction. Therefore $G / P$ does not have element of order $p$.
+\end{proof}
+
+(c) $|P|=p^n$.
+\begin{proof}
+	Suppose $p \mid | G / P |$.  $G/P$ is abelian and finite (since $G$ is abelian), so there exists an element of order $p$ by Cauchy's Theorem, a contradiction to the last statement.
+	Hence one must have $p^n \mid |P|$. 
+
+	Now suppose $m | |P|$. We have $|P| = p^n m = |G|$, so $P = G$. Then there exists an element $a \in G$ of order $m$ by Cauchy's Theorem. Also, there exists $k$ such that $a^{p^k} = e$. Hence $m | p^k$. But it is assumed that $p \nmid m$, so we cannot have  $m | p^k$, a contradiction. Therefore $m \nmid |P|$. Combining all we have,  we conclude $|P| = p^n$.
+\end{proof}
+
+\item 18. Let $G$ be an abelian group (possibly infinite) and let the set $T=$ $\left\{a \in G \mid a^m=e, m>1\right.$ depending on $\left.a\right\}$. Prove that:
+(a) $T$ is a subgroup of $G$.
+\begin{proof}
+	Associativity is inherited from $G$. We first verify closure of $T$. Take $a, b \in T$. Then there exists positive integers $m, n$ such that $a^m = b^n = e$. Now \[
+		(ab)^{mn} = a^{mn}b^{mn} = \left( a^m \right) ^n \left( b^n \right) ^m = e^ne^m = e
+	.\] 
+	Hence $ab \in T$. 
+
+	Clearly the identity $e \in T$ since $e^2 = e$. For inverse, note that
+	\[
+		\left( a^{-1}  \right) ^m = a^{-m}
+		=\left( a^m \right) ^{-1} = e^{-1} = e
+	.\] 
+	Hence $a^{-1}  \in T$.
+
+	We have verified all group properties, so $T$ is a subgroup of $G$.
+\end{proof}
+
+(b) $G / T$ has no element-other than its identity element-of finite order.
+\begin{proof}
+	Suppose $a \in G$ such that $Ta$ has order $n > 1$ in $G / T$. Then \[
+		(Ta)^n = Ta^n = T
+	.\] 
+	Hence $a^n \in T$. Thus there exists positive integer $m$ such that $\left( a^n \right) ^m =a^{nm}= e$. But this implies $a \in T$, hence $Ta = T$, so $o(Ta) = 1$, a contradiction.
+\end{proof}
+
+\end{enumerate}
+\newpage
+Herstein, section 2.7, page 87: Questions 4,6,7
+\begin{enumerate}[resume]
+	\item 4. If $G_1, G_2$ are two groups and $G=G_1 \times G_2=\left\{(a, b) \mid a \in G_1, b \in G_2\right\}$, where we define $(a, b)(c, d)=(a c, b d)$, show that:
+(a) $N=\left\{\left(a, e_2\right) \mid a \in G_1\right\}$, where $e_2$ is the unit element of $G_2$, is a normal subgroup of $G$
+\begin{proof}
+	{\color{blue}question: do we need to check that $G$ is a group?}
+
+	Define the mapping 
+	\begin{align*}
+		\varphi: G_1 &\longrightarrow G \\
+		a &\longmapsto \varphi(a) = (a,e_2)
+	.\end{align*}
+	And note that \[
+		\varphi(a)\varphi(b) = (a, e_2)(b,e_2)
+		=(ab, e_2e_2) = (ab,e_2)=\varphi(ab)
+	.\] 
+	Hence $\varphi$ is a homomorphism. Note that  $N = \varphi(G_1)$, so $N$ is a subgroup of $G$. 
+	To check normality, let $g = (a,b) \in G$ and $n = (c,e_2) \in N$. Now
+	\begin{align*}
+		g^{-1} ng &= (a,b)^{-1}(c, e_2)(a,b)\\
+		&= (a^{-1} ,b^{-1} ) (c, e_2)(a,b)\\
+		&= (a^{-1} ca, b^{-1} e_2b) \\
+		&= (a^{-1} ca, b^{-1}b) \\
+		&= (a^{-1} ca, e_2) \\
+		&\in N
+	.\end{align*}
+\end{proof}
+
+(b) $N \simeq G_1$.
+\begin{proof}
+	Define the mapping
+	\begin{align*}
+		\varphi: G_1 &\longrightarrow N \\
+		a &\longmapsto \varphi(a) = (a,e_2)
+	.\end{align*}
+	To check well-definedness, note that for any $a \in G$, the element $(a,e_2)$ is in $N$ as per definition of $N$.
+
+	To check that $\varphi$ is a homomorphism, note that \[
+		\varphi(a)\varphi(b) = (a, e_2)(b,e_2)
+		=(ab, e_2e_2) = (ab,e_2)=\varphi(ab)
+	.\] 
+	To check that $\varphi$ is injective, assume $\varphi(a) = \varphi(b)$. Now $(a, e_2) = (b, e_2)$. But they are equal if and only if $a = b$.
+
+	To check that $\varphi$ is sujective, take any $(a, e_2) \in N$. Then $\varphi(a) = (a, e_2)$.
+
+	Hence $\varphi$ is an isomorphism from $G_1$ to $N$. Hence $G_1 \cong N$.
+\end{proof}
+
+(c) $G / N \simeq G_2$.
+\begin{proof}
+	Define the mapping
+	\begin{align*}
+		\varphi: G_2 &\longrightarrow G / N \\
+		b &\longmapsto \varphi(b) = N (e_1,b)
+	.\end{align*}
+	It is clear that $\varphi$ is well-defined. To check that $\varphi$ is a homomorphism, note
+	\[
+		\varphi(a)\varphi(b) = N(e_1,a)N(e_1,b)
+		=N(e_1,a)(e_1,b)
+		=N(e_1,ab)
+		=\varphi(ab)
+	.\] 
+	To check that $\varphi$ is injective, assume $\varphi(a) = \varphi(b)$. Hence $N(e_1,a) = N (e_1,b)$. Hence $(e, ab^{-1}) \in N$. But this means $ab^{-1} = e_2$ by definition of $N$. Therefore $a = b$.
+
+	To check that $\varphi$ is surjective, let $(a,b) \in G$ and we claim that $\varphi(b) = N (a, b)$. But note that \[
+		N(a,b) = N(a,e_2)(e_1,b) = N(e_1,b)
+	\] 
+	where the second inequality holds true since $(a,e_2) \in N$. Hence $\varphi(b) = N(e_1,b)$ from definition of $\varphi$.
+
+	Now we have found a bijective homomorphism $\varphi: G_2 \to G / N$, so $G_2 \cong G / N$. Therefore $G / N \cong G_2$.
+\end{proof}
+\newpage
+\item *6. If $G$ is a group and $N \triangleleft G$, show that if $a \in G$ has finite order $o(a)$, then $N a$ in $G / N$ has finite order $m$, where $m \mid o(a)$. (Prove this by using the homomorphism of $G$ onto $G / N$.)
+7. If $\varphi$ is a homomorphism of $G$ onto $G^{\prime}$ and $N \triangleleft G$, show that $\varphi(N) \triangleleft G^{\prime}$.
+\end{enumerate}
+\newpage
+Herstein, section 3.2, page 117 , Questions 3,9,11,14,17,20,23
+\begin{enumerate}[resume]
+	\item 3. Express as the product of disjoint cycles and find the order.
+(a) $\left(\begin{array}{lllll}1 & 2 & 3 & 5 & 7\end{array}\right)\left(\begin{array}{llll}2 & 4 & 7 & 6\end{array}\right)$.
+(b) $\left(\begin{array}{lll}1 & 2\end{array}\right)\left(\begin{array}{lll}1 & 3\end{array}\right)(1 \quad 4)$.
+(c) $\left(\begin{array}{lllllllll}1 & 2 & 3 & 4 & 5\end{array}\right)\left(\begin{array}{lllllll}1 & 2 & 3 & 4 & 6\end{array}\right)\left(\begin{array}{lllll}1 & 2 & 3 & 4 & 7\end{array}\right)$.
+(d) $\left(\begin{array}{lll}1 & 2 & 3\end{array}\right)\left(\begin{array}{lll}1 & 3 & 2\end{array}\right)$.
+(e) $\left(\begin{array}{lllll}1 & 2 & 3\end{array}\right)\left(\begin{array}{llll}3 & 5 & 7 & 9\end{array}\right)\left(\begin{array}{lll}1 & 2 & 3\end{array}\right)^{-1}$.
+(f) $\left(\begin{array}{lllll}1 & 2 & 3 & 4 & 5\end{array}\right)^3$.
+\item 9. Given the two transpositions $\left(\begin{array}{ll}1 & 2\end{array}\right)$ and $\left(\begin{array}{ll}1 & 3\end{array}\right)$, find a permutation $\sigma$ such that $\sigma\left(\begin{array}{ll}1 & 2\end{array}\right) \sigma^{-1}=\left(\begin{array}{ll}1 & 3\end{array}\right)$.
+\item 11. Prove that there is a permutation $\sigma$ such that $\sigma(1 \quad 2 \quad 3) \sigma^{-1}=$ $\left(\begin{array}{lll}4 & 5 & 6\end{array}\right)$
+\item 14. Prove that for any permutation $\sigma, \sigma \tau \sigma^{-1}$ is a transposition if $\tau$ is a transposition.
+\item 14. Prove that for any permutation $\sigma, \sigma \tau \sigma^{-1}$ is a transposition if $\tau$ is a transposition.
+\item 17. Let $\left(\begin{array}{ll}1 & 2\end{array}\right)$ and $\left(\begin{array}{lllll}1 & 2 & 3 & \cdots & n\end{array}\right)$ be in $S_n$. Show that any subgroup of $S_n$ that contains both of these must be all of $S_n$ (so these two permutations generate $\left.S_n\right)$
+\item 20. If $\tau_1, \tau_2$ are distinct transpositions, show that $\tau_1 \tau_2$ is of order 2 or 3 .
+\item 23. Let $\sigma, \tau$ be two permutations such that they both have decompositions into disjoint cycles of cycles of lengths $m_1, m_2, \ldots, m_k$. (We say that they have similar decompositions into disjoint cycles.) Prove that for some permutation $\rho, \tau=\rho \sigma \rho^{-1}$.
+\end{enumerate}

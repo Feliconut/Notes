@@ -60,10 +60,10 @@ Thus for $\forall  n \in N$ and  $\forall x \in G'$, we have$x^{-1} \varphi(n)x 
 	\begin{align*}
 	\varphi(ab)g &= \sigma_{ab}(g) \\
 	&= (ab)g(ab)^{-1} \\
-	&= a(bgb^{-1} )a-1 \\
+	&= a(bgb^{-1} )a^{-1}  \\
 	&= \sigma_a(bgb^{-1} ) \\
 	&= \sigma_a(\sigma_b(g)) \\
-	&= (\sigma_a\sigma_b)(g)\\
+	&= (\sigma_a\circ\sigma_b)(g)\\
 	&= (\varphi(a)\varphi(b))(g)
 	.\end{align*}
 	Since this is true for all $g \in G$, we have $\varphi(ab) = \varphi(a)\varphi(b)$.
@@ -79,7 +79,7 @@ Thus for $\forall  n \in N$ and  $\forall x \in G'$, we have$x^{-1} \varphi(n)x 
 		&\iff \varphi(g) = \iota_G \\
 		&\iff g \in \operatorname{ker} \varphi
 	.\end{align*}
-	Where $\iota_G$ is the identity map, which serves as the ideneity element in $A(G)$.
+	Where $\iota_G$ is the identity map, which serves as the identity element in $A(G)$.
 \end{proof}
 
 	\item 34. Let $G$ be a group, $\mathscr{A}(G)$ the group of all automorphisms of $G$. (See Problem 28.) Let $I(G)=\left\{\sigma_a \mid a \in G\right\}$, where $\sigma_a$ is as defined in Problem $26 .$ Prove that $I(G) \triangleleft \mathscr{A}(G)$.
@@ -208,7 +208,7 @@ Hence $\varphi^{-1} \sigma_a\varphi = \sigma_{\varphi^{-1} (a)} \in I(G)$. There
 \newpage
 	\item 44. Prove that a group of order $p^2, p$ a prime, has a normal subgroup of order $p$.
 \begin{proof}
-	Let the group be $G$. We claim that there exists a subgroup of $p$ with order $p$. Take $a \in G$ where $a \neq e$. By Lagrange theorem, we have $o(a) | |G|$. Since $|G| = p^2$ where $p $ prime, we have $o(a) = 1$, $o(a) = p$, or $o(a) = p^2$. Since $a \neq e$, $o(a)\neq 1$. If $o(a) = p$ then $\left\langle a \right\rangle $ is the desired subgroup. Now assume $o(a) = p^2$, then $G$ is cyclic. Use exercise 37 from Chapter 2.4 taking $m = p$, we have that there are exactly $\varphi(p) = p$ elements in $G$ of order $p$. Take any of these elements and it will generate a cyclic subgroup of order $p$.
+	Let the group be $G$. We claim that there exists a subgroup of $G$ with order $p$. Take $a \in G$ where $a \neq e$. By Lagrange theorem, we have $o(a) | |G|$. Since $|G| = p^2$ where $p $ prime, we have $o(a) = 1$, $o(a) = p$, or $o(a) = p^2$. Since $a \neq e$, $o(a)\neq 1$. If $o(a) = p$ then $\left\langle a \right\rangle $ is the desired subgroup. Now assume $o(a) = p^2$, then $G$ is cyclic. Use exercise 37 from Chapter 2.4 taking $m = p$, we have that there are exactly $\varphi(p) = p$ elements in $G$ of order $p$. Take any of these elements and it will generate a cyclic subgroup of order $p$.
 
 	Let $H$ be some subgroup of  $G$ with order $p$. Now use Exercise 40. Indeed, $n = p^2 \nmid i_G(H)! = p!$. Now there is a nontrivial normal subgroup $N$ of $G$ contained in $H$. By Lagrange's Theorem, $|N| \mid |G|$. But $|N| >1$ (since it is nontrivial) and $|N| \le |H|=p$ (since it is contained in $H$ ). Therefore $|N| = p$, since $p$ is the only divisor of $p^2$ in $2, \ldots, p$.
 \end{proof}
@@ -292,7 +292,7 @@ for all $a, b \in G$, prove that $G / N$ is abelian.
 \begin{proof}
 	Let $a, b \in G$ such that $o(a) = m$ and $o(b) = n$. We claim that $o(ab) = mn $.
 
-	Suppose $(ab)^k = a^k b^k = e$ for some $k \in \mathbb{Z}$. Then $a^k = (b^k)^{-1}$. However we know that two orbits are either coincident or almost disjoint (either $\left\langle a \right\rangle = \left\langle b \right\rangle $ or $\left\langle a \right\rangle \cap \left\langle b \right\rangle  = \{e\} $.
+	Suppose $(ab)^k = a^k b^k = e$ for some $k \in \mathbb{Z}$. Then $a^k = (b^k)^{-1}$. However we know that two orbits are either coincident or almost disjoint (either $\left\langle a \right\rangle = \left\langle b \right\rangle $ or $\left\langle a \right\rangle \cap \left\langle b \right\rangle  = \{e\} $).
 	Since $\left\langle a \right\rangle $ and $\left\langle b \right\rangle $ have different order, they cannot be coincident. Hence their intersection contains only $e$.
 	From $a^k = (b^k)^{-1}$ we know that $a^k \in \left\langle a \right\rangle \cap \left\langle b \right\rangle $, so $a^k = e$, whence  $b^k = e$. Now $m|k$ and $n|k$, so $mn | k$. 
 
