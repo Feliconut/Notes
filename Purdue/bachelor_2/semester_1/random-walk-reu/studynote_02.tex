@@ -1,0 +1,102 @@
+\studynote{2}{Tue 20 Sep 2022 09:49}{Brownian Motion}
+
+\subsection{Definition and Properties of Brownian Motion}
+\begin{definition}[Brownian Motion]
+	A one-dimensional Brownian motion is a real-valued process $B_t, t \geq 0$ that has the following properties:\\
+(a) If $t_0<t_1<\ldots<t_n$ then $B\left(t_0\right), B\left(t_1\right)-B\left(t_0\right), \ldots, B\left(t_n\right)-B\left(t_{n-1}\right)$ are independent.\\
+(b) If $s, t \geq 0$ then
+\[
+W_t-W_s \sim \mathcal{N}(0, t-s),(0 \leq s \leq t)
+\]
+(c) With probability one, $t \rightarrow B_t$ is continuous.
+\end{definition}
+
+\begin{theorem}[Levy's Characterization of Brownian Motion]
+	Let $X=\left(X_1, \ldots, X_n\right)$ be a continuous stochastic process on a probability space $(\Omega, \Sigma, \mathrm{P})$ taking values in $\mathbf{R}^n$. Then the following are equivalent:
+\begin{enumerate}
+		\item 
+$X$ is a Brownian motion with respect to $\mathbf{P}$, i.e., the law of $X$ with respect to $\mathbf{P}$ is the same as the law of an $n$-dimensional Brownian motion, i.e., the push-forward measure $X_*(\mathbf{P})$ is classical Wiener measure on $C_0\left([0,+\infty) ; \mathbf{R}^m\right)$.
+\item 
+ both
+\begin{enumerate}
+ 	\item 
+$X$ is a martingale with respect to $\mathbf{P}$ (and its own natural filtration); and
+ 	\item 
+for all $1 \leq i, j \leq n, X_i(t) X_j(t)-\delta_{i j}$ i is a martingale with respect to $\mathbf{P}$ (and its own natural filtration), where $\delta_{i j}$ denotes the Kronecker delta.
+	\end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+\textbf{Translation invariance.} $\left\{B_t-B_0, t \geq 0\right\}$ is independent of $B_0$ and has the same distribution as a Brownian motion with $B_0=0$.
+
+The \textbf{Brownian scaling relation.} If $B_0=0$ then for any $t>0$,
+\[
+\left\{B_{s t}, s \geq 0\right\} \stackrel{d}{=}\left\{t^{1 / 2} B_s, s \geq 0\right\}
+\]
+\textbf{Markov Property.} if $s \geq 0$ then $B(t+s)-B(s), t \geq 0$ is a Brownian motion that is independent of what happened before time $s$.
+
+\textbf{Reflection Principle.} 
+(Example 8.4.1.) Let $a>0$ and let $T_a=\inf \left\{t: B_t=a\right\}$. Then
+\[
+P_0\left(T_a<t\right)=2 P_0\left(B_t \geq a\right)
+\]
+\begin{proof}[Intuitive proof]
+	
+We observe that if $B_s$ hits $a$ at some time $s<t$, then the strong Markov property implies that $B_t-B\left(T_a\right)$ is independent of what happened before time $T_a$. The symmetry of the normal distribution and $P_a\left(B_u=a\right)=0$ for $u>0$ then imply
+\[
+P_0\left(T_a<t, B_t>a\right)=\frac{1}{2} P_0\left(T_a<t\right)
+\]
+Rearranging the last equation and using $\left\{B_t>a\right\} \subset\left\{T_a<t\right\}$ gives
+\[
+P_0\left(T_a<t\right)=2 P_0\left(T_a<t, B_t>a\right)=2 P_0\left(B_t>a\right)
+\]
+\end{proof}
+
+\begin{theorem}(1-d BM is unbounded)
+	(8.2.8) Let $B_t$ be a one-dimensional Brownian motion starting at 0 then with probability 1 ,
+\[
+\limsup _{t \rightarrow \infty} B_t / \sqrt{t}=\infty \quad \liminf _{t \rightarrow \infty} B_t / \sqrt{t}=-\infty
+\]
+\end{theorem}
+
+\begin{theorem}(1-d BM is recurrent)
+(8.2.9) Let $B_t$ be a one-dimensional Brownian motion and let $A=\cap_n\left\{B_t=\right.$ 0 for some $t \geq n\}$. Then $P_x(A)=1$ for all $x$.
+\end{theorem}
+
+\begin{theorem}
+	(Relating zero and infinity) If $B_t$ is a Brownian motion starting at 0, then so is the process defined by $X_0=0$ and $X_t=t B(1 / t)$ for $t>0$.
+\end{theorem}
+
+\begin{corollary}
+	$B_t$ reaches $0$ infinitely many times by time $ \varepsilon>0$.
+\end{corollary}
+
+\textbf{Properties of zero set.} The zero set $\mathcal{Z}(\omega) \equiv\left\{t: B_t(\omega)=0\right\}$ has no isolated points, is uncountable, is of measure zero, and has Hausdorff dimension $\frac{1}{2}$. (Compare to Cantor's Set with Hausdorff dimension $\log 2 / \log 3$.
+
+\subsubsection{Brownian Motion and Random Walk}
+
+We can construct brownian motion by taking scaling limit of random walk:
+
+In probability theory, Donsker's theorem (also known as Donsker's invariance principle, or the functional central limit theorem), named after Monroe D. Donsker, is a functional extension of the central limit theorem.
+
+Let $X_1, X_2, X_3, \ldots$ be a sequence of independent and identically distributed (i.i.d.) random variables with mean 0 and variance 1. Let $S_n:=\sum_{i=1}^n X_i$. The stochastic process
+
+$S:=\left(S_n\right)_{n \in \mathbb{N}}$ is known as a random walk. Define the diffusively rescaled random walk (partialsum process) by
+\[
+W^{(n)}(t):=\frac{S_{\lfloor n t\rfloor}}{\sqrt{n}}, \quad t \in[0,1]
+\]
+
+The central limit theorem asserts that $W^{(n)}(1)$ converges in distribution to a standard Gaussian random variable $W(1)$ as $n \rightarrow \infty$. Donsker's invariance principle extends this convergence to the whole function $W^{(n)}:=\left(W^{(n)}(t)\right)_{t \in[0,1]}$. More precisely, in its modern form, Donsker's invariance principle states that: 
+
+\begin{theorem}[Donsker's Invariance Principle]
+As random variables taking values in the Skorokhod space $\mathcal{D}[0,1]$ (right continuous and have left limit everywhere), the random function $W^{(n)}$ converges in distribution to a standard Brownian motion $W:=(W(t))_{t \in[0,1]}$ as $n \rightarrow \infty$.
+\end{theorem}
+source: \cite{DonskerTheorem2021}
+
+We can also embed a random walk inside a brownian motion:
+
+\textbf{Skorohod Embedding.} Suppose we are given a standard Brownian motion $\left(B_t\right)$, and a stopping time $T$. Then, so Iong as $T$ satisfies one of the regularity conditions under which the Optional Stopping Theorem applies, we know that $\mathbb{E}\left[B_T\right]=0$. Furthermore, since $B_t^2-t$ is a martingale, $\mathbb{E}\left[B_T^2\right]=\mathbb{E}[T]$, so if the latter is finite, so is the former.
+
+Now, using the strong Markov property of Brownian motion, we can come up with a sequence of stopping times $0=T_0, T_1, T_2, \ldots$ such that the increments $T_k-T_{k-1}$ are IID with the same distribution as $T$. Then $0, B_{T_1}, B_{T_2}$, . . is a centered random walk. By taking $T$ to be the hitting time of $\{-1,+1\}$, it is easy to see that we can embed simple random walk in a Brownian motion using this approach.
+
+copied from: \cite{dominicyeoSkorohodEmbedding2016}. For more information see: \cite{oblojSkorokhodEmbeddingProblem2004}

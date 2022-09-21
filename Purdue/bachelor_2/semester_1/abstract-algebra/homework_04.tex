@@ -183,23 +183,11 @@ Hence $\varphi^{-1} \sigma_a\varphi = \sigma_{\varphi^{-1} (a)} \in I(G)$. There
 
 	\item 40. If $G$ is a finite group, $H$ a subgroup of $G$ such that $n \nmid i_G(H)$ ! where $n=|G|$, prove that there is a normal subgroup $N \neq(e)$ of $G$ contained in $H$.
 \begin{proof}
-	We use everything from exercise 38. We have established that $\operatorname{ker} \varphi$ is a normal subgroup of $G$ lying in $H$. Let $N = \operatorname{ker} \varphi$. It remains to show that $N \neq  (e)$.
+	We use everything from exercise 38, and define $S, \varphi$ and $A(S)$ in the same way. We have established that $\operatorname{ker} \varphi$ is a normal subgroup of $G$ lying in $H$. Let $N = \operatorname{ker} \varphi$. It remains to show that $N \neq  (e)$.
 
 	Suppose the opposite, that $N = (e)$. 
-	We claim that $\varphi(G)$ forms a subgroup of $A(S)$ with order exactly $G$, where the group operation is $\varphi$ restricted to $\varphi(G)$. We need to show that $\varphi$ is an isomorphism between $G$ and $\varphi(G)$. It suffices to verify that $\varphi$ is bijective.
-	Surjectivity is trivial, since for any element in $\varphi(G)$, there exist by definition some $g \in G$ mapping to it. Therefore we only have to verify injectivity.
-
-	To establish injectivity, take arbitrary $x, y \in G$. Suppose $\varphi(x) = \varphi(y)$. Now for all $a \in G$, we have
-	\begin{align*}
-		T_x(Ha) = T_y(Ha)\\
-		&\iff Hax^{-1} =Hay^{-1} \\
-		&\iff (Ha)(x^{-1} y) = Ha \\
-		&\iff T_{xy^{-1} }(Ha) = Ha
-	\end{align*}
-	This is true for all $a \in G$, so $T_{xy^{-1}}$ is the identity in $A(S)$. But since $\operatorname{ker} \varphi = \{e\} $, we have $xy^{-1}  = e$. This implies $x = y$.
-
-
-	Now by Lagrange's Theorem, $|\varphi(G)| \mid |A(S)|$. But note that $|\varphi(G)| = |G| = n$ and $|A(S)| = |S|! = i_G(H)!$. So we have \[
+	Then this means that $\varphi$ is injective, so $|\varphi(G)| = |G| = n$.
+	Now by Lagrange's Theorem, $|\varphi(G)| \mid |A(S)|$. But note that $|A(S)| = |S|! = i_G(H)!$. So we have \[
 		n | i_G(H)!
 	\] 
 	which is a contradiction with the assumption. Therefore we must have  $N \neq  (e)$.
@@ -208,9 +196,17 @@ Hence $\varphi^{-1} \sigma_a\varphi = \sigma_{\varphi^{-1} (a)} \in I(G)$. There
 \newpage
 	\item 44. Prove that a group of order $p^2, p$ a prime, has a normal subgroup of order $p$.
 \begin{proof}
-	Let the group be $G$. We claim that there exists a subgroup of $G$ with order $p$. Take $a \in G$ where $a \neq e$. By Lagrange theorem, we have $o(a) | |G|$. Since $|G| = p^2$ where $p $ prime, we have $o(a) = 1$, $o(a) = p$, or $o(a) = p^2$. Since $a \neq e$, $o(a)\neq 1$. If $o(a) = p$ then $\left\langle a \right\rangle $ is the desired subgroup. Now assume $o(a) = p^2$, then $G$ is cyclic. Use exercise 37 from Chapter 2.4 taking $m = p$, we have that there are exactly $\varphi(p) = p$ elements in $G$ of order $p$. Take any of these elements and it will generate a cyclic subgroup of order $p$.
+	Let the group be $G$. We claim that there exists a subgroup of $G$ with order $p$. Take $a \in G$ where $a \neq e$. By Lagrange theorem, we have $o(a) | |G|$. Since $|G| = p^2$ where $p $ prime, we have $o(a) = 1$, $o(a) = p$, or $o(a) = p^2$. Since $a \neq e$, $o(a)\neq 1$. 
 
-	Let $H$ be some subgroup of  $G$ with order $p$. Now use Exercise 40. Indeed, $n = p^2 \nmid i_G(H)! = p!$. Now there is a nontrivial normal subgroup $N$ of $G$ contained in $H$. By Lagrange's Theorem, $|N| \mid |G|$. But $|N| >1$ (since it is nontrivial) and $|N| \le |H|=p$ (since it is contained in $H$ ). Therefore $|N| = p$, since $p$ is the only divisor of $p^2$ in $2, \ldots, p$.
+	Now assume $o(a) = p^2$, then $G$ is cyclic. Use exercise 37 from Chapter 2.4 taking $m = p$, we have that there are exactly $\varphi(p) = p$ elements in $G$ of order $p$. Take any of these elements and it will generate a cyclic subgroup of order $p$.
+	But since $G$ is cyclic, it is abelian, so every subgroup is a normal subgroup, so we are done.
+
+	If $o(a) = p$ then $\left\langle a \right\rangle \le G$. We may assume in addition that there are no other element with order $p^2$, otherwise it will fall to the case we just proved. We now prove that $\left\langle a \right\rangle \triangleleft G$. Now apply Exercise 40, and let $H = \left\langle a \right\rangle $. Observe that \[
+		p^2 \nmid p! = (p^2 / p)! = (|G| / |H|)! = (|G / H|)! = i_G(H)
+	.\] 
+	Hence there is a nontrivial normal subgroup $N$ of $G$ contained in $H$. Hence $|N| \mid |G|$ and $1 < |N| \le  |H| = p$. But this forces $|N| = p$.
+
+
 \end{proof}
 
 \end{enumerate}

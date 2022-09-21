@@ -1,0 +1,203 @@
+\lecture{9}{Tue 20 Sep 2022 12:03}{Integration}
+
+A \textit{curve} in region $\Omega$ is a continuous map \[
+	\gamma: [a,b] \to  \Omega \subset \mathbb{C}
+.\] 
+
+We can write it in term of real and imaginary parts, 
+\[
+	\gamma(t) = x(t) + i y(t)
+.\] 
+
+We consider \textit{piecewise-smooth} curves, curves such that there exists \[
+	a < = t_0 < t_1 < \ldots < t_{n+1} = b
+\] such that $\gamma$ has a continuous analytic on each interval $[t_i, t_{i+1}]$.
+
+A curve that does not intersect itself is called \textit{simple}, i.e., $\gamma$ is injective.
+
+A curve such that $\gamma(a) = \gamma(b)$ is called \textit{closed}.
+
+If $\gamma$ is closed and injective on $[a,b)$, then the curve is called \textit{Jordan}.
+
+(This theorem is not relevant to this class.)
+\begin{theorem}[Jordan curve theorem]
+	A Jordan curve divides a plane to two parts, inside and outside.
+
+	Any simple closed contour separates the plane into two domains, each having the curve as its boundary. One of these domains, called the interior, is bounded; the other, called the exterior, is unbounded.
+\end{theorem}
+
+\begin{definition}[Line Integral]
+\[
+	\int_\gamma f(z) dz := \int_a^b f(\gamma(t))\gamma'(t)dt
+.\] 
+If $f(z) = u(x,y) i v(x,y)$, then $\gamma = x(t) + i y(t)$. Then the integral can be described in real integral:
+\[
+	\int_a^b (u + i v)(dx + i dy) = \int_\gamma u dx - v dy + i\int_\gamma udy + v dx 
+.\] 
+\end{definition}
+
+\begin{example}
+	Compute \[
+		\int_\gamma |z| dz, \quad \gamma (t) = (1+i)t, \quad t \in [0,1]
+	.\] 
+
+	\begin{align*}
+		&= \int _0^1 \sqrt{2 t^2}(1+i)dt  \\
+		&= \sqrt{2} (1+i) \int _0^1 t dt \\
+		&= \frac{1+i}{\sqrt{2} }
+	.\end{align*}
+\end{example}
+
+\begin{proposition}(Properties of integral)
+	\begin{enumerate}
+		\item Suppose we have 
+			\[
+				\varphi: [c,d] \to  [a,b]
+			.\] 
+			And \[
+				\gamma: [a,b] \to  \Omega
+			.\] 
+		Where $\varphi(c) = a, \varphi(d) = b$, $\varphi$ is strictly increasing. Then
+		\[
+			\int_{\varphi\circ\gamma}f(z) dz = \int_\gamma f(z) dz
+		.\] 
+	\item (Linearity)
+		\[
+		\int _\gamma (c_1f + c_2g)dz 
+		=c_1 \int_\gamma fdz + c_2 \int _\gamma g dz 
+		.\] 
+	\item (Addition of paths)
+		If $\gamma = \gamma_1 + \gamma_2$, then
+		\[
+		\int _\gamma f(z) dz
+		= \int _{\gamma_1} f(z) dz
+		+ \int _{\gamma_2} f(z) dz
+		.\] 
+	\item 
+	\end{enumerate}
+\end{proposition}
+
+\begin{definition}
+	Assume $f$ is continuous in $\Omega$. If there exists an analytic $F$ in $\Omega$ such that $F' = f$, we say that $f$ has a \textit{primitive} (indefinite integral) in $\Omega$.
+\end{definition}
+
+Observe that we have by Newton Leibnitz formula: \[
+	\int _\gamma f(z) dz = \int _\gamma F'(z) dz = \int _a^b F'(\gamma(t))\gamma'(t) dt = F(\gamma(b)) - F(\gamma(a))
+.\] 
+
+Hence the integral is \textit{path independent} if the function has a primitive.
+
+\begin{example}
+	$\Omega = \mathbb{C}^*$, and $f(z) = z^n$. Consider any integer $n$.
+
+	For $n \neq  -1$ has a primitive $F(z) = \frac{1}{n+1}z^{n+1}$. So any integral is path independent.	
+\end{example}
+
+\begin{theorem}
+	For a continuous function $f$ in a region $\Omega$, the following are equivalent:
+	\begin{enumerate}
+		\item $f$ has a primitive
+		\item $\int _\gamma f dz$ is path independent for paths in $\Omega$
+		\item $\int _\gamma f dz$ for every closed path is zero.
+	\end{enumerate}
+\end{theorem}
+
+If $\int f(z) dz $ is path independent, we can define \[
+	F(z) = \int _{z_0}^z f(\zeta)d\zeta
+.\] 
+
+Then we show by definition that $F$ has a derivative 
+\begin{align*}
+	F'(z) &= \lim_{h \to 0} \frac{F(z+h) - F(z)}{h}\\
+	&= \lim_{h \to 0} \frac{\int _z^{z+h}f(z) dz }{h}\to f(z)
+.\end{align*} 
+
+
+Main estimate of an integral:
+\[
+	\left| \int _\gamma f(z) dz  \right| \le \max_{z \in \gamma} \left| f(z) \right| \cdot \text{length of }\gamma
+.\] 
+
+\begin{example}(The most important example)
+	Consider
+	\[
+		\int _\gamma \frac{dz }{z} \quad, \gamma \text{ is unit circle, parameterized counter-clockwise}
+	.\] 
+	\[
+		\gamma(t) = e^{it },\quad 0\le t\le 2\pi
+	.\] 
+	
+	By definition,
+	\begin{align*}
+		&=\int _0^{2 \pi} \frac{i e^{it }}{e^{it }} dt\\
+		&= 2 \pi i
+	.\end{align*} 
+
+	$f(z) = \frac{1}{z}$ is analytic in $\mathbb{C}^* = \Omega$. 
+	$\gamma$ is a closed curve around $0$. However the integral is not zero.
+
+	Hence $f$ \textbf{does not have a primitive} in $\Omega$.
+
+	Consider $F(z) = \operatorname{Log} z$, $F'(z) = \frac{1}{z}$ is defined in $\mathbb{C} \setminus  (-\infty, 0] = \Omega_1$. 
+	So $f(z) = \frac{1}{z}$ does have a primitive in $\Omega_1$. So whether having a primitive is a property depending on not only the function but also the region we choose.
+\end{example}
+
+\subsection{Calculus: Green's Formula}
+
+Consider $\mathcal{D} = \{(x,y): a \le x\le b, \varphi_1(x)\le y\le \varphi_2(x)\} $.
+
+Suppose we have some function $u(x,y)$ continuously differentiable in $\overline{\mathcal{D}} $. We apply Newton Leibneitz,
+\[
+	\int_{\varphi_1(x)}^{\varphi_2(x)}u_y dy = u(\varphi_2(x))-u(\varphi_1(x)) \text{ for } a\le x\le b
+.\] 
+
+Hence \[
+	\iint_{\mathcal{D}} u_y dx dy = \int  u(\varphi_2(x))dx-\int u(\varphi_1(x)) dx
+.\] 
+
+Assume $\partial \mathcal{D}$ is a parameterized curve (oriented boundary): when described, the region is on the left.
+
+\[
+	= -\int_{\partial \mathcal{D}} u(x,y) dx
+.\] 
+
+
+Similarly for $u_x$ ($\varphi_1$, $\varphi_2$, $a$ and $b$ are re-defined):
+\[
+	\int_a^b\int _{\varphi_1(y)}^{\varphi_2(y)} u_x dx dy
+	= \int_{\partial \mathcal{D}}u dy
+.\] 
+
+\begin{definition}[Green's Formula]
+\[
+	\int _{\partial \mathcal{D}} u(x,y)dx + v(x,y)dy
+	= \iint_{\mathcal{D}} - u_y + v_x dA
+.\] 
+\end{definition}
+
+Suppose we have a region split by some curve $\gamma_3$, as shown in the following figure: FIGURE
+\[
+	\iint_{\mathcal{D}}=
+	\iint_{\mathcal{D}_1}+
+	\iint_{\mathcal{D}_2}
+.\] 
+Our definition of oriented boundary gives the next property for line integrals:
+\[
+	\int _{\partial \mathcal{D}}=
+	\int _{\partial \mathcal{D}_1}+
+	\int _{\partial \mathcal{D}_2}
+.\] 
+Since
+\[
+	\partial \mathcal{D}_1
+	+\partial \mathcal{D}_2
+	= -\gamma_2 + \gamma_3 + (\gamma_1-\gamma_3) = \gamma_1 - \gamma_2 = \partial \mathcal{D}
+.\] 
+
+
+Now we can apply this argument of cutting to very complex regions by cutting it into simple regions.
+
+If C-R is satisfied, then any integral around closed loop is zero. Such differential forms are called \textit{exact}. This is the first condition of path independence.
+
+If $u dx + v dy $ is a exact form in $\Omega$, then 
+$\int _{\partial \mathcal{D}} u dx + v dy = 0$ for $\mathcal{D} \subset \Omega$.

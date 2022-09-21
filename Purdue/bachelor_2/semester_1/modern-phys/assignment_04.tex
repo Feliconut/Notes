@@ -1,0 +1,103 @@
+\assignment{4}{Tue 20 Sep 2022 14:25}{}
+\begin{enumerate}
+\item 
+(a) Writing the discrete Maxwell-Boltzmann distribution for Planck's cavity wall oscillators as $N_n=A \exp \left(-\frac{E_n}{k T}\right)$ (where $A$ is a constant to be determined), show that the condition $\sum_{n=0}^{\infty} N_n=N$ gives $A=$ $N\left(1-\exp \left(-\frac{\varepsilon}{k T}\right)\right)$ as in Eq $3.36$ in book [Hint: use $\sum_{n=0}^{\infty} \exp (n x)=1 /(1-\exp (x))]$. 
+\begin{proof}[Solution]
+	\begin{align*}
+		\sum_{n=0}^{\infty} N_n
+		&= \sum_{n=0}^{\infty} A \exp\left( -\frac{E_n}{kT} \right)  \\
+		&= A\sum_{n=0}^{\infty}  \exp\left( -\frac{n \varepsilon}{kT} \right)  \\
+		&= A\sum_{n=0}^{\infty}  \exp\left( n\left( -\frac{\varepsilon}{kT} \right)  \right)  \\
+		&= \frac{A}{1 - \exp\left( \frac{\varepsilon}{kT} \right) } \\
+		&= N
+	.\end{align*}
+	By rearranging the last equality, we obtain the desired result.
+\end{proof}
+(b) By taking the derivative respect to $x$ of the equation given in the hint, show that $\sum_{n=0}^{\infty}(\mathrm{n} \exp (n x))=\exp (x) /(1-\exp (x))^2$.
+\begin{proof}[Solution]
+	\begin{align*}
+		\frac{d}{dx} \sum_{n=0}^{\infty} \exp (n x)
+		&=\sum_{n=0}^{\infty} \frac{d}{dx}  \exp (n x)\\
+		&=\sum_{n=0}^{\infty} n  \exp (n x)
+	.\end{align*}
+	On the other hand,
+	\begin{align*}
+		\frac{d}{dx }1 /(1-\exp (x))
+		&= - \frac{1}{\left( 1-\exp (x) \right) ^2} \left( -\exp(x) \right) \\
+		&= \exp (x) /(1-\exp (x))^2
+	.\end{align*}
+	Since $\sum_{n=0}^{\infty} \exp (n x)=1 /(1-\exp (x))$, the derivative of both sides equal.
+\end{proof}
+(c) Use this result to derive equation $3.38$ from equation $3.37$ in the book. 
+\begin{proof}[Solution]
+	\begin{align*}
+		E_{\mathrm{av}}&=\frac{1}{N} \sum_{n=0}^{\infty} N_n E_n\\
+		&=\left(1-\exp(-\varepsilon / k T)\right) \sum_{n=0}^{\infty}(n \varepsilon) e^{-n \varepsilon / k T}\\
+		&=\left(1-\exp(-\varepsilon / k T)\right) 
+		\varepsilon \sum_{n=0}^{\infty} n e^{n (-\varepsilon / k T)}\\
+		&=\left(1-\exp(-\varepsilon / k T)\right)
+		\varepsilon \exp (-\varepsilon / k T) /(1-\exp (-\varepsilon / k T))^2\\
+		&= \varepsilon \exp \frac{-\varepsilon / k T}{1-\exp (-\varepsilon / k T)}\\
+		&= \varepsilon \exp \frac{1}{\exp (\varepsilon / k T) - 1}\\
+		&=\frac{h c / \lambda}{\exp(h c / \lambda k T)-1}
+	.\end{align*}
+\end{proof}
+
+(d)
+Show that $E_{a v} \cong k T$ at large wavelength and $E_{a v} \rightarrow 0$ for small wavelength?
+\begin{proof}[Solution]
+	For large wavelength,
+	Apply L'Hopital Rule,
+	\begin{align*}
+		&\quad\lim_{\lambda \to \infty} 
+		\frac{h c / \lambda}{\exp(h c / \lambda k T)-1}\\
+		&=  \lim_{\lambda \to \infty}
+		\frac{\frac{d}{d\lambda}h c / \lambda}{\frac{d}{d\lambda}\left[ \exp(h c / \lambda k T)-1 \right] } \\
+		&=  \lim_{\lambda \to \infty}
+		\frac{-\frac{hc}{\lambda^2}}{- \frac{hc}{kT\lambda^2}\exp\left( \frac{hc}{\lambda kT} \right) } \\
+		&=  \lim_{\lambda \to \infty}
+		\frac{1}{\frac{1}{kT}\exp\left( \frac{hc}{\lambda kT} \right) } \\
+		&= 1 / \frac{1}{kT} \\
+		&= kT
+	.\end{align*}
+
+	For small wavelength, apply the same argument:
+\begin{align*}
+		&\quad\lim_{\lambda \to 0} 
+		\frac{h c / \lambda}{\exp(h c / \lambda k T)-1}\\
+		&=  \lim_{\lambda \to 0}
+		\frac{\frac{d}{d\lambda}h c / \lambda}{\frac{d}{d\lambda}\left[ \exp(h c / \lambda k T)-1 \right] } \\
+		&=  \lim_{\lambda \to 0}
+		\frac{-\frac{hc}{\lambda^2}}{- \frac{hc}{kT\lambda^2}\exp\left( \frac{hc}{\lambda kT} \right) } \\
+		&=  \lim_{\lambda \to 0}
+		\frac{kT}{\exp\left( \frac{hc}{\lambda kT} \right) }
+		\intertext{As $\lambda \to  0$, $\frac{hc}{\lambda k T} \to \infty $, hence  (a little informally)}
+		&= \frac{kT}{\exp(\infty ) }\\
+		&= \frac{kT}{\infty  }\\
+		&= 0 
+	.\end{align*}
+\end{proof}
+
+\item
+The WMAP satellite launched in 2001 studied the cosmic microwave background radiation and was able to chart all fluctuations in the
+temperature of different regions of the background radiation. These fluctuations of temperature correspond to regions of large and small density in the early universe. The satellite was able to measure differences in temperature of $2 \times 10^{-5} \mathrm{~K}$ at a temperature of $2.7250 \mathrm{~K}$. At the peak wavelength, what is the difference in the radiation intensity per unit wavelength interval between the "hot" and "cold" regions of the background radiation?
+\begin{proof}[Solution]
+	Use Equation 3.39 for radiation intensity: \[
+		I(\lambda)=\frac{2 \pi h c^2}{\lambda^5} \frac{1}{e^{h c / \lambda k T}-1}
+	.\] 
+	We will do the approximation in the following way:
+	\begin{align*}
+		dI &= I(\lambda) d\lambda
+	.\end{align*}
+	And we want to find the peak wavelength. To do this, we set $I(\lambda) = 0$, plug in all physical constants and $T = 2.7250$, and solve numerically:
+	
+	
+\end{proof}
+
+\item 
+Prove that it is not possible to conserve both momentum and total relativistic energy in the following situation: A free electron moving at velocity $\vec{v}$ emits a photon and then moves at a slower velocity $\vec{v}^{\prime}$
+\begin{proof}[Solution]
+	
+\end{proof}
+
+\end{enumerate}
