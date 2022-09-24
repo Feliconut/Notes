@@ -69,7 +69,7 @@ Let $\delta>0$. Note that $B_{\frac{\delta}{2}}(x) \subset B_\delta(x)$, so $x$ 
 
 Now we prove that $0$ is a cluster point. Take any $\delta>0$, and by the claim above, $A \setminus B_\delta(0)$ is finite. Since $A$ is infinite, $A \cap B_\delta(0)$ is infinite, and we are done.
 
-Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}$ such that $x \neq 0$. Now let $\delta = \frac{|x|}{2}$. Now we have $B_\delta(x) \subset A \setminus B_\delta(0)$. Hence $B_\delta(x)$ is finite, which means that $x$ is not a boundary point.
+Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}$ such that $x \neq 0$. Now let $\delta = \frac{|x|}{2}$. Now we have $B_\delta(x) \subset A \setminus B_\delta(0)$. Hence $B_\delta(x) \cap A$ is finite, which means that $x$ is not a boundary point.
 \end{proof}
 
 	\item 10.F. Let $A, B$ be subsets of $\boldsymbol{R}^p$ and let $x$ be a cluster point of $A \cup B$ in $\boldsymbol{R}^p$. Prove that $x$ is either a cluster point of $A$ or of $B$.
@@ -95,6 +95,42 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 
 	\item 11.A. Show directly from the definition (i.e., without using the Heine-Borel Theorem) that the open ball given by $\left\{(x, y): x^2+y^2<1\right\}$ is not compact in $R^2$.
 \begin{proof}
+	Define the open ball $\left\{(x, y): x^2+y^2<1\right\}$ as $B$.
+	We give the following open cover \[
+		\mathcal{C} = \{B_n: n \in \mathbb{N}\} 
+	\]
+	where \[
+		B_n = B_{1- \frac{1}{n}}((0,0))
+	.\] 
+	Since open ball is open, $\mathcal{C}$ is an open family. To verify covering, consider $(x,y) \in B$. Hence $x^2 + y^2 < 1$. Take $\delta = 1 - (x^2 + y^2)$.
+	Now there exists $n \in \mathbb{N}$ by Archimedean Property such that 
+	\[
+		 n > 2 / \delta
+	.\] 
+	Hence 
+	\begin{align*}
+		n> \frac{2}{\delta}
+		&\implies - \frac{2}{n}> -\delta \\
+		&\implies 1 - \frac{2}{n} + \frac{1}{n^2} > 1 - \delta \\
+		&\implies (1-\frac{1}{n})^2 > 1 - \delta \\
+		&\implies (1-\frac{1}{n})^2 > x^2 + y^2
+	.\end{align*}
+	Hence $\|(x,y) - (0,0)\| = \sqrt{x^2 + y^2} < 1-\frac{1}{n}$. Hence $(x,y) \in B_n$ for some $n$.
+	Therefore $\mathcal{C}$ covers $B$. 
+
+	Suppose  $B$ is compact, then there exists a finite subcover of $\mathcal{C}$, say $\mathcal{C}'$. We can enumerate the subcover: \[
+		\mathcal{C}' = \{B_{m_1}, B_{m_2}, \ldots, B_{m_N}\} 
+	.\] 
+	Without loss of generality, assume $m_1 < m_2 < \ldots < m_N$. By considering the definition,
+	\[
+		\bigcup_{k = 1,\ldots,N} B_{m_k} = B_{m_N}
+	.\] 
+	But the point $(1-\frac{1}{m_{N}}, 0)$ gives us an contradiction. It is apparently not in $B_{m_N}$. However, since $\frac{1}{m_N}> 0$, we have $(1-\frac{1}{m_N}, 0) \in B$. Hence $\mathcal{C}'$ is not a subcover of $B$, a contradiction.
+\end{proof}
+
+\begin{proof}
+	Hide. 
+
 	Denote the open ball as $S$. For any $n \in \mathbb{N}$, define $a_n = (1-\frac{1}{n}, 0)$. We consider the infinite subset
 	\[
 		A = \{a_n: n \ge 1, n \in \mathbb{N}\} 
@@ -159,39 +195,37 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 \end{proof}
 
 	\item 11.K. If $K$ is a compact subset of $\mathbf{R}^p$ and $x$ is a point of $\mathbf{R}^p$, then the set $K_x=\{x+y: y \in K\}$ is also compact. (This set $K_x$ is sometimes called the translation of the set $K$ by $x$.)
-\begin{proof} 
-	We first prove a lemma.
-	\begin{lemma}(Translation is a bijection)
-		For any $K \subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, the mapping \begin{align*}
-			f_x: K &\longrightarrow K_x \\
-			k &\longmapsto f(k) = k_x = k + x
-		\end{align*}
-		is a bijection.
-	\end{lemma}
-	\begin{proof}
-		To verify injectivity, assume there are  $a, b \in \mathbb{R}^p$ such that $a_x = b_x$. Hence $a + x = b + x$, and thus $a = b$.
-		To verify surjectivity, consider any member of $K_x$ of the form $k + x$. Then $f_x(k) = k_x = k+x$.
-	\end{proof}
+\begin{proof}
 	
-	\begin{lemma}(Translation is distributive over set intersection)
+	We first prove a lemma.
+\begin{lemma}[Translation preserves openness]
+	For any set $K \subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, $K$ is open if and only if $K_x$ is open.
+	\begin{proof}
+		By symmetry we only need to show $K$ open implies $K_x$ open.
+		Assume $K$ is open. Take $p \in K_x$. By definition of $K_x$, there exists $k \in K$ such that $p = k + x$. By openness of $K$, there exists some $\delta>0$ such that $B_\delta(k)\subset K$. We claim that $B_\delta(p)\subset K_x$.
+
+		To see this, take any point $b \in B_\delta(p)$. Since  $b \in K_x$, there exists $a \in K$ such that $b = a + x$. Now $\delta>\| b - p\| = \|(a + x)-(k+x)\| = \|a - k\|$, hence $a \in B_\delta(k)$. Hece $a \in K$. By definition of $K_x$, $b = a+x \in K_x$. Therefore $B_\delta(p) \subset K_x$ and we have shown that every point of $K_x$ is an interior point, thus $K_x$ open.
+	\end{proof}
+\end{lemma}
+
+\begin{lemma}(Translation is distributive over set union)
 		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$,\[
-			K_x \cap F_x = (K \cap F)_x
+			K_x \cup F_x = (K \cup F)_x
 		.\] 
-	\end{lemma}
+	
 	\begin{proof}
 		For any $a \in \mathbb{R}^p$,
 		\begin{align*}
-			&a \in K_x \cap F_x \\
-			&\iff a \in K_x \land a \in F_x \\
-			&\iff \exists k \in K, a = k + x \land  \exists p \in F, a = p + x \\
-			&\iff \exists k \in K \cap F, a = k + x \\
-			&\iff a \in  (K \cap F)_x
+			&a \in K_x \cup F_x \\
+			&\iff a \in K_x \lor a \in F_x \\
+			&\iff \exists k \in K, a = k + x \lor  \exists p \in F, a = p + x \\
+			&\iff \exists k \in K \cup F, a = k + x \\
+			&\iff a \in  (K \cup F)_x
 		.\end{align*}
 	\end{proof}
-	
-	\begin{lemma}(Translation preserves set ordering).
-		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, $F \subset K$ if and only if $F_x \subset K_x$.
 	\end{lemma}
+\begin{lemma}(Translation preserves set ordering).
+		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, $F \subset K$ if and only if $F_x \subset K_x$.
 	\begin{proof}
 		For any $k \in \mathbb{R}^p$, one has by definition \[
 			k \in F \iff k+x \in F_x
@@ -209,6 +243,109 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 			F\subset K \iff  F_x \subset K_x
 		.\] 
 	\end{proof}
+	\end{lemma}
+	Take an open cover $\mathcal{C}_x$ of $K_x$ with index set $I$:  \[
+		\mathcal{C}_x = \{A_i: i \in I\} ,
+		\quad
+		\cup \mathcal{C}_x = \bigcup_{i \in I} A_i \supset K_x
+	.\] 
+	Now apply translation $A_i \mapsto (A_i)_{-x} = \{a-x: a \in A_i\} $ to all sets $A_i \in \mathcal{C}_x'$. Define
+	\[
+		\mathcal{C} = \{(A_i)_{-x}: A_i \in \mathcal{C}_x\} 
+	.\] 
+	By distributivity over set union,
+	\[
+		\cup \mathcal{C} = \bigcup_{i \in  I} (A_i)_{-x} = \left( \bigcup_{i \in  I} A_i \right) _{-x} = \left( \cup \mathcal{C}_x \right) _{-x}
+	.\]
+	Hence in particular, $\cup \mathcal{C}_x = \left( \cup \mathcal{C} \right) _{x}$.
+	 
+	By preservation of set inclusion, since $K_x \subset  \cup \mathcal{C}_x $
+	\[
+		K = (K_x)_{-x} \subset \left( \cup \mathcal{C}_x \right)_{-x} = \cup \mathcal{C}
+	.\] 
+	By preservation of openness applied to each $A_i \in \mathcal{C}_x$, since $\mathcal{C}_x $ is a open cover, $\mathcal{C}$ is a open cover. Because $K$ is compact, there exists a finite subcover $\mathcal{C}' \subset \mathcal{C}$ of $K$. More precisely, we have finite $I' \subset I$ and $\mathcal{C}' = \{(A_i)_{-x} \in \mathcal{C}: i \in I'\} $. Now we have \[
+		\cup \mathcal{C}'  = \bigcup_{i \in  I'} \left( A_i \right) _{-x}\supset K
+	.\] 
+	By preservation of set inclusion,
+	\[
+		K_x \subset (\cup \mathcal{C}')_{x}
+	.\]
+	Define $\mathcal{C}_x' := \{A_i \in \mathcal{C}_x: i \in I'\} $. Now by distributivity over union, \[
+		(\cup \mathcal{C}')_{x} = 
+		\left(  \bigcup_{i \in  I'} \left(A_i \right) _{-x} \right) _{x} = 
+		\left( \left( \bigcup_{i \in  I'} A_i \right) _{-x} \right) _{x} = 
+		\bigcup_{i \in  I'} A_i  =
+		\cup \mathcal{C}'_{x}
+	.\] 
+	Hence $K_x \subset \cup \mathcal{C}'_{x}$. $\mathcal{C}'_x \subset \mathcal{C}_x$ by definition, so $\mathcal{C}'_{x}$ is a finite subcover of $\mathcal{C}_x$. 
+	Then  is an open subcover of $K_x$.
+\end{proof}
+\begin{proof} 
+	\begin{lemma}(Translation is a bijection)
+		For any $K \subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, the mapping \begin{align*}
+			f_x: K &\longrightarrow K_x \\
+			k &\longmapsto f(k) = k_x = k + x
+		\end{align*}
+		is a bijection.
+	\end{lemma}
+	\begin{proof}
+		To verify injectivity, assume there are  $a, b \in \mathbb{R}^p$ such that $a_x = b_x$. Hence $a + x = b + x$, and thus $a = b$.
+		To verify surjectivity, consider any member of $K_x$ of the form $k + x$. Then $f_x(k) = k_x = k+x$.
+	\end{proof}
+	
+	\begin{lemma}(Translation is distributive over set intersection)
+		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$,\[
+			K_x \cap F_x = (K \cap F)_x
+		.\] 
+	\begin{proof}
+		For any $a \in \mathbb{R}^p$,
+		\begin{align*}
+			&a \in K_x \cap F_x \\
+			&\iff a \in K_x \land a \in F_x \\
+			&\iff \exists k \in K, a = k + x \land  \exists p \in F, a = p + x \\
+			&\iff \exists k \in K \cap F, a = k + x \\
+			&\iff a \in  (K \cap F)_x
+		.\end{align*}
+	\end{proof}
+	\end{lemma}
+\begin{lemma}(Translation is distributive over set union)
+		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$,\[
+			K_x \cup F_x = (K \cup F)_x
+		.\] 
+	
+	\begin{proof}
+		For any $a \in \mathbb{R}^p$,
+		\begin{align*}
+			&a \in K_x \cup F_x \\
+			&\iff a \in K_x \lor a \in F_x \\
+			&\iff \exists k \in K, a = k + x \lor  \exists p \in F, a = p + x \\
+			&\iff \exists k \in K \cup F, a = k + x \\
+			&\iff a \in  (K \cup F)_x
+		.\end{align*}
+	\end{proof}
+	\end{lemma}
+
+	
+	\begin{lemma}(Translation preserves set ordering).
+		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, $F \subset K$ if and only if $F_x \subset K_x$.
+	\begin{proof}
+		For any $k \in \mathbb{R}^p$, one has by definition \[
+			k \in F \iff k+x \in F_x
+		.\] 
+		Similarly, \[
+			k \in K \iff  k + x \in K_x
+		.\] 
+		Hence for all $k$, \[
+			(k \in F \implies k \in K)
+			\iff 
+			(k + x \in F_x \implies k+x \in K_x)
+		.\] 
+		Therefore
+		\[
+			F\subset K \iff  F_x \subset K_x
+		.\] 
+	\end{proof}
+	\end{lemma}
 	
 	
 	
@@ -223,8 +360,6 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 	.\] 
 	Thus $A \subset K$ (by preservation of set ordering). Then by compactness of $K$, there exists a cluster point $a$ of $A$ in $K$. Thus $a_x :=a + x \in K_x$ (by preservation of set membership). For any $\delta\in \mathbb{R}$ such that $\delta>0$, the intersection $B_\delta(a) \cap A$ is infinite. 
 	Hence the intersection $B_{\delta}(a_x) \cap A_x = \left( B_\delta(a) \cap A \right)_x $ is infinite (by distributivity and bijectivity). Hence $a_x$ is a cluster point of $A_x$.
-
-
 \end{proof}
 
 \end{enumerate}
