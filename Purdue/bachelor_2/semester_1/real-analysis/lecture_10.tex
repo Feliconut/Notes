@@ -1,0 +1,119 @@
+\lecture{10}{Wed 21 Sep 2022 11:33}{}
+
+\begin{theorem}[Cantor Intersection Theorem]
+	Suppose $F_1, F_2, \ldots, F_n$ is a nested sequence of sets \[
+		F_1 \supset F_2 \supset \ldots\supset F_n \supset \ldots
+	.\] 
+	which are nonempty and compact. Then \[
+		\bigcap_{n=1} ^\infty  F_n \neq \emptyset 
+	.\] 
+\end{theorem}
+\begin{proof}
+	Suppose $\bigcap_{n=1} ^\infty  F_n \neq \emptyset $. Let $G_n = F_n^c$. $G_n$ is open since $F_n$ is closed. Then by De Morgan's Law, $\bigcup_{n=1} ^\infty G_n= \mathbb{R}^p$, where \[
+		G_1 \subset G_2 \subset \ldots\subset G_n \subset \ldots
+	.\] 
+	Then $G_n$ is open cover of $F_1$. Since $F_1$ is compact, there exists a finite cover $\{G_{n_1}, G_{n_2}, G_{n_N}\} $ such that \[
+		F_1 \subset \bigcup_{i=1} ^N G_{n_i}
+		= G_M, \quad M = \max \{n_1, \ldots, n_N\} 
+	.\] 
+	So in particular $F_M \subset G_M = F_M^c$. Hence $F_M$ is empty, a contradiction. This means the intersection is not empty.
+\end{proof}
+\begin{remark}
+	This theorem is true in general spaces, unlike Heine Borel.
+\end{remark}
+
+\subsection{Connectedness}
+
+\begin{definition}[Connected Set]
+	We say that $E\subset \mathbb{R}^p$ is \textit{disconnected} if there exists two open sets $A, B \subset \mathbb{R}^p$ such that $E \subset A \cup B$, $E \cap A \neq  \emptyset $, $E \cap B \neq \emptyset $, and $(A \cap E) \cap (B \cap E) = \emptyset $.
+
+	We say $A, B$ form a \textit{disconnection}, \textit{separation}, or \textit{splitting} of $E$.
+
+	We say that $E$ is \textit{connected} if it is not disconnected.
+\end{definition}
+\begin{remark}
+	We want to make connectedness an \textbf{internal} property, hence requiring $(A \cap E)$ and $(B \cap E)$ in the previous definition.
+\end{remark}
+
+\begin{example}
+	Every finite set in $\mathbb{R}^p$ with more than 1 element is disconnected. Let $E = \{x_1, \ldots, x_N\} $. Let $r = \min \{\|x_1-x_2\|, \|x_1-x_3\|,\ldots,\|x_1-x_N\|\} $. 
+
+	Take $A = B_r(x_1)$ and $B = \overline{B_{\frac{r}{2}}(x_1)} ^c$ to be the exterior of $A$.
+\end{example}
+
+\begin{example}
+	Any subset of the Cantor set with more than 1 element is disconnected.
+\end{example}
+
+\begin{proposition}
+	The interval $[0,1] \subset \mathbb{R}$ is connected.
+\end{proposition}
+\begin{proof}
+	Suppose there is a disconnection $A, B$ of $[0,1]$. Thus $A, B$ are open, $[a,b] \subset A \cup B$, $A \cap [0,1] \neq  \emptyset $, $B \cap [0,1] \neq \emptyset $, and $(A \cap [0,1]) \cap (B \cap [0,1]) = \emptyset $.
+
+	Hence there exists $a \in A \cap [0,1]$, $b \in B \cap [0,1]$, and $a \neq  b$. Without loss of generality, assume $a < b$. 
+
+	Also, without loss of generality, we may assume  $0 < a$ and $b < 1$. (If $a = 0$, since $A$ open, $(-\delta, \delta) \subset A$, so we can choose $\frac{\delta}{2}$ as the new $a$. Do the same to $b$.)
+
+	Therefore, without loss of generality, \[
+		0 < a < b < 1
+	.\] 
+	Let $S = \{x: x \in A \cap [0,1], x < b\} $.
+	This set is nonempty, since $a \in S$. Also, it has an upper bound $b$. By Supremum Property, there is $\xi = \operatorname{sup} S$.
+	Also, $a \le \xi\le b$, so $\xi \in [0,1]$, hence $\xi \in A \cup B$.
+
+	If $\xi \in A$, since $A$ is open, there exists $\delta$ such that $(\xi-\delta, \xi+\delta) \subset A$. Then $\xi + \frac{\delta}{2} \in S$. A contradiction.
+
+	If $\xi \in B$, there exists $\delta > 0$ such that $(\xi-\delta, \xi+\delta) \subset B$. Then there exists no $x \in A$ such that $\xi - \delta < x \le \xi$. This means $\xi - \delta$ is an upper bound of $S$, so $\xi = \operatorname{sup} S \le  c- \delta$, a contradiction.
+
+	This means there's no disconnection of  $[0,1]$, so $[0,1]$ is connected.
+\end{proof}
+
+\begin{corollary}
+	\label{thm: Rp-connected}
+	$\mathbb{R}^p$ is connected.
+\end{corollary}
+\begin{proof}
+	Let $A, B$ form a disconnection of $\mathbb{R}^p$. This means $B = A^c$. Let $a \in A$ and $b \in B$. Consider a mapping 
+	\begin{align*}
+		\varphi: \mathbb{R} &\longrightarrow \mathbb{R}^p \\
+		t &\longmapsto \varphi(t) = (1-t)a + tb
+	.\end{align*}
+	Now $\varphi(0) = a$ and $\varphi(1) = b$. Define
+	\[
+		[a,b] := \varphi([0,1]) = \{1-t(a) + tb: 0\le t\le 1\} 
+	.\] 
+	Let $A_1 = \{\varphi^{-1}(A) = \{t: \varphi(t) \in A\} \} $, and 
+	$B_1 = \{\varphi^{-1}(B) = \{t: \varphi(t) \in B\} \} $. 
+	We claim that $A_1, B_1$ are open in $\mathbb{R}$. Pick any $t \in A_1$, we can find a small enough $\delta$ such that 
+	\[
+		\varphi((t-\delta, t+\delta)) \subset 
+		B_{(b - a)\delta}(\varphi(t))
+		\subset A
+	.\] 
+	Thus $A_1$ is open. Similarly $B_1$ is open. But then $A_1, B_1 $ form a disconnection of $[0,1]$. Other properties follow from those of  $A, B$. This is a contradiction since $[0,1]$ is connected. Therefore $\mathbb{R}^p$ is connected.
+\end{proof}
+
+\begin{remark}
+	This statement is equivalent to: \textbf{the only clopen sets in $\mathbb{R}^p$ are $\emptyset $ and $\mathbb{R}^p$.}
+\end{remark}
+
+\begin{theorem}
+	$E \subset \mathbb{R}$ is connected if and only if $E$ is an interval.
+\end{theorem}
+\begin{proof}
+	We state without proof the following lemma:
+\begin{lemma}
+	$E \subset \mathbb{R}$ is an interval if and only if $E$ has the Interval Property:  \[
+		a, b \in E, a\le b \implies [a,b] \subset E
+	.\] 
+\end{lemma}	
+Let $E$ be connected, but doesn't satisfy the interval property. So there exists $a,b \in E$, $c \not\in E$, such that $a < c < b$. Then $(-\infty , c), (c, \infty )$ form a disconnection of $E$, a contradiction.
+
+The other direction is identical to the one for $\mathbb{R}^p$.
+\end{proof}
+\begin{remark}
+	General connected sets can be sometimes counterintuitive, but open connected sets have very nice properties.
+\end{remark}
+
+

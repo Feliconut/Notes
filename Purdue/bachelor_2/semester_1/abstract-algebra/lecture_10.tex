@@ -1,0 +1,99 @@
+\lecture{10}{Fri 23 Sep 2022 10:38}{}
+
+\begin{theorem}[Third Homomorphism Theorem]
+	Suppose $\varphi: G \to  G'$ is a surjective homomorphism of groups, with $K = \operatorname{ker} \varphi$, and $N' \triangleleft G'$. Put $N = \{a \in G: \varphi(a) \in N'\} $. Then one has $G / N \cong G ' / N '$ and hence $G / N \cong (G / K)/ (N / K)$.
+\end{theorem}
+\begin{proof}
+	Define \begin{align*}
+		\psi: G &\longrightarrow G' / N' \\
+		a &\longmapsto \psi(a) = N'\varphi(a)
+	.\end{align*}
+	Since $\varphi$ is surjective, each element of $G' / N'$ has the form $N' b'$ for some $b'\in G'$, hence there exists $a \in G$ with $\varphi(a) = b'$, so $N'b' = N'\varphi(a) = \psi(a)$. So $\psi$ is surjective.
+
+	When $a,b \in G$, one has \[
+		\psi(ab) = N'\varphi(ab) = N'\varphi(a)\varphi(b) = N'\varphi(a)N'\varphi(b) = \psi(a)\psi(b)
+	.\] 
+	So $\psi$ is a homomorphism.
+	Moreover,
+	 \begin{align*}
+		\operatorname{ker} \psi 
+		&= \{a \in G: \psi(a) = N'\}  \\
+		&= \{a \in G: N'\varphi(a) = N'\}  \\
+		&= \{a \in G: \varphi(a) \in N'\}  \\
+		&= N
+	.\end{align*}
+	Now by the first homomorphism theorem, since $\psi$ is a surjetive homomorphism with kernel $N$, \[
+		G / N \cong G' / N'
+	.\] 
+	Also by the first homomorphism theorem, \[
+		G / K = G / \operatorname{ker} \varphi \cong G'
+	.\] 
+	and by the Correspondence Theorem, \[
+		N / K = N /\operatorname{ker}  \varphi \cong N'
+	.\] 
+	Thus \[
+		G / N \cong (G / K) / (N / K)
+	.\] 
+\end{proof}
+
+\begin{remark}
+	The compatibility is guaranteed by Correspondence Theorem.
+\end{remark}
+
+\begin{theorem}[Zasseinhaus Theorem]
+	Suppose 
+	\begin{align*}
+		&H\le G,\quad K \le G\\
+		&H^* \triangleleft H, \quad K^* \triangleleft K
+	.\end{align*}
+	Then
+	\begin{itemize}
+		\item $H^*(H \cap K^*) \triangleleft H^* (H \cap K)$
+	\item $K^*(H^* \cap K) \triangleleft K^*(H \cap K)$
+	\item 
+		\begin{align*}
+			&H^*(H \cap K) / H^*(H \cap K)\\
+			&\cong K^*(H \cap K) / K^*(H ^* \cap K) \\
+			&\cong H \cap K / \left( (H^* \cap K) (H \cap K^*) \right) 
+		\end{align*}
+
+	\end{itemize}
+	Also called \logseq{Butterfly Lemma} or \logseq{Fourth Homomorphism Theorem}.
+\end{theorem}
+
+\section{Permutation Groups}
+\subsection{The symmetric group}
+
+\begin{notation}
+	If $\sigma \in S_n$, then we write 
+	\begin{align}
+\sigma=\left(\begin{array}{ccccc}
+x_1 & x_2 & x_3 & \cdots & x_n \\
+\sigma\left(x_1\right) & \sigma\left(x_2\right) & \sigma\left(x_3\right) & \cdots & \sigma\left(x_n\right)
+\end{array}\right)
+\end{align}
+where $\sigma(j) = a_j$ for each $j$, and the $a_j$ are distinct and lie in $\{1,2,\ldots,n\} $.
+\end{notation}
+
+See how to combine permutations.
+
+\begin{notation}[Cycle Notation]
+	When $i_1,\ldots,i_k$ are $k$ distinct integers lying in $\{1,2,\ldots,n\} $, we use $(i_1,i_2,\ldots,i_k)$ to denote $\sigma \in S_n$ with the property given by \[
+		\sigma(i_1) = i_2, \sigma(i_2) = i_3, \ldots,\sigma(i_{k-1}) = i_k, \sigma(i_k) = i_1
+	\] 
+	, and $\sigma(s) = s$ for $s \in \{1,2,\ldots,n\}\setminus \{i_1,\ldots,i_k\} $ .
+
+	Also called \logseq{Cycle Decomposition}.
+\end{notation}
+
+\begin{definition}[Transposition]
+	A permutation interchanging $2$ elements only, such as $(i_1,i_2)$, is called a \textit{transposition}, or \textit{2-cycle}.
+
+	An \textit{m-cycle} is a permutation of shape \[
+		\left( i_1,i_2,\ldots,i_m \right) 
+	.\] 
+\end{definition}
+
+Two cycles are disjoint if they contain no common element, e.g. $(1,4,2)$ and $(4,5)$ are disjoint.
+
+Note: any two disjoint cycles commute.

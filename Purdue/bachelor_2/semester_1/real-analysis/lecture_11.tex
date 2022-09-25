@@ -1,0 +1,87 @@
+\lecture{11}{Fri 23 Sep 2022 11:34}{More on Connectedness}
+
+Let $U \subset \mathbb{R}^p$ and  $a,b \in U$. We say that there is a \textit{polygonal curve} from $a$ to $b$ in $U$ if there are $z_0,z_1,\ldots,z_N \in U$ such that $z_0 = a$, $z_N = b$, and $[z_{i-1 }, z_i] \subset U$.
+
+\begin{theorem}
+	Open set $U \subset \mathbb{R}^p$ is connected if and only if for any $a, b \in U$, there is a polygonal curve from $a$ to $b$.
+\end{theorem}
+\begin{proof}
+	Suppose $U$ is not connected. This means there is a disconnection $A,B$. Pick $a \in A \cap U$, and $b \in B \cap U$. By assumption, there is a polygonal curve from $a$ to $b $, $z_0,z_1,\ldots,z_N$.
+
+	We have $z_0 \in A$ but $z_N \not\in A$. So there is a smallest index $n \ge 1$ such that $z_n \not\in A$, but $z_{n-1 } \in A$.
+
+	Then  look at 
+	\begin{align*}
+		\varphi: \mathbb{R} &\longrightarrow \mathbb{R}^p \\
+		t &\longmapsto \varphi(t) = (1-t)z_{n-1} + tz_n
+	.\end{align*}
+Let $A_1 = \{\varphi^{-1}(A) = \{t: \varphi(t) \in A\} \} $, and 
+	$B_1 = \{\varphi^{-1}(B) = \{t: \varphi(t) \in B\} \} $. 
+	Repeat the argument in Corollary \ref{thm: Rp-connected}. Thus 
+	$A_1, B_1 $ form a disconnection of $[0,1]$.This is a contradiction since $[0,1]$ is connected.
+
+	\begin{remark}
+		In this part of the proof, we haven't used the openness. For example, every convex set is connected.
+	\end{remark}
+
+	Now prove the other direction. We say $a \sim b$ if there is a polygonal curve from  $a$ to $b$ in $U$. We check $\sim $ is a equivalence property:
+	\begin{itemize}
+		\item $a \sim a$. Indeed, $z_0 = a$ satisfies.
+		\item $a\sim b \implies b \sim a$. Indeed, we reverse the order of $z_0,\ldots,z_N$.
+		\item $a\sim b, b\sim c \implies a\sim c$. Indeed. We connect the curves.
+	\end{itemize}
+	Let $U_a = \{b \in U: b \sim a\} $.
+	\begin{claim}
+		$U_a$ is open.
+	\end{claim}
+	\begin{proof}
+		Let $b \in U_a$. Let $z_0,\ldots,z_N$ be polygonal curve from $a$ to $b$. Since $U$ open, there exists $\delta>0$ such that $B_\delta(b) \subset U$. Then for every $c \in B_\delta(b)$ we have $c \sim b$, since $[c,b] \subset B_\delta(b)$ (since balls are convex). This means $a \sim c$, hence $B_\delta(b) \subset U_a$. Therefore  $U_a$ open.
+	\end{proof}
+
+	Let $V_a = \{b \in U: b \not\sim a\} $. Similarly,
+	\begin{claim}
+		$V_a$ is open.
+	\end{claim}
+	\begin{proof}
+		Same as for $U_a$.
+	\end{proof}
+
+	Moreover, we see that $U \subset U_a \cup V_a$.
+	If $U_a \cap V_a \neq \emptyset $, then both $U_a$, $V_a$ are noempty, they will form a disconnection, a contradiction. Hence $U = U_a$.
+\end{proof}
+
+\begin{corollary}
+	Every open set is a union of disjoint connected open sets.
+\end{corollary}
+
+\begin{lemma}
+	Disjoint family of open set can be at most countable.
+\end{lemma}
+\begin{proof}
+	Use rational points. Now two open sets can contain the same rational ball.
+\end{proof}
+
+
+\begin{theorem}
+	Every open set is a disjoint, countable union of connected sets.
+
+	They are called \textit{connected components} of the open set.
+\end{theorem}
+\begin{example}
+	Look at $F^c$, $F$ is the cantor set.
+\end{example}
+
+\section{Sequences}
+
+\begin{definition}[Sequence]
+	A sequence $E$ is a mapping \[
+		\varphi: \mathbb{N} \to  E
+	.\] 
+	We identify $\varphi$ with ordered list \[
+		(\varphi(1), \varphi(2), \ldots, \varphi(n), \ldots)
+	.\] 
+\end{definition}
+\begin{notation}
+	Often we use subscripts $x_n := \varphi(n)$.
+	We may write $X = (x_1, x_2, \ldots)$, $(x_n)_{n\in \mathbb{N}}$, $(x_n)$, $(x_n)_{n = 1}^\infty $, or $\left\{ x_n \right\}_{n=1}^\infty  $ for the sequence. 
+\end{notation}

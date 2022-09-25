@@ -1,0 +1,25 @@
+\lecture{9}{Wed 21 Sep 2022 10:43}{second homomorphism theorem}
+
+
+See the subgroup lattice:
+
+\begin{theorem}[Second Isomorphism Theorem]
+	Suppose $H \le G$ and $N \triangleleft G$, Then \[
+		H / (H \cap N) \cong (H N) / N
+	.\] 
+\end{theorem}
+\begin{proof}
+	Observe that $N \subset H N \subset G$, hence $N \triangleleft  H N$. We define a homomorphism:
+	\begin{align*}
+		\varphi: H &\longrightarrow (H N) / N \\
+		a &\longmapsto \varphi(a) = N a
+	.\end{align*}
+	This map is well defined, and $\varphi(a b) = N(ab) = Na Nb = \varphi(a)\varphi(b)$ for all $a, b \in H$. So $\varphi$ is a homomorphism, and surjective by construction. (why?)
+
+	We apply the first homomorphism theorem, \[
+		(H N) /N \cong H / \operatorname{ker} \varphi
+	.\] 
+	and have $\operatorname{ker} \varphi = \{a \in H: a N = N\} = \{a \in H: a \in N\} = H \cap N$.
+\end{proof}
+
+

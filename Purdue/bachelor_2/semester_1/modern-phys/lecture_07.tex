@@ -1,0 +1,40 @@
+\lecture{7}{Wed 21 Sep 2022 21:02}{}
+\section{Wave and Particle Property of EM wave}
+
+\subsection{Review of EM wave}
+
+Consider plane wave: \begin{align*}
+	\vec{E} (t) &= \vec{E} _0 \sin\left( k_z - \omega t \right) \\
+	\vec{M} (t) &= \vec{B} _0 \sin\left( k_z - \omega t \right) 
+.\end{align*} 
+while $k = 2 \frac{\pi}{\lambda}$ is the \textit{wave number}, and $\omega = 2 \pi f$ is \textit{angular frequency}.
+
+Consider linearly polarized case, where $\vec{E} \perp \vec{B} $. Let
+\begin{align*}
+	\vec{E}  &= E_0 \hat{i}  \\
+	\vec{B}  &= B_0 \hat{j} 
+.\end{align*}
+Then $\vec{E} \times \vec{B} $ is in $\hat{z} $ direction.
+
+\begin{definition}[Poynting Vector]
+	For some electromagnetic field, define the \textit{poynting vector} as
+	\begin{align*}
+		S &= \frac{1}{\mu_0}\vec{E} \times \vec{B}\\
+		&= \frac{1}{\mu_0}E_0B_0 \sin^2(kz - \omega t)\hat{k}
+	\end{align*}
+	Then $S$ is the \textit{energy flux}, the dimension is "power per area".  
+\end{definition}
+
+If we have a detector perpendicular to $\hat{k} $, then
+\[
+	P = S \cdot \vec{A} = \frac{1}{\mu_0}E_0B_0 A\sin^2(kz - \omega t)\hat{k}
+.\] 
+Taking the average,
+\[
+	\overline{P}  =  \frac{1}{2\mu_0}E_0B_0 A\hat{k}
+.\] 
+Thus
+\begin{itemize}
+	\item $I_{\text{mean}} \sim E_0B_0\sim E_0^2$
+	\item $I(t)$ varies at frequency $2f$
+\end{itemize}

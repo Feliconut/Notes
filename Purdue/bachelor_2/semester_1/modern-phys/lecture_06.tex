@@ -1,0 +1,81 @@
+\lecture{6}{Wed 21 Sep 2022 20:17}{4 Vectors}
+
+\subsection{4-vectors}
+The $4$-position is defined as \[
+	R = \left( ct, x, y, z \right) 
+	= \left( cx_0, x_1, x_2, x_3 \right) 
+.\] 
+
+The $4$-velocity is \[
+	\frac{dR }{d\tau}= \frac{dR }{\frac{1}{\gamma}dt }= v = \gamma(c, v_x, v_y, v_z) = \gamma(v_0, v_1, v_2, v_3)
+.\] 
+Where $\tau$ is the \textit{proper time}.
+
+The $4$-momentum is \[
+	p = mv = \left( \frac{E}{c}, p_x, p_y, p_z \right)  = \gamma(mc, mv_x, mv_y, mv_z)
+.\] 
+
+We take the dot product $p \cdot p$ :
+\begin{align*}
+	p\cdot p
+	&= -\frac{E^2}{c^2} + (\gamma m \vec{v} ^2) \\
+	&= -\frac{E^2}{c^2} + \vec{p} \cdot \vec{p} \\
+	&= -\frac{E^2}{c^2} + \vec{p}^2
+.\end{align*} 
+Where we write $\vec{p} $ for the 3-momentum.
+
+On the other hand,
+\begin{align*}
+	p \cdot p
+	&= - \gamma^2 m^2 c^2 + \gamma^2 m^2 \vec{v} ^2 \\
+	&= - \gamma^2 m^2 c^2 \left( 1 - \vec{v} ^2 / c^2 \right)  \\
+	&= - m^2 c^2
+.\end{align*}
+
+We have obtained
+\[
+	E^2 = p^2 + m^2 c^4
+.\] 
+
+\subsubsection{Invariants}
+
+\textbf{The dot product with any two 4-vectors is an invariant in Minkowski space.} In particular, the dot product of a vector with itself is invariant.
+\[
+	P \cdot P = E^2 - \vec{p} ^2 c^2
+\] 
+The invariant of this quantitity can be used to give the definition \[
+	m_0 c^2 = \sqrt{E^2 - p^2 c^2} 
+.\] 
+Hence mass is a coordinate invariant.
+
+Also, the norm of position 4-vectors \[
+	R \cdot R =  c^2 t^2 - r^2
+\] 
+is the \textit{length} in space-time.
+
+The invariance of dot product can be used to justify the formula $E^2 = p^2 c^2 + m^2 c^4$. Consider the 4-vector of the same traveling particle in two frames:
+\[
+	P = \left( \frac{E}{c}, p_x, p_y, p_z \right) \quad P'= \left( \frac{mc^2}{c}, 0, 0, 0 \right) 
+.\] 
+Where $P'$ is the static frame. By the invariance of inner product we must have $-\frac{E^2}{c^2} + \vec{p} ^2 = (\frac{mc^2}{c})^2 $.
+
+\begin{example}
+	Suppose a proton is at rest and a pion travels with momentum $p_\pi$ in $x$ direction hits the proton, and they merge into a single particle. Calculate the total relativistic energy and momentum of the composite particle.
+
+\begin{proof}[Solution]
+	First, use invariance of dot product to write \[
+		-E_\pi^2 / c^2 + p_\pi^2 = -(m_\pi c^2 / c)^2 
+	.\] 
+	From which we can find $E_\pi$. Now
+	\[
+		P_{\text{tot}} = P_{\pi} + P_{\text{proton}}
+	\] 
+	by conservation of energy and momentum in the same frame. Thus the 4-vector for composite particle is
+	\[
+		\left( E_\pi, p_\pi, 0,0 \right) +
+		\left( E_p, 0,0,0 \right) =
+		\left( E_\pi + E_p, p_\pi, 0,0 \right) 
+	.\] 
+\end{proof}
+
+\end{example}

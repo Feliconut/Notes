@@ -74,12 +74,15 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 
 	\item 10.F. Let $A, B$ be subsets of $\boldsymbol{R}^p$ and let $x$ be a cluster point of $A \cup B$ in $\boldsymbol{R}^p$. Prove that $x$ is either a cluster point of $A$ or of $B$.
 \begin{proof}
-	We prove the contrapositive. Assume $x$ is neither a cluster point of $A $ nor a cluster point of $B$. Then there exists positive $\delta, \delta' \in \mathbb{R}$ such that \[
-		|B_\delta(x) \cap A| < \infty , 
-	|B_{\delta'}(x) \cap B| < \infty 
+	We prove the contrapositive. Assume $x$ is neither a cluster point of $A $ nor a cluster point of $B$. Then its intersection with $A$ and $B$ are both finite, i.e. there exists positive $\delta, \delta' \in \mathbb{R}$, and $N, M \in \mathbb{N}$ such that \[
+		|B_\delta(x) \cap A|  = N < \infty , \quad
+	|B_{\delta'}(x) \cap B| = M < \infty 
 	.\] 
 	Without loss of generality, assume $\delta<\delta'$. Now $B_\delta(x) \cap B \subset B_{\delta'}(x) \cap B$, so \[
-		|B_\delta(x) \cap B| < \infty , 
+		|B_\delta(x) \cap B| 
+		\le |B_{\delta'}(x) \cap B|
+		= M
+		< \infty  
 	.\] 
 
 	Therefore \begin{align*}
@@ -88,9 +91,10 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 		\cup  \left( B_\delta(x) \cap B \right) \right|\\
 		&\le |B_\delta(x) \cap A|
 		+ |B_\delta(x) \cap B|\\
+		&= N + M \\
 		&< \infty 
 	.\end{align*}
-	This show that $x$ is not a boundary point of $A \cup B$.
+	This show that $x$ is not a cluster point of $A \cup B$.
 \end{proof}
 
 	\item 11.A. Show directly from the definition (i.e., without using the Heine-Borel Theorem) that the open ball given by $\left\{(x, y): x^2+y^2<1\right\}$ is not compact in $R^2$.
@@ -121,63 +125,23 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 	Suppose  $B$ is compact, then there exists a finite subcover of $\mathcal{C}$, say $\mathcal{C}'$. We can enumerate the subcover: \[
 		\mathcal{C}' = \{B_{m_1}, B_{m_2}, \ldots, B_{m_N}\} 
 	.\] 
-	Without loss of generality, assume $m_1 < m_2 < \ldots < m_N$. By considering the definition,
+	Without loss of generality, assume $m_1 < m_2 < \ldots < m_N$. Now $1-\frac{1}{m_i}\le 1-\frac{1}{m_N}$ since $m_N \ge m_i$. By considering the definition,
 	\[
 		\bigcup_{k = 1,\ldots,N} B_{m_k} = B_{m_N}
 	.\] 
 	But the point $(1-\frac{1}{m_{N}}, 0)$ gives us an contradiction. It is apparently not in $B_{m_N}$. However, since $\frac{1}{m_N}> 0$, we have $(1-\frac{1}{m_N}, 0) \in B$. Hence $\mathcal{C}'$ is not a subcover of $B$, a contradiction.
 \end{proof}
 
-\begin{proof}
-	Hide. 
-
-	Denote the open ball as $S$. For any $n \in \mathbb{N}$, define $a_n = (1-\frac{1}{n}, 0)$. We consider the infinite subset
-	\[
-		A = \{a_n: n \ge 1, n \in \mathbb{N}\} 
+	\item 11.C. Prove directly that if $K$ is compact in $\boldsymbol{R}^p$ and $F \subseteq K$ is a closed set, then $F$ is compact in $\boldsymbol{R}^p$.
+\begin{proof}(Using definition of compactness using open coer)
+	Take a open cover of $F$, say $\mathcal{C}$. Since $F$ is closed $F^c$ is open. Now consider the open cover $\mathcal{C} \cup \{F^c\} $. Now \[
+		K \subset \mathbb{R}^p = F \cup F^c \subset \left( \cup \mathcal{C} \right)  \cup F^c = \cup (\mathcal{C} \cup \{F^c\} )
 	.\] 
-	For any $n \in \mathbb{N}$, we have
-	\[
-		\left(1-\frac{1}{n}\right)^2 + 0^2 
-		=\left(1-\frac{1}{n}\right)^2 
-		< \left(1\right)^2 
-		=1
-	.\] 
-	Therefore $A \subset S$. We now claim that $A$ does not have a cluster point in $S$. To do this, we show that
-	\begin{claim}
-		Let $a = (1,0) \in \mathbb{R}^2$. For any positive $\delta \in \mathbb{R}$, the set $A \setminus B_\delta(a)$ is finite.
-	\end{claim}
-	\begin{proof}[Proof of claim]
-		By Archimedean property, there exists $N \in \mathbb{N}$ such that $\frac{1}{N} < \delta$. But now for all $n \in \mathbb{N}$ where $n \ge N$, we have \[
-			\|a_n-a\|
-			=\left|\left(  1-\frac{1}{n} \right)  - 1 \right| 
-			= \frac{1}{n}
-			\le \frac{1}{N}<\delta
-		.\] 
-		Hence $a_n  \in B_\delta(a)$ for all $n \ge N$. Now
-		\begin{align*}
-			A \setminus  B_\delta(a)
-			&=\left(\{a_n:n \in \mathbb{N}, n <N\} \cup \{a_n:n \in \mathbb{N}, n \ge N\}\right) \setminus  B_\delta(a)\\
-			&=\left(\{a_n:n \in \mathbb{N}, n <N\} \setminus  B_\delta(a)\right) \cup \left(\{a_n:n \in \mathbb{N}, n \ge N\} \setminus  B_\delta(a)\right)\\
-			&=\left(\{a_n:n \in \mathbb{N}, n <N\} \setminus  B_\delta(a)\right) \cup \emptyset \\
-			&=\{a_n:n \in \mathbb{N}, n <N\} \setminus  B_\delta(a)\\
-			&\subset \{a_n:n \in \mathbb{N}, n <N\}
-			.
-		\end{align*}
-		Hence $A \setminus  B_\delta(a)$ is finite.
-	\end{proof}
-	Now take arbitrary $b \in S$. Let $\delta = \frac{1}{2}\|b - a\|$. Then $\delta>0$. We have 
-\[
-		B_\delta(b) \cap B_\delta(a) = \emptyset 
-	.\]
-	Hence \[
-		B_\delta(b) \cap A \subset A \setminus B_\delta(a)
-	.\] 
-	Therefore $B_\delta(b) \cap A $ is finite. Hence  $b$ cannot be a cluster point.
+	Since $K$ is compact, there exists a subcover $\mathcal{C}'$ of $\mathcal{C} \cup \{F^c\}$. Now $\mathcal{C}' \setminus \{F^c\} $ is a subcover of $\mathcal{C}$ that covers $F$.
 \end{proof}
 
-	\item 11.C. Prove directly that if $K$ is compact in $\boldsymbol{R}^p$ and $F \subseteq K$ is a closed set, then $F$ is compact in $\boldsymbol{R}^p$.
-\begin{proof}
-	Let $A\subset F$ be infinite. Then $A \subset K$. Because $K$ is compact, there exists $x \in K$ such that $x$ is a cluster point of $A$. Because $F$ is closed, it contains all its cluster point. Hence $x \in F$.
+\begin{proof}(Using definition of compactness using cluster point)
+	Let $A\subset F$ be infinite and bounded. Then $A \subset K$. Because $K$ is compact, there exists $x \in K$ such that $x$ is a cluster point of $A$. Because $F$ is closed, it contains all its cluster point. Hence $x \in F$.
 \end{proof}
 
 	\item 11.G. Prove the Cantor Intersection Theorem by selecting a point $x_n$ from $F_n$ and then applying the Bolzano-Weierstrass Theorem $10.6$ to the set $\left\{x_n: n \in \mathbf{N}\right\}$.
@@ -185,7 +149,7 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 	From each  $F_n$ choose $x_n \in F_n$. Now consider the set \[
 		X = \{x_n: n \in \mathbb{N}\} 
 	.\]
-	Suppose $X$ is finite. Then there exists some $x \in X$ such that $x \in F_n$ infinitely often. Thus for any $m \in \mathbb{N}$, one can find $n>m$ such that $x \in F_n \subset F_m$. Hence $x \in F_m$ for all $m \in \mathbb{N}$.
+	Suppose $X$ is finite. We know that each $F_n$ has at least one $x \in F_n \cap X$. Then there exists some $x \in X$ such that $x \in F_n$ infinitely often (by the pigeonhole principle). Thus for any $m \in \mathbb{N}$, one can find $n>m$ such that $x \in F_n \subset F_m$. Hence $x \in F_m$ for all $m \in \mathbb{N}$.
 
 	Suppose $X$ is infinite. Then by the Bolzano-Weierstrass Theorem we can find a cluster point $x \in \mathbb{R}^p$ of $X$. Let $m \in \mathbb{N}$, we want to prove $x \in F_m$.
 	We define the "tail set" as  \[
@@ -259,9 +223,9 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 	.\]
 	Hence in particular, $\cup \mathcal{C}_x = \left( \cup \mathcal{C} \right) _{x}$.
 	 
-	By preservation of set inclusion, since $K_x \subset  \cup \mathcal{C}_x $
+	By preservation of set inclusion, since $K_x \subset  (\cup \mathcal{C})_x $
 	\[
-		K = (K_x)_{-x} \subset \left( \cup \mathcal{C}_x \right)_{-x} = \cup \mathcal{C}
+		K \subset   \cup \mathcal{C}
 	.\] 
 	By preservation of openness applied to each $A_i \in \mathcal{C}_x$, since $\mathcal{C}_x $ is a open cover, $\mathcal{C}$ is a open cover. Because $K$ is compact, there exists a finite subcover $\mathcal{C}' \subset \mathcal{C}$ of $K$. More precisely, we have finite $I' \subset I$ and $\mathcal{C}' = \{(A_i)_{-x} \in \mathcal{C}: i \in I'\} $. Now we have \[
 		\cup \mathcal{C}'  = \bigcup_{i \in  I'} \left( A_i \right) _{-x}\supset K
@@ -280,19 +244,20 @@ Finally we verify that $0$ is the only cluster point. Take any $x \in \mathbb{R}
 	Hence $K_x \subset \cup \mathcal{C}'_{x}$. $\mathcal{C}'_x \subset \mathcal{C}_x$ by definition, so $\mathcal{C}'_{x}$ is a finite subcover of $\mathcal{C}_x$. 
 	Then  is an open subcover of $K_x$.
 \end{proof}
-\begin{proof} 
+\newpage
+\begin{proof}(Using cluster point definition of compactness)
+	First establish several lemmas.
 	\begin{lemma}(Translation is a bijection)
 		For any $K \subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$, the mapping \begin{align*}
 			f_x: K &\longrightarrow K_x \\
 			k &\longmapsto f(k) = k_x = k + x
 		\end{align*}
 		is a bijection.
-	\end{lemma}
 	\begin{proof}
 		To verify injectivity, assume there are  $a, b \in \mathbb{R}^p$ such that $a_x = b_x$. Hence $a + x = b + x$, and thus $a = b$.
 		To verify surjectivity, consider any member of $K_x$ of the form $k + x$. Then $f_x(k) = k_x = k+x$.
 	\end{proof}
-	
+	\end{lemma}
 	\begin{lemma}(Translation is distributive over set intersection)
 		For any $K \subset \mathbb{R}^p$, $F\subset \mathbb{R}^p$ and $x \in \mathbb{R}^p$,\[
 			K_x \cap F_x = (K \cap F)_x

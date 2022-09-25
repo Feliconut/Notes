@@ -1,4 +1,4 @@
-\lecture{8}{Mon 19 Sep 2022 10:46}{}
+\lecture{8}{Mon 19 Sep 2022 10:46}{homomorphism theorems}
 
 \subsection{The homomorphism theorems}
 
@@ -13,7 +13,7 @@
 \begin{proof}
 	Define the map  \begin{align*}
 		\psi: G / K &\longrightarrow G' \\
-		Ka &\longmapsto \psi(Ka) = \varphi(k)
+		Ka &\longmapsto \psi(Ka) = \varphi(a)
 	.\end{align*}
 	Check this gives an  isomorphism:
 
@@ -55,8 +55,36 @@
 	\begin{enumerate}
 		\item $H\le G$ :
 		We have $e \in H$, so $H \neq  \emptyset $. Also, whenever $a, b \in H$, one has $\varphi(ab^{-1} ) = \varphi(a)\varphi(b)^{-1} \in H'$, and hence
-		$ab^{-1} \in H$. So $H \le G$.
+		$ab^{-1} \in H$. So $H \le G$ by the subgroup criterion.
+	\item Since  $K = \operatorname{ker} \varphi$, we have $a \in K \implies \varphi(a) = e' \in H'$, so $a \in H$, so $K \subset H$.
+	\item Next, since $K \triangleleft G$, we have $K \triangleleft H \subset G$. We cinsider the restricted map
+		\begin{align*}
+			\varphi|_H: H &\longrightarrow H' \\
+			h &\longmapsto \varphi|_H(h) = \varphi(h)
+		.\end{align*}
+	So this map is surjective from $H$ to $H'$, with $\operatorname{ker} \varphi_|H = K$. Then by First Homomorphism Theorem, we have \[
+		H / K \cong H'
+	.\] 
+\item When $H'\triangleleft G'$, then whenever, $g \in G$, 
+	\[
+	\varphi(g^{-1} Hg) = \varphi(g)^{-1}\varphi(H)\varphi(g) = \varphi(g)^{-1}H'\varphi(g) \subset H'
+.\] 
+So $g^{-1} Hg \subset H$. Hence $H \triangleleft G$.
 	\end{enumerate}
-	Then we use the first homomorphism theorem.
 \end{proof}
 
+When $H \le G$ and $N \triangleleft G$, consider \[
+	H N = \{hn \in G: h \in H, n \in N\} 
+.\] 
+\begin{claim}
+	$H N \le G $.
+\end{claim}
+\begin{proof}
+	Observe that whenever $h_1, h_2 \in H$ and $n_1, n_2 \in N$, one has 
+	\begin{align*}
+		(h_1n_1)(h_2n_2)^{-1} 
+		&= h_1h_2^{-1}(h_2n_1n_2^{-1}h_2^{-1})\\
+		&\in H (h_2 N h_2^{-1})\\
+		&\subset  H N
+	.\end{align*} 
+\end{proof}

@@ -1,0 +1,89 @@
+\lecture{10}{Thu 22 Sep 2022 12:07}{}
+\subsection{Cauchy's Theorem}
+
+\begin{theorem}[Cauchy's Theorem]
+	If $f$ is analytic in a region $\Omega$ and $\overline{\mathcal{D}} =  \mathcal{D} \cup \partial \mathcal{D}\subset \Omega$ , $\partial \mathcal{D}$ is piecewise smooth curve, then \[
+		\int _{\partial \mathcal{D}} f(z) dz =0
+	.\]  
+\end{theorem}
+
+\subsubsection{Continuous Deformation of curves}
+
+\begin{definition}
+	Consider a curve $\gamma_0(t): [a,b] \to \Omega$. Consider a family of curves, $\{\gamma_s(t): [a,b] \to  \Omega\} $, such that $a\le t\le b$ and $0\le s\le 1$, $\gamma_s(a) = \gamma_0(a)$, $\gamma_s(b) = \gamma_0(b)$.
+
+	Then $\gamma_s$ is a \textit{continuous deformation} from $\gamma_0$ to $\gamma_1$.
+\end{definition}
+
+\begin{corollary}
+	If $f$ is analytic in $\Omega$, and $\gamma_0$ and $\gamma_1$ are two curves in $\Omega$ which can be continuously deformed, then \[
+		\int _{\gamma_0}f(z) dz
+		=
+		\int _{\gamma_1}f(z) dz
+	.\] 
+\end{corollary}
+\begin{proof}
+	Let $\mathcal{D}$ be the region bounded by $\gamma_0$ and $\gamma_1$. Now $\partial \mathcal{D} = \gamma_0 - \gamma_1$, and the integral in $\mathcal{D}$ is zero.
+\end{proof}
+
+\begin{definition}[Simply Connected]
+	A region $\mathcal{D}$ is called \textit{simply connected} if any two curves with common begin and common end in this region can be deformed to each other.
+\end{definition}
+
+\begin{proposition}
+	A region is simply connected iff 
+	every closed curve can be deformed to a point.
+\end{proposition}
+
+\begin{intuition}
+	Simply connected means the region has "no holes".
+\end{intuition}
+
+\begin{example}
+	\begin{enumerate}
+		\item Every conved region is simply connected.
+		\item Every starlike region is simply connected.
+		A "starlike" region is a region where there exists a point $z_0$ such that every light segment from this point to some other point in the region is contained in the region.
+		Define \[
+			\gamma_s(t) = z_0(1-s) + s\gamma(t)
+		.\] 
+	\item $\mathbb{C}\setminus  (-\infty , 0]$ is not convext, but starlike, $z_0 = 1$.
+	\item A branch of $\log z$ exists in $\mathcal{D}$ if and only if $\mathcal{D} \subset \Omega$, where $\Omega$ is simply connected, $0 \not\in \Omega$.
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}(Cauthy's Theorem for simply connected regions)
+	In a simply connecteed region, for any analytic funtion $f$, integrals \[
+		\int _{\gamma}f(z) dz
+	\] are path independent. 
+\end{theorem}
+
+\begin{example}[Winding Number]
+	\begin{enumerate}
+\item The integral $\int _{\gamma}\frac{dz }{z}$ is $2 \pi i$ times the \textit{winding number} of the curve around origin. The integral only depends on the times the cirve circulates around origin.
+\item The integral \[
+	\frac{1}{2 \pi i} \oint _{\gamma} \frac{dz}{z - a}
+.\] 
+is the \textit{winding number } about $a$.
+
+Intuitively, it is the number the cirve circulates around $a$ \textbf{counter-clockwise}.
+\item \[
+	\oint_{\gamma}\frac{1}{\left( z-a \right) ^2}dz = 0
+.\] Reason: the function has a primitive $- \frac{1}{z - a}$. So we can ignore the terms with order larger than $1$ in the partial fraction decomposition.
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+	In a simply connected region, every real harmonic function $u$ is the real part of some analytic function $f$ in the same region (also imaginary part).
+\end{theorem}
+
+\begin{enumerate}
+	\item Complex conjugate of gradient of harmonic function is always analytic.
+	\item In a simply connected region, $g$ has a primitive ($g$ is analytic and region is simply connected, therefore $g$ has a primitive), $f' = g$, $f$ is the analytic function we are looking for.
+		\[
+			f = p + i q, \quad f' = p_x + i q_x = p_x - i p_y = g = u_x - i u_y
+		.\] 
+		So $p_x = u_x, p_y = u_y$. So \[
+			\operatorname{Re} f = p = u + C
+		.\] 
+\end{enumerate}

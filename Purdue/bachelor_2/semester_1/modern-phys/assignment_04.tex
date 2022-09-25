@@ -80,24 +80,77 @@ Show that $E_{a v} \cong k T$ at large wavelength and $E_{a v} \rightarrow 0$ fo
 
 \item
 The WMAP satellite launched in 2001 studied the cosmic microwave background radiation and was able to chart all fluctuations in the
-temperature of different regions of the background radiation. These fluctuations of temperature correspond to regions of large and small density in the early universe. The satellite was able to measure differences in temperature of $2 \times 10^{-5} \mathrm{~K}$ at a temperature of $2.7250 \mathrm{~K}$. At the peak wavelength, what is the difference in the radiation intensity per unit wavelength interval between the "hot" and "cold" regions of the background radiation?
+temperature of different regions of the background radiation. These fluctuations of temperature correspond to regions of large and small density in the early universe. The satellite was able to measure differences in temperature of $\SI{2e-5}{\kelvin}$ at a temperature of $2.7250 \mathrm{~K}$. At the peak wavelength, what is the difference in the radiation intensity per unit wavelength interval between the "hot" and "cold" regions of the background radiation?
 \begin{proof}[Solution]
 	Use Equation 3.39 for radiation intensity: \[
 		I(\lambda)=\frac{2 \pi h c^2}{\lambda^5} \frac{1}{e^{h c / \lambda k T}-1}
 	.\] 
 	We will do the approximation in the following way:
 	\begin{align*}
-		dI &= I(\lambda) d\lambda
+		dI &= \frac{\partial I}{\partial T}(\lambda_{\max}, T) dT
 	.\end{align*}
-	And we want to find the peak wavelength. To do this, we set $I(\lambda) = 0$, plug in all physical constants and $T = 2.7250$, and solve numerically:
-	
-	
+	The peak wavelength is determined from Wien's displacement law:
+	\[
+		\lambda_{\max} 
+		= \frac{2.8978 \times 10^{-3} \mathrm{~m} \cdot \mathrm{K}}{T}	
+		= \frac{2.8978 \times 10^{-3} \mathrm{~m} \cdot \mathrm{K}}{2.7250 \mathrm{~K}}	
+		= \SI{1.06e-3}{\metre}
+.\] 
+
+	The partial derivative at given temperature and peak wavelength is computed numerically via Newton's Method:
+	\[
+		\frac{\partial I}{\partial T} (\lambda_{\max}, T) = \SI{3.55e-03}{\watt\per\metre\cubed\per\kelvin}
+	.\] 
+
+Now
+\begin{align*}
+	dI &= \frac{\partial I}{\partial T}(\lambda_{\max}, T) dT\\
+	&=  \SI{3.55e-03}{\watt\per\metre\cubed\per\kelvin} \cdot
+	\SI{2e-5}{\kelvin}\\
+	&= \SI{7.09e-08}{\watt\per\metre\cubed}
+.\end{align*}
+
+Therefore the difference in indensity per unit wavelength interval is approximately  \SI{7.09e-8}{\watt \per \metre \cubed}.
 \end{proof}
 
-\item 
-Prove that it is not possible to conserve both momentum and total relativistic energy in the following situation: A free electron moving at velocity $\vec{v}$ emits a photon and then moves at a slower velocity $\vec{v}^{\prime}$
+\newpage
+\item Prove that it is not possible to conserve both momentum and total relativistic energy in the following situation: A free electron moving at velocity $\vec{v}$ emits a photon and then moves at a slower velocity $\vec{v}^{\prime}$
 \begin{proof}[Solution]
-	
+	We prove by contradiction. Suppose such a situation occurs and both momentum and total relativistic energy are conserved. Let the initial and final momentum of the electron be $p$ and $p'$, and let the momentum of the photon be $p_0$. By conservation of momentum,  \[
+		\vec{p}  = \vec{p} ' + \vec{p} _0
+	\] where all term are 3-vectors. We denote the inner product of $p$ with itself by $p^2$. Therefore, 
+	\[
+		p^2 = p'^2 + p_0^2 + 2 p_0 p'
+	.\] 
+	Now by conservation of total relativistic energy,
+	\[
+		E = E' + E_0
+	.\] 
+	Using the formula $E^2 = (pc)^2 + m^2 c^4$,
+	\[
+		\sqrt{(pc)^2 + m_e^2 c^4}  = 
+		\sqrt{(p'c)^2 + m_e^2 c^4} + 
+		p_0c
+	.\] 
+	Solve the equation:
+	\begin{align*}
+		\sqrt{(pc)^2 + m_e^2 c^4}  &= 
+		\sqrt{(p'c)^2 + m_e^2 c^4} + 
+		p_0c\\
+		(pc)^2 + m_e^2 c^4  &= 
+		(p'c)^2 + m_e^2 c^4 + 
+		(p_0c)^2 +
+		2 p_0 c \sqrt{(p'c)^2 + m_e^2 c^4}\\
+		p^2 + m_e^2 c^2  &= 
+		p'^2 + m_e^2 c^2 + 
+		p_0^2 +
+		2 p_0 \sqrt{p'^2 + m_e^2 c^2}\\
+		p^2  &= 
+		p'^2 +  p_0^2 +
+		2 p_0 \sqrt{p'^2 + m_e^2 c^2}\\
+		2 p_0 p' &=  2 p_0 \sqrt{p'^2 + m_e^2 c^2}
+	.\end{align*}
+	Hence either $p_0 = 0$, or $p' = \sqrt{p'^2 + m^2 _e c^2} $. The first case is not true, since we assumed a nontrivial photon emission, and it doesn't make sense to say the photon has no momentum. The second case is not true since it implies $m_e^2 c^2 = 0$, which is false.
 \end{proof}
 
 \end{enumerate}
