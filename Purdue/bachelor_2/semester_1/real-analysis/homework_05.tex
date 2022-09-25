@@ -1,0 +1,87 @@
+\homework{5}{Fri 23 Sep 2022 11:26}{due Sep 30}
+
+12.A, 12.C, 12.I, 14.D, 14.M, 14.N, 14.O, 15.L, 15.N
+\begin{enumerate}
+\item 12.A. If $A$ and $B$ are connected subsets of $\boldsymbol{R}^p$, give examples to show that $A \cup B$, $A \cap B, A \backslash B$ can be either connected or disconnected.
+\begin{proof}[Solution]
+	
+\end{proof}
+
+\item 12.C. If $C \subseteq \mathbf{R}^{\mathrm{p}}$ is connected, show that its closure $C^{-}$(see Exercise $\left.9 . \mathrm{L}\right)$ is also connected.
+\begin{proof}
+	Assume $C$ is connected, and suppose $\overline{C} $ is not connected. Take $A,B$ to be a disconnection of $\overline{C} $. The following properties hold:
+	\begin{itemize}
+		\item $\overline{C}  \subset A \cup B$
+		\item $A \cap \overline{C}  \neq \emptyset $
+		\item $B \cap \overline{C}  \neq \emptyset $
+		\item $(A \cap \overline{C} ) \cap (B \cap \overline{C} ) = \emptyset $
+	\end{itemize}
+
+	Moreover, we cannot have both $A \cap C\neq \emptyset $ and $B \cap C \neq \emptyset $, otherwise $C$ is disconnected, since $C \subset A \cup B$ (since $C \subset \overline{C} $ ), and $(A \cap C) \cap (B \cap C) = \emptyset $, a contradiction.
+
+	Without loss of generality, assume $A \cap C = \emptyset $. Then $C \subset B$ since $C \subset A \cup B$. But $A \cap \overline{C} \neq \emptyset $, so there exists $x \in A \cap \overline{C} $ such that $x \in A $ is a cluster point of $C$. However, since $A$ is open, there exists a neighborhood $N$ such that $x \in N \subset A$. Thus $N \cap C = \emptyset $, so $x$ is not a cluster point of $C$, a contradiction.
+\end{proof}
+
+\item 12.I. Show that the set
+\[
+S=\left\{(x, y) \in \mathbf{R}^2: y=\sin \frac{1}{x}, x \neq 0\right\} \cup\{(0, y):-1 \leq y \leq 1\}
+\]
+is connected in $\boldsymbol{R}^2$. However, it is not always possible to join two points in $S$ by a polygonal curve (or anỳ "continuous" curve) lying entirely in S.
+\begin{proof}
+	We have to use the continuity of $\sin(\frac{1}{x})$ in this proof. We give the formulation of continuity as
+	\begin{claim}
+		For any $\varepsilon>0$, for any $x \in \mathbb{R}^+$, there exists $\delta>0$ such that whenever $|y - x| < \delta$, we have $|\sin \frac{1}{y} - \sin \frac{1}{x}|<\varepsilon$.
+	\end{claim}
+
+	We first prove $S_1 = \{(x,y) \in S: x>0\} $ is connected. After this is proved, by symmetry, $S_2 = \{(x,y) \in S: x < 0\} $ is also connected. Note that the function
+	\begin{align*}
+		f: \mathbb{R}^+  &\longrightarrow \mathbb{R}^2 \\
+		x &\longmapsto f(x) = (x, \sin \frac{1}{x})
+	\end{align*}
+	is a continuous function, and $\mathbb{R}^+$ is connected, so $S_1 = f(\mathbb{R}^+)$ is connected. 
+
+	If the grader thinks it is not acceptable to use property of continuous function, here is a proof directly from the definition: Let $g:\mathbb{R}^2 \to \mathbb{R}$ be the projection mapping $(x,y) \mapsto x$. Take a disconnection $A, B$ of $S_1$. We claim that $g (A)$ and $g (B) $ is a disconnection of $\mathbb{R}^+$. First $g(A)$ and $g(B)$ are open since projection is an open mapping. For any $x \in \mathbb{R}^+$, we have $(x, \sin\frac{1}{x}) \in S_1 \subset A \cup B$, hence $x = f^{-1} (x, \sin \frac{1}{x}) \in f^{-1} (A \cup B) = f^{-1} (A) \cup f^{-1} (B)$.
+
+		
+\end{proof}
+
+\item 14.D. Let $X=\left(x_n\right)$ be a sequence in $\boldsymbol{R}^p$ which is convergent to $x$. Show that $\lim \left(\left\|x_n\right\|\right)=\|x\| . \quad$ (Hint: use the Triangle Inequality.)
+\begin{proof}
+	
+\end{proof}
+
+\item 14.M. Let $X=\left(x_n\right)$ be a sequence of strictly positive real numbers such that $\lim \left(x_n^{1 / n}\right)<1$. Show that for some $r$ with $0<r<1$, then $0<x_n<r^n$ for all sufficiently large $n \in \mathbf{N}$. Use this to deduce that $\lim \left(x_n\right)=0$.
+\begin{proof}
+	
+\end{proof}
+
+\item 14.N. Let $X=\left(x_n\right)$ be a sequence of strictly positive real numbers such that $\lim \left(x_n^{1 / n}\right)>1$. Show that $X$ is not a bounded sequence and hence is not convergent.
+\begin{proof}
+	
+\end{proof}
+
+\item 14.O. Give an example of a convergent sequence $\left(x_n\right)$ of strictly positive real numbers such that $\lim \left(x_n^{1 / n}\right)=1$. Give an example of a divergent sequence with this property.
+\begin{proof}
+	
+\end{proof}
+
+
+\item 15.L. If $0<a \leq b$ and if $x_n=\left(a^n+b^n\right)^{1 / n}$, then $\lim \left(x_n\right)=b$.
+\begin{proof}
+	
+\end{proof}
+
+15.M. Every irrational number in $\boldsymbol{R}$ is the limit of a sequence of rational numbers. Every rational number in $\boldsymbol{R}$ is the limit of a sequence of irrational numbers.
+\begin{proof}
+	
+\end{proof}
+
+\item 15.N. Let $A \subseteq \mathbf{R}^p$ and $x \in \mathbf{R}^p$. Then $x$ is a boundary point of $A$ if and only if there is a sequence $\left(a_n\right)$ of elements in $A$ and a sequence $\left(b_n\right)$ of elements in $\mathscr{C}(A)$ such that
+\[
+\lim \left(a_n\right)=x=\lim \left(b_n\right) .
+\]
+\begin{proof}
+	
+\end{proof}
+
+\end{enumerate}
