@@ -4,7 +4,11 @@
 \begin{enumerate}
 \item 12.A. If $A$ and $B$ are connected subsets of $\boldsymbol{R}^p$, give examples to show that $A \cup B$, $A \cap B, A \backslash B$ can be either connected or disconnected.
 \begin{proof}[Solution]
+	Example for $A \cup B$ : consider $\mathbb{R}$. Take $A = B = [0,1]$. Now $A \cup B = [0,1]$ which is connected. Take $A = (0,1)$ and $B = (1,2)$. Now $A \cup B = (0,1) \cup (1,2)$ which is disconnected.
+
+	Example for $A \setminus B$ : consider $\mathbb{R}$. Take $A = [0,1]$ and $B = [\frac{1}{2}, 1]$. Then $A \setminus B = [0,\frac{1}{2})$ which is connected. Take $A = [0,3]$ and $B = (1,2)$. Now $A\setminus B = [0,1] \cup [1,2]$ which is disconnected.
 	
+	Example for $A \cap B$ : consider $\mathbb{R}$. Take $A = B = [0,1]$. Now $A \cap B = [0,1] $ which is connected. Consider $\mathbb{R}^2$. Take $A = \{x \in \mathbb{R}^2: \|x\| = 1\} $ to be the unit sphere which is connected. Take $B = \{(x_1,0): x_1 \in \mathbb{R}\} $ to be the real axis which is connected. Then $A \cap B = \{(1,0), (-1,0)\} $ which is two distinct points, which is disconnected.
 \end{proof}
 
 \item 12.C. If $C \subseteq \mathbf{R}^{\mathrm{p}}$ is connected, show that its closure $C^{-}$(see Exercise $\left.9 . \mathrm{L}\right)$ is also connected.
@@ -30,7 +34,7 @@ is connected in $\boldsymbol{R}^2$. However, it is not always possible to join t
 \begin{proof}
 	First we prove a lemma:
 \begin{lemma}
-	If $A \cup B$ is connected and $B \cup C$ is connected, then $A \cup B \cup C$ is connected.
+	If $A \cup B$ is connected and $B \cup C$ is connected, where $A, B, C$ are nonempty, then $A \cup B \cup C$ is connected.
 
 \begin{proof}
 	Suppose not. Then $X,Y$ forms a disconnection of $A \cup B \cup C$. Now we cannot have  $(A \cup B)\cap X\neq \emptyset $ and $(A \cup B) \cap Y \neq \emptyset $ simultaneously, otherwise $X,Y$ will form a disconnection of $A \cup B$, a contradiction. Therefore we can assume without loss of generality of $A \cup B \subset X$ and $(A \cup B) \cap Y = \emptyset $.
@@ -38,13 +42,31 @@ is connected in $\boldsymbol{R}^2$. However, it is not always possible to join t
 	Also, we cannot have $(B \cup C) \cap X \neq \emptyset $ and $(B \cup C) \cap Y \neq \emptyset $. Since we already have $(B \cup C) \cap X \neq \emptyset $, we must have $(B \cup C) \cap Y = \emptyset $. Now $(A \cup B \cup C) \cap Y = \emptyset $, so $X,Y  $ is not a disconnection, which is a contradiction.
 \end{proof}
 \end{lemma}
-
-	We still have not rigorously defined $\sin$ and verified its properties. So I will use the properties of $\sin$ implicitly in the proof without justification.
-
 	First of all,  $\sin$ is a continuous function and $x \mapsto \frac{1}{x}$ is a continuous function. The function $f: \mathbb{R}\setminus \{0\}  \mapsto \mathbb{R}$ such that $f(x) = \sin \frac{1}{x}$ is their composition so is also continuous. Since $\mathbb{R}^+$ is continuous, and $\mathbb{R}^+$ is connected, the set \[
 		S_1 = \{(x,y) \in \mathbb{R}^2: y = \sin \frac{1}{x}, x > 0\} 
 	\] 
 	is connected, since it is the graph of a continuous function over a connected region.
+
+	Here is a proof of the continuity statement: Take $\varepsilon>0$ and some ball $B_\varepsilon(x_0, \sin \frac{1}{x_0})$. We show that there exists some $\delta>0$, such that $(x, \sin x) \in B_\varepsilon(x_0, \sin\frac{1}{x_0})$ if $|x-x_0|<\delta$. 
+
+
+	We use the fact $\left| \sin \alpha - \sin \beta \right| \le |\alpha-\beta|$.
+	By choosing appropriate $\delta$, we want
+	\[
+		\left| \sin \frac{1}{x_0} - \sin \frac{1}{x} \right| \le \left| \frac{1}{x_0} - \frac{1}{x} \right| = \left| \frac{x_0-x}{x_0x} \right| < \frac{\delta}{x_0(x_0-\delta)} \le \varepsilon
+	.\] 
+	To justify the $<$ sign, note that we are considering $S_1$, so $x_0 > 0$. Also it is safe to assume that $x_0 - \varepsilon > 0$. To make an appropriate choice of $\delta$, we can let
+	\[
+		\delta \le \frac{x_0^2 \varepsilon}{1 + x_0 \varepsilon}
+	.\] 
+	Where the right hand side is strictly larter than zero, since both numerator and denominator is strictly larger than zero.
+
+	Now we have proved the continuity statement. Suppose there is a disconnection of $S_1$, say $A$ and $B$. Let the natural projection mapping from $\mathbb{R}^2$ to $\mathbb{R}$ be $\tau$. We want to prove $\tau(A)$ and $\tau(B)$ form a disconnection of $\mathbb{R}^+$. 
+
+	$\mathbb{R}^+ \subset \tau(A) \cup \tau(B) $, $(\tau(A) \cap \mathbb{R}^+) \cap \left( \tau(B) \cap \mathbb{R}^+ \right) = \emptyset $, $\tau(A) \cap \mathbb{R}^+ \neq \emptyset $, $\tau(B) \cap \mathbb{R}^+ \neq  \emptyset $ are obvious by property of projection. 
+	Now we verify that $\tau(A)$, $\tau(B)$ are open. Take any $x \in \tau(A)$, then $(x,\sin \frac{1}{x}) \in A$. By the statement above, there exists a ball $B_\varepsilon(x, \sin \frac{1}{x}) \subset A$. The projection of the ball is the interval $(x-\varepsilon, x+\varepsilon)$, and by property of projection, $(x-\varepsilon, x+\varepsilon)  = \tau(B_\varepsilon(x, \sin \frac{1}{x})) \subset \tau(A)$. Thus there exists a neighborhood of $x$ in $\tau(A)$. We have verified that $\tau(A)$ is open. $\tau(B)$ is open by symmetry.
+
+	Thus $\tau(A)$ and $\tau(B)$ form a disconnection of $\mathbb{R}^+$. But we have a contradiction since $\mathbb{R}^+$ is connected. Thus $S_1$ is connected.
 
 	By symmetry, the set \[
 		S_2 = \{(x,y) \in \mathbb{R}^2: y = \sin \frac{1}{x}, x < 0\} 
@@ -56,9 +78,11 @@ is connected in $\boldsymbol{R}^2$. However, it is not always possible to join t
 	\[
 		\overline{S_1} = S_1 \cup S_3 
 	.\] 
-	To justify this, note that $0$ is an oscillating discontinuity of $f$. This means $f$ oscillates near $0$ infinitely often. More precisely, for any $y \in [-1,1]$ and $\delta > 0$, there exists some $0 < x < \delta$ such that $f(x) = y$. Using this property, we can conclude that every point $(0,y)$ such taht $y \in [0,1]$ is a cluster point of $S_1$.
+	To justify this, note that $0$ is an oscillating discontinuity of $f$. This means $f$ oscillates near $0$ infinitely often. More precisely, for any $y \in [-1,1]$ and $\delta > 0$, there exists some $0 < x < \delta$ such that $f(x) = y$. To verify this, take $x_1 = \frac{\delta}{2}$ and $x_2 = \frac{x_2}{2 \pi x_1 + 1}$. Now $\frac{1}{x_2} - \frac{1}{x_1} = 2 \pi$. Hence the function $\sin \frac{1}{x}$ completes exactly one period between $x_1$ and $x_2$, taking all values between $-1$ and $1$. Hence there exists some $x \in [x_2,x_1]$ such that $f(x) = y$. Also, $x< \delta$ since $x \le  x_1<\delta$ and $x>0$ by construction.
+
+	We can conclude that every point $(0,y)$ such that $y \in [0,1]$ is a cluster point of $S_1$, since for any neighborhood ball $B_\varepsilon(0,y)$ containing $(0,y)$, it contains at least one point from $S_1$ by previous claim, and contains $(0,y')$ whenever $|y'-y|<\varepsilon$ which are infinitely many number of intersection with $S_1^c$.
 	
-	By the last exercise,  $\overline{S_1} = S_1 \cup S_3$ is connected. Symmetrically, $\overline{S_2}  = S_2 \cup S_3$ is connected. Hence $S = S_1 \cup S_2 \cup S_3$ is connected.
+	By the last exercise,  $\overline{S_1} = S_1 \cup S_3$ is connected. Symmetrically, $\overline{S_2}  = S_2 \cup S_3$ is connected. Hence $S = S_1 \cup S_2 \cup S_3$ is connected by the lemma.
 
 	Consider $s_1 = (0, 1)$ and $s_2 = (1, \sin 1)$. For a curve $\gamma: [0,1] \to [-1, 1]$ such that $\gamma(0) = s_1$ and $\gamma(1) = s_2$ to be entirely in $S$, it has to coincide with $f$ in $S_1$, and take value $s_1$ in $S_3$. But the right limit of $\gamma$ at $0$ does not exist, since $f$ does not have a right limit at $0$. Therefore $\gamma$ cannot be continuous at $0$. In other words, there does not exist a continuous curve $\gamma$ joining $s_1$ and $s_2$.
 \end{proof}
@@ -197,7 +221,9 @@ Now for all $\varepsilon>0$, there exists $N$ such that for all $n \ge N$, $\fra
 \begin{proof}
 	Since $x$ is a boundary point of $A$, each neighborhood of $x$ should have nonempty intersection with both $A$ and $A^{c} $. Now for each $n \in \mathbb{N}$, pick $a_n \in A \cap B_{1 / n}(x)$ and $b_n \in A^{c}  \cap B_{1 / n}(x)$. 
 
-	Now for arbitrary $\varepsilon>0$, there exists by Archimedean property a natural number $N \in \mathbb{N} $ such that $\frac{1}{N}<\varepsilon$. Hence for all $n \ge N$, we have $|a_n - x| < \frac{1}{n} \le \frac{1}{N}$. Hence $a_n$ converges to $x$. The proof of $b_n \to x$ is completely symmetrical.
+	Now for arbitrary $\varepsilon>0$, there exists by Archimedean property a natural number $N \in \mathbb{N} $ such that $\frac{1}{N}<\varepsilon$. Hence for all $n \ge N$, we have $|a_n - x| < \frac{1}{n} \le \frac{1}{N}$. Hence $a_n$ converges to $x$. The proof of $b_n \to x$ is completely symmetric. Hence there exists a the desired sequences.
+
+	To prove the other direction, assume the sequences are available, and consider some $B_\varepsilon(x)$. Then there exists $N$ and $M$ such that $|a_n - x| <\varepsilon$ for all $n\ge N$ and $|a_m - x| < \varepsilon$ for all $m \ge M$. This is to say that $B_\varepsilon(x) \cap A$ and $B_\varepsilon(x) \cap A^c$ are both unempty. Thus $x$ is boundary point of $A$.
 \end{proof}
 
 \end{enumerate}

@@ -1,0 +1,147 @@
+\lecture{11}{Tue 27 Sep 2022 12:04}{}
+
+\begin{theorem}[Cauchy Theorem]
+	If $f$ is analytic in $\Omega$ and $\mathcal{D}$ is a region, $\partial \mathcal{D}$ is piecewise smooth, $\mathcal{D} \cup \partial \mathcal{D} \subset \Omega$, Then \[
+		\int _{\partial \mathcal{D}}f(z) dz = 0
+	.\] 
+\end{theorem}
+
+\begin{example}
+	if $f$ is rational and has no poles in $\Omega$, consider the path integral \[
+		\int _{\partial \mathcal{D}} \frac{f(z)}{z - a}dz
+	.\] 
+	Where the partial fraction decomposition is (assume $f(a) \neq  0),$
+	\[
+		\frac{f(z)}{z - a} = \frac{f(a)}{z - a}+ g
+	\] 
+	where $g$ is analytic in $\Omega$.
+
+	Now $\int_{\partial \mathcal{D}} g(z) dz= 0$ by Cauchy's Theorem. Therefore: \[
+		\int_{\partial \mathcal{D}}\frac{f(z)}{z - a}dz 
+		= \int_{\partial \mathcal{D}}\frac{f(a)}{z - a}dz
+		= 2 \pi i f(a)
+	.\] 
+\end{example}
+
+The next theorem generalizes the example to all analytic functions.
+
+\begin{corollary}[Cauchy Integral Formula]
+	If $f$ is analytic in $\Omega$ and $\mathcal{D}$ is a region, $\partial \mathcal{D}$ is piecewise smooth, $\mathcal{D} \cup \partial \mathcal{D} \subset \Omega$, Then for all $a$ in the interior of $\mathcal{D}$,
+	\[
+		f(a) = \frac{1}{2 \pi i } \int_{\partial \mathcal{D}} \frac{f(a)}{z-a}dz
+	\]
+\end{corollary}
+\begin{proof}
+	We remove some disk in $\mathcal{D}$ centered at $a$, say $\mathcal{D}_{\varepsilon}$.
+	\[
+		\mathcal{D}_\varepsilon = \mathcal{D} \setminus \{z: |z-a| \le \varepsilon\} 
+	\] 
+	\[
+		\partial \mathcal{D}_\varepsilon = \partial \mathcal{D} - C_\varepsilon
+	\] 
+	Where $C_\varepsilon$ is oriented around the small disk counterclockwise. Now we have removed the singularity $a$, hence
+	$\frac{f(z)}{z-a}$ is analytic in $\mathcal{D}_\varepsilon$. By Cauchy Theorem, \[
+		\int _{\partial \mathcal{D}_\varepsilon} \frac{f(z)}{z-a}dz = 0
+	.\] 
+	Now \[
+		\int _{\partial\mathcal{D}} - \int _{C_\varepsilon} = \int _{\partial\mathcal{D}_\varepsilon} = 0
+	.\] 
+	Therefore
+	\[
+		\int _{C_\varepsilon}\frac{f(z)}{z-a}dz
+		=\int _{\partial \mathcal{D}}\frac{f(z)}{z-a}dz 
+	.\] 
+	By the integral $\int _{C_\varepsilon}\frac{1}{z-a}dz = 2 \pi i$,
+	\[
+		f(a) = \frac{1}{2 \pi i} \int _{C_\varepsilon} \frac{f(a)}{z - a}dz
+	.\] 
+Now estimate the difference:
+\begin{align*}
+	&\left| \frac{1}{2 \pi i}\int _{C_\varepsilon}\frac{f(a)}{z-a}dz 
+	- \frac{1}{2 \pi i} \int _{C_\varepsilon} \frac{f(z)}{z-a} dz\right| \\
+	&\le 2 \pi \varepsilon \frac{1}{2\pi} \frac{\max |f(z) - f(a)|}{\varepsilon}\\
+	&\to 0 
+.\end{align*}
+Hence \[
+	f(a) = \frac{1}{2 \pi i} \int_{\partial \mathcal{D}}\frac{f(z)}{z-a}
+.\]
+\end{proof}
+
+\begin{remark}
+	Boundary determines interior points. This is similar to Dirichlet Problem and harmonic functions.
+\end{remark}
+
+\begin{corollary}[Cauchy's Differentiation Formula]
+	Differentiable functions are infinitely differentiable. Moreover,
+\[
+	\frac{d^n}{dz^n} f(z) = \frac{n!}{2 \pi i} \int _{\partial \mathcal{D}}\frac{f(\zeta)}{(\zeta - z)^{n+1}} d\zeta
+\]
+for all $z$ in the interior of $\mathcal{D}$.
+\end{corollary}  
+\begin{proof}
+	Write
+\[
+	f(z) = \frac{1}{2 \pi i}\int _{\partial \mathcal{D}}\frac{f(\zeta)}{\zeta - z} d \zeta, \quad z \in \mathcal{D}
+.\]	
+This is infinitely differentiable wrt $z$, since $\frac{1}{\zeta - z}$ is infinitely differentiable. The formula comes easily via induction.
+\end{proof}
+test
+
+\begin{property}[Average Property of Analytic Functions]
+	
+Let $\mathcal{D} = \{z: |z - a| > r\}$. Then $f(a) = \frac{1}{2 \pi i}\int _\gamma \frac{f(z)}{z - a} dz$.
+
+We parameterize $\gamma$. Let $\gamma(t) = a + r e^{i t}, 0\le t\le 2 \pi$. $\gamma'(t) = i r e^{it}$. Now
+\begin{align*}
+	f(a) &= \frac{1}{2 \pi i}\int _0^{2 \pi}\frac{f(a + r e ^{it })}{r e^{it }} i r e^{it } dt\\
+	     &= \frac{1}{2 \pi} \int _0^{2 \pi} f(a + r e^{it }) dt
+.\end{align*}
+This is the average of $f$ along the curve.
+
+By splitting real and imaginary part, we conclude that this property holds for real and imaginary parts separately. Hence \logseq{Harmonic function}s have average property.
+\end{property}
+
+Suppose $g: \mathcal{D} \to \mathbb{R}$ is harmonic. We say $a$ is a point of (local, non-strict) maximum if $g(a) \ge g(z)$ for $z$ in some neighbourhood  of $a$.
+
+\begin{theorem}[Maximum Principle]
+	\begin{enumerate}
+		\item If a function $u$ harmonic in $\mathcal{D}$ has a (local, nonstrict) maximum at some point $A \in \mathcal{D}$, then $u$ is constant.
+		\item Minimum Principle: same for mimima of harmonic functions.
+	\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+Solution to \logseq{Dirichlet Problem } for bounded region must be unique.
+\end{corollary}
+\begin{proof}
+	Suppose $u_1, u_2$ are two solutions, then $u_1-u_2$ is harmonic, and have boundary value zero. 
+
+	If $u_1-u_2 \neq 0$, there must be a maximum or minimum in domain. ($u_1-u_2$ is continuous on a close and bounded region, and continuous functions must achieve extremum on compact domain). Then by maximum principle, $u_1 = u_2$.
+\end{proof}
+
+\begin{theorem}[Maximum Modulus Principle]
+	If a function $f$ is analytic in $\mathcal{D}$, and $|f(z)|$ has a (local, nonstrict) maximum in $\mathcal{D}$ then $f$ is constant.
+\end{theorem}
+\begin{proof}
+	We have $f(a) = \frac{1}{2 \pi}\int _0^{2 \pi} f(a + r e^{i t})d t$. Suppose $|f(z)|$ has a maximum in $\mathcal{D}$, we take $r  $ small enough so that $|f(z+re^{it })| \le f(a)$.
+
+	On the other hand, \[
+		|f(a)| \le  \frac{1}{2 \pi} \int _0^{2 \pi} |f(a + r e^{i t})|d t
+	.\] 
+	These imply that $|f(a + r e^{i t})|$ is constant.
+\end{proof}
+We do not have ``minimum modulus principle'' in the same form. To obtain it we need to replace $f$ by $\frac{1}{f}$.
+
+\begin{example}
+	Consider $\sin(z)$. The real version has infinitely many extrema. However the complex version is harmonic, and the previous maxima become saddle points. 
+
+	\logseq{Harmonic functions} cannot have maxima if non-constant. They can only have saddle points.
+\end{example}
+
+\begin{corollary}
+	If $\mathcal{D}$ bounded, $\overline{\mathcal{D}} $ is compact, $f$ analytic in $\mathcal{D}$, continuous in $\overline{\mathcal{D}} $. Then $|f|$ has a global maximum in $\mathcal{D}$. Furthermore, this global maximum must be in $\partial \mathcal{D}$.
+\end{corollary}
+
+\begin{corollary}
+	Under the same assumptions in the last corollary, if $f$ bounded by $M$ in $\partial \mathcal{D}$, then $f$ is bounded by $M$ in $\mathcal{D}$.
+\end{corollary}

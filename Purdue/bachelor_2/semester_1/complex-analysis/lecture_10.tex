@@ -1,4 +1,4 @@
-\lecture{10}{Thu 22 Sep 2022 12:07}{}
+\lecture{10}{Thu 22 Sep 2022 12:07}{Cauchy's Theorem}
 \subsection{Cauchy's Theorem}
 
 \begin{theorem}[Cauchy's Theorem]
@@ -41,7 +41,7 @@
 
 \begin{example}
 	\begin{enumerate}
-		\item Every conved region is simply connected.
+		\item Every convex region is simply connected.
 		\item Every starlike region is simply connected.
 		A "starlike" region is a region where there exists a point $z_0$ such that every light segment from this point to some other point in the region is contained in the region.
 		Define \[
@@ -61,13 +61,15 @@
 \begin{example}[Winding Number]
 	\begin{enumerate}
 \item The integral $\int _{\gamma}\frac{dz }{z}$ is $2 \pi i$ times the \textit{winding number} of the curve around origin. The integral only depends on the times the cirve circulates around origin.
-\item The integral \[
+\item The integral 
+	\[
 	\frac{1}{2 \pi i} \oint _{\gamma} \frac{dz}{z - a}
 .\] 
 is the \textit{winding number } about $a$.
 
 Intuitively, it is the number the cirve circulates around $a$ \textbf{counter-clockwise}.
-\item \[
+\item 
+	\[
 	\oint_{\gamma}\frac{1}{\left( z-a \right) ^2}dz = 0
 .\] Reason: the function has a primitive $- \frac{1}{z - a}$. So we can ignore the terms with order larger than $1$ in the partial fraction decomposition.
 \end{enumerate}

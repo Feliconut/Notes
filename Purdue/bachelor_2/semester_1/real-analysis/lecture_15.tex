@@ -1,0 +1,102 @@
+\lecture{15}{Fri 30 Sep 2022 12:13}{}
+
+
+\subsection{Combination of Sequences}
+
+\begin{theorem}
+	Let $X$ and $Y$ be sequences in $\mathbb{R}$ (or $\mathbb{R}^p$ ). 
+	Define operations element-wise ($X + Y := (x_n + y_n)$ ), etc
+	Then
+	\begin{itemize}
+		\item $\lim X + Y = \lim X + \lim Y$
+		\item $\lim c X = c \lim X$
+		\item $\lim XY = \lim X \lim Y$ (in $\mathbb{R}^p$ it is the inner product)
+		\item $\lim 1 / X = \frac{1}{\lim X}$ when $X \neq 0$, $\lim X \neq 0$. (in $\mathbb{R}$)
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item (3rd) Use the formula \[
+			|x_n y_n - xy|
+			= |x_ny_n - xy_n + xy_n - xy|
+			\le |y_n| |x_n - x| + |x| |y_n - y|
+			\le |y_n|\varepsilon + |x| \varepsilon
+		.\] 
+		If $n \ge \max \{K_\varepsilon, K_{\varepsilon'}\} $. Since $y_n$ is convergent, $y_n$ is bounded. Hence the last line can be arbitrarily small, i.e.\[
+			|x_n y_n - xy|
+			\le \varepsilon(M + |x|)
+		.\] 
+	\item (reciprocal) 
+		\[
+			\left| \frac{1}{y_n} - \frac{1}{y} \right| 
+			= \left| \frac{y_n - y}{|y_n| |y|} \right| 
+			\le \frac{|y_n - y|}{\frac{|y|}{2}|y|}
+			\le \frac{2}{|y|^2}\varepsilon
+		.\] 
+		If $n \ge \max\{N, K'_\varepsilon\}$.  Where $n\ge N$ guarantees $|y_n| \ge |y|/2$.
+	\item (quotient) Follows from 3 and 4.
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	\begin{itemize}
+		\item $\lim_{n \to \infty} x_n^k = x^k$ 
+		\item $\lim_{n \to \infty} P(x_n) = P(x)$ where $P$ is any polynomial. This can be generalized to $\mathbb{R}^p$ with polynomial with multiple input variables.
+	\end{itemize}
+\end{corollary}
+
+\begin{theorem}[Squeeze Theorem]
+	Suppose we have sequences $x_n, y_n, z_n$ in $\mathbb{R}$ so that $x_n \le y_n \le z_n$, and $x_n \to c$ and $z_n \to c$, then $y_n \to c$.
+
+	Also called \logseq{Sandwich Theorem}, or \logseq{Two Policeman Theorem}.
+\end{theorem}
+\begin{proof}
+	We know that $|x_n - c| < \varepsilon$ for $n \ge K_\varepsilon$, and $|z_n - c| < \varepsilon$ for $n \ge  K'_\varepsilon$.
+
+	Now for $n \ge \max \{K_\varepsilon, K'_\varepsilon\} $, we have \[
+		c-\varepsilon < x_n \le y_n \le z_n < c+\varepsilon
+	.\] 
+	Therefore $|y_n - c| < \varepsilon$.
+\end{proof}
+
+\begin{definition}[Monotone Sequence]
+	Let $X = (x_n)$ be a sequence in $\mathbb{R}$. We say $x_n $ is \textit{increasing} (nondecreasing) if $x_n \le x_{n+1}$ for $n \in \mathbb{N}$. We say $x_n$ is \textit{strictly increasing} if $x_n < x_{n+1}$.
+
+	We may write $x_n \nearrow$.
+
+	We define \textit{decreasing} and \textit{strictly decreasing} sequences symmetrically.
+
+	An increasing or decreasing sequence is called \textit{monotone}.
+\end{definition}
+
+\begin{theorem}[Monotone Convergence Theorem]
+	Let $(x_n)$ monotone increasing, and bounded above. Then $(x_n)$ is convergent, and \[
+		\lim (x_n) = \operatorname{sup} \{x_n: n \in \mathbb{N}\} 
+	.\] 
+
+	Symmetrically, let $(x_n)$ decreasing and bounded below, then \[
+		\lim (x_n) = \operatorname{inf} \{x_n : n \in \mathbb{N}\} 
+	.\] 
+\end{theorem}
+\begin{proof}
+	Since $S = \{x_n : n \in \mathbb{N}\} $ is bounded above by $M$, there exists $s = \operatorname{sup} S$. Now for any $\varepsilon$, there exists $N$ such that $x_N > s - \varepsilon$. But for all subsequent $n \ge  N$, $x_n \ge x_N > s - \varepsilon$. This implies that $|x_n - s| < \varepsilon$ for all $n \ge N$. Hence $x_n \to  s$.
+\end{proof}
+
+\subsection{Number $e$ }
+
+Look at $u_n = \left( 1+\frac{1}{n} \right) ^n$. Expand by Newton Binomial Theorem, we have the expansion
+\begin{align*}
+u_n &= 1+ n \frac{1}{n} + \ldots + (n,k) \frac{1}{n^k} + \ldots + \frac{1}{n^n}
+&= 1 + 1 + \ldots + \frac{1(1-\frac{1}{n})\ldots(1- \frac{k-1 }{n})}{k!} + 1 \\
+u_{n+1} &= 1 + 1 + \ldots + \frac{1 (1-\frac{1}{n+1})}{2} + \frac{1 \left( 1-\frac{1}{n+1} \right) \left( 1-\frac{2}{n+1} \right) }{3!} + \ldots + \frac{1\left( 1-\frac{1}{n+1} \right) (1-\frac{2}{n+1}+.\ldots}{n!}) + \text{last term} \\
+\end{align*}
+By comparing term by term, $u_n \le  u_{n+1}$, so $u_n$ monotone increase.
+Furthermore, 
+\begin{align*}
+	u_n &\le  1+1 + \frac{1\cdot 1}{2} + \ldots + \frac{1}{n!}\\
+	&\le  1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \ldots + \frac{1}{2^{n-1 }}\\
+	&\le 3 - \frac{1}{2^n} \\
+	&\le 3
+.\end{align*}
+Hence $u_n \le 3$. Now by monotone convergence theorem, $u_n $ converges. Call its limit $e$.
+

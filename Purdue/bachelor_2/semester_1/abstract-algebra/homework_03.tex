@@ -14,6 +14,13 @@ Herstein, section 2.4, page 64 : Questions 8,13,16,18,27,31,37
 		  &\iff x \in H
 	.\end{align*}
 \end{proof}
+\begin{correction}
+	The assumption is: For any right coset $Ha$ in $G$, there exists $b \in G$ such that $Ha = bH$. 
+
+	Since $Ha = bH$, we conclude that $b \in Ha$, so $ba^{-1} \in H$, so $ab^{-1} \in H$.
+
+	Now $aH = a(b^{-1} b)H = (ab^{-1} )bH = (ab^{-1} ) Ha = Ha$.
+\end{correction}
 
 	\item 13. Find the orders of all the elements of $U_{18}$. Is $U_{18}$ cyclic?
 \begin{proof}
@@ -73,7 +80,7 @@ Continue in this fashion we can cancel all terms and onclude that $x^2 = e$.
 
 \end{proof}
 
-	\item 18. Using the results of Problems 15 and 16 , prove that if $p$ is an odd prime number, then $(p-1) ! \equiv-1 \bmod p$. (This is known as Wilson's Theorem.) It is, of course, also true if $p=2$.
+\item 18. Using the results of Problems 15 and 16 , prove that if $p$ is an odd prime number, then $(p-1) ! \equiv-1 \bmod p$. (This is known as Wilson's Theorem.) It is, of course, also true if $p=2$. \logseq{review}
 \begin{proof}
 	Consider the group $U_p$. Since $p$ is prime, the elements of the group are exactly the natural numbers from $1$ up to $p -1$. Now
 	\[
@@ -89,7 +96,7 @@ Therefore all members except $1 $ or $p -1$ are not their own inverse. Hence the
 	
 \end{proof}
 
-	\item 27. If $a H=b H$ forces $H a=H b$ in $G$, show that $a H a^{-1}=H$ for every $a \in G$.
+\item 27. If $a H=b H$ forces $H a=H b$ in $G$, show that $a H a^{-1}=H$ for every $a \in G$. \logseq{review}
 \begin{proof}
 	Note that 
 	\begin{align*}
@@ -173,8 +180,9 @@ Hence
 .\] 
 Which implies $m | s$.
 \end{proof}
+\newpage
 
-	\item 37. In a cyclic group of order $n$, show that for each positive integer $m$ that divides $n$ (including $m=1$ and $m=n$ ) there are $\varphi(m)$ elements of order $m$.
+\item 37. In a cyclic group of order $n$, show that for each positive integer $m$ that divides $n$ (including $m=1$ and $m=n$ ) there are $\varphi(m)$ elements of order $m$. \logseq{review}
 \begin{proof}
 	An element $a^k \in \left\langle a \right\rangle = G$ has order $m$ iff
 	\begin{enumerate}

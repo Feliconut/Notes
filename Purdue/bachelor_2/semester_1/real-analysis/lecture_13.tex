@@ -1,0 +1,88 @@
+\lecture{13}{Wed 28 Sep 2022 11:31}{}
+
+\begin{lemma}
+	$x_n \to a$ in $\mathbb{R}^p$ if and only of $\|x_n - a\| \to 0$ in $\mathbb{R}^p$.
+\end{lemma}
+\begin{lemma}
+	Let $\alpha_n>0, \alpha_n \to 0$. If $\|x_n - a\|\le C \alpha_n$ for all $n \ge K_0$, then $x_n \to  a$.
+\end{lemma}
+\begin{proof}
+	If $\alpha_n > \varepsilon$ for $n \ge K_\varepsilon$, then $\|x_n - a\|< C\varepsilon$ for $n \ge K_\varepsilon$. We let $\varepsilon' =  C \varepsilon $.
+\end{proof}
+
+\begin{example}
+	\begin{enumerate}
+		\item $\frac{1}{n} \to  0$ as $n \to \infty $
+		\item Let $0<|b|<1$. Then $b^n \to 0$ as $n\to 0$.
+			\begin{proof}
+				Represent $|b| = \frac{1}{1+\alpha}, \alpha>0$. By Bernoulli, $(1+\alpha)^n \ge 1+n \alpha$. Thus $|b|^n \le \frac{1}{1+n \alpha}\le \frac{1}{n \alpha }$. 
+
+				But then $|b|^n \le \frac{1}{n \alpha}< \varepsilon$ if $n>\frac{1}{\alpha \varepsilon}$. Since $|b^n - 0| = |b|^n < \varepsilon$ if $n > \frac{1}{\alpha\varepsilon}$, so $b^n \to 0$.
+			\end{proof}
+		\item Let $a>0$. Then $a^{\frac{1}{n}}\to 1$ as $n\to \infty $.
+			\begin{proof}
+				Assume  $a>1$. Let $d_n = a^{\frac{1}{n}}-1> 0$ since $a>1$. 
+				Now $a = (1+d_n)^n\ge 1+ n d_n$.
+				Hence $d_n \le \frac{a-1 }{n}<\varepsilon$ if $n\ge \frac{a-1}{\varepsilon}$.
+				Hence $|d_n|<\varepsilon$ if $n \ge K_\varepsilon$, so $d_n \to  0$.
+
+			Now assume $a \le 1$. We prove later that $x_n \to b$ implies $\frac{1}{x_n}\to \frac{1}{b}$. Then we use the previous argument to see $\frac{1}{a^{\frac{1}{n}}}\to 1$, thus $a^{\frac{1}{n}}\to 1$.
+			\end{proof}
+		\item $n^{\frac{1}{n}}\to 1$. 
+			\begin{proof}
+				Let $c_n = n^{\frac{1}{n}}-1\ge 0$.
+				Now $(1+c_n)^n = n$. We use 2 terms in the Binomial Expansion to bound $n$ from below:
+				\[
+					n \ge 1+n c_n + \frac{n(n-1)}{2}c_n^2
+				.\] 
+				We have used the 
+				\begin{theorem}[Newton's Binomial Theorem]
+					\[
+						(1+\alpha)^n = 1 + n \alpha + \ldots + (n,k) \alpha^k + \ldots + \alpha^n
+					.\] 
+					where \[
+						(n,k) = \frac{n!}{k! (n-k)!}
+					.\] 
+				\end{theorem}
+				Now $c_n^2 \le \frac{2}{n-1} \to 0$. Hence $c_n \to 0$.
+			\end{proof}
+			
+			
+			
+	\end{enumerate}
+\end{example}
+
+\subsection{Subsequences}
+
+\begin{definition}[Subsequence]
+	Let $X$ be a sequence and $r_1 < r_2 <\ldots<r_n$ be a sequence of natural numbers.
+	Then $X' = (x_{r_1}, x_{r_2}, \ldots,x_{r_n},\ldots)$ is called a \textit{subsequence} of $X$.
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item $(x_{2n})$ is a subsequence of $(x_n)$.
+		\item Tails: $(x_n)_{n\ge k}$ is called a \textit{tail} of $X$. It is a subsequence of $(x_n)$.
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}
+	If $X$ is a sequence in $\mathbb{R}^p$, and $\lim X = a$, then any subsequence $X'$ of $X$ also converges to $a$.
+\end{theorem}
+\begin{proof}
+	For any $\varepsilon>0$, there exists $K_\varepsilon$ such that $\|x_n - a\|<\varepsilon$ if $n > K_\varepsilon$. 
+	Let $X' = (x_{r_n})$. Note $r_n \ge n$. Hence \[
+		\|x_{r_n} - a\|<\varepsilon \quad \text{for } n\ge K_\varepsilon
+	.\] 
+\end{proof}
+
+\begin{example}
+	$(-1)^n$ is divergent.
+	\begin{proof}
+		$x_{2n} = (-1)^{2n} = 1 \to  1$. But $x_{2n+1} = (-1)^{2n+1}= -1 \to -1$. If $X \to a$ then $x_{2n} \to a$ and $x_{2n+1}\to a$, so $-1 = 1$, a contradiction.
+	\end{proof}
+\end{example}
+
+\begin{proposition}
+	If $X \not \to a$, then there exists a subsequence of $X$ entirely out of some neighborhod of $a$.
+\end{proposition}

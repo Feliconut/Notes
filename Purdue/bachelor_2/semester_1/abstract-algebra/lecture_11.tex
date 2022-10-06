@@ -1,0 +1,70 @@
+\lecture{11}{Mon 26 Sep 2022 10:30}{Cycle Decomposition}
+
+\subsection{Cycle Decomposition}
+\begin{theorem}
+	(3.2.2)
+	Every permutation in $S_n$ can be written as a product of disjoint cycles.
+\end{theorem}
+\begin{proof}
+	(exercise) consider the orbits of items.
+\end{proof}
+
+Implicitly we require a  \textit{cycle decomposition} to be disjoint cycles.
+
+\begin{theorem}
+	(3.2.4)
+	Let $\sigma \in S_n$ have cycle decomposition $\tau_1\tau_2\ldots\tau_k$ where $\tau_j$ is an $m_j$-cycle for each $1\le j\le k$. Then $o(\sigma) = [m_1,\ldots,m_k]$ (the LCM).
+\end{theorem}
+\begin{proof}
+	Disjoint cycles commute, and hence if $\sigma^M = e$, then $\tau_1^M \tau_2^M \ldots\tau_k^M = e$. Since these cycles commute and are disjoint, this can happen if and only if $\tau_j^M = e$ for each $j$ (Note that each $\tau_j^M$ are still disjoint $m_j$-cycles).
+	Since $o(\tau_j) = m_j$, this can happen iff $m_j | M$ for every $j$. This is to say that $[m_1,\ldots,m_k] \mid M$.
+\end{proof}
+
+\begin{theorem}
+	(3.2.5)
+	Every permutation in $S_n$ is the product of transpositions.
+\end{theorem}
+\begin{proof}
+	Suffice to prove this for a $k$-cycle, since each $\sigma \in S_n$ has a cycle decomposition. 
+	Consider $\sigma = (i_1,i_2,\ldots,i_k) \in S_n$. Observe that \[
+		\sigma = (i_k, i_1)(i_{k-1},i_1)\ldots(i_2,i_1)
+	\]
+	is a product of transpositions.
+\end{proof}
+
+\subsection{Odd and Even permutations}
+
+\begin{theorem}
+	(3.3.1)
+	A permutation $\sigma \in S_n$ is either odd or even, in the sense that $\sigma$ is either a product of an odd number of transpositions (and never an even number) or else is an even number of transpositions (and never an odd number).
+\end{theorem}
+\begin{proof}
+	Consider the polynomial in $n$ variables $x_1, \ldots, x_n$, $f(x) = \prod_{1\le i<j\le n} (x_i - x_j) = \operatorname{det}(x_i^{j-1})_{1\le i,j\le n}  $. (This is the \logseq{Vandermonde determinant}). 
+
+	We can consider the action of $\sigma \in S_n$ on $f(x)$ by putting $\sigma(f(x)) = \prod_{1\le i<j\le n} (x_{\sigma(i)}-x_{\sigma(j)} = \operatorname{det} \left( x_{\sigma(i)}^{j-1} \right) _{1\le i,j\le n}$.
+
+	Thus $\sigma$ permutes the columns of the determinant.
+
+	Suppose $\sigma$ is a product of $k$ transpositions, say $\sigma = \tau_1\ldots\tau_k$, where each $\tau_j$ is a transposition.
+	Then \[
+		\sigma(f(x)) = \tau_1\ldots\tau_k(f(x))
+	.\] 
+	Each $\tau$ switches two columns of determinant. Then
+\[
+		\sigma(f(x)) = (-1)^kf(x)
+	.\]
+	If $\sigma = \tau_1\ldots\tau_k$ and $\sigma = \tau_1'\ldots\tau_l'$, are both decompositions of $\sigma$ into transpositions, then \[
+		\sigma(f(x)) = (-1)^k f(x) = (-1)^l f(x)
+	.\] 
+	So $(-1)^k = (-1)^l$, hence $l \equiv k \pmod 2$, i.e. $l$ and $k$ has same parity.
+\end{proof}
+
+\begin{definition}[Alternating Group]
+	The subset $A_n$ of all even permutations of $S_n$ is called the \textit{alternating group} of degree $n$.
+\end{definition}
+Implicit claim: $A_n$ forms a subgroup of $S_n$.
+\begin{proof}
+	Since $e$ is a product of  $0$ transpositions, $e \in A_n$. Next, $\sigma, \tau \in A_n$, then $\sigma$ and $\tau$ are each a product of an even number of transpositions, say $\tau = \omega_1\ldots\omega_k$ as a product of trnspositions, then $\tau^{-1}  = \omega_k^{-1} \ldots\omega_1^{-1} = \omega_k \ldots\omega_1 \in A_n$. Hence $\sigma\tau^{-1}$ is a product of even number of transpositions, since this is true for both $\sigma$ and $\tau^{-1}$, so $\sigma\tau^{-1} \in A_n$. Conclusion follows from subgroup criterion.
+\end{proof}
+
+

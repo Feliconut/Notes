@@ -1,0 +1,109 @@
+\lecture{12}{Mon 26 Sep 2022 11:31}{Sequences in $\mathbb{R}^p$}
+
+\begin{definition}[Limit of Sequence]
+	We say that $X = (x_n)$ converges to $a \in \mathbb{R}^p$ if
+	\begin{itemize}
+	\item (topological)
+		For open set $V$ containing $a$, there is $K_V \in \mathbb{N}$ such that $x_n \in V$ for $n \ge K_V$.
+
+		In some cases, one only asks $V$ to be a neighborhood of $a$, which means $a$ is an interior point of $V$.
+	\item (metric)
+		We say that $X = (x_n)$ converges to $a \in \mathbb{R}^p$ if for every $\varepsilon>0$, there is $K_\varepsilon \in \mathbb{N}$ such that $\|x_n - a\|<\varepsilon$ for $n \ge K_\varepsilon$.
+	\end{itemize}
+\end{definition}
+
+\begin{proposition}
+	The two definitions above are equivalent.
+\end{proposition}
+\begin{proof}
+	(I implies II): 
+
+	Simply take $V = B_\varepsilon(a)$ which is open. Then apply definition I. Take $K_\varepsilon = K_{B_\varepsilon(a)}$.
+
+	(II implies I):
+	
+	Let $a \in V$, $V$ open. Then there exists $\varepsilon>0$ such that $B_\varepsilon(a) \subset V$.
+	Then by definition II, there is  $K_\varepsilon$ such that $x_n \in B_\varepsilon(a) \subset V$ for $n\ge K_\varepsilon$. Take $K_V = K_\varepsilon$.
+\end{proof}
+\begin{remark}
+	The topological definition is very general, not dependent on metric. \textbf{Convergence is a topological notion}. 
+
+	However it is simpler to work with metric definition in Euclidean space, or metric spaces.
+\end{remark}
+
+\begin{notation}
+	$X = (x_n)$ converges to $a$, write it as \[
+		x_n \to a \quad \text{as}\quad n\to \infty 
+	.\] 
+	or \[
+		\lim_{n \to \infty} x_n = a
+	.\] 
+	or \[
+		\lim X = a
+	.\] 
+\end{notation}
+
+\begin{theorem}[Uniqueness of Limit]
+	(Topological proof)
+	If $X = (x_n)$ is a sequence in $\mathbb{R}^p$, and $\lim_{n \to \infty} x_n = a$, and $\lim_{n \to \infty}  = b$, then $a = b$.
+
+	In other words, limit is unique if limit exists.
+\end{theorem}
+\begin{proof}
+	Let $x_n \to $, and $x_n \to b$ where $a \neq b$. Use Hausdorff Property, there are $U \ni a, V \ni b$ open, such that $U \cap V = \emptyset $.
+
+	Since $x_n \to a$, there exists $K_U $ such that $x_n \in U, n \ge K_U$. Similarly, exists $K'_V $ such that $x_n \in V, n \ge K'_V$. Hencce for $n \ge \max(K_U, K'_V)$, $x_n \in U \cap V = \emptyset $, a contradiction.
+\end{proof}
+
+
+\begin{lemma}[Hausdorff Property]
+	If $a, b \in \mathbb{R}^p$ are distinct, then there are open sets $U \ni a, V \ni b$ such that $U \cap V = \emptyset $.
+\end{lemma}
+\begin{proof}
+	$a \neq b$ implies $\|a-b\|>0$.
+	Let $\varepsilon = \|a-b\|/2$. Take $U = B_\varepsilon(a)$ and $V = B_\varepsilon(b)$.
+\end{proof}
+
+
+
+\begin{example}
+	\begin{enumerate}
+		\item Take $x_n = \frac{1}{n}, n = 1,2,\ldots$
+			Then $x_n \to  0$. 
+			\begin{proof}
+			For any $\varepsilon>0$, observe that $0<\frac{1}{n}<\varepsilon$ if $n > \frac{1}{\varepsilon}$. Hence for all $n > \frac{1}{\varepsilon}, \frac{1}{n} \in (-\varepsilon,\varepsilon)$.			\end{proof}
+			
+		\item $x_n = (-1)^n$. Then $x_n$ does not converge, which we call \textit{diverge}.
+		\item $x_n = n$. divergent (see next proposition).
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}(Convergent seqences are bounded)
+	If $X = (x_n)$ is convergent, then $X $ is bounded, in the sense that the set $\{x_n : n \in \mathbb{N}\} $ is bounded.
+\end{theorem}
+\begin{proof}
+	Let $x_n \to a$ and take $\varepsilon = 1$. Then $x_n \in B_1(a)$ for $n \ge K_1$. Take $M = 1 + \max_{n\le K_1} \|x_n\|$. Then $x_n \in B_M(0)$ for all $n \in \mathbb{N}$.
+\end{proof}
+
+\begin{theorem}
+	Assume $x_n = \left(x_n^{(1)}, \ldots,x_n^{(p)}\right) \in \mathbb{R}^p$. Then $x_n \to a = \left(a^{(1)}, a^{(2)}, \ldots, a^{(p)}\right)$ if and only if for all $1\le m\le p$, $x_n^{(m)} \to a^{(m)}$ in $\mathbb{R}$.
+\end{theorem}
+\begin{proof}
+	For any $\varepsilon$, there exists $K_\varepsilon$ such that $\|x_n - a\|< \varepsilon$ for $n \ge K_\varepsilon$. If $u = (u_1, u_2,\ldots, u_p)$, then $\|u\| = \sqrt{u_1^2 + \ldots + u_p^2} \ge \sqrt{u_i^2}  = |u_i|$ for any $i = 1,\ldots,p$.
+	
+	Thus $|x_n^{(i)} - a^{(i)}| < \varepsilon$ for $n \ge K_\varepsilon$, so $x_n^{(i)}\to a^{(i)}$.
+
+	The other direction: Choose $K_\varepsilon^{(i)}$ such that for all $n\ge K_\varepsilon^{(i)}$, $|x_n^{(i)} - a^{(i)}< \varepsilon$. Now
+
+	\begin{align*}
+		\|x_n - a\|
+		&= \sqrt{|x_n^{(1)}-a^{(1)}|^2 + \ldots + |x_n^{(p)}- a^{(p)|^2}}  \\
+		&< \sqrt{\varepsilon^2 + \ldots + \varepsilon^2}\\
+		&= \sqrt{p}  \varepsilon \\
+	.\end{align*}
+	If $n \ge K_\varepsilon := \max \{K_\varepsilon^{(1)},\ldots,K_\varepsilon^{(p)}\} $.
+	Hence $x_n \to a$.
+\end{proof}
+
+
+

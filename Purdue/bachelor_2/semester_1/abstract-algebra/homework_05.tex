@@ -37,7 +37,10 @@ Herstein, section 2.6, page 84: Questions 16,18
 	Suppose $p \mid | G / P |$.  $G/P$ is abelian and finite (since $G$ is abelian), so there exists an element of order $p$ by Cauchy's Theorem, a contradiction to the last statement.
 	Hence one must have $p^n \mid |P|$. 
 
-	Now suppose $m | |P|$. We have $|P| = p^n m = |G|$, so $P = G$. Then there exists an element $a \in G$ of order $m$ by Cauchy's Theorem. Also, there exists $k$ such that $a^{p^k} = e$. Hence $m | p^k$. But it is assumed that $p \nmid m$, so we cannot have  $m | p^k$, a contradiction. Therefore $m \nmid |P|$. Combining all we have,  we conclude $|P| = p^n$.
+	Now suppose $m | |P|$. We have $|P| = p^n m = |G|$, so $P = G$.
+	Take some prime divisor $q>0$ such that $q | m$. Thus $q \mid |P|$.
+	Then there exists an element $a \in G$ of order $q$ by Cauchy's Theorem. 
+	Also, there exists $k$ such that $a^{p^k} = e$. Hence $q | p^k$. But it is assumed that $p \nmid m$, so we cannot have  $q | p^k$ (otherwise $q = p$, and $q | m$, so $p | m$ ), a contradiction. Therefore $m \nmid |P|$. Combining all we have,  we conclude $|P| = p^n$.
 \end{proof}
 
 \item 18. Let $G$ be an abelian group (possibly infinite) and let the set $T=$ $\left\{a \in G \mid a^m=e, m>1\right.$ depending on $\left.a\right\}$. Prove that:
@@ -46,7 +49,7 @@ Herstein, section 2.6, page 84: Questions 16,18
 	Associativity is inherited from $G$. We first verify closure of $T$. Take $a, b \in T$. Then there exists positive integers $m, n$ such that $a^m = b^n = e$. Now \[
 		(ab)^{mn} = a^{mn}b^{mn} = \left( a^m \right) ^n \left( b^n \right) ^m = e^ne^m = e
 	.\] 
-	Hence $ab \in T$. 
+	Hence $ab \in T$, since $mn>1$. 
 
 	Clearly the identity $e \in T$ since $e^2 = e$. For inverse, note that
 	\[
@@ -73,7 +76,7 @@ Herstein, section 2.7, page 87: Questions 4,6,7
 	\item 4. If $G_1, G_2$ are two groups and $G=G_1 \times G_2=\left\{(a, b) \mid a \in G_1, b \in G_2\right\}$, where we define $(a, b)(c, d)=(a c, b d)$, show that:
 (a) $N=\left\{\left(a, e_2\right) \mid a \in G_1\right\}$, where $e_2$ is the unit element of $G_2$, is a normal subgroup of $G$
 \begin{proof}
-	{\color{blue}question: do we need to check that $G$ is a group?}
+	I use the established result that direct product of two groups is a group.
 
 	Define the mapping 
 	\begin{align*}
@@ -141,23 +144,227 @@ Herstein, section 2.7, page 87: Questions 4,6,7
 \end{proof}
 \newpage
 \item *6. If $G$ is a group and $N \triangleleft G$, show that if $a \in G$ has finite order $o(a)$, then $N a$ in $G / N$ has finite order $m$, where $m \mid o(a)$. (Prove this by using the homomorphism of $G$ onto $G / N$.)
-7. If $\varphi$ is a homomorphism of $G$ onto $G^{\prime}$ and $N \triangleleft G$, show that $\varphi(N) \triangleleft G^{\prime}$.
+\begin{proof}
+	Define
+	\begin{align*}
+		\varphi: G &\longrightarrow G / N \\
+		a &\longmapsto \varphi(a) = N a
+	.\end{align*}
+	We have verified that $\varphi$ is a surjective homomorphism. Since $o(a) = n$ is finite,
+
+	\[
+		(Na)^n = \varphi(a)^n = \varphi(a^n) = \varphi(e) = N
+	.\] 
+	Hence $o(Na)$ is finite and $o(Na) | n$. 
+
+	The last statement uses homework 3 problem 31, saying that for any group $G $ and $a \in G$, if $a^s = e$ then $o(a) | s$.
+\end{proof}
+
+\item 7. If $\varphi$ is a homomorphism of $G$ onto $G^{\prime}$ and $N \triangleleft G$, show that $\varphi(N) \triangleleft G^{\prime}$.
+\begin{proof}
+	We have already verified in previous lectures that homomorphisms send subgroup to subgroup, i.e. $\varphi(N) \le  G'$.
+	
+	Now take arbitarary $\varphi(n) \in \varphi(N)$ and $x \in G'$. We want to prove $\varphi(n)^{-1} x \varphi(n) \in G'$.
+
+	Since $\varphi$ is surjective, there exists $g \in G$ such that $\varphi(g) = x$. Now
+	\begin{align*}
+		\varphi(n)^{-1} x \varphi(n) 
+		&= \varphi(n)^{-1} \varphi(g) \varphi(n) \\
+		&= \varphi(n^{-1} ) \varphi(g) \varphi(n) \\
+		&= \varphi(n^{-1} gn)\\
+		&\in \varphi(n^{-1} Gn)\\
+		&= \varphi(G)\\
+		&= G'
+	.\end{align*}
+\end{proof}
+
 \end{enumerate}
 \newpage
 Herstein, section 3.2, page 117 , Questions 3,9,11,14,17,20,23
 \begin{enumerate}[resume]
 	\item 3. Express as the product of disjoint cycles and find the order.
 (a) $\left(\begin{array}{lllll}1 & 2 & 3 & 5 & 7\end{array}\right)\left(\begin{array}{llll}2 & 4 & 7 & 6\end{array}\right)$.
+\begin{proof}[Solution]
+	$(1,2,4)(3,5,7,6)$. The order is  $12$.
+\end{proof}
+
 (b) $\left(\begin{array}{lll}1 & 2\end{array}\right)\left(\begin{array}{lll}1 & 3\end{array}\right)(1 \quad 4)$.
+\begin{proof}[Solution]
+	$(1,4,3,2)$. The order is $4$.
+\end{proof}
+
 (c) $\left(\begin{array}{lllllllll}1 & 2 & 3 & 4 & 5\end{array}\right)\left(\begin{array}{lllllll}1 & 2 & 3 & 4 & 6\end{array}\right)\left(\begin{array}{lllll}1 & 2 & 3 & 4 & 7\end{array}\right)$.
+\begin{proof}[Solution]
+	$(1,4,7,3,6,2,5)$. It has order $7$.
+\end{proof}
+
 (d) $\left(\begin{array}{lll}1 & 2 & 3\end{array}\right)\left(\begin{array}{lll}1 & 3 & 2\end{array}\right)$.
+\begin{proof}[Solution]
+	$(1)(2)(3)$. It has order $1$.
+\end{proof}
+
 (e) $\left(\begin{array}{lllll}1 & 2 & 3\end{array}\right)\left(\begin{array}{llll}3 & 5 & 7 & 9\end{array}\right)\left(\begin{array}{lll}1 & 2 & 3\end{array}\right)^{-1}$.
+\begin{proof}[Solution]
+	$(1,5,7,9)$. It has order $4$.
+\end{proof}
+
 (f) $\left(\begin{array}{lllll}1 & 2 & 3 & 4 & 5\end{array}\right)^3$.
+\begin{proof}[Solution]
+	$(1,4,2,5,3)$. It has order $5$.
+\end{proof}
+
 \item 9. Given the two transpositions $\left(\begin{array}{ll}1 & 2\end{array}\right)$ and $\left(\begin{array}{ll}1 & 3\end{array}\right)$, find a permutation $\sigma$ such that $\sigma\left(\begin{array}{ll}1 & 2\end{array}\right) \sigma^{-1}=\left(\begin{array}{ll}1 & 3\end{array}\right)$.
+\begin{proof}
+	Let $\sigma = (2,3)$. Now
+	$\sigma (1,2) \sigma^{-1} = \sigma(1,2)\sigma = \sigma((1,2)\sigma) = \sigma(1,2,3) = (1,3)$.
+\end{proof}
 \item 11. Prove that there is a permutation $\sigma$ such that $\sigma(1 \quad 2 \quad 3) \sigma^{-1}=$ $\left(\begin{array}{lll}4 & 5 & 6\end{array}\right)$
+\begin{proof}
+	Let $\sigma = (1,4)(2,5)(3,6)$. Now
+	\begin{align*}
+		\sigma(1,2,3)\sigma^{-1} 
+		&= \sigma(1,2,3)\sigma \\
+		&= \sigma((1,2,3)(1,4)(2,5)(3,6)) \\
+		&= \sigma(1,4,2,5,3,6) \\
+		&= (1,4)(2,5)(3,6)(1,4,2,5,3,6)\\
+		&= (4,5,6)
+	.\end{align*}
+\end{proof}
+
+
 \item 14. Prove that for any permutation $\sigma, \sigma \tau \sigma^{-1}$ is a transposition if $\tau$ is a transposition.
-\item 14. Prove that for any permutation $\sigma, \sigma \tau \sigma^{-1}$ is a transposition if $\tau$ is a transposition.
+\begin{proof}
+
+	Let $\sigma_1$, \ldots, $\sigma_k$ be the cycle decomposition of $\sigma$. Then $\sigma_1, \ldots, \sigma_k$ are disjoint. Let $\tau = (x_1,x_2)$. We have two cases:
+
+	Case 1: $x_1,x_2$ are in $\sigma_1$. It is done by the following lemma:
+\begin{lemma}
+	If $\sigma$ is a permutation, $\tau = (x_1,x_2)$ is a transposition, and  $\sigma$ contains $x_1$ and $x_2$, then $\sigma \tau \sigma^{-1} $ is a transposition.
+	\begin{proof}
+	Write $z_1 = \sigma(x_1)$ and $z_2 = \sigma(x_2)$. First assume that $z_1\neq x_2$ and $z_2 \neq x_1$. Now 
+	\[
+		\sigma\tau\sigma^{-1}(z_1) = \sigma\tau(x_1) = \sigma(x_2) = z_2
+	\] 
+	, and \[
+		\sigma\tau\sigma^{-1} (z_2) = \sigma\tau(x_2) = \sigma(x_1) = z_1
+	.\] 
+	Also, for any other element $x$ distinct from $z_1$ and $z_2$, we have $\sigma^{-1} (x) \not\in \{x_1,x_2\} $, so $\sigma^{-1} (x)$ is not affected by $\tau$, whence $\sigma\tau\sigma^{-1} (x) = \sigma\sigma^{-1} (x) = x$. Therefore, \[
+		\sigma\tau\sigma^{-1} = (z_1,z_2)
+	.\] 
+
+	Now assume, without loss of generality, that $\sigma(x_1) = x_2$ and $\sigma(x_2) = z_2$. Now
+	\[
+		\sigma\tau\sigma^{-1} (z_2) = \sigma\tau(x_2) = \sigma(x_1) = x_2
+	\] 
+	,and \[
+		\sigma\tau\sigma^{-1} (x_2) = \sigma\tau(x_1) = \sigma(x_2) = z_2
+	.\] 
+	From a similar argument, all other elements remain unchanged. Thus \[
+		\sigma\tau\sigma^{-1}  = (x_2,z_2)
+	.\] 
+\end{proof}
+
+\end{lemma}
+Now consider cycle decompositions:
+\begin{align*}
+		&\sigma \tau \sigma^{-1}\\
+		&= (\sigma_1 \ldots\sigma_k) \tau \left( \sigma_1\ldots\sigma_k \right) ^{-1} \\
+		&= \sigma_1\tau\sigma_1^{-1}	
+	.\end{align*}
+	By the previous lemma, $\sigma\tau\sigma^{-1} $ is a transposition.
+
+	Case 2: $x_1$ in $\sigma_1$ and $x_2$ in $\sigma_2$.
+	First we prove a lemma.
+	\begin{lemma}
+	If $\sigma$ is a permutation, $\tau = (x_1,x_2)$ is a transposition, and  $\sigma$ contains $x_1$ but not $x_2$, then $\sigma \tau \sigma^{-1} $ is a transposition.
+	\begin{proof}
+	Write $\sigma = (x_1,y_1,\ldots,y_p)$ where $y_1,\ldots,y_p$ are elements distinct from $x_1$ and $x_2$.
+	\begin{align*}
+		\sigma\tau\sigma^{-1} 
+		&=\sigma(x_1,x_2)\sigma^{-1}\\
+		&=(x_1,y_1,y_2,\ldots,y_p)(x_1,x_2)\sigma^{-1}\\
+		&=(x_1,x_2,y_1,y_2,\ldots,y_p)\sigma^{-1}\\
+		&=(x_1,x_2,y_1,y_2,\ldots,y_p)(y_p, \ldots,y_2,y_1,x_1)\\
+		&=(x_2,y_1)
+	.\end{align*}
+	Thus $\sigma\tau\sigma^{-1}$ is a transposition.
+\end{proof}
+
+\end{lemma}
+	\begin{align*}
+		&\sigma \tau \sigma^{-1}\\
+		&= (\sigma_1 \ldots\sigma_k) \tau \left( \sigma_1\ldots\sigma_k \right) ^{-1} \\
+		&= (\sigma_1\sigma_2)\tau(\sigma_1^{-1}\sigma_2^{-1}) (\sigma_3\ldots\sigma_k)\left( \sigma_3\ldots\sigma_k \right) ^{-1} \\
+		&= (\sigma_1\sigma_2)\tau(\sigma_1^{-1}\sigma_2^{-1})\\
+		&= (\sigma_1\sigma_2)\tau(\sigma_1^{-1}\sigma_2^{-1})\\
+		&= \sigma_2(\sigma_1\tau\sigma_1^{-1})\sigma_2^{-1}\\
+		&= \sigma_2(\sigma_1\tau\sigma_1^{-1})\sigma_2^{-1}
+	.\end{align*}
+	Apply the lemma twice and we see it is a transposition.
+\end{proof}
+
 \item 17. Let $\left(\begin{array}{ll}1 & 2\end{array}\right)$ and $\left(\begin{array}{lllll}1 & 2 & 3 & \cdots & n\end{array}\right)$ be in $S_n$. Show that any subgroup of $S_n$ that contains both of these must be all of $S_n$ (so these two permutations generate $\left.S_n\right)$
+\begin{proof}
+	We show that all transpositions in $S_n$ can be generated by $(1,2)$ and $(1,2,3,\ldots,n)$. Write $\sigma_0 = (1,2,3,\ldots,n)$. Then $S_n$ is generated by all the transpositions.
+
+	First, we show that  $\sigma_0 (a,b) \sigma_0^{-1} = (a+1,b+1)$, where the $+$ operation is addition modulo $n$. Also, we use $1$ to denote the element $0$ in $\mathbb{Z}_n$, $2$ to denote $1$ in $\mathbb{Z}_n$, etc.
+
+	Take any $x$. If  $\sigma^{-1} (x) = x-1 \not\in \{a,b\} $, then $\sigma_0(a,b)\sigma_0^{-1}(x) = \sigma_0\sigma_0^{-1}(x) = x$. 
+	If $x = a+1$, then $\sigma_0(a,b)\sigma^{-1} (x) =\sigma_{0} (a,b)(a)=\sigma(b) = b+1$. Similarly,  $\sigma_0(a,b)\sigma^{-1}(b+1) = a+1$. Hence
+	\[
+		\sigma_0(a,b) \sigma_0^{-1} = (a+1,b+1)
+	.\] 
+
+	Now by repetitively using the last result, we obtain $n$ transpositions: $(1,2), (2,3),\ldots,(n-1, n), (n, 1)$.
+
+	Next we build up the remaining transpositions from what we have. We verify that 
+	\[
+		(b,c)(a,b)(b,c) = (a,c)
+	.\]
+	Now suppose we want a transposition $(x,y)$. We first build the transposition $(x,x+2)$ from $(x,x+1)$ and $(x+1, x+2)$. Then we combine it with  $(x+2, x+3)$ to obtian $(x, x+3)$. Repeat in this fashion until we obtain $(x, y)$.
+
+	With all transpositions in hand, it will be easy to contruct all the permutations.
+	We have verified in class that for any $\sigma = (a_1,a_2,\ldots,a_k)$, \[
+		\sigma = (a_1,a_k)\ldots(a_1,a_3)(a_1,a_2)
+	.\] 
+\end{proof}
+
 \item 20. If $\tau_1, \tau_2$ are distinct transpositions, show that $\tau_1 \tau_2$ is of order 2 or 3 .
+\begin{proof}
+	If $\tau_1$ and $\tau_2$ are disjoint, then \[
+		o(\tau_1\tau_2) = \text{LCM}(2, 2) = 2
+	.\] 
+	If $\tau_1$ and $\tau_2$ are coincident, then  \[
+		o(\tau_1\tau_2) = o(\tau_1\tau_1) = o(e) = 1
+	.\] 
+	If $\tau_1$ and $\tau_2$ share 1 element, then we write $\tau_1 = (a,b)$ and $\tau_2 = (b,c)$ , and 
+	\[
+		o(\tau_1\tau_2) = o((a,b)(b,c)) = o((b,c,a)) = 3
+	.\] 
+	Thus if $\tau_1$ and $\tau_2$ are not coincident, i.e. distinct, their product is of order 2 or 3.
+\end{proof}
+
 \item 23. Let $\sigma, \tau$ be two permutations such that they both have decompositions into disjoint cycles of cycles of lengths $m_1, m_2, \ldots, m_k$. (We say that they have similar decompositions into disjoint cycles.) Prove that for some permutation $\rho, \tau=\rho \sigma \rho^{-1}$.
+\begin{proof}
+	We assume that the undelying set is $S$. Without loss of generality, assume $S $ is finite,  and all the $1$-cycles are also included in the decomposition. This implies that $m_1+m_2+\ldots+m_k = |S|$.
+
+	We write $\sigma = \sigma_1\sigma_2\ldots\sigma_k$, where $\sigma_i$ is the $i$-th cycle in the cycle decomposition with length $m_i$. Similarly write $\tau = \tau_1\tau_2\ldots\tau_k$.
+
+	We write $\sigma_i = \left( x_1^{i} , x_2^i, \ldots, x_{m_i}^i \right) $. Similarly, we write $\tau_i = \left( y_1^i, \ldots, y_{m_i}^i \right) $.
+
+	Now since the cycle decomposition is disjoint, the set $X = \{x_j^i: 1\le i\le k, 1\le j\le m_i\} $ has exactly $|S|$ elements, so is the set $Y = \{y_j^i: 1\le i\le k, 1\le j\le m_i\} $. We define the map
+	\begin{align*}
+		\rho: S &\longrightarrow S \\
+		x_j^i &\longmapsto \varphi(x_j^i) = y_j^i
+	.\end{align*}
+
+	We check the map is well-defined. First, as we have verified, each element in $S$ has a unique representation $x_j^i$. Also, each element in $S$ has a unique representation $y_j^i$, where $\rho(x_j^i) = y_j^i$. Thus $\rho$ is surjective. Injectivity is also easy, since $x_j^i \neq x_{j'}^{i'} \iff (j,i)\neq (j',i') \iff y_j^i \neq y_{j'}^{i'}$. Thus $\rho$ defines a permutation on $S$. 
+
+	Now
+	\[
+		\tau(y_j^i) = y_{j+1}^i = \rho(x_{j+1}^i) = \rho(\sigma(x_j^i)) = \rho\sigma\rho^{-1} (y_j^i)
+	.\] 
+	Hence $\tau = \rho\sigma\rho^{-1} $.
+\end{proof}
+
 \end{enumerate}

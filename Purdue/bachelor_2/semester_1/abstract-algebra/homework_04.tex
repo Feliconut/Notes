@@ -39,6 +39,18 @@ Herstein, section 2.5, page 74 : Questions 12,15,20,26,34,40,44
 	.\end{align*}
 Thus for $\forall  n \in N$ and  $\forall x \in G'$, we have$x^{-1} \varphi(n)x \in \varphi(N)$. Therefore $x^{-1} \varphi(N) x \subset \varphi(N)$, as desired.
 \end{proof}
+\begin{correction}
+	Note: Normal subgroup does not commute with the group elements of $G$ element-wise. It does commute as a whole group. In particular $Ng = gN$, but it is not true in general that  $ng = gn$  for all $n$.
+
+	\begin{align*}
+		x^{-1} \varphi(n) x &= \varphi(g)^{-1} \varphi(n) \varphi(g) \\
+		&= \varphi(g^{-1} )\varphi(n)\varphi(g) \\
+		&= \varphi(g^{-1} n)\varphi(g) \\
+		&= \varphi(g^{-1} ng) \\
+		&\in  \varphi(g^{-1} Ng) \\
+		&= \varphi(N)
+	.\end{align*}
+\end{correction}
 
 	\item 20. If $M  \triangleleft G, N \triangleleft  G$, and $M \cap N=(e)$, show that for $m \in M, n \in N, m n=n m$.
 \begin{proof}
@@ -161,9 +173,9 @@ Hence $\varphi^{-1} \sigma_a\varphi = \sigma_{\varphi^{-1} (a)} \in I(G)$. There
 	&\iff \varphi(g^{-1} ag) = \iota \\
 	&\iff \forall b \in G, T_{g^{-1} ag}(Hb) = Hb \\
 	&\iff \forall b \in G, Hb(g^{-1} a^{-1}g) = Hb \\
-	&= \forall b \in G, Hbg^{-1}a^{-1}   = Hbg^{-1} \\
-	&= \forall b \in G,  T_{a}(Hbg^{-1} )= Hbg^{-1}  \\
-	&= \forall b \in G,  \iota(Hbg^{-1} )= Hbg^{-1} 
+	&\iff  \forall b \in G, Hbg^{-1}a^{-1}   = Hbg^{-1} \\
+	&\iff  \forall b \in G,  T_{a}(Hbg^{-1} )= Hbg^{-1}  \\
+	&\iff  \forall b \in G,  \iota(Hbg^{-1} )= Hbg^{-1} 
 	.\end{align*}
 	The last statement is true because  $\iota$ is the identity in $S$.
 
@@ -194,7 +206,7 @@ Hence $\varphi^{-1} \sigma_a\varphi = \sigma_{\varphi^{-1} (a)} \in I(G)$. There
 \end{proof}
 
 \newpage
-	\item 44. Prove that a group of order $p^2, p$ a prime, has a normal subgroup of order $p$.
+\item 44. Prove that a group of order $p^2, p$ a prime, has a normal subgroup of order $p$. \logseq{review}
 \begin{proof}
 	Let the group be $G$. We claim that there exists a subgroup of $G$ with order $p$. Take $a \in G$ where $a \neq e$. By Lagrange theorem, we have $o(a) | |G|$. Since $|G| = p^2$ where $p $ prime, we have $o(a) = 1$, $o(a) = p$, or $o(a) = p^2$. Since $a \neq e$, $o(a)\neq 1$. 
 

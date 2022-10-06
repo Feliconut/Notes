@@ -1,0 +1,98 @@
+\lecture{12}{Thu 29 Sep 2022 12:03}{}
+
+Review: assume $f$ analytic in $\Omega$. Then
+\begin{enumerate}
+	\item For every region $\mathcal{D}$, $\overline{\mathcal{D}} \subset \Omega$, $\partial \mathcal{D}$ is piecewise smooth, then
+		\[
+			\int _{\partial \mathcal{D}} f(z) dz = 0
+		.\] 
+	\item If two piecewise smooth curves can be deformed to each other, then the path integral along them are equal.
+	\item If a smooth curve can be deformed to a point, then path integral is zero.
+	\item If $ \Omega$ is simply connected, then any closed curve has integral zero.
+\end{enumerate}
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+	Every polynomial of degree $\ge 1$ has a root.
+\end{theorem}
+\begin{proof}
+	Let $f(z) = a_d z^d + \ldots + a_0$, suppose $f(z) \neq 0$, $z \in \mathbb{C}$. Let $g(z) = \frac{1}{f(z)}$. Then  $g$ is entire. 
+
+	Now  $\lim_{z \to \infty} g(z) = 0$. Consider $|g(z)|$. Choose some big disk centered at zero. Then $|g(z)|$ reaches maximum $c \in \mathbb{R}$ somewhere in the disk. However we can choose the disk such that $|g(z)| < c $ on the boundary. Now $|g(z)|$ has to be constantly zero.
+\end{proof}
+
+\begin{remark}
+	This is fundamental because it demands that every matrix has an eigenvalue.
+\end{remark}
+
+
+\begin{theorem}[Cauchy's Inequalities]
+	Let $f$ be analytic inside and on a circle $C_R$ of radius $R$ centered about $z_0$. If $|f(z)| \leq M$ for all $z$ on $C_R$, then the derivatives of $f$ at $z_0$ satisfy
+\[
+\left|f^{(n)}\left(z_0\right)\right| \leq \frac{n ! M}{R^n} \quad(n=1,2,3, \ldots)
+\]
+\end{theorem}
+\begin{proof}
+	Use cauchy's formula, and main estimate of integral.
+\end{proof}
+
+\begin{theorem}[Liouville's Theorem]
+	Let $f$ be entire. If $f$ is bounded, then it is constant.
+\end{theorem}
+\begin{proof}
+	Take $a \in \mathbb{C}$, apply Cauchy inequality with $n=1$. We obtain \[
+		|f'(a)| \le C R^{-1}
+	.\] 
+	$C$ is constant since $f$ is bounded. But $R$ is arbitrary. So $|f'(a)| = 0$. But  $a$ is arbitrary, so $f$ is constant.
+\end{proof}
+
+\begin{proof}(Fundamental Theorem of Algebra)
+	Suppose $f$ is polynomial, suppose $f(z)\neq 0$. Then $g(z) = \frac{1}{f(z)}$ is entire. Since $f (z) \to \infty $, $g(z) \to 0$, so $g$ is bounded, so $g$ is contant by Liouville's Theorem, so $f$ is constant.
+\end{proof}
+
+\subsection{Taylor Series}
+
+In real calculus, if $f$ is infinitely differentiable, it is not true that it can be written as a convergent taylor series. $f^{(n)}(a)$ may have all derivatives, but Taylor series diverge, or conerge to another function.
+\begin{example}
+	Define $f(x) = \begin{cases}
+		0 & x\le 0\\
+		e^{- \frac{1}{x}} & x>0
+	\end{cases}$
+	. This function is continuous and infinitely differentiable. But all derivatives at $0$ is $0$, so the taylor series is $0$.
+\end{example}
+
+\begin{definition}[Series]
+	Let $S_n = a_0 + \ldots+ a_n$ be the n-th partial sum. If $\lim_{n \to \infty} S_n = s$ exists, call $s$ the sum of the series.
+
+	The series is called \textit{convergent} if the limit exists.
+\end{definition}
+
+\begin{example}(Most Fundamental Example)
+	Consider the series $1 + q + q^2 + \ldots = \sum_{n=1}^{\infty} q^n$. Multiply by $q$ to each term, we see that $1 + qS_n = S_n + q^{n+1}$. We see that $s_n = \frac{1 - q^{n+1}}{1 - q}$.
+
+	If $|q| < 1$ then the limit is $\frac{1}{1-q}$. If $|q| \ge 1$ then the limit does not exist.
+\end{example}
+
+\begin{definition}[Absolutely Convergent]
+	A series is called \textit{absolutely convergent} if $\sum_{n=1}^{\infty} |a_n|$ is convergent.
+\end{definition}
+
+\begin{example}
+	Consider the series $\sum_{n=1}^{\infty} n^{- \alpha}$, $\alpha \in \mathbb{R}$.
+
+The sum is bounded above by $\int_1^{\infty } \frac{dx }{x^\alpha}= - \frac{1}{1-\alpha}$, but this is reasonable when $\alpha > 1$. So the series is convergent when $\alpha>1$.
+
+When $\alpha = 1$, we can have a lower estimate by integral, and the integral is divergent. Hence the harmonic series diverges.
+\end{example}
+
+\begin{example}
+	 \[
+		1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \ldots = \ln 2
+	.\] 
+	This series is convergent but not absolutely.
+
+	For series that are convergent but not absolutely, we can rearrange to obtain any sum.
+\end{example}
+
+\begin{theorem}
+	Analytic functions can be represented as convergent Taylor series.
+\end{theorem}

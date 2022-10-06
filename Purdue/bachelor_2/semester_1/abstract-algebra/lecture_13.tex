@@ -1,0 +1,48 @@
+\lecture{13}{Wed 05 Oct 2022 10:37}{}
+
+\begin{remark}[Commutator]
+	$[x,y] = x y x^{-1} y^{-1} $ gives a measure of how nonabelian a group is.
+\end{remark}
+
+
+\begin{theorem}(6.1.9)
+	$A_n$ is simple for $n\ge 5$.
+\end{theorem}
+\begin{proof}
+	The last theorem proves $A_5$ is simple. We prove by induction, and assume that $A_m$ is simple for $5\le m<n$, and seek to prove that $A_n$ is simple.
+
+	Suppose $\{e\} \neq N \triangleleft A_n$, and try to show that $N$ contains an element $\sigma$ which leaves an element of $\{1,2,\ldots,n\} $  fixed. Suppose that no such $\sigma$ exists. Then there exists distinct elements $a,b,c,d \in \{1,2,\ldots,n\} $ such that \[
+		\sigma(a) = b, \sigma(c) = d.
+	.\] 
+	Since $n\ge 6$, there is an element $\tau \in A_n$ with \[
+		\tau = (a,b)(c,d,e, f)
+	.\] 
+	for $e,f \not\in \{a,b,c,d\} $ with $e \neq f$.
+	By normality of $N$ in $A_n$, one has $\tau^{-1} \sigma\tau \in N$.
+	Then \begin{align*}
+		\tau^{-1} \sigma\tau(b) &= \tau^{-1} \sigma(a) = \tau^{-1} (b) = a\\
+		\tau^{-1} \sigma\tau(d) &= \tau^{-1} \sigma(e) = \tau^{-1} (e) = d
+	.\end{align*} 
+	Then
+	\begin{align*}
+		\tau^{-1} \sigma\tau\sigma(a) &= \tau^{-1} \sigma\tau(b) = a\\
+		\tau^{-1} \sigma\tau\sigma(c) &= \tau^{-1} \sigma\tau(d) = d\\
+	\end{align*}
+	So $\tau^{-1} \sigma\tau\sigma$ fixes $a$ and moves $c$, so it is not the identity, and there is an element of $N$ fixing  $a$. We have a contradiction.
+
+	We can suppose, by relabeling, that $\sigma \in \mathbb{N}\setminus \{\text{id}\} $ and $\sigma(1) = 1$. The elements of $A_n$ which fix $1$ form a subgroup of $A_n$, say $H_1 \le A_n$, with $H_1 \cong A_{n-1}$. 
+	Then $N \cap H_1 \neq \{\text{id}\} $ (since $\sigma \in N \cap H_1$), and $N \cap H_1 \triangleleft H_1$.
+	But $H_1$ is simple (because $A_{n-1}$ is simple), so $N \cap H_1 = H_1$. 
+	Then $H_1\le N$.
+
+	Let $\tau$ be any permutation with $\tau(2) = 1$. Then $\tau^{-1} \sigma\tau(2) = \tau^{-1} \sigma(1) = \tau^{-1} (2) = 2$.
+	So $H_2 := \tau^{-1} H_1\tau$ is a subgroup of $A_n$ that fixes $2$.
+	By normality of $N$ in $A_n $ we have $\tau^{-1} H_1 \tau \le N$, and $\tau^{-1} H_1\tau \cong A_{n-1 }$.
+	Also, \[
+		H_1 \cap \tau H_1 \tau \cong A_{n-2}
+	\],
+	since it fixes both $1$ and $2$.
+
+	TODO Now consider $H_1H_2$, and show that it must be the whole of $A_n$.
+\end{proof}
+

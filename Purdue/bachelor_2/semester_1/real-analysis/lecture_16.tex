@@ -1,0 +1,98 @@
+\lecture{16}{Mon 03 Oct 2022 11:32}{}
+
+\begin{example}
+	(Monotone sequences)
+	Let $s_1 =1$, $s_{n+1}=\frac{1}{2} (s_n + \frac{a}{s_n})$, $n\ge 1 (a>0)$
+	The sequence is convergent.
+	\begin{proof}
+		\begin{enumerate}
+		\item $s_n$ is bounded below, and $s_n \ge \sqrt{a} $.
+			\begin{lemma}
+				if $\alpha,\beta\ge 0$, then $\frac{\alpha+\beta}{2}\ge \sqrt{\alpha\beta} $.
+			\end{lemma}
+			\begin{proof}
+				$\frac{\alpha+\beta}{2}-\sqrt{\alpha\beta} = \frac{1}{2}\left( \sqrt{\alpha} +\sqrt{\beta}  \right) ^2 \ge 0$
+			\end{proof}
+			
+			Now $s_{n+1}=\frac{1}{2}(s_n + \frac{a}{s_n})\ge \sqrt{s_n \frac{a}{s_n}}  = \sqrt{a} $.
+		\item $s_{n+1}\le s_n$ for $n \ge 2$.
+
+			This is equivalent to $\frac{1}{2}(s_n + \frac{a}{s_n}) \le s_n$. Equivalent to $s_n \ge \sqrt{a} $.
+		\end{enumerate}
+		Now apply the monotone convergence theorem to the sequence $\left( s_n \right) _{n\ge 2}$. Hence $\lim s_n = s$ exists.
+
+		Take limit in the iterated equation:
+		\[
+			s = \frac{1}{2} (s + \frac{a}{s})
+		.\] 
+		Hence $s = \sqrt{a} $.
+	\end{proof}
+\end{example}
+
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+	(for sequences)
+	Every bounded sequence in $\mathbb{R}^p$ has a convergent subsequence.
+\end{theorem}
+\begin{proof}
+	Let $X = (x_n)$ be a bounded sequence in $\mathbb{R}^p$ such that $\|x_n\|\le M$ for all $n \in \mathbb{N}$.
+
+	Let $E = \{x_n: n \in \mathbb{N}\} $. If $E$ finite, this means there is $a \in E$ such that $x_n = a$ for infinitely many indices $n \in \mathbb{N}$. There exists $n_1 < n_2<\ldots<n_k < \ldots$ such that $x_{n_k} = a$. But then $x_{n_k}\to a$.
+
+	If $E$ is infinite, then envoke B-W for sets. Since $E$ is bounded and infinite, there ecists $x_* \in \mathbb{R}^p$ such that $x_{*}$ is a cluster point of $E$.
+
+	Choose $n_1$ such that $\|x_{n_1}-x_{^*}\|<1$. Then choose $n_2>n_1$ such that $\|x_{n_2}-x_{*}\|<\frac{1}{2}$ (since $B_{\frac{1}{2}}(x_{*}) \cap E$ is infinite. Continue in this fashion. Now $x_{n_k}$ is a subsequence of $x_n$ that converges to $x_{*}$.
+\end{proof}
+
+The next theorem gives an intrisic characterization of convergence.
+\begin{theorem}[Cauchy Sequences]
+	We say that a sequence  $X = (x_n)$ is \textit{Cauchy} if for all $\varepsilon>0$, there exists $N_\varepsilon \in \mathbb{N}$ such that $\|x_n - x_m\|<\varepsilon$ for all $n, m \ge N_\varepsilon$.
+\end{theorem}
+Also called \textit{fundamental sequence} or \textit{internally convergent}.
+\begin{example}
+	$x_n = 1 + \frac{1}{2} + \ldots + \frac{1}{n}$ is not Cauchy.
+	\begin{align*}
+		x_m - x_n &= \frac{1}{n+1} + \frac{1}{n+2} + \ldots + \frac{1}{m} \\
+		&\ge  \frac{1}{m} + \ldots + \frac{1}{m} \\
+		&= \frac{m-n}{m} \\
+	.\end{align*}
+	Choose $m = 2n$, so $x_{2n} - x_n \ge \frac{1}{2}$. This means $x_n$ is not Cauchy, fails with $\varepsilon = \frac{1}{2}$.
+\end{example}
+
+\begin{theorem}
+	If $X$ is convergent, then $X$ is Cauchy.
+\end{theorem}
+\begin{proof}
+	For any $\varepsilon$, $\|x_n - a\|<\varepsilon$ for $n \ge K_{\varepsilon}$. Hence, for $n, m > K_\varepsilon$, 
+	\[
+		\|x_n - x_m\| \le \|x_n - a\|+ \|x_m - a\| = 2 \varepsilon
+	.\] 
+\end{proof}
+
+\begin{theorem}
+	If $X$ is Cauchy, then $X$ is bounded.
+\end{theorem}
+\begin{proof}
+	Take $\varepsilon = 1$, then there exists $N$ such that for all $n, m \ge 1$, $\|x_n - x_m\|<1$. In particular, $\|x_n - x_N\|<1$. Now $(x_n)_{n\ge N}$ is bounded by $\|x_N\| + 1$. Then we take the maximum to bound the finitely many items before $x_N$.
+\end{proof}
+
+\begin{lemma}
+	If $X$ is Cauchy and has a convergent subsequence $X'$, then $X$ is convergent and $\lim X = \lim X'$.
+\end{lemma}
+\begin{proof}
+	Let $X = (x_n), X' = (x_{n_k})$. Let $a = \lim_{k\to \infty } x_{n_k}$.
+	Then for $\varepsilon>0$, $\|x_{n_k}- a\|<\varepsilon$ for $k \ge K$. 
+	But because $X$ is Cauchy, there exists  $N$ such that for all $n, m \ge N$, $\|x_n - x_m\|<\varepsilon$. Now take $M = \max(N, K)$. Then for $k \ge M$ :
+	\[
+		\|x_n - a\|\le \|x_n - x_{n_k}\| + \|x_{n_k} - a\| \le \varepsilon + \varepsilon = 2 \varepsilon
+	.\] 
+\end{proof}
+
+\begin{theorem}[Cauchy Criterion]
+	A sequence $X$ in $\mathbb{R}^p$ is convergent if and only if $X$ is Cauchy.
+\end{theorem}
+\begin{proof}
+	We only need to prove that $X$ Cauchy implies $X$ convergent.
+
+	Since $X$ Cauchy, $X$ is bounded, so $X$ has a convergent subsequence by B-W. Hence by lemma, $X$ is convergent.
+\end{proof}
+
