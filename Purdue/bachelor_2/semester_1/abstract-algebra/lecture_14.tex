@@ -1,0 +1,17 @@
+\lecture{14}{Fri 07 Oct 2022 11:10}{Cauchy's Theorem}
+
+\subsection{Cauchy's Theorem}
+
+\begin{definition}
+	Let $S$ be a set and $f \in A(S)$. Then the \textit{orbit} of an element $s \in S$ under the action $ f$ is $\text{Orb}_f(s) := \{f^i(s): i \in \mathbb{Z}\} $.
+\end{definition}
+
+We define an equivalence relation such that \[
+	s \sim t :\iff t = f^i(s) \text{ for some } i \in \mathbb{Z}
+.\] 
+Equivalence classes $[s]$ are then orbits $\text{Orb}_f(s)$.
+
+\begin{lemma}
+	(2.8.1)
+	Suppose that $f \in A(S)$ has order $p$, where $p$ is prime, then for all $s \in S$, we have $\left| \text{Orb}_f(s) \right| = 1 \text{ or } p$.
+\end{lemma}

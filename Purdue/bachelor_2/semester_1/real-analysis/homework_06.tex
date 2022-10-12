@@ -1,0 +1,92 @@
+\homework{6}{Tue 11 Oct 2022 22:28}{}
+
+\begin{enumerate}
+	\item 16.A. Let $x_1 \in \boldsymbol{R}$ satisfy $x_1>1$ and let $x_{n+1}=2-1 / x_n$ for $n \in \boldsymbol{N}$. Show that the sequence $\left(x_n\right)$ is monotone and bounded. What is its limit?
+\begin{proof}
+	We establish the fact that $(x_n)$ is monotone decreasing and bounded below by $1$. The first term $x_1$ is obviously monotone decreasing (since there is only one term), and bounded below by $1$ as assumed.
+
+	Now assume that $x_1, \ldots, x_k$ is monotone decreasing and bounded below by $1$. We have
+	\begin{align*}
+		&x_{k+1}< x_k \\
+		&\iff 2 - \frac{1}{x_k} < x_k \\
+		&\iff 2 x_k - 1 < x_k ^2 &\text{since }x_k > 1 > 0 \\
+		&\iff  (x_k - 1)^2 > 0
+	.\end{align*}
+	Which is true since $x_k > 1$, thus $x_k - 1>0$.
+
+	Moreover, since $x_k > 1$, $\frac{1}{x_k}< 1$, so $2 - \frac{1}{x_k} > 1$. Therefore $x_{k+1} > 1$. 
+
+	We have completed the induction and $(x_n)$ is indeed monotone decreasing and bounded below by $1$. To obtain the limit, let the limit be $1$ and take limit on both sides of $x_{n+1}=2-1 / x_n$. Hence $x = 2 - 1 /x$. Solve the equation we obtain $x = 1$, so the limit is $1$.
+\end{proof}
+
+	\item 16.E. Show that every sequence in $\boldsymbol{R}$ either has a monotone increasing subsequence or a monotone decreasing subsequence.
+\begin{proof}
+	If $\limsup X$ exists, then there exists a monotone subsequence $X'$ of $X$ converging to $s :=\limsup X$ (claim 1). If $\limsup X$ does not exist, then $X$ is unbounded from above, so there exists a monotone increasing unbounded subsequence of $X$ (claim 2).
+
+	Justification of claim 1:
+	Since $s = \limsup X$, there exists a subsequence of $X$ converging to $s$, say $Y$. Note that one of the following events must happen infinitely often: 
+	\begin{itemize}
+		\item  $y_n > s$
+		\item $y_n = s$ 
+		\item $y_n < s$
+	\end{itemize}
+	If $y_n = s$ infinitely often, we just take the subsequence that takes a constant value of $s$ and it is indeed monotone. If $y_n > s$ infinitely often, we define the subsequence $y_{n_j} $ as \[
+		n_j := \operatorname{inf} \{m \in \mathbb{N}: m > n_j, s < y_m \le  y_{n_j}\} 
+	.\] 
+	To check the definition is well-posed, assume inductively that $n_j$ is well-defined up to $j = p$. Now since $y_n$ converges to $s$, there exists some $N \in \mathbb{N}$ such that for all  $m \ge  N$, we have $y_m \le y_{n_j} $. Since $y_m > s$ infinitely often, $\{m \in \mathbb{N}: m > n_j, s < y_m \le  y_{n_p}\}$ is nonempty, therefore (by well-orderedness of $\mathbb{N}$ ) $n_j$ is well-defined. Now $y_{n_j} $ is the desired sequence.
+
+	The proof for the case that $y_n < s$ infinitely often is entirely symmetrical. 
+
+	Justification of claim 2: Since $X$ is unbounded from above, for each $M$, there exists $N$ such that for all $n > N$, we have  $x_n > M$. Therefore, we can define a subsequence $x_{n_j}$ such that \[
+		n_j := \operatorname{inf} 
+		\{m \in \mathbb{N}: m > n_{j-1}, x_m > x_{n_{j-1}}\} 
+	.\] 
+	To verify that the definition is well-posed, assume inductively that $n_j$ is well-defined up to $j = p$. Now there exists $N$ such that for all $m >  N$, we have $x_m > x_{n_{p}}$. Then $\max(n_{j-1}, N)+1 \in \{m \in \mathbb{N}: m > n_{j-1}, x_m > x_{n_{j-1}}\}$. Thus by well-orderedness of natural numbers $n_{j}$ is well-defined for $j = p+1$.
+
+	By definition, $x_{n_j}$ is monotone increasing and is a subsequence of $X$.
+\end{proof}
+
+	\item 16.G. Determine the convergence or divergence of the sequence $\left(x_n\right)$, where
+\[
+x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2 n} \quad \text { for } \quad n \in N
+\]
+\begin{proof}
+	We establish an upper bound of the sequence:
+	\[
+		 x_n = \sum_{k=n+1}^{2n} \frac{1}{k}
+		 \le  \sum_{k=n+1}^{2n} \frac{1}{n}
+		 = n \frac{1}{n} = 1
+	.\] 
+	Then we prove $x_n$ is monotone increasing. Combine with the upper bound and we know $x_n$ is convergent by monotone convergence theorem.
+	\begin{align*}
+		x_n - x_{n-1 }&= \frac{1}{n+1} + \ldots + \frac{1}{2n} - \left( \frac{1}{n} + \ldots + \frac{1}{2n-2} \right)  \\
+			      &= \frac{1}{2n-1} + \frac{1}{2n} - \frac{1}{n} \\
+			      &> \frac{1}{2n} + \frac{1}{2n} - \frac{1}{n} \\
+			      &= 0
+	.\end{align*} 
+\end{proof}
+
+	\item 16.Q. Prove that if $K_1$ and $K_2$ are compact subsets of $\boldsymbol{R}^{\mathrm{p}}$, then there exist points $x_1 \in K_1, x_2 \in K_2$ such that if $z_1 \in K_1, z_2 \in K_2$, then $\left\|z_1-z_2\right\| \geq\left\|x_1-x_2\right\|$
+\begin{proof}
+	If $K_1$ and $K_2$ intersect somewhere, then we pick $x_1 = x_2 \in K_1 \cap K_2$ and complete the proof.
+
+	From now on we assume $K_1$ and $K_2$ are disjoint. Since $K_2$ is compact, $K_2$ is closed.
+	For each $k_1 \in K_1$, we choose $k_2 \in K_2$ using Nearest Point Theorem (11.6), such that for all $k \in K_2$, $\|k_1, k\| \ge \|k_1, k_2\|$.
+
+	Now pick $\varepsilon > 0$ and define an open cover $\mathcal{O} = \{B_{\varepsilon}(k_1): k_1 \in K\} $. Because $K_1$ is compact, there exists a finite subcover. We define $B$ to be the open ball $B_\varepsilon(k^*_1)$ in the finite subcover that minimizes $\|k_1 - k_2(k_1)\|$. Denote the minimum distance by $d_\varepsilon = \|k^*_1 - k_2(k^*_1)\|$. We can make such a choice because we are comparing finitely many values.
+
+	Now for any $k \in K_1$, let $k'$ be the center of some open ball in the finite subcover that includes $k$. Now observe
+	\begin{align*}
+		\|k - k_2(k)\|
+		&\ge \|k' - k_2(k)\| - \|k - k'\|\\
+		&\ge \|k' - k_2(k')\| - \|k - k'\|\\
+		&\ge \|k_1^* - k_2(k_1^*)\| - \| k - k'\|\\
+		&\ge d_\varepsilon - \varepsilon
+	.\end{align*}
+
+\end{proof}
+
+	\item 18.B. If $X=\left(x_n\right)$ is a bounded sequence in $\boldsymbol{R}$, show that there is a subsequence of $X$ which converges to $\lim \inf X$.
+	\item 18.F. If $X=\left(x_n\right)$ is a bounded sequence of strictly positive elements in $\boldsymbol{R}$ show that $\lim \sup \left(x_n^{1 / n}\right) \leq \lim \sup \left(x_{n+1} / x_n\right)$.
+	\item 18.I. Show that lim $\sup X=+\infty$ if and only if there is a subsequence $X^{\prime}$ of $X$ such that $\lim X^{\prime}=+\infty$.
+\end{enumerate}

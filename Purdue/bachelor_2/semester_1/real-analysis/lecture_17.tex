@@ -1,0 +1,98 @@
+\lecture{17}{Fri 07 Oct 2022 11:33}{Cauchy Sequences, limsup and liminf}
+
+\begin{example}
+	Let $(x_n)$ be such that $x_1 = a$, $x_2 = b$, $x_{n+1} = \frac{x_n + x_{n-1}}{2}$. Prove $(x_n) $ is convergent, and find the limit.
+
+	\begin{proof}
+		\begin{align*}
+			x_{n+1} - x_n &= \frac{x_{n-1} - x_n}{2}\\
+		|x_{n+1} - x_n| &= \frac{1}{2} |x_n - x_{n-1}| = \frac{1}{2^{n-1}}|x_2 - x_1| = \frac{|b-a|}{2^{n-1}} \\
+		\end{align*}
+	\end{proof}
+	\begin{claim}
+		$(x_n)$ is Cauchy.
+	\end{claim}
+	Indeed, if we take $m\ge n$, then 
+	\begin{align*}
+		|x_m - x_n| &\le |x_m - x_{m-1}| + |x_{m-1}-x_{m-2}| + \ldots + |x_{n+1} - x_n| \\
+		&= |b-a| \left( \frac{1}{2^{m-2}}+ \ldots + \frac{1}{2^{n-1}} \right) \\
+		&=\frac{|b-a|}{2^{n-1}} \left(2 - \frac{1}{2^{m-1-n}}\right)\\
+		&\le \frac{C}{2^n} \text{ for }m\ge n
+	.\end{align*} 
+	Hence $|x_m - x_n| < \varepsilon$ for $m \ge n\ge K_\varepsilon$. Hence $(x_n)$ is Cauchy. Hence $(x_n)$ is convergent.
+
+	Consider special case $a = 0$ and  $b = 1$.
+	Let $\alpha_1 =0$, $\alpha_2 = 1$, $\alpha_{n+1} = \frac{\alpha_n + \alpha_{n-1}}{2}$. Let $\alpha = \lim (\alpha_n)$. Note: we have $x_n = \varphi(\alpha_n)$ where $\varphi(t) = a(1-t) + bt$. 
+
+	Thus $\lim(x_n) = a (1-\alpha) + b\alpha$.
+
+	Take $(x_n)_{n\ge 2}$, we have $x_2 = b$, $x_3 = \frac{a+b}{2}$, the limit is \[
+		\lim(x_n)_{n\ge 2} = \lim(x_n) = b(1-\alpha) + \frac{a+b}{2}\alpha
+	.\] 
+
+	Now
+	\[
+		a(1-\alpha) + b\alpha = b(1-\alpha) + \frac{a+b}{2}\alpha
+	.\] 
+	Thus \[
+		\alpha = \frac{2}{3}
+	.\] 
+	Hence $\lim (x_n) = \frac{1}{3} a + \frac{2}{3} b$.
+\end{example}
+
+\subsection{$\limsup$ and  $\liminf$}
+
+Let $X = (x_n)$ in $\mathbb{R}$. Let
+	\[
+		E = \{a: \exists \text{ subsequence }X' \text{ of }X \text{ st. } \lim X' = a\}
+	\]
+to be the \textit{subsequential limits} of $X$.
+We will assume for now that $X$ is bounded. Then by Bolzano-Weierstrass, $E$ is nonempty.
+
+Note: If $X$ is bounded by $M$, then $E \subset [-M, M]$ is also bounded. Thus $\operatorname{sup}  E$ and $\operatorname{inf} E$ exist.
+
+Let $s^* = \operatorname{sup} E$ and $s_* = \operatorname{inf} E$. We show $s^*, s_* \in E$, then they will be smallest and largest subsequntial limits.
+
+Alternative approach:
+\begin{definition}
+	We say that $v$ is an \textit{almost upper bound} for $X = (x_n)$ if $x_n \le v$ for all but finitely many $n \in \mathbb{N}$. Equivalently, $x_n \le v$ for all $n \ge N_v$ for some $N_v$.
+\end{definition}
+
+Let $V = \{v: v \text{ almost upper bound for }X\} $.
+\begin{claim}
+	$V \neq \emptyset $, and $V$ bounded below.
+\end{claim}
+\begin{proof}
+	If $|x_n| \le M$ for all $n$, then $x_n \le M$ for $n\ge 1$, so $M \in V$, so $V$ not empty.
+
+	Also, if $v  \in V$, then $-M \le x_n \le v$ for $n \ge K_v$, there is at least one such $n$, so $n \ge  -M$. So $-M$ is a lower bound for $V$.
+\end{proof}
+Hence $\operatorname{inf} V$ exists, denote as $x^* = \operatorname{inf} V$.
+
+\begin{proposition}
+	The following statements are equivalent for a number $x^*$:
+	\begin{enumerate}
+		\item $x^* = \operatorname{inf} V$, $V$ is almost upper bounds of $X$ 
+		\item For any $\varepsilon>0$, there are at most finitely many $n $'s such that $x_n > x^* + \varepsilon$ and infinitely many $n$'s such that $x_n > x^* - \varepsilon$.
+		\item Let $v_m = \operatorname{sup} \{x_n: n \ge m\} $. Then $x^* = \operatorname{inf} v_m = \lim v_m$.
+		\item $x^*$ is the largest subsequential limit of  $X$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item $(a)\implies(b)$: If $x^* = \operatorname{inf} V$, then for any $\varepsilon>0$, there is $v \in V$ such that \[
+			x^* \le v < x^* + \varepsilon
+		.\] 
+		But this means $x_n \le v_\varepsilon$ for $n \ge K_{v_\varepsilon}$. So $x_n \le x^* + \varepsilon$ for $n \ge  K_{v_\varepsilon}$. So there are only finitely many $n$ such that $x_n > x^* + \varepsilon$.
+
+		If $x^* - \varepsilon \not\in V$, then there are infinitely many  $n$ such that $x_n > x^* - \varepsilon$.
+	\end{itemize}
+\end{proof}
+
+
+
+\begin{definition}
+	The \textit{limit superior} is defined as \[
+		\limsup X = \inf_N \sup X_{n\ge N}
+	.\] 
+\end{definition}

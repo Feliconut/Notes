@@ -27,39 +27,49 @@
 \end{example}
 
 \begin{example}
-	The \textit{Joukowski function} is defined as
+	The \logseq{Joukowski function} is defined as
 	\[
 	J(z) = \frac{1}{2}(z + \frac{1}{z})
 	.\]
-	Domain: $\mathbb{C}^* = \{z \in \mathbb{C}: z \neq  0\} $ 
-	Where is it 1-1?
+	\begin{enumerate}
+		\item Find a 1-1 domain. The full domain is $\mathbb{C}^* = \{z \in \mathbb{C}: z \neq  0\} $.
+	To decide where is it $1-1$, let
 	\begin{align*}
 		& J(z_1) = J(z_2)\\
 		&\implies z_1-z_2 - \frac{z_1-z_2}{z_1z_2} = 0 
 	.\end{align*}
 	If $z_1 \neq  z_2$ then $z_1z_2 = 1$. We want to find a region where $z_1z_2 \neq  1$ for any $z_1z_2$.
 
-	For example, a region inside or outside the unit circle. Consider the region $\mathcal{D}_1 = \{z: |z|<1\} $ and we want to visualize its image. Fill it with circular curves.
+	We can take the region inside unit circle. Consider the region $\mathcal{D}_1 = \{z: |z|<1\} $.
+	We proceed to visualize its image. Fill it with circular curves.
 	TODO image here
 	
-	Paramaterize $z = r_0 e^{it}$, $0\le t\le 2\pi$, where $r_0 \in (0,1)$. Plug: \[
+\item Paramaterize the curve: $z = r_0 e^{it}$, $0\le t\le 2\pi$, where $r_0 \in (0,1)$. 
+\item Plug into function $J$: \[
 		w = \frac{1}{2}\left( r_0 e^{it }+r_0^{-1}e^{-it} \right) 
-		= \frac{1}{2}\left( r_0 + \frac{1}{r_0} \right) \cos(t) + i \frac{1}{2} (r_0 - \frac{1}{r_0}) \sin(t).
+		= \frac{1}{2}\left( r_0 + \frac{1}{r_0} \right) \cos(t) + i \frac{1}{2} \left(r_0 - \frac{1}{r_0}\right) \sin(t).
 	\]
-	Eliminate $t$:
+\item Eliminate $t$:
 	\[
-	\frac{u^2}{\left(\frac{1}{2} \left( z_0 + \frac{1}{z_0} \right)  \right) ^2} 
-	+ \frac{v^2}{\left(\frac{1}{2} \left( z_0 - \frac{1}{z_0} \right)  \right) ^2} = 1
+	\frac{u^2}{\left(\frac{1}{2} \left( r_0 + \frac{1}{r_0} \right)  \right) ^2} 
+	+ \frac{v^2}{\left(\frac{1}{2} \left( r_0 - \frac{1}{r_0} \right)  \right) ^2} = 1
 	.\] 
 
-	The image of a circle of radius $r_0$ centered at the origin is an ellipse with half-axis $\left(\frac{1}{2} \left( z_0 + \frac{1}{z_0} \right)  \right) $ and $\left(\frac{1}{2} \left( z_0 - \frac{1}{z_0} \right)  \right)$.
+	The image of a circle of radius $r_0$ centered at the origin is an ellipse with half-axis $\frac{1}{2} \left( r_0 + \frac{1}{r_0} \right)   $ and $\frac{1}{2} \left( r_0 - \frac{1}{r_0} \right)  $.
 
-	Decreasing from $+\infty $ to $1$ ; decreasing from $+\infty $ to $0$. Conclusion: the image of $|z| < 1$ is the plane with cut from $-1, 1$.
+	Let $r_0$ continuously change from $0$ to $1$. The first half-axis decreases from $+\infty $ to $1$ ; The second half-axis decreases from $+\infty $ to $0$. 
 
-	$J$ is conformal except at two points. 
-
-	$J$ is 1-1 also in $\operatorname{Im} z > 0$ and $\operatorname{Im}  z < 0$.
+	Conclusion: the image of $|z| < 1$ is the plane with cut from $-1, 1$.
 
 
+	\end{enumerate}
+Other properties of $J$ :
+\begin{itemize}
+\item $J$ is conformal except at two points, $-1$ and $1$. The angle of $\pi$ is expanded to $2 \pi$ at these two points.
+\item $J$ is 1-1 in upper and lower unit semi-disks. It maps the upper unit semi-disk to the lower half plane, and the lower unit semi-disk to the upper half plane.
+\item $J$ maps the upper half plane with unit disk removed to the upper half plane, and similarly for lower half plane.
+\item $J(\pm i) = 0, J(0) = \infty$, $J(-1) = -1, J(1) = 1$.
+\item $J$ is 1-1 also in $\operatorname{Im} z > 0$ and $\operatorname{Im}  z < 0$.
+\end{itemize}
 \end{example}
 

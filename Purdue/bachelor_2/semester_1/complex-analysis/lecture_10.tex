@@ -1,6 +1,8 @@
 \lecture{10}{Thu 22 Sep 2022 12:07}{Cauchy's Theorem}
 \subsection{Cauchy's Theorem}
 
+
+
 \begin{theorem}[Cauchy's Theorem]
 	If $f$ is analytic in a region $\Omega$ and $\overline{\mathcal{D}} =  \mathcal{D} \cup \partial \mathcal{D}\subset \Omega$ , $\partial \mathcal{D}$ is piecewise smooth curve, then \[
 		\int _{\partial \mathcal{D}} f(z) dz =0
@@ -25,7 +27,12 @@
 \begin{proof}
 	Let $\mathcal{D}$ be the region bounded by $\gamma_0$ and $\gamma_1$. Now $\partial \mathcal{D} = \gamma_0 - \gamma_1$, and the integral in $\mathcal{D}$ is zero.
 \end{proof}
-
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.3\textwidth]{figures/path-deformation.png}
+	\caption{(1) Region and path as in Green's Theorem, proving path independence; (2) A continuous deformation of curve; (3) A Starlike region.}
+	\label{fig:path-deformation}
+\end{figure}
 \begin{definition}[Simply Connected]
 	A region $\mathcal{D}$ is called \textit{simply connected} if any two curves with common begin and common end in this region can be deformed to each other.
 \end{definition}
@@ -61,6 +68,12 @@
 \begin{example}[Winding Number]
 	\begin{enumerate}
 \item The integral $\int _{\gamma}\frac{dz }{z}$ is $2 \pi i$ times the \textit{winding number} of the curve around origin. The integral only depends on the times the cirve circulates around origin.
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/path-winding.png}
+	\caption{Closed integral in domain of analyticity only depends on the winding number.}
+	\label{fig:path-winding}
+\end{figure}
 \item The integral 
 	\[
 	\frac{1}{2 \pi i} \oint _{\gamma} \frac{dz}{z - a}
