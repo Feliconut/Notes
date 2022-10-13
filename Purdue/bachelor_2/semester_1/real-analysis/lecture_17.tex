@@ -73,9 +73,9 @@ Hence $\operatorname{inf} V$ exists, denote as $x^* = \operatorname{inf} V$.
 	The following statements are equivalent for a number $x^*$:
 	\begin{enumerate}
 		\item $x^* = \operatorname{inf} V$, $V$ is almost upper bounds of $X$ 
-		\item For any $\varepsilon>0$, there are at most finitely many $n $'s such that $x_n > x^* + \varepsilon$ and infinitely many $n$'s such that $x_n > x^* - \varepsilon$.
+		\item For any $\varepsilon>0$, there are at most finitely many $n $'s such that $x_n > x^* + \varepsilon$ but infinitely many $n$'s such that $x_n > x^* - \varepsilon$.
 		\item Let $v_m = \operatorname{sup} \{x_n: n \ge m\} $. Then $x^* = \operatorname{inf} v_m = \lim v_m$.
-		\item $x^*$ is the largest subsequential limit of  $X$.
+		\item $x^*$ is the largest subsequential limit of  $X$, i.e. $x^* = \operatorname{sup}  E$.
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -86,13 +86,33 @@ Hence $\operatorname{inf} V$ exists, denote as $x^* = \operatorname{inf} V$.
 		But this means $x_n \le v_\varepsilon$ for $n \ge K_{v_\varepsilon}$. So $x_n \le x^* + \varepsilon$ for $n \ge  K_{v_\varepsilon}$. So there are only finitely many $n$ such that $x_n > x^* + \varepsilon$.
 
 		If $x^* - \varepsilon \not\in V$, then there are infinitely many  $n$ such that $x_n > x^* - \varepsilon$.
+	\item $(b)\implies(c)$ : 
+		For any  $\varepsilon>0$, $x^* + \varepsilon \in V$, so $x_n \le x^* + \varepsilon$ for $n \ge K_\varepsilon$. Thus $v_{K_\varepsilon} = \operatorname{sup}_{n \ge K_\varepsilon} x_n \le  x^* + \varepsilon$.
+
+		Thus $\operatorname{inf} v_m \le v_{K_\varepsilon}\le x^* + \varepsilon$. Since $\varepsilon$ is arbitrary, $\operatorname{inf} v_m \le x^*$.
+
+		Fix any $m \in \mathbb{N}$. Take any $\varepsilon>0$, there are infinitely many $n$ such that $|x^* - \varepsilon| < x_n$. So there exists $n > m$ such that $x^* - \varepsilon < x_n \le \operatorname{sup}_{n\ge m}x_n = v_m$.
+
+		Therefore $x^* - \varepsilon \le v_m$ for any $m$, for arbitrary $\varepsilon > 0$. Hence $x^* \le \operatorname{inf}  v_m$.
+
+		Finally, note that $v_m$ is decreasing. Therefore $\lim v_m = \inf v_m$ once we know $v_m$ is bounded below.
+	\item $(c) \implies (d)$ : Let $x^*$ be as in $(c)$, and take any subsequence $x_{m_k}$ which is converges.  Then $x_{m_k}\le v_k$ since $m_k \ge k$. Thus $s \le x^*$. This means $x^*$ is an upper bound for $E$. 
+		It is left to show $x^* \in  E$. 
+		By definition of $v_1$, there is $n_1$ such that $v_1 - 1 < x_{n_1}\le v_1$. Suppose we have constructed $n_1, n_2, \ldots, n_k$. Let $n_{k+1}\ge k+1$ be such that $v_{k+1}- \frac{1}{k+1} < x_{n_{k+1}} \le v_{k+1}$.
+
+		We now take $m_1 = n_1$, $m_2 = n_{m_1}+1 > m_1$, and $m_{k+1} = n_{m_k}+1 > m_k$. Thus $x_{m_k}$ will be a subsequence of $\left( x_{n_k} \right) $. Therefore $x_{m_k} \to x^*$.
+	\item $(d) \implies(a)$ : Suppose $x^*$ is the largest subsequential limit of $X$. We want to prove $x^* = \operatorname{inf} V$. Take $\varepsilon>0$. Then we claim that $x^* + \varepsilon \in V$. Suppose not. Then there exists a subsequence $\left( x_{n_k} \right) $ such that $x_{n_k}\ge x^*+\varepsilon$. Also $(x_{n_k})$ is bounded. By Bolzano-Weierstrass, there exists $x_{n_{k_m}}$ convergent, $x_{n_{k_m}}\to s$ as $m\to \infty $. Thus  $x^* + \varepsilon \le s$, thus $s \in E$ and $s>x^*$, and contradiction. Thus $\operatorname{inf} V\le x^*$.
+
+		On the other hand, let $(x_{n_k}) \to x^*$. Then $x_{n_k}>x^* - \varepsilon$ for $k \ge K_\varepsilon$. Thus $x^* - \varepsilon \not\in V$, so $x^* - \varepsilon \le  \operatorname{inf} V$ for all $\varepsilon>0$. So $x^* \le \operatorname{inf} V$.
 	\end{itemize}
 \end{proof}
 
 
 
 \begin{definition}
-	The \textit{limit superior} is defined as \[
-		\limsup X = \inf_N \sup X_{n\ge N}
-	.\] 
+	The \textit{limit superior} is defined as 
+	\[
+		\lim \sup X = x^*
+	\] 
+	whenever the equivalent conditions above are satisfied.
 \end{definition}

@@ -1,0 +1,83 @@
+\studynote{4}{Wed 12 Oct 2022 18:59}{Concepts of Continuity}
+
+The main reference in this note is \cite{durettProbabilityTheory}.
+
+\begin{definition}[Lipschitz continuous]
+	$f$ is said to be \textit{Lipschitz continuous} if there is a constant $C$ so that $|f(x)-f(y)| \leq C \rho(x, y)$.
+\end{definition}
+
+Lipschitz continuity is a stronger notion of continuity than classical continuity. Lipschitz continuity implies continuity.
+
+Geometrically, Lipchitz condition puts a finite bound on the slope of any secant line one can get from the graph of the function.
+
+\begin{definition}
+	A real or complex valued function $f$ on $d$-dimensional Euclidean space satisfies a Hölder condition with exponent $\alpha$, or is $\alpha$-Hölder continuous, when there are nonnegative real constants $C, a>0$, such that
+\[
+|f(x)-f(y)| \leq C\|x-y\|^\alpha
+\]
+for all $x$ and $y$ in the domain of $f$.
+\end{definition}
+
+\begin{itemize}
+	\item When $\alpha > 1$, an $\alpha$-Hölder continuous function is \textit{constant}.
+	\item When $\alpha = 1$, an $\alpha$-Hölder continuous function is \textit{Lipchitz continuous}.
+	\item When $\alpha >0$, an $\alpha$-Hölder continuous function is \textit{uniformly continuous}.
+	\item Whenver $0 < \alpha \le  \alpha'$, $\alpha'$-Hölder continuity implies $\alpha$-Hölder continuity.
+\end{itemize}
+
+\begin{remark}
+	(from wikipedia) We have the following chain of strict inclusions for functions over a closed and bounded non-trivial interval of the real line:
+
+Continuously differentiable $\subset $ Lipschitz continuous $\subset \alpha$-Hölder continuous $\subset$ uniformly continuous $\subset$ continuous
+
+where $\alpha \in (0,1]$.
+\end{remark}
+
+\begin{theorem}
+8.1.5. Brownian paths are Hölder continuous for any exponent $\gamma<1 / 2$.
+\end{theorem}
+
+\begin{theorem}
+	8.1.6. With probability one, Brownian paths are not Lipschitz continuous (and hence not differentiable) at any point.
+\end{theorem}
+
+\subsection{Test for holder continuity exponent}
+
+From the definition of holder continuity: 
+\[
+	|f(x)-f(y)| \leq C\|x-y\|^\alpha
+\] 
+Our goal is to find smallest possible $\alpha$ such that the equation above holds true empirically. We take logarithm on both sides (using the fact that $\log$ is monotone increasing):
+\[
+	\log |f(x) - f(y)| \le \log C + \alpha \log \|x-y\|
+\] 
+rearrange:
+\[
+	\alpha \ge \frac{\log \left| f(x) - f(y) \right| - \log C}{\log \|x - y\|} \sim \frac{\log \left| f(x) - f(y) \right| }{\log \|x-y\|}
+.\] 
+The term involving $\log C$ should fade away when $\|x-y\|$ is sufficiently small. 
+
+Thus our testing strategy is:
+
+\begin{enumerate}
+	\item Pick some small $\varepsilon_1$ and randomly pick $x_1^{(1)}, \ldots, x_n^{(1)}$ in the domain of interested function.
+	\item Calculate
+		\[
+			a_i^{(j)} := \frac{\log \left| f(x_i^{(j)}) - f(x_i^{(j)} + \varepsilon_j) \right| }{\log \varepsilon_j}
+		.\] 
+
+	\item Do the same for successively smaller $\varepsilon_2, \ldots, \varepsilon_m, \ldots$ that converge to $0$.
+	\item Denote 
+		\[
+			\hat{a} _i^{(j)} := \frac{\log \left| f(x_i^{(j)}) - f(x_i^{(j)} + \varepsilon_j) \right| - \log C}{\log \varepsilon_j}
+		.\] 
+	We know $\hat{a}_i^{(j)}$ is always a \textbf{lower estimate} of $\alpha$. Thus a reasonable guess of $\alpha$ would be:
+	\[
+		\hat{\alpha} = \operatorname{sup}_{i, j} \hat{a}_i^{(j)}
+	.\] 
+\item As discussed above, $\hat{a}_i^{(j)} \sim a_i^{(j)}$ as $j \to  \infty $. Thus we can replace of estimate our $\alpha$ by
+	\[
+		\hat{\alpha}  = \lim_{j \to \infty} \operatorname{sup}_i \hat{a} _i^{(j)}
+	.\] 
+\item Thus in our numerical algorithm, we should pick successively small $j$, keep calculating $\operatorname{sup}_i \hat{a} _i^{(j)}$, until we see a clear pattern of convergence of the sequence $\left( \operatorname{sup}_i \hat{a} _i^{(j)} \right)_{j \in \mathbb{N}} $. The limit would beour numerical result of $\hat{\alpha}$, the guess of $\alpha$.
+\end{enumerate}

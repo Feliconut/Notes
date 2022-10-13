@@ -284,3 +284,5 @@ current_semester
 **/.DS_Store
 **/*.pdf
 **/*.pdf_tex
+**/master.pdf
+**/master.tex

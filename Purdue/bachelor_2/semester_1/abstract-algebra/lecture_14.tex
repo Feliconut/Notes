@@ -15,3 +15,72 @@ Equivalence classes $[s]$ are then orbits $\text{Orb}_f(s)$.
 	(2.8.1)
 	Suppose that $f \in A(S)$ has order $p$, where $p$ is prime, then for all $s \in S$, we have $\left| \text{Orb}_f(s) \right| = 1 \text{ or } p$.
 \end{lemma}
+\begin{proof}
+	Two cases:
+	\begin{enumerate}
+		\item If $f(s) = s$, then $\text{Orb}_f(s) = \{s\}$, so $\left| \text{Orb}_f(s) \right|  = 1$.
+		\item If $f(s) \neq s$, then \[
+			\text{Orb}_f(s) =
+			\{s, f(s), f^2(s), \ldots, f^{p-1}(s)\} 
+		.\] 
+		We claim that these elements are all distinct. If not, say $f^i\left( s \right)  =f^j(s)$, for some $0 \le i < j \le p-1$, one has $f^{j-i}(s) = s$. Since also $f^p(s) = s$. But $(p, j-i) = 1$, so there exist $a, b \in \mathbb{Z}$ with $a(j-i) + bp = 1$, and then \[
+			f(s) = f^{a(j-i)+bp } = f^{bp}f^{(j-i)a}(s) = f^{bp}(s)=s
+		.\] 
+		Therefore $\left| \text{Orb}_f(s) \right|  = p$ after all.
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Cauchy's Theorem]
+	(2.8.2)
+	Suppose $p$ is prime adn $p \mid |G|$, then $G$ has an element of order $p$.
+
+	Thus $G$ has a subgroup of order $p$, say $\left\langle a \right\rangle \le G$ with $o(a) = p$.
+\end{theorem}
+\begin{proof}
+	Two cases.
+	\begin{enumerate}
+		\item $p = 2$. If $2 \mid |G|$, if $a^2 = e$ has no solution with $a \neq e$, then for no $a \in G \setminus \{e\} $ does one have $a = a^{-1} $. But for each $b \in G$ there is a distinct $b^{-1} \in G$ with $b b^{-1}  = e$. Hence we can partition $G$ into $m$ subsets of shape $\{b, b^{-1} \} $, say together with $\{e\} $. Then $|G| = 2 m + 1$, which is a contradiction since $2 \mid |G|$. Thus there exists  $a \in G$ with $o(a) = 2$.
+		\item $p$ prime, $p > 2$, $p \mid |G|$. 
+		Let $S = \{\left( a_1, a_2, \ldots, a_p \right) \in G^p: a_1\ldots a_p = e\} $.
+		Note that if $(a_1, a_2, \ldots, a_p) \in S$, then given $a_1, \ldots, a_{p-1}$, we have $a_p = (a_1, \ldots, a_{p-1})^{-1}\in G$ is uniquely defined, so $|S| = |G|^{p-1}$.
+
+		We define  
+		\begin{align*}
+			f: S &\longrightarrow S \\
+			\left( a_1, \ldots, a_p \right)  &\longmapsto f(\left( a_1, \ldots, a_p \right) ) = \left( a_p, a_1, \ldots, a_{p-1} \right) 
+		.\end{align*}
+		Plainly $f \in A(S)$. Note that $f \neq  \text{id}$, and $f^p = \text{id}$, so $f$ has order $p$. Also, one has $f(s) = s$ if and only if  $s=\left( a, \ldots, a \right) $ for some $a \in G$.
+
+		Observe that if $f(s) = s$ for precisely $m$ elements $s \in S$, then \[
+			|S| - m
+			= \text{card}\{s \in S: f(s)\neq s\} 
+		.\] 
+		where any element in the set satisfies $|\text{Orb}_f(s) |=p$, so $|S| - m \equiv 0 \pmod p$.
+
+		Also, $|S| = |G|^{p-1} \equiv 0 \pmod p$ since $p \mid |G|$. Thus  $m \equiv 0 \pmod p$.
+		Since $f\left( (e, \ldots, e) \right) = (e, \ldots, e)$ and $(\vec{e} ..,e) \in S$, $m\ge 1$. Hence $m \ge p >1$. Hence there exists $a \in G$ with property $(a, \ldots, a) \in S$, whence  $a^p = e$. But $o(a) | p$, and $a \neq  e$, so $o(a) = p$.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+	(2.8.3)
+	Let $G$ be a group with $|G| = p q$, where $p$ and $q$ are primes with $p > q$. Whenever $a \in G$ has order $p$, then $\left\langle a \right\rangle \triangleleft G$.
+\end{lemma}
+\begin{proof}
+	We claim $A:=\left\langle a \right\rangle $ is the \textbf{only} subgroup of $G$ having order $p$. Suppose, by the way of deriving a contradiction, that $B \le G$ and $|B|\neq p$ with $B \neq A$.
+	
+	Observe that $AB = \{ab: a \in A, b \in B\} \subset G$. Therefore $|AB| \le pq<p^2$. But if $a_1, a_2$ are distinct elements of $a$ and $b_1, b_2$ are distinct elements from $B$, then $a_1b_1 = a_2b_2$ if and only if $a_2^{-1}a_1 = b_2b_1^{-1}$, so $a_2^{-1}a_1 \in A \cap B$. 
+
+	But if $B \neq A$, since $A \cap B \le G$, and $A$ (and $B$ ) have prime order, so we must have $A \cap B = \{e\} $. Therefore $a_2^{-1}a_1 = e$, so $a_1 = a_2$ and similarly $b_1 = b_2$. Thus $|AB| = p^2$. But $|AB|<p^2$, a contradiction. Thus $A$ is the only subgroup of  $G$ of order $p$.
+
+	Thus if $g \in G$, we have $g^{-1} Ag\le G$ of order $p$, so $g^{-1} Ag = A$. Then $A \triangleleft G$.
+\end{proof}
+\begin{theorem}
+	Suppose $G$ is a group of order $pq$ with $p$ and $q$ primes with $p > q$. Provided that $q \nmid (p-1)$, one has that $G$ is cyclic.
+\end{theorem}
+\begin{proof}
+	
+\end{proof}
+
+
+

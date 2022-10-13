@@ -2,8 +2,42 @@
 
 \begin{enumerate}
 	\item An electron is trapped in a one-dimensional region of width $0.062 \mathrm{~nm}$. Find the three smallest possible values allowed for the energy of the electron. 
+\begin{proof}
+	The possible de broglie wavelengths of the matter wave is \[
+		\lambda_n = \frac{2L}{n}
+	.\] 
+	Thus the corresponding energies are \[
+		E_n = \frac{n^2 h^2}{8 m L^2}
+	.\] 
+	Plug in $n = 1, 2, 3$ and value for $m$ and $L$, we obtain
+	$E1 = \SI{1.567e-17}{} $J, $E2 = \SI{6.269e-17}{}$ J, $E3 = \SI{1.411e-16}{}$ J
+\end{proof}
+
 
 	\item An electron is trapped in a one-dimensional well of width $0.132 \mathrm{~nm}$. The electron is in the $n=10$ state. (a) What is the energy of the electron? (b) What is the uncertainty in its momentum? (c) What is the uncertainty in its position? (d) How do these results change as $n \rightarrow \infty$ ? Is this consistent with classical behavior?
+\begin{proof}
+	Use the same equation as above. We obtain
+\[
+		E_n = \frac{n^2 h^2}{8 m L^2}
+	.\]
+	and $E_{10} = \SI{3.458e-16}{J}$ 
+
+	\[
+		\Delta p \sim \frac{\hbar}{\Delta x} = \frac{1}{c} \frac{\SI{197}{\mega\electronvolt \femto\metre}}{\SI{0.132}{\nano\metre}} = \SI{0.0149}{\mega\electronvolt\per c\squared}
+	\]
+
+	The uncertainty of position is just the width of the well, $0.132 $nm.
+
+	As $n \to  \infty $, $\Delta p$ and $\Delta x$ stay the same, but $\Delta p / p \to  0$.
+\end{proof}
+
 
 \item A proton or a neutron can sometimes "violate" conservation of energy by emitting and then reabsorbing a pi meson, which has a mass of $135 \mathrm{MeV} / \mathrm{c}^2$. This is possible as long as the pi meson is reabsorbed within a short enough time $\Delta t$ consistent with the uncertainty principle. A) Consider $p \rightarrow p+\pi$. But what amount $\Delta E$ is the energy conservation violated? (Ignore any kinetic energies.) B) For how long a time $\Delta t$ can the pi meson exist? C) Assuming that the pi meson travels at very nearly the speed of light, how far from the proton can it go?
+\begin{proof}
+	$\Delta E = m_\pi c^2 = 135 MeV$
+	\[
+		\Delta t \sim \frac{\hbar}{\Delta E}  = \frac{1}{c} \frac{\hbar c}{\Delta E} = \frac{1}{c} \frac{137 \text{MeV} \cdot \text{fm}}{135 \text{MeV}} = 1.01481\text{fm/c}
+	\]
+	$\Delta L = c \Delta t = 1.0148 \text{fm}$
+	\end{proof}
 \end{enumerate}

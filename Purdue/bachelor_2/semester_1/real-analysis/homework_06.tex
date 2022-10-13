@@ -16,12 +16,34 @@
 
 	Moreover, since $x_k > 1$, $\frac{1}{x_k}< 1$, so $2 - \frac{1}{x_k} > 1$. Therefore $x_{k+1} > 1$. 
 
-	We have completed the induction and $(x_n)$ is indeed monotone decreasing and bounded below by $1$. To obtain the limit, let the limit be $1$ and take limit on both sides of $x_{n+1}=2-1 / x_n$. Hence $x = 2 - 1 /x$. Solve the equation we obtain $x = 1$, so the limit is $1$.
+	We have completed the induction and $(x_n)$ is indeed monotone decreasing and bounded below by $1$. To obtain the limit, let the limit be $x$ and take limit on both sides of $x_{n+1}=2-1 / x_n$. Hence $x = 2 - 1 /x$. Solve the equation we obtain $x = 1$, so the limit is $1$.
 \end{proof}
 
 	\item 16.E. Show that every sequence in $\boldsymbol{R}$ either has a monotone increasing subsequence or a monotone decreasing subsequence.
 \begin{proof}
-	If $\limsup X$ exists, then there exists a monotone subsequence $X'$ of $X$ converging to $s :=\limsup X$ (claim 1). If $\limsup X$ does not exist, then $X$ is unbounded from above, so there exists a monotone increasing unbounded subsequence of $X$ (claim 2).
+	(Simpler)
+	Take any sequence $X$. If $X$ is unbounded, then we may assume without loss of generality that it is unbounded from above, thus we can construct a monotone increasing subsequence of $X$. For the detailed construction, let
+	\[
+		n_j = \operatorname{inf} 
+		\{n \in \mathbb{N}: x_{n}>x_{n_{j-1}}, n > n_{j-1}\} 
+	.\] 
+	We verify that $n_j$ is well-defined. Since $X$ is unbounded from above, for any fixed $x_{n_{j-1}}$, $x_n > x_{n_{j-1}}$ for sufficiently large $n$. Since such $n$ is infinitely many, we can add the restriction $n > n_{j_-1}$. Then by well-orderedness of natural numbers, $n_j$ is well defined.
+	Then $x_{n_j}$ is monotone increasing by construction.
+
+	If $X$ is bounded, then by Bolzano-Weierstrass, there exists convergent subsequence $(x_{n_m})$ of $X$ with limit $x$. We define $A_1 = \{m \in \mathbb{N}: x_{n_m} < x\} $, $A_2 = \{m \in \mathbb{N}: x_{n_m} = x\} $, and $A_3 = \{m \in \mathbb{N}: x_{n_m} > x\} $. Since $A_1 \cup A_2 \cup A_3 = \mathbb{N} $ is infinite, at least one of $A_1, A_2, A_3$ is infinite. If $A_2$ is infinite, we can choose a constant subsequence of $x_{n_m}$ which is indeed monotone.
+
+	The cases $A_1$ is infinite and $A_3$ infinite are symmetrical, so it suffices to prove for the case that $A_1$ is infinite. Then we define the subsequence $x_{n_{m_j}}$ as
+	\[
+		m_j = \operatorname{inf} 
+		\{m \in \mathbb{N}: m > m_{j-1}, x_{n_{m_{j-1}}}< x_{n_m} < x\} 
+	.\] 
+	To justify that $m_j$ is well-defined, note that since  $A_1$ is infinite, there exists infinitely many $x_{n_m} < x$. Since  $x_{n_m} \to x$ as $m \to \infty $, for any fixed $x_{n_{m_{j-1}}}$, we have $x_{n_m}>x_{n_{m_{j-1}}}$ for all sufficiently large $m$. Since there are infinitely many such $m$, we can add the restriction that $m > m_{j-1}$. Then by well-orderedness of natural numbers, $m_j$ is well-defined.
+
+	Now $x_{n_{m_j}}$ is strictly monotone increasing by construction.
+\end{proof}
+
+\begin{proof}
+	If $\limsup X$ is finite, then there exists a monotone subsequence $X'$ of $X$ converging to $s :=\limsup X$ (claim 1). If $\limsup X$ is not finite, then $X$ is unbounded from above, so there exists a monotone increasing unbounded subsequence of $X$ (claim 2).
 
 	Justification of claim 1:
 	Since $s = \limsup X$, there exists a subsequence of $X$ converging to $s$, say $Y$. Note that one of the following events must happen infinitely often: 
@@ -68,25 +90,85 @@ x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2 n} \quad \text { for } \quad n
 
 	\item 16.Q. Prove that if $K_1$ and $K_2$ are compact subsets of $\boldsymbol{R}^{\mathrm{p}}$, then there exist points $x_1 \in K_1, x_2 \in K_2$ such that if $z_1 \in K_1, z_2 \in K_2$, then $\left\|z_1-z_2\right\| \geq\left\|x_1-x_2\right\|$
 \begin{proof}
+	Define the distance function
+		\begin{align*}
+			d: K_1 \times K_2 &\longrightarrow \mathbb{R} \\
+			k_1, k_2 &\longmapsto d(k_1, k_2) = \|k_1 - k_2\|
+		.\end{align*}
+	By definition we know $d(k_1, k_2) \ge 0$, so $d(K_1 \times K_2)$ is bounded below by $0$. Also, it is obviously nonempty. Hence there exists $u := \operatorname{inf} d(K_1\times K_2)$.
+
+	Now for each $n \in \mathbb{N}$, there must exist $k_1^{(n)}$ and $k_2^{(n)}$ such that $d(k_1^{(n)}, k_2^{(n)}) < u + \frac{1}{n}$, by property of infimum. 
+
+	Then since $K_1$ and $K_2$ are compact, there exist convergent subsequences $k_1^{(n_k)} \to k_1$ and $k_2^{(n_k)}\to k_2$. Thus $k_1 \in K_1$ and $k_2 \in K_2$, and $d(k_1, k_2) \le  u$. Since $d(k_1, k_2) \ge u$, we have $d(k_1, k_2) = u$. Thus for any $z_1 \in K_1, z_2 \in K_2$, we have $d(z_1, z_2) \ge d(k_1, k_2)$.
+\end{proof}
+
+\begin{proof}
+	(First attempt, more complicated)
 	If $K_1$ and $K_2$ intersect somewhere, then we pick $x_1 = x_2 \in K_1 \cap K_2$ and complete the proof.
 
 	From now on we assume $K_1$ and $K_2$ are disjoint. Since $K_2$ is compact, $K_2$ is closed.
-	For each $k_1 \in K_1$, we choose $k_2 \in K_2$ using Nearest Point Theorem (11.6), such that for all $k \in K_2$, $\|k_1, k\| \ge \|k_1, k_2\|$.
+	For each $k_1 \in K_1$, we choose $k_2(k_1) \in K_2$ using Nearest Point Theorem (11.6), such that for all $k \in K_2$, $\|k_1, k\| \ge \|k_1, k_2(k_1)\|$.
 
-	Now pick $\varepsilon > 0$ and define an open cover $\mathcal{O} = \{B_{\varepsilon}(k_1): k_1 \in K\} $. Because $K_1$ is compact, there exists a finite subcover. We define $B$ to be the open ball $B_\varepsilon(k^*_1)$ in the finite subcover that minimizes $\|k_1 - k_2(k_1)\|$. Denote the minimum distance by $d_\varepsilon = \|k^*_1 - k_2(k^*_1)\|$. We can make such a choice because we are comparing finitely many values.
-
-	Now for any $k \in K_1$, let $k'$ be the center of some open ball in the finite subcover that includes $k$. Now observe
-	\begin{align*}
-		\|k - k_2(k)\|
-		&\ge \|k' - k_2(k)\| - \|k - k'\|\\
-		&\ge \|k' - k_2(k')\| - \|k - k'\|\\
-		&\ge \|k_1^* - k_2(k_1^*)\| - \| k - k'\|\\
-		&\ge d_\varepsilon - \varepsilon
+	Now define \begin{align*}
+		\varphi: K_1 &\longrightarrow \mathbb{R} \\
+		k_1 &\longmapsto \varphi(k_1) = \|k_1 - k_2(k_1)\|
 	.\end{align*}
+	Let $u = \operatorname{inf}_{k_1 \in K_1}\varphi(k_1)$. To see that $u$ is well-defined, note that $u$ is nonempty (pick arbitrary $k_1 \in K_1$ and $\varphi(k_1)$ is well-defined), and bounded from below (obviously  $\varphi(k_1)\ge 0$ ). 
 
+	Now for each $n \in \mathbb{N}$, define
+	\[
+		F_n = \{k_1 \in K_1: \varphi(k_1) \le  u + \frac{1}{n}\} 
+	.\] 
+	Then $F_n$ is closed (since it is the intersection of $K_1$ and the closed ball $\overline{B_{u+\frac{1}{n}}\left( k_2(k_1) \right) } $\quad ) and nonempty (by property of infimum). Moreover, $F_n$ has a nesting property. To see this, note that $\varphi(k_1)$ is independent of $n$, and for any $k_1 \in F_{n+1}$ we have $\varphi(k_1)\le u + \frac{1}{n+1} \le u + \frac{1}{n}$, thus $F_{n+1} \subset F_n$.
+
+	Finally, $F_1$ is bounded since $K_1$ is bounded.
+	Now by the cantor intersection theorem, there exists a point $k^*$ belonging to all the sets $F_n$. Thus $\varphi(k^*) \le u + \frac{1}{n}$ for all $n \in \mathbb{N}$, so $\varphi(k^*) = u$. We can easily verify from the definition that $ x_1:=k^*$ and $x_2 := k_2(k^*)$ satisfy desired properties.
 \end{proof}
 
 	\item 18.B. If $X=\left(x_n\right)$ is a bounded sequence in $\boldsymbol{R}$, show that there is a subsequence of $X$ which converges to $\lim \inf X$.
+\begin{proof}
+	Denote $x = \lim \inf X$. Let $L$ be the set of $v \in \mathbb{R}$ such that there exists a subsequence of $X$ which converges to $v$, and we know that $x = \operatorname{inf} L$. 
+
+	Now let $\varepsilon_m = \frac{1}{m}$. Using property of infimum, take $v_m \in L$ such that $v_m < v + \varepsilon_m / 2$. Then there exists some subsequnce $(x_{n_j})$ of $X$ that converges to $v_m$. Then there exists some $N_m \in \mathbb{N}$ such that for all $j > N_m$ we have $|x_{n_j} - v_m | < \varepsilon_n / 2$.
+	Combining the results, we have $|x_{n_j} - v| \le |x_{n_j} - v_m| + |v_m - v| = \varepsilon_m$. 
+
+	Now we proceed to define our subsequence.
+	For each $m \in \mathbb{N}$, take $\varphi(m)$ to be the least integer $n$ such that $n = n_j$ for some $j > N_m$, and $n > \varphi(m-1)$.
+
+	Now we see that for each $m$, $|x_{\varphi(m)} - v|\le \varepsilon_m$. As $m \to \infty$, $\varepsilon_m \to 0$, so $x_{\varphi(m)} \to v$.
+	
+\end{proof}
+
 	\item 18.F. If $X=\left(x_n\right)$ is a bounded sequence of strictly positive elements in $\boldsymbol{R}$ show that $\lim \sup \left(x_n^{1 / n}\right) \leq \lim \sup \left(x_{n+1} / x_n\right)$.
-	\item 18.I. Show that lim $\sup X=+\infty$ if and only if there is a subsequence $X^{\prime}$ of $X$ such that $\lim X^{\prime}=+\infty$.
+\begin{proof}
+	\begin{notation}
+		We say some statement $P_n$ holds for \textit{sufficiently large }$n$ if there exists $N \in \mathbb{N}$ such that for all  $n \ge  N$, we have $P_n$ is true.
+	\end{notation}
+
+	Denote $\lim \sup \frac{x_{n+1}}{x_n} = L$. Then for each $\varepsilon>0$, $\frac{x_{n+1}}{x_n}\le L + \varepsilon$ for sufficiently large $n$.
+	To see this, apply the property of limsup, and see that there are at most finitely many $n$ such that $\frac{x_{n+1}}{x_n}>L + \varepsilon$.
+
+	Thus $x_n\le   C (L + \varepsilon)^n$ for sufficiently large $n$ for some $C$ (by using a past homework problem). Therefore
+	\[
+		x_n ^{\frac{1}{n}} \le  C^{\frac{1}{n}}(L + \varepsilon) \to  L + \varepsilon
+	.\] 
+	Thus $x_n^{\frac{1}{n}}\le L + 2\varepsilon$ for sufficeintly large $n$. To see this, pick arbitrarily small $\delta>0$, and note that $C^{\frac{1}{n}}< 1 + \delta$ for sufficiently large $n$. Hence $x_n ^{\frac{1}{n}}\le (1 + \delta)(L + \varepsilon)$ for arbitrarily small $\delta$ and $\varepsilon$. Now let $\delta < \frac{1}{(L + 1)}$ and $\varepsilon< 1$, and we obtain $x_n^{\frac{1}{n}}\le L + 2 \varepsilon$ for sufficiently large $n$.
+
+	Therefore $\lim\sup x_n^{\frac{1}{n}}\le L + 2 \varepsilon$ for arbitrary $\varepsilon$. Hence $\lim\sup x_n^{\frac{1}{n}} \le L$.
+\end{proof}
+\item 18.I. Show that lim $\sup X=+\infty$ if and only if there is a subsequence $X^{\prime}$ of $X$ such that $\lim X^{\prime}=+\infty$.
+\begin{proof}
+	Suppose $\lim \sup X = + \infty $. 
+	Then for each natural number $N$, there exists some value $v > N$ in the extended real numbers ($v \in \mathbb{R}$ or $v = +\infty $), such that there is a subsequence in $X$ converging to  $v$. Thus 
+	$X$ is not bounded from above, because we can always find a subsequence converging to $v$, satisfying $x_{n_j}>N$ for sufficiently large $j$.
+	Then we let  \[
+		n_j = \operatorname{inf} 
+		\{m: m > n_{j-1}, x_m > j\} 
+	.\] 
+	The set above is clearly nonempty for each $j$ since $X$ is unbounded. Thus $n_j$ is well-defined and we have $x_{n_j} \to  +\infty $.
+
+	Now assume there is a subsequence  $X'$ of $X$ such that $\lim X' = + \infty $.
+	Let $V$ be the set of values $v \in \mathbb{R}$ such that there exists a subsequence of  $X$ converging to $v$. By definition, $\lim \sup X  = \operatorname{sup} V$. But we have $+\infty  \in V$, so $\lim \sup X = +\infty $.
+\end{proof}
+
 \end{enumerate}
