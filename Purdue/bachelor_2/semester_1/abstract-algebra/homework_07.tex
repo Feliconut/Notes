@@ -1,0 +1,266 @@
+\homework{7}{Sat 15 Oct 2022 18:57}{}
+
+Herstein, section 2.8, page 91, Questions $2,4,5,8,9,10,12$
+\begin{enumerate}
+	\item 2. Prove that a group of order 35 is cyclic.
+\begin{proof}
+	Apply theorem 2.8.5. Note that $G$ has order $pq$ where $p = 7$ and $q = 5$, and $p,q$ are primes. We also have $p > q$ and $q  = 5 \nmid 6 = p-1$. Thus $G$ must be cyclic.
+\end{proof}
+\item 4. Construct a nonabelian group of order 21. (Hint: Assume that $a^3=e$, $b^7=e$ and find some $i$ such that $a^{-1} b a=b^i \neq b$, which is consistent with the relations $a^3=b^7=e$.)
+\begin{proof}
+	Let $G$ be the group
+	\[
+		G = \left\langle a, b | a^3 = b^7 = e, a^{-1} b a = b^2 \right\rangle 
+	.\] 
+	The group is nonabelian by definition.
+
+	Using the relation $a^{-1} ba = b^2$, we can simplify any finite product of $a$ and $b$ to the form $a^i b^j$. Also, any two elements $a^ib^j$ and $a^kb^l$ such that $i\not\equiv k \pmod 3$ and $j \not\equiv l \pmod 7$ cannot be simplified into each other by the rule $a^{-1} ba = b^2$, and are viewed as distinct elements. Therefore there are $3 \cdot 7 = 21$ elements in the group.
+\end{proof}
+\item 5. Let $G$ be a group of order $p^n m$, where $p$ is prime and $p \nmid m$. Suppose that $G$ has a normal subgroup $P$ of order $p^{n}$. Prove that $\theta(P)=P$ for every automorphism $\theta$ of $G$.
+\begin{proof}
+	Since $P \triangleleft G$ and $\theta$ is a homomorphism, we have $\theta(P)\triangleleft \theta(G)=G$. Since $\theta$ is an isomorphism, $|\theta(P)| = |P| = p^n$.
+
+	Now we have
+	\[
+		|P \theta(P)| = \frac{|P| |\theta(P)|}{|P \cap \theta(P)|} = \frac{p^{2n}}{|P \cap \theta(P)|} \mid |G| = p^n m
+	.\] 
+	Since $p \nmid m$, this can happen only when $p^n \mid |P \cap \theta(P)|$. Thus $|P \cap \theta(P)| \ge p^n$. But we also have $|P \cap \theta(P)| \le |P| = p^n$, so $|P \cap  \theta(P)| = p^n = |P|$, so $\theta(P) = P$.
+\end{proof}
+\item 8. Prove that a group of order 99 has a nontrivial normal subgroup.
+\begin{proof}
+	By Cauchy Theorem, there is an element $a \in G$ such that $o(a) = 11$. We claim that $\left\langle a \right\rangle |G$.
+
+	Take arbitrary element $g \in G$. We claim that $g^{-1}  \left\langle a \right\rangle g = \left\langle a \right\rangle $. If they are not equal, then $(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle $ has order $1$, because it is a proper subgroup of $\left\langle a \right\rangle$, and $o(a) = 11$ is prime.
+
+	But then
+	\[
+		\left| (g^{-1}  \left\langle a \right\rangle g) \left\langle a \right\rangle  \right| 
+		= \frac{\left| g^{-1} \left\langle a \right\rangle g \right| \left| \left\langle a \right\rangle  \right| }{(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle }
+		= 11^2 > 99
+	.\] 
+
+	Which is a contradiction, since $ \left| (g^{-1}  \left\langle a \right\rangle g) \left\langle a \right\rangle \right|  \le |G| = 99$.
+\end{proof}
+
+9. Prove that a group of order 42 has a nontrivial normal subgroup.
+\begin{proof}
+	By Cauchy Theorem, there exists an element $a \in G$ such that $o(a) = 7$. We claim that $\left\langle a \right\rangle \triangleleft G$.
+
+	Take arbitrary $g \in G$. We must have either $g^{-1} \left\langle a \right\rangle g = \left\langle a \right\rangle $ or $g^{-1} \left\langle a \right\rangle g \neq  \left\langle a \right\rangle $.
+	In the first case we are done; in the second case we must have $(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle = (e)$, since its order must divide $o(a)$ and be strictly less than $o(a)$ which is a prime.
+	Now using the counting property,
+	\[
+		\left| (g^{-1}  \left\langle a \right\rangle g) \left\langle a \right\rangle  \right| 
+		= \frac{\left| g^{-1} \left\langle a \right\rangle g \right| \left| \left\langle a \right\rangle  \right| }{(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle }
+		= 7^2 > 42
+	.\]
+		
+	Which yields a contradiction since the order of $(g^{-1}  \left\langle a \right\rangle g) \left\langle a \right\rangle $ must be less than or equal to $42$.
+
+	Since $g^{-1} \left\langle a \right\rangle g = \left\langle a \right\rangle $ for all $g \in G$. Hence $\left\langle a \right\rangle \triangleleft G$ as desired.
+\end{proof}
+
+10. From the result of Problem 9, prove that a group of order 42 has a normal subgroup of order 21 .
+\begin{proof}
+	We already know $G$ has a normal subgroup of order $7$, say $\left\langle a \right\rangle \triangleleft G$.
+
+	 Now $\left| G / \left\langle a \right\rangle  \right|  = 6$. By Lemma 2.8.3, a group of order $6$ has a normal subgroup of order $3$. Call this subgroup $N'$.
+
+	 Define the homomorphism
+	 \begin{align*}
+	 	\varphi: G &\longrightarrow G / \left\langle a \right\rangle  \\
+	 	g &\longmapsto \varphi(g) = \left\langle a \right\rangle g
+	 .\end{align*}
+	 We have verified that $\varphi$ is a surjective homomorphism when we were studying homomorphism theorems. Let $K = \left\langle a \right\rangle $ be the kernel of $\varphi$.
+
+	 By the Correspondence Theorem, $N := \varphi^{-1}(N')$ is a normal subgroup of $G$, $K \subset N$, and $N / K \cong N'$. Thus
+	 \[
+	 	\left| \left( G / \left\langle a \right\rangle \right)  / \left( N / \left\langle a \right\rangle \right)  \right|  = 6 / 3 = 2
+	 .\] 
+	 By Third Homomorphism theorem,
+	 \[
+	 	G / N \cong (G / K) / (N / K)
+	 .\] 
+	 So $|G / N| = 2$. Thus $|N| = |G| / 2 = 21$.
+
+	 
+
+	
+\end{proof}
+\item 12. Prove that any two nonabelian groups of order 21 are isomorphic. (See Problem 4.)
+\begin{proof}
+	 By Cauchy Theorem, there is an element $b \in G$ with order $7$. Using Lemma 2.8.3, $\left\langle b \right\rangle \triangleleft G$. Also by Cauchy Theorem, there is an element $a \in G$ with order $3$. Now we have $a^{-1} b a = b^i$ for some $i$ such that $0\le i < 7$. Therefore, any element $g \in G$ can be uniquely written as $g = a^j b^k$ where $0\le j\le 2$, $0\le k\le 6$.
+
+	 First of all, $i\neq 1$ and $i \neq 0$, otherwise we have  $ab = ba$ or $b = e$, which are contradictory to our assumptions. 
+
+	 Also, if we conjugate $b$ by $a$ for $3$ times,
+	 \[
+	 	b = a^{-3} ba^{3} = b^{i^3}
+	 .\] 
+	 Thus $i^3 \cong 1 \pmod 7$. The possible solutions of $i$ are $2$ and $4$. We now want to show that the definitions of $G$ by setting $i = 2$ or $i = 4$ are equivalent.
+
+	Assume $a^{-1} ba = b^4$. Now \[
+		aba^{-1} = a^2 (a^{-1} ba)a^{-2} = a^2 b^4 a^{-2} = a^{-1} b^4 a = (b^{4})^{4} = b^{16} = b^2
+	.\] 
+
+	Assume $a^{-1}ba = b^2$. Now
+\[
+		aba^{-1} = a^2 (a^{-1} ba)a^{-2} = a^2 b^2 a^{-2} = a^{-1} b^2 a = (b^{2})^{2} = b^{4} 
+	.\]
+
+	Therefore we can replace $a^{-1} $ by $a$ to go from one definition to another, and the two definitions are identical.
+\end{proof}
+
+
+
+
+\end{enumerate}
+Herstein, section $2.9$, page 96 , Questions $1,2,3,5,6$
+\begin{enumerate}[resume]
+	\item 1. If $G_1$ and $G_2$ are groups, prove that $G_1 \times G_2 \simeq G_2 \times G_1$.
+\begin{proof}
+	Construct a map
+	\begin{align*}
+		\varphi: G_1\times G_2 &\longrightarrow G_2\times G_1 \\
+		(a,b) &\longmapsto \varphi((a,b)) = (b,a)
+	.\end{align*}
+	This map is clearly bijective. Also, for any pairs $(a_1, b_1)$ and $(a_2,b_2)$ in $G_1 \times G_2$, 
+	\begin{align*}
+		&\varphi\left( (a_1,b_1)(a_2,b_2) \right)  = \varphi(a_1a_2,b_1b_2) \\
+		&= (b_1b_2,a_1a_2) = (b_1,a_1)(b_2,a_2)\\
+		&=\varphi(a_1,b_1)\varphi(a_2,b_2)
+	.\end{align*} 
+	Hence $\varphi$ is an isomorphism. Hence $G_1\times G_2 \cong G_2 \times G_1$.
+\end{proof}
+
+	\item 2. If $G_1$ and $G_2$ are cyclic groups of orders $m$ and $n$, respectively, prove that $G_1 \times G_2$ is cyclic if and only if $m$ and $n$ are relatively prime.
+\begin{proof}
+	Take $a \in G_1$ and $b \in G_2$ such that $G_1 = \left\langle a \right\rangle $ and $G_2 = \left\langle b \right\rangle $, so $o(a) = m$, $o(b) = n$.
+	Now for any $s \in \mathbb{Z}$, $(a,b)^{s} = (a^s, b^s)$ which is equal to $(e_1,e_2)$ if and only if  $a^s = e_1$ and $b^s = e_2$. This is true if and only if $m | s$ and $n | s$.
+
+	Assume $m$ and $n$ are relatively prime. Now  $(a,b)^s = (e_1,e_2)$ if and only if $mn | s$. Thus there is no integer $t$ smaller than $mn$ such that $(a,b)^t = (e_1,e_2)$. Hence $o((a,b)) = mn = |G_1 \times G_2|$, so $G_1 \times G_2 = \left\langle (a,b) \right\rangle $.
+
+	Assume $m$ and $n$ are not relatively prime. Then there exists some $c > 1$ such that $c | m $ and $c | n$. Now $(a,b)^s = (e_1,e_2)$ if $\frac{mn}{c}|s$. Hence $mn$  is not the smallest integer $t$ such that $(a,b)^t = (e_1,e_2)$. Hence $o(a,b)<mn$, hence $G_1 \times G_2 \neq \left\langle (a,b) \right\rangle $. We chose our $a,b$ as arbitrary generators of $G_1$ and $G_2$, and any generator of $G_1 \times G_2$ must contain a generator of $G_1$ and a generator of $G_2$. So no such generator exists, so $G_1 \times G_2$ cannot be cyclic.
+\end{proof}
+
+	\item 3. Let $G$ be a group, $A=G \times G$. In $A$ let $T=\{(g, g) \mid g \in G\}$.
+(a) Prove that $T \simeq G$.
+\begin{proof}
+	Define
+	\begin{align*}
+		\varphi: G &\longrightarrow T \\
+		g &\longmapsto \varphi(g) = (g,g)
+	.\end{align*}
+	This map is clearly well-defined and injective. To check that it is surjective, note that for any $(g, g) \in T$, we have $\varphi(g) = (g,g)$. To check that it is a homomorphism, note
+	\[
+		\varphi(g_1)\varphi(g_2) = (g_1,g_1)(g_2,g_2)=(g_1g_2,g_1g_2) = \varphi(g_1g_2)
+	.\] 
+
+	Thus $\varphi$ is an isomorphism, therefore $T \cong G$.
+\end{proof}
+
+(b) Prove that $T \triangleleft A$ if and only if $G$ is abelian.
+\begin{proof}
+	\begin{align*}
+		& T \triangleleft A\\
+		&\iff \forall (g_1,g_2)\in A, (g_1,g_2)^{-1}T (g_1,g_2) = T \\
+		&\iff \forall (g_1,g_2)\in A,\forall g \in G,  (g_1,g_2)^{-1}(g,g) (g_1,g_2) \in  T \\
+		&\iff \forall (g_1,g_2)\in A,\forall g \in G,  g_1^{-1}gg_1 = g_2^{-1}gg_2 \\
+		&\iff \forall g_1,g_2,g \in G,  (g_2g_1^{-1})g = g(g_2g_1^{-1}) \\
+		&\iff \forall g_1,g_2,g \in G,  (g_2g_1^{-1})g = g(g_2g_1^{-1}) \\
+		&\iff \forall h,g \in G,  hg = gh\\
+		&= G \text{ is abelian}
+	.\end{align*}
+\end{proof}
+
+\item 5. Let $G$ be a finite group, $N_1, N_2, \ldots, N_k$ normal subgroups of $G$ such that $G=N_1 N_2 \cdots N_k$ and $|G|=\left|N_1\right|\left|N_2\right| \cdots\left|N_k\right|$. Prove that $G$ is the direct product of $N_1, N_2, \ldots, N_k$.
+\begin{proof}
+	Define
+	\begin{align*}
+		\varphi: N_1\times N_2 \times  \ldots\times N_k &\longrightarrow G \\
+		(n_1,n_2,\ldots,n_k) &\longmapsto \varphi((n_1,n_2,\ldots,n_k)) = n_1n_2\ldots n_k
+	.\end{align*}
+	By assumptions, obviously this map is well-defined and surjective. Also it is assumed that $|G|=\left|N_1\right|\left|N_2\right| \cdots\left|N_k\right|$, so  $\varphi$ is bijective. This means that each element in $g$ is \textit{uniquely} represented by a product of $n_1n_2\ldots n_k$ where $n_i \in N_i$ for $1\le i\le k$. Thus $G$ is a direct product of $N_1, \ldots, N_k$.
+\end{proof}
+
+\item 6. Let $G$ be a group, $N_1, N_2, \ldots, N_k$ normal subgroups of $G$ such that:
+1. $G=N_1 N_2 \cdots N_k$.
+2. For each $i, N_i \cap\left(N_1 N_2 \cdots N_{i-1} N_{i+1} \cdots N_k\right)=(e)$.
+Prove that $G$ is the direct product of $N_1, N_2, \ldots, N_k$.
+\begin{proof}
+	By assumption 1, each element of $G$ can be represented as product of elements in $N_1, \ldots, N_k$. We need to show such representation is unique.
+
+	Let $(n_1,n_2,\ldots,n_k)$ and $(n_1',n_2',\ldots,n_k')$ be elements in $N_1 \times N_2\times \ldots\times N_k$. Fix any $i$ such that $1\le i\le k$. Now
+	\[
+		n_1n_2\ldots n_i \ldots n_k
+		= n_1'n_2'\ldots n_i' \ldots n_k'
+	.\] 
+	Rearrange:
+\[
+		n_i= \left( n_{i-1}n_{i-2}\ldots n_1 \right)  n_1'n_2'\ldots n_i' \ldots n_k' \left( n_{k} n_{k-1} \ldots n_{i+1} \right) 
+	.\]
+	We can group $n_1n_1'$ and $n_k'n_k$ to obtain
+\[
+		n_i\in  \left( n_{i-1}n_{i-2}\ldots n_2 \right)  N_1 (n_2'\ldots n_i' \ldots n_{k-1}')N_k \left( n_{k-1} \ldots n_{i+1} \right) 
+	.\]
+	Since $N_1$ and $N_k$ are normal subgroups of $G$, they commute with group items. Hence
+\[
+		n_i\in  N_1\left( n_{i-1}n_{i-2}\ldots n_2 \right)  (n_2'\ldots n_i' \ldots n_{k-1}')\left( n_{k-1} \ldots n_{i+1} \right) N_k
+	.\]
+	Now we may continue grouping $n_2n_2'$ and $n_{k-1}' n_{k-1 }$. Continue in this fashion, we finally obtain
+\[
+		n_i\in  N_1 N_2 \ldots N_{i-1} n_{i-1}' N_{i+1}\ldots N_k
+	.\]
+	Hence
+\[
+		n_i (n_{i}')^{-1}\in  N_1 N_2 \ldots N_{i-1} N_{i+1}\ldots N_k
+	.\]
+	But we also have $n_i (n_{i}')^{-1} \in N_i$. Therefore by assumption, \[
+		n_i = n_i'
+	.\]
+	Since $i$ is arbitrary, we conclude that any two representations of some same element in  $G$ must be identical. Hence $G$ is the direct product of $N_1, \ldots, N_k$.
+\end{proof}
+
+\newpage
+
+\begin{enumerate}
+	\item 13. Using the fact that any group of order 9 is abelian, prove that any group of order 99 is abelian.
+\begin{proof}
+	By Cauchy Theorem, there exists an element  $a \in G$ such that $o(a) = 11$. By using a counting argument, we conclude that $\left\langle a \right\rangle \triangleleft G$, and $G / \left\langle a \right\rangle $ has order $9$. 
+
+	Now take any $g \in G$. We know that $g^9 = a^k$ and $g^{-1} a g = a^i$ for some $i $ and  $k$. Now
+	\[
+		a = a^{-k} a a^k = g^{-9}ag^{9} = a^{i^9}
+	.\] 
+	Thus $i^9 \equiv 1 \pmod {11}$. Surprisingly, the only solution is $i = 1$. Thus $\left\langle a \right\rangle \le  Z(G)$.
+
+	Hence $G / Z(G)$ has order at most $9$. If it has order $3$ or $1$, it is cyclic, and hence $G$ is abelian. If it has order $9$, then  $G / Z(G)$ is abelian. Then it is either isomorphic to $\mathbb{Z}_9$ or isomorphic to $\mathbb{Z}_3 \times  \mathbb{Z}_3$. In the first case we are done. 
+
+	In the second case, ???
+\end{proof}
+
+\item 14. Let $p>q$ be two primes such that $q \mid p-1$. Prove that there exists a nonabelian group of order $p q$. (Hint: Use the result of Problem 40 of Section 4 , namely that $U_p$ is cyclic if $p$ is a prime, and the idea needed to do Problem 4 above.)
+\begin{proof}
+	Let $G$ be the group
+	\[
+		G = \left\langle 
+		a,b|
+		a^q = b^p = e, a^{-1} b a = b^i
+		\right\rangle 
+	\]
+	where $i$ is to be determined later.
+
+	Now
+	\[
+		a^{-q} b a^q = b = b^{i^q}
+	.\] 
+	Thus $i^q \equiv 1 \pmod p$. We demonstrate that this equation has a solution such that $i > 1$.
+
+
+\end{proof}
+
+\item 15. Prove that if $p>q$ are two primes such that $q \mid p-1$, then any two nonabelian groups of order $p q$ are isomorphic.
+\end{enumerate}
+
+
+\end{enumerate}

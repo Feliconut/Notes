@@ -21,7 +21,15 @@
 
 	\item 16.E. Show that every sequence in $\boldsymbol{R}$ either has a monotone increasing subsequence or a monotone decreasing subsequence.
 \begin{proof}
-	(Simpler)
+	(Hint given in class)
+	We say $n \in \mathbb{N}$ is a \textit{peak} if $x_n \ge x_m$ for every $m \ge n$.
+	Then consider two cases:
+	\begin{enumerate}
+		\item Finitely many peaks.
+		\item Infinitely many peaks.
+	\end{enumerate}
+\end{proof}
+\begin{proof}
 	Take any sequence $X$. If $X$ is unbounded, then we may assume without loss of generality that it is unbounded from above, thus we can construct a monotone increasing subsequence of $X$. For the detailed construction, let
 	\[
 		n_j = \operatorname{inf} 
@@ -93,13 +101,23 @@ x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2 n} \quad \text { for } \quad n
 	Define the distance function
 		\begin{align*}
 			d: K_1 \times K_2 &\longrightarrow \mathbb{R} \\
-			k_1, k_2 &\longmapsto d(k_1, k_2) = \|k_1 - k_2\|
+			k^{(1)}, k^{(2)} &\longmapsto d(k^{(1)}, k^{(2)}) = \|k^{(1)}- k^{(2)}\|
 		.\end{align*}
-	By definition we know $d(k_1, k_2) \ge 0$, so $d(K_1 \times K_2)$ is bounded below by $0$. Also, it is obviously nonempty. Hence there exists $u := \operatorname{inf} d(K_1\times K_2)$.
+		By definition we know $d(k^{(1)}- k^{(2)}) \ge 0$, so $d(K_1 \times K_2)$ is bounded below by $0$. Also, it is obviously nonempty. Hence there exists $u := \operatorname{inf} d(K_1\times K_2)$.
 
-	Now for each $n \in \mathbb{N}$, there must exist $k_1^{(n)}$ and $k_2^{(n)}$ such that $d(k_1^{(n)}, k_2^{(n)}) < u + \frac{1}{n}$, by property of infimum. 
+	Now for each $n \in \mathbb{N}$, there must exist $k_n^{(1)}$ and $k_n^{(2)}$ such that $d(k^{(1)}_n- k^{(2)}_n) < u + \frac{1}{n}$, by property of infimum. 
 
-	Then since $K_1$ and $K_2$ are compact, there exist convergent subsequences $k_1^{(n_k)} \to k_1$ and $k_2^{(n_k)}\to k_2$. Thus $k_1 \in K_1$ and $k_2 \in K_2$, and $d(k_1, k_2) \le  u$. Since $d(k_1, k_2) \ge u$, we have $d(k_1, k_2) = u$. Thus for any $z_1 \in K_1, z_2 \in K_2$, we have $d(z_1, z_2) \ge d(k_1, k_2)$.
+	Then since $K_1$ is compact, by Bolzano-Weierstrass, there exists convergent subsequence $k_{n_p}^{(1)}$ of $k_n^{(1)}$. Now $k_{n_p}^{(2)}$ is a bounded subsequence of $k_n^{(2)}$, but not necessarily convergent. By Bolzano-Weierstrass again, there exists convergent sequence $k_{n_{p_l}}^{(2)}$ of $k_{n_p}^{(2)}$.
+
+	Now $(k_{n_{p_l}}^{(1)}, k_{n_{p_l}}^{(2)})$ is a subsequence of $\left( k_n^{(1)}, k_{n}^{(2)} \right) $. 
+	Moreover, since both $K_1 $ and $K_2$ are closed, there exists $(x_1, x_2) \in K_1 \times K_2$ such that $\lim ( k_{n_{p_l}}^{(1)}, k_{n_{p_l}}^{(2)}) = (x_1, x_2) $. 
+	Now for each $l \in \mathbb{N}$, we have
+	\[
+		u \le d( k_{n_{p_l}}^{(1)}, k_{n_{p_l}}^{(2)}) < u + \frac{1}{n_{p_l}} \le u + \frac{1}{l} 
+	.\] 
+	By taking $l \to \infty $ on both sides and applying Squeeze Theorem, we obtain
+	$d(x_1, x_2) = u$. Thus for all $(z_1, z_2) \in K_1 \times K_2$, we have $d(z_1, z_2)\ge \operatorname{inf} d(K_1, K_2) = u$.
+	
 \end{proof}
 
 \begin{proof}
@@ -127,15 +145,21 @@ x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2 n} \quad \text { for } \quad n
 
 	\item 18.B. If $X=\left(x_n\right)$ is a bounded sequence in $\boldsymbol{R}$, show that there is a subsequence of $X$ which converges to $\lim \inf X$.
 \begin{proof}
-	Denote $x = \lim \inf X$. Let $L$ be the set of $v \in \mathbb{R}$ such that there exists a subsequence of $X$ which converges to $v$, and we know that $x = \operatorname{inf} L$. 
+	Denote $x = \lim \inf X$. Let $L$ be the set of $v \in \mathbb{R}$ such that there exists a subsequence of $X$ which converges to $v$, and let $x = \operatorname{inf} L$. 
 
-	Now let $\varepsilon_m = \frac{1}{m}$. Using property of infimum, take $v_m \in L$ such that $v_m < v + \varepsilon_m / 2$. Then there exists some subsequnce $(x_{n_j})$ of $X$ that converges to $v_m$. Then there exists some $N_m \in \mathbb{N}$ such that for all $j > N_m$ we have $|x_{n_j} - v_m | < \varepsilon_n / 2$.
-	Combining the results, we have $|x_{n_j} - v| \le |x_{n_j} - v_m| + |v_m - v| = \varepsilon_m$. 
+	Now let $\varepsilon_m = \frac{1}{m}$. Using property of infimum, take $v_m \in L$ such that $v_m < x + \varepsilon_m / 2$. Then there exists some subsequnce $(x_{n_j})$ of $X$ that converges to $v_m$. Then there exists some $N_m \in \mathbb{N}$ such that for all $j > N_m$ we have $|x_{n_j} - v_m | < \varepsilon_m / 2$.
+	Combining the results, we have $|x_{n_j} - x| \le |x_{n_j} - v_m| + |v_m - x| <  \varepsilon_m$. 
 
 	Now we proceed to define our subsequence.
-	For each $m \in \mathbb{N}$, take $\varphi(m)$ to be the least integer $n$ such that $n = n_j$ for some $j > N_m$, and $n > \varphi(m-1)$.
+	For each $m \in \mathbb{N}$, we do the construction above, and define
+\[
+	\varphi(m) = \operatorname{inf} 
+	\{
+		n_j: j>N_m, n_j > \varphi(m-1)
+	\} 
+.\] 
 
-	Now we see that for each $m$, $|x_{\varphi(m)} - v|\le \varepsilon_m$. As $m \to \infty$, $\varepsilon_m \to 0$, so $x_{\varphi(m)} \to v$.
+	Now we see that for each $m$, $|x_{\varphi(m)} - x|\le \varepsilon_m$. As $m \to \infty$, $\varepsilon_m \to 0$, so $x_{\varphi(m)} \to x$.
 	
 \end{proof}
 
@@ -152,7 +176,8 @@ x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2 n} \quad \text { for } \quad n
 	\[
 		x_n ^{\frac{1}{n}} \le  C^{\frac{1}{n}}(L + \varepsilon) \to  L + \varepsilon
 	.\] 
-	Thus $x_n^{\frac{1}{n}}\le L + 2\varepsilon$ for sufficeintly large $n$. To see this, pick arbitrarily small $\delta>0$, and note that $C^{\frac{1}{n}}< 1 + \delta$ for sufficiently large $n$. Hence $x_n ^{\frac{1}{n}}\le (1 + \delta)(L + \varepsilon)$ for arbitrarily small $\delta$ and $\varepsilon$. Now let $\delta < \frac{1}{(L + 1)}$ and $\varepsilon< 1$, and we obtain $x_n^{\frac{1}{n}}\le L + 2 \varepsilon$ for sufficiently large $n$.
+	Thus $x_n^{\frac{1}{n}}\le L + 2\varepsilon$ for sufficeintly large $n$. To see this, pick arbitrarily small $\delta>0$, and note that $C^{\frac{1}{n}}< 1 + \delta$ for sufficiently large $n$. Hence $x_n ^{\frac{1}{n}}\le (1 + \delta)(L + \varepsilon)$ for arbitrarily small $\delta$ and $\varepsilon$. 
+	Now let $\delta < \frac{\varepsilon}{(L + \varepsilon)}$, and we obtain $x_n^{\frac{1}{n}} < (1 + \frac{\varepsilon}{L + \varepsilon})(L + \varepsilon) = L + 2 \varepsilon$ for sufficiently large $n$.
 
 	Therefore $\lim\sup x_n^{\frac{1}{n}}\le L + 2 \varepsilon$ for arbitrary $\varepsilon$. Hence $\lim\sup x_n^{\frac{1}{n}} \le L$.
 \end{proof}
@@ -165,7 +190,7 @@ x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2 n} \quad \text { for } \quad n
 		n_j = \operatorname{inf} 
 		\{m: m > n_{j-1}, x_m > j\} 
 	.\] 
-	The set above is clearly nonempty for each $j$ since $X$ is unbounded. Thus $n_j$ is well-defined and we have $x_{n_j} \to  +\infty $.
+	The set above is well-defined. To see this, first note that there always exists some $x_m > j$ by unboundedness. But then we can always find some $x_m' > x_m$. Continue in this fashion, there are infinitely many  $x_m > j$. Thus we can put a restriction $m > n_{j-1}$. Then $n_j$ is well-defined by well-orderedness of $\mathbb{N}$. Thus $n_j$ is well-defined and we have $x_{n_j} \to  +\infty $.
 
 	Now assume there is a subsequence  $X'$ of $X$ such that $\lim X' = + \infty $.
 	Let $V$ be the set of values $v \in \mathbb{R}$ such that there exists a subsequence of  $X$ converging to $v$. By definition, $\lim \sup X  = \operatorname{sup} V$. But we have $+\infty  \in V$, so $\lim \sup X = +\infty $.

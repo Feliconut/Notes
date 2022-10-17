@@ -1,4 +1,6 @@
 \studynote{4}{Wed 12 Oct 2022 18:59}{Concepts of Continuity}
+\section{Continuity and Hölder continuity test}
+\subsection{Definitions and Examples}
 
 The main reference in this note is \cite{durettProbabilityTheory}.
 
@@ -41,24 +43,151 @@ where $\alpha \in (0,1]$.
 	8.1.6. With probability one, Brownian paths are not Lipschitz continuous (and hence not differentiable) at any point.
 \end{theorem}
 
-\subsection{Test for holder continuity exponent}
+\subsection{Test for hölder continuity exponent}
 
-From the definition of holder continuity: 
+From the definition of hölder continuity: 
 \[
 	|f(x)-f(y)| \leq C\|x-y\|^\alpha
 \] 
-Our goal is to find smallest possible $\alpha$ such that the equation above holds true empirically. We take logarithm on both sides (using the fact that $\log$ is monotone increasing):
+Our goal is to find smallest possible $\alpha$ such that the equation above holds true empirically.
+
+We take logarithm on both sides (using the fact that $\log$ is monotone increasing):
 \[
 	\log |f(x) - f(y)| \le \log C + \alpha \log \|x-y\|
 \] 
-rearrange:
-\[
-	\alpha \ge \frac{\log \left| f(x) - f(y) \right| - \log C}{\log \|x - y\|} \sim \frac{\log \left| f(x) - f(y) \right| }{\log \|x-y\|}
-.\] 
+rearrange and assuming $\log\|x-y\|<0$ for small $\|x-y\|$:
+\begin{equation}
+	\alpha \le \frac{\log \left| f(x) - f(y) \right| - \log C}{\log \|x - y\|} \sim \frac{\log \left| f(x) - f(y) \right| }{\log \|x-y\|}
+.\end{equation} 
+The smallest such $\alpha$ is then
+\begin{equation}
+	\label{eqn:holder-fit-1}
+	\alpha 
+	= \operatorname{inf}_{x, y} \frac{\log \left| f(x) - f(y) \right| - \log C}{\log \|x - y\|}
+.\end{equation}
+
+
 The term involving $\log C$ should fade away when $\|x-y\|$ is sufficiently small. 
 
-Thus our testing strategy is:
+\subsubsection{Compute $\alpha$ by finding a limit}
+Let $x_1, \ldots, x_i, \ldots, x_n$ be random points in the domain of $f$. Let $\varepsilon_1, \ldots, \varepsilon_j, \ldots, \varepsilon_m$ be small changes.
 
+Denote 
+		\[
+			\hat{a} _i^{(j)} := \frac{\log \left| f(x_i) - f(x_i + \varepsilon_j) \right| - \log C}{\log \varepsilon_j}
+		.\] 
+	We know $\hat{a}_i^{(j)}$ is always an \textbf{upper estimate} of $\alpha$. Thus a reasonable guess of $\alpha$ would be:
+	\[
+		\hat{\alpha} = \operatorname{inf}_{i, j} \hat{a}_i^{(j)}
+	.\] 
+
+Since $\hat{a}_i^{(j)} \sim a_i^{(j)}$ as $j \to  \infty $, we can replace our estimate of $\alpha$ by
+	\[
+		\hat{\alpha}  = \lim_{j \to \infty} \operatorname{inf}_i \hat{a} _i^{(j)}
+	.\] 
+
+	The limit, however, converges very slowly. As $\varepsilon_j$ decreases exponentially, $\left| \log \varepsilon_j \right| $ only increases linearly, so the error terms decreases very slowly.
+
+\subsubsection{Find $\alpha$ and $C$ by Curve Fitting}
+
+	Rewrite equation \eqref{eqn:holder-fit-1} as
+	\[
+		\alpha 
+		= \operatorname{inf}_{x, \varepsilon} \frac{\log \left| f(x) - f(x+\varepsilon) \right| - \log C}{\log \varepsilon}
+		\quad\text{where }\varepsilon>0
+	.\]
+Hence
+\[
+		\alpha 
+		= \operatorname{inf}_{\varepsilon}
+		\left( \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+-\frac{\log C}{\log \varepsilon} \right) 
+	.\]
+
+We claim:
+\begin{proposition}
+\[
+		\alpha 
+		=\lim_{\delta \to  0}
+		\operatorname{inf}_{\varepsilon<\delta}
+		\left( \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+-\frac{\log C}{\log \varepsilon} \right) 
+	.\]
+\end{proposition}
+	This is basically saying that all roughness must remain in arbitrarily small detail.
+\begin{proof}
+	Fix some $\varepsilon'$ such that 
+	for some $\delta>0$ and all $\varepsilon < \varepsilon'$, \[
+		 \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+-\frac{\log C}{\log \varepsilon} 
+> \alpha + \delta
+	.\] 
+	We claim that $f$ is actually $(\alpha + \delta)$-Hölder continuous, which results in a contradiction. It suffices to show that there exists some constant $C$ such that for all $\varepsilon$ where $\varepsilon\ge \varepsilon'$, \[
+		\left| f(x) - f(x+\varepsilon) \right| \le C \varepsilon^{\alpha+\delta}
+	.\] 
+But since $f$ is $\alpha$-Hölder continuous, there exists some $C'>0$ such that
+\[
+		\left| f(x) - f(x+\varepsilon) \right| \le C' \varepsilon^{\alpha}
+.\] 
+Take $C = \frac{C'}{(\varepsilon')^{-\delta}}$, and we have
+\[
+		\left| f(x) - f(x+\varepsilon) \right| \le C (\varepsilon')^{\delta} \varepsilon^{\alpha}
+		\le C \varepsilon^{\delta} \varepsilon^{\alpha}
+		= C' \varepsilon^{\alpha+\delta}
+.\]
+\end{proof}
+This claim allows us to take smaller and smaller $\varepsilon$, and be convinced that the limit infimum will be our desired $\alpha$.
+
+%The next claim gives a reasonable error bound for dropping the infimum over $\varepsilon$ when calculating $\alpha$.
+\begin{proposition}
+	We have the bound
+	\[
+		 \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+-\frac{\log C}{\log \varepsilon}  
+\le 
+		\operatorname{inf}_{\varepsilon}
+		\left( \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+-\frac{\log C}{\log \varepsilon} \right) 
++ O(\varepsilon)
+	\]
+	under the following assumptions:
+
+\begin{enumerate}
+	\item $f$ has bounded total variation.
+\end{enumerate}
+
+\color{gray}Note: I don't know how to prove this theorem. I discussed this with Zijie, and have some sketchy idea on how to prove it for brownian motions. 
+\end{proposition}
+
+Using the approximation above, for some specific $\varepsilon$, we can approximate $\alpha$ by
+\[
+	\alpha \approx \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+-\frac{\log C}{\log \varepsilon} 
+.\] 
+
+We then use $\operatorname{inf} _i a_i^{(j)}$ as an upper estimation:
+
+\[
+\operatorname{inf} _i a_i^{(j)} \approx
+	 \operatorname{inf}_x
+		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+.\] 
+
+We finally have a curve to fit:
+\begin{equation}
+	\label{eqn:holder-fit-curve}
+	\alpha + \frac{\log C}{\log \varepsilon_j} = \operatorname{inf} _i a_i^{(j)} + O(\varepsilon) 
+.\end{equation} 
+
+{\color{gray} Note: We still need to bound the errors of the approximations above.}
+
+Thus our testing strategy is:
 \begin{enumerate}
 	\item Pick some small $\varepsilon_1$ and randomly pick $x_1^{(1)}, \ldots, x_n^{(1)}$ in the domain of interested function.
 	\item Calculate
@@ -66,18 +195,9 @@ Thus our testing strategy is:
 			a_i^{(j)} := \frac{\log \left| f(x_i^{(j)}) - f(x_i^{(j)} + \varepsilon_j) \right| }{\log \varepsilon_j}
 		.\] 
 
-	\item Do the same for successively smaller $\varepsilon_2, \ldots, \varepsilon_m, \ldots$ that converge to $0$.
-	\item Denote 
-		\[
-			\hat{a} _i^{(j)} := \frac{\log \left| f(x_i^{(j)}) - f(x_i^{(j)} + \varepsilon_j) \right| - \log C}{\log \varepsilon_j}
-		.\] 
-	We know $\hat{a}_i^{(j)}$ is always a \textbf{lower estimate} of $\alpha$. Thus a reasonable guess of $\alpha$ would be:
-	\[
-		\hat{\alpha} = \operatorname{sup}_{i, j} \hat{a}_i^{(j)}
-	.\] 
-\item As discussed above, $\hat{a}_i^{(j)} \sim a_i^{(j)}$ as $j \to  \infty $. Thus we can replace of estimate our $\alpha$ by
-	\[
-		\hat{\alpha}  = \lim_{j \to \infty} \operatorname{sup}_i \hat{a} _i^{(j)}
-	.\] 
-\item Thus in our numerical algorithm, we should pick successively small $j$, keep calculating $\operatorname{sup}_i \hat{a} _i^{(j)}$, until we see a clear pattern of convergence of the sequence $\left( \operatorname{sup}_i \hat{a} _i^{(j)} \right)_{j \in \mathbb{N}} $. The limit would beour numerical result of $\hat{\alpha}$, the guess of $\alpha$.
+	\item Calculate $\operatorname{inf} _i a_{i}^{(j)}$
+	\item Do the same for successively smaller $\varepsilon_2, \ldots, \varepsilon_m, \ldots$ that approach $0$.
+\item Fit the curve \eqref{eqn:holder-fit-curve}. Then read the $\alpha$ and $C$.
 \end{enumerate}
+
+

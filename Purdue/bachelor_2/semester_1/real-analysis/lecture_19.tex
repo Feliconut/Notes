@@ -1,0 +1,70 @@
+\lecture{19}{Fri 14 Oct 2022 11:31}{}
+
+\begin{remark}
+	$\lim\inf(x_n) = - \lim\sup(-x_n)$.
+\end{remark}
+\begin{lemma}
+	$\lim\sup (x_n)\le a$ is equivalent to: For every $\varepsilon>0$, there exists $K_\varepsilon$ such that $x_n \le  a + \varepsilon$ for $n \ge  K _\varepsilon$.
+\end{lemma}
+\begin{proof}
+	Let $x^* = \lim\sup (x_n)$. Then for all $\varepsilon>0$, $x^* + \varepsilon$ is an almost upper bound. So $x_n < x^* + \varepsilon$ for $n \ge K_\varepsilon$. Thus $x_n < a + \varepsilon$.
+
+	On the other side, suppose for every $\varepsilon>0$, there exists $K_\varepsilon$ such that $x_n \le  a + \varepsilon$ for $n \ge  K _\varepsilon$. Then $a + \varepsilon$ is an almost upper bound. So $x^* = \operatorname{inf} \{\text{almost upper bounds}\} \le a + \varepsilon$. Hence $x^* a + \varepsilon$ for all $\varepsilon$, so $x^* \le a$.
+\end{proof}
+
+
+\begin{lemma}
+	$\lim\inf (x_n)\ge a$ is equivalent to: For every $\varepsilon>0$, there exists $K_\varepsilon$ such that $x_n \ge  a - \varepsilon$ for $n \ge  K _\varepsilon$.
+\end{lemma}
+\begin{proof}
+	symmetrical.
+\end{proof}
+
+\begin{corollary}
+	$(x_n)$ is convergent and $\lim(x_n) = a$ if and only if $\lim\inf(x_n) = \lim\sup(x_n) = a$.
+\end{corollary}
+
+\begin{proposition}
+	Let $(x_n), (y_n)$ be bounded. Then
+	\begin{enumerate}
+		\item $\lim\sup(c x_n) = c \lim\sup (x_n)$ if $c > 0$. \\
+		$\lim\sup(c x_n) = c \lim\inf (x_n)$ if $c < 0$. 
+	\item $\lim\sup (x_n + y_n) \le  \lim\sup(x_n) + \lim\sup(y_n)$\\
+	 $\lim\inf (x_n + y_n) \ge  \lim\inf(x_n) + \lim\inf(y_n)$
+ \item If $x_n < y_n $ then $\lim\sup(x_n) \le \lim\sup(y_n)$ and  $\lim\inf(x_n) \ge \lim\inf(y_n)$
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	We only prove (2). Let $x^* = \limsup (x_n) $ and $y^* = \limsup (y_n)$. Then $x_n \le x^* + \varepsilon$ and $y_n \le y^* + \varepsilon$ for sufficiently large $n$. Thus $x_n + y_n \le  x^* + y^* + 2 \varepsilon$. By lemma, $\limsup (x_n + y_n)\le  x^* + y^*$.
+\end{proof}
+
+\begin{proof}[Proof of Squeeze Theorem]
+	We have $x_n \le y_n \le z_n$. Also, $\lim x_n = \lim z_n = a$. We prove that $\lim y_n = a$. 
+
+	First  $\lim\inf y_n \ge \lim\inf x_n = \lim x_n = a$. Also, $\lim \sup y_n \le  \lim \sup z_n = \lim z_n = a$. Also, $\lim \inf y_n \le  \lim \sup y_n$. Thus
+
+	\[
+		a \le \lim \inf y_n \le  \lim \sup y_n \le a
+	.\] 
+	Thus $\lim \inf y_n =  \lim \sup y_n = a$. Thus $\lim y_n = a$.
+\end{proof}
+
+\subsection{Unbounded sequences}
+
+If $E \subset \mathbb{R}$ and is unbounded above, we simply write $\operatorname{sup} E = \infty $.
+ 
+
+We also set $\operatorname{sup}  \emptyset  = - \infty $.
+
+We say that $\lim (x_n) = \infty $ iff for any $N>0$ there exists $K_N$ such that $x_n > N$ for $n \ge  K_N$.
+
+If $(x_n)$ is unbounded above, then we find a subsequence $\left( x_{n_k} \right) $ such that $x_{n_k}\ge k$. Then $x_{n_k} \to  \infty $. 
+
+If $(x_n)$ is unbounded above, then $x_n$ has no upper bounds, so $x_n$ has no almost upper bounds. Thus $\operatorname{inf} \{\text{almost upper bounds}\} = \operatorname{inf} \emptyset  = +\infty $.
+
+So if $(x_n)$ is unbounded above, we set $\lim\sup (x_n) = \infty $.
+
+We restate the previous lemma that works on extended real numbers.
+\begin{lemma}
+	$\lim\sup x_n \le a$ iff for any $a < \alpha$, $x_n \le \alpha$ for $n \ge  K_\alpha$. This walks for $a \in [-\infty , \infty ]$.
+\end{lemma}

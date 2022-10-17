@@ -1,0 +1,85 @@
+\lecture{15}{Fri 14 Oct 2022 10:33}{}
+\begin{corollary}
+	Under assumption of last lemma, for each $g \in G$, one has $g^{-1} a g = a^{i}$ for some $i = i(g)$ with $1\le i < p$.
+\end{corollary}
+\begin{proof}
+	We know $g^{-1} a g \in \left\langle a \right\rangle $ since $\left\langle a \right\rangle \triangleleft G$. So $g^{-1} ag = a^j$ for some $j \in \mathbb{Z}$. We can assume $0\le j<p$ since $o(a) = p$, and $j\neq 0$ (if $j = 0$ then $ag = g \implies a = e$, a contradiction).
+\end{proof}
+
+
+\begin{theorem}
+	(2.8.5)
+	Suppose $G$ is a group of order $pq$ with $p$ and $q$ primes with $p > q$. Provided that $q \nmid (p-1)$, one has that $G$ is cyclic.
+\end{theorem}
+\begin{proof}
+	By Cauchy's Theorem, since $p \mid |G|$ and $q \mid |G|$, so there exists $a, b \in G$ with $o(a) = p$ and $o(b) = q$. The corollary shows that $b^{-1} ab = a^i$ for some $i$ with $1\le i<p$. Then $b^{-2} a b^2 = b^{-1} a^i b = (b^{-1}ab)^{i} = (a^i)^{i} = a^{i^2}$. By induction, $b^{-r} a b^r = a^{i^r}$. In particular, \[
+		a = b^{-q} a b^q = a^{i^q}
+	.\] 
+	Thus $i^q \equiv 1 \pmod p$, since $a$ has order $p$. But $i^{p-1}\equiv 1 \pmod p$ by Fermat's Little Theorem. Then since $i^q \equiv 1 \pmod p$ and $(q, q-1) = 1$, we must have integers  $u$ and $v$ with $u(p-1) + vq = 1$, so $i = (i^{p-1})^u (i^q)^v \equiv 1 \pmod p$.
+	
+	Thus $b^{-1} ab = a^1$. Thus $G$ is abelian. So now we can assume $G$ is abelian, $o(a) = p$ and $o(b) = q$ with $(p,q) = 1$. Note that $(ab)^m = e$ then $a^m = b^{-m}$. Now $a^{mq } = (b^1)^{-m} = e$, so $p | mq $, whence $p | m$. Similarly $b^{mp } = (a^{-p})^m = e$, so $q | m$. But then the order of $ab $ is at least $pq $, and $(ab)^{pq } = (a^p)^q (b^q)^p = e$. So  $o(ab) = pq $, and $\left\langle ab  \right\rangle  = G$. Thus $G$ cyclic.
+\end{proof}
+
+\subsection{Direct Products (internal and external)}
+
+\begin{definition}
+	Suppose $G_1, G_2, \ldots, G_n$ is any collection of groups. Then the \textit{(external) direct product} $G_1\times G_2\times \ldots\times G_n$ is the group \[
+		G = \{(g_1, \ldots, g_n): g_i \in G_i, 1\le i\le n\} 
+	\] 
+	and the group operation defined element-wise, i.e.\[
+		(g_1, \ldots, g_n)*(h_1, \ldots, g_h) = 
+		(g_1h_1,\ldots,g_nh_n)
+	.\] 
+\end{definition}
+It's easy to check that $(G, *)$ forms a group with identity $(e_1,\ldots,e_n)$.
+
+\begin{remark}
+	Define \[
+		\overline{G_i} = \{(e_1,\ldots,e_{i-1}, g_i, e_{i+1},\ldots,e_n): g_i \in G_i\} 
+	.\] 
+	Then $G_i \cong \overline{G_i} \triangleleft G_1 \times \ldots\times G_n =:G$.
+	\begin{proof}
+		Easily $\overline{G_i} \le G_i$, and in fact we can define a projection mapping
+		\begin{align*}
+			\pi_i: \overline{G_i}  &\longrightarrow G_i \\
+			(e_1,\ldots,e_{-1}, g_i, e_{i+1}, \ldots, e_n) &\longmapsto \pi_i((e_1,\ldots,e_{-1}, g_i, e_{i+1}, \ldots, e_n)) = g_i
+		.\end{align*}
+		Which is a surjective and injective homomorphism.
+
+		Also, if $\gamma \in G$, say $\gamma = (h_1, \ldots, h_n$, then
+		\begin{align*}
+			&\gamma^{-1}(e_1,\ldots,e_{-1}, g_i, e_{i+1}, \ldots, e_n) \gamma\\
+			&(e_1,\ldots,e_{-1}, h_i^{-1}g_ih_i, e_{i+1}, \ldots, e_n) \\
+			&\in \overline{G_i} 
+		\end{align*}
+	\end{proof}
+	
+\end{remark}
+
+\begin{remark}
+	If $\gamma = (g_1, \ldots, g_n) \in G$, then \[
+		\gamma = (g_1, e_2,\ldots,e_n)(e_1,g_2, e_3,\ldots,e_n)\ldots(e_1,e_2,\ldots,e_{n-1},g_n)
+	.\] 
+	Therefore $\gamma \in \overline{G_1} \overline{G_2} \ldots \overline{G_n} $ and the representation is unique.
+\end{remark}
+
+\begin{definition}
+	We say $G$ is the \textit{(internal) direct product} of its \textbf{normal} subgroups $N_1, \ldots, N_n$ if for every $g \in G$ there is a \textbf{unique} representation in the form $g = g_1g_2\ldots g_n$ with $g_i \in N_i$ for $1\le i\le n$.
+\end{definition}
+
+\begin{lemma}
+	(2.9.1) If $G = G_1 \times G_2 \times \ldots \times G_n$ is the external direct product, then $G$ is the internal direct product $G = \overline{G_1} \overline{G_2} \ldots \overline{G_n} $.
+\end{lemma}
+\begin{proof}
+	See 2 remarks.
+\end{proof}
+
+\begin{theorem}
+	(2.9.4)
+	Let $G$ be a group with $N_1,\ldots,N_n$. Then the map
+	\begin{align*}
+		\psi: N_1\times N_2\times \ldots\times N_n &\longrightarrow G \\
+		(g_1,g_2,\ldots,g_n) &\longmapsto \psi((g_1,g_2,\ldots,g_n)) = g_1g_2\ldots g_n
+	.\end{align*}
+	is an isomorphism if and only if $G$ is the internal direct product of $N_1, \ldots, N_n$.
+\end{theorem}
