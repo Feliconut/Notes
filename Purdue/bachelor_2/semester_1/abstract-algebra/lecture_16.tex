@@ -1,0 +1,71 @@
+\lecture{16}{Mon 17 Oct 2022 10:38}{}
+
+\begin{lemma}
+	(2.9.3) If $G$ is an internal direct product of its normal subgroups $N_1, \ldots, N_n$, then $N_i \cap N_j = \{e\} $ for $i \neq j$.
+\end{lemma}
+\begin{proof}
+	If $a \in N_i \cap N_j$ and $a \neq  e$ then
+	\[
+		a = e_1e_2\ldots a_i e_n\ldots e 
+		= e_1 e_2 \ldots a_j \ldots e_n
+	.\] 
+	which contradicts the uniqueness of representation of $a$ in the direct product.
+\end{proof}
+
+\begin{lemma}
+	(2.9.2)
+	Let $G$ be a group with $M \triangleleft G$ and $N \triangleleft G$ and $M \cap  N  =\{e\} $. Then for all $m \in  M$ and $n \in N$ one has $mn = nm$.
+
+\end{lemma}
+\begin{proof}
+	Observe that if $a = m n m^{-1} n^{-1} $, then $a = m(n m^{-1} n^{-1} ) \in M$. Also, $a = (m n m^{-1} ) n \in N$. That means $a \in M \cap N$, so $a = e$. Thus $mn = nm$.
+\end{proof}
+
+\begin{proof}
+	(Proof of 2.9.4)
+	
+	Suppose $\psi$ defined in hypothesis is an isomorphism. Then each $g \in G$ has a representation $g = g_1g_2\ldots g_n$ for some $g_i \in N_i$ by surjectivity. Also by injectivity, whenever $g = g_1\ldots g_n$ with $(g_1, g_2, \ldots, g_n) \in N_1\times \ldots \times N_n$, each $g_i$ is unique, so representation is unique. Then $G$ is the internal direct product of $N_1, \ldots, N_n$.
+
+	Suppose $G$ is the internal direct product of $N_1, \ldots, N_n$. Then each $g \in G$ has a unique representation $g = g_1g_2 \ldots g_n$. So $\psi$ is surjective. If $\psi(g_1, \ldots, g_n) = \psi(h_1, \ldots, h_n)$, then uniqueness of representation shows $g_1 \ldots g_n = h_1 \ldots h_n$ implies  $g_i = h_i$ for each $i$. So the $n$-tuples are the same. So $\psi$ is injective.
+
+	Remains to show $\psi$ is a homomorphism. But whenever $(g_1, \ldots, g_n)$ and $(h_1, \ldots, h_n)$ lie in $N_1 \times  \ldots \times  N_n$, then
+	\begin{align*}
+		&\psi\left( (g_1, \ldots, g_n)(h_1, \ldots, h_n) \right)\\
+		&= \psi(g_1h_1,\ldots ,g_n h_n) \\
+		&= g_1h_1 g_2h_2 \ldots g_n h_n \\
+		&= \left( g_1g_2\ldots g_n \right)  \left( h_1 h_2 \ldots h_n \right)  & \text{Lemma 2.9.2}\\
+		&= \psi(g_1,\ldots,g_n)\psi(h_1,\ldots,h_n) 
+	\end{align*}
+	Thus $\psi$ is a homomorphism, it's injective and surjective, hence it is an isomorphism.
+\end{proof}
+
+\subsection{Finite Abelian Groups}
+\begin{theorem}[Classification for Finite Abelian Groups]
+	(2.10 A)
+	Suppose that $G$ is a finite abelian group. Then $G$ is isomorphic to a direct product of cyclic groups of the shape \[
+		\mathbb{Z}_{p_1^{\alpha_1}}\times \mathbb{Z}_{p_2^{\alpha_2}}\times\ldots \times  \mathbb{Z}_{p_r^{\alpha_r}}
+	.\] 
+	where $p_i$ are primes (not necessarily distinct), and $\alpha_i \in \mathbb{N}$, and $n = |G| = p_1^{\alpha_1} \ldots p_r^{\alpha_r}$.
+\end{theorem}
+
+\begin{corollary}
+	(2.10 B)
+	If $G$ is a finite abelian group, then there are integers $m_1, \ldots, m_k$ with $2 \le m_1 \le  m_2 \le  \ldots \le  m_k$, and $m_i | m_{i+1}$ for $1\le i<k$, such that \[
+		G \cong \mathbb{Z}_{m_1} \times \mathbb{Z}_{m_2} \times \ldots \times \mathbb{Z}_{m_k}
+	.\] 
+\end{corollary}
+
+\begin{example}
+	Classify all abelian groups of order $1400$.
+
+	Observe that $1400 = 2^3 5^2 7$. Then by classification theorem, if $|G| = 1400$, then $G$ is isomorphic to one of:
+	\begin{itemize}
+		\item $\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_5 \times \mathbb{Z}_5 \times \mathbb{Z}_7 \cong \mathbb{Z}_{70} \times \mathbb{Z}_{10} \times \mathbb{Z}_2$
+		\item $\mathbb{Z}_2 \times \mathbb{Z}_4 \times \mathbb{Z}_5 \times \mathbb{Z}_5 \times \mathbb{Z}_7 \cong \mathbb{Z}_{140} \times \mathbb{Z}_{10}$ 
+		\item $\mathbb{Z}_8 \times \mathbb{Z}_5 \times \mathbb{Z}_5 \times \mathbb{Z}_7 \cong \mathbb{Z}_{280}\times \mathbb{Z}_5$
+		\item $\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_{25} \times \mathbb{Z}_7\cong \mathbb{Z}_{350} \times \mathbb{Z}_2 \times \mathbb{Z}_2$ 
+		\item $\mathbb{Z}_2 \times \mathbb{Z}_4 \times \mathbb{Z}_{25} \times \mathbb{Z}_7 \cong \mathbb{Z}_{700} \times \mathbb{Z}_2$
+		\item $\mathbb{Z}_8 \times \mathbb{Z}_{25} \times \mathbb{Z}_7 \cong \mathbb{Z}_{1400}$
+	\end{itemize}
+	There are $6 $ isomorphism classes for all finite abelian group of order $1400$.
+\end{example}

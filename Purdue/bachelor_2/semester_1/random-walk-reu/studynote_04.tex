@@ -105,18 +105,17 @@ Hence
 -\frac{\log C}{\log \varepsilon} \right) 
 	.\]
 
-We claim:
+The next claim justifies us to take smaller and smaller $\varepsilon$, and implies that $\alpha$ can be bounded from below arbitrarily closely in finitely many steps.
 \begin{proposition}
 \[
 		\alpha 
-		=\lim_{\delta \to  0}
-		\operatorname{inf}_{\varepsilon<\delta}
+		=\lim_{\varepsilon' \to  0}
+		\operatorname{inf}_{\varepsilon<\varepsilon'}
 		\left( \operatorname{inf}_x
 		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
 -\frac{\log C}{\log \varepsilon} \right) 
 	.\]
 \end{proposition}
-	This is basically saying that all roughness must remain in arbitrarily small detail.
 \begin{proof}
 	Fix some $\varepsilon'$ such that 
 	for some $\delta>0$ and all $\varepsilon < \varepsilon'$, \[
@@ -136,12 +135,14 @@ Take $C = \frac{C'}{(\varepsilon')^{-\delta}}$, and we have
 \[
 		\left| f(x) - f(x+\varepsilon) \right| \le C (\varepsilon')^{\delta} \varepsilon^{\alpha}
 		\le C \varepsilon^{\delta} \varepsilon^{\alpha}
-		= C' \varepsilon^{\alpha+\delta}
+		= C \varepsilon^{\alpha+\delta}
 .\]
+
 \end{proof}
-This claim allows us to take smaller and smaller $\varepsilon$, and be convinced that the limit infimum will be our desired $\alpha$.
 
 %The next claim gives a reasonable error bound for dropping the infimum over $\varepsilon$ when calculating $\alpha$.
+
+When running our algorithm, we fix some particular $\varepsilon$ and take infimum over $x$. We want to be assured that dropping the infimum over $\varepsilon$ when calculating $\alpha$ gives a good enough approximation. This motivates the next proposition:
 \begin{proposition}
 	We have the bound
 	\[
@@ -158,17 +159,27 @@ This claim allows us to take smaller and smaller $\varepsilon$, and be convinced
 	under the following assumptions:
 
 \begin{enumerate}
+	\item $f$ is a 
 	\item $f$ has bounded total variation.
 \end{enumerate}
+
 
 \color{gray}Note: I don't know how to prove this theorem. I discussed this with Zijie, and have some sketchy idea on how to prove it for brownian motions. 
 \end{proposition}
 
+To prove it, we use
+\begin{theorem}[Berry-Esseen Inequality]
+	3.4.9. Let $X_1, X_2, \ldots$ be i.i.d. with $E X_i=0, E X_i^2=\sigma^2$, and $E\left|X_i\right|^3=$ $\rho<\infty$. If $F_n(x)$ is the distribution of $\left(X_1+\cdots+X_n\right) / \sigma \sqrt{n}$ and $\mathcal{N}(x)$ is the standard normal distribution, then
+\[
+\left|F_n(x)-\mathcal{N}(x)\right| \leq 3 \rho / \sigma^3 \sqrt{n}
+\]
+\end{theorem}
+
 Using the approximation above, for some specific $\varepsilon$, we can approximate $\alpha$ by
 \[
-	\alpha \approx \operatorname{inf}_x
+	\alpha = \operatorname{inf}_x
 		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
--\frac{\log C}{\log \varepsilon} 
+-\frac{\log C}{\log \varepsilon}  + O(\varepsilon)
 .\] 
 
 We then use $\operatorname{inf} _i a_i^{(j)}$ as an upper estimation:
@@ -179,7 +190,7 @@ We then use $\operatorname{inf} _i a_i^{(j)}$ as an upper estimation:
 		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
 .\] 
 
-We finally have a curve to fit:
+Put all these together, we have a curve to fit, with error terms bounded and going to zero:
 \begin{equation}
 	\label{eqn:holder-fit-curve}
 	\alpha + \frac{\log C}{\log \varepsilon_j} = \operatorname{inf} _i a_i^{(j)} + O(\varepsilon) 

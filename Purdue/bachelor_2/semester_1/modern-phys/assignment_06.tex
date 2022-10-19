@@ -1,0 +1,61 @@
+\assignment{6}{Tue 18 Oct 2022 16:17}{}
+
+1. Find the locations where the probability density has its maximum values for the wave function $\psi(x)=A\left(2 a x^2-1\right) e^{-a x^2 / 2}$, which represents the second excited state of the simple harmonic oscillator.
+\begin{proof}[Solution]
+	First square it to obtain probability density:
+	\[
+		|\varphi(x)|^2 = A^2 (2 a x^2 - 1)^2 e^{- a x^2}
+	.\] 
+	Then differentiate to find extremum:
+	\begin{align*}
+		\frac{d}{dx} |\varphi(x)|^2 \\
+		&= A^2 2(2 a x^2 - 1) (4 a x) e^{- a x ^2} + A^2 (2 a x^2 - 1)^2 (- 2 a x) e^{- a x^2}\\
+		&= A^2(2 a x^2 - 1) (8 a x - (2 a x^2 - 1)(2 a x)) e^{- a x^2} \\
+		&= A^2(2 a x^2 - 1) (10 a x - 4 a^2 x^3) e^{- a x^2} \\
+		&= A^2(2 a x^2 - 1) (2ax)( 5  - 2a x^2) e^{- a x^2}
+	.\end{align*} 
+	It attains extremum at the following points: $x = \pm \sqrt{\frac{1}{2a}} $, $x = 0$,  $x = \pm \sqrt{\frac{5}{2a}} $.
+
+	We also need to to find zeros of the wave function itself:
+	 the zeros are $x = \pm \sqrt{\frac{1}{2a}} $.
+
+	Thus the maximum values of probability density are achieved at $x = 0$,  $x = \pm \sqrt{\frac{5}{2a}} $.
+\end{proof}
+
+2. The first excited state of the harmonic oscillator has a wave function of the form $\psi(x)=A x e^{-a x^2}$. Find the constants $A$ and $a$ and the energy $E$.
+\begin{proof}[Solution]
+	First substitute into schodinger equation to solve for $a$.
+\[
+	-\frac{\hbar^2}{2 m} \frac{d^2 \psi}{d x^2}+\frac{1}{2} k x^2 \psi=E \psi
+.\] 
+It's so hard to typeset, so the procedure is written on paper and attached.
+
+The result is $a = \frac{\sqrt{mk}}{2 \hbar} $ and $E = \frac{3}{2} \hbar \sqrt{k / m} $.
+
+Now we want to find $A$ by normalization. The integration process is also written on a paper attached (on the back side of the paper)
+
+The result is $A = \frac{2^{\frac{5}{4}}}{\pi^{\frac{1}{4}}} \left( \frac{\sqrt{mk} }{2 \hbar} \right)^{\frac{3}{4}} $
+\end{proof}
+
+3. A two-dimensional harmonic oscillator has energy $E=\left(n_x+n_y+1\right)$ where $n_x$ and $n_y$ are integers beginning with zero.
+a) Justify this result based on the energy of the one-dimensional oscillator.
+\begin{proof}[Solution]
+	In one-dimentison case, \[
+		E_n=\left(n+\frac{1}{2}\right) \hbar \omega_0
+	.\] 
+	If we assume that the two dimensions can be viewed at independent contributions to the total energy, then
+	\[
+		E_n = E_x + E_y = (n_x + \frac{1}{2}) \hbar \omega + (n_y + \frac{1}{2}) \hbar \omega =   (n_x + n_y + 1) \hbar \omega
+	.\] 
+\end{proof}
+
+b) Sketch an energy level diagram showing the lowest for energy levels, For each level show the value of $E$ (in units of $\hbar \omega_0$ ), the quantum numbers $n_x$ and $n_y$, and the degeneracy.
+\begin{proof}[Solution]
+	see attached paper.
+\end{proof}
+
+c) Show that the degeneracy of each level is equal to $n_x+n_y+1$.
+\begin{proof}[Solution]
+	For any level $n_x + n_y + 1 = k$, there are exactly $k$ ways to choose nonnegative integers $n_x$ and $n_y$ such that they sum to $k$. $n_x$ may take values $0, 1, 2, \ldots, k-1$, and $n_y$ may take $k-1, k-2, \ldots, 0$.
+\end{proof}
+

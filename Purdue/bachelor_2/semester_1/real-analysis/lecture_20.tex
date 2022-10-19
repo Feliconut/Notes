@@ -1,0 +1,62 @@
+\lecture{20}{Mon 17 Oct 2022 11:43}{Continuous Functions}
+\section{Continuous Functions}
+
+\begin{proposition}
+	Definitions of continuity are equivalent.
+\end{proposition}
+\begin{proof}
+	We prove in the direction $1\implies 2\implies 3 \implies 1$.
+	\begin{itemize}
+		\item [Def 1 implies Def 2] Take $V = B_{\varepsilon} \left( f(a) \right) $. By definition, there is open $U$, $U \ni a$, such that $f(U \cap E) \subset V = B_{\varepsilon}\left( f(a) \right) $.
+			Since $U$ is open, there exists some $\delta >0$ such that $B_\varepsilon(a) \subset U$. Thus $B_\varepsilon(a) \subset B_\varepsilon\left( f(a) \right) $.
+		\item [Def 2 implies Def 3] Take some sequence $(x_n)$ converging to $a$ in $E$. Fix arbitrary $\varepsilon>0$. By def 2, there exists $\delta>0$ such that $f\left( B_\delta(a) \right)  \subset B_\varepsilon\left( f(a) \right) $.
+			Then by convergence of $x_n$, we have $\|x_n - a\|<\varepsilon$ for $n \ge K_\delta$. Then $f(x_n) \in B_\varepsilon(f(a))$, so $\|f(x_n) - f(a)\|N \varepsilon$ for $n \ge K_\varepsilon$. Thus $f(x_n) \to  f(a)$.
+		\item [Def 3 implies Def 1]
+		Suppose not. Then $f$ is sequentially continuous at $a$, but there exists open $V \ni b$ in $\mathbb{R}^q$ such that $f(U \cap E) \not \subset V$ for any open $U \ni a$.
+		In particular, $f\left( B_{\frac{1}{n}}(a) \cap E\right) \not \subset V$. Thus there exists $x_n \in B_{\frac{1}{n}} (a) \cap E$ such that $x_n \not\in V$. Thus $\|x_n - a\|< \frac{1}{n}$ and $f(x_n) \not\in V$ for any $n$. Therefore $x_n \to a$ but $f(x_n) \not \to f(a)$ (it never enters $V$ because it stays in the complement of  $V$, and the complement is closed).
+	\end{itemize}
+\end{proof}
+
+\begin{example}
+	Define
+	\begin{align*}
+		f: \mathbb{R} &\longrightarrow \mathbb{R} \\
+		x &\longmapsto f(x) = \begin{cases}
+			0 & x \in \mathbb{R}\setminus \mathbb{Q}\\
+			1 & x \in \mathbb{Q}
+		\end{cases}
+	.\end{align*}
+
+	This is called the \logseq{Dirichlet's Function}.
+	\begin{claim}
+		$f$ is discontinuous everywhere.
+	\end{claim}
+	\begin{proof}
+		From density of $\mathbb{Q}$ in $\mathbb{R}$, there exists a sequence such that $r_n \in \mathbb{Q}$, $r_n \to a$. From density of $\mathbb{R}\setminus \mathbb{Q}$ in $\mathbb{R}$, there also exists a sequence such that $s_n \in \mathbb{R}\setminus \mathbb{Q}$ and $s_n \to a$. Thus $f(r_n) \to 1$ and $f(s_n) \to 0$. Thus $f$ is not continuous at $a$.
+	\end{proof}
+\end{example}
+\begin{example}
+	Define
+	\begin{align*}
+		g: \mathbb{R} &\longrightarrow \mathbb{R} \\
+		x &\longmapsto g(x) = \begin{cases}
+			0 & x \in \mathbb{R}\setminus \mathbb{Q}\\
+			\frac{1}{n} & x = \frac{m}{n} \text{ in least terms, }m \in \mathbb{Z}, n \in \mathbb{N}, (m,n) = 1
+		\end{cases}
+	.\end{align*}
+	\begin{claim}
+		$g$ is discontinuous at any $a \in \mathbb{Q}$.
+	\end{claim}
+	\begin{proof}
+		Take $s_n \in \mathbb{R}\setminus \mathbb{Q}$ such that $s_n \to a$. Then $g(s_n) \to 0 \neq g(a) >0$.
+	\end{proof}
+	\begin{claim}
+		$g$ is continuous at any $a \in \mathbb{R}\setminus \mathbb{Q}$.
+	\end{claim}
+	\begin{proof}
+		Pick any $\varepsilon>0$. Then there are only finite many $x \in (b -1, b+1)$ such that $g(x) > \varepsilon$. All of them are in $\mathbb{Q}$. Let $\delta  = \min \{| b - x| : g(x) > \varepsilon, x \in (b-1, b+1)\} $. Thus $\delta > 0$. Hence $g(b - \delta, b + \delta) \subset [0,\varepsilon)$. Hence $f$ is continuous at $b$.
+	\end{proof}
+	
+	                                                                  
+	
+\end{example}
