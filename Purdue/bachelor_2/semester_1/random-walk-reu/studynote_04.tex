@@ -142,38 +142,53 @@ Take $C = \frac{C'}{(\varepsilon')^{-\delta}}$, and we have
 
 %The next claim gives a reasonable error bound for dropping the infimum over $\varepsilon$ when calculating $\alpha$.
 
-When running our algorithm, we fix some particular $\varepsilon$ and take infimum over $x$. We want to be assured that dropping the infimum over $\varepsilon$ when calculating $\alpha$ gives a good enough approximation. This motivates the next proposition:
+To get a even faster approximation, we want to fix some particular $\varepsilon$ and take infimum only over $x$. We want to be assured that dropping the infimum over $\varepsilon$ when calculating $\alpha$ gives a good enough approximation. This motivates the next proposition:
 \begin{proposition}
-	We have the bound
+	If $f$ is a stationary process, with independent and symmetrically distributed increments, and it is scale invariant in the sense that for any $\varepsilon$ and $\varepsilon'$ we have $\frac{f(x+\varepsilon) - f(x)}{\varepsilon} =_d \frac{f(x'+\varepsilon') - f(x')}{\varepsilon'}$, then for all $\delta>0$,
+	we have the bound
 	\[
+		\operatorname{Pr} \left[
+\left|
 		 \operatorname{inf}_x
-		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
--\frac{\log C}{\log \varepsilon}  
-\le 
-		\operatorname{inf}_{\varepsilon}
-		\left( \operatorname{inf}_x
-		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
--\frac{\log C}{\log \varepsilon} \right) 
-+ O(\varepsilon)
+		 \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha 
+		\right|
+		> \delta
+	\right]
+<  O(\varepsilon)
 	\]
-	under the following assumptions:
-
-\begin{enumerate}
-	\item $f$ is a 
-	\item $f$ has bounded total variation.
-\end{enumerate}
-
-
-\color{gray}Note: I don't know how to prove this theorem. I discussed this with Zijie, and have some sketchy idea on how to prove it for brownian motions. 
 \end{proposition}
-
-To prove it, we use
-\begin{theorem}[Berry-Esseen Inequality]
-	3.4.9. Let $X_1, X_2, \ldots$ be i.i.d. with $E X_i=0, E X_i^2=\sigma^2$, and $E\left|X_i\right|^3=$ $\rho<\infty$. If $F_n(x)$ is the distribution of $\left(X_1+\cdots+X_n\right) / \sigma \sqrt{n}$ and $\mathcal{N}(x)$ is the standard normal distribution, then
+\begin{proof}
+	We assume $\alpha + \delta < 1$, and $\varepsilon < 1$.
+	Take arbitrary $\varepsilon>0$. We can choose $\varepsilon'>0$ such that $\varepsilon' < \varepsilon$, and
+	\[
+		\operatorname{inf}_x \frac{\log \left| f(x) - f(x+\varepsilon') \right|}{\log \varepsilon'} - \frac{\log C}{\log \varepsilon'} < \alpha + \delta
+	.\] 
+	Thus \[
+		\operatorname{inf}_x  \left| f(x) - f(x+\varepsilon') \right|
+		> C \varepsilon'^{\alpha + \delta}
+	.\] 
+	By an (unrigorous) use of scale invariance, 
+	\[
+		\operatorname{inf}_x  \left| f(x) - f(x+\varepsilon) \right| > C \varepsilon'^{\alpha + \delta} \frac{\varepsilon}{\varepsilon'} > C \varepsilon^{\alpha + \delta}
+	.\] 
+	Thus 
 \[
-\left|F_n(x)-\mathcal{N}(x)\right| \leq 3 \rho / \sigma^3 \sqrt{n}
-\]
-\end{theorem}
+		\operatorname{inf}_x \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha < \delta
+	.\]
+\end{proof}
+\begin{proof}
+	We assume $\alpha + \delta < 1$, and $\varepsilon < 1$.
+	\begin{align*}
+		&\operatorname{Pr} \left[ \operatorname{inf}_x \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha < \delta \right]\\
+		&\ge\operatorname{Pr} \left[ \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha < \delta \right]\\
+		&= \operatorname{Pr} \left[ \left| f(x) - f(x+\varepsilon) \right| > C \varepsilon^{\alpha + \delta} \right]  
+		\intertext{Now we choose some $\varepsilon' < \varepsilon$, and note that this implies $C \varepsilon'^{\alpha + \delta} \frac{\varepsilon}{\varepsilon'} > C \varepsilon^{\alpha + \delta}$, so}
+		&\ge  \operatorname{Pr} \left[ \left| f(x) - f(x+\varepsilon) \right| > C \varepsilon'^{\alpha + \delta}\frac{\varepsilon}{\varepsilon'} \right] \\
+		&= \operatorname{Pr} \left[ \left| f(x') - f(x'+\varepsilon') \right| > C \varepsilon'^{\alpha + \delta} \right]  & \text{using scale invariance}\\
+		&\ge\operatorname{Pr} \left[ \frac{\log \left| f(x') - f(x'+\varepsilon') \right|}{\log \varepsilon'} - \frac{\log C}{\log \varepsilon'} - \alpha < \delta \right]
+	.\end{align*}
+	Using Proposition 2, we can choose small enough $\varepsilon'$ to make this probability arbitrarily close to $1$.
+\end{proof}
 
 Using the approximation above, for some specific $\varepsilon$, we can approximate $\alpha$ by
 \[
