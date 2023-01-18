@@ -1,0 +1,113 @@
+\lecture{28}{Mon 07 Nov 2022 11:31}{Differentiation}
+
+\section{Differentiation}
+\subsection{Definition and basic properties}
+Suppose we have a function $f: E \to \mathbb{R}^q$, $E \subset \mathbb{R}$, $c$ cluster point of $E$, then we define \[
+	f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}
+.\] 
+as the \textit{derivative} of $f$ at $c$.
+
+We restrict outselfs to $E = [a,b]$, $c \in (a,b)$. When $c = a$ or $c = b$ we would rather write $f'(a+)$ and $f'(b-)$.
+
+By definition, $f'(c) = L$ iff for any $\varepsilon>0$, there is $\delta>0$ such that $|\frac{f(x)-f(c)}{x - c}-L|<\varepsilon$ whenever $0<|x - c|<\delta$.
+
+We also say $f$ is \textit{differentiable} at $c$ if $f'(c)$ exists.
+
+\begin{proposition}
+	If $f$ is differentiable at $c$, then $f$ is continuous at $c$.
+\end{proposition}
+\begin{proof}
+	Take $\varepsilon = 1$ and let $\delta = \delta(\varepsilon)$ such that
+	\[
+		\left| \frac{f(x) - f(c)}{x -c}- L  \right| < 1
+	.\] 
+	Then by triangle inequality, 
+	 \[
+		\left| \frac{f(x) - f(c)}{x - c} \right| \le |L| + 1
+	.\] 
+	Hence $\|f(x) - f(c)\|\le (\|L\|+1) |x - c|$ whenever $\|x - c\|<\delta$, where $\|L\| + 1$ is a constant. This is called \textit{Lipchitz condition} at $c$, which implies continuity condition of $f$ at $c$.
+\end{proof}
+
+\begin{nonexample}
+	$f(x) = |x|$ is not differentiable at $0$, but continuous.
+
+	There are functions continuous everywhere but nowhere differentiable. For example, the \logseq{Weierstrass Function}
+	\[
+		f(x) = \sum_{n=1}^{\infty} \frac{1}{2^n}\cos(3^n x)
+	.\] 
+\begin{intuition}
+	Intuition. In this function, $3^n$ is multiple of derivative of $\cos(3^nx)$ but only divided by $2^n$, so we are adding finer and sharper oscillation to the function. In the end the function will be so sharp in its fine detail.
+\end{intuition}
+\end{nonexample}
+
+\begin{remark}
+	We always take small enough $\delta$ so that  $(c - \delta, c+\delta) \subset (a,b)$. This is always possible.
+\end{remark}
+\begin{proposition}
+	Let $f: [a,b] \to \mathbb{R}$. Suppose $f'(c) > 0$. Then there is $\delta>0$ such that $f(x) > f(c)$ for $c < x < c+\delta$ and $f(x) < f(c)$ for $c - \delta < x < c$.
+\end{proposition}
+\begin{proof}
+	Take $\varepsilon = \frac{1}{2}f'(c)$. Then for $|x - c| < \delta$,
+	\[
+		\left| \frac{f(x) - f(c)}{x - c} - f'(c) \right| < \frac{1}{2} f'(c)
+	.\] 
+	Then
+	\[
+		\frac{1}{2} f'(c) < \frac{f(x) - f(c)}{x - c}
+	.\] 
+	In the first case, if $c < x < c+\delta$, we have $x - c > 0$, so $f(x) - f(c) > \frac{1}{2} f'(c) ( x - c ) > 0$.
+
+	In the second case, $c - \delta < x < c$, then $x - c < 0$. Hence $f(x) - f(c) < \frac{1}{2} f'(c) (x - c) < 0$.
+\end{proof}
+
+\begin{definition}[Local Maximum]
+	We say $f$ has a \textit{local maximum} (or relative maximum) at $c$, if there exists $\delta>0$ such that $f(x) \le f(c)$ for any $x \in B_\delta(c) \cap E$.
+\end{definition}
+
+\begin{theorem}[Interior Maximum Theorem]
+	Let $f: [a,b] \to \mathbb{R}$. If $c \in (a,b)$ and $f$ has a relative maximum (or minimum) at $c$, then there are two possibilities
+	\begin{enumerate}
+		\item $f$ is differentiable at $c$ and $f'(c) = 0$ 
+		\item $f$ is not differentiable at $c$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Suppose $f'(c)$ exists. Then if $f'(c) > 0$, then there exists $\delta>0$ such that $f(x) > f(c)$ for $c < x < c+\delta$, so $c$ is not relative maximum. Also, $f(x) < f(c) $ for $c - \delta< x < c$, so $c$ is not local minimum.
+
+	The same holds for $f'(c) < 0$. Hence $f'(c) = 0$.
+\end{proof}
+
+\subsection{Mean Value Theorem and some Applications}
+
+\begin{theorem}[Rolle's Theorem]
+	Let $f: [a,b] \to \mathbb{R}$ be continuous and differentiable in $(a,b)$. If $f(a) = f(b)  =0$, then there exists $c \in (a,b)$ such that $f'(c) = 0$.
+\end{theorem}
+\begin{proof}
+	$f$ must achieve maximum and minimum values somewhere $x^*, x_* \in [a,b]$ since $f$ continuous and $[a,b]$ compact. If $x^*$ or $x_*$ is an interior point then we are done by the Interior Maximum Theorem. If both $x^*$ and $x_*$ are boundar points, then $f$ is constantly zero, thus $f'$ is constantly zero.
+\end{proof}
+
+\begin{theorem}[Mean Value Theorem]
+	Let $f: [a,b]\to \mathbb{R}$ be continuous and differentiable on $(a,b)$. Then there is $c \in (a,b)$ such that 
+	\[
+		\frac{f(b) - f(a)}{b-a} = f'(c)
+	.\] 
+\end{theorem}
+\begin{proof}
+	We reduce to Rolle's Theorem. Define $l(x) = f(a) + \frac{f(b) - f(a)}{b-a}(x-a)$. Now we have  $l(a) = f(a)$ and $l(b) = f(b)$. Then $f - l$ is differentable on $(a,b)$ and both its endpoints are $0$. Hence by Rolle's Theorem, there is $c \in (a,b)$ such that $(f-l)'(c) = 0$. This means
+	\[
+		f'(c) = l'(c) = \frac{f(b) - f(a)}{b-a}
+	.\] 
+\end{proof}
+
+\begin{theorem}[Cauchy's Mean Value Theorem]
+	Let $f,g$ be continuous functions on $[a,b]$ and differentiable on $(a,b)$. Then there exists $c \in (a,b)$ such that
+	\[
+		\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}
+	.\] 
+	In the sense that $g'(c)\left( f(b) - f(a) \right)  = f'(c)\left( g(b) - g(a) \right) $.
+\end{theorem}
+\begin{proof}
+	See textbook.
+\end{proof}
+
+

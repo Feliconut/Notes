@@ -1,0 +1,59 @@
+\lecture{26}{Wed 02 Nov 2022 11:54}{Limit of function}
+
+\begin{remark}
+	Bernstein's Theorem $\implies$ Weierstrass theorem on $[0,1]\implies$  Weierstrass theorem on $[a,b]$
+
+If $f: [a,b] \to \mathbb{R}$ continuous, let $\varphi(t) = f\left( a(1-t) + bt \right) $. Then $\varphi(t)$ is continuous. By Weierstrass on $[0,1]$, there exists $P(t)$ polynomial such that $\left| \varphi(t) - P(t) \right| <\varepsilon$ for all $t \in [0,1]$. Then $\left| f(x) - P(\frac{x-a}{b-a})  \right| < \varepsilon$ for $x \in [a,b]$.
+\end{remark}
+
+\begin{remark}
+	(Probabilistic Proof of Berstein Approximation Theorem)
+
+	We take $X_n$ independent random variables taking values  $[0,1]$ where $P(X_n = 1) = x \in  [0,1]$. By law of large number, $\frac{X_1 + \ldots + X_n}{n}\to x$. Now \[
+		P\left( \frac{X_1+\ldots+ X_n}{n}= \frac{k}{n} \right)  = \omega_k(x)
+	.\] 
+	Hence the Bernstein Polynomial is
+	\[
+		B_n(x, f) = E\left( f\left( \frac{X_1+ \ldots + X_n}{n} \right)  \right) 
+	.\] 
+\end{remark}
+
+\subsection{Limit of a function at a point}
+
+Warning: Skip everything about "nondeleted limit".
+
+Let $E \subset \mathbb{R}^p$, $c$ is a cluster point of $E$. We want to define what it means to say $\lim_{x \to c} f(x) = b$.
+
+\begin{definition}[Limit of Function]
+	We say $\lim_{x \to c} f(x) = b$ if
+	\begin{itemize}
+		\item (Topological)
+			for any open $V \ni b$ in $\mathbb{R}^q$ there is $U = U_V \ni c$ open in $\mathbb{R}^p$ such that $f(x) \in V$ if $x \in \left( U \setminus  \{c\}  \right) \cap E $.
+		\item (Metric)
+			For any $\varepsilon>0$, exists $\delta>0$ such that $|f(x) - b|< \varepsilon$ whenever $0<|x - c| < \delta$ and $x \in E$.
+		\item (Sequential)
+			For any sequence $x_n$ in $E$ such that $x_n \to c, x_n \neq c$, we have $f(x_n) \to b$.
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	In the definition, we neglect the value of function at point $c$. Limit at a point only depends on points beside it.
+\end{remark}
+
+We skip the proof that these definitions are equivalent.
+
+\begin{proposition}
+	If $f: E \to \mathbb{R}^q$ and $c \in E$ is a cluster point of $E$, then $f$ is continuous at $c$ iff $\lim_{x \to c} f(x) = f(c)$.
+\end{proposition}
+\begin{proof}
+	Skipped.
+\end{proof}
+
+\begin{proposition}
+	Limit preserves linear combination, multiplication, substraction (when divisor is nonzero) of functions.
+\end{proposition}
+\begin{proof}
+	Similar to proof of continuous functions.
+\end{proof}
+
+
+

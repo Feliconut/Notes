@@ -1,0 +1,215 @@
+\homework{10}{Fri 04 Nov 2022 13:52}{}
+Herstein, section $4.1$, page 133 , Questions $1,2,3,13,19,20,31$. 
+\begin{itemize}
+	\item 1. Find all the elements in $\mathbb{Z}_{24}$ that are invertible (i.e., have a multiplicative inverse) in $\mathbb{Z}_{24}$.
+\begin{proof}
+	We find all solution $p,q \in \{0,1,2,\ldots,23\} $ such that $pq \equiv 1 \pmod {24}$.
+
+	\begin{align*}
+		1\times 1&=24\times 0+1 \\
+5\times 5&=24\times 1+1\\
+7\times 7&=24\times 2+1\\
+11\times 11&=24\times 5+1\\
+13\times 13&=24\times 7+1\\
+17\times 17&=24\times 12+1\\
+19\times 19&=24\times 15+1\\
+23\times 23&=24\times 22+1
+	.\end{align*}
+Thus the only invertible elements are $1,5,7,11,13,17,19,23$.
+\end{proof}
+
+	\item 2. Show that any field is an integral domain.
+\begin{proof}
+	Assume $R$ is a field, in particular it is commutative. Hence it suffices to show that $R$ is a domain. 
+
+	Assume $a \cdot b = 0$ and $a\neq 0$. We have to show $b = 0$. Now because $R$ is a division ring (part of definition of a field), there exists $a^{-1} \in R$ such that $a a^{-1} = a^{-1} a = 1$. Thus
+	\[
+		a^{-1} \cdot (a \cdot b) = a^{-1} \cdot 0
+	.\] 
+	Use associative law in the left and use the identity $x \cdot 0 = 0$ on the right, we obtain
+	\[
+		(a^{-1} \cdot a) \cdot b = 1 \cdot b = b = 0
+	.\] 
+\end{proof}
+
+	\item 3. Show that $\mathbb{Z}_n$ is a field if and only if $n$ is a prime.
+\begin{proof}
+	Assume $n = p$ is a prime and $m < p$. Then since $(m,p) = 1$, there exist integers $k$ and $l$ such that $km + lp = 1$. Then we have  $km \equiv 1 \pmod p$. Apply Euclidean algorithm we obtain $k = s p + r$ where $s \in \mathbb{Z}$ and $0\le r<p$. Thus $s m \equiv 1 \pmod p$, so $s \in \mathbb{Z}_n$ and $s \cdot m = 1$ in $\mathbb{Z}_n$. Hence $\mathbb{Z}_n$ is a division ring. Since multiplication is commutative, $\mathbb{Z}_n$ is a field.
+
+	Assume $n$ is not prime. Then there exists some $a, b < n$, where  $a, b > 1$ such that $n = ab$. But then $ab = 0$ modulo $n$, but $a, b \neq 0$. Hence $\mathbb{Z}_n$ is not a domain. Hence it cannot be a field.
+\end{proof}
+
+	\item 13. Find the following products of quaternions.
+(a) $(i+j)(i-j)$.
+\begin{proof}[Solution]
+	\[
+		(i+j)(i-j) = i^2 - ij + ji - j^2 = -1 - k - k + 1 = -2k
+	.\] 
+\end{proof}
+
+(b) $(1-i+2 j-2 k)(1+2 i-4 j+6 k)$.
+\begin{proof}[Solution]
+	\begin{align*}
+		&(1 -1 i +2 j -2 k)
+		(1 +2 i -4 j +6 k)\\
+		&=(1+2+8+12) + (2-1+12-8)i + (-4+2-4+6)j + (6-2+4-4)k\\
+		&= 23 + 5i + 4k
+	.\end{align*} 
+\end{proof}
+
+(c) $(2 i-3 j+4 k)^2$.
+\begin{proof}[Solution]
+	\begin{align*}
+		(2 i-3 j+4 k)^2
+		&= (2 i-3 j+4 k)(2 i-3 j+4 k) \\
+		&= (-4-9-16)+(-12+12)i+(8-8)j+(-6+6)k \\
+		&= -29
+	\end{align*}
+\end{proof}
+
+(d) $i\left(\alpha_0+\alpha_1 i+\alpha_2 j+\alpha_3 k\right)-\left(\alpha_0+\alpha_1 i+\alpha_2 j+\alpha_3 k\right) i$.
+\begin{proof}[Solution]
+	\begin{align*}
+		& i\left(\alpha_0+\alpha_1 i+\alpha_2 j+\alpha_3 k\right)-\left(\alpha_0+\alpha_1 i+\alpha_2 j+\alpha_3 k\right) i\\
+		&= \left( -\alpha_1 + \alpha_0 i -\alpha_3 j + \alpha_2 k \right) - \left( -\alpha_1 + \alpha_0 i + \alpha_3 j - \alpha_2 k \right)  \\
+		&= -2\alpha_3 j + 2 \alpha_2 k
+	.\end{align*}
+\end{proof}
+
+\item 19. Show that there is an infinite number of solutions to $x^2=-1$ in the quaternions.
+\begin{proof}
+	Observe that 
+	\[
+		(ai + bj + ck)^2 = -(a^2 + b^2 + c^2)
+	.\] 
+	And since there are infinitely many 3-tuples $(a,b,c)$ such that $(a^2 + b^2 + c^2 = 1)$, we have infinitely many solutions to $x^2 = -1$ by letting $x = ai + bj + ck $.
+\end{proof}
+
+\item 20. In the quaternions, consider the following set $G$ having eight elements: $G=\{\pm 1, \pm i, \pm j, \pm k\}$.\\
+(a) Prove that $G$ is a group (under multiplication).
+\begin{proof}
+	The multiplication table for $1,i,j,k$ is
+	\begin{tabular}{r||*{4}{2|}}
+$\cdot$ & 1 & i & j & k \\
+\hline\hline
+1 & 1 & i & j & k \\ 
+\hline
+i & i & -1 & k & -j \\ 
+\hline
+j & j & -k & -1 & i \\ 
+\hline
+k & k & j & -i & -1 \\ 
+\hline
+\end{tabular}
+We can see that closure is satisfied in $G$, multiplication is associative, and  $1$ acts as identity element. Moreover, the inverse exists for each element. If $a = 1$ then $a$ itself is the inverse; if $a = i, j, $ or $k$, then $a(-a) = - a^2 = -(-1) = 1$, so $-a$ is the multiplicative inverse of $a$.
+
+We have verified all group axioms so $G$ is a group under multiplication.
+\end{proof}
+
+(b) List all subgroups of $G$.
+\begin{proof}[Solution]
+	\begin{itemize}
+		\item $\{1\} $
+		\item $\{1, -1\} $
+		\item $\{1, -1, i, -i\} $
+		\item $\{1, -1, j, -j\} $
+		\item $\{1, -1, k, -k\} $
+		\item $\{1, -1, \pm i, \pm j, \pm k\} $
+	\end{itemize}
+\end{proof}
+
+(c) What is the center of $G$ ?
+\begin{proof}
+	The center of $G$ is $\{1,-1\} $.
+\end{proof}
+
+(d) Show that $G$ is a nonabelian group all of whose subgroups are normal.
+\begin{proof}
+	To show non-abelian, note that $ij = k \neq  -k = ji$.
+	
+	The whole group and the center are normal. The trivial subgroup is normal. Hence we need to show the other three subgroups of order 4 are normal. By symmetry, we only need to show $A :=\{1,-1, i, -i\} $ is normal (since the role of  $i,j,k$ are entirely symmetrical in definition of quaternions). 
+
+	We only need to show that conjugates of elements in $A \setminus Z(G)$ by elements in $G \setminus Z(G)$ remain inside $A$. Thus we only need to show conjugate of $ \pm i$ by $ \pm i, \pm j, \pm k$ lie in $A$. By since the product between different elements of  $i,j,k$ are anticommutative ($ij = -ji, ik=-ki, jk=-kj$), we may obtain
+	\[
+		j^{-1} i j = j^{-1} (- j i) = - (j^{-1} j) i = - i \in A
+	.\] 
+	And the same for  $-j, k, -k$. Finally,
+	\[
+		i^{-1} i i = (i^{-1}  i) i = i
+	.\] 
+	and
+	\[
+		(-i)^{-1} i (-i) = (-i)^{-1} (-i) i = i
+	.\] 
+	Thus $A$ is normal in $G$.
+\end{proof}
+
+\item 31. Let $R$ be the ring of all $2 \times 2$ matrices over $\mathbb{Z}_p, p$ a prime. Show that if $\operatorname{det}\left(\begin{array}{ll}a & b \\ c & d\end{array}\right)=a d-b c \neq 0$, then $\left(\begin{array}{ll}a & b \\ c & d\end{array}\right)$ is invertible in $R$.
+\begin{proof}
+	Define
+	\begin{align*}
+		\varphi: \mathbb{Z}_p &\longrightarrow R \\
+		a &\longmapsto \varphi(a) = 
+		\left(\begin{array}{rr}
+	a & 0 \\ 0 & a \end{array}\right)
+	.\end{align*}
+		Then $\varphi$ is a homomorphism by rule of matrix multiplication; and $\varphi$ is injective since for $a \neq b$, the two matrices $\varphi(a)$ and $\varphi(b)$ differ in their diagonal entries.
+
+	Then we have an isomorphism $\mathbb{Z}_p \cong \varphi(\mathbb{Z}_p)$.
+
+	Since $|\mathbb{Z}_p| = p$ is prime, $\mathbb{Z}_p$ is a field (so is $\varphi(\mathbb{Z}_p)$.
+
+
+	Whenever $ad - bc \neq  0$, due to field property, there exists $(ad-bc)^{-1} \in \mathbb{Z}_p$. Now	
+	\[
+	\left(\begin{array}{ll}a & b \\ c & d\end{array}\right)^{-1}=
+	\left(\begin{array}{rr}
+	d & -b \\ -c & a\end{array}\right)
+	 \varphi\left((ad-bc)^{-1}\right)
+	.\] 
+
+\end{proof}
+
+\end{itemize}
+Herstein, section $4.2$, page 139 , Questions $1,2,3$.
+\begin{itemize}[resume]
+	\item 1. Let $R$ be a ring: since $R$ is an abelian group under $+$, $na$ has meaning for us for $n \in \mathbb{Z}, a \in R$. Show that $(n a)(m b)=(n m)(a b)$ if $n, m$ are integers and $a, b \in R$.
+\begin{proof}
+	We fix $n$ and induct on $m$. Note that if the desired equation $(na)(mb) = (nm)(ab)$ holds for some $m$, it automatically holds for $-m$ since $(-m)b = -(mb)$ and $n(-m) = -(nm)$. Hence we can assume $m\ge 0$. The base case is trivial since both sides becomes $0$.
+
+	Now assume the equation is true for $m$ and we want to prove for $m+1$. Note that
+	\begin{align*}
+		(na)((m+1)b) &= (na)(mb +b) \\
+			     &= (na)(mb) + (na)b \\
+			     &= (nm)(ab) + n(ab) \\
+			     &= (nm+n)(ab) \\
+			     &= (n(m+1))(ab)
+	.\end{align*} 
+	This completes the induction, thus the equation is true for all $m \in \mathbb{N}$, hence true for all $m \in \mathbb{Z}$. $n$ is arbitrary, so we are done.
+\end{proof}
+
+	\item 2. If $R$ is an integral domain and $a b=a c$ for $a \neq 0, b, c \in R$, show that $b=c$.
+\begin{proof}
+	$ab=ac $ iff $ab-ac = 0$, iff $a(b-c) = 0$. By property of integral domain, either $a=0$ or $b-c = 0$. Since $a\neq 0$, we have $b-c=0$, hence $b=c$.
+\end{proof}
+
+	\item 3. If $R$ is a finite integral domain, show that $R$ is a field.
+\begin{proof}
+	An integral domain is a commutative domain, and a field is a commutative division ring. Hence it suffices to show that $R$ is a division ring.
+
+	First, let $A = R \setminus  \{0\} $. Consider arbitrary $a \in A$ and consider the map
+	\begin{align*}
+		\varphi_a: A &\longrightarrow A \\
+		x &\longmapsto \varphi_a(x) = ax
+	.\end{align*}
+	Now we know $a\neq 0$, so $ax = ay$ implies $x=y$ so $\varphi_a$ is injective. Since $R$ is finite, $A$ is finite. Therefore $\varphi_a$ is bijective. Therefore there exists  $1_a \in A$ such that $a \cdot 1_a = a$.  
+
+	Next we show that $1_a = 1_b$ for any $a, b \in A$, which implies existence and uniqueness of multiplicative identity, which we denote as $1$. To verify $1_a = 1_b$, note that (we supress $\cdot$ sign)
+	\[
+		(ab)1_a = (ba)1_a = b(a 1_a) = ba = ab = a(b 1_b) = (ab) 1_b
+			.\] 
+	
+	Now consider any $a \in A$. Since the map $\varphi_a$ is bijective, there exists unique element $x$ such that $ax = 1$. Since $R$ is commutative, $ax = xa = 1$. Hence $R$ is a division ring. Therefore $R$ is a field.
+\end{proof}
+
+\end{itemize}

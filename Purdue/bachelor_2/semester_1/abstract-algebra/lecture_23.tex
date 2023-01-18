@@ -1,0 +1,110 @@
+\lecture{23}{Mon 07 Nov 2022 10:30}{}
+
+\subsection{Ideals, Homomorphisms, and Quotient Ring}
+
+\begin{remark}
+	Subgroups are exactly images of homomorphisms of groups; normal subgroups are exactly kernels of homomorphism of groups. The same corresponding structure are there for ring theory, namely subrings and ideals.
+\end{remark}
+
+\begin{definition}[Homomorphism]
+	Let $R$ and $R'$ be two rings. A map $\varphi: R \to R'$ is a \textit{homomorphism} if
+	\begin{itemize}
+		\item for all $a \in R$, $b \in R$ : $\varphi(a+b) = \varphi(a)+\varphi(b)$
+		\item for all $a \in R$, $b \in R$ : $\varphi(ab) = \varphi(a)\varphi(b)$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[kernel]
+	The kernel of a homomorphism $\varphi: R \to  R'$ of rings is \[
+		\operatorname{ker} \varphi = \{r \in R | \varphi(r) = 0\} 
+	.\] 
+\end{definition}
+\begin{remark}
+	The kernel does not know about the other operation $\cdot$. The definition is exactly same as for groups.
+\end{remark}
+\begin{observation}
+	If $\varphi: R \to R'$ is a homomorphism of rings, then $\varphi(R)$ is a subring of $R'$
+\begin{proof}
+	Let $\varphi(a)$ and $\varphi(b)$ be elements fro $\varphi(R)$. Then $\varphi(a) - \varphi(b) = \varphi(a-b) \in \varphi(R)$ and $\varphi(a) \varphi(b) = \varphi(ab) \in R$.
+\end{proof}
+\end{observation}
+
+\begin{example}
+	Let $p$ be prime number, define
+	\begin{align*}
+		\varphi: \mathbb{Z} &\longrightarrow \mathbb{Z}_p \\
+		n &\longmapsto \varphi(n) = [n]
+	.\end{align*}
+	Then $\varphi$ is a homomorphism of rings.
+	$\varphi(\mathbb{Z}) = \mathbb{Z}_p$, $\operatorname{ker} \varphi = p\mathbb{Z} = [0]$.
+
+	Note in this case, $k (p\mathbb{Z}) = p\mathbb{Z}$ whenever $k \in \mathbb{Z}$. This property motivates the definition of
+\end{example}
+
+
+\begin{definition}[Ideal]
+	Let $R$ be a ring. An \textit{ideal} of $R$ is a subset $I \subset R$ so that
+	\begin{itemize}
+		\item $I$ is a subgroup of additive abelian group $R$. In particular, $I$ is nonempty.
+		\item For every $r \in R$, $a \in I$, we have $ra \in I$ and $ar \in I$.
+	\end{itemize}
+\end{definition}
+\begin{example}
+	$p\mathbb{Z}$ is an ideal of $\mathbb{Z}$.
+
+	Note: Every ideal is a subring, but not conversely.
+\end{example}
+
+\begin{notation}
+	If $I$ is an ideal of $R$, then we write $I \triangleleft R$, like for normal subgroups.
+\end{notation}
+
+\begin{lemma}
+	Let $\varphi: R \to R'$ be a homomorphism of rings, then $\operatorname{ker} \varphi \triangleleft R$.
+\end{lemma}
+\begin{proof}
+	Obviously $\operatorname{ker} \varphi$ is an additive subgroup of the additive abelian group $R$. Now let $r \in R$ and $a \in \operatorname{ker} \varphi$. Then
+	\[
+		\varphi(ra) = \varphi(r)\varphi(a) = \varphi(r)\cdot 0 = 0
+	.\] 
+	And same for $ar$. Hence $ra \in \operatorname{ker} \varphi$ and $ar \in \operatorname{ker} \varphi$.
+\end{proof}
+
+\begin{definition}[One-sided Ideal]
+	Let $R$ be a ring. A \textit{left ideal} (right ideal) is a subset $I \subset R$ such that
+\begin{itemize}
+	\item $I$ is a subgroup of the additive group $R$ 
+	\item For all $r \in R$ and $a \in I$, $ra \in I$ ($ar \in I$).
+\end{itemize}
+\end{definition}
+
+\begin{example}
+	Let $F$ be a field, $n\ge 2$, $R = M_{n \times n}(F) = \{n \times n \text{ matrices with entries in }F\} $. Then $R$ is a ring.
+
+	Let  $1\le k\le n$, and $I = \{\text{matrices that have non-zero entries only in the $k$-th row}\} $. The $I$ is a right ideal, not a left ideal.
+\end{example}
+
+Let $R$ be a ring and $I \triangleleft R$. Since $I$ is a normal subgroup of the additive group $R$, $R / I$ is an additive subgroup of additive group $R$. We want to make it a ring.
+\begin{theorem}[Quotient Ring]
+	The additive group $R / I$ becomes a ring with respect to the operation
+	\[
+		(a+I)(b+I) := ab + I
+	.\] 
+	And the natural map
+	\begin{align*}
+		\varphi: R &\longrightarrow R/I \\
+		r &\longmapsto \varphi(r) = r+I
+	.\end{align*}
+	is a homomorphism of rings with $\operatorname{ker} \varphi  = I$.
+	In particular, every ideal is a kernel.
+\end{theorem}
+\begin{proof}
+	We show this is an operation, i.e. $\varphi$ is well-defined. Assume $a+I = a'+I$ and $b+I = b'+I$. We have $a = a' + x$ for some $x \in I$ and likewise $b = b' + y$ for some $y \in I$. Now $ab = (a'+x)(b'+y) = a'b' + a'y + x b' + xy$. Since $I \triangleleft R$, $a'y \in I$ and $x b' \in I$. Also $xy \in I$. Hence $ab \in a'b' + I$. Hence $ab + I = a'b' + I$.
+\end{proof}
+
+\begin{definition}[Isomorphism]
+	An isomorphism of rings is a bijective homomorphism of rings. We say two rings $R, R'$ are \textit{isomorphic}, and write $R \cong R'$ if there exists an isomorphi.sm $R \to R'$.
+\end{definition}
+\begin{definition}[Automorphism]
+	An automorphism of ring is an isomorphism of rings where the domain and range are the same.
+\end{definition}

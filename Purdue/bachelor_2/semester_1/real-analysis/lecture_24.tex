@@ -1,0 +1,98 @@
+\lecture{24}{Wed 26 Oct 2022 11:32}{Uniform Convergence}
+
+\subsection{Convergence of Functions}
+
+Suppose $E \subset \mathbb{R}^p$ and we have \[
+	f_n: E \to \mathbb{R}^q, \quad n = 1,2,\ldots
+\] 
+and
+\[
+	f: E \to \mathbb{R}^q
+.\] 
+\begin{definition}[Point-wise convergence]
+	We say $f_n \to f$ pointwise on $E$ if
+	\[
+		f_n(x) \to f(x)
+	\]
+	for any $x \in E$.
+\end{definition}
+
+\begin{example}
+	Take $f(x) = x^n$, $E = [0,1]$.
+	Then
+	 \[
+		f_n(x) \to f(x) = \begin{cases}
+			1&x = 1\\
+			0&x<1
+		\end{cases}
+	.\] 
+	Note: $f_n(x)$ are continuous on $[0,1]$ but $f(x)$ is not.
+
+	Note: It is possible to contruct $f_n \to f$ with infinitely many discontinuities.
+\end{example}
+\begin{remark}
+	There is a theorem by Baire that pointwise limits are continuous at "most" points in topological sense. Point of discontinuity form a nowhere-dense, $F_\sigma$ set.
+\end{remark}
+
+\begin{theorem}[Uniform Convergence]
+	$f_n \to f$ uniformly on $E  $ if for all $\varepsilon>0$, there exists $K_\varepsilon \in \mathbb{N}$ such that for all $x \in E$, $|f_n(x) - f(x)|<\varepsilon$ for $n > K_\varepsilon$.
+\end{theorem}
+\begin{intuition}
+	This means the function stays in a  \textit{tube} around $f$. The same intuition works in higher dimensions.
+\end{intuition}
+
+\begin{theorem}
+	Let $f_n: E \to \mathbb{R}^q$ converge uniformly to $f: E \to \mathbb{R}^q$. If all  $f_n$ are continuous at $a \in E$, then $f$ is continuous at $a$.
+\end{theorem}
+\begin{proof}
+	Use triangle inequality,
+	\[
+		\|f(x) - f(a)\|\le \|f(x) - f_N(x)\| + \|f_N(x) - f_N(a)\| + \|f_N(a) - f(a)\|
+	.\] 
+	By uniform convergence, $\|f(x) - f_N(x)\|<\varepsilon$ if $N >K_1$, and $\|f(a) - f_N(a)\|<\varepsilon$ if $N > K_2$. By continuity of $f_N$, $\|f_N(x) - f_N(a)\| < \varepsilon$ if $\|x - a\|< \delta$.
+
+	Thus $\|f(x) - f(a)\| < 3 \varepsilon$ if $\|x - a\|< \delta$.
+\end{proof}
+
+\begin{definition}[Uniform Norm]
+	For a bounded $f: E \to \mathbb{R}^q$. Define the \textit{uniform norm} of $f$ be
+	\[
+		\|f\|_E = \operatorname{sup}_{x \in E} \|f(x)\|
+	.\] 
+	We define $B(E, \mathbb{R}^q) = \{f \in \left( \mathbb{R}^q \right) ^{E}: f \text{ bounded}\} $.
+
+	We define $C(E, \mathbb{R}^q) = \{f \in \left( \mathbb{R}^q \right) ^{E}: f \text{ continuous}\}$ 
+
+	We define $BC(E) = B(E) \cap C(E)$. We can check that $\|\cdot\|_E$ is a norm on $B(E), C(E), BC(E)$.
+\end{definition}
+
+\begin{proposition}
+	$f_n \to f$ uniformly on $E$ iff $\|f_n - f\|_E \to 0$ as $n\to \infty $.
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item [$\implies$ :] $\|f_n(x) - f(x)\|< \varepsilon \implies \|f_n - f\|\le \varepsilon$ for all $x$.
+		\item [$\impliedby$ : ] $\|f_n - f\|_E < \varepsilon \implies \|f_n(x) - f(x) < \varepsilon\|$ for all $x \in E$.
+	\end{enumerate}
+\end{proof}
+	
+\begin{corollary}
+	Uniform convergence preserves boundedness.
+\end{corollary}
+
+\begin{corollary}
+	$B(E)$,  $C(E)$ and $BC(E)$ are closed under uniform limit.
+\end{corollary}
+
+\begin{proposition}[Cauchy's criterion for uniform convergence]
+	$f_n: E \to \mathbb{R}^q$ is uniformly convergent iff $(f_n)$ is uniformly Cauchy on $E$, i.e. $\|f_n(x) - f_m(x)\|<\varepsilon$ if $n, m \ge M(\varepsilon)$ for all $x$, i.e. $\|f_n - f_m\|_E < \varepsilon$ if $n, m \ge M(\varepsilon)$.
+\end{proposition}
+
+\begin{remark}
+	Warning: Heine-Borel, Bolzano-Weierstrass are false for pointwise and uniform convergence in $BC(E)$ (and $B(E), C(E)$ ).
+\end{remark}
+\begin{example}
+	Prove that $\left( \sin n x \right)_{n=1}^{\infty }$ has no uniformly convergent subsequence.
+\end{example}
+
+Next time we work on approximation theorems.

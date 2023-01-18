@@ -1,0 +1,182 @@
+\lecture{28}{Mon 21 Nov 2022 20:26}{Factorization}
+
+\begin{proposition}
+	(Consequence of irreducibility)
+	$p$ is irreducible if and only if there does not exist $f, g \in F[x]$ such that $\operatorname{deg}  f \ge \operatorname{deg} g \ge 1$ and $p = f g$.
+\end{proposition}
+\begin{proof}
+	Suppose $p$ is irreducible and $p = fg$ with $\operatorname{deg}  f \ge  \operatorname{deg} g \ge 1$. Then either $p | f$ or $(p, f) = 1$, in which case $p | g$. But then $\operatorname{deg} p \ge  \operatorname{deg} p + \min \{\operatorname{deg} f, \operatorname{deg} g\} > \operatorname{deg} g$, a contradiction.
+
+	Suppose $p(x)$ cannot be written as $p = fg $ with $\operatorname{deg} f \ge \operatorname{deg} g \ge 1$, and yet $\operatorname{deg}  p \ge  1$. Suppose that $h \in F[x]$. Then either $(p, h) = 1$ or else $(p, h) = c p $ for some $c \in F$ (in other cases $(p,h) | p$ and $\operatorname{deg} (p,h) \ge 1$, so we have contradiction). Then $(p, h) = 1$ or $p | h$, so $p$ irreducible.
+\end{proof}
+
+\begin{lemma}
+	Suppose that $p \in F[x]$ and $p$ is irreducible. Then whenever $p | a_1a_2\ldots a_k$, with $a_i \in F[x]$, one has $p | a_i $ for some index $i$.
+\end{lemma}
+\begin{proof}
+	We proceed inductively, notinc that the conclusion is trivial for $k = 1$. Suppose that the conclusion has been proved for $1 \le  k < K$ with $K \ge 2$, and that $p | a_1a_2\ldots a_K$. Then $p | (a_1\ldots a_{K-1} )a_K$, so either $p | a_K$ or $(p, a_K) = 1$, in the later case we have $p | a_1\ldots a_{K-1 }$, and the inductive hypothesis shows $p | a_i$ for some $i$. This completes the induction.
+\end{proof}
+
+\begin{theorem}(Analogue of \logseq{Fundamental Theorem of Arithmetic})
+	Suppose that $f(x) \in F[x]$ has degree at least $1$. Then $f(x)$ is the product of irreducible polynomials in $F[x]$, and this product is unique in the following sense. One has
+	\[
+		f(x) = c p_1(x)^{m_1} p_2(x)^{m_2}\ldots p_n(x)^{m_n}
+	.\] 
+	where $c$ is the leading coefficient of $f$, the polynomials $p_1(x), \ldots, p_n(x)$ are distinct, monic and irreducible in $F[x]$, and the integers $m_1, \ldots, m_n$ are positive, and up to reordering, the list of tuples $(p_1, m_1), \ldots, (p_n, m_n)$ is unique.
+\end{theorem}
+\begin{proof}
+	We proceed by induction on $n = \operatorname{deg} (f)$. When $\operatorname{deg} f = 1$, we have $f(x) = a x + b$ for some $a, b \in F$, and thus $f(x) = a(x+b / a)$, with $x + b / a$ irreducible.
+
+	Now suppose that the conlusion holds whenever $\operatorname{deg}  f < n$, with $n \ge 2$. If $f(x)$ is irreducible, we are done. Otherwise, we have $f(x) = a(x) b(x)$, some $a, b \in F[x]$ with $\operatorname{deg} b \ge \operatorname{deg} a \ge 1$ and $\operatorname{deg} b < \operatorname{deg} f$. By induction, both $a$ and $b$ factor into a product of irreducibles, and so therefore does $f$. This completes the inductive step showing that $f$ factors as a product of irreducibles.
+
+	Now we consider the uniqueness claim. Suppose that $f$ has two representations of the claimed type. Say
+	\[
+		c p_1(x)^{m_1} p_2(x)^{m_2}\ldots p_k(x)^{m_k} = f(x) = c' p_1'(x)^{m_1'} p_2'(x)^{m_2'}\ldots p_{k'}(x)^{m'_{k'}}
+	.\] 
+	with $p_i, p'_i$ monic and irreducible, $m_i, m_i' \in \mathbb{N}$ and $c, c' \in F$. Then we have $p_k(x) | c'p_1'(x)^{m_1'} p_2'(x)^{m_2'}\ldots p_{k'}(x)^{m'_{k'}}$, whence $p_k(x) | p_i'(x)$ for some $i$. But $p_i$ is monic and irreducible, so $p_k(x) = p_i'(x)$. Dividing left and right hand sides by $p_k(x)$, we find that $f(x) / p_k(x)$ has two factorizations as a product of irreducibles. But $\operatorname{deg} (f(x) / p_k(x)) < \operatorname{deg} f(x)$, so by induction we see that $f(x) / p_k(x)$ and hence $f(x)$ have unique factorization.
+\end{proof}
+
+One can use these ideas to develop arithmetic over $F[x]$. For example,
+\begin{fact}
+	If $F$ is a finite field having $p$ elements, $p$ prime, then \\
+	$\operatorname{card} \{f(x) \in F[x]: \operatorname{deg} (f) \le n, f \text{monic and irreducible}\}  $ is approximately $p^n / n$.
+
+	This is analogue to the theorem about prime numbers: $\varphi(x) \sim x / \log x$
+\end{fact}
+
+Irreducible polynomials can be used to generate new fields:
+\begin{theorem}
+	Suppose that $p(x) \in F[x]$. Then $\left( p(x) \right) $ is a maximal ideal of $F[x]$ if and only if $p(x)$ is irreducible over $F[x]$.
+\end{theorem}
+\begin{proof}
+	Suppose $p(x)$ is irreducible over $F[x]$. We try to show that $\left( p(x) \right) $ is a maximal ideal of $F[x]$ by considering what it means for some other ideal $N$ to satisfy $\left( p(x) \right) \subset N$. But $N = \left( f(x) \right) $ for some $f \in F[x]$, and since $p(x) \in \left( p(x) \right) \subset N$, we have $p(x) = a(x) f(x)$ for some $a \in F[x]$. By irreducibility of $p$, we see that either $a $ or $f$ is constant, whence $f(x) = a^{-1} p(x)$ for some $a \in F \setminus  \{0\} $, or $f(x) = f_0 \in F$. 
+
+	In the first case we have $f(x) \in \left( p(x) \right) $, so $N \subset \left( p(x) \right) $, which yields $N = \left( p(x) \right) $. In the second case we have $1 = f_0^{-1} f_0 \in \left( f(x) \right) $, whence $g(x) \in \left( f(x) \right) $ for all $g \in F[x]$, yielding $\left( f(x) \right)  = F[x]$. Hence $\left( p(x) \right) $ is a maximal ideal, since whenever $\left( p(x) \right) \subset N$, we have $N = \left( p(x) \right) $ or $N = F[x]$.
+\end{proof}
+
+\begin{remark}
+This conclusion has the consequence that 
+\[
+	F[x] / \left( p(x) \right) \text{ is a field } \iff 
+	p(x) \text{ is irreducible}
+.\] 
+In particular, $\mathbb{R}[x] \setminus \left( x^2 + 1 \right)  \cong \mathbb{C}$ is a field.
+
+Note that if $p(x)$ is irreducible of degree $d$, then (by division algorithm)
+\[
+	F[x] / \left( p(x) \right) =
+	\{a_0+a_1x + \ldots + a_{d-1 }x^{d-1} + \left( p(x) \right) : a_i \in F\} .
+.\] 
+Hence, the element $x + \left( p(x) \right) $ ``solves'' $p(x)$, since
+\[
+	p(x + \left( p(x) \right) ) = p(x) + \left( p(x) \right)  = \left( p(x) \right)
+,\] 
+which is the zero element in $F[x] / \left( p(x) \right) $.
+	
+\end{remark}
+\begin{remark}
+	Since there are infinitely many (monic) irreducible polynomials over $F[x]$, we can find infinitely many fields of the shape $F[x]\setminus \left( p(x) \right)$. 
+\end{remark}
+
+We have used the division algorithm (which can be used to generate the Euclidean Algorithm) to establish results on divisibility in $F[x]$. This is not the only route, but it is convenient algorithmically when available. This motivates:
+
+\begin{definition}[Euclidean Ring]
+	An integral domain $R$ is called a \textit{Euclidean ring} when there exists a function $d: R\setminus \{0\} \to  \mathbb{Z}_{\ge 0}$ satisfying:
+	\begin{enumerate}
+		\item For all $a, b \in R \setminus \{0\} $, one has $d(a) \le  d(ab)$
+		\item Whenever $a,b \in R \setminus  \{0\} $, there exist $q, r \in R$ such that $b = q a + r$, where $r = 0$ or $d(r) < d(a)$.
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	$\mathbb{Z}, F[x], \mathbb{Z}[\sqrt{-1} ] = \{a + b\sqrt{-1} : a, b \in \mathbb{Z}\} $ with $d(a + b\sqrt{1}) = a^2 + b^2 $
+\end{example}
+\begin{nonexample}
+	$\mathbb{Z} [\sqrt{-5} ] $
+\end{nonexample}
+
+
+\subsection{Polynomials over Rationals}
+
+We develop the theory of (irreducible) polynomials further in $\mathbb{Z}[x]$ and $\mathbb{Q}[x]$. Our first goal is to show that irreducibility over $\mathbb{Z}[x]$ is sufficient to guarantee irreducibility over $\mathbb{Q}[x]$.
+\begin{definition}[primitive polynomial]
+	$f(x) = a_n x^n + a_{n-1}x^{n-1} + \ldots + a_0 \in \mathbb{Z}[x]$ is a polynomial in which $(a_n, a_{n-1}, \ldots, a_0) = 1$.
+\end{definition}
+
+\begin{theorem}[Gauss' Lemma]
+	Let $f(x) \in \mathbb{Z}[x]$ be a primitive polynomial, and suppose that $f(x) = A(x)B(x)$, where $A(x), B(x) \in \mathbb{Q}[x]$. Then there exist primitive polynomials $a(x), b(x) \in Z[x]$ for which $f(x) = a(x) b(x)$, where $\operatorname{deg} a = \operatorname{deg} A$ and $\operatorname{deg}  b = \operatorname{deg} B$.
+\end{theorem}
+\begin{proof}
+	Let $f(x) \in \mathbb{Z}[x]$ be primitive of degree at least $2$, for otherwise there is nothing to prove. Suppose that $f(x) = A(x)B(x)$, where $A(x), B(x) \in \mathbb{Q}[x]$. By considering the least common multiple of the denominators of the coefficients of $A(x)$, we can write 
+	\[
+		A(x) = \frac{u_1}{v_1}a(x)
+	,\]
+	where $a(x) \in \mathbb{Z}[x]$ is primitive and $u_1, v_1 \in \mathbb{Z}$ satisfy $(u_1, v_1) = 1$. (Explanation: move common factor in  $a$ into the fraction, and simplify the fraction in order to obtain $(u_1, v_1) = 1$ ).
+
+	Similarly, we can write
+	 \[
+		B(x) = \frac{u_2}{v_2}b(x)
+	,\] 
+	where $b(x) \in \mathbb{Z}[x]$ is primitive and $u_2, v_2 \in \mathbb{Z}$ satisfy $(u_2, v_2) = 1$. 
+	Thus, there exist integers $u, v \in \mathbb{Z}$ with $(u,v) = 1$ for which 
+	\[
+		f(x) = \frac{u}{v} a(x) b(x)
+	,\] 
+	where, we emphasize, the polynomials $a$ and $b$ are primitive in $\mathbb{Z}[x]$.
+	
+	We claim that $u = v = 1$ or $u = v = -1$. Otherwise, there is a prime $p$ with $p | u$, or a prime $v$ with $p | v$.
+
+	First consider the scenario with $p | v$, in which case
+	\[
+		u a(x) b(x) = vf(x), \quad p | v
+	.\] 
+	so since $(u, p) = 1$ we see that all coefficients of $a(x)b(x) $ are divisible by $p$. Let the highest degree term of $a(x)$ with coefficient \textit{not} divisible by $p$ be $a_r x^r$, and the highest degree term of $b(x)$ with coefficient \textit{not} divisible by $p$ be $b_s x^s$. Then we see that
+	\[
+		a(x)b(x) = a_rb_sx^{r+s} + c_{r+s-1} x^{r+s-1} + \ldots + c_0 + p h(x)
+	\]
+	for some $h(x) \in \mathbb{Z}[x]$ and some $c_i \in \mathbb{Z}$. But \textit{all} coefficients of $a(x) b(x)$ are supposed to be divisible by $p$, so $p | a_r$ or $p | b_s$, a contradiction. This means either all coefficients of $a(x)$ are divisible by $p$, contradicting primitivity of $a(x)$, or all coefficients of $b(x) $ are divisible by $p$, contradicting primitivity. Thus $v = \pm 1$.
+
+	When $p | u$, we see that all coefficients of $f(x)$ are divisible by $p$, contradicting primitivity of $f$. Hence $u = \pm 1$,
+
+	Then we conclude that $f(x) = \pm  a(x) b(x)$ with $a, b$ primitive, and $\operatorname{deg} a  = \operatorname{deg} A, \operatorname{deg} b = \operatorname{deg} B$. This sufficies to prove the lemma.
+\end{proof}
+
+\begin{example}
+Already this is useful in finding irreducible polynomials over $\mathbb{Q}[x]$. Thus, for example, the polynomial $x^3 - x - 1$ is irreducible over $\mathbb{Q}[x]$, for if not, it would have a factor of degree $1 $ over $\mathbb{Q}[x]$, and Gauss' Lemma shows then that such a factor (primitive) exists over $\mathbb{Z}[x]$. This factor takes the form $ax+b$ with $a,b \in \mathbb{Z}$. But then
+\[
+	x^3 - x - 1 = (ax+b) g(x)
+.\] 
+for some $g \in \mathbb{Z}[x]$, and we must have:
+\begin{itemize}
+	\item (lead coefficient): $a | 1 \implies a = \pm 1$
+	\item (final coefficient): $b | (-1) \implies b = \pm 1$
+\end{itemize}
+But by trial and error, none of $ \pm (x \pm 1)$ is a factor of $x^3 - x - 1$, so $x^3 - x - 1$ is irreducible over $\mathbb{Q}[x]$.
+\end{example}
+
+Notice that the final part of the argument applied in the proof of Gauss' Lemma could have been made more concise by reducing modulo $p$. We had, for example
+\[
+	u a(x) b(x) = v f(x) \quad \text{with }p|v \text{ and } p \nmid u
+.\] 
+So in a sense $a(x) b(x) \equiv 0 \pmod p$. But we are working with polynomials, so need to be more careful.
+
+\begin{lemma}
+	Suppose that $R$ is a ring and $I \triangleleft R$. Then 
+	\begin{enumerate}
+		\item $I[x] \triangleleft R[x]$, and
+		\item $R[x] / I[x] \cong \left( R / I \right) [x]$
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Write $\overline{R}  = R / I$. Recall that there exists a homomorphism
+	\begin{align*}
+		\varphi: R &\longrightarrow \overline{R}  \\
+		a &\longmapsto \varphi(a) = a+I
+	.\end{align*}
+	having kernel  $I$. We now define
+	\begin{align*}
+		\Phi: R[x] &\longrightarrow (R / I)[x] \\
+		a_nx^n + \ldots + a_0 &\longmapsto \Phi(a_nx^n + \ldots + a_0) = \varphi(a_n)x^n + \ldots + \varphi(a_0)
+	.\end{align*}
+	It is easy to show that $\Phi$ is a surjective homomorphism of $R[x]$ into $(R / I) [x]$.
+\end{proof}
+

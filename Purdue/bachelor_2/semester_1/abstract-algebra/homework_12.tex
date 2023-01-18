@@ -1,0 +1,150 @@
+\homework{12}{Mon 21 Nov 2022 20:15}{}
+Herstein, section 4.4, page 151, Questions 9, 10, 11, 12, 13.
+\begin{itemize}
+	\item [9.] Show that $(p-1) / 2$ of the numbers $1,2, \ldots, p-1$ are quadratic residues and $(p-1) / 2$ are quadratic nonresidues $\bmod p$. [Hint: Show that $\left\{x^2 \mid x \neq 0 \in \mathbb{Z}_p\right\}$ forms a group of order $(p-1) / 2$.]
+\begin{proof}
+	$p$ has to be a prime, to ensure that $\mathbb{Z}_p^{x}$ is a multiplicative group mod $ p$.
+	Consider the mapping
+	\begin{align*}
+		\varphi: \mathbb{Z}_p^{\times } &\longrightarrow \mathbb{Z}_p^{\times } \\
+		x &\longmapsto \varphi(x) = x^2
+	.\end{align*}
+	We show that this map is a homomorphism between two groups of multiplication modulo $p$. Let $x, y \in \mathbb{Z}_p^{\times }$. We have
+	\[
+		\varphi(x) \varphi(y)
+		=x^2y^2 = (xy)^2
+		=\varphi(xy)
+	.\] 
+	Hence the image of $\varphi$, the set of quadratic residues, form a subgroup of $\mathbb{Z}_p^{\times }$. By first homomorphism theorem,
+	\[
+		\mathbb{Z}_p^{\times } / \operatorname{ker} \varphi \cong \varphi(\mathbb{Z}_p^\times )
+	.\] 
+	So what is the size of kernel? Consider $x^2 \equiv 1 \pmod p$. This has exactly two solutions, $x \equiv 1 \pmod p$, or $x \equiv -1 \pmod p$. Thus $|\operatorname{ker} \varphi| = 2$. Also, $\left| \mathbb{Z}_p^{\times } \right|  = p - 1$ since it is $\mathbb{Z}_p$ with $0$ removed. Hence
+	\[
+		\left| \varphi(\mathbb{Z}_p^{\times }) \right| 
+		= \frac{\left| \mathbb{Z}_p^{\times } \right| }{\left| \operatorname{ker} \varphi \right| } = \frac{p-1}{2}
+	.\] 
+\end{proof}
+
+	\item [10.] Let $m>0$ be in $\mathbb{Z}$, and suppose that $m$ is not a square in $\mathbb{Z}$. Let $R=$ $\{a+\sqrt{m} b \mid a, b \in \mathbb{Z}\}$. Prove that under the operations of sum and product of real numbers $R$ is a ring.
+\begin{proof}
+	Since $(\sqrt{m} )^2 = m \in \mathbb{Z}$, $R$ is equal to
+	\[
+		R = \{f(\sqrt{m} ): f \in \mathbb{Z}[x]\} 
+	.\] 
+	And all ring properties are inherited from the ring $\mathbb{Z}[x]$.
+
+	We could justify this by constructing the homomorphism
+	\begin{align*}
+		\varphi: \mathbb{Z}[x] &\longrightarrow \mathbb{R} \\
+		f &\longmapsto \varphi(f) = f(\sqrt{m} )
+	.\end{align*}
+	Now $\varphi$ is a homomorphism since
+	\[
+		\varphi\left( f + g \right)  = (f+g)(\sqrt{m} ) = f(\sqrt{m} ) + g(\sqrt{m}) = \varphi(f) + \varphi(g) 
+	.\] 
+	and
+\[
+		\varphi\left( f  g \right)  = (fg)(\sqrt{m} ) = f(\sqrt{m} )  g(\sqrt{m}) = \varphi(f)  \varphi(g) 
+	.\]
+
+	Hence $R = \varphi(\mathbb{Z}[x])$ is a subring of $\mathbb{R}$. Hence $R$ is a ring.
+\end{proof}
+
+	\item [11.] If $p$ is an odd prime, let us set $I_p=\{a+\sqrt{m} b|p| a$ and $p \mid b\}$, where $a+\sqrt{m} b \in R$, the ring in Problem 10. Show that $I_p$ is an ideal of $R$.
+\begin{proof}
+	$I_p = pR$ is an ideal of $R$. To verify,
+
+	$pR = \{pf(\sqrt{m}): f \in \mathbb{Z}[x]\} = \{f(\sqrt{m} ): f \in p \mathbb{Z}[x]\}  $.
+
+	Now $p\mathbb{Z}[x]$ is an ideal of $\mathbb{Z}[x]$, so $pR$ is an ideal of $R$.
+	
+	To justify, consider the surjective homomorphism
+	\begin{align*}
+		\varphi: \mathbb{Z}[x] &\longrightarrow R \\
+		f &\longmapsto \varphi(f) = f(\sqrt{m} )
+	.\end{align*}
+	We note that $pR = \varphi(p\mathbb{Z}[x])$. Hence $p\mathbb{Z}[x]\triangleleft \mathbb{Z}[x] \implies pR \triangleleft R$, since image of an ideal under surjective homomorphism is an ideal.
+\end{proof}
+
+	\item [12.] If $m$ is a quadratic nonresidue $\bmod p$, show that the ideal $I_p$ in Problem 11 is a maximal ideal of $R$.
+\begin{proof}
+	Define
+	\begin{align*}
+		\psi: \mathbb{Z}_p[x] &\longrightarrow R / pR \\
+		f &\longmapsto \psi(f) = f(\sqrt{m} )+pR
+	.\end{align*}
+	We first verify the map is surjective. Let $a + b \sqrt{m}  + pR \in R / pR$. We may assume $a, b \in \mathbb{Z}_p$ due to the term $pR$. Hence we have $a + b x \in \mathbb{Z}_p [x]$, and
+	\[
+		\psi(a + b x) = a + b \sqrt{m} + pR
+	.\] 
+	Next we verify the map is a homomorphism. Let $f_1, f_2 \in \mathbb{Z}_p[x]$. Then
+	\[
+		\psi(f_1) + \psi(f_2) 
+		= f_1(\sqrt{m}) + pR + f_2(\sqrt{m} )+ pR
+		= (f_1+f_2)(\sqrt{m} ) + pR
+		=\psi(f_1+f_2)
+	.\] 
+	Proof for multiplication is identical.
+
+	Now $\operatorname{ker} \psi = \{f \in \mathbb{Z}_p[x]: f(\sqrt{m} ) = 0\}  = \left( x^2 - m \right) $. Now since $x^2 - m$ is irreducible in $\mathbb{Z}_p[x]$ and $\mathbb{Z}_p$ is a field, $\left( x^2 - m \right) $ is a maximal ideal of $\mathbb{Z}_p[x]$. Using correspondence theorem, we see that $0$ is a maximal ideal of $R / pR$. Hence $R / pR$ is a field. Hence $pR$ is a maximal ideal of $R$.
+\end{proof}
+
+	\item [13.] In Problem 12 show that $R / I_p$ is a field having $p^2$ elements.
+\begin{proof}
+	From the last problem, we have the surjective homomorphism $\psi: \mathbb{Z}_p[x] \to R / pR$. By first homomorphism theorem,
+	\[
+		\mathbb{Z}_p[x] / \left( x^2 - m \right) 
+		\cong R / pR
+	.\] 
+	How many elements are in $A := \mathbb{Z}_p[x] / \left( x^2 - m \right) $? By division algorithm, each element in $A$ can be identified as a polynomial in $\mathbb{Z}_p[x]$ with degree at most $1$, i.e. $A = \{a + bx + \left( x^2 - m \right) : a, b \in \mathbb{Z}_p\} $. Also, for each choice of $a, b$, we get distinct elements from $A$. Since there are $p^2$ choices for $(a,b)$, there are $p^2$ elements in $A$. Therefore there are $p^2$ elements in $R / pR$.
+\end{proof}
+
+
+\end{itemize}
+Herstein, section 4.5, page 163, Questions 3, 5, 12, 18.
+\begin{itemize}
+	\item 3. Find the greatest common divisor of the following polynomials over $\mathbb{Q}$, the field of rational numbers.\\
+(a) $x^3-6 x+7$ and $x+4$.
+\begin{proof}[Solution]
+	The gcd is $1$.
+\end{proof}
+
+(b) $x^2-1$ and $2 x^7-4 x^5+2$.
+\begin{proof}[Solution]
+	The gcd is $(x-1)$.
+\end{proof}
+
+(c) $3 x^2+1$ and $x^6+x^4+x+1$.
+\begin{proof}[Solution]
+	The gcd is $1$.
+\end{proof}
+
+(d) $x^3-1$ and $x^7-x^4+x^3-1$.
+\begin{proof}[Solution]
+	The gcd is $(x^3-1)$.
+\end{proof}
+
+\item [5.] In Problem 3, let $I=\{f(x) a(x)+g(x) b(x)\}$, where $f(x), g(x)$ run over $\mathbb{Q}[x]$ and $a(x)$ is the first polynomial and $b(x)$ the second one in each part of the problem. Find $d(x)$, so that $I=(d(x))$ for Parts (a), (b), (c), and (d).
+\begin{proof}
+	\begin{itemize}
+		\item [(a)] Let $d(x) = 1$. Since $a(x)$ and $b(x)$ are coprime, there exists $u, v \in \mathbb{Z}$ such that $a u + b v = 1$. Hence for any polynomial $f$ in $\mathbb{Q}[x]$, we have $f = (f u) a + (f v) b$.
+	\end{itemize}
+	We prove the result in general, so we don't have to repeat the procedure for $b, c, d$. Let $d(x) = \left( a(x), b(x) \right) $. Let $a'(x) = a(x) / d(x)$ and $b'(x) = b(x) / d(x)$. Now $(a', b') = 1$, so there exists $u, v \in \mathbb{Z}$ such that $a' u + b' v = 1$. Hence for any polynomial $f d(x)$ in $\left( d(x) \right) $, we have $f d(x) = (f u) a'd(x) + (f v) b'd(x) = (f u) a + (f v) b$.
+\end{proof}
+
+\item [12.] If $F \subset K$ are two fields and $f(x), g(x) \in F[x]$ are relatively prime in $F[x]$, show that they are relatively prime in $K[x]$.
+\begin{proof}
+	Since $f$ and $g$ are coprime in $F[x]$, there exists $a, b \in F[x]$ such that  $af + bg = 1$. Then suppose that we have $u \in K[x]$ such that  $u | f$ and $u | g$. Then $u | af+bg = 1$, so $u = 1$. This shows that $(f,g) = 1$ in $K[x]$.
+\end{proof}
+
+\item [18.] Let $F$ be a finite field. Show that $F[x]$ contains irreducible polynomials of arbitrarily high degree. (Hint: Try to imitate Euclid's proof that there is an infinity of prime numbers.)
+\begin{proof}
+	Suppose for sake of contradiction that there exists $f \in F[x]$ which is irreducible and has highest degree. Since $F$ is finite, the number of possible polynomials with degree $\le \operatorname{deg} f$ is finite, so in particular it has finitely many irreducible polynomials. Let $f_1, \ldots, f_n$ be all irreducible polynomials where $f = f_1$. We now define
+	\[
+		g = f_1 \ldots f_n + 1
+	.\] 
+	Suppose there exists some $c \in F[x]$ such that $c | g$. Then we may assume without loss of generality that $c$ is irreducible, otherwise we can keep considering factors of $c$ until we obtain an irreducible polynomial. Hence $c = f_i$ for some $i$. Then $c | 1$, so $c = 1$. This implies $g$ is irreducible. But $\operatorname{deg} g > \operatorname{deg} f_1$, a contradiction. So $F[x]$ contains irreducible polynomials of arbitrarily large degree.
+	\end{proof}
+
+\end{itemize}

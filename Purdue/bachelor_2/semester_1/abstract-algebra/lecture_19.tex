@@ -1,0 +1,16 @@
+\lecture{19}{Wed 26 Oct 2022 10:35}{}
+\begin{theorem}
+	Let $G$ be a nontrivial finite group whose order is a power of a prime $p$. Then $Z(G) $ has more than one element.
+\end{theorem}
+
+\begin{theorem}[Sylow's First Theorem]
+	Let $G$ be a group of order $p^n m$ with $p$ prime and $p \nmid $, $n \ge 1$. Then $G$ has a subgroup of order $p^n$.
+\end{theorem}
+\begin{proof}
+	Induction. Suppose true for all groups $H $ with $1 \le |H| < |G|$. Suppose $|G| = p^n m$, $p $ prime, $p \nmid m$. Then $Z(G)$ has an element of a group of order $p$, put $A = \left\langle a \right\rangle $. We investigate $K = G / A$.
+ 
+	Since $|K| = |G| / |A| = p^n m / p < |G|$, so by inductive hypothesis that $K $ has a subgroup $M$ or order $p^{n -1}$. By the correspondence theorem, there exists $A \triangleleft P \le G$ and $P / A = M$. Hence $|P| / |A| = |M| = p^{n-1}$, so $|P| = p^n$.
+
+	Then $P$ is a subgroup $G$ of order $p^n$. This completes the induction.
+\end{proof}
+

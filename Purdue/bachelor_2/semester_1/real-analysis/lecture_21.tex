@@ -1,0 +1,56 @@
+\lecture{21}{Wed 19 Oct 2022 11:35}{}
+
+\begin{proposition}
+	Let $f: E \to \mathbb{R}^q$. Then $f$ is continuous at $a$ if and only all its orthogonal projections $f_i$ are continuous at $a$.
+\end{proposition}
+\begin{proof}
+	Sequential argument.
+\end{proof}
+
+\begin{corollary}
+	Orthogonal projection function is continuous. As a result, polyomials are continuous.
+\end{corollary}
+
+\begin{proposition}
+	Let $A \subset \mathbb{R}^p$, $B \subset \mathbb{R}^q$. Let $f: A \to B$ and $g: B \to \mathbb{R}^r$. Let $a \in A$ and $b = f(a) \in B$. Then, if $f$ is continuous at $a$, $g$ is continuous at $b = f(a)$, then $g \circ f$ is continuous at $a$.
+\end{proposition}
+\begin{proof}
+	(topological)
+	Let $W \ni g(f(a))$ be open in $\mathbb{R}^r$. Then by continuity of $g$ at $b = f(a)$, there exists $V \ni b$ open in $\mathbb{R}^q$ such that $g(V \cap B)\subset W$. Then by continuity of $f$ at $a$, there is $U \ni a$, open in $\mathbb{R}^p$ such that $f(U \cap A) \subset V$. Thus $g \circ f (U \cap A) = g(f(U \cap A)) \subset g(V \cap B) \subset W$. Thus $g\circ f(U \cap A) \subset W$, so $g \circ f$ is continuous at $a$.
+\end{proof}
+
+\begin{theorem}[Global Continuity Theorem]
+	The following statements are equivalent:\\
+(a) $f$ is continuous on its domain $D(f)$.\\
+(b) If $G$ is any open set in $\boldsymbol{R}^{\mathrm{q}}$, then there exists an open set $G_1$ in $\boldsymbol{R}^{\mathrm{p}}$ such that $G_1 \cap D(f)=f^{-1}(G)$.\\
+(c) If $H$ is any closed set in $\mathbf{R}^q$, then there exists a closed set $H_1$ in $\mathbf{R}^{\mathrm{p}}$ such that $H_1 \cap D(f)=f^{-1}(H)$.
+\end{theorem}
+
+\begin{definition}[Relative Topology]
+	Let $E \subset \mathbb{R}^p$. We say that $U \subset E$ is \textit{relatively open} in $E$ if there is open $U_1$ in $\mathbb{R}^p$ such that $U = U_1 \cap E$.
+\end{definition}
+The relatively open subsets in $E$ form a topology on $E$.
+
+\begin{theorem}[Global Continuity Theorem]
+	The following statements are equivalent:\\
+(a) $f$ is continuous on its domain $D(f)$.\\
+(b) $f^{-1}(V)$ is relatively open in $E$ for any open  $V \subset \mathbb{R}^q$.\\
+(c) $f^{-1} (F)$ is relatively closed in $E$ for any closed $V \subset \mathbb{R}^q$.
+\end{theorem}
+\begin{proof}
+	We prove in the direction $a\iff  b \iff  c$.
+	\begin{itemize}
+		\item [(a) implies (b)]
+			Let $f: E \to  \mathbb{R}^q$ be continuous, and $V \subset \mathbb{R}^q$ be open. Let $a \in f^{-1} (V)$. So there exists $U_a \subset \mathbb{R}^p$ open containing $a$, such that $f(E \cap U_a) \subset V$. 
+
+			Note: Let $U = \bigcup_{a \in f^{-1} (V)} U_a $. We claim that $f^{-1} (V) = U \cap E$.
+
+			To verify this, consider $a \in f^{-1} (V)$, then $a \in U_a \subset U$. Since $a \in E$, we have $a \in U \cap E$. Hence $f^{-1} (V) \subset U \cap E$.
+			Also, since $f(U_a \cap E) \subset V$, we have $U_a \cap E \subset f^{-1} (V)$. So $\bigcup_{a \in f^{-1} (V)} \left( U_a \cap E \right)  = U \cap E \subset f^{-1} (V)$.
+		\item [(b) implies (a)]
+			Let $a \in E$ and $f(a) \in V$ open. This implies that there exist $U \subset \mathbb{R}^p $ such that $U \cap E = f^{-1} (V)$. This implies that $f(U \cap E) \subset V$. Hence $f$ is continuous at $a$.
+		\item [(b) equivalent to (c)]
+			Take $f^{-1} (V) = E \setminus f^{-1} (F)$ where $f = V^c$. $f^{-1} (V)$ is relatively open iff $f^{-1} (F)$ is closed. We have $V$ open iff $F$ closed.
+	\end{itemize}
+\end{proof}
+

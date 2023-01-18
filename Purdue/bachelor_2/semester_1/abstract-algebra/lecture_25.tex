@@ -1,0 +1,49 @@
+\lecture{25}{Wed 09 Nov 2022 11:30}{}
+\begin{definition}[Maximal Ideal]
+	An ideal $M$ of $R$ is a \textit{maximal ideal} if $M \neq R$ and for any $N \triangleleft R$ , $N \neq R$ we have $N \subset M$.
+\end{definition}
+\begin{corollary}
+	A ring $R$ is a field if and only if $R$ is commutative with $1$ and $\{0\} $ is a maximal ideal of $R$.
+\end{corollary}
+
+\begin{theorem}
+	Let $R$ be a commutative ring with $1$, and let $M \triangleleft R$. Then $R / M$ is a field if and only if $M$ is a maximal ideal of $R$.
+\end{theorem}
+\begin{proof}
+	In either case, $M \neq R$, equivalently, $R / M \neq  \{0\} $. So $R / M$ is a commutative with $1 \neq 0$. By the corollary, $R / M$ is a field and $M / M$ is a maximal ideal of $R / M$. By correspondence theorem, this happend iff there is no ideal of $R$ between $M$ and $R$, iff $M$ is a maximal ideal of $R$.
+\end{proof}
+
+\begin{example}
+	\begin{enumerate}
+		\item $n \in \mathbb{Z}, n \ge 2: n \mathbb{Z}\triangleleft \mathbb{Z}$. 
+			Note $n \mathbb{Z}\neq \mathbb{Z}$. Whenever $n = a b$ for $a, b \in \mathbb{Z}$, we have $n \mathbb{Z} \subset a \mathbb{Z} \subset \mathbb{Z}$, so $n\mathbb{Z}$. If $n$ is a prime, then there exists such a decomposition with $1 < a < n$, so $n\mathbb{Z}$ is not a maximal ideal. So $\mathbb{Z} / n\mathbb{Z}$ is not a field.
+			
+			If $n = p$ is a prime numebr, then $p \neq  \pm 1$, so $p\mathbb{Z} \neq \mathbb{Z}$, and in fact $p \mathbb{Z}$ is a maximal ideal, so $\mathbb{Z} / p \mathbb{Z}$ is a field.
+
+			So $\mathbb{Z}_n$ is a field iff $n$ is prime.
+	
+	\item $\mathbb{Z}_9$ is not a field. However, there exists a field of order $9$.
+
+		\begin{fact}
+			Any field must have prime-power order. Conversely, for any prime power there exists up to isomorphism a unique field of that order.
+		\end{fact}
+	\end{enumerate}
+	\item (Field of 9 elements)
+		Let $R = \mathbb{Z}_3 [t]$. Let $J = R( t^2 + 1) $. Then $R / J$ is a field with $9$ elements.
+		\begin{proof}
+			$R / J = \{ f + J : f \in R\} = \{a + b t + J : a, b \in \mathbb{Z}_3\} $. There are $9$ such elements.
+		How does multiplication work?
+		\begin{align*}
+			\left( (a+bt)+J \right) \left( (c+dt)+J \right)  &= \left( (a+bt)(c+dt) \right) +J\\
+			&= ac + bdt^2 + (ad+bc)t + J \\
+			&= (ac -bd) + (ad+bc)t + J & t^2 \equiv -1 \mod J
+		.\end{align*} 
+		Let $0 \neq (a+bt) + J \in  R / J$. Then $a\neq 0$ or $b \neq 0$ in $\mathbb{Z}_3$. We have $a^2 + b^2 \neq 0$ in $\mathbb{Z}_3$. Therefore $\frac{1}{a^2 + b^2}$ exists in $\mathbb{Z}_3$. Now
+		\begin{align*}
+			\left( a+bt+J \right) \left( \frac{a-bt }{a^2 + b^2}+J \right) &= \frac{a^2 - b^2 t^2}{a^2 + b^2}+J \\
+			&= \frac{a^2 + b^2}{a^2 + b^2} +J\\
+			&= J \\
+		.\end{align*} 
+		Hence $R /J$ is a field with $9$ elements, and $J$ is a maximal ideal.
+		\end{proof}
+\end{example}

@@ -1,0 +1,87 @@
+\lecture{25}{Mon 31 Oct 2022 11:31}{Approximation Theorems}
+
+We say that $g: [a,b] \to \mathbb{R}$ is \textit{piecewise constant} if there are $a = x_0 < x_1 < \ldots < x_n = b$ a partition of $[a,b]$ such that $g $ is constant on $(x_{i^{-1} , x_i}, i = 1,2,\ldots,n$.
+
+\begin{theorem}[Uniform Approximation by Step Functions]
+	For any $f \in C([a,b])$ and $\varepsilon>0$, there is $g_\varepsilon$ piecewise constant on $[a,b]$ such that \[
+		\|f - g_\varepsilon\|_{[a,b]} < \varepsilon
+	.\] 
+\end{theorem}
+\begin{proof}
+	Let $\delta_\varepsilon>0$ be such that $|f(x) - f(y)| < \varepsilon$ if $|x-y|<\delta_\varepsilon$. $\delta_\varepsilon$ exists since $f$ is uniformly continuous.
+
+	Now let $N $ be so large that $\frac{b-a}{N}<\delta_\varepsilon$. We partition $[a,b]$ into $N$ intervals of same length.
+
+	Pick $\xi_i \in [x_{i-1}, x_i]$, $i = 1,\ldots, N$. \[
+		g_\varepsilon(x) = \begin{cases}
+			f(\xi_i) & x \in [x_{i-1}, x_i)\\
+			f(\xi_N) & x = x_N
+		\end{cases}
+	.\] 
+
+	Now for any $x$, $x \in [x_{i-1}, x_i)$ such that $i < N$ or $x \in [x_{N_1}, x_N]$.
+	But  $\xi_i \in [x_{i-1}, x_i)$, so $|x - \xi_i| < \delta_\varepsilon$, so $|f(\xi_i) - f(x)| < \varepsilon$.
+\end{proof}
+
+\begin{theorem}
+	For any $f \in C([a,b])$ and $\varepsilon>0$, there is $g_\varepsilon$ continuous piecewise linear on $[a,b]$ such that \[
+		\|f - g_\varepsilon\|_{[a,b]} < \varepsilon
+	.\]
+\end{theorem}
+\begin{proof}
+	Take same partition as before. Define
+	$g_\varepsilon(x)$ linear on $[x_{i-1}, x_i]$, $g_\varepsilon(x_i) = f(x_i)$ for all $i$. (We could explicitly write the formula but there is no need).
+
+	Then $|f(x) - f(x_i)| < \varepsilon$ and $|f(x) - f(x_{i-1})| < \varepsilon$ for some $i$. Using property of linear combination, we have
+
+	\[
+		f(x) - \varepsilon< f(x_i) < f(x) + \varepsilon
+	\]  and \[
+		f(x) - \varepsilon < f(x_{i-1}) < f(x) + \varepsilon
+	.\] 
+	Now $g_\varepsilon(x)$ is between $f(x_{i-1}), f(x)$, so $f(x) - \varepsilon < g(x) < f(x) + \varepsilon$.
+\end{proof}
+
+\begin{theorem}[Weierstrass Approximation Theorem]
+	For any $f \in C([a,b])$ and $\varepsilon>0$, there is a polynomial $P_\varepsilon(x)$ such that 
+\[
+		\|f - P_\varepsilon\|_{[a,b]} < \varepsilon
+	.\]
+\end{theorem}
+
+	(Berstein's Proof)
+	We assume wlog that $[a,b] = [0,1]$. Define the \textit{n-th Berstein Polynomial} as
+	\[
+		B_n(x,f) = \sum_{k=0}^{n} f(\frac{k}{n}) (C^n_k) x^k (1-x)^{n-k}
+	.\] 
+	\begin{example}
+		
+	Recall Newton's Binomial Theorem:
+	\[
+		(a+b)^n = \sum_{k=0}^{n} C^n_k a^k b^{n-k}
+	.\] 
+	Take $a = x, b = 1-x$, we have
+	\[
+		1 = \sum_{k=0}^{n} C^n_k x^k (1-x)^k
+	.\] 
+	Thus $B_n(x, 1) = 1$.
+
+	\end{example}
+
+\begin{theorem}(Bernstein's Theorem)
+	If $f \in C([0,1])$, then $B_n(x,f) \to f$ uniformly on $[0,1]$.
+	
+\end{theorem}
+\begin{proof}
+	Intuitively the Bernstein Polynomial is a weighted average of values of $f$ at a collection of points. We may write the weight as 
+	\[
+		\omega_k = C^n_k x^k (1-x)^{n-k}
+	.\] 
+	Now $\omega_k(x)$ is concentrated around $\frac{k}{n}$. We claim that 
+	\[
+		\sum_{k: |x - \frac{k}{n}|>\delta} \omega_k \to 0 \text{ uniformly as }n \to  \infty 
+	.\] 
+
+	For proof, see textbook or written note.
+\end{proof}
+

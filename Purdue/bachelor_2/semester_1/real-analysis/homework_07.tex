@@ -1,0 +1,81 @@
+\homework{7}{Sun 23 Oct 2022 17:59}{}
+20.G, 20.N, 20.P, 22.D, 22.F, 22.R, 22.S
+\begin{itemize}
+	\item 20.G. Let $f$ and $g$ be continuous on $\boldsymbol{R}$ to $\boldsymbol{R}$. Is it true that $f(x)=g(x)$ for $x \in \boldsymbol{R}$ if and only if $f(y)=g(y)$ for all rational numbers $y$ in $\boldsymbol{R}$ ?
+\begin{proof}
+	Yes it is. It suffices to prove the $(\impliedby)$ direction since the other direction is trivial. Fix any $x \in \mathbb{R}$. We can find a sequence of rational number $r_n $ such that $r_n \to  x$. By assumption, $f(r_n) = g(r_n)$ for all $n \in \mathbb{N}$. By property of continuity, $f(r_n) \to f(x)$ and $g(r_n) \to g(x)$. Since $f(r_n) = g(r_n)$, $f(x) = g(x)$.
+\end{proof}
+
+	\item 20.N. Let $g: \boldsymbol{R} \rightarrow \boldsymbol{R}$ satisfy the relation
+\[
+g(x+y)=g(x) g(y) \quad \text { for } x, y \in \boldsymbol{R} .
+\]
+Show that, if $g$ is continuous at $x=0$, then $g$ is continuous at every point. Also, if $g(a)=0$ for some $a \in \boldsymbol{R}$, then $g(x)=0$ for all $x \in \boldsymbol{R}$.
+\begin{proof}
+	Fix  $x \in \mathbb{R}$. Take any sequence $x_n$ in $\mathbb{R}$ such that $x_n \to x$. Define $y_n = x_n - x$. 
+	By convergence of sequence, $y_n \to  0$. By continuity of $g$ at $0$, $g(y_n) \to g(0)$. Now
+	\[
+		g(x_n) = g(x + y_n) = g(x) g(y_n) \to g(x)g(0) = g(x+0) = g(x)
+	.\] 
+	Thus $g(x_n) \to g(x)$ for any $x$ and any $x_n \to x$. Thus $g$ is continuous anywhere.
+
+	To verify the second claim, suppose $g(0) = 0$ and note that
+	\[
+		g(x) = g(x-a+a) = g(x-a)g(a) = g(x-a) \cdot 0 = 0
+	.\] 
+
+\end{proof}
+
+\item 20.P. Let $f, g: \boldsymbol{R}^p \rightarrow \boldsymbol{R}$ be continuous at a point $a \in \boldsymbol{R}^p$ and let $h, k$ be defined on $\boldsymbol{R}^p$ to $\boldsymbol{R}$ by
+\[
+h(x)=\sup \{f(x), g(x)\}, \quad k(x)=\inf \{f(x), g(x)\} .
+\]
+Show that $h$ and $k$ are continuous at $a$. (Hint: note that $\sup \{b, c\}=\frac{1}{2}(b+c+|b-c|)$ and $\inf \{b, c\}=\frac{1}{2}(b+c-|b-c|)$.)
+\begin{proof}
+	Using the hint, we define $h'(x) = \frac{1}{2}\left( f(x) + g(x) + \left| f(x) - g(x) \right|  \right) $ and similarly define $k'(x)$.
+
+	Since addition, substraction of continuous functions are continuous, and composition of continuous function with the continuous function $x \mapsto |x|$ is continuous, $h'$ and $k'$ are continuous. Also, for any $x \in \mathbb{R}^p$, we have $h(x) = \operatorname{sup} \{f(x), g(x)\} = \frac{1}{2}\left( f(x) + g(x) + \left| f(x) - g(x) \right|  \right)  = h'(x) $, so $h = h'$ and similarly $k = k'$. Hence $h$ and $k$ are continuous.
+	
+\end{proof}
+
+	\item 22.D. If $p: \boldsymbol{R}^2 \rightarrow \boldsymbol{R}$ is a polynomial and $c \in \boldsymbol{R}$, show that the set $\{(x, y): p(x, y)<c\}$ is open in $\boldsymbol{R}^2$.
+\begin{proof}
+	The set $(-\infty , c)$ is open in $\mathbb{R}$. Polynomials are continuous, so the inverse image $p^{-1} ((-\infty , c)) = \{(x, y): p(x, y)<c\}$ is open in $\mathbb{R}^2$.
+\end{proof}
+
+	\item 22.F. A subset $D \subseteq \boldsymbol{R}^p$ is disconnected if and only if there exists a continuous function $f: D \rightarrow \boldsymbol{R}$ such that $f(D)=\{0,1\}$
+\begin{proof}
+	Let $A, B$ be a disconnection of $D$. Define $f$ such that $f(A \cap D) = \{0\} $ and $f(B \cap D) = \{1\} $. Such function is well-defined since $A, B$ are disjoint and $A \cup B$ covers $D$. Let $N$ be any open set in $\mathbb{R}$. If $N \cap \{0,1\}  = \{0\} $, then $f^{-1} (N) = A \cap D$ is relatively open in $D$; if $N \cap \{0,1\}  = \{1\} $, then $f^{-1} (N) = B \cap D$ is relatively open in $D$; if $N \cap \{0,1\} = \{0,1\} $, then $f^{-1} (N) = D$ is relatively open in $D$ ; if $N \cap \{0,1\}  = \emptyset $, then $f^{-1} (N) = \emptyset $ is relatively open in $D$. Thus by definition of continuity,  $f$ is continuous on $D$.
+
+	Now we prove the other direction. Suppose there exists such a function $f$. Take $A = f^{-1} ((0-0.1, 0+0.1) )$ and $B = f^{-1} ((1-0.1, 1+0.1))$. Thus $A $ and $B$ are both open since they are inverse image by continuous function of open sets. $A \cup B$ covers $D$ since $\{0,1\} \subset (0-0.1, 0+0.1) \cup (1-0.1, 1+0.1)$. Moreover, $A$ and $B$ are disjoint, since $f$ takes different values on $A$ and on $B$. Hence $A,B$ forms a disconnection on $D$, so $D$ is disconnected.
+\end{proof}
+
+	\item 22.R. Let $f$ be continuous on the interval $[0,2 \pi]$ to $\boldsymbol{R}$ and such that $f(0)=f(2 \pi)$. Prove that there exists a point $c$ in this interval such that $f(c)=f(c+\pi)$. (Hint: consider $g(x)=f(x)-f(x+\pi)$.) Conclude that there are, at any time, antipodal points on the equator of the earth which have the same temperature.
+\begin{proof}
+	Let $g(x) = f(x) - f(x+\pi)$. Note that {\color{red}$g(x+\pi) = f(x+\pi) - f(x+2 \pi) = f(x+\pi) - f(x) = - g(x)$ (not well-defined on $(0,\pi))$.}
+	But since $f$ is continuous on $[0,2 \pi]$, so is $g(x)$ on $[0,\pi]$. If $g = 0$ then we are done, since there exists $x \in [0,\pi]$ such that $f(x) - f(x+\pi) = g(x) = 0$. If $g  \neq 0$, then there exists $x \in [0,\pi]$ such that $g(x+\pi) = - g(x) \neq  0$. By Bolzano's Intermediate Value Theorem, there exists $y \in (x, x+\pi)$ such that $g(y) = 0$, thus $f(y) - f(y+\pi) = 0$.
+
+	Interpretation: $[0,2 \pi]$ with two endpoint identified is homeomorphic to the earth's equator. We may assume that temperature is a continuous real-valued function on its domain. So the result applies directly to the equator.
+\end{proof}
+\begin{correction}
+	First note that
+	\[
+		g(\pi) = f(\pi) - f(2 \pi) = f(\pi) - f(0) = - g(0)
+	\]
+	We consider two cases. In the first case $g(0) = 0$, we have $f(0) = f(\pi)$ as desired. In the second case $g(0)\neq 0$, we suppose without loss of generality that $g(0) < 0$. Then $g(\pi) > 0$. By Bolzano's Intermediate Value Theorem, there exists $y \in [0, \pi]$ such that $g(y) = 0$. Hence $f(y) = f(y + \pi)$. We have $y + \pi \le  2 \pi$, so $f(y + \pi)$ is well-defined. Hence we are done.
+\end{correction}
+
+
+
+	\item 22.S. Let $\varphi:[0,2 \pi) \rightarrow \mathbf{R}^2$ be defined by $\varphi(t)=(\cos t, \sin t)$ for $t \in[0,2 \pi)$. Then $\varphi$ is an injective continuous map of $[0,2 \pi)$ onto the unit circle $S=$ $\left\{(x, y) \in \mathbf{K}^2: x^2+y^2=1\right\}$. Show that $\varphi^{-1}: S \rightarrow[0,2 \pi)$ cannot be continuous. (We conclude that Theorem $22.9$ may fail if the domain is not compact.)
+\begin{proof}
+	(topological)
+	The set $[0,1)$ is relatively open in $[0,2 \pi)$, but $\varphi([0,1))$ is a half-open interval on $S$, which is not relatively open in $S$. Thus $\varphi^{-1}$ is not continuous.
+\end{proof}
+\begin{proof}
+	(sequential)
+	By definition of $\varphi(t)$, $\lim_{t \to  2 \pi} \varphi(t) = (1,0) = \varphi(0)$. Now take the sequence $t_n = \pi + (-1)^n\left( 1-\frac{1}{n} \right) \pi$. $t_n$ is bounded and has exactly two limit points: $0$ and $2 \pi$, and $\varphi(t)$ converge to the same limit when $t$ approaches $0$ or $2 \pi$. Hence $\varphi(t_n)$ is a convergent sequence in $\mathbb{R}^2$. However, $\varphi^{-1} (\varphi(t_n)) = t_n$ is not convergent in $\mathbb{R}$. Thus $\varphi^{-1} $ is not convergent.
+\end{proof}
+
+
+\end{itemize}

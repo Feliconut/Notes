@@ -1,0 +1,80 @@
+\lecture{29}{Wed 09 Nov 2022 11:32}{}
+
+\begin{proposition}
+	Let $f:[a,b] \to \mathbb{R}$ be continuous and differentiable in $(a,b)$. Then
+	\begin{itemize}
+		\item $f$ nondecreasing on $[a,b]$ iff $f'(x) \ge 0$ for any $x \in (a,b) $
+		\item $f$ nonincreasing on $[a,b]$ iff $f'(x) \le 0$ for any $x \in (a,b) $
+		\item $f$ constant on $[a,b]$ iff $f'(x) = 0$ for any $x \in (a,b) $
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	We only prove (1). (2) is similar, (3) follows from (1),(2). For any $x \in (a,b)$, we have \[
+		f'(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}
+	.\] 
+	Then when  $h>0$, we have $f(x+h) - f(x) \ge 0$, thus \[
+		\frac{f(x+h) - f(x)}{h} \ge 0
+	\]
+	Hence $f'(x)\ge 0$.
+
+	Conversely, if $x<y$, $x,y \in [a,b]$, then by Mean Value Theorem, there exists $c \in (x,y)$ such that
+	\[
+		\frac{f(y) - f(x)}{y-x } = f'(c) \ge 0
+	.\] 
+	Hence $f(y) - f(x) \ge 0$.
+\end{proof}
+
+\begin{proposition}[L'Hopital's rule]
+	Let $f,g: [a,b]\to \mathbb{R}$ be continuous and differentiable in $(a,b)$. Suppose $f(a) = g(a) = L$ and $\lim_{x \to a+} \frac{f'(x)}{g'(x)} = L$. Then $\lim_{x \to a+} \frac{g(x)}{g(x)} = L$.
+\end{proposition}
+\begin{proof}
+	For any $\varepsilon>0$ there exists $\delta(\varepsilon)>0$ such that for all $a<y<a+\delta(\varepsilon)$, 
+	\[
+		\left| \frac{f'(y)}{g'(y)} - L \right| < \varepsilon
+	.\] 
+	Now take $a < x < a+\delta(\varepsilon)$, we have by Cauchy's Mean Value Theorem,
+	\[
+		\frac{f(x)}{g(x)} = \frac{f(x) - f(a)}{g(x) - g(a)} = \frac{f'(c_x)}{g'(c_x)}
+	\] 
+	where $c_x \in (a,x)$. In particular $a < c_x < a+\delta(\varepsilon)$. Hence
+	\[
+		\left| \frac{f'(c_x)}{g'(c_x)} - L \right| < \varepsilon
+	.\] 
+	Then the desired result follows.
+\end{proof}
+
+\subsection{Taylors theorem}
+
+\begin{theorem}[Taylor's Theorem]
+	Let $f$ be $n$ times differentiable in $(a,b)$, and $\alpha, \beta \in (a,b)$. Then
+	\[
+		f(\beta) = f(\alpha) + \frac{f'(\alpha)}{1!}(\beta - \alpha) + \ldots + \frac{f^{(n-1)}(\alpha)}{(n-1)!}(\beta - \alpha)^{n-1}
+		+ \frac{f^n (\gamma)}{n!}(\beta - \alpha)^n
+	\]
+	where $\gamma$ is between $\alpha$ and $\beta$. We define $R_n(f, \alpha, \beta) =  \frac{f^n (\gamma)}{n!}(\beta - \alpha)^n$ to be the \textit{remainder term}.
+\end{theorem}
+\begin{observation}
+	When $n=1$, we get the mean value theorem:
+	\[
+		\frac{f(\beta) - f(\alpha)}{\beta - \alpha} = f'(\gamma)
+	.\] 
+	Take $\beta  = \alpha+x$ and we observe that Taylor Theorem allows us to express $f(\alpha+x)$ in a polynomial of $x$ plus a remainder term.
+\end{observation}
+\begin{proof}
+	Let $P$ be such that \[
+		f(\beta) - \left( f(\alpha)+\frac{f'(\alpha)}{1!}(\beta - \alpha) + \ldots + \frac{f^{n-1}(\alpha)}{(n-1)!}(\beta - \alpha)^{n-1} \right)  = \frac{P(\beta - \alpha)^n}{n!}
+	.\] 
+	Let
+	\[
+		\varphi(x) = f(\beta) - \left( f(x) + \frac{f'(x)}{1!} (\beta - x) + \ldots + \frac{f^{(n -1)}(x)}{(n-1)!} (\beta - x)^{n -1} + \frac{P(\beta - x)^n}{n!}\right)
+	\]
+	Then $\varphi(\alpha) = 0$, and $\varphi(\beta) = 0$. By Rolle's Theorem, there exists $\gamma$ between $\alpha, \beta$ such that $\varphi'(\gamma) = 0$, which gives $P = f^{(n)}(\gamma)$.
+\end{proof}
+
+\subsection{Integration}
+
+A partition $P$ of an interval $[a,b]$ is given by a sequence 
+\[
+	P: a = x_0<x_1<\ldots <x_{N-1}<x_N = b
+.\] 
+

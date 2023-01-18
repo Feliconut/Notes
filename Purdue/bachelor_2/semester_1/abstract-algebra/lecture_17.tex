@@ -1,0 +1,61 @@
+\lecture{17}{Wed 19 Oct 2022 10:33}{}
+
+\begin{lemma}
+	Let $G$ be a finite abelian group of order $n = p_1^{\alpha_1}\ldots p_k^{\alpha^k}$,  where the $p_i$ are distinct primes and $\alpha _i \in \mathbb{N}$. Then $G$ is an internal direct product of subgroups $G_1, \ldots, G_k$ where $G_i$ is the subgroup of $G$ having all its elements $g$ of order $p_i^{r_i}$ for some $r_i = r_i(g) \ge 0$.
+\end{lemma}
+\begin{proof}
+	Let $G_i = \{g \in G: g^{p_i^r} = e \text{ for some }r \in \mathbb{N}\}$. Then (homework problem) $G_i \le G$, and since $G$ is abelian, one has $G_i \triangleleft G$.
+
+	Next we show that when $g \in G,$, thhen $g = g_1g_2\ldots g_k$ with $g_i \in G_i$. We have (by Lagrange) that $o(g) | G$, so $o(g) = p_1^{\beta_1}p_2^{\beta_2}\ldots p_k ^{\beta^k}$, say with $0\le \beta_i \le \alpha_i$. Put $a_i = o(g) / p_i ^{\beta_i}$, so $(a_1, a_2, \ldots, a_k) = 1$. Then, by Euclidean algorithm, there exist $b_i \in \mathbb{Z}$ with $a_1b_1 + \ldots + a_k b_k = 1$. Thus
+	\[
+		g = g^{a_1b_1} g^{a_2b_2}\ldots g^{a_kb_k}
+	.\] 
+	But
+	\[
+		\left( g^{a_ib_i} \right) ^{p_i^{\beta_i}}
+		= (g^{o(g)})^{b_i} = e
+	\]
+	So $g^{a_i b_i} \in G_i$. Thus $g = g_1 \ldots g_k$ with $g_i = g^{a_i b_i} \in G_i$.
+
+	To show $G = G_1 \ldots G_k$ as a direct product, we must show uniqueness of the decomposition, which amounts to showing $G_i \cap G_j = \{e\} $ for $i \neq j$. But if $g \in G_i \cap G_j$, then \[
+		g^{p_i^{\alpha_i}} = e = g^{p_j^{\alpha_j}}
+	.\] 
+	So $g^{(p_i^{\alpha_i}, p_j^{\alpha_j})} = g^1 = e$.
+
+	So  $G_i \cap G_j = \{e\} $ for $i \neq j$ and $G = G_1 \ldots G_k$ as a direct product.
+\end{proof}
+
+We now classify abelian \textit{p-groups}, groups having all elements a power of $p$.
+
+\begin{lemma}
+	Let $G$ be a finite abelian $p$-group and suppose $g \in G$ has maximal order. Then for some $H \le G$, one has $G = \left\langle g \right\rangle H$ as an internal direct product.
+\end{lemma}
+\begin{proof}
+	By Cauchy's Theorem, if $G$ is a p-group when $|G| = p^n$, some $n \in \mathbb{Z}_{\ge 0}$. Proceed by induction on $n$. When $n =1$ then  $G$ is cyclic of order $p$, so $G = \left\langle g \right\rangle $ and we are done taking $H = \{e\} $.
+
+	Suppose $n>1$, and the desired conclusion holds for all groups $G' $ of order $p^k$ where $1\le k<n$. Let $g \in G$ have maximal order, say $o(g) = p^m$ with $1\le m < n$ (without loss of generality since if $m = n$ we again have $G$ cyclic). 
+
+	Put $A = \left\langle g \right\rangle $, and let $h \in G / A$ be the element of least possible order in  $G / A$. Note that $G / A$ is nonempty, for else $G = \left\langle g \right\rangle \times \{e\} $.
+	\begin{claim}
+		$o(h) = p$.
+	\end{claim}
+	To check this, note that the order of $h$ is a power of $p$, so $o(h^p) = o(h) / p$. By minimality of $h$, $h^p \in A = \left\langle g \right\rangle $, so $h^p = g^r$ for some $r \in \mathbb{Z}$. But $o(g) = p^m$, and
+	\[
+		\left( g^r \right) ^{p^{m-1}} = \left( h^p \right) ^{p^{m-1}} = h^{p^m} = e
+	\] 
+	since $o(g) = p^m$ is maximal. Whence $p^m | r p^{m-1}$. Thus $p | r$, say $r = ps $ for some $s \in \mathbb{Z}$.
+	Put $a = g^{-s} h$, and observe that if $a \in \left\langle g \right\rangle $ then $h \in \left\langle g \right\rangle $, a contradiction. So $a \not\in \left\langle g \right\rangle $ and $a^p = g^{-sp}h^p = g^{-r}h^p = e$.  Then $o(a) = p$, so by the minimality of  $o(h)$, we have $o(h) = p$. This proves the claim.
+
+	Now study $H = \left\langle h \right\rangle $ and $G / H$ (noting $H \triangleleft G$). We claim that the order of $Hg$ in $G / H$ is $o(g) = p^m$ (Exercise). If $H = \left( Hg \right) ^{p^{m-1}}$, so $g^{p^{m-1}} \in H$, whence $g^{p^{m-1}} = h^u$ for some  $u \in \mathbb{Z}$, so $h= g^{v p ^{m-1}}$ for $v \in \mathbb{Z}$ satisfying $uv = 1 \pmod p$. This is  a contradiction since $h \not\in  \left\langle g \right\rangle $.
+
+	We have $Hg$ has order $p^m = o(g)$ in $G / H$. Observe that $| G / H| < |G|$, so by inductive hypothesis, $G / H = \left\langle H g \right\rangle \times T$, for some subgroup $T \le G / H$. By the correspondence theorem, one has $T = K / H$ for some subgroup $K$ of  $G$ such that $H \triangleleft K \le G$. Thus $G / H = \left\langle H g \right\rangle \times K / H$.
+
+	Now we aim to prove $G = \left\langle g \right\rangle  \times K$. To see this, observe that when $a \in G$, one has $Ha = aH \in \left\langle H g \right\rangle \times K / H$, so $g^r k H$, for some $r \in \mathbb{Z}$ and $k \in K$, whence 
+	\begin{align*}
+		a &= g^r k h' \text{for some  $h' \in H$}\\
+		&=  g^r k' \text{for some  $k' \in K$, since $H \triangleleft K$}
+	.\end{align*}
+
+	Thus $G = \left\langle g \right\rangle K $. If $ \left\langle g \right\rangle \cap K \neq \{e\}  $, say $b \in \left\langle g \right\rangle \cap K $ with $b \neq e$, then $H b \in \left\langle Hg \right\rangle \cap K / H = \{H\} $ (trivial intersection, since $G / H$ is an internal direct product). Then $b \in H = \left\langle h \right\rangle $, and $b \in \left\langle g \right\rangle = A $, so $b \in A \cap \left\langle h \right\rangle $, and this gives $b = e$. Thus $G = \left\langle g \right\rangle  K$ with $\left\langle g \right\rangle  \cap K = \{e\} $, so $G  = \left\langle g \right\rangle \times K$ as an internal direct product. This completes induction.
+\end{proof}
+

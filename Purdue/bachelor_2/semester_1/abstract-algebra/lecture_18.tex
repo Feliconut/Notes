@@ -1,0 +1,60 @@
+\lecture{18}{Fri 21 Oct 2022 10:35}{Proof of classification theorem}
+\begin{theorem}[Classification for Finite Abelian Groups]
+	(2.10 A)
+	Suppose that $G$ is a finite abelian group. Then $G$ is isomorphic to a direct product of cyclic groups of the shape \[
+		\mathbb{Z}_{p_1^{\alpha_1}}\times \mathbb{Z}_{p_2^{\alpha_2}}\times\ldots \times  \mathbb{Z}_{p_r^{\alpha_r}}
+	.\] 
+	where $p_i$ are primes (not necessarily distinct), and $\alpha_i \in \mathbb{N}$, and $n = |G| = p_1^{\alpha_1} \ldots p_r^{\alpha_r}$.
+\end{theorem}
+\begin{proof}
+	Apply Lemma 2.10.C to show that if $G$ is a finite abelian group of order $n = p_1^{\alpha_1}\ldots p_k^{\alpha_k}$, then $G$ is an internal direct product $G = G_1 \ldots G_k$ of $p_i$-groups $G_i$, for distinct primes $p_1,\ldots,p_k$. Fix a choice for $i$. Then by Lemma 2.10.D, show that $G_i$ has an element $g_i \in G \ \{e\} $ of maximal order and a subgroup $H_i$ such that $G_i = \left\langle g_i \right\rangle \times H_i$ and $H_i$ is also a $p_i$-group. And by induction $H_i$ has a similar decomposition, so
+	\[
+		G_i = \left\langle g_{i_1} \right\rangle \left\langle g_{i 2} \right\rangle \ldots \left\langle g_{ir_i} \right\rangle 
+	.\] 
+	where $o(g_{ij}) = p_i^{n_j}$, say, and $n_1 \ge n_2 \ge  \ldots \ge n_{r_i} \ge 1$.
+	
+	Thus  \[
+		G_i = \mathbb{Z}_{p_i^{n_1}}\times 
+\mathbb{Z}_{p_i^{n_2}}\times  \ldots \times 
+\mathbb{Z}_{p_i^{n_{r_i}}}
+	.\] 
+	Hence $G$ is an internal direct product of cyclic $p$-groups.
+\end{proof}
+
+\subsection{Conjugacy and Sylow Theorems}
+
+Recall: $a$ is conjugate to $b$ means $b = g^{-1} ag $ for some $g \in G$.
+
+Conjugacy defines an equivalence relation. We define the \textit{equivalece class}:
+\[
+	\operatorname{cl}(a):= \{b \in G: b \text{ conjugate to }a\} 
+.\] 
+
+If $G$ is abelian, then $g^{-1} ag = a$ for all $g \in G$, so $\operatorname{a} = \{a\} $. This is true also if $a \in Z(G)$. If $a \not\in Z(G)$, the center can be bigger.
+
+Also recall the \textit{centralizer} $C(a) = \{g \in G: ga = ag \} $. They are related by
+\begin{theorem}
+	Let $G$ be a finite group and $a \in G$. Then
+	\[
+		|\operatorname{cl}(a)| = \frac{|G|}{|C(a)}=i_G\left( C(a) \right)
+	.\]
+\end{theorem}
+\begin{proof}
+	If $g, h \in G$, and the conjugate of  $a$ by $g$ and $h$ are the same, then $g a g^{-1} = h a h^{-1} $, whence $h^{-1} g a g^{-1} h = a$, hence $h^{-1} g \in C(a)$. Thus $g \in hC(a)$. Thus, $g$ and $h$ lie in $C(a)$ if and only if $g \in h C(a)$. Thus the number of conjugates of $a $ in $G$ is equal to $\operatorname \{h C(a) \in G / C(a) : h \in G\} = |G| / |C(a)| = i_G\left( C(a) \right) $.
+\end{proof}
+
+\begin{theorem}[Class equation]
+	If $G$ is a finite group, then
+	\[
+		|G| = \sum_{a=1} i_G\left( C(a) \right)  = \sum_a \frac{|G|}{|C(a)|}
+	\]
+	, where the summation is over distinct conjugacy class representatives. 
+\end{theorem}
+\begin{proof}
+	The equivalence classes partition $G$.
+\end{proof}
+
+Consequences
+\begin{itemize}
+	\item Any group $G$ of order $p^2$ with $p$ prime is abelian, so $G \cong \mathbb{Z}_{p^2}$ or $G \cong \mathbb{Z}_p \times \mathbb{Z}_p$.
+\end{itemize}

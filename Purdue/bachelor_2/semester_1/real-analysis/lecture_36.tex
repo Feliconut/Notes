@@ -1,0 +1,134 @@
+\lecture{36}{Wed 07 Dec 2022 11:33}{}
+
+\begin{theorem}(Uniform convergence and integrability)
+	Suppose $f_n: [a,b] \to \mathbb{R}$ are R-S integrable wrt $g$, $g$ monotone increase on $[a,b]$. If $f(x) = \sum_{n=1}^{\infty} f_n(x)$ is uniformly convergent on $[a,b]$ then $f$ is R-S integrable wrt $g$ on $[a,b]$ and 
+	\[
+		\int _a^b f dg = \sum_{n=1}^{\infty} \int _a^b f_n dg
+	.\] 
+\end{theorem}
+
+\begin{theorem}(Uniform convergence and Differentiability)
+	Suppose $f_n: [a,b] \to \mathbb{R}$ (continuously) differentiable on $[a,b]$ such that 
+	\begin{itemize}
+		\item $\sum_{n=1}^{\infty} f'_n(x)$ is uniformly cnvergent on $[a,b]$
+		\item  $\sum_{n=1}^{\infty} f_n(x_0)$ is convergent for some $x_0 \in [a,b]$.
+	\end{itemize}
+	Then, $f(x) = \sum_{n=1}^{\infty} f_n(x)$ is convergent uniformly on $[a,b]$, and $f'(x) = \sum_{n=1}^{\infty} f'_n(x)$, $x \in [a,b]$.
+\end{theorem}
+This justifies term-by-term differentiation.
+
+\begin{remark}
+	This theorem is true without assuming continuously differentiable. However the proof we give will depend on this assumption.
+\end{remark}
+
+\begin{proof}
+	From assumptions and Newton Leibniz formula, we have
+	\[
+		f_n(x) = f_n(x_0) + \int _{x_0}^x f'_n(x) dx
+	.\] 
+	Taking sums,
+	\[
+		\sum_{n=1}^{\infty} f_n(x) = \sum_{n=1}^{\infty} f_n(x_0) + \sum_{n=1}^{\infty} \int _{x_0}^x f'_n(t) dt
+	.\] 
+	Applying definition of $f(x)$ and uniform convergence, we have
+	\[
+		f(x) = \sum_{n=1}^{\infty} f_n(x_0) + \int _{x_0}^t \sum_{n=1}^{\infty}f'_n(t)dt 
+		=:  f(x_0) + \int _{x_0}^x g(t) dt
+	.\] 
+	By the differentiation theorem,
+	\[
+		f'(x) = g(x) \qquad 
+		\text{ for any }  x \in [a,b]
+	.\] 
+\end{proof}
+
+\begin{example}
+	Show that
+	\[
+		f(x) = \sum_{n=1}^{\infty} \frac{(nx) }{n^2}
+		\qquad x \in \mathbb{R}
+	\] 
+	where
+	\[
+		(\alpha) = \alpha - [\alpha] \in [0,1)
+	\]
+	is the fractional part of $\alpha$,
+	is discontinuous at all rational points, but is Riemann integrable on any finite interval.
+\end{example}
+	By Weierstrass M-test, $\sum f_n(x)$ is uniformly convergent. 
+
+	$f_n$ has finitely many discontinuity, so $f_n$ is Riemann integrable, hence $f$ is Riemann integrable.
+
+	$f_n$ not continuous at all $c$, but the ine sided limits exist at every point. Define
+	\[
+		j_n(c) = f_n(c+) - f_n(c-)
+	.\] 
+	be the \textit{jump} at $c$. 
+
+	By uniform continuity,
+	\[
+		f(c+) = \lim_{x \to c+} \sum f_n(x) = \sum \lim_{x \to c+} f_n(x)
+	.\] 
+
+	Similarly we define $f(c-)$. Now we have
+	\[
+		f(c+) - f(c-) = \sum_{n=1}^{\infty} j_n(c) < 0 \iff  c \in \mathbb{Q}
+	.\] 
+
+\subsection{Power Series}
+
+A power series is a series of the form
+\[
+	f(x) = \sum_{n=0}^{\infty} a_n x^n
+.\] 
+
+\begin{theorem}
+	Let $\rho = \limsup_{n \to \infty} |a_n|^{\frac{1}{n}} \in [0, \infty ]$ and $R = \frac{1}{\rho}$ in the extended sense. 
+
+	Then
+	\begin{enumerate}
+		\item for any $|x| < R$ the series is convergent.
+		\item for any $|x| \le  C < R$ the series is uniformly convergent.
+		\item If $|x| >R$ the series is divergent.
+		\item for $|x| = R$ the series may or may not diverge.
+	\end{enumerate}
+	$R$ is called \logseq{Radius of Convergence}.
+\end{theorem}
+\begin{proof}
+	Apply Root test to $a_n x^n$. Thus
+	\[
+		\limsup |a_n x^n|^{\frac{1}{n}} = |x| \limsup |a_n|^{\frac{1}{n}} =  \frac{|x|}{R}< 1 \iff |x| > R
+	.\]
+
+	To prove the uniformly convergent part, let $x \in [-r, r] $ and
+	\[
+		|a_n x^n| \le |a_n| r^n
+	.\] 
+	and
+	\[
+		\sum |a_n| r^n < \infty  \qquad \text{ by Root Test}
+	.\]
+	Hence $\sum a_n x^n$ uniformly converge by Weierstrass M-test.
+\end{proof}
+
+\begin{theorem}
+	If $f$ is a power series as above, and $R$ is as above, then $f$ is infinitely differentiable in $(-R, R)$ and the series can be differentiated term-by-term.
+\end{theorem}
+\begin{proof}
+	Consider the series
+	$g(x) = \sum_{k=1}^{\infty} k a_k x^{k-1}$. $g(x)$ converges iff $x g(x) = \sum_{k=0}^{\infty} k a_k x^k $ converges. We claim this sum has the same radius of convergence as $g$. This is true since $k^{\frac{1}{k}}\to  1$. 
+
+	Besides, we know $f$ is convergent at $0$. Apply differentiation theorem,
+	$f'(x) = \sum_{k=0}^{\infty} k a_k x^{k-1}$.
+\end{proof}
+\begin{remark}
+	From term-of-term differentiation we have
+	\[
+		a_n = \frac{f^{(n)}(0)}{n!}
+	.\] 
+	and $f(x)$ is a \logseq{Taylor series}.
+\end{remark}
+
+
+
+

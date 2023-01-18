@@ -28,7 +28,7 @@ The next theorem generalizes the example to all analytic functions.
 \begin{corollary}[Cauchy Integral Formula]
 	If $f$ is analytic in $\Omega$ and $\mathcal{D}$ is a region, $\partial \mathcal{D}$ is piecewise smooth, $\mathcal{D} \cup \partial \mathcal{D} \subset \Omega$, Then for all $a$ in the interior of $\mathcal{D}$,
 	\[
-		f(a) = \frac{1}{2 \pi i } \int_{\partial \mathcal{D}} \frac{f(a)}{z-a}dz
+		f(a) = \frac{1}{2 \pi i } \int_{\partial \mathcal{D}} \frac{f(z)}{z-a}dz
 	\]
 \end{corollary}
 \begin{proof}
@@ -71,8 +71,24 @@ Hence \[
 	Boundary determines interior points. This is similar to Dirichlet Problem and harmonic functions.
 \end{remark}
 
+\begin{lemma}
+	Let $g$ be continuous on the contour $\Gamma$, and for each $z$ not on $\Gamma$ set
+	\[
+		G(z) = \int_\Gamma \frac{g(\xi)}{\left( \xi - z \right) ^n} d \xi
+	.\] 
+	Then $G$ is analytic at each point not on $\Gamma$, and its derivative is
+	\[
+		G'(z) = n \int _\Gamma \frac{g(\xi)}{(\xi - z)^{n+1}} d \xi
+	.\] 
+\end{lemma}
+Note: we do not assume $g$ is analytic, or $\Gamma$ is closed.
+\begin{proof}
+	Not given here. The proof is from definition of derivative, and mean estimation.
+\end{proof}
+
+
 \begin{corollary}[Cauchy's Differentiation Formula]
-	Differentiable functions are infinitely differentiable. Moreover,
+	\textbf{Derivatives are analytic}, so differentiable functions are infinitely differentiable. Moreover,
 \[
 	\frac{d^n}{dz^n} f(z) = \frac{n!}{2 \pi i} \int _{\partial \mathcal{D}}\frac{f(\zeta)}{(\zeta - z)^{n+1}} d\zeta
 \]
@@ -83,9 +99,20 @@ for all $z$ in the interior of $\mathcal{D}$.
 \[
 	f(z) = \frac{1}{2 \pi i}\int _{\partial \mathcal{D}}\frac{f(\zeta)}{\zeta - z} d \zeta, \quad z \in \mathcal{D}
 .\]	
-This is infinitely differentiable wrt $z$, since $\frac{1}{\zeta - z}$ is infinitely differentiable. The formula comes easily via induction.
+Apply the previous lemma, and the formula comes easily via induction.
 \end{proof}
-test
+
+\begin{theorem}[Morera's Theorem]
+	If $g$ is continuous in a domain $D$ and if for any closed contour $\Gamma$ we have
+	\[
+		\int _\Gamma f(z) dz = 0
+	.\] 
+	Then $f$ is analytic in $D$.
+\end{theorem}
+\begin{proof}
+	Integral over each closed path is $0$, so $f$ has a primitive. Derivaties are analytic, so $f$ is analytic.
+\end{proof}
+
 
 \begin{property}[Average Property of Analytic Functions]
 	

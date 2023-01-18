@@ -1,0 +1,161 @@
+\lecture{33}{Wed 30 Nov 2022 11:30}{Series}
+
+\section{Series}
+
+\subsection{Definitions}
+
+\begin{definition}(Series of Numbers)
+	Define the \textit{partial sum} \[
+		S_n = \sum_{k=1}^{n} x_k
+	.\] 
+	We say \[
+		S = \sum_{k=1}^{\infty} x_k :\iff S_n \to S \text{ as } n\to \infty 
+	.\] 
+\end{definition}
+
+\begin{definition}[Absolutely Convergent]
+	We say a series  $\sum_{k=1}^{\infty} x_k $ is \textit{absolutely convergent} if $\sum_{k=1}^{\infty} \left| x_k \right|  $.
+\end{definition}
+
+\begin{lemma}
+	Let $\sum_{k=1}^{\infty} x_n$ be a series with $x_n \ge 0$. Then it is convergent iff there exists $M$ such that $S_n \le M$ for all $n$. Then $\sum_{k=1}^{\infty} x_n \le M$.
+\end{lemma}
+\begin{proof}
+	By Monotone Convergence Theorem applied to $S_n$.
+\end{proof}
+
+\begin{lemma}[Cauchy Criterion]
+	$\sum x_n$ converges iff for any $\varepsilon>0$ ther is $M_\varepsilon$ such that $\sum_{k=n}^m x_k$ if $n\ge m\ge M_\varepsilon$.
+\end{lemma}
+\begin{proof}
+	$S_n$ converges iff $S_n$ is cauchy sequence.
+\end{proof}
+
+\begin{proposition}
+	Absolute convergnce implies convergence.
+\end{proposition}
+\begin{proof}
+	Use triangle inequality, prove that $\sum x_n$ is Cauchy.
+\end{proof}
+
+\begin{definition}[Rearrangement of Series]
+	Take $\varphi: \mathbb{N}\to \mathbb{N}$ be a bijection. The series
+	\[
+		\sum_{n=1}^{\infty} x_{\varphi(n)}
+	\] is called a \textit{rearrangement} of $\sum_{n=1}^{\infty} x_n $.
+\end{definition}
+
+\begin{theorem}
+	If $x_n \ge 0$, $\sum_{n=1}^{\infty} x_n < \infty $, then $\sum_{n=1}^{\infty} x_{\varphi(n)} < \infty $ and $\sum_{n=1}^{\infty} x_{n} = \sum_{n=1}^{\infty} x_{\varphi(n)}$
+\end{theorem}
+\begin{proof}
+	Let $S_n' = X_{\varphi(1)} + \ldots + X_{\varphi(n)}$. Let $N = \max \{\varphi(1), \ldots, \varphi(n) \} $.
+	Hence for any $n$,
+	\[
+		S_n' \le S_N \le M
+	.\] 
+	Thus $\sum_{n=1}^{\infty} x_{\varphi(n)} = \lim_{n \to \infty} S_n' \le M$.
+\end{proof}
+\begin{theorem}
+	If $\varphi: \mathbb{N}\to \mathbb{N}$ is bijection, then $\sum x_n$ absolutely convergent iff $\sum x_{\varphi(n)}$ absolutely convergent, and then 
+	\[
+		\sum_{n=1}^{\infty} x_n 
+		= \sum_{n=1}^{\infty} x_{\varphi(n)}
+	.\] 
+\end{theorem}
+\begin{proof}
+	Convergence follows from the proposition above. To prove the sums are equal, split into positive and negative parts. 
+\end{proof}
+
+\begin{definition}[Conditionally Convergent]
+	$\sum x_n$ is convergent, but not absolutely.
+\end{definition}
+Equivalently, both $\sum_{n=1}^{\infty } x_n^+$ and $\sum_{n=1}^{\infty} x_n^-$ are infinite.
+
+\begin{theorem}
+	If $\sum_{n=1}^{\infty} x_n$ converges conditionally, then for each real number $x$ there exists $\varphi: \mathbb{N}\to \mathbb{N}$ such that
+	\[
+		\sum_{n=1}^{\infty} x_{\varphi_x(n)} = x
+	.\] 
+\end{theorem}
+
+\begin{proposition}
+	$\sum a_n$ convergent implies $a_n \to 0$.
+\end{proposition}
+\begin{proof}
+	$a_n = S_n - S_{n-1} \to S - S = 0$
+\end{proof}
+
+\begin{example}
+	\begin{enumerate}
+	\item (Geometric series)
+	\item ($p$-series)
+		\[
+		\sum_{n=1}^{\infty} \frac{1}{n^p}
+		.\] 
+		If $p\le 0$, then $\frac{1}{n^p}\ge 1 \not \to 0$ divergent.
+		If $p>0$, $\frac{1}{n^p} \to 0$. But is the series it convergent?
+
+		Apply \textit{Cauhy's condensation method}: 
+		\[
+		S_{2^k}\ge 1 + \frac{1}{2} \left( \frac{1}{2^{p-1} + \frac{1}{(2^{p-1})^2}} + \ldots + \frac{1}{(2^{p-1})^k} \right) 		.\] 
+		 \[
+			S_{2^k} \ge  1 + \frac{1}{2} \left( a + a^2 + \ldots + a^k \right) \qquad a = \frac{1}{2^{p-1}}
+		.\] 
+		So the series diverges if $p \le 1$.
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}[Cauchy's Condensation Test]
+	Let $a_n \ge 0$, $a_n$ strictly decreasing. Then $\sum a_n <\infty $ iff $\sum 2^k a_{2^k} < \infty $.
+	
+\end{theorem}
+
+\begin{theorem}[Comparison Theorem]
+	Suppose $\sum x_n$, $\sum y_n$, $x_n, y_n \ge 0$ are such that  $x_n \le y_n$ for $n \ge N$. Then 
+	\[
+	\sum y_n < \infty \implies \sum x_n < \infty 
+	.\] 
+	Also
+	\[
+		\sum x_n = \infty  \implies \sum y_n = \infty
+	.\] 
+\end{theorem}
+\begin{proof}
+	work with partial sums.
+\end{proof}
+
+
+\begin{theorem}[Limit Comparison Theorem]
+	Suppose $\limsup \frac{x_n}{y_n}< \infty$, then
+	\[
+		\sum y_n <\infty  \implies \sum x_n < \infty
+	.\] 
+	SUppose $\liminf \frac{x_n}{y_n}>0$ then
+	\[
+		\sum y_n = \infty  \implies \sum x_n = \infty 
+	.\] 
+\end{theorem}
+\begin{theorem}[Root Test]
+	Let $x_n \ge 0$ and 
+	\[
+		\rho =\limsup _{n \to  \infty } |x_n|^{\frac{1}{n}}
+	.\] 
+	Then
+	\begin{enumerate}
+		\item If $\rho < 1$ then $\sum x_n $ absolutely convergent
+		\item If  $\rho > 1$ then $\sum x_n$ divergent.
+		\item Otherwise the test is conclusive.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Choose $\rho < \tilde \rho < 1$. Then there exists $N $ such that for $n \ge N$,
+	\[
+		|x_n|^{\frac{1}{n}}\le \rho \tilde
+	.\] 
+	Hence $|x_n|\le \tilde \rho^n$. Now we can apply comparison test.
+\item Pick subsequence such that $|x_{n_k}|^{\frac{1}{n}} \ge 1$, so $x_n \not \to 0$.
+	\end{enumerate}
+\end{proof}
+

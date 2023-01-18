@@ -1,0 +1,103 @@
+\lecture{22}{Fri 04 Nov 2022 10:31}{Ring Theory}
+
+\section{Ring Theory}
+\subsection{Definitions and Examples}
+
+\begin{definition}[Ring]
+	Let $R$ be a nonempty set. Then $R$ is a \textit{ring} if there are two binary operations $+$ and $\cdot$ satisfying:
+	\begin{itemize}
+		\item [R0] $a,b \in R$ implies $a+b \in R$.
+		\item [R1] $+$ is commutative.
+		\item [R2] $+$ is associative.
+		\item [R3] There exists $0 \in R$ as additive identity.
+		\item [R4] For all $a \in R$ there exists $-a \in R$ such that $a+(-a) = (-a)+a = 0$
+		\item [M0] $a, b \in R$ implies $a \cdot b \in R$.
+		\item [M1] $\cdot$ is associative.
+		\item [D1] (distributivity) $a \cdot(b+c) = a\cdot b + a \cdot c$ 
+		\item [D2]  $(a+b)\cdot c = a \cdot c + b \cdot c$
+	\end{itemize}
+\end{definition}
+
+\begin{example}
+	$\mathbb{Z}$ and $\mathbb{Z}_n$ are rings with usual addition and multiplication (modulo $n$ for $\mathbb{Z}_n$ )
+
+	$M_2(n\mathbb{Z})$ (2 by 2 matrices with entries from $n\mathbb{Z}$ ) form a ring with usual matrix addition and multiplication.
+\end{example}
+
+\begin{remark}
+	$R$ is a ring when $(R, +)$ is an abelian group and $(R, \cdot)$ is associative, distributive.
+\end{remark}
+
+Rings with extra properties:
+\begin{enumerate}
+	\item (Rings with unity)
+		If $R$ is a ring with also
+		\begin{itemize}
+			\item [M2] There exists $1 \in R$ with $1 \neq 0$ such that $1 \cdot a = a \cdot 1$ for all $a \in R$
+		\end{itemize}
+		then $R$ is a ring with unity.
+	\begin{nonexample}
+		$2\mathbb{Z}$
+	\end{nonexample}
+	\begin{example}
+		$M_2(\mathbb{Z})$, identity matrix is the multiplicative $1$.
+	\end{example}
+	\begin{notation}
+		Rings without $1$ are sometimes called ``rngs''.
+	\end{notation}
+\item (Commutative Ring)
+	If $(R, + ,\cdot)$ also satisfies
+	\begin{itemize}
+		\item [M3] For all $a, b \in R$ we have $a \cdot b = b \cdot a$
+	\end{itemize}
+	then $R$ is a \textit{commutative ring}.
+	\begin{nonexample}
+		$M_2(\mathbb{Z})$
+	\end{nonexample}
+	\begin{example}
+		$\mathbb{Z}$, $2\mathbb{Z}$
+	\end{example}
+\item (Domains)
+	If $(R, + , \cdot)$ satisfies
+	\begin{itemize}
+		\item [M4] whenever $a \cdot b = 0$ then $a=0$ or $b=0$
+	\end{itemize}
+	then $R$ is a \textit{domain}.
+	\begin{nonexample}
+		$M_2(\mathbb{Z})$. ($e_1 \cdot e_2 = 0$)
+	\end{nonexample}
+\item (Integral Domain)
+	If $(R, +,  \cdot)$ is a commutative domain, then $R$ is an integral domain.
+\item (Division Ring)
+	A ring $(R, + , \cdot)$ with unity is a \textit{division ring} if for all $a \in R \setminus \{0\} $, there exists $b \in R$ such that $a \cdot b=  b\cdot a = 1$.
+\item (Fields)
+	A ring $(R, +, \cdot)$ is a \textit{field} if it is a commutative division ring.
+	\begin{example}
+		$\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{Z}_p(+, \cdot \pmod p)$ form a field.
+	\end{example}
+	\begin{example}
+		Quaternions (Hamilton, 19th century). Consider \[
+			\mathbb{H} = \{a+bi+cj+dk: a,b,c,d \in \mathbb{R}\} 
+		\] 
+		subject to: $+$ coordinate-wise, and $i^2 = j^2 = k^2  = -1$, $ij = k$, $jk = i$, $ki = j$.
+
+		$\mathbb{H}$ is noncommutative but a division ring. Observe taht \[
+			(a+bi+cj+dk)(a-bi-cj-dk) = a^2 + b^2+c^2+d^2
+		.\] 
+		Hence if $a+bi+cj+dk \neq 0$, then there is an element \[
+			(a+bi+cj+dk)^{-1} = \frac{a-bi-cj-dk}{a^2 + b^2+c^2+d^2}
+		.\] 
+	\end{example}
+\end{enumerate}
+
+\begin{definition}[Subring]
+	A \textit{subring} $S$ of a ring $R$ is a subset $S \subset R$ with $S$ satisfying ring axioms.
+\end{definition}
+To verify subring, we have to check:
+\begin{itemize}
+	\item $S \neq \emptyset $ 
+	\item For all $a,b \in S$, $a \pm b \in S$ and $a \cdot b \in S$.
+\end{itemize}
+\begin{example}
+	$2\mathbb{Z}$ is a subring of $\mathbb{Z}$.
+\end{example}

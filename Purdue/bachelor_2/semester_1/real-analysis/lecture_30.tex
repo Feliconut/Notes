@@ -1,0 +1,106 @@
+\lecture{30}{Fri 11 Nov 2022 11:29}{}
+\subsection{The Riemann-Stieltjes Integral}
+\begin{definition}[Riemann-Stieltjes Integral]
+	Let $f: [a,b] \to \mathbb{R}$ bounded and $g: [1,b] \to  \mathbb{R}$ monotone increasing. We define the \textit{Riemann-Stieltjes Integral} to be
+	\[
+		\int_a^b f d g
+	.\]
+\end{definition}
+\begin{definition}[Riemann Sum]
+	
+Given a partition $P: a = x_0 < x_1 < \ldots < x_N = b$. Let $\Delta g_i = g(x_i) - g(x_{i-1})$. Let also $\xi_i \in [x_{i-1}, x_i]$, $i = 1, \ldots, N$. We define $m_i (f) = \operatorname{inf}_{[x_{i-1}, x_i]}  f$ and $M_i(f) = \operatorname{sup} _{[x_{i-1}, x_i]}f$. Note that $m_i \le f(\xi_i) \le  M_i$. Now we define the \textit{Riemann Sum}
+\[
+	S(P, f, g) = \sum_{i=1}^{N} f(\xi) \Delta g_i
+.\] 
+The \textit{Upper Sum (Darboux)}
+\[
+	U(P, f, g) = \sum_{i=1}^{N} M_i \Delta g_i
+.\] 
+The \textit{Lower Sum}
+\[
+	L(P, f, g) = \sum_{i=1}^{N} m_i \Delta g_i
+.\] 
+We have
+\[
+	L(P, f, g) \le S(P, f, g) \le U(P, f, g)
+.\] 
+\end{definition}
+Note: Take supremum over $\xi_i$ in $S(P, f, g)$ and we get the upper sum. Take infimum and we get the lower sum.
+
+\begin{definition}[R-S Integrability]
+	We say $f$ is R-S integrable and  $\int_a^b f dg =I $ if
+	\begin{itemize}
+		\item [(Riemann)] For any $\varepsilon>0$  there is a partition $P_\varepsilon$ of $[a,b] $ such that $\left| S(P_\varepsilon, f, g) - I \right| < \varepsilon$ for any $P $ finer than $ P_\varepsilon$.
+		\item [(Darboux)] Define $I^* = \operatorname{inf} U(P, f, g) = \overline{\int _a^b} f dg$ and $I_* = \operatorname{sup} L(P, f, g)=\underline{\int _a^b} f dg$. Then for any (bounded) $f$, $I_* \le  I^*$. We say $f$ is R-S integrable if $I_* = I^*$ and we define the integral to be the common value.
+	\end{itemize}
+\end{definition}
+\begin{proposition}
+	Integrals in Riemann definition are uniquely defined. If $\int _a^b f dg = I_1$ and $\int _a^b f dg = I_2$, then $I_1 = I_2$.
+\end{proposition}
+\begin{proof}
+	 Let $P_\varepsilon, P_\varepsilon'$ be such that $\left| S(P, f, g) - I_1 \right| <\varepsilon$ if $P$ finer than $P_\varepsilon$ and $\left| S(P, f, g) - I_2 \right| <\varepsilon$ if $P$ finer than $P_\varepsilon'$. Take a common refinement $P$ of $P_\varepsilon$, $P_\varepsilon'$. Then
+	 \[
+	 	\left| I_1 - I_2 \right| \le 
+		\left| S(P, f,, g) - I_1 \right| + \left| S(P, f, g) - I_2 \right| \le 2 \varepsilon
+	 .\] 
+	 $\varepsilon$ arbitrary, so $I_1 = I_2$.
+\end{proof}
+
+\begin{lemma}
+	If $Q$ finer than $P$ then $L(Q, f, g) \ge L(P, f, g)$ and $U(Q, f, g) \le U(P, f, g)$. Also, for any two partitions $P, Q $ we have $L(P, f, g) \le U(Q, f, g)$.
+\end{lemma}
+\begin{proof}
+	Let $P: a = x_0 < \ldots < x_N = b$. Suppose $Q: a < x_0 < \ldots < x_{i-1} < \overline{x} <x_i < \ldots < x_N = b$ (We only add one point to $P$).
+
+	Let $m_i' = \operatorname{inf}_{[x_{i-1}, \overline{x} ]}f$ and $m_i'' = \operatorname{inf} _{[\overline{x} , x_{i}]}f$. Then $m_i \le m_i'$ and $m_i \le m_{i}''$.
+
+	Then  \[
+		L(P, f, g) = \sum_{k \neq  i}^{} m_k \Delta g_k + m_i \left( g(x_i) - g(x_{i-1}) \right) 
+	.\] 
+	and
+\begin{align*}
+	L(Q, f, g) &= \sum_{k \neq  i}^{} m_k \Delta g_k + m_i' \left( g(\overline{x} ) - g(x_{i-1}) \right) +  m_i'' \left( g(\overline{x} ) - g(\overline{x} ) \right) \\
+		   &\ge \sum_{k \neq  i}^{} m_k \Delta g_k + m_i \left( g(\overline{x} ) - g(x_{i-1}) \right)
+	.\end{align*}
+
+	The first claim follows from induction. Proof for upper sum is symmetric. 
+
+	Now take arbitrary $P, Q$. Take $R$ a common refinement of $P, Q$. Then
+	\[
+		L(Q, f, g) \le L(R, f, g) \le U(R, f, g) \le U(P, f, g)
+	.\] 
+\end{proof}
+
+Now from lemma,
+$I_* = \operatorname{sup}_P L(P, f, g) \le U(Q, f, g)$ for any $Q$. Hence
+\[
+	I_* \le \operatorname{inf}_Q U(Q, f, g) = I^*
+.\] 
+
+\begin{proposition}
+	R-S integrability in Riemann sense and in Darboux sense are equivalent.
+\end{proposition}
+\begin{proof}
+	Assume integrability in Riemann sense. Let $\int _a^b f dg = I$. Then we know $|S(P, f, g) - I| < \varepsilon$ if $P$ finer than $P_\varepsilon$. Recall $U(P, f, g) = \operatorname{sup}_{\xi_i} S(P, f, g)$, hence $\left| U(P, f, g) - I \right| \le \varepsilon$ for any  $P$ finer than $P_\varepsilon$. Hence $I^* \le  I + \varepsilon$ for any $\varepsilon$. Hence $I^* \le I$.
+
+	Similarly, we show $I_* \ge I$. Hence $I^* = I_* = I$.
+
+	Now assume integrability in Darboux sense. Suppose $I^* = I_* = I$. By definition of sup and inf, there are partitions $P_\varepsilon$ and $Q_\varepsilon$ such that 
+	\[
+		I < U(Q_\varepsilon, f, g) \le I + \varepsilon
+	.\] 
+	and \[
+		I > L(P_\varepsilon, f, g) \ge I - \varepsilon
+	.\] 
+	Now take common refinement of  $Q_\varepsilon$ and $P_\varepsilon$, say $R_\varepsilon$. Hence
+	\[
+	I-\varepsilon  < L(R_\varepsilon, f, g) \le U(R_\varepsilon, f, g) \le I + \varepsilon
+	.\] 
+	Hence for all $P$ finer than $R_\varepsilon$,
+\[
+	I-\varepsilon  < L(P, f, g) \le U(P, f, g) \le I + \varepsilon
+	.\]
+	Hence
+	$I - \varepsilon \le S(P, f, g) \le I + \varepsilon$. Hence $\left| S(P, f, g) - I \right| <\varepsilon$ if $P$ finer than $R_\varepsilon$.
+\end{proof}
+

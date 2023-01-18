@@ -1,0 +1,260 @@
+\lecture{32}{Mon 28 Nov 2022 11:33}{}
+
+\begin{theorem}[Mean Value Theorem]
+	If $f$ is continuous on $[a,b]$, $g$ monotone increase on $[a,b]$, then there is $c \in [a,b]$ such that 
+	\[
+		\int_a^b f dg = f(c) \left[ g(b) - g(a) \right] 
+	.\]
+\end{theorem}
+\begin{remark}
+	In this theorem $c$ is in the closed interval, and we cannot restrict it to the open interval. For example, let $g$ be constantly zero on $[a,b)$ and $1$ on $[b, \infty )$. Then $\int_a^b f dg = f(b) (g(b) - g(a)$.
+\end{remark}
+
+\begin{theorem}[Differentiation of Integral]
+	Let $f:[a,b] \to \mathbb{R}$ be Riemann integrable on $[a,b]$ and continuous at $c \in [a,b]$. Let
+	\[
+		F(x) = \int_a^x f(t)dt
+	.\] 
+Then $F'(c) = f(c)$.
+\end{theorem}
+\begin{definition}[Antiderivative]
+	We say that $G$ is an \textit{antiderivative} of $f$ on $[a,b]$ if
+	\begin{enumerate}
+		\item $G$ continuous on $[a,b]$ 
+		\item $G'(x) = f(x)$ on $(a,b)$
+	\end{enumerate}
+\end{definition}
+
+\begin{corollary}[Fundamental Theorem of Calculus]
+	Let $f: [a,b] \to \mathbb{R}$ be continuous.
+	Let $G$ be an antiderivative of $f$ on $[a,b]$.
+	Then
+	\[
+		\int_a^b f(x) dx = G(b) - G(a)
+	.\] 
+	Also called \logseq{Newton-Leibniz Formula}.
+\end{corollary}
+\begin{proof}
+	Let $F(x) = \int_a^x f(t) dt$, $x \in [a,b]$.
+	We claim that $F$ is antiderivative of $f$.
+	(2) follows from differentiation theorem. (1) follows from the fact that as
+	\[
+		|F(y) - F(x)| = \left|\int_x^y f(t) dt\right| \le M |x-y|
+	.\]
+	hence $F$ Lipschitz continuous, hence continuous on $[a,b]$.
+
+	Then look at \[
+		H(x) = G(x) - F(x)
+	.\] 
+	We have
+	\begin{enumerate}
+		\item $H$ continuous on $[a,b]$
+		\item  $H'(x) = 0$ for every  $x \in (a,b)$
+	\end{enumerate}
+	Hence $H$ is constant on $[a,b]$. Hence  $G(x) = F(x) + C$ for all $x \in [a,b]$, for some $C \in \mathbb{R}$. Now
+	\[
+		G(b) - G(a) = (F(b) + C) - (F(a)+C) = F(b) - F(a) = F(b) = \int_a^x f(t) dt
+	.\] 
+
+\end{proof}
+
+\begin{theorem}[Integration By Parts]
+	Suppose $f, g$ continuously differentiable on $[a,b]$. Then 
+	\[
+		\int_a^b f g' dx = fg|_a^b - \int_a^b g f' dx
+	.\] 
+\end{theorem}
+\begin{proof}
+	From product rule, $\left( f(x)g(x) \right) ' = f'(x) g(x) + f(x) g'(x)$. We can integrate this since $(fg)'$ is continuous. Now by Newton-Leibniz, 
+	\[
+		\int_a^b (fg)' dx = f(b)g(b) - f(a) g(a)
+	.\] 
+	On the other hand
+\[
+		\int_a^b (fg)' dx = \int_a^b fg' dx + \int_a^b gf' dx
+	.\]
+\end{proof}
+
+\begin{theorem}
+	If $f$ bounded on $[a,b]$, $g$ monotone increase and continuously differentiable on $[a,b]$, then
+	\[
+		\int_a^b f dg \text{ exists } \iff  \int_a^b fg' dx \text{ exists}
+	.\] 
+	and the two integrals are equal.
+\end{theorem}
+
+\begin{theorem}
+	Suppose $f, g$ monotone increase on $[a,b]$, then
+	\[
+		\int_a^b f\, dg \text{ exists } \iff  \int _a^b g \,df \text{ exists}
+	.\] 
+	and then
+	\[
+		\int_a^b f \,dg = fg|_a^b - \int _a^b g \, df
+	.\] 
+\end{theorem}
+\begin{proof}
+	By Riemann Criterion for integrability, $\int_a^b f\, dg$ exists iff for any  $\varepsilon>0$ there exists partition $P_\varepsilon$ such that 
+	\[
+		\sum_{i=1}^{N} \left( M_i(f) - m_i(f) \right) \Delta g_i < \varepsilon
+		\qquad 
+	.\] 
+	where
+\[
+		m_i(f) = \operatorname{inf}_{[x_{i-1}, x_i]} f = f(x_{i-1})
+	.\]
+	\[
+		M_i(f) = \operatorname{sup}_{[x_{i-1}, x_i]} f = f(x_i)
+	.\] 
+	Hence
+\[
+		\sum_{i=1}^{N} \left( M_i(f) - m_i(f) \right) \Delta g_i 
+		= \sum_{i=1}^{N} \Delta f_i \Delta g_i
+		=\sum_{i=1}^{N} \left( M_i(g) - m_i(g) \right) \Delta f_i 
+	.\]
+	Hence the existence criterion for the two integrals are equivalent.
+
+	Let $P$ be any partition of $[a,b]$ such that
+	\[
+		U(P, f, g)= \sum_{i=1}^{N} f(x_i) [g(x_i) - g(_{i-1})]
+	.\] 
+	\[
+		L(P, g, f) = \sum_{i=1}^{N} g(x_{i-1})\left[ f(x_i) - f(x_{i-1 })\right] 
+	.\] 
+	Now
+	\begin{align*}
+		U(P, f, g) + L(P, g, f) &= \sum_{i=1}^{N} \left[ f(x_i) g(x_i) - f(x_{i-1}) g(x_{i-1 }) \right] \\
+		&= f(b) g(b) - f(a) g(a)
+	.\end{align*} 
+	Hence
+	\[
+		\int_a^b f \,dg + \int _a^b g \, df = 
+		f(b) g(b) - f(a) g(a)
+	.\] 
+\end{proof}
+
+
+\begin{theorem}[Change of Variables]
+	Let $f:[a,b] \to \mathbb{R}$ be continuous and $\varphi: [\alpha,\beta] \to [a,b]$ be continuously differentiable and such that
+	\[
+		\varphi(\alpha) = a, \varphi(\beta) = b
+	.\] 
+	Then
+	\[
+		\int_a^b f(x) dx = \int_\alpha^\beta f(\varphi(t))\varphi'(t) dt
+	.\] 
+\end{theorem}
+\begin{proof}
+	Let \[
+		F(x) = \int_a^x f(\xi) d\xi
+	.\] 
+	and
+	\[
+		\Phi(t) = \int_\alpha^t f(\varphi(\tau)) \varphi'(\tau) d\tau
+	.\] 
+	We look at $F(\varphi(\tau)), \tau \in [\alpha,\beta]$ 
+
+	\begin{enumerate}
+		\item $F(\varphi(\tau))$ continuous on $[\alpha, \beta]$ 
+		\item $(F(\varphi(\tau)))' = F'(\varphi(\tau)) \varphi'(\tau)$,  
+	\end{enumerate}
+	so $F(\varphi(\tau))$ is an antiderivative of $f(\varphi(t) )\varphi'(t)$ on $[\alpha, \beta].$
+
+	By the Newton-Leibniz Formula,
+	\[
+		\int_\alpha^\beta f(\varphi(t))\varphi'(t) dt = F(\varphi(\beta)) - F(\varphi(\alpha)) = F(b) - F(a) = \int_a^b f(x) dx
+	.\] 
+\end{proof}
+
+\begin{theorem}
+	Suppose $f: [a,b] \to \mathbb{R}$ bounded and $\varphi: [\alpha, \beta] \to  [a,b]$ monotone increase, and $\varphi$ is a bijection. Then
+	\[
+		\int _a^b f(x) dx \text{ exists }\iff 
+		\int _a^b f \circ \varphi d \varphi \text{ exists}
+	.\] 
+	and the integrals are equal.
+\end{theorem}
+\begin{proof}
+	Let $P$ be a partition of $[\alpha, \beta]$. Denote $P: \alpha = t_0 < t_1< \ldots < t_N = \beta$. Let $\varphi(P): a = x_0 < x_1 = \varphi(t_1) < x_2=\varphi(t_2) < \ldots < x_N = \beta$.
+
+	Now
+	\begin{align*}
+		U(P, f, \varphi) &= U(\varphi(P), f, x)\\
+		L(P, f, \varphi) &= L(\varphi(P), f, x)
+	.\end{align*}
+	This finishes the proof.
+\end{proof}
+
+
+\subsection{Convergence and Integral}
+
+In general, if $f_n : [a,b] \to \mathbb{R}$ are R-S integrable w.r.t $g$ monotone increase on $[a,b]$.
+
+$f_n \to f$ pointwise, does not imply $f$ R-S integrable, and even if the limit exists, the integrals are not necessarily equal.
+
+\begin{example}
+	Let  $f$ be the Dirichlet function
+	\[
+		f(x) = \begin{cases}
+			1 & x \in \mathbb{Q}\\
+			0 & x \not\in \mathbb{Q}
+		\end{cases}
+	.\] 
+	We enumerate the rational numbers $\mathbb{Q} = \{r_n: n \in \mathbb{N}\} $. Let
+	\[
+		f_n(x) = \begin{cases}
+			1 & x = r_1, r_2, \ldots, r_n \\
+			0 & \text{otherwise}
+		\end{cases}
+	.\] 
+	$f_n$ has finitely many discontinuities, so $f_n$ is R-S integrable. Also, $f_n \to f$ pointwise. But $f$ not R-S integralble.
+\end{example}
+
+\begin{example}
+	Let $f_n$ be piecewise linear such that
+	\[
+		f_n(0) = 0, f_n(\frac{1}{n}) = n, f_n(\frac{2}{n}) = 0
+	.\] 
+	Then $f_n \to  0$ pointwise, but $\int_0^1 f_n dx = 1$.
+\end{example}
+
+\begin{theorem}[Bounded Convergence Theorem]
+	Suppose $f_n: [a,b] \to \mathbb{R}$ are uniformly bounded on $[a,b]$, i.e. there exists $B\ge 0$ such that
+	\[
+		|f_n(x)| \le B \text{ for all }x \in [a,b], n \in \mathbb{N}
+	.\] 
+	If $f_n$ are R-S integrable wrt $g$ and $f_n (x) \to  f(x)$ pointwise, then $f$ is also R-S integrable and  \[
+		\int _a^b f_n dg \to \int _a^b f dg
+	.\] 
+\end{theorem}
+
+This theorem is easy to prove in the Lebesgue integration theory, but very difficult to prove in RS integration theory. Hence we omit the proof.
+
+\begin{theorem}
+	Let $f_n: [a,b] \to \mathbb{R}$ be R-S integrable wrt $g$, $g$ monotone increase on $[a,b]$, and $f_n \to f$ uniformly on $[ a,b]$. Then $f$ is R-S integrable wrt $g$ on $[a,b]$, and $\int _a^b f_n dg \to  \int _a^b f dg$.
+\end{theorem}
+\begin{proof}
+	Suppose $f$ is integrable, then
+	\[
+		\left| \int _a^b f_n dg - \int _a^b f dg  \right| \le \int _a^b \left| f_n - f \right| dg \le  \varepsilon \int _a^b dg = \varepsilon (g(b) - g(a))
+	.\] 
+
+	Now we verify integrability of $f$.
+\end{proof}
+
+For any $\varepsilon$, we have for sufficiently fine partition that
+\[
+	\left| U(P, f_n, g) - U(P, f, g) \right| \le \varepsilon\left( g(b) - g(a) \right) 
+.\] 
+
+Hence for $n \ge K_\varepsilon$,
+\[
+	\left| \overline{\int _a^b} f_n dg - \overline{\int _a^b}f dg   \right| \le \varepsilon
+.\] 
+
+Symmetrically we have the result for lower integral. But since $f_n$ integrable, we have
+\[
+	\left| \overline{\int _a^b} f dg - \underline{\int _a^b}f dg  \right|  \le  2 \varepsilon
+.\] 
+
+This proves $f$ is RS integrable.

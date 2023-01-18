@@ -1,0 +1,89 @@
+\lecture{26}{Mon 14 Nov 2022 10:38}{}
+
+\begin{fact}
+	Every finite field has $p^n$ elements for prime $p$ and natural number $n$ ; and for every $p,n$ we have a finite field with $p^n$ elements. Furthermore, every field with $p^n$ elements are isomorphic.
+\end{fact}
+
+\subsection{Polynomial Rings}
+
+Given $R$ a ring, we can define $R[x] = \{a_0 + a_1x + \ldots + a_n x^n: a_i \in R, n \ge 0\} $. We concentrate on situation when $R$ is a field.
+\begin{enumerate}
+	\item $F[x]$ forms a commutative ring with unit.
+		 \begin{proof}
+			 Consider $p(x) = a_0 + a_1x + .. + a_n x^n \in F[x]$, and $q(x) = b_0 + b_1x + \ldots + b_m x^m \in F[x]$, $n \ge m \ge 0$.
+
+			 \begin{itemize}
+			 	\item (equality)
+			 $p(x) = q(x)$ iff $a_0 = b_0, \ldots, a_m = b_m$, $a_j = 0$ for $j > m$. 
+		                \item (addition)
+					\[
+						p(x)+ q(x) = (a_0+b_0) + (a_1+b_1)x + \ldots + (a_m + b_m)x^m + a_{m+1}x^{m+1} + \ldots + a_n x^n
+					.\] 
+				\item (multiplication)
+					Define $p(x) q(x) = c_0 + c_1x + \ldots + c_r x^r \in F[x]$ where  $c_i = \sum_{l=0}^{i} a^l b^{i - l}$, adopt convention that $a_i = 0$ for $i > n$, $b_j = 0$ for $j > m$.
+				\item (Additive Identity) $0 \in F[x]$
+				\item (Additive Inverse) $-(a_0+a_1x+\ldots+a_nx^n) = (-a_0) + (-a_1) x + \ldots + (-a_n)x^n$
+				\item Assiciativity and Commutativity of addition inherited from $F$.
+				\item (Multiplicative Identity) $1 \in F[x]$ since $1 \in F$
+				\item (Commutativity of Multiplication) inherited from $F$.
+
+			 \end{itemize}
+		\end{proof}
+\end{enumerate}
+
+We measure the size of polynomials with ``degree'', which is analogous to $\log|n|$ for $n \in \mathbb{Z}$.
+
+\begin{definition}[Degree of Polynomial]
+	Suppose $f(x) = a_0+a_1x + \ldots + a_n ^n$ with $a_n \neq 0$, then the \textit{degree} of $f(x)$ is $\operatorname{deg} f = n$. By convention, $\operatorname{deg} (0) = -\infty $.
+\end{definition}
+\begin{example}
+	One has $3x^2 + 2 \in \mathbb{Z}_5[x]$, and $\operatorname{deg} (3x^2 + 2) = 2$, and $\operatorname{deg} (2) = 0$. 
+\end{example}
+\begin{proposition}
+	The following statements hold for $p(x), q(x) \in F[x]$ :
+	\begin{itemize}
+		\item $\operatorname{deg} \left( p(x) + q(x) \right) \le \max \{\operatorname{deg} p, \operatorname{deg} q\} $
+		\item $\operatorname{deg} (pq) = \operatorname{deg} p + \operatorname{deg}  q$
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	exercise.
+\end{proof}
+
+\begin{lemma}
+	When $F$ is a filed, then $F[x]$ is an integral domain.
+\end{lemma}
+\begin{proof}
+	Need to check $F[x]$, which is commutative ring with unity, has no zero divisors. But if  $p(x) , q(x) \in F[x]$ and $p(x)q(x) = 0$, then
+	\[
+		- \infty = \operatorname{deg} \left( p(x)q(x) \right) =\operatorname{deg} p + \operatorname{deg} q
+	.\] 
+	Which is possible when either $\operatorname{deg} p = -\infty $ or $\operatorname{deg} q = -\infty $, or both. So one of them is $0$.
+\end{proof}
+
+\begin{theorem}[Division Algorithm]
+	Suppose that $f(x), g(x) \in F[x]$ and that $g(x) \neq 0$. Then
+	\[
+		f(x) = q(x)g(x) + r(x)
+	\] 
+	where the \textit{quotient} $q(x)$ and \textit{remainer} $r(x) \in F[x]$, and $r(x) = 0$ or  $\operatorname{deg} r < \operatorname{deg} g$.
+\end{theorem}
+\begin{proof}
+	If $\operatorname{deg} f < \operatorname{deg} g$, take $q = 0$ and $r = f$ and we are done. So we assume $\operatorname{deg} f\ge \operatorname{deg} g$, and say
+	\begin{align*}
+		f(x)&= a_0+a_1x + \ldots+a_mx^m \\
+		g(x)&= b_0+b_1x+\ldots+b_nx^n & m\ge n\ge 0, a_m \neq 0, b_n\neq 0\\
+	.\end{align*}
+	Proceed induction and assume conclusion holds for $\operatorname{deg} (f) < m$ for some $m\ge 1$. Now assume $\operatorname{deg} f = m$ as above, and observe
+	\begin{align*}
+		&f(x) - \frac{a^m}{b^n}x^{m-n}g(x) \\
+		&= \left( a_{m-1} - \frac{a_m}{b_n}b_{n-1 } \right) x^{m-1} + \ldots+ \left( a_{m-n}- \frac{a^m}{b^n}b_0 \right) x^{m-n }+ a_{m-n-1 }x^{m-n-1 } + \ldots + a_0 \\
+		&= h(x) \in F[x] \\
+	.\end{align*} 
+	When $\operatorname{deg} h \le m-1<\operatorname{deg} f$, so inductive hypothesis applies, so $h(x) = q_1(x) g(x) + r_1(x)$ where $q_1, r_1 \in F[x]$, $r_1(x) = 0$ or $\operatorname{deg} r_1 < \operatorname{deg} g$.
+	But then $f(x)= \left( \frac{a^m}{b^n}x^{m-n}q_1(x) \right)  g(x) + r_1(x) =: q(x)g(x) + r(x)$.
+	Where $q(x), r(x) \in F[x]$, and $q, r$ satisfies needed properties. This complete inductive step.
+\end{proof}
+\begin{remark}
+	One can also prove by linear algebra.
+\end{remark}

@@ -1,0 +1,278 @@
+\homework{1}{Mon 16 Jan 2023 01:23}{homework}
+
+21.L, 21.M, 39.D, 39.G, 39.J, 39.T, 39.V, 39.W
+\begin{itemize}
+	\item [21.L] If $f$ is a linear map on $\mathbf{R}^p$ to $\boldsymbol{R}^q$, define
+\[
+\|f\|_{\mathrm{pq}}=\sup \left\{\|f(x)\|: x \in \mathbf{R}^{\mathrm{p}},\|x\| \leq 1\right\} .
+\]
+Show that the mapping $f \mapsto\|f\|_{\text {pq }}$ defines a norm on the vector space $\mathscr{L}\left(\mathbf{R}^{\mathrm{p}}, \mathbf{R}^{\mathrm{q}}\right)$ of all linear functions on $\boldsymbol{R}^p$ to $\boldsymbol{R}^q$. Show that $\|f(x)\| \leq\|f\|_{p q}\|x\|$ for all $x \in \boldsymbol{R}^p$.
+
+\begin{proof}
+	Verify the definition of norm:
+	\begin{itemize}
+		\item (nonnegativity)
+			We check that $\|f\|_{pq}\ge 0$ for all $f$ and equals $0$ only for the zero function. The first part is obvious by the definition. 
+
+			Now suppose $\|f\|_{pq }= 0$, so $\operatorname{sup} \{\|f(x)\|: \|x\| \le 1\}  = 0$. We know that $\|f(x)\| \ge 0$ for all $x$, so $f(x) = 0$ for all $x$, $\|x\|\le 1$. Thus $f(x) = 0$ for all $x$ in the unit ball. 
+
+			Since $f$ is linear, for any $y \in \mathbb{R}^p$ we have $y = \|y\| \frac{y}{\|y\|}$ where $\frac{y}{\|y\|}$ has norm $1$. Thus $f(y) = \|y\| f(\frac{y}{\|y\|}) = \|y\|0 = 0$. Thus $f$ is the zero function.
+		\item (scalar multiplication)
+			Simply notice that
+			\begin{align*}
+				\|cf \|_{pq } 
+				&= \operatorname{sup} \{\|cf(x)\|: \|x \|\le 1\}\\
+				&= \operatorname{sup} \{c\|f(x)\|: \|x \|\le 1\}\\
+				&= c\operatorname{sup} \{\|f(x)\|: \|x \|\le 1\}\\
+			&= c\|f \|_{pq } 
+				.
+			\end{align*}
+		\item (triangle inequality)
+			Simply notice that
+			\begin{align*}
+				\|f + g\|_{pq}
+				&= \operatorname{sup} \{\|f(x) + g(x)\|: \|x \|\le 1\}\\
+				&\le  \operatorname{sup} \{\|f(x) \|+\| g(x)\|: \|x \|\le 1\}\\
+				&\le   \operatorname{sup} \{\|f(x) \|: \|x \|\le 1\}+  \operatorname{sup} \{\|g(x) \|: \|x \|\le 1\}\\
+				&=
+				\|f \|_{pq}
+				+\| g\|_{pq}
+			.\end{align*} 
+	\end{itemize}
+	To verify the last claim, let $x \in \mathbb{R}^p$ and $y = \frac{x}{\|x\|}$, thus $y$ lies inside the unit ball. Thus $f(y)\le \|f\|_{pq }$. This implies $\|f(x) \|= \|x\|f(y) \le \|f\|_{pq }\|x\|$.
+\end{proof}
+
+\item [21.M.] If $f$ is a linear map on $\mathbf{R}^p$ to $\mathbf{R}^q$, define
+\[
+M(f)=\inf \left\{M>0:\|f(x)\| \leq M\|x\|, x \in \mathbf{R}^p\right\} .
+\]
+Show that $M(f)=\|f\|_{p q}$.
+\begin{proof}
+	For every $\varepsilon>0$, it suffices prove the following: 
+	\begin{itemize} 
+		\item For all $x$ we have $\|f(x)\|\le (\|f\|_{pq}+\varepsilon) \|x\|$.  This is proved in the last question.  
+		\item There exists some $x$ such that $\|f(x)\| > (\|f\|_{pq}-\varepsilon) \|x\|$.
+		For every $\varepsilon>0$ there exists $x \in \mathbb{R}^p, \|x\|\le 1$ such that
+			\[
+				\|f\|_{pq} - \varepsilon < \| f(x)\| \le \|f \|_{pq}
+			.\] 
+		Now since $\|x\|\le 1$ we have
+		\[
+			\|f(x) \|>  \|f \|_{pq } - \varepsilon  \ge \left( \|f \|_{pq } - \varepsilon \right) \|x\|
+		.\] 
+	\end{itemize}
+\end{proof}
+
+\item [39.D.] Let $k: \boldsymbol{R}^2 \rightarrow \boldsymbol{R}$ be defined by
+\[
+\begin{aligned}
+k(x, y) & =0 & & \text { for }(x, y)=(0,0), \\
+& =\frac{x y^2}{x^2+y^4} & & \text { for }(x, y) \neq(0,0)
+\end{aligned}
+\]
+Show that the partial derivative of $k$ at $(0,0)$ with respect to any vector $u=(a, b)$ exists and that
+\[
+D_u k(0,0)=\frac{b^2}{a} \quad \text { if } a \neq 0
+\]
+Show that $k$ is not continuous and hence not differentiable at $(0,0)$.
+\begin{proof}
+	Apply the definition of partial derivative. Partial deriative exist if the limit exists:
+	\[
+		\lim_{t \to 0} \frac{f((0,0) + t u) - f((0,0))}{t} = \lim_{t \to 0} \frac{\frac{ab^2t^3}{a^2 t^2 + b^4 t^4}}{t}
+	.\] 
+	When $a\neq 0$, this is true since the RHS is
+	\[
+		\lim_{t \to 0} \frac{ab^2t^3}{a^2t^2 + b^4 t^4} = \lim_{t \to 0} \frac{ab^2 }{a^2 + b^4t^4} = \frac{b^2}{a}
+	.\] 
+	When $a = 0$, we have
+	\[
+		\lim_{t \to 0} \frac{ab^2t^3}{a^2t^2 + b^4 t^4} = \lim_{t \to 0} \frac{0}{0+ b^4t^4} = 0
+	.\] 
+	
+	Thus the partial derivative always exists at $(0,0)$. However $k$ is not continuous, since if we approach $(0,0)$ along the path $x = y^2$, we obtain
+	 \[
+		\lim_{(x,y) \to (0,0); x = y^2} k(x,y) = \lim \frac{y^4}{y^4 + y^4}  = \frac{1}{2} \neq  k(0,0)
+	.\] 
+	Thus $k$ is not differentiable at $(0,0)$.
+\end{proof}
+
+\item [39.G.] Let $G: \boldsymbol{R}^2 \rightarrow \boldsymbol{R}$ be defined by
+\[
+\begin{aligned}
+G(x, y) & =\left(x^2+y^2\right) \sin 1 /\left(x^2+y^2\right) & & \text { for }(x, y) \neq(0,0) \\
+& =0 & & \text { for }(x, y)=(0,0)
+\end{aligned}
+\]
+Show that $G$ is differentiable at every point of $\boldsymbol{R}^2$ but the partial derivatives $D_1 G$, $D_2 G$ are not bounded (and hence not continuous) on a neighborhood of $(0,0)$.
+\begin{proof}
+	$G$ is the composition of monomial, addition, $\sin$ and reciprocal, which are all differentiable at $(x, y)\neq (0,0)$, so $G$ is differentiable by the chain rule. Now we prove $G$ is differentiable at $(0,0)$. 
+	\[
+		\lim_{(x,y) \to 0} \frac{G(x, y)}{\|(x,y)\|} 
+		\le  \lim_{(x,y) \to 0} \frac{\|(x,y)\|^2}{\|(x,y)\|} 
+		= \lim_{(x,y) \to 0} \|(x,y)\| = 0
+	.\] 
+	Thus $G$ has derivative $0$ at $(0,0)$.
+
+	Now we treat the partial derivatives. Consider some nonzero $x$ with small norm. Now
+	\begin{align*}
+		D_1G(x, 0) &= \lim_{t \to 0} \frac{(x+t)^2 \sin \frac{1}{(x+t)^2} - x^2 \sin \frac{1}{x^2}}{t}\\
+			   &= \lim_{t \to 0} 2(x+t) \sin \frac{1}{(x+t)^2} -2 (x+t)^{-1} \cos \frac{1}{(x+t)^2}\\
+			   &= 2x \sin \frac{1}{x^2} - 2x^{-1} \cos \frac{1}{x^2}
+	.\end{align*} 
+	The second term is clearly unbounded as $x \to  0.$ Similarly $D_2G(0, y)$ is unbounded in a neighborhood of $(0,0)$.
+\end{proof}
+
+\item 39.J. Let $c$ be an interior point of $A \subseteq \boldsymbol{R}^p$ and let $f: A \rightarrow \boldsymbol{R}$.
+(a) If $f$ is differentiable at $c$, show that there exists a unique vector $v_c \in \boldsymbol{R}^p$ such that
+\[
+D_u f(c)=D f(c)(u)=v_c \cdot u \quad \text { for all } u \in \boldsymbol{R}^p .
+\]
+The vector $v_c$ is called the gradient of $f$ at $c$ and is denoted by $\nabla_c f$, or by grad $f(c)$. Show that
+\[
+\nabla_c f=\left(D_1 f(c), \ldots, D_p f(c)\right) .
+\]
+\begin{proof}
+	Consider $v_c = (v_c^{(1)}, \ldots, v_c^{(p)})$. Consider $u = e_1 = (1,0,\ldots, 0)$. Now $D_uf(c) = D_1f(c) = v_c \cdot u = v_c^{(1)}$. Proceed in the similar fashion, we see $v_c^{(i)} = D_i f(c)$. This uniquely determines $v_c$. 
+
+	Now we verify 
+	\[
+		D_u f(c)=D f(c)(u)=v_c \cdot u \quad \text{for all } u \in \boldsymbol{R}^p
+	.\] 
+	This can be shown using the Jacobian Matrix:
+	\begin{equation*}
+		Df(c)(u) = \left[ D_1 f (c) \quad \ldots \quad D_p f(c) \right] 
+     \begin{bmatrix}
+           u_{1} \\
+           u_{2} \\
+           \vdots \\
+           u_{p}
+         \end{bmatrix}
+	 = \sum_{j=1}^{p} u_j D_j f(c)
+	 = 
+     \begin{bmatrix}
+           D_1f(c) \\
+           D_2f(c) \\
+           \vdots \\
+           D_pf(c)
+         \end{bmatrix}
+	 \cdot
+     \begin{bmatrix}
+           u_{1} \\
+           u_{2} \\
+           \vdots \\
+           u_{p}
+         \end{bmatrix}
+\end{equation*} 
+\end{proof}
+
+(b) Use the Schwarz Inequality to show that if $u \in \boldsymbol{R}^p$ and $\|u\|=1$, then the function $u \mapsto D_u f(c)$ has a maximum value when $u$ is a positive multiple of $\nabla_c f$. Hence the direction in which the directional derivative of $f$ at $c$ is maximum is that of the gradient of $f$ at $c$.
+\begin{proof}
+	By Schwarz Inequality, $\|D_u f(c)\| =\| v_c \cdot u\| \le \|v_c\| \|u\|$ where equality holds iff  $v_c$ is scalar multiple of $u$. Hence maximum is attained when $u$ is positive multiple of $v_c = \Delta_c f$.
+\end{proof}
+
+\item 39.T. If $A \subseteq \boldsymbol{R}^p$ and $f: A \rightarrow \boldsymbol{R}$ is such that the partial derivatives $D_1 f, \ldots, D_p f$ exist and are bounded on some neighborhood of $c \in A$, then $f$ is continuous at $c$. (Hint: argue as in the proof of Theorem 39.9.)
+\begin{proof}
+	Let $\delta>0$ and $M > 0$ be such that the partial derivatives of $f$ exist in $N := B_\delta(c) \cap A$ and $\|D_i f(x)\|\le M$ for all $i$ and all $x \in N$. We may assume additionally that $N$ is convex since we can always choose $N$ to be a ball centered around $c$ with small enough radius that is contained in $A$.
+
+	Take $x \in N$ and write $x = (x_1, \ldots, x_p)$ and $c = (c_1, \ldots, c_p)$. Define $z_0, \ldots, z_p$ to be
+	\begin{align*}
+		&z_0 = x \\
+		&z_1= (c_1, x_2, \ldots, x_p)\\
+		&   \vdots\\
+		&z_{p-1} = (c_1, c_2, \ldots, c_{p-1 }, x_p) \\
+		&z_p =  c
+	.\end{align*}
+	Then it is easily seen that  $\|z_i - c\|\le \delta$ for $i = 0, 1, \ldots, p$. We write the difference $f(x) - f(c)$ as a telescoping sum:
+	\[
+		f(x) - f(c) = \sum_{j=1}^{p} f(z_{j-1 }) - f(z_j)
+	.\] 
+	Now since $N$ is convex, the line segment $\{t z_{j-1} + (1-t) z_j: t \in [0,1]\} $ is completely contained in $N$, and the function $f$ restricted to the line segment can be viewed as a differentiable function on $[0,1]$. Thus by mean-value theorem, there exists $\overline{z}_j$ in the line segment joining $z_{j-1}$ and $z_j$ such that
+	\[
+		f(z_{j-1}) - f(z_j) = (x_j - c_j)D_j f(\overline{z} _j)
+	.\] 
+	Therefore, we obtain
+	\[
+		f(x) - f(c) = \sum_{j=1}^{p} (x_j - c_j)D_j f(\overline{z} _j)
+	.\] 
+	By triangle inequality,
+	\[
+		\|f(x) - f(c)\|\le \sum_{j=1}^{p} \|(x_j - c_j)D_j f(\overline{z} _j)\|
+	.\] 
+	Thus by Schwarz Inequality,
+	\[
+		\|f(x) - f(c)\| \le \sum_{j=1}^{p} \|x_j - c_j\|\sum_{j=1}^{p} \|D_j f(\overline{z} _j)\| \le \sqrt{p} \|x - c\| pM 
+	.\] 
+	As $x\to c$, the right hand side vanishes. Thus $f(x) \to f(c)$ as $x \to  c$, so $f$ is continuous at $c$.
+\end{proof}
+\item 39.V. Let $A \subseteq \boldsymbol{R}^p$ and let $f: A \rightarrow \mathbf{R}^q$ and $g: A \rightarrow \mathbf{R}^r$ be given. If $F: A \rightarrow \boldsymbol{R}^q \times$ $\mathbf{R}^r=\mathbf{R}^{q+r}$ is defined by $F(x)=(f(x), g(x))$ for $x \in A$, show that $F$ is differentiable at an interior point $c \in A$ if and only if $f$ and $g$ are differentiable at $c$. In this case we have
+\[
+\operatorname{DF}(c)(u)=(\operatorname{Df}(c)(u), \operatorname{Dg}(c)(u)) \quad \text { for } u \in \boldsymbol{R}^p .
+\]
+\begin{proof}
+	$F$ differentiable at $c$ iff for any $\varepsilon>0$ there exists $\delta(\varepsilon) > 0$ such that for all $\|t u\|\le \delta(\varepsilon)$ we have
+	\[
+		\| F(c + t u) - F(c) - DF(c)(tu) \| \le \varepsilon \|tu\| \qquad (1)
+	.\]
+	Let $\pi_1$ be projection mapping from $\mathbb{R}^{q + r}$ onto $\mathbb{R}^q$. By defintion of $f$, we have $\pi_1 F = f$. Projection is a linear mapping, so by applying $\pi_1$ we have the statement
+	\[
+		\|f(c+tu) - f(c) - \pi_1 DF(c)(tu)\|\le \frac{\varepsilon}{2} \|tu\| \qquad \text{for all }\|tu\|\le \delta(\frac{\varepsilon}{2}) \qquad (2)
+	.\] 
+	Similarly, we have
+	\[
+		\|g(c+tu) - g(c) - \pi_2 DF(c)(tu)\|\le \frac{\varepsilon}{2} \|tu\| \qquad \text{for all }\|tu\|\le \delta(\frac{\varepsilon}{2}) \qquad (3)
+	.\] 
+	where $\pi_2$ is the projection mapping to $\mathbb{R}^r$. Observe the following inequality that holds for all $x \in \mathbb{R}^{q + r}$ and $i = 1, 2$:
+	\[
+	\|\pi_i x\|\le \|x\| \le \|\pi_1 x\| + \|\pi_2 x\|
+	.\] 
+	The two statements $(2)$ and $(3)$ are implied by $(1)$, due to the first inequality; and they together imply $(1)$, due to the second inequality.
+	
+	Now observe that $(2)$ is equivalent to the statement that $f$ is differentiable at $c$ with derivative $\pi DF(c)$, and $(3)$ is equivalent to the statement that $g$ is differentiable at $(c)$ with derivative $\pi_2 DF(c)$. Thus when $f, g$ are both differentiable, we have
+	\[
+		DF(c) = \left( \pi(DF(c)), \pi_2(DF(c)) \right)  = \left( Df(c), Dg(c) \right) 
+	.\] 
+\end{proof}
+
+\item 39. W. Let $A \subseteq \boldsymbol{R}^p$ and $B \subseteq \boldsymbol{R}^q$ and let $G: A \times B \rightarrow \mathbf{R}^{r}$ be differentiable at a point $(a, b)$ in $A \times B$. We define $g_1: A \rightarrow \mathbf{R}^r$ and $g_2: B \rightarrow \mathbf{R}^{r}$ to be the ``partial maps'' at $(a, b)$ given by
+\[
+g_1(x)=G(x, b), \quad g_2(y)=G(a, y)
+\]
+for all $x \in A, y \in B$. Show that $g_1$ and $g_2$ are differentiable at $a$ and $b$, respectively, and that
+\[
+\operatorname{D}g_1(a)(u)=\operatorname{D}G(a, b)(u, 0), \quad \operatorname{D}g_2(b)(v)=\operatorname{D}G(a, b)(0, v) \text {, }
+\]
+for all $u \in \mathbf{R}^p, v \in \mathbf{R}^q$. Moreover, we have
+\[
+\operatorname{D}G(a, b)(u, v)=\operatorname{D}g_1(a)(u)+\operatorname{D}g_2(b)(v) \text {. }
+\]
+[Sometimes $\operatorname{D}g_1(a) \in \mathscr{L}\left(\mathbf{R}^p, \mathbf{R}^r\right)$ and $\operatorname{D}g_2(b) \in \mathscr{L}\left(\mathbf{R}^q, \mathbf{R}^r\right)$ are called the "block partial derivatives" of $G$ at $(a, b)$ and are denoted by $D_{(1)} G(a, b)$ and $D_{(2)} G(a, b)$.]
+\begin{proof}
+	To show $g_1$ differentiable at $a$, it suffices to show the following limit is true:
+	\[
+		\lim_{t \to 0} \frac{1}{t}\left( g_1(a + t u) - g_1(a) \right) - D G(a, b) (u, 0) = 0
+	.\] 
+	Let $\vec{u} = (u, 0) \in A \times B$, and apply definition of $g_1$. The limit is equivalent to
+	\[
+		\lim_{t \to 0} \frac{G\left( (a,b) + t \vec{u}  \right)  - G(a, b)}{t} - DG(a, b)(\vec{u} ) = 0
+	.\] 
+	Which is equivalent to
+	\[
+		D_{\vec{u} }G(a,b) = DG(a, b) (\vec{u} )
+	.\] 
+	This is true by theorem 39.6.
+	Hence
+	\[
+		Dg_1(a)(u) = DG(a,b)(u,0)
+	.\] 
+	Result for $g_2$ is symmetric.
+
+	Now by linearity of $DG(a,b)$,
+	\begin{align*}
+		DG(a,b)(u,v)
+		&= DG(a,b)\left( (u,0)+(0,v) \right)  \\
+		&= DG(a,b)(u,0)+DG(a,b)(0,v) \\
+		&= D g_1(a)(u) + Dg_2(b)(v)
+	.\end{align*} 
+\end{proof}
+
+\end{itemize}

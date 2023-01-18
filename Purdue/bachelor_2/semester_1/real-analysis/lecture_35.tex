@@ -1,0 +1,119 @@
+\lecture{35}{Mon 05 Dec 2022 11:29}{}
+
+\begin{theorem}[Ratio Test]
+	Suppose $x_n \neq 0$, and for $n \ge N$,
+	\begin{enumerate}
+		\item If $\limsup \frac{|x_{n+1}|}{|x_n|} < 1$, then $\sum |x_n| < \infty $
+		\item If $\liminf \frac{|x_{n+1}|}{|x_n|} > 1$, then $\sum |x_n|$ diverges
+		\item Otherwise the test is inconclusive.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Recall, from homework,
+	\begin{itemize}
+		\item $\limsup |x_n|^{\frac{1}{n}}\le \limsup \frac{|x_{n+1}|}{|x_n|}$.
+		\item $\liminf |x_n|^{\frac{1}{n}}\ge \liminf \frac{|x_{n+1}|}{|x_n|}$.
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[Dirichlet Test for conditional convergence]
+	Let $\sum_{n=1}^{\infty} x_n y_n$ be such that
+	\begin{enumerate}
+		\item $x_n$ monotonely decrease to zero
+		\item Partial sums $s_n = \sum_{k=1}^{n} y_k$ are bounded.
+	\end{enumerate}
+	Then $\sum_{n=1}^{\infty} x_n y_n$ is convergent.
+\end{theorem}
+\begin{proof}
+	By the Cauchy Criterion, we consider
+	\begin{align*}
+		&x_{m+1}y_{m+1}+ \ldots + x_n y_n\\
+		&= x_{m+1}(s_{m+1} - s_m) + x_{m+2}(s_{m+2} - s_{m+1}) + \ldots + x_n (s_n - s_{n-1 }) \\
+		&= x_n s_n - x_{m+1}s_m + (x_{m+1} - x_{m+2}) s_{m+1} + \ldots + (x_{n-1 } - x_n) s_{n-1} \\
+		&= x_n s_n - x_{m+1}s_m + \sum_{k=m+1}^{n} (x_{k-1} - x_{k}) S_{k-1}
+	.\end{align*}
+	Using this, we can bound the sum by
+	\[
+		\left| \sum_{k=m+1}^{n} x_k y_k \right|  \le  B|x_n| + |x_{m+1}|+ B | x_m - x_n| \le  4 \varepsilon B
+	.\] 
+	{\color{blue} This part can be generalized since the replacement of $S_n$ by $B$ is uniform.}
+\end{proof}
+
+
+As a particular case, we have convergence condition for alternating series.
+
+\begin{theorem}[Alternating Series Test]
+	If $x_n$ monotone decrease to zero, then $\sum (-1)^n x_n$ converges.
+\end{theorem}
+
+\begin{example}
+	(p310 on textbook)
+	Consider $\sum_{n=1}^{\infty} \frac{\cos nx }{n}$. Take $x_n = \frac{1}{n}$ monotone increase to $0$, then 
+	\begin{align*}
+		s_n &= \cos x + \cos 2x + \ldots + \cos nx \\
+		&= \frac{1}{\sin \frac{x}{2}} \left( \sin \frac{x}{2} \cos x + \sin \frac{x}{2} \cos 2x + \ldots + \sin \frac{x}{2} \cos nx \right)  \\
+		&= \frac{1}{\sin \frac{x}{2}} 
+		\left( \left(\sin \frac{3}{2} x - \sin \frac{x}{2}\right) + \left(\sin \frac{5}{2}x - \sin \frac{3}{2} x \right)+
+		\ldots + \left(\sin (n+\frac{1}{2}) x - \sin (n-\frac{1}{2})x \right)\right) \\
+		&= \frac{\sin (n+\frac{1}{2})x - \sin \frac{x}{2}}{2 \sin \frac{x}{2}}
+	.\end{align*}
+	Hence $|s_n| \le \frac{1}{\left| \sin \frac{x}{2} \right| }$. So, if $\sin \frac{x}{2}\neq 0$, then $s_n$ are bounded, so the sum converges.
+\end{example}
+
+\begin{theorem}[Abel's Test]
+	If the sum $\sum x_n y_n$ satisfies
+	\begin{itemize}
+		\item $x_n$ monotone decrease
+		\item $\sum y_n$ is convergent
+	\end{itemize}
+	Then the sum converges.
+\end{theorem}
+
+To convert Abel to Dirichlet, we can consider the sum
+$\sum (x_n - x) y_n$ and apply Dirichlet.
+
+\subsection{Series of Functions}
+
+Terminologies for convergence of  $\{S_n(x)\}$ is used for $\sum_{n=1}^{\infty} f_n(x)$.
+
+We can talk about absolute pointwise convergence, pointwise uniform, uniform pointwise, etc.
+
+\begin{proposition}[Cauchy Criterion]
+	$\sum_{n=1}^{\infty} f_n(x)$ is uniformly convergent on $E$ iff for any $\varepsilon>0$ there is $M_\varepsilon$ such that
+	\[
+		\|f_{m+1}(x) + \ldots + f_n(x)\| < \varepsilon
+		\quad \text{ if } M_\varepsilon \le m < n
+	.\]
+\end{proposition}
+
+\begin{theorem}[Weierstrass M-Test]
+	Suppose there exists a sequence of numbers $M_n \ge 0$ such that
+	\[
+		\|f_n\|_\infty  \le M_n
+	.\] 
+	and
+	\[
+		\sum M_n < \infty 
+	.\] 
+	Then $\sum f_n(x)$ converges absolutely uniformly on $E$.
+\end{theorem}
+\begin{proof}
+	 \begin{align*}
+		&\|f_{m+1}(x) + \ldots + f_n(x)\| \\
+		\le \|f_{m+1}\left( x \right) \| + \ldots.+ \|f_n(x)\|\\
+		\le M_{m+1} + \ldots + M_n < \varepsilon \text{ if } K_\varepsilon \le m < n
+	.\end{align*}
+\end{proof}
+
+\begin{theorem}[Dirichlet Test]
+	Consider the series $\sum_{n=1}^{\infty} a_n(x) b_n $. If 
+	\begin{itemize}
+		\item  $b_n$ monotone decrease and $\to 0+$
+		\item $S_n(x)$ uniformly bounded on $E$
+	\end{itemize}
+	Then the series converges uniformly.
+\end{theorem}
+\begin{proof}
+	Same proof as for numbers.
+\end{proof}
+

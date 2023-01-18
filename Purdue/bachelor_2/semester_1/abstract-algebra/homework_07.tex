@@ -28,14 +28,14 @@ Herstein, section 2.8, page 91, Questions $2,4,5,8,9,10,12$
 \end{proof}
 \item 8. Prove that a group of order 99 has a nontrivial normal subgroup.
 \begin{proof}
-	By Cauchy Theorem, there is an element $a \in G$ such that $o(a) = 11$. We claim that $\left\langle a \right\rangle |G$.
+	By Cauchy Theorem, there is an element $a \in G$ such that $o(a) = 11$. We claim that $\left\langle a \right\rangle \triangleleft G$.
 
 	Take arbitrary element $g \in G$. We claim that $g^{-1}  \left\langle a \right\rangle g = \left\langle a \right\rangle $. If they are not equal, then $(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle $ has order $1$, because it is a proper subgroup of $\left\langle a \right\rangle$, and $o(a) = 11$ is prime.
 
 	But then
 	\[
 		\left| (g^{-1}  \left\langle a \right\rangle g) \left\langle a \right\rangle  \right| 
-		= \frac{\left| g^{-1} \left\langle a \right\rangle g \right| \left| \left\langle a \right\rangle  \right| }{(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle }
+		= \frac{\left| g^{-1} \left\langle a \right\rangle g \right| \left| \left\langle a \right\rangle  \right| }{\left| (g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle  \right| }
 		= 11^2 > 99
 	.\] 
 
@@ -51,7 +51,7 @@ Herstein, section 2.8, page 91, Questions $2,4,5,8,9,10,12$
 	Now using the counting property,
 	\[
 		\left| (g^{-1}  \left\langle a \right\rangle g) \left\langle a \right\rangle  \right| 
-		= \frac{\left| g^{-1} \left\langle a \right\rangle g \right| \left| \left\langle a \right\rangle  \right| }{(g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle }
+		= \frac{\left| g^{-1} \left\langle a \right\rangle g \right| \left| \left\langle a \right\rangle  \right| }{\left| (g^{-1} \left\langle a \right\rangle g) \cap \left\langle a \right\rangle \right|  }
 		= 7^2 > 42
 	.\]
 		
@@ -110,6 +110,28 @@ Herstein, section 2.8, page 91, Questions $2,4,5,8,9,10,12$
 
 	Therefore we can replace $a^{-1} $ by $a$ to go from one definition to another, and the two definitions are identical.
 \end{proof}
+\begin{correction}
+	We explicitly construct an isomorphism. Let 
+\[
+		G_2 = \{a_2 ^m b_2^n: 0\le m\le 2, 0\le n\le 6\} 
+	.\]
+	\[
+		G_4 = \{a_4 ^m b_4^n: 0\le m\le 2, 0\le n\le 6\} 
+	.\] 
+
+	We need $\varphi$ is a hoomorphism:
+	\[
+		\varphi(a_2^{m_1}b_2^{n_1} a_4^{m_2}b_4^{n_2}) = \varphi(a_2^{m_1}b_2^{n_1})\varphi( a_4^{m_2}b_4^{n_2})
+	.\] 
+	Compute the lhs: \[
+		\varphi(a_2^{m_1}b_2^{n_1} a_4^{m_2}b_4^{n_2}) = \varphi(a_2^{m_1+m_2}b_2^{n_1 2^{m_2} + n_2})
+	.\] 
+	We define
+	\begin{align*}
+		\varphi: G_2 &\longrightarrow G_4 \\
+		a_2^m b_2^n &\longmapsto \varphi(a_2^m b_2^n) = a_4^{2m}b_4^{4n}
+	.\end{align*}
+\end{correction}
 
 
 
@@ -197,15 +219,15 @@ Prove that $G$ is the direct product of $N_1, N_2, \ldots, N_k$.
 	.\] 
 	Rearrange:
 \[
-		n_i= \left( n_{i-1}n_{i-2}\ldots n_1 \right)  n_1'n_2'\ldots n_i' \ldots n_k' \left( n_{k} n_{k-1} \ldots n_{i+1} \right) 
+		n_i= \left( n_{i-1}^{-1}n_{i-2}^{-1}\ldots n_1^{-1} \right)  n_1'n_2'\ldots n_i' \ldots n_k' \left( n_{k}^{-1} n_{k-1}^{-1} \ldots n_{i+1}^{-1} \right) 
 	.\]
 	We can group $n_1n_1'$ and $n_k'n_k$ to obtain
 \[
-		n_i\in  \left( n_{i-1}n_{i-2}\ldots n_2 \right)  N_1 (n_2'\ldots n_i' \ldots n_{k-1}')N_k \left( n_{k-1} \ldots n_{i+1} \right) 
+		n_i\in  \left( n_{i-1}^{-1}n_{i-2}^{-1}\ldots n_2^{-1} \right)  N_1 (n_2'\ldots n_i' \ldots n_{k-1}')N_k \left( n_{k-1}^{-1} \ldots n_{i+1}^{-1} \right) 
 	.\]
 	Since $N_1$ and $N_k$ are normal subgroups of $G$, they commute with group items. Hence
 \[
-		n_i\in  N_1\left( n_{i-1}n_{i-2}\ldots n_2 \right)  (n_2'\ldots n_i' \ldots n_{k-1}')\left( n_{k-1} \ldots n_{i+1} \right) N_k
+		n_i\in  N_1\left( n_{i-1}^{-1}n_{i-2}^{-1}\ldots n_2^{-1} \right)  (n_2'\ldots n_i' \ldots n_{k-1}')\left( n_{k-1}^{-1} \ldots n_{i+1}^{-1} \right) N_k
 	.\]
 	Now we may continue grouping $n_2n_2'$ and $n_{k-1}' n_{k-1 }$. Continue in this fashion, we finally obtain
 \[
@@ -215,7 +237,7 @@ Prove that $G$ is the direct product of $N_1, N_2, \ldots, N_k$.
 \[
 		n_i (n_{i}')^{-1}\in  N_1 N_2 \ldots N_{i-1} N_{i+1}\ldots N_k
 	.\]
-	But we also have $n_i (n_{i}')^{-1} \in N_i$. Therefore by assumption, \[
+	But we also have $n_i (n_{i}')^{-1} \in N_i$. Therefore by assumption 2, \[
 		n_i = n_i'
 	.\]
 	Since $i$ is arbitrary, we conclude that any two representations of some same element in  $G$ must be identical. Hence $G$ is the direct product of $N_1, \ldots, N_k$.
@@ -236,7 +258,17 @@ Prove that $G$ is the direct product of $N_1, N_2, \ldots, N_k$.
 
 	Hence $G / Z(G)$ has order at most $9$. If it has order $3$ or $1$, it is cyclic, and hence $G$ is abelian. If it has order $9$, then  $G / Z(G)$ is abelian. Then it is either isomorphic to $\mathbb{Z}_9$ or isomorphic to $\mathbb{Z}_3 \times  \mathbb{Z}_3$. In the first case we are done. 
 
-	In the second case, ???
+	In the second case, 
+
+	There exists $a \in G$ with order $11$. So $\left\langle a \right\rangle \subset G$. Then $\left\langle a \right\rangle \triangleleft G$ by a counting argument.
+
+	Alternative method: use Sylow Third Theorem: There is only one Sylow $11$-subgroup of $G$.
+
+	$|G / \left\langle a \right\rangle | = 9$, Hence $G / \left\langle a \right\rangle $ which is abelian.
+
+	Suppose $b \in G / \left\langle a \right\rangle $. Such an element exists of order $3$.
+
+	Since $\left\langle a \right\rangle  \triangleleft G$ then $b^{-1} ab = a^i$ for some $1\le i\le 10$. Now using conjugacy argument, $i^3 \equiv 1 \pmod 11$. Thus $i = 1$. Hence $ab = ba$. Then $|Z(G)| \ge 33$.
 \end{proof}
 
 \item 14. Let $p>q$ be two primes such that $q \mid p-1$. Prove that there exists a nonabelian group of order $p q$. (Hint: Use the result of Problem 40 of Section 4 , namely that $U_p$ is cyclic if $p$ is a prime, and the idea needed to do Problem 4 above.)

@@ -1,0 +1,172 @@
+\homework{11}{Sun 20 Nov 2022 22:21}{}
+Herstein, section 4.2, page 139 , Question 8.
+Herstein, section 4.3, page 146, Questions 1, 2, 3, 4, 18, 20, 21, 22, 23, 24.
+
+\begin{itemize}
+	\item [8.] If $F$ is a finite field, show that:
+(a) There exists a prime $p$ such that $p a=0$ for all $a \in F$.
+\begin{proof}
+	Let $p$ be the smallest nonzero natural number such that $p 1 = 0$. We know that such $p$ exists, since $F$ is finite, there must exists two distinct natural numbers $n, m \in \{1, 2, \ldots, |F| + 1\} $ such that $n 1 = m 1$. Then assuming $n <  m$, we have  $(m-n) 1 = 0$.
+
+	$p$ must be prime. If $p = mn$ where $m, n > 0$ are integers, then $p 1 = (m 1) ( n 1) = 0$, so either $(m 1) = 0$ or $(n 1) = 0$, a contradiction to the fact that  $p$ is minimal.
+
+	Now for any $a \in F$, we have $p a = p (a 1) = a (p 1) = a 0 = 0$.
+\end{proof}
+
+(b) If $F$ has $q$ elements, then $q=p^n$ for some integer $n$. (Hint: Cauchy's Theorem)
+\begin{proof}
+	If there were another element with order $s$, $s$ prime and $s \neq p$, we would have an element in $F$, say $a$, of order $s$ (by Cauchy's Theorem). But then we can apply Euclid's Algorithm to $p$ and $s$, and have $p a = (m s + r) a = r a$ where $0<r<s$, so $p a \neq 0$, a contradiction. Hence  $|F| = p^n$.
+\end{proof}
+
+\item 1. If $R$ is a commutative ring and $a \in R$, let $L(a)=\{x \in R \mid x a=0\}$. Prove that $L(a)$ is an ideal of $R$.
+\begin{proof}
+	Take $x, y \in L(a)$. Hence $x a  = 0$ and $y a = 0$. Now
+	\[
+		(x + (-y))a = x a + (-y) a = xa - ya = 0 - 0 = 0
+	.\] 
+	Hence $(x + (-y)a \in L(a)$. Thus  $L(a)$ is a subgroup of the additive abelian group $R$. Now let $x \in L(a)$. Since $R$ commutative, for any $r \in R$,
+	\[
+		(xr) a = (rx)a = r(xa) = r 0 = 0
+	.\] 
+	Hence $xr = rx \in L(a)$. Hence $L(a) \triangleleft R$.
+\end{proof}
+
+\item 2. If $R$ is a commutative ring with 1 and $R$ has no ideals other than (0) and itself, prove that $R$ is a field. (Hint: Look at Example 9.)
+\begin{proof}
+	Let $a \in R$ nonzero. Then by example 9, the set $(a) = \{xa : x \in R\} $ is an ideal of $R$. Clearly $(a) \neq  (0)$ since $a = 1 a \in (a)$. Thus $(a) = R$. Hence the operation
+	\begin{align*}
+		\varphi: R &\longrightarrow R \\
+		x &\longmapsto \varphi(x) = xa
+	.\end{align*}
+	is a bijection. Injectivity comes from cancellation law while surjectivity comes from counting.
+
+	Hence there exists $b$ such that $\varphi(b) = b a = 1$. Hence $R$ is a division ring, thus a field.
+\end{proof}
+
+\item *3. If $\varphi: R \rightarrow R^{\prime}$ is a homomorphism of $R$ onto $R^{\prime}$ and $R$ has a unit element, 1 , show that $\varphi(1)$ is the unit element of $R^{\prime}$.
+\begin{proof}
+	Since $\varphi$ is onto, for any element $r \in R'$, there exists $a \in R$ such that $\varphi(a) = r$. Observe that
+	\[
+		\varphi(1)\varphi(a) = \varphi(1 a) = \varphi(a) = \varphi(a 1) = \varphi(a) \varphi(1)
+	.\] 
+	Hence $\varphi(1)$ is indeed the multiplicative identity of $R'$.
+\end{proof}
+
+\item 4. If $I, J$ are ideals of $R$, define $I+J$ by $I+J=\{i+j \mid i \in I, j \in J\}$. Prove that $I+J$ is an ideal of $R$.
+\begin{proof}
+	First, take $i+j, i'+j' \in I + J$, and note
+	\[
+		(i+j) \pm (i'+j') = i + j \pm i' \pm j' = i \pm i' + j \pm j' = (i\pm i') + (j \pm  j') \in I + J
+	.\] 
+	Hence $I + J$ is a subgroup of the additive abelian group. Now let $r \in R$. Note that
+	\[
+		r(i+j) = ri + rj \in I + J
+	.\] 
+	and
+	\[
+		(i+j)r = (ir) + (jr) \in I + J
+	.\] 
+	By using the fact that $I, J$ are each an ideal of $R$. Hence $I + J \triangleleft R$.
+\end{proof}
+
+\item 18. Show that $R \oplus S$ is a ring and that the subrings $\{(r, 0) \mid r \in R\}$ and $\{(0, s) \mid s \in S\}$ are ideals of $R \oplus S$ isomorphic to $R$ and $S$, respectively.
+\begin{proof}
+	$R \oplus S$ is a additive abelian group, by relevant result for groups. Now we verify the ring properties. Let $(r, s)$ and $(r', s') \in R \oplus S$. 
+	\begin{itemize}
+		\item [M0] $(r,s) (r',s') = (rr', ss') \in R \oplus S$.
+		\item [M1] associativity is inherited from $R$ and $S$.
+		\item [D1] $(r, s)\left( (r', s')+(r'', s'') \right)  = (r,s)(r'+r'', s'+s'') = (r(r'+r''),s(s'+s'')) = (rr'+rr'', ss'+ss'') = (rr', ss') + (rr'', ss'') = (r,s)(r', s') + (r,s)(r'', s'')$.
+		\item [D2] Similar to D1.
+	\end{itemize}
+	Now construct mapping
+	\begin{align*}
+		\varphi: R &\longrightarrow R \oplus S \\
+		r &\longmapsto \varphi(r) = (r, 0)
+	.\end{align*}
+	To verify it is a homomorphism, note that
+	\[
+		\varphi(rr') = (rr',0) = (r,0)(r',0) =\varphi(r)\varphi(r')
+	.\] 
+	To verify injectivity, note that for any  $r\neq r'$, obviously $(r, 0)\neq (r', 0)$.
+
+	To verify surjectivity onto $\{(r,0): r \in R\} $, fix any $(r, 0)$, and note that $\varphi(r) = (r, 0)$.
+
+	To verify it is an ideal, it is a normal subgroup of the abelian additive group by previous knowledge. Now fix any $(r, s) \in R \oplus S$. Now
+	\[
+		(r', 0)(r, s) = (r'r, 0 s) = (r'r, 0) \in \{(r,0): r \in R\} 
+	.\] 
+	The other side is similar. Hence an isomorphism. The proof for $S$ is similar.
+\end{proof}
+
+\item 20. If $I, J$ are ideals of $R$, let $R_1=R / I$ and $R_2=R / J$. Show that $\varphi: R \rightarrow R_1 \oplus R_2$ defined by $\varphi(r)=(r+I, r+J)$ is a homomorphism of $R$ into $R_1 \oplus R_2$ such that $\operatorname{Ker} \varphi=I \cap J$.
+\begin{proof}
+	To verify homomorphism, 
+	\begin{align*}
+		&\varphi(r r') \\
+		&= (r r'+I, r r' + J)\\
+		&= (rr' + rI + r'I + II, rr'+rJ+r'J+JJ)\\
+		&= ((r+I)(r'+I), (r+J)(r'+J))\\
+		&= (r+I, r+J)(r'+I, r'+J)\\
+		&= \varphi(r)\varphi(r')
+	.\end{align*} 
+	Now we investigate the kernel.
+	\begin{align*}
+		& r \in \operatorname{Ker} \varphi \\
+		&\iff \varphi(r) = (I, J) \\
+		&\iff (r+I, r+J) = (I, J) \\
+		&\iff r \in I \land r \in J \\
+		&\iff r \in I \cap J 
+	.\end{align*}
+\end{proof}
+
+\item 21. Let $\mathbb{Z}_{15}$ be the ring of integers $\bmod 15$. Show that $\mathbb{Z}_{15} \simeq \mathbb{Z}_3 \oplus \mathbb{Z}_5$.
+\begin{proof}
+	By Chinese Remainder Theorem, for each $m \in \mathbb{Z}_5$, $n \in \mathbb{Z}_3$, the system of equations $x \equiv m \pmod 5$, $x \equiv n \pmod 3$ has unique solution modulo  $5 \cdot 3 = 15$. Hence we may define the mapping 
+	\begin{align*}
+		\varphi: \mathbb{Z}_{5}\times \mathbb{Z}_3 &\longrightarrow \mathbb{Z}_{15} \\
+		(m,n) &\longmapsto \varphi((m,n)) = p_{mn}
+	.\end{align*}
+	where $p_{mn}$ is the uniquely determined solution of congruence equations.
+
+	Moreover, $\varphi$ is surjective, since each element in  $\mathbb{Z}_{15}$ has a remainder when divided by $5$ or devided by $3$. Hence $\varphi$ is a bijection by counting.
+
+	Now we verify $\varphi$ is a homomorphism. Let $m,m' \in \mathbb{Z}_{5}$ and $n, n' \in \mathbb{Z}_3$.
+	Then by properties of congruence,
+	\begin{align*}
+		p_{mn} + p_{m'n'} &\equiv m + m' \pmod 5 \\
+		p_{mn} + p_{m'n'} &\equiv n + n' \pmod 3
+	.\end{align*}
+	Also,
+	\begin{align*}
+		p_{mn}p_{m'n'} &\equiv m m' \pmod 5 \\
+		p_{mn} p_{m'n'} &\equiv n n' \pmod 3
+	.\end{align*}
+	Hence $\varphi((m+m', n+n')) = p_{mn}+p_{m'n'}$, and $\varphi((mm',n n')) = p_{mn}p_{m'n'}$. Thus a homomorphism. Because it is bijective, it is isomorphism.
+\end{proof}
+
+\item 22. Let $\mathbb{Z}$ be the ring of integers and $m, n$ two relatively prime integers, $I_m$ the multiples of $m$ in $\mathbb{Z}$, and $I_n$ the multiples of $n$ in $\mathbb{Z}$.
+(a) What is $I_m \cap I_n$ ?
+\begin{proof}[Solution]
+	It is $I_p$ where $p$ is the least common multiple of $m$ and $n$. In case $m, n$ are relatively prime, $p=mn$.
+\end{proof}
+
+(b) Use the result of Problem 20 to show that there is a one-to-one homomorphism from $\mathbb{Z} / I_{m n}$ to $\mathbb{Z} / I_m \oplus \mathbb{Z} / I_n$.
+\begin{proof}
+	Define $\varphi: \mathbb{Z} / I_{mn} \to  \mathbb{Z} / I_m \oplus \mathbb{Z} / I_n$. It is strightforward to verify that $\mathbb{Z}/I_m$, $\mathbb{Z}/I_n$ are ideals of $\mathbb{Z}/I_{mn}$. Also, $m,n$ coprime implies $I_m \cap I_n = I_{mn}$ which is identity in $\mathbb{Z} / I_{m n}$, so $\varphi$ is injective.
+\end{proof}
+
+\item 23. If $m, n$ are relatively prime, prove that $\mathbb{Z}_{m n} \simeq \mathbb{Z}_m \oplus \mathbb{Z}_n$. (Hint: Use a counting argument to show that the homomorphism of Problem 22(b) is onto.)
+\begin{proof}
+	We have $|\mathbb{Z} / I_{mn}| = mn$, $\mathbb{Z} / I_m$ has order $m$ and $\mathbb{Z} / I_n$ has order $n$. Hence by counting, $\varphi$ is an isomorphism.
+\end{proof}
+
+\item 24. Use the result of Problem 23 to prove the Chinese Remainder Theorem, which asserts that if $m$ and $n$ are relatively prime integers and $a, b$ any integers, we can find an integer $x$ such that $x \equiv a \bmod m$ and $x \equiv b \bmod n$ simultaneously.
+\begin{proof}
+	Fix $m, n$. Consider an isomorphism $\varphi: \mathbb{Z} / I_{mn} \to  \mathbb{Z}/ I_m \oplus \mathbb{Z} / I_n$. By surjective, there exists $c_1, c_2 \in \mathbb{Z}_{mn}$ such that $\varphi(c_1) = (1,0)$ and $\varphi(c_2) = (0,1)$.
+
+	Let $a_0, b_0$ be element in $\mathbb{Z}_m, \mathbb{Z}_n$ such that $a_0 \equiv a \pmod \mathbb{Z}_m$  and $b_0 \equiv b \pmod \mathbb{Z}_n$.
+
+	Now let $x = ac_1 + b c_2 \in \mathbb{Z}_{mn}$. 
+\end{proof}
+
+\end{itemize}

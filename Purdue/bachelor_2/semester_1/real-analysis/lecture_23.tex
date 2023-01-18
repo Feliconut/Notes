@@ -1,0 +1,87 @@
+\lecture{23}{Mon 24 Oct 2022 11:34}{Continuity of the inverse}
+
+\begin{theorem}
+	Suppose $f: K \to \mathbb{R}^q$ is continuous and injective, and $K$ is compact. Then $f^{-1} : f(K) \to K$ is also continuous.
+\end{theorem}
+\begin{proof}
+	Take any closed $F \subset \mathbb{R}^p$. Then $(f^{-1})(F) = \{y: f^{-1} (y) \in F\} = \{y: f^{-1} (y) \in K \cap F\} =  f(K \cap F)$. Since $K \cap F$ is compact (as closed subset of compact set), $f(K \cap F)$ is compact (since continuous function preserves compactness). Hence $f(K \cap F)$ closed.
+
+	Thus $(f^{-1} )^{-1}(F)$ is closed for any closed $F$. Thus it is also relatively closedd in $f(K)$. Thus $f^{-1} : f(K) \to K$ is continuous.
+\end{proof}
+Exercise: Find a sequential proof.
+
+\subsection{Uniform Continuity}
+
+Recall the $\varepsilon-\delta$ definition of continuity. In this definition, $\delta$ depends on both $\varepsilon$ and the point of interest. The function is continuous, but it can be as "discontinuous" as possible.
+
+\begin{example}
+	Consider $f(x) = \frac{1}{x}$. The slope is unbounded as $x\to 0$. Fix any $\varepsilon>0$, and arbitrarily small  $\delta$ won't work for all $a$. As we approach zero, $\delta$ must be smaller and smaller.
+
+	\begin{align*}
+		f(x) - f(a) &= \left| \frac{1}{x} - \frac{1}{a} \right|< \varepsilon \text{\quad for } x \in (a-\delta, a+\delta)\\
+		&= \left| \frac{x-a}{xa} \right| = \frac{\delta}{a (a-\delta)}<\varepsilon \\
+	.\end{align*}
+	Now the solution of  $\delta$ goes to zero as $a \to 0$.
+\end{example}
+
+
+
+\begin{definition}[Uniform Continuity]
+	We say $f: E \to \mathbb{R}^q$ is uniformly continuity if
+	\begin{itemize}
+		\item For any $\varepsilon>0$, there exists $\delta>0$ such that for all $a, x \in E$, $\left| f(x) - f(a) \right| < \varepsilon$ whenever $|a - x| < \delta$.
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	Uniform continuity is a global property.
+\end{remark}
+
+Compactness implies uniform continuity.
+\begin{theorem}
+	Suppose $f: K \to \mathbb{R}^q$ is continuous and $K $ is compact, then $f$ is uniformly continuous on $K$.
+\end{theorem}
+\begin{proof}
+	(Sequential) Suppose $f$ is not uniformly continuous, then there exists $\varepsilon$ for which there is no $\delta$ as in the def. In particular $\delta = \frac{1}{n}$ fails, there exists $x_n, y_n \in K$ such that $\|x_n - y_n\| < \frac{1}{n}$ but $\|f(x_n) - f(y_n)\| >\varepsilon$.
+
+	Since $(x_n)$ is bounded, we use Bolzano-Weierstrass theorem to find a convergent subsequence $x_{n_k} \to  x_0$. Since $y_{n_k} - x_{n_k} \to 0 $, $y_{n_k}\to  x_0$. By sequential continuity, $\|f(x_{n_k})  - f(y_{n_k})\| \to\| f(x_0) - f(x_0)\| = 0$. but $\varepsilon \le \|f(x_{n_k}) - f(y_{n_k})\|$. This yields a contradiction. Thus $f$ is uniformly continuous.
+\end{proof}
+\begin{proof}
+	(Topological) Prove using open covers.
+\end{proof}
+\begin{fact}
+	On any noncompact set one can construct a function that is continuous but not uniformly continuous. Conversely, on a compact set continuity is equivalent to uniform continuity.
+\end{fact}
+
+\subsection{Extensions of uniformly continuous functions}
+
+Let $f: E \to  \mathbb{R}^q$ be a uniformly continuous function. Then we can extend $f$ to \[
+	\tilde f : \overline{E} \to \mathbb{R}^q
+.\] 
+where $\overline{E} $ is closure of $E$.
+
+Take any $x \in \overline{E} $. Then there exists $(x_n)$ in $E$ such that $x_n \to x$.
+
+\begin{claim}
+	$(x_n)$ is Cauchy implies $\left( f(x_n) \right) $ is Cauchy.
+\end{claim}
+\begin{proof}
+	We can write $\|f(x_n) - f(x_m)\|< \varepsilon$ if $\|x_n - x_m\|< \delta$. We can also write $\|x_n - x_m\|< \delta$ if $n, m \ge M$ for some $M$. Combine the two statements.
+\end{proof}
+Therefore $f(x_n)$ is convergent. So we define $\tilde f (x) = \lim \left( f(x_n) \right) $.
+
+We still have two verify well-definedness.
+\begin{claim}
+	Show that if $(y_n)$ is another sequence in $E$ such that $y_n \to x$ then $\lim f(x_n) = \lim f(y_n)$.
+\end{claim}
+
+Finally we verify
+\begin{claim}
+	$\tilde f(x) = f(x)$ when $x \in E$.
+\end{claim}
+
+\begin{claim}
+	$\delta(\varepsilon)$ works also for $\tilde f(x)$, in the sense that $\|\tilde f(x) - \tilde f(y)\|\le \varepsilon$ if $\|x - y\|< \delta(\varepsilon)$.
+\end{claim}
+
+
+

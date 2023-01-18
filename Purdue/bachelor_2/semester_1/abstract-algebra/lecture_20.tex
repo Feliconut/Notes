@@ -1,0 +1,36 @@
+\lecture{20}{Wed 26 Oct 2022 10:35}{}
+\begin{theorem}[Second Sylow Theorem]
+    Let $P_1$ and $P_2$ be Sylow p-subgroups of a finite group. Then $P_1$ and $P_2$ are conjugate.
+    i.e., there exists $g \in G$ such that $P_1 = gP_2g^{-1}$.
+\end{theorem}
+\begin{proof}
+	Let $P$ be a Sylow $p$-subgroup of $G$, where $|G| = p^n m$ with $p$ prime and $p \nmid m, n\ge 1$. We suppose that $Q$ is another Sylows p-subgroup of $G$ with $Q \neq  x^{-1} P x$ for any $x \in G$ (and seek to derive a contradiction.)
+
+	Define  $S = \{y^{-1} Qy: y \in G\} $ and a relation $\sim $ on $S$ by taking $Q_1 \sim Q_2 $ where $Q_2 = a^{-1} Qa$ for some $a \in P$. We can check that this gives an equivalence relation.
+
+	How many elements in each equivalence class? We have
+	\[
+		a^{-1} Q_1a = b^{-1} Q_1b \iff ab^{-1} \in N(Q_1) \cap P \iff a \in \left( N(Q_1) \cap P \right) b
+	.\] 
+	Then for a fixed choice of $b \in P$, there are  $\left| N(Q_1) \cap P \right| $ choices for $a \in P$ with $a^{-1} Q_1a = b^{-1} Q_1 b$.
+
+	So the number of elements in an equivalence class is \[
+		|P| / |(N(Q_1) \cap P) |
+	.\] 
+	We claim that this is divisible by $p$.
+	If true, then $|S|$ is also dividible by $p$, which gives the conclusion, since each equivalence class contained in $S$ has a number of elements divisible.
+
+	But since $|P| = p^n$, we have $|P| / |N(Q_1) \cap P|$ not divisible by $p$ iff $|P| / |N(Q_1) \cap P| = 1$, iff $N(Q_1) = P$, i.e. $P \subset N(Q_1)$.
+	But then $P \le N(Q_1)$ and (by hw q2.11.9) we have $Q_1 \triangleleft N(Q_1)$, so $PQ_1 \le N(Q_1)$ and by second homomorphism theorem, $PQ_1 / Q_1 = P / (P \cap Q_1)$. Then $|PQ_1| = \frac{|Q_1| |P|}{|P \cap Q_1|}$. But every element of $P \cap Q_1$ has order a power of $ p$, and likewise for $P, Q_1$, so each group has order of a power of $p$.
+
+	In particular, $PQ_1$ has order a power of $p$. Then $PQ_1$ is a $p$-group that contains $P$, which is a Sylow p-subgroup that has maximal $p$-power order in $G$. But $PQ_1 \subset G$, then $PQ_1 = P$. Thus $P = Q_1$, since $|Q_1| = |P|$, and hence $a^{-1} Q a = P$ for some $a \in P$, whence $P = Q$. This is a contradiction.
+
+	Thus $|S| \equiv 0 \pmod p$. Then also, by (HW Q 2.11.13), the number of distinct subgroups $x^{-1} Q x$ of $G$ is equal to \[
+		|S| = i_G (N(Q)) = |G| / |N(Q)|
+	.\] 
+	Since $Q \triangleleft N(Q)$, we have $|Q| | |N(Q)|$, whence  $p^n | |N(Q)|$. But $|G| = p^n m$ with $p \nmid m$, so
+	\[
+		|S| \not\equiv 0 \pmod p
+	.\]
+	Thus this contradiction shows that $Q$ has to be equal to $x^{-1} Px$ for some $x \in G$. So any two Sylow $p$-subgroups are conjugate.
+\end{proof}
