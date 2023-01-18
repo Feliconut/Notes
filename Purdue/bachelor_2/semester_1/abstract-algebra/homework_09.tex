@@ -1,0 +1,204 @@
+\homework{9}{Mon 31 Oct 2022 16:12}{}
+Herstein, section $2.11$, page 106 , Questions $15,16,18,20,23,24$.
+\begin{itemize}
+	\item [15.] If $N \triangleleft G$, let $B(N)=\{x \in G \mid x a=a x$ for all $a \in N\}$. Prove that $B(N) \triangleleft G$.
+\begin{proof}
+	Take $b \in B(N)$. 
+	Now for arbitrary $n \in N$, we consider the product
+	\[
+		n g^{-1} b g n^{-1}
+	.\] 
+	Since $N \triangleleft G$, we have $N g^{-1} = g^{-1} N$, so there exists $n' \in N$ such that $n g^{-1}  = g^{-1} n'$. Hence the product is equal to
+	\[
+		g^{-1} n' b n'^{-1} g
+	.\] 
+	Now by definition of $B(N)$, we know that $n' b n'^{-1} = b$. So the product is equal to
+	\[
+		g^{-1} b g
+	.\] 
+	But we see that $g^{-1} b g$ is invariant under conjugation by elements from $N$. Hence $g^{-1} b g \in B(N)$ by definition. Since $g$ and $b$ are arbitrary, we conclude that $B(N) \triangleleft G$.
+\end{proof}
+
+	\item [16.] Show that a group of order 36 has a normal subgroup of order 3 or 9.
+(Hint: See Problem 40 of Section 5.)
+\begin{proof}
+	By Sylow's Theorem, since $|G| = 36 = 3^2 \cdot 4$ where $3$ is prime and $3 \nmid 4$, $G$ has a subgroup of order $9$, say $H$.
+
+	Now by Problem 40 of section 5, since $H \le G$ and $36 \nmid 4! = i_G(H)!$, there exists nontrivial  $N$ contained in $H$ such that $N \triangleleft G$, thus in particular $N \le  H$. By Lagrange Theorem, $N$ has order $1, 3, $ or $9$. Since $N$ is nontrivial, $N$ has order $3$ or $9$.
+\end{proof}
+
+	\item [18.] If $P$ is a $p$-Sylow subgroup of $G$, show that $N(N(P))=N(P)$.
+\begin{proof}
+	Obviously $N(P) \subset N(N(P))$, so we only prove $N(N(P)) \subset N(P)$.
+
+	We have, by assumption, that $P \le N(P) \le N(N(P))$. Take $a \in N(N(P))$. Then we can take conjugates on the equation and obtain $a^{-1} Pa \le a^{-1} N(P) a$. Since $a \in N(N(P))$, $a^{-1} N(P) a = N(P)$, so $a^{-1} P a \le N(P)$.
+	
+	Now  $a^{-1} P a$ is a group of order $|P|$. Since $P$ is a $p$-Sylow subgroup of $G$, it is a $p$-Sylow subgroup of $N(P)$. Also, $a^{-1} Pa$ is a $p$-Sylow subgroup of $N(P)$.
+
+	Then by the Sylow Theorem, $P$ and $a^{-1} Pa$ are conjugate in $N(P)$. Hence there exists some $b \in N(P)$ such that $b^{-1} P b = a^{-1} P a$. Thus $ab^{-1} \in N(P)$. Therefore $a \in N(P)$ and we are done showing $N(N(P)) \subset N(P)$.
+\end{proof}
+
+	\item [20.] If $p^m$ divides $|G|$, show that $G$ has a subgroup of order $p^m$.
+\begin{proof}
+	Let $H$ be a Sylow $p$-subgroup of $G$ of order $p^n$. We have $m \le  n$. It suffices to show that there exists a subgroup $M$ of $H$ of order $p^m$. 
+
+	We claim the following: For any group $H$ with order $p^n$ and any $m \le n$, there exists a subgroup $M$ of $H$ with order $p^m$. We proceed by induction on $n$. When $n=2$, $m$ can be either $0, 1, $ or $2$. The cases $m=0$ and $m=2$ are trivial, and the case  $m=1$ follows directly from Cauchy's Theorem.
+
+	Now assume that the statement is true for all groups of order $p^k$ where $k < n$. We may also assume without loss of generality that $m > 1$ (since $m=1$ is trivial). Since $H$ is of prime-power order, it has nontrivial center. Hence by Cauchy's Theorem we can choose $a \in H$ such that $o(a) = p$. Since $a$ is in the center of $H$, we have $\left\langle a \right\rangle \triangleleft H$. Now the quotient group $H / \left\langle a \right\rangle $ has order $p^{n-1}$, so the induction hypothesis applies. We may choose a subgroup $M'$ of $H / \left\langle a \right\rangle $ with order $m-1$.
+
+	Now we construct the projection homomorphism
+	\begin{align*}
+		\varphi: H &\longrightarrow H / \left\langle a \right\rangle \\
+		h &\longmapsto \varphi(h) = \left\langle a \right\rangle h
+	.\end{align*}
+	By Correspondence Theorem, there exists $M \le H$ and $M / \left\langle a \right\rangle  \cong M'$. Therefore $|M| = |M'| |\left\langle a \right\rangle | = p^{m-1 }p = p^m$.
+\end{proof}
+
+	\item [23.] Let $G$ be a group, $H$ a subgroup of $G$. Define for $a, b \in G, a \sim b$ if $b=$ $h^{-1} a h$ for some $h \in H$. Prove that\\
+(a) this defines an equivalence relation on $G$.
+\begin{proof}
+	Reflexivity: For any $a \in G$, $e^{-1} a e = a$ where $e \in H$, hence $a \sim a$.
+
+	Symmetry: If $a \sim b$, then $b = h^{-1} ah $ for some $h \in H$. Hence $a = (h^{-1} )^{-1} b h^{-1} $ where $h^{-1}  \in H$. Hence $b \sim a$.
+
+	Transitivity: If $a\sim b$ and $b\sim c$, then $b = h^{-1} ah $ and $c = k^{-1} b k$ for $h, k \in H$. Then $c = k^{-1} (h^{-1} ah) k = (hk)^{-1} a (hk)$ where $hk \in H$, so $a\sim c$
+\end{proof}
+
+(b) If $[a]$ is the equivalence class of $a$, show that if $G$ is a finite group, then $[a]$ has $m$ elements where $m$ is the index of $H \cap C(a)$ in $H$.
+\begin{proof}
+	Let $b \in [a]$, so $b = h_1^{-1} a h_1$ for some $h_1 \in H$.
+	For each $h \in C(a) \cap H$, we also have $b = (h_1^{-1} h^{-1} ) a (h h_1)$, so $b$ can be expressed as conjugation by at least $|C(a) \cap H|$ different items on $a$. On the other hand, if $b = h_1^{-1} a h_1 = h_2^{-1} a h_2$ where $h_1, h_2 \in H$, then we have $h_1h_2^{-1} \in C(a) \cap H$, so each item $b$ can be obtained by conjugating on $a$ exactly $|C(a) \cap H|$ items in $H$.
+
+	Therefore the number of different conjugates is \[
+		|[a]| = m = |H| / |C(a) \cap H| = i_H\left( H \cap C(a) \right) 
+	.\] 
+\end{proof}
+
+	\item [24.] If $G$ is a group, $H$ a subgroup of $G$, define a relation $B \sim A$ for subgroups $A, B$ of $G$ by the condition that $B=h^{-1} A h$ for some $h \in H$.
+(a) Prove that this defines an equivalence relation on the set of subgroups of $G$.
+\begin{proof}
+	Reflexivity: $A = e^{-1} A e$.
+
+	Symmetry: If $A \sim B$ then $B = h^{-1} Ah$ for some $h \in H$. Now $A = (h^{-1} )^{-1} B (h^{-1} )$ hence $B \sim A$.
+
+	Transitivity: If $A\sim B$ and $B \sim C$ then $B = h^{-1} A h$ and $C = k^{-1} Bk$ where $h, k \in H$. Now $C = k^{-1} (h^{-1} A h) k = (hk)^{-1} A (hk)$ where $hk \in H$, hence $A \sim C$.
+\end{proof}
+
+(b) If $G$ is finite, show that the number of distinct subgroups equivalent to $A$ equals the index of $N(A) \cap H$ in $H$.
+\begin{proof}
+	For every element $B$ in $[A ]$, we have $B = h^{-1} A h$ for some $h \in H$. For every element $k$ in $N(A) \cap H$, we have $A = k^{-1} A k$, so $B = (kh)^{-1} A (kh)$. Hence each element $B$ in the conjugacy class of $A$ is associated with at least $|N(A) \cap H|$ elements from $H$.
+
+	Now suppose $B = h^{-1} A h = k^{-1} A k$ where $h, k \in H$. Now $hk^{-1} \in N(A) \cap H$. Hence each element $B$ in $[A]$ is associated with exactly $|N(A) \cap H|$ elements from $H$.
+
+	Thus the size of  $[A]$ is $|H| / |N(A) \cap H|  = i_H\left( N(A) \cap H \right) $.
+\end{proof}
+
+\end{itemize}
+Small groups (and the Sylow theorems):
+SG.A In this problem, the letter $p$ denotes a prime and $n$ a natural number.\\
+(a) Show that when $n \geq 2$ and $G$ is a group of order $p^n$, then $G$ is not simple.
+\begin{proof}
+	Since $G$ has prime-power order, it has nontrivial center. Hence we can choose $a \in Z(G)$ such that $o(a) = p$. Hence  $\left\langle a \right\rangle \triangleleft G$. Therefore  $G$ is not simple since it has a nontrivial normal subgroup.
+\end{proof}
+
+(b) Show that when $p \neq 2$, then the group $G$ cannot be simple if it has order $2 p^n$ or $3 p^n$ or $5 p^n$
+\begin{proof}
+	We may assume without loss of generality that  $G$ is not a group of prime-power order, because we have already completed this special case.
+
+	By Sylow's Theorem we can choose a Sylow  $p$-subgroup with order $p^n$, say $H$. By Third Sylow Theorem, the number of Sylow $p$-subgroups must be the form $kp+1$ and divide $|G|$. Suppose there is more than one $p$-subgroup. Since $kp+1$ does not divide $p$ when $k\neq 0$, we must have $kp+1$ divides $2, 3, $ or $5$. However all three cases are impossible. Therefore $H$ is the only Sylow $p$-subgroup.
+
+	Hence $H \triangleleft G$ and $G$ is not simple.
+\end{proof}
+
+(c) Show that when $G$ is a group of order $4 p^n(p \neq 3)$ then $G$ is not simple.
+\begin{proof}
+	Let $H$ be a Sylow $p$-subgroup of $G$. By Sylow's Third Theorem, the number of distinct Sylow $p$-groups must be equal to $kp+1$ and divide $4$. The only solution is $p = 3$ and $k =1$, in this case $kp+1 = 4 | 4$. However it is assumed that $p\neq 3$, so $H$ is the only Sylow $p$-subgroup of $G$. Therefore $H \triangleleft G$ and $G$ is not simple.
+\end{proof}
+
+SG.B Let $G$ be a group of order 56 .
+(a) Show that $G$ has either 1 or 8 Sylow 7-subgroups, and either 1 or 7 Sylow 2 -subgroups.
+\begin{proof}
+	Let $H$ be a Sylow $7$-subgroup of order $7$. Now by Sylow's Third Theorem, the number of Sylow $7$-subgroups must be $7k+1$ and divide $8$. Solving this and we have $k = 0$ or $k = 1$. When $k=0$, there are $1$ Sylow $7$-subgroup; when  $k=1$, there are $8$ Sylow $7$-subgroups.
+
+	Now let $H$ be a Sylow $2$-subgroup of order $8$. Now by Sylow's Third Thoerem, the number of Sylow $2$-subgroups must be $2k+1 $ and divide $7$. We can only have $2k+1 = 1$ or $2k+1 = 7$. Thus there are $1 $ or $7$ Sylow $2$-subgroups.
+\end{proof}
+
+(b) By showing that, if there are 2 distinct Sylow 7-subgroups, they necessarily have trivial intersection, show that $G$ cannot be simple.
+\begin{proof}
+	 Take $H$ and $H'$ be Sylow $7$-subgroups. Then we have $H \cap H' \le H$, hence by Lagrange Theorem, $|H \cap H'|$ is $1 $ or $7$. Since they are distinct, the intersection is trivial.
+
+	 If all $8$ Sylow $7$-subgroups have trivial intersection, they contain $8 \cdot (7 - 1) = 48$ nontrivial elements of $G$, hence the set of remaining $8$ elements, say $K$, must form a normal subgroup of $G$. To see this, first note that any conjugation of a nonidentity element of a Sylow $7$-subgroup will only send it to an element in another Sylow $7$-subgroup and never into $K$. Also, any nonidentity element $x \in K$ won't be sent to a nonidentity element in any Sylow $7$-subgroup. Hence $K$ must be closed under conjugation.
+
+	 Now that $K\triangleleft G$ and $K$ nontrivial so $G$ is not simple.
+\end{proof}
+
+
+SG.C By considering Sylow $p$-subgroups with $p$ equal to 3 and 5 , show that no group of order 30 is simple.
+\begin{proof}
+	The number $n_3$ of Sylow $3$-subgroups satisfies  $n_3 = 3k+1 | 10$, hence  $n_3 = 1$ or $10$. The number $n_5$ of Sylow  $5$-subgroups satisfies $n_5 = 5k+1 | 6$, hence $n_5 = 1$ or $6$.
+
+	If $n_3 = 1$ or $n_5 = 1 $ then the groups has a normal Sylow group. Hence we can assume $n_3 = 10$ and $n_5 = 6$.
+
+	Any Sylow $3$-subgroup and any Sylow $5$-subgroup must be trivial intersection. To see this, note that the intersection is a subgroup of the Sylow $3$-group, and apply Lagrange's Theorem.
+
+	Hence if $G$ has both $10$ Sylow $3$-groups and $6$ Sylow $5$-subgroups, then these subgroups contain $10 \cdot (3-1) + 6 \cdot (5-1) = 44$ distinct nontrivial elements, which is impossible because $G$ has only $30$ elements.
+
+	Hence either $n_3 = 1$ and $n_5 = 1$, so we are done.
+\end{proof}
+
+SG.D
+(a) Show that no group of order 12, 24, 36 or 48 can be simple. [Hint: Recall homework question 16 from section 2.11].
+\begin{proof}
+	We treat each case differently
+	\begin{itemize}
+		\item [order 12] Apply Sylow Third Theorem, the possible number of Sylow  $2$-subgroups are $n_2=1$ and $n_2=3$. If $n_2=1$ then we are done. If $n_2 = 3$, then let $H, H'$ be two distinct Sylow  $2$-groups with nontrivial intersection (We have justified that if all such intersections are trivial then $G$ is not simple).
+			\[
+				|H H'|  = \frac{16}{|H \cap H'|}
+			.\] 
+			Hence $|H \cap H'|$ is greater than $1$, divides  $4$, and less than $4$. Hence it can only be $2$. Now since $H$ and $H'$ are or order $2^2$, they are abelian, thus $N(H \cap H')$ contains $H$ and $H'$. Therefore $N(H \cap H')$ divides $12$, is divisible by $4$, and contains at least $8$ elements. Hence $|N(H \cap H')| = 12$. Thus $H \cap H' \triangleleft G$ by definition of normalizer.
+		\item [order 24] Apply Sylow Third Theorem and obtain $n_3 = 1 $ or $4$. If $n_3 = 1$ then we are done; now assume $n_3 = 4$. But for any two Sylow $3$-subgroups $H$ and $H'$, we have either $H_1 = H_2$ or $H_1 \cap H_2 = (e)$. Thus the previous argument applies: all Sylow $p$-subgroups pairwise intersect trivially implies the group is not simple.
+		\item [order 36] Apply Sylow Third Theorem and obtain $n_3 = 1$ or $4$. Consider the nontrivial case $n_3 = 4$. Then pick two distinct Sylow $3$-subgroups that intersect nontrivially, and use the counting argument,
+			\[
+				|H H'| = \frac{81}{|H \cap H'|}\le |G| = 36
+			.\] 
+			Thus $H \cap H'$ has at least $3$ elements (from counting argument), with order dividing $9$ and between $1$ and $9$. Hence $|H \cap H'| = 3$. Since $|H| = |H'| = 3^2$, they are abelian. Thus $N(H \cap H')$ contains both $H$ and $H'$, so $N(H \cap H')$ has at least $27$ elements, with order dividing $36$ and divisible by $9$. Hence $|N(H \cap H')| = 36$. This implies $H \cap H' \triangleleft G$.
+		\item [order 48] Apply Sylow Third Theorem and obtain $n_3 = 1 $ or $4$ or $16$. But any two Sylow $3$-groups with order $3$ are either coincident or intersect trivially, so the previous argument applies: All distinct Sylow $p$-subgroups intersect trivially implies the group is not simple.
+	\end{itemize}
+	
+\end{proof}
+
+(b) Let $G$ be a simple group of order $n$, where $2 \leq n \leq 59$. Show that $n$ is a prime number $p$ and $G$ is cyclic of order $p$.
+\begin{proof}
+	We perform Sylow test on every integer. A number $n$ passes the "Sylow test" if it does not have a prime factor  $p$ such that the $p$-subgroups of a group of order $n$ is unique. In other words, for all prime factor $p$ of $n$, we write $n = p^r m$ such that $p \nmid m$. Then try to find nontrivial solution of $kp+1 | m$. 
+
+	This test will eliminate all orders of prime power(where $p$-subgroup is the group itself), and non-simple groups (where $p$-subgroup is never the group itself). We have proved that groups of prime power order are simple iff the power is 1.
+
+	Running a Python program and sifting through all numbers, the following orders pass the test, which means they could be simple:
+\[
+	12, 24, 30, 36, 48, 56
+.\] 
+But we have ruled out each of them in previous exercises.
+
+Hence the only simple groups with order less than $60$ and greater than $1$ are those of prime orders. 
+
+We have proven earlier that prime-order groups are cyclic.
+\end{proof}
+
+\begin{lstlisting}[language=Python, caption=Python code]
+import sympy
+orders = set(range(1, 60)) #possible nonsimple orders
+for n in range(1,60):
+    factors = sympy.factorint(n)
+    for p, rp in factors.items():
+        mp = n / p**rp
+        sols = []
+        for k in range(0,100):
+            if k * p + 1 > mp:
+                break
+            if mp % (k * p + 1) == 0:
+                sols.append(k)
+        if len(sols) == 1:
+            orders.remove(n)
+            break
+print(orders)
+\end{lstlisting}

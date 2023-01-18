@@ -2,7 +2,7 @@
 \section{Continuity and Hölder continuity test}
 \subsection{Definitions and Examples}
 
-The main reference in this note is \cite{durettProbabilityTheory}.
+The main reference in this note is \cite{durrettProbabilityTheory}.
 
 \begin{definition}[Lipschitz continuous]
 	$f$ is said to be \textit{Lipschitz continuous} if there is a constant $C$ so that $|f(x)-f(y)| \leq C \rho(x, y)$.
@@ -144,7 +144,7 @@ Take $C = \frac{C'}{(\varepsilon')^{-\delta}}$, and we have
 
 To get a even faster approximation, we want to fix some particular $\varepsilon$ and take infimum only over $x$. We want to be assured that dropping the infimum over $\varepsilon$ when calculating $\alpha$ gives a good enough approximation. This motivates the next proposition:
 \begin{proposition}
-	If $f$ is a stationary process, with independent and symmetrically distributed increments, and it is scale invariant in the sense that for any $\varepsilon$ and $\varepsilon'$ we have $\frac{f(x+\varepsilon) - f(x)}{\varepsilon} =_d \frac{f(x'+\varepsilon') - f(x')}{\varepsilon'}$, then for all $\delta>0$,
+	If $f$ is a random process with independent increment, and is scale invariant in the sense that for any increments $\varepsilon$ and $\varepsilon'$, the scaled increments are equal in distribution, i.e. {\color{red}$\frac{f(x+\varepsilon) - f(x)}{\varepsilon} \stackrel{d}{=} \frac{f(x'+\varepsilon') - f(x')}{\varepsilon'}$ (need to be fixed)}, then for all $\delta>0$,
 	we have the bound
 	\[
 		\operatorname{Pr} \left[
@@ -159,25 +159,6 @@ To get a even faster approximation, we want to fix some particular $\varepsilon$
 \end{proposition}
 \begin{proof}
 	We assume $\alpha + \delta < 1$, and $\varepsilon < 1$.
-	Take arbitrary $\varepsilon>0$. We can choose $\varepsilon'>0$ such that $\varepsilon' < \varepsilon$, and
-	\[
-		\operatorname{inf}_x \frac{\log \left| f(x) - f(x+\varepsilon') \right|}{\log \varepsilon'} - \frac{\log C}{\log \varepsilon'} < \alpha + \delta
-	.\] 
-	Thus \[
-		\operatorname{inf}_x  \left| f(x) - f(x+\varepsilon') \right|
-		> C \varepsilon'^{\alpha + \delta}
-	.\] 
-	By an (unrigorous) use of scale invariance, 
-	\[
-		\operatorname{inf}_x  \left| f(x) - f(x+\varepsilon) \right| > C \varepsilon'^{\alpha + \delta} \frac{\varepsilon}{\varepsilon'} > C \varepsilon^{\alpha + \delta}
-	.\] 
-	Thus 
-\[
-		\operatorname{inf}_x \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha < \delta
-	.\]
-\end{proof}
-\begin{proof}
-	We assume $\alpha + \delta < 1$, and $\varepsilon < 1$.
 	\begin{align*}
 		&\operatorname{Pr} \left[ \operatorname{inf}_x \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha < \delta \right]\\
 		&\ge\operatorname{Pr} \left[ \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha < \delta \right]\\
@@ -187,7 +168,18 @@ To get a even faster approximation, we want to fix some particular $\varepsilon$
 		&= \operatorname{Pr} \left[ \left| f(x') - f(x'+\varepsilon') \right| > C \varepsilon'^{\alpha + \delta} \right]  & \text{using scale invariance}\\
 		&\ge\operatorname{Pr} \left[ \frac{\log \left| f(x') - f(x'+\varepsilon') \right|}{\log \varepsilon'} - \frac{\log C}{\log \varepsilon'} - \alpha < \delta \right]
 	.\end{align*}
-	Using Proposition 2, we can choose small enough $\varepsilon'$ to make this probability arbitrarily close to $1$.
+	Using the previous proposition, we can choose small enough $\varepsilon'$ to make this probability arbitrarily close to $1$.
+	Thus for all $\delta > 0$, 
+\[
+		\operatorname{Pr} \left[
+\left|
+		 \operatorname{inf}_x
+		 \frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon} - \frac{\log C}{\log \varepsilon} - \alpha 
+		\right|
+		> \delta
+	\right]
+= 0
+	\]
 \end{proof}
 
 Using the approximation above, for some specific $\varepsilon$, we can approximate $\alpha$ by
@@ -199,19 +191,26 @@ Using the approximation above, for some specific $\varepsilon$, we can approxima
 
 We then use $\operatorname{inf} _i a_i^{(j)}$ as an upper estimation:
 
+\begin{theorem}
+	Assume (some condition). Then for any specific $\varepsilon_j$,
 \[
-\operatorname{inf} _i a_i^{(j)} \approx
+	\operatorname{inf} _{i \in [n]} a_i^{(j)} <
 	 \operatorname{inf}_x
-		\frac{\log \left| f(x) - f(x+\varepsilon) \right|}{\log \varepsilon}
+		\frac{\log \left| f(x) - f(x+\varepsilon_j) \right|}{\log \varepsilon_j} + O\left(\frac{1}{\log n}\right)
 .\] 
+\end{theorem}
+\begin{proof}
+	To be done. Need to work out what assumptions I need.
+\end{proof}
+
 
 Put all these together, we have a curve to fit, with error terms bounded and going to zero:
 \begin{equation}
 	\label{eqn:holder-fit-curve}
-	\alpha + \frac{\log C}{\log \varepsilon_j} = \operatorname{inf} _i a_i^{(j)} + O(\varepsilon) 
+	\alpha + \frac{\log C}{\log \varepsilon_j} = \operatorname{inf} _i a_i^{(j)} + O\left(\varepsilon\right)+ O \left(\frac{1}{\log n}\right) 
 .\end{equation} 
 
-{\color{gray} Note: We still need to bound the errors of the approximations above.}
+{\color{gray}More work needed to turn this into an error bound for $\alpha$, by considering the curve regression error.}
 
 Thus our testing strategy is:
 \begin{enumerate}

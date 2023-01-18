@@ -1,0 +1,146 @@
+\homework{9}{Sat 05 Nov 2022 00:33}{}
+25.A(c,d), 25.V, 25.X (see 25.H), 27.D, 27.H, 28.B, 28.K, 28.O
+
+\begin{itemize}
+	\item [25.A.] Discuss the existence of both the deleted and the non-deleted limits of the following functions at the point $x=0$.\\
+(c) $f(x)=x \sin (1 / x), \quad x \neq 0$
+\begin{proof}[Solution]
+	The two notions of limit are equivalent since $0 \not\in  \operatorname{Dom} f$. 
+
+	Take any sequence $x_n \to 0$. Apply squeeze theorem,
+	\[
+		0\le |f(x_n)| = |x_n| |\sin(\frac{1}{x})| \le |x_n| \to 0
+	.\] 
+	Thus $f(x_n) \to 0$. Hence $\lim_{x \to 0} f(x) = 0$.
+\end{proof}
+(d) $f(x)=\sin (1 / x), \quad x \neq 0$
+\begin{proof}[Solution]
+	The limit does not exist. We have proved in Exercise 12.I that the set $\{(0,y): -1\le y\le 1\} $ is in the boundary of graph of $f$. If the limit $\lim_{x \to 0} f(x)$ exists, it must be unique, so graph of $f$ should only have one cluster point when $x = 0$. However there are infinitely many such cluster points, so the limit does not exist.
+\end{proof}
+
+\item [25.V.] Let $f$ be as in Definition $25.1$ and suppose that the deleted limit at $c$ exists and that for some element $A$ in $\mathbf{R}^q$ and $r>0$ the inequality $\|f(x)-A\|<r$ holds on some neighborhood of $c$. Prove that $\left\|\lim _c f-A\right\| \leq r$. Does the same conclusion hold for the non-deleted limit?
+\begin{proof}
+	Let $\lim_{x \to c} f = L$. Pick $\varepsilon>0$, then there exists $\delta>0$ such that $|f(x) - L| < \varepsilon$ whenever $0<|x - c| < \delta$. We may assume without loss of generality that $B_\delta(c)$ is contained in the neighborhood of $c$ where the inequality holds, so we have $|f(x) - A | < r$. By triangle inequality, $|L - A| < r + \varepsilon$. Since $\varepsilon$ is arbitrary, $|L - A| \le r$.
+
+	Prof. Petrosyan told us to ignore everything about nondeleted limit, so I skip the second half of the problem.
+\end{proof}
+
+\item [25.X.] If $f:[0,+\infty) \rightarrow \mathbb{R}$ is continuous on $[0,+\infty)$ and $\lim _{x \rightarrow+\infty} f(x)=0$, show that $f$ is uniformly continuous on $[0,+\infty)$
+\begin{proof}
+	Let $N> 0$, and we know that $f$ is uniformly continuous on $[0,N]$ since the interval is compact. Let $\varepsilon>0$, and there exists $\delta>0$ such that $|f(x) - f(y)| < \varepsilon$ whenever $|x - y| < \delta$ for $x, y \in [0,N]$. Now since $\lim_{x \to +\infty} f(x) = 0$, we may pick large enough $N$ such that for all $x \ge  N$, we have $|f(x)| \le  \frac{\varepsilon}{2}$. 
+
+	Now let $x, y\ge  0$ such that $|x - y| < \delta$. If $x,y \le  N$ then we are done. If $x, y > N$ then by triangle inequality we have $|f(x) - f(y)| < \varepsilon$. If $x \le  N$ and $y\ge N$, then $|x - N| \le  \delta$. Hence $|f(x) - f(y)|\le |f(x) - f(N)| + |f(N) - f(y)| \le  \varepsilon + \varepsilon = 2 \varepsilon$. Therefore $f$ is uniformly continuous on $[0, +\infty )$.
+\end{proof}
+
+\item [27.D.] Show that the function defined by
+\[
+\begin{aligned}
+g(x) &=x^2 \sin (1 / x), & & x \neq 0 \\
+&=0, & & x=0
+\end{aligned}
+\]
+is differentiable for all real numbers, but that $g^{\prime}$ is not continuous at $x=0$.
+\begin{proof}
+	Using chain rule, we know  $g'(x) = 2x \sin \frac{1}{x} - \cos \frac{1}{x}$. This exists whenever $x\neq 0$, so $g$ is differentiable for all nonzero real numbers. 
+	Next, we determine the derivative at $0$. Now
+	\[
+		\lim_{x \to 0+} \frac{g(x) - g(0)}{x - 0} = \lim_{x \to 0+} \frac{x^2 \sin \frac{1}{x}}{x} = \lim_{x \to 0+} x \sin \frac{1}{x} = 0
+	.\] 
+	And similarly $\lim_{x \to 0-} \frac{g(x) - g(0)}{x - 0} = 0$. Hence $g'(0)$ exists and equal to $0$.
+
+	On the other hand, however, as $x \to 0$, the term $2x \sin \frac{1}{x}$ converges to $0$ but the term $\cos \frac{1}{x}$ does not converge. Hence $\lim_{x \to 0} g'(x)$ does not exist, so $g'$ is not continuous at $x = 0$.
+\end{proof}
+
+\item [27.H.] (Darboux) If $f$ is differentiable on $[a, b]$, if $f^{\prime}(a)=A, f^{\prime}(b)=B$, and if $C$ lies between $A$ and $B$, then there exists a point $c$ in $(a, b)$ for which $f^{\prime}(c)=C$. (Hint: consider the lower bound of the function $g(x)=f(x)-C(x-a)$.)
+\begin{proof}
+	Assume without loss of generality that $A < B$. $f$ differentiable implies $f$ continuous, hence $g$ as defined in the hint is continuous. Also, we have $g'(a) = f'(a) - C = A - C < 0$ and $g'(b) = f'(b) - C = B - C > 0$. Since $[a,b]$ is compact, $g$ reaches minimum value at some $c \in [a,b]$. $g$ differentiable implies $g'(c) = 0$, hence  in particualr $c \in (a,b)$.  
+
+	Now $g'(c) = f'(c) - C = 0$, hence $f'(c) = C$.
+\end{proof}
+
+\item [28.B.] Show that if $x>0$, then
+\[
+1+\frac{x}{2}-\frac{x^2}{8} \leq \sqrt{1+x} \leq 1+\frac{x}{2}
+\]
+\begin{proof}
+	Let $f(x) = \sqrt{1+x} $. Differentiate and find
+	\begin{align*}
+		f^{(1)}(x) &= \frac{1}{2} (1+x)^{-\frac{1}{2}} \\
+		f^{(2)}(x) &= -\frac{1}{4}(1+x)^{-\frac{3}{2}} \\
+		f^{(3)}(x) &= \frac{3}{8}(1+x)^{-\frac{5}{2}} 
+	.\end{align*} 
+	Now by Taylor's Theorem,
+	 \begin{align*}
+		 f(x) &= f(0) + \frac{f'(0)}{1!}(x-0) + \frac{ f^{(2)}(\gamma)}{2!}(x-0)^2 \\
+		 &= 1 + \frac{1}{2} x - \frac{1}{8} ( 1+\gamma)^{\frac{3}{2}} x^2 < 1 + \frac{x}{2}
+	.\end{align*} 
+
+	By Taylor's Theorem again,
+	\begin{align*}
+		 f(x) &= f(0) + \frac{f'(0)}{1!}(x-0) + \frac{ f^{(2)}(0)}{2!}(x-0)^2 + \frac{f^{(3)}(\gamma)}{3!}(x-0)^3\\
+		 &= 1 + \frac{1}{2} x - \frac{1}{8} x^2 + \frac{1}{16} (1+\gamma)^{\frac{5}{2}}x^3 > 1 + \frac{x}{2}-\frac{1}{8} x^2
+	.\end{align*}
+\end{proof}
+
+\item [28.K.] If $f(x)=e^x$, show that the remainder term in Taylor's Theorem converges to zero as $n \rightarrow \infty$ for each fixed $\alpha, \beta$.
+\begin{proof}
+	Assume without loss of generality that $\alpha < \beta$. We have $f^{(n)}(x) = f(x) = e^x$. The remainder term is
+	\[
+		\frac{f^{(n)}(\gamma_n)}{n!}(\beta-\alpha)^n
+		= e^{\gamma_n} \frac{(\beta-\alpha)^n}{n!}
+	.\] 
+	Now $f$ is uniformly continuous on $[\alpha,\beta]$ and thus $f(x)$ is bounded on this interval, hence $e^{\gamma_n}$ is bounded by some fixed constant  $B$. Define $C = \beta - \alpha$, where $C > 0$, and it suffices to show that
+	\[
+		\frac{C^n}{n!} \to 0
+	.\] 
+	 Now we verify this fact. Let $N$ be some natural number such that $N > C$. Define $M = \frac{C^N}{N!}$. Now there exists $m > N$ such that $\frac{C}{m} < \frac{\varepsilon}{M}$. Hence for all $n > m$,
+	 \[
+	 	\frac{C^n}{n!} = \frac{C^N}{N!}\prod_{k=N+1}^{n} \frac{C}{k} < M \frac{C}{m} < \varepsilon
+	 .\] 
+	 Hence $\frac{C^n}{n!}\to 0$.
+\end{proof}
+
+\item [28.O.] If $f: \boldsymbol{R} \rightarrow \boldsymbol{R}$, if $f^{\prime}(x)$ exist for $x \in \boldsymbol{R}$, and if $f^{\prime \prime}(a)$ exists, show that
+\[
+f^{\prime \prime}(a)=\lim _{h \rightarrow 0} \frac{f(a+h)-2 f(a)+f(a-h)}{h^2} .
+\]
+Give an example where this limit exists, but the function does not have a second derivative at $a$.
+\begin{proof}
+	\begin{align*}
+		f''(a) &= \lim_{h \to 0} \frac{f'(a+h) - f(a)}{h}\\
+		&= \lim_{h \to 0} \frac{\lim_{k \to 0} \frac{f(a+h)-f(a+h-k)}{k} - \lim_{k \to 0} \frac{f(a) - f(a-k)}{k}}{h}\\
+		&= \lim_{h \to 0} \lim_{k \to 0} \frac{f(a+h) - f(a+h-k) - f(a) + f(a-k)}{hk} \\
+		&= \lim_{h \to 0} \frac{f(a+h) - 2f(a) + f(a-h)}{h^2}
+	.\end{align*}
+\end{proof}
+\begin{example}
+	Consider
+	\[
+		f(x) = \begin{cases}
+			x^2 & x \le 0 \\
+			x^3 & x \ge 0
+		\end{cases}
+	.\] 
+	Now 
+	\[
+		f'(x) = \begin{cases}
+			2x & x \le 0 \\
+			3x^2 & x \ge 0
+		\end{cases}
+	.\] 
+	The limit exists:
+	\[
+		\lim_{h \to 0} \frac{f(h)- 2 f(0) + f(-h)}{h^2} = \lim_{h \to 0} \frac{h^3 + h^2}{h^2} = 1
+	.\] 
+
+	However, 
+	\[
+		f''(x) = \begin{cases}
+			2 & x < 0 \\
+			6x & x > 0
+		\end{cases}
+	.\] 
+	So $f''(x)$ is not defined at $x = 0$, since the left and right limit aren't equal.
+\end{example}
+
+\end{itemize}

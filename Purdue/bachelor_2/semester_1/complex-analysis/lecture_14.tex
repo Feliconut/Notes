@@ -1,0 +1,96 @@
+\lecture{14}{Mon 14 Nov 2022 00:48}{Meromorphic Functions}
+\subsection{Meromorphic Functions}
+
+\begin{definition}
+	A function $f$ is said to be meromorphic in a domain $D$ if at every point of $D$ it is either analytic or has a pole.
+\end{definition}
+
+\begin{remark}
+	Meromorphic Functions form a \textbf{field}. We can divide them. 
+
+	Meromorphic functions act like rational numbers; holomorphic (analytic) functions act like integers (form a \textbf{ring}).
+\end{remark}
+
+\begin{theorem}
+	Meromorphic functions can only have isolated singularities.
+\end{theorem}
+\begin{proof}
+	If $f$ has non-isolated singularity at $z_0$, then in particular $z_0$ is not a pole, and $f$ not analytic at $z_0$, so $f$ is not meromorphic.
+\end{proof}
+
+\begin{corollary}
+	Meromorphic functions can have at most finitely many poles in a compact region (or within a simple closed contour).
+\end{corollary}
+\begin{proof}
+	If there are infinitely many, then by compactness, there exists a subsequence $z_n$ that converge to $z$ inside the region, where the  $z_n$ are poles. But then $z$ is a singularity, and it is not isolated. Thus we have a contradiction.
+\end{proof}
+
+\begin{theorem}
+	Meromorphic functions on $\mathbb{C}$ are a ratio of analytic (entire) functions.
+\end{theorem}
+\begin{proof}
+	If $f$ is meromorphic in $\mathbb{C}$ , then it has zeros $a_1, \ldots, a_n$ and poles  $b_1, \ldots, b_n$, counting multiplicity.
+
+	Define
+	\[
+		g(z) = \frac{(z-a_1)\ldots(z-a_n)}{(z-b_1)\ldots(z-b_n)}
+	.\] 
+	Then $\frac{f}{g}$ has no zeros and no poles in $\mathbb{C}$.
+	Now if $\frac{f}{g}$ has a pole at  $\infty $, then $g / f$ has removable singularity at $\infty $.
+
+	Thus either one of them has removable singualrity at $\infty $. Then by defining the value at $\infty $ properly, we may assume $f / g$ analytic at $\infty $. Hence $f / g $ is constant, and $f = cg$.
+\end{proof}
+\begin{note}{Warning}
+	The same does not hold on $\overline{\mathbb{C}} $, the sphere.
+\end{note}
+
+\begin{theorem}
+	Meromorphic functions on $\overline{\mathbb{C}} $ are rational.
+\end{theorem}
+And also recall that analytic functions on $\overline{\mathbb{C}} $ are constant.
+
+\begin{theorem}
+	For a meromorphic function in a punctured disk $\{z : 0 < |z-a| < R\} $, one of the following must hold:
+	\begin{enumerate}
+		\item $a$ is a removable singularity.
+		\item $a $ is a pole.
+		\item In all neighbour of $a$, $f(z) = w$ has solution for all $w \in \overline{\mathbb{C}} $, with at most 2 exception.
+	\end{enumerate}
+\end{theorem}
+\begin{example}
+	$\tan \frac{1}{z}$ is meromorphic in $\overline{\mathbb{C}} \setminus \{0\} $, omitting $ \pm i$. 
+
+	$\tan \frac{1}{z}$ has nonisolated singularity at $0$, so we cannot write a Laurent series at $0$.
+\end{example}
+
+\begin{theorem}
+	For a non-constant analytic function, the image of an open set is open.
+\end{theorem}
+\begin{proof}
+	We can write $f$ in the form
+	\[
+		f(z) = f(a) + \left( h(z) \right) ^m
+	.\] 
+	where $h$ is analytic and has a simple zero at $a$.
+
+	Let $A$ be the open set. We have $h(a) = 0$ and $h'(a) \neq 0$. By inverse function theorem, $h(A)$ is open. Then $\left( h(A) \right) ^m$ is open since $z^m$ sends disks to disks. Translation also preserves openness. Hence $f(A)$ is open.
+
+	(to clarify in office hour)
+\end{proof}
+The same is true for meromorphic functions.
+
+\begin{example}
+	(New proof of maximum principle)
+
+	Let $f$ be analytic in $D$, and $a$ a local maximum of $f$ lying in the interior of $D$. Let $f(a) = L$ and take some open neighbourhood $A$ of $a$. Then $f(A)$ is open. But $f(A)$ shares a point with the closed disk $|z| \le L$, so $f(A) $ cannot be open, a contradiction.
+\end{example}
+
+\begin{example}
+	Determine nature of singularity of $e^{\frac{1}{z^2 + 1}}$ at $z = i$.
+	
+	It is hard to write Laurent series. However, we use the fact that $e ^{\frac{1}{z}}$ has essential singularity at $0$. Take a neighbor $A$ of $i$, then $A^2 + 1$ is a neighbor of $0$. Then $\frac{1}{A^2 + 1}$ is a neighbor of infinity.
+\end{example}
+
+\begin{theorem}
+	If $f$ has essential singularity at $\infty $, and $g$ has a pole at $a$, then $f(g(z))$ has essential singularity at $a$.
+\end{theorem}

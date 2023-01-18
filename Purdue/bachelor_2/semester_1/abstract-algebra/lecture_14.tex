@@ -1,5 +1,6 @@
 \lecture{14}{Fri 07 Oct 2022 11:10}{Cauchy's Theorem}
 
+\section{Finite Groups}
 \subsection{Cauchy's Theorem}
 
 \begin{definition}
@@ -32,7 +33,7 @@ Equivalence classes $[s]$ are then orbits $\text{Orb}_f(s)$.
 
 \begin{theorem}[Cauchy's Theorem]
 	(2.8.2)
-	Suppose $p$ is prime adn $p \mid |G|$, then $G$ has an element of order $p$.
+	Suppose $p$ is prime and $p \mid |G|$, then $G$ has an element of order $p$.
 
 	Thus $G$ has a subgroup of order $p$, say $\left\langle a \right\rangle \le G$ with $o(a) = p$.
 \end{theorem}
@@ -55,10 +56,10 @@ Equivalence classes $[s]$ are then orbits $\text{Orb}_f(s)$.
 			|S| - m
 			= \text{card}\{s \in S: f(s)\neq s\} 
 		.\] 
-		where any element in the set satisfies $|\text{Orb}_f(s) |=p$, so $|S| - m \equiv 0 \pmod p$.
+		where any element in the set satisfies $|\text{Orb}_f(s) |=p$, so $|S| - m \equiv 0 \pmod p$ (recall orbits are disjoint, so $p$ elements such that $f(s) \neq s$ comes together as one orbit).
 
 		Also, $|S| = |G|^{p-1} \equiv 0 \pmod p$ since $p \mid |G|$. Thus  $m \equiv 0 \pmod p$.
-		Since $f\left( (e, \ldots, e) \right) = (e, \ldots, e)$ and $(\vec{e} ..,e) \in S$, $m\ge 1$. Hence $m \ge p >1$. Hence there exists $a \in G$ with property $(a, \ldots, a) \in S$, whence  $a^p = e$. But $o(a) | p$, and $a \neq  e$, so $o(a) = p$.
+		Since $f\left( (e, \ldots, e) \right) = (e, \ldots, e)$ and $(e ,\ldots,e) \in S$, $m\ge 1$. Hence $m \ge p >1$. Hence there exists $a \in G$ with property $(a, \ldots, a) \in S$ (by definition of $S$), whence  $a^p = e$. But $o(a) | p$, and $a \neq  e$, so $o(a) = p$.
 	\end{enumerate}
 \end{proof}
 

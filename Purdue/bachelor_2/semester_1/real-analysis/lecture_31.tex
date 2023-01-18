@@ -1,0 +1,153 @@
+\lecture{31}{Mon 14 Nov 2022 11:31}{}
+
+\subsection{Properties of Integral}
+
+\begin{example}
+	\begin{enumerate}
+		\item When $g(x) = x$, the R-S integral is called \logseq{Riemann Integral}.
+		\item Let
+			\[
+				f(x) = \begin{cases}
+					1 & x \in \mathbb{Q}\\
+					0 & x \not\in \mathbb{Q}
+				\end{cases}
+			\]
+			be the \textit{Dirichet's function}. 
+			\begin{claim}
+				$f$ not Riemann integrable on any $[a,b], a < b$. 
+			\end{claim}
+				\begin{proof}
+					Let $P$ be any partition of $[a,b]$. By density of rationals (and irrationals),
+					\[
+						m_i = \operatorname{inf} _{[x_{i-1}, x_i]}f = 0 \qquad \text{for any }i = 1,\ldots, N
+					.\] 
+\[
+						M_i = \operatorname{sup} _{[x_{i-1}, x_i]}f = 1 \qquad \text{for any }i = 1,\ldots, N
+					.\]
+					Hence $L(P, f) = 0$, $U(P, f) = \sum_{i=1}^{N} 1 \Delta x_i = b-a$. Hence the upper and lower sums do not match. Hence not integrable in Darboux sense.
+				\end{proof}
+			\item Let 
+				\[
+					g(x) = 
+					\begin{cases}
+						0 & a\le x\le c \\
+						1 & c< x\le b
+					\end{cases}
+				\quad, c \in (a,b)
+			.\] 
+			Let $P$ be a partition containing $c$. Let $i$ be such that $c = x_{i-1}$. Then note: $\Delta g_k = 0$ unless $k = i$. Moreover, $\Delta g_i = 1$. Therefore, 
+			\[
+				S(P, f, g) = \sum_{k=1}^{N} f(\xi_k) \Delta g_k \qquad \xi_k \in [x_{k-1}, x_k]
+			.\] 
+			\[
+				S(P, f, g) = f(\xi_i)
+			.\] 
+			$\int_a^b f dg$ exists iff $\lim_{x \to c+} f(x) = f(c)$ (continuity from the right). We have $\int_a^b f dg = f(c)$.
+			\begin{remark}
+				This allows us to treat series as integrals.
+			\end{remark}
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}[Change of Variable]
+	Suppose $g(x)$ monotone increasing and \textbf{continuously differentiable}. Let $f(x)$ be a bounded function. Then $\int_a^b f dg $ exists iff $\int_a^b f g' dx$ exists, and 
+	\[
+		\int_a^b f dg  = \int_a^b f g' dx
+	.\] 
+\end{theorem}
+\begin{proof}
+	Since $g'$ continuous on $[a,b]$, $g'$ uniformly continuous on $[a,b]$. Hence for any $\varepsilon>0$ there exists $\delta>0$ such that for all $x, y \in [a,b]$,
+	\[
+		\left| x - y \right| < \delta \implies
+		\left| g'(x) - g'(y) \right| <\varepsilon 
+	.\] 
+	Now pick $P_\varepsilon$ be a partition such that $\Delta x_i < \delta$. Then for any $P  $ finer than $P_\varepsilon$ we have $\Delta x_i<\delta$ for $P$ as well. Now
+	\[
+		S(P, f, g) = \sum_{i=1}^{N} f(\xi_i) \left( g(x_i) - g(x_{i-1 }) \right) 
+	.\] 
+\[
+		S(P, fg') = \sum_{i=1}^{N} f(\xi_i)g'(\xi_i) \left( x_i - x_{i-1 } \right) 
+	.\]
+	Apply mean value theorem, there exists $\zeta \in [x_{i-1 }, x_i]$ such that
+	\[
+		f(\xi_i)\left( g(x_{i}) - g(x_{i-1 }) \right)  =
+		f(\xi_i) g'(\zeta_i) \left( x_i - x_{i-1 } \right) 
+	.\] 
+	Now
+	\begin{align*}
+		\left| S(P, f, g) - S(P, fg') \right| 
+		&\le \sum_{i=1}^{N} |f(\xi_i)| |g'(\zeta_i) - g'(\xi_i)| \Delta x_i\\
+		&\le \|f\| \varepsilon (b-a)
+	.\end{align*} 
+	Now if one of the integrals exists, then this statement implies that the other integral must exist.
+	Hence the theorem holds.
+\end{proof}
+
+\begin{proposition}(Properties of \logseq{R-S integral})
+	Suppose $f_1, f_2: [a,b] \to \mathbb{R}$ bounded, and $g$ monotone increase. Then if $\int_a^b f_1 dg$ and $\int_a^b f_2 dg$ exist, then
+	\begin{itemize}
+		\item (Linearity) For $\alpha_1, \alpha_2 \in \mathbb{R}$, 
+			\[
+			\int _a^b \left( \alpha_1f_1+\alpha_2f_2 \right) dg = 
+			\alpha_1\int_a^b f_1 dg + \alpha_2\int_a^b f_2 dg
+		.\] 
+	\item (Linearity in integrator) If $\beta_1, \beta_2\ge 0$, then
+\[
+			\int _a^b f d(\beta_1g_1+\beta_2g_2) = 
+			\beta_1 \int _a^b f dg_1 + \beta_2 \int _a^b f dg_2
+		.\]
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item (Linearity)
+		\item (Linearity in integrator) Riemann Sum is linear.
+	\end{itemize}
+\end{proof}
+
+\begin{proposition}(Additivity of \logseq{R-S integral})
+	Let $f: [a,b] \to \mathbb{R}$ bounded and $g$ monotone increase, $c \in [a,b]$. Then $\int _a^b fdg $ exists iff  $\int _a^c fdg $ and $\int _c^b fdg $ exist, and then
+	\[
+		\int _a^b fdg = \int _a^c fdg+ \int _c^b fdg
+	.\] 
+	
+\end{proposition}
+\begin{proof}
+	Let $I = \int _a^b fdg $. Without loss of generality we consider only partitions that contain $c$. For any $\varepsilon>0$, there exists $P_\varepsilon$ such that 
+	\[
+		\left| S(P, f, g)- I \right| <\varepsilon \quad \text{if }P > P_\varepsilon
+	.\] 
+	Assume existence of integral, then for $P > P_\varepsilon$,
+	\[
+		\left| U(P, f, g)- L(P, f, g) \right| \le  2\varepsilon
+	.\] 
+	For $P>P_\varepsilon$, $P$ contains $c = x_M$. Then $P': a = x_0 < x_1 < \ldots < x_M = c$ is a partition of $[a,c]$, and $P'': c = x_M < x_{M+1} < \ldots<x_N = b$ is a partition of $[c,b]$. Now
+	\begin{align*}
+		\left| U(P, f, g)- L(P, f, g) \right| &= \sum_{i=1}^{N} (M_i - m_i) \Delta g_i\\
+		&\ge \sum_{i=1}^{M} (M_i - m_i) \Delta g_i \\
+		&= U(P', f, g) - L(P', f, g)
+	.\end{align*} 
+	Hence for $P > P_\varepsilon$, \[
+		\left| U(P', f, g)- L(P', f, g) \right| \le  2\varepsilon
+	.\]
+	Hence \[
+		\left| \overline{\int _a^c} fdg - \underline{\int _a^c} fdg  \right| \le  2 \varepsilon
+	.\] 
+	Hence the integral exists. Similarly $\int _c^b f dg$ exists.
+
+	On the other direction, suppose both $\int _a^c f dg$ and $\int _c^b f dg$ exists. Then we can put two partitions together in a similar way, ad conclude that for fine $P$,
+	\[
+		\left| S(P, f, g) - \left( \int_a^c f dg + \int _c^b f dg \right)  \right| \le 2 \varepsilon
+	.\] 
+
+	Now to verify additive identity,
+	\[
+		S(P, f, g) = S(P', f, g) + S(P'', f, g)
+	.\] 
+	Hence by taking fine partitions, each is $\varepsilon$-close the the corresponding integral. So 
+\[
+		\left| \int _a^b fdg  - \left(\int _a^c fdg+ \int _c^b fdg\right) \right| \le 3 \varepsilon \to 0
+.\] 
+\end{proof}
+
+

@@ -51,7 +51,7 @@ Herstein, section 6.1, page 221: Questions 1, 2, 8
 
 	\item 2. Prove that if $n>3$, the center of $A_n$ is (e).
 \begin{proof}
-	Suppose for contradiction that center of $A_n$ is not $(e)$. Take nontrivial $\sigma \in Z(A_n)$. Take  $a,b$ such that $\sigma(a)\neq a$ and $\sigma(b)\neq b$. Because $\sigma(a,b) = (a,b)\sigma$, we have  $(a,b)^{-1}\sigma(a,b) = \sigma$, so $\sigma$ must be in the form $(a,b)\tau$ where $\tau$ is disjoint from $(a,b)$. Since $\sigma \in A_n$, $\sigma$ must be of the form $(a,b)(c,d)\tau$ where $\tau \in A_n$. Now
+	Suppose for contradiction that center of $A_n$ is not $(e)$. Take nontrivial $\sigma \in Z(A_n)$. Take  $a,b$ such that $\sigma(a)\neq a$ and $\sigma(b)\neq b$. Because {\color{red}$\sigma(a,b) = (a,b)\sigma$}, we have  $(a,b)^{-1}\sigma(a,b) = \sigma$, so $\sigma$ must be in the form $(a,b)\tau$ where $\tau$ is disjoint from $(a,b)$. Since $\sigma \in A_n$, $\sigma$ must be of the form $(a,b)(c,d)\tau$ where $\tau \in A_n$. Now
 	\begin{align*}
 		&(a,b)(c,d)\tau(a,b,c) = (a,b,c)(a,b)(c,d)\tau\\
 		&\iff (a,b,d)\tau(a,b,c) = \tau \\
@@ -60,6 +60,12 @@ Herstein, section 6.1, page 221: Questions 1, 2, 8
 
 	We have arrived at a contradiction, so the center of $A_n$ must be $(e)$.
 \end{proof}
+\begin{correction}
+	The red part is incorrect since $(a,b) \not\in A_n$ (it is in fact in $S_n$ ), and $\sigma$ only commutes with elements in $A_n$.
+
+
+	Take $a,b,c,d$ such that $\sigma(a) = b$ and $\sigma(c) = d$. Now $(b,a,c) \sigma (a) = a$ but $\sigma(b,a,c)(a) = d$, a contradiction.
+\end{correction}
 
 	\item 8. If $M \triangleleft N$ and $N \triangleleft G$, show that $a M a^{-1}$ is normal in $N$ for every $a \in G$.
 \begin{proof}

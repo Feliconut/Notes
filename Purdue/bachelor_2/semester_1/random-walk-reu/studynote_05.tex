@@ -1,0 +1,113 @@
+\studynote{5}{Mon 07 Nov 2022 20:50}{Statistical Tests and their Development}
+\section{Statistical Tests}
+\subsection{Fundamental Results}
+\begin{theorem}[Glivenko–Cantelli Theorem]
+	Assume that $X_1, X_2, \ldots$ are independent and identically-distributed random variables in $\mathbb{R}$ with common cumulative distribution function $F(x)$. The empirical distribution function for $X_1, \ldots, X_n$ is defined by
+\[
+F_n(x)=\frac{1}{n} \sum_{i=1}^n I_{\left[X_i, \infty\right)}(x)=\frac{1}{n}\left|\left\{1 \leq i \leq n \mid X_i \leq x\right\}\right|
+\]
+where $I_C$ is the indicator function of the set $C$. Then the empirical cdf uniformly converges to the common cdf almost surely:
+\[
+\left\|F_n-F\right\|_{\infty}=\sup _{x \in \mathbb{R}}\left|F_n(x)-F(x)\right| \longrightarrow 0 \text { almost surely. }
+\]
+	
+	Sometimes called \logseq{The Fundamental Theorem of Statistics}. Source: wikipedia.
+\end{theorem}
+\begin{remark}
+For every (fixed) $x, F_n(x)$ is a sequence of random variables which converge to $F(x)$ almost surely by the strong law of large numbers. Glivenko and Cantelli strengthened this result by proving uniform convergence of $F_n$ to $F$.
+\end{remark}
+
+\subsection{Kolomogorov-Smirnov (K-S) One-Sample Statistic}
+Source: \cite{gibbonsNonparametricStatisticalInference2014}
+
+A single random sample of size $n$ is drawn from a population with unknown $\operatorname{cdf} F_X$. We wish to test the null hypothesis
+\[
+H_0: F_X(x)=F_0(x) \text { for all } x
+\]
+where $F_0(x)$ is completely specified, against the general alternative
+\[
+H_1: F_X(x) \neq F_0(x) \quad \text { for some } x
+\]
+Let $S_n$ be the empirical distribution function with sample size $n$. Let $F_0$ be the expected cdf.
+The test statistic is
+\[
+D_n=\sup _x\left|S_n(x)-F_0(x)\right|
+.\]
+By Glivenko–Cantelli Theorem, $D_n$ should be a reasonable measure of the accuracy of our estimate.
+
+\begin{theorem}
+	(K-S statistic is distribution free)
+	The statistics $D_n, D_n^{+}$, and $D_n^{-}$are completely distribution-free for any specified continuous cdf $F_0$.
+\end{theorem}
+
+The following theorem gives a good approximation (practically $n>35$ ) to sampling distribution of $D_n$.
+\begin{theorem}[Kolmogorov Theorem]
+	If $F_X$ is any continuous distribution function, then for every $d>0$,
+\[
+\lim _{n \rightarrow \infty} P\left(D_n \leq d / \sqrt{n}\right)=L(d)
+\]
+where
+\[
+L(d)=1-2 \sum_{i=1}^{\infty}(-1)^{i-1} \mathrm{e}^{-2 i^2 d^2}
+\]
+\end{theorem}
+
+\subsection{K-S Two-Sample Statistic}
+
+The order statistics corresponding to two random samples of size $m$ and $n$ from continuous populations $F_X$ and $F_Y$ are
+\[
+X_{(1)}, X_{(2)}, \ldots, X_{(m)} \quad \text { and } \quad Y_{(1)}, Y_{(2)}, \ldots, Y_{(n)}
+\]
+Their respective empirical (sample) distribution functions, denoted by $S_m(x)$ and $S_n(x)$, are defined as before:
+\[
+S_m(x)=\left\{\begin{array}{ll}
+0 & \text { if } x<X_{(1)} \\
+k / m & \text { if } X_{(k)} \leq x<X_{(k+1)} \\
+1 & \text { if } x \geq X_{(m)}
+\end{array} \text { for } k=1,2, \ldots, m-1\right.
+\]
+and
+\[
+S_n(x)=\left\{\begin{array}{ll}
+0 & \text { if } x<Y_{(1)} \\
+k / n & \text { if } Y_{(k)} \leq x<Y_{(k+1)} \\
+1 & \text { if } x \geq Y_{(n)}
+\end{array} \quad \text { for } k=1,2, \ldots, n-1\right.
+\]
+The null and alternative hypothesis are
+\[
+H_0: F_Y(x)=F_X(x) \text { for all } x
+\]
+\[
+H_A: F_Y(x)\neq F_X(x) \text { for some } x
+\]
+The test statistic is based on the maximum absolute difference between the two empirical distributions
+\[
+	D_{m, n}=\max _x\left|S_m(x)-S_n(x)\right|
+.\] 
+The rejection region is defined by 
+\[
+	D_{m,n}\ge c_\alpha
+\] 
+where $\alpha$ is the significance level, and
+\[
+P\left(D_{m, n} \geq c_\alpha \mid H_0\right) \leq \alpha
+\]
+Because of the Glivenko-Cantelli theorem (Theorem 2.3.2), the test is consistent for this alternative. The $P$ value is
+\[
+p = P\left(D_{m, n} \geq D_0 \mid H_0\right)
+\]
+where $D_0$ is the observed value of the two-sample $K-S$ test statistic.
+
+
+
+
+For the asymptotic null distribution, that is, $m, n \rightarrow \infty$ in such a way that $m / n$ remains constant, Smirnov (1939) proved the result
+\[
+\lim _{m, n \rightarrow \infty} P\left(\sqrt{\frac{m n}{m+n}} D_{m, n} \leq d\right)=L(d)
+\]
+where
+\[
+L(d)=1-2 \sum_{i=1}^{\infty}(-1)^{i-1} e^{-2 i^2 d^2}
+\]
+Note that the asymptotic distribution of $\sqrt{m n /(m+n)} D_{m, n}$ is exactly the same as the asymptotic distribution of $\sqrt{N} D_N$ in the Kolmogorov Theorem. The only difference is in the normalizing factor.

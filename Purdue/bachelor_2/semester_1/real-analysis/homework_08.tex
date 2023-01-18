@@ -1,0 +1,211 @@
+\homework{8}{Thu 03 Nov 2022 17:00}{}
+
+23.G, 23.J, 24.C, 24.D, 24.E(a,d,e), 24.N, 24.S
+\begin{itemize}
+	\item 
+		[23.G.] A function $g: \boldsymbol{R} \rightarrow \boldsymbol{R}^q$ is periodic if there exists a number $p>0$ such that $g(x+p)=g(x)$ for all $x \in \boldsymbol{R}$. Show that a continuous periodic function is bounded and uniformly continuous on $\boldsymbol{R}$.
+\begin{proof}
+	Fix arbitrary $x_0 \in \mathbb{R}$, and consider the interval $I = [x_0, x_0+p]$. We know that $f(x_0) = f(x_0+p)$. Moreover, since $I$ is compact (by Heine Borel), and $f$ is continuous, we know $f$ is uniformly continuous on $I$. By Extremum Value Theorem, $\|f\|$ attains maximum and minimum somewhere in $I$, so in particular $\|f\|$ is bounded in $I$, hence $f$ is bounded in $I$. 
+
+	Now take any $x \in \mathbb{R}$. We take integer $k$ and real number $r \in [0,p)$ such that $x + kp = x_0 + r$. We know $f(x) = f(x+kp) \in f(I)$, so it immediately follows that $f(x)$ is bounded.
+
+	Now we verify uniform continuity of $f$ on $\mathbb{R}$. Fix any $\varepsilon>0$. Then there exists $\delta>0$ as in the definition of uniform continuity of $f$ on $I$. We first assume $r> 0$.  We may assume without loss of generality that $\delta<r$ and $\delta<p-r$, so 
+	$(x+ kp - \delta, x+kp + \delta) = (x_0+r-\delta, x_0+r+\delta) \subset I$. 
+	Now $f((x-\delta, x+\delta)) = f((x+kp-\delta, x+kp+\delta)) \subset \left( f(x+kp) - \varepsilon, f(x+kp) + \varepsilon \right)  = (f(x) - \varepsilon, f(x) + \varepsilon)$.
+
+	Now we verify the edge case $r = 0$, i.e. $x = x_0 + kp $ for some integer $k$. In this case, 
+	 \begin{align*}
+		 f((x - \delta, x+\delta)) &= f((x_0 - \delta, x_0 + \delta)) \\
+					 &= f((x_0 + p - \delta, x_0+p)) \cup f((x_0, x_0+\delta)) \\
+					 &\subset (f(x_0+p) - \varepsilon, f(x_0+p) + \varepsilon) \cup (f(x_0) - \varepsilon, f(x_0)+\varepsilon)\\
+					 &= (f(x) - \varepsilon, f(x)+\varepsilon)
+	.\end{align*} 
+
+	We have verified $f((x-\delta, x+\delta)) \subset (f(x)-\varepsilon, f(x)+\varepsilon)$ for all $x \in \mathbb{R}$, where $\varepsilon$ and $\delta$ do not depend on $x$, hence $f$ is uniformly continuous.
+\end{proof}
+
+\item [23.J.] Let $D=\left\{x \in \boldsymbol{R}^p:\|x\|<1\right\}$. Show that $f: D \rightarrow \boldsymbol{R}^q$ can be extended to a continuous function on $D_1=\left\{x \in \boldsymbol{R}^p:\|x\| \leq 1\right\}$ to $\boldsymbol{R}^q$ if and only if $f$ is uniformly continuous on $D$.
+\begin{proof}
+	Suppose there exists a continuous extention of $f$ on $D_1$. Then since $D_1 $ is closed and bounded, it is compact by Heine-Borel; therefore $f$ is uniformly continuous on $D_1$, hence uniformly continuous on  $D$.
+
+	Suppose $f$ is uniformly continuous. We construct a continuous extension to $D_1$. Fix $\varepsilon$ and obtain  $\delta$ as in the definition of uniform continuity. 
+	Now take some $x_0 \in D_1$ and some sequence $x_n \to  x_0$ in $D$. By convergence of sequence there exists  $N_\delta$ such that  $|x_n - x_m|<\delta$ for $n, m > N_\delta$. But then $|f(x_n) - f(x_m)| < \varepsilon$ by uniform continuity. $\varepsilon$ is arbitrary, so $f(x_n)$ is Cauchy, and hence converges. We may define $f(x_0)$ to be the limit so that $f(x_n) \to  x_0$ whenever $x_n \to  x_0$.
+
+	Now we show $f(x_0)$ is well-defined. Take another sequence $y_n \to x_0$. We know that $|x_n - y_n| \to 0$ as $n \to  \infty $. In particular, $|x_n - y_n|<\delta$ for $n > M_\delta$. But then $|f(x_n) - f(y_n)|<\varepsilon$ by uniform continuity. Since $\varepsilon$ is arbitrary $|f(x_n) - f(y_n)| \to 0$. Hence the limit is unique. Thus $f(x_0)$ is well-defined.
+
+	Finally we have to verify that the extended $f$ is continuous on $D_1$. Take $x_0 \in D_1$, and it suffices to show that $f$ is continuous at $x_0$. If $x_0 \in D$, we are done. Therefore we may assume $x_0 \in D_1 \setminus D$. We have to show $f(x_n) \to f(x_0)$ for any $x_n \to  x_0$ in $D_1$.
+
+	Now we let $y_n$ be a sequence lying in $D_1 \setminus D$ converging to $x_0$, and $z_n$ be a sequence lying in $D$ converging to $x_0$. Let $x_n$ be a sequence such that for each $n$, we either have $x_n = y_n$ or $x_n = z_n$. Then $x_n$ could be any sequence in $D_1$ converging to $x_0$. To show $f(x_n) \to f(x_0)$, it suffices to show both $f(y_n) \to f(x_0)$ and $f(z_n) \to  f(x_0)$.
+
+	$f(z_n) \to f(x_0)$ is trivial as it follows from definition of $f$ in $D_1 \setminus D$. Now we verify $f(y_n) \to f(x_0)$. 
+	For each $n\ge 1$, there exists a sequence $(a_m^{(n)})_{m \in \mathbb{N}}$ contained in $D$ converging to $y_n$. Also, let $a_m^{(0)} \to x_0$ in $D$. Take $\varepsilon>0$ and we have $\delta>0$ as in definition for uniform continuity of $f$ in $D$. Then there exists  $N_\delta$ such that $|y_n - x_0|<\delta$ for $n > N_\delta$. Now fix $n > N_\delta$. We let $\delta'>0$ be such that $\delta' < \delta - |y_n - x_0|$. Then there exists $M_{\delta'}^{(n)}$ and $M_{\delta'}^{(0)}$ such that $|a_m^{(n)} - y_n| < \delta'$ for $m > M_{\delta'}^{(n)}$ and $|a_m^{(0)} - x_0| < \delta'$ for $m > M_{\delta'}^{(0)}$. Using triangle inequality, we verify that $|a_m^{(n)} - a_{m}^{(0)}| < \delta$ for all $m > M$ for some $M$. But by uniform continuity of $f$ in $D$, we know that $\left| f(a_m^{(n)}) - f(a_m^{(0)}) \right| < \varepsilon $ for $m > M$. Hence 
+	 \[
+		|f(y_n) - f(x_0)| 
+		= \left| \lim_{m \to \infty} f(a_m^{(n)}) - \lim_{m \to \infty} f(a_m^{(0)}) \right| 
+		= \left| \lim_{m \to \infty} f(a_m^{(n)}) - f(a_m^{(0)}) \right|  \le \varepsilon
+	.\] 
+
+	Hence for each $\varepsilon>0$, there exists $N_\delta$, such that $|f(y_n) - f(x_0)| < \varepsilon$ whenever $n > N_\delta$. Hence $f(y_n) \to f(x_0)$.
+\end{proof}
+\item 
+	[24.C.] Give an example of a sequence of continuous functions which converges on a compact set to a function that has an infinite number of discontinuities.
+\begin{proof}
+	We construct an "infinite staircase". Let $I = [0,1]$. Define $f_n: I \to I$ such that
+	\[
+		f_n(x) = \begin{cases}
+			1-\frac{1}{2^m} + r^n 2^{(m+1)(n-1)} & x = (1-\frac{1}{2^m})+ r, m \in \mathbb{N}, 0\le r < \frac{1}{2^{m+1}}\\
+			1 & x = 1
+		\end{cases}
+	.\] 
+	Then as $n\to \infty $, $f_n$ converges to the "infinite step function"
+	\[
+		f(x) = \begin{cases}
+			1-\frac{1}{2^m} & x = (1-\frac{1}{2^m})+ r, m \in \mathbb{N}, 0\le r < \frac{1}{2^{m+1}}\\
+			1 & x = 1
+		\end{cases}
+	.\] 
+
+	Obviously the function is discontinuous at infinitely many points. Namely, it is discontinuous precisely at the points $1-\frac{1}{2^m}$ for $m \in \mathbb{N}^+$.
+
+	Moreover, $f_n(x)$ is uniquely defined and continuous at each $x$. It is obvious unique in each interval $[1-\frac{1}{2^m}, 1-\frac{1}{2^{m+1}})$. At the boundaries, we have 
+	\[
+		\lim_{x \to 1-\frac{1}{2^{m+1}}; x \in [1-\frac{1}{2^{m}}, 1-\frac{1}{2^{m+1}})} f(x) =  
+		\lim_{r \to \frac{1}{2^{m+1}}}1-\frac{1}{2^m} + r^n 2^{(m+1)(n-1)} = 1 - \frac{1}{2^m} + 2^{-m-1} = 1-\frac{1}{2^{m+1}}
+	.\] 
+\[
+		\lim_{x \to 1-\frac{1}{2^{m+1}}; x \in (1-\frac{1}{2^{m+1}}, 1-\frac{1}{2^{m+2}})} f(x) =  
+		\lim_{r \to 0}1-\frac{1}{2^{m+1}} + r^n 2^{(m+2)(n-1)} = 1 - \frac{1}{2^{m+1}}
+	.\]
+	Thus the left and right limits are equal to the value of function at any point. Hence $f_n$ is continuous.
+\end{proof}
+
+\item
+	[24.D.] Let $\left(f_n\right)$ be a sequence of continuous functions on $D \subseteq \boldsymbol{R}^p$ to $\boldsymbol{R}^q$ such that $\left(f_n\right)$ converges uniformly to $f$ on $D$, and let $\left(x_n\right)$ be a sequence of elements in $D$ which converges to $x \in D$. Does it follow that $\left(f_n\left(x_n\right)\right.$ ) converges to $f(x)$ ?
+\begin{proof}
+	Fix $\varepsilon>0$. Since $f_n \to f$ uniformly, $|f_n(y) - f(y)| < \varepsilon $ for all  $y \in D$ whenver $n > N_\varepsilon$ for some $N_\varepsilon \in \mathbb{N}$.
+	Hence $|f_n(x_n) - f(x_n) |< \varepsilon$ for $n > N_\varepsilon$. On the other hand, $f_n \to f $ uniformly and $f_n$ continuous implies $f$ continuous, so $f(x_n) \to f(x)$. Hence $|f(x_n) - f(x)| < \varepsilon$ whenever $n > N'_\varepsilon$. Take $N = \max(N_\varepsilon, N'_\varepsilon)$ and we have, by triangle inequality, that $|f_n(x_n) - f(x)| < 2 \varepsilon$ for all $n > N$. By taking $\varepsilon = \frac{1}{n}$ we can conclude that $f_n(x_n) \to f(x)$.
+\end{proof}
+
+\item 
+	[24.E.] Consider the sequences $\left(f_n\right)$ defined on $D=\{x \in \boldsymbol{R}: x \geq 0\}$ to $\boldsymbol{R}$ by the following formulas.
+Discuss the convergence and the uniform convergence of these sequences and the continuity of the limit functions. In case of non-uniform convergence on $D$, consider appropriate intervals in $D$.\\
+(a) $\frac{x^n}{n}$,
+\begin{proof}
+	When $x\le 1$, we have $f_n(x) \to 0$ as $n \to  \infty $. When $x > 1$, we have $f_n(x) \to \infty $ as $n \to \infty $. Hence $f_n$ does not converge to a real-valued function on $D$.
+\end{proof}
+
+(b) $\frac{x^n}{1+x^n}$,
+\begin{proof}
+	$f_n$ converges to the following function
+	\[
+		f(x) = \begin{cases}
+			0 & x < 1\\
+			\frac{1}{2} & x = 1 \\
+			1 & x > 1
+		\end{cases}
+	.\] 
+	Which is not a continuous function. Hence the convergence cannot be uniform.
+\end{proof}
+
+(c) $\frac{x^n}{n+x^n}$,
+ \begin{proof}
+	$f_n$ converges to 
+	\[
+		f(x) = \begin{cases}
+			0 & x \le 1\\
+			1 & x >1
+		\end{cases}
+	.\] 
+	Hence the convergence is not uniform.
+\end{proof}
+
+(d) $\frac{x^{2 n}}{1+x^n}$,
+\begin{proof}
+	When  $x<1$, we have $x^{2n} \to 0$ and $x^n \to 0$ so $f_n(x) \to \frac{0}{1+0} = 0$.
+	
+	When $x = 1$, we have $x^{2n} = 1 = x^n$ so $f_n(x) = \frac{1}{2}$.
+
+	When $x>1$, we have $f_n(x) = \frac{x^{2n}}{1+x^n} \sim \frac{x^{2n}}{x^n} = x^n \to  \infty $. The divergence can be shown more rigorously by ratio test.
+
+	Hence $f_n(x)$ does not converge when $x > 1$. In particular, $f_n$ does not converge to a real-valued function.
+\end{proof}
+
+(e) $\frac{x^n}{1+x^{2 n}}$,
+\begin{proof}
+	Argument for $x<1$ and $x=1$ are the same.
+
+	When $x>1$, we have $f_n(x) \sim \frac{x^n}{x^{2n}} = \frac{1}{x^n} \to 0$.
+
+	Hence $f_n$ converges point wise to the following function
+	\[
+		f(x) = \begin{cases}
+			\frac{1}{2} & x = 1 \\
+			0 & \text{otherwise}
+		\end{cases}
+	.\] 
+	$f$ is not continuous, so the convergence is not uniform.
+\end{proof}
+
+(f) $\frac{x}{n} e^{-x / n}$.
+\begin{proof}
+	This function converges pointwise to the zero function. However the convergence is not uniform. To see this, observe that for any $n$, 
+	\[
+		\operatorname{sup}_x |f_n(x) - f(x)| \ge |f_n(n) - f(n)| = |e^{-1} - 0| = e^{-1}
+	.\] 
+	which does not vanish.
+\end{proof}
+\item [24.N.] If $f_3(x)=x^3$ for $x \in I$, calculate the $n$th Bernstěn polynomial for $f_3$. Show directly that this sequence of polynomials converges uniformly to $f_3$ on $I$.
+\begin{proof}
+	We start from the binomial formula
+	\[
+		1 = \sum_{k=0}^{n} \binom{n}{k} x^k (1-x)^{n-k}
+	.\] 
+	Replace $n$ by $n-3$ :
+\[
+		1 = \sum_{k=0}^{n-3} \binom{n-3}{k} x^k (1-x)^{n-3-k}
+	.\]
+	Apply the identity \[
+		\binom{n-3}{k-3} = \frac{k(k-1)(k-2)}{n(n-1)(n-2)}\binom{n}{k}
+	.\] 
+	Now
+\[
+		1 = \sum_{k=0}^{n-3} \frac{(k+3)(k+2)(k+1)}{n(n-1)(n-2)}\binom{n}{k+3} x^k (1-x)^{n-3-k}
+	.\]
+	Multiply by $x^3$ and replace $k+3$ by $j$ :
+\[
+		x^3 = \sum_{j=3}^{n} \frac{j(j-1)(j-2)}{n(n-1)(n-2)}\binom{n}{j} x^j (1-x)^{n-j}
+	.\]
+	The terms $j=0, j=1, j=2$ can be added because they vanish:
+\[
+		x^3 = \sum_{j=0}^{n} \frac{j(j-1)(j-2)}{n(n-1)(n-2)}\binom{n}{j} x^j (1-x)^{n-j}
+	.\]
+	Rearrange:
+\[
+		n(n-1)(n-2)x^3 = \sum_{k=0}^{n} k(k-1)(k-2)\binom{n}{k} x^k (1-x)^{n-k}
+	.\]
+	Hence
+	\[
+		n(n-1)(n-2)x^3 = n^3 B_n(x, f_3) -3 n^2 B_n(x, f_2) + 2 nB_n(x, f_1)
+	.\]
+	Therefore
+	\[
+		B_n(x, f_3) = \frac{n(n-1)(n-2)}{n^3} x^3 + \frac{3}{n}B(x, f_2) - \frac{2}{n^2}B(x, f_1)
+	.\] 
+	As $n\to \infty $, the last two terms vanish. Also, $\frac{n(n-1)(n-2)}{n^3} \to 1$ as $n\to \infty $. Hence $B_n(x, f_3) \to x^3$ pointwise. Since $I$ is compact, the convergence is uniform.
+\end{proof}
+
+
+\item [24.S.] Show that the Weierstrass Approximation Theorem fails for bounded open intervals.
+\begin{proof}
+	\begin{enumerate}
+		\item Any polynomial is bounded in $(0,1)$.
+		\item Uniform limit preserves boundedness.
+		\item  $\frac{1}{x}$ is unbounded in $(0,1)$.
+	\end{enumerate}
+	If there is a uniform approximation of $\frac{1}{x}$ in $(0,1)$, the limit must be bounded. However, $\frac{1}{x}$ is unbounded, so it cannot be uniformly approximated. 
+
+	This counterexample shows that not all functions can be uniformly approximated in a bounded open interval. Hence the Weierstrass Approximation Theorem is not true for bounded open interval.
+\end{proof}
+
+\end{itemize}
+

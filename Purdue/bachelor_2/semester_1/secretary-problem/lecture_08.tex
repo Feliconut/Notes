@@ -1,7 +1,9 @@
 \lecture{8}{Tue 31 May 2022 08:47}{Partially Adversarial SP with Examination}
 
+continued on next page
+
 \newpage
-\section{Partially Adversarial SP}
+\section{Partially Adversarial Secretary Problem (PASP)}
 
 \subsection{Problem formulation }
 \textbf{Random arrival.} $n $ items are totally ordered. A random permutation $\sigma $ is taken uniformly from the permutation group $S_n$. The classical SP corresponds to finding a stopping time that most likely stops on $t = \sigma(1)$. We will always use numbers to denote the true rank of items, so the incoming stream of items is represented by $\sigma(1,\ldots,n)$.
@@ -124,11 +126,26 @@ We establish a lower bound for the following simple algorithm: examine each item
 \end{algorithm}
 
 \begin{lemma}[Equivalent construction of the game]
-It is equivalent to view this game as follows: when an item is examined, instead of omitting the next item, the last available item is taken from the end of the queue. The player wins only if the best item is accepted, and the item is not omitted.
+	\label{lem:equiv-construct-pasp}
+It is equivalent to view this game as follows: when an item is examined, instead of omitting the next item, the last available item is taken from the end of the queue. The player wins only if the best item is accepted and is not omitted.
 \end{lemma}
 \begin{proof}
-	(informal, to be put rigorously) Consider a deterministic algorithm. The algorithm never knows $\sigma^{-1}(t)$, the position of the current item in the arrival sequence. For some $\sigma \in S_n$, we can perform some reordering according to the following rule: We first let the algorithm run through the sequence, and take out all the items omitted, and stack them to the end of the queue. The resultant sequence $\sigma'$ looks exactly same to the algorithm in the new setting.
-	Hence, the whole gameplay will be identical up to an automorphism on $S_n$, and there's no difference revealed to the algorithm. Because the only randomness we used is the randomized $\sigma \in  S_n$, we have essentially created an isomorphism between the two probability spaces for the two versions of the game.
+	Consider a deterministic algorithm \textsf{ALG}. The algorithm never knows $\sigma^{-1}(t)$, the position of the current item in the arrival sequence. For some $\sigma \in S_n$, we can define an automorphism $\varphi(\mathsf{ALG}) \in A(S_n)$ according to the following reorder of elements: We first let the algorithm run through the sequence, mark all the items omitted, and move the marked items to the end of the queue. The resultant sequence $\sigma'$ looks exactly the same to the algorithm in the new setting.
+
+	In the original setting we have the sequence of incoming items 
+\[
+	\sigma^{-1} (t) \quad \sigma^{-1} (t+1) \quad \sigma^{-1} (t+2) \quad \ldots \quad \sigma^{-1} (p)
+.\] 
+	When \textsf{ALG} encounters $\sigma^{-1}(t)$ and choose to \textsf{Examine}, $ \sigma^{-1}(t+1)$ will be omitted and $\sigma^{-1} (t+2)$ is revealed to \textsf{ALG}. 
+
+	On the other hand, in the modified setting, after applying $\varphi(\mathsf{ALG})$ we have the incoming sequence 
+\[
+	\sigma^{-1} (t)  \quad \sigma^{-1} (t+2) \quad \ldots \quad \sigma^{-1} (p) \quad \sigma^{-1} (t+1)
+.\]
+
+	examining $\sigma^{-1} (t)$ will drop the last item in the sequence, while $\sigma^{-1} (t+2)$ is observed next, identical to the original case.
+	
+	We have shown that the original and modified setups of the game are equivalent.
 \end{proof}
 
 \begin{intuition}
@@ -145,10 +162,14 @@ Let $t^* := \sigma^{-1}(1)$, i.e., the position of the best item. We couple the 
 
 \begin{lemma}[Coupling with CSP]
 \label{lem:CSP-couple}
-	Whenever an algorithm wins the problem, it automatically wins CSP in the same item setting. Whenever an algorthm wins CSP such that $t^* + |E_{t^*}| \le n$, it automatically wins our problem.
+	Consider any deterministic algorithm  \textsf{ALG}. Then \textsf{ALG} wins $\text{PASP}(n, c)$ implies  \textsf{ALG} wins $\text{CSP}(n)$. Conversely, \textsf{ALG} wins $\text{CSP}(n)$ implies  \textsf{ALG} wins $\text{PASP}(n, c)$ whenever $t^* + |E_{t^*}| \le n$.
 \end{lemma}
 \begin{proof}
-	To be done.
+	Assume an algorithm \textsf{ALG} wins $PASP(n, c)$. Then we can use Lemma \ref{lem:equiv-construct-pasp} to move all omitted items to the end of the queue, so the algorithm does not accept any item before $1$. Now the same algorithm, in the CSP setting, observe all items before $1$ and accepts $1$.
+
+	Assume the algorithm wins  $\text{CSP}(n)$. We can perform the process above in the opposite way: for each item that \textsf{ALG} decides to examine, pull an element from end of the queue and put it right next to the examined item. The inequality $t^* + |E_{t^*}| \le n$ guarantees that there are enough elements at the end of the queue to proceed with our construction.
+
+
 \end{proof}
 
 \begin{lemma}
@@ -163,8 +184,26 @@ Let $t^* := \sigma^{-1}(1)$, i.e., the position of the best item. We couple the 
 
 \end{lemma}
 \begin{proof}
-	To be done.
+	From Lemma \ref{lem:equiv-construct-pasp}, we conclude that
+	 \begin{equation}
+	 	\mathsf{ALG}\text{ wins} \implies t^* + |E_{t^*}| \le  n
+	 .\end{equation} 
 \end{proof}
+
+\begin{theorem}(Lower Bound)
+	For PASP with parameters $(n, c)$, for all $a \in \{1, \ldots, n\} $ and $\beta > 0$ such that
+	\[
+		c\left(\beta+\sum_{s=c}^a \frac{1}{s}\right)+c-1 \leq n-a
+	\]
+	we have
+	\[
+		\operatorname{Pr}[\mathsf{ALG}\,\operatorname{win}] \geq  \frac{1}{e} \frac{a}{n}\left(1-\exp \left(-\frac{2 \beta^2}{a-c+1}\right)\right)
+	.\] 
+
+	
+\end{theorem}
+\begin{proof}
+	
 
 
 From Lemma \ref{lem:CSP-couple} we have
@@ -197,36 +236,43 @@ From Lemma \ref{lem:CSP-couple} we have
 	   &\ge \max_{a \le n} \frac{1}{e } \operatorname{Pr}\left[{|E_a|\le n-a}\right] \operatorname{Pr}\left[{t^*\le a}\right]
 .\end{align}
 
-For $t\ge c$ we have \[
+For $t\ge c$ we have 
+\begin{equation}
 |E_t| = c-1+c \sum_{s=c}^{t} B_s
-\]  where $B_s \sim \text{Ber}(\frac{1}{s })$.
+\end{equation}  
+where $B_s \sim \text{Ber}(\frac{1}{s })$.
 
 Using Hoeffding's Bound:
 
-\[
+\begin{equation}
 \operatorname{Pr}\left[{\sum_c^t B_s - \sum_c^t \frac{1}{s } \le \beta}\right] \ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
-\] 
-\[
+\end{equation} 
+\begin{equation}
 \operatorname{Pr}\left[{|E_t| \le c(\beta+\sum_{s=c }^t \frac{1}{s })+c-1}\right]\ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
-.\] 
+.\end{equation} 
 
-Fix some $a$. Let $\beta$ be the greatest real number such that \[
+Fix some $a$. Let $\beta$ be the greatest real number such that 
+\begin{equation}
 c(\beta+\sum_{s=c }^a \frac{1}{s })+c-1 \le n-a
-.\] 
-Therefore,  \[
+.\end{equation} 
+Therefore,  
+\begin{equation}
 \beta = \frac{n-a}{c} -1 - H(a)+H(c-1)
-\] where we use $H(a)$ to denote the $a $-th harmonic number.
+\end{equation} 
+where we use $H(a)$ to denote the $a $-th harmonic number.
 
 Now we have a concentration bound for $|E_{t^*}|$ :
-\[
+\begin{equation}
 	\operatorname{Pr}\left[{|E_{t^*}| \le n-a}\right]\ge 1-\exp\left( - \frac{2\beta^2}{t-c+1} \right) 
-.\] 
+.\end{equation} 
 
 Applying this bound, we now have
-\begin{align*}
+\begin{equation}
 	\operatorname{Pr}\left[{\text{win}}\right] \ge  \max_{a\le n } \frac{1}{e } \frac{a}{n } \left( 1-\exp\left( - \frac{2\beta^2}{a-c+1} \right)  \right) 
-.\end{align*}
+	.
+\end{equation}
 
+\end{proof}
 
 \textbf{Numerical Result.}
 Take $c=2 $ and $n = 100$ for an example. When $a = 70$, we have the numerical bound $\operatorname{Pr}\left[{\text{win }}\right]\ge 0.674 \frac{1}{e}$, which is a non-trivial improvement from the examine-everything algorithm which guarantees only a competitive ratio of $0.5 \frac{1}{e}$.
@@ -234,34 +280,34 @@ Take $c=2 $ and $n = 100$ for an example. When $a = 70$, we have the numerical b
 Take $c = 1$ and $n = 100$, then the optimal choice of $a$ is $82$, and the corresponding bound is $\operatorname{Pr} \left[\text{win}\right] \ge 0.807 \frac{1}{e}$.
 
 \newpage
-\subsection{Upperbound for the problem}
+% \subsection{Upperbound for the problem}
 
-\textbf{This section only contains ideas, there's not any proof.}
+% \textbf{This section only contains ideas, there's not any proof.}
 
-\subsubsection{some guesses}
+% \subsubsection{some guesses}
 
-\begin{definition}
-	A \textit{simple algorithm} is an algorithm in the following form, with parameters $c$ and $T$ replaced by any valid value: \textsf{Examine} each item with observed relative rank $\le c$, and \textsf{Accept} if it is $\max P_{t+1}$ and  $t\ge T$.
-\end{definition}
+% \begin{definition}
+% 	A \textit{simple algorithm} is an algorithm in the following form, with parameters $c$ and $T$ replaced by any valid value: \textsf{Examine} each item with observed relative rank $\le c$, and \textsf{Accept} if it is $\max P_{t+1}$ and  $t\ge T$.
+% \end{definition}
 
-\begin{conjecture}
-	Any algorithm, no matter deterministic or randomized, has its competitive ratio dominated by some simple algorithm.
-\end{conjecture}
+% \begin{conjecture}
+% 	Any algorithm, no matter deterministic or randomized, has its competitive ratio dominated by some simple algorithm.
+% \end{conjecture}
 
-\begin{conjecture}
-	For each $c$ and $n$ (as parameters of the game), of all simple best algorithms, there is one optimal simple algorithm. The optimal algorithm has the exactly same $c$.
-\end{conjecture}
+% \begin{conjecture}
+% 	For each $c$ and $n$ (as parameters of the game), of all simple best algorithms, there is one optimal simple algorithm. The optimal algorithm has the exactly same $c$.
+% \end{conjecture}
 
-If the above guesses are true, then we only need to find the optimal $T$ for the simple algorithm, and bound its competitive ratio from above.
+% If the above guesses are true, then we only need to find the optimal $T$ for the simple algorithm, and bound its competitive ratio from above.
 
 
-\subsubsection{An alternative thought}
+% \subsubsection{An alternative thought}
 
-The process of examination and omitting items will often bring the player to a \textbf{from-two-choose-one} scenario. For example, consider the following sequence of items:
+% The process of examination and omitting items will often bring the player to a \textbf{from-two-choose-one} scenario. For example, consider the following sequence of items:
 
-$*, \triangleleft , \triangleright , -, -$
+% $*, \triangleleft , \triangleright , -, -$
 
-Where the player is at *. Suppose that both $\triangleleft$  and $\triangleright$  are "critical" items such that they have relative rank $\le $ c and shall be examinated. Now if the player declines *, it has to examine $\triangleleft$  and therefore lose $\triangleright$ ; if it examines and declines *, it loses $\triangleleft$ .
+% Where the player is at *. Suppose that both $\triangleleft$  and $\triangleright$  are "critical" items such that they have relative rank $\le $ c and shall be examinated. Now if the player declines *, it has to examine $\triangleleft$  and therefore lose $\triangleright$ ; if it examines and declines *, it loses $\triangleleft$ .
 
-Therefore one of $\triangleleft$  and $\triangleright$  must be lost, and there is no way to mitigate this.
-This behavior can be something fundamental that can be properly exploited to obtain an upper bound.
+% Therefore one of $\triangleleft$  and $\triangleright$  must be lost, and there is no way to mitigate this.
+% This behavior can be something fundamental that can be properly exploited to obtain an upper bound.

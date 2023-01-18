@@ -1,0 +1,28 @@
+\lecture{21}{Fri 28 Oct 2022 10:33}{Third Sylow Theorem}
+
+\begin{theorem}[Third Sylow Theorem]
+	The number of Sylow $p$-subgroups of a finite group $G$ of order $p^n m$, where $p$ prime, $n\ge 1$ and $p\nmid m$, is equal to $kp+1$ for some $k \in \mathbb{Z}$ with $(kp+1) \mid |G|$.
+\end{theorem}
+\begin{proof}
+	Using the proof of Second Sylow Theorem, if there is more than one Sylow $p$-subgroup, say $P$ and $Q \neq P$, then each equivalence class of the set $S$ from that proof has a number of elements divisible by $p$. Then $|S| = k p$ for some $k \in \mathbb{Z}_{\ge 0}$.
+
+	But the number of Sylow $p$-subgroups conjugate to $P$ by the action of $P$ is $1$.
+	Thus the number of Sylow $p$-subgroups of $G$ is $1 + |S| = 1 + k p$.
+
+	We still need to show $(1+kp) \mid |G|$. Suppose $P$ is any Sylow  $p$-subgroup of $G$. If $Q$ is any other Sylow $p$-subgroup (possibly $P$ itself) then $Q = g^{-1} Pg$ for some $g \in G$ (by 2nd Sylow Theorem). 
+
+	With what multiplicity is $Q$ represented in this way? If $h^{-1} Ph = Q =  g^{-1} Pg$ where $h \in G$, then $hg^{-1} \in N(P)$, and thus $h \in N(P)g$. So there are $|N(P)|$ elements $g$ with $Q = g^{-1} Pg$, for each $Q \in S \cup \{P\} $. Then $|G| = |N(P)| \cdot (1+kp)$. Hence $(kp+1) \mid |G|$.
+\end{proof}
+
+\subsection{Small Groups}
+We try to classify all isomorphism classes of groups of a given order.
+
+\begin{example}
+	Classify all groups of order $2p$ where $p\neq 2$ is prime.
+
+	$G$ has a Sylow p-subgroup of order $p$. Since $(kp+1)\nmid 2$ if $k\ge 1$, by Sylow's Third Theorem, there is  precisely one Sylow $p$-subgroup of $G$, fixed under conjugation, hence $G$ has a normal subgroup $P$ of order $p$. Say $P = \left\langle a \right\rangle \triangleleft G$ with $a^p = e$. If $b \in G \ P$, then $b$ has order $2$. THus $b^{-1} ab = a^r$ for some $r \in \mathbb{Z}$.
+
+	Then $a = b^{-2} a b^2 = b^{-1} a^r b = a^{r^2}$. So $r^2 \equiv 1 \pmod p$. Then $r = \pm 1$ without loss of generality. If $r = 1$ then $ab=ba$ thus $G$ is abelian.If $r = -1$ then $b^{-1} ab = a^{-1} $, thus $G$ is dihedral.
+\end{example}
+
+

@@ -1,0 +1,89 @@
+\colloquium{1}{Fri 13 Jan 2023 15:32}{colloquium}
+
+\section{Recent Progress on Maximal Degenerations of Some Calabi-Yau Hypersurfaces}
+
+$\mathbb{C} \mathbb{P}^{n+1}$ complex projective space. Paramaterize use homogenous coordinates.
+
+$x^n = \{f(z) = 0\}  \subset \mathbb{C}\mathbb{P}^{n+1}$ 
+
+\begin{example}
+	$X =\{z_0 z_1 z_2 \ldots z_{n+1} + \tau\sum_{i=0}^{n+1} z_i^{n+2} = 0\} $ (preturbation term) Can check this is a manifold.
+\end{example}
+
+Add some parameter $\tau$, want to make this holomorphic, so let $\tau \in C^*$.
+
+Analyze these manifolds:
+
+\begin{itemize}
+	\item $\tau = 0$ : Product of monomials is zero. Assume $n = 1$, have three sets $\{z_1 = 0\} $, $\{z_2 = 0\} $, $z_3 = 0$. Three copies of 2-spheres, each intersect at one point. (Figure 1) 
+	\item When $\tau\neq 0$, we have a torous.
+\end{itemize}
+
+\textbf{Calabi-Yau}: $\operatorname{deg} f = n + 2$. Step back a little. Consider $(X^n, g)$ the compact complex riemannian metric space. Let $g$ be Kahler. We say $X$ is Calabi-Yau if it satisfies  one if:
+\begin{enumerate}
+	\item $\text{Ric}(g) = 0$ (ricci curv is like the trace of full curvature.
+	\item Exists $\Omega$, holomorphic non-vanishing $n$-form. (Ex: Equivalent to $\operatorname{deg}  f = n + 2$
+	\item $g$ solves \logseq{complex Monge-Ampere Equation}. $det(g) = \Omega \land \overline{\Omega}$
+\end{enumerate}
+Elliptic, fully nonlinear PDE, [Yau '78]
+
+\begin{example}
+	Consider $(X_\tau, g_\tau)$ the C-Y metric. As $\tau\to 0$, torus stretches and we don't get a limit. In the limit on the complex space survives and metric does not make sense.
+\end{example}
+
+To fix this, we \textit{re-normalize} each of these metrics such that
+\[
+	\text{diam}g_\tau = 1
+.\] 
+Now the limit becomes $S_1$ (see fig 2). THe limit has no complex structure. This is example of \textbf{maximal degeneration}.
+
+\begin{conjecture}
+	$(X_\tau, g_\tau)$ max degeneration of Calabi-Yaus, then after some renormalization,
+	$X_\tau \to (B, g)$ a metric space such that $B$ a singular "flat" manifold, with a canonical volume form $\nu$. Moreover, $g$ solves a real MA equation $\text{deg}g = \nu$ on $B_{reg}$.
+	Moreover, $X_\tau$ should be a special Lagrangian torus fibration on $B$.
+\end{conjecture}
+
+basically, maxim degeneration occur when some specifc Lagrangian fibration are shrinked.
+
+\begin{remark}
+	\begin{enumerate}
+		\item inspired by mirror symmetry: Originally proposed as a way to explain MS.
+		\item Complex MAE collapse to real MAE
+		\item Previous results: known in $\text{dim} \le 2$.
+		\item Breakthrough by Li in $'19$. 
+	\end{enumerate}
+\end{remark}
+ \begin{theorem}(Li '22)
+ 	For $\{z_0 \ldots z_{n+1} + \tau \sum z_i^{n+1} = 0\} $, there exists $\tau_i \to 0$, $X_\tau$ is a SL fibration over a generic sol.
+ \end{theorem}
+
+\begin{theorem}
+	(main result '22)
+	Preturbation term can be generic: 
+$\{z_0 \ldots z_{n+1} + \tau \sum z_i^{n+1} = 0\} $ satisfies "weak SYZ" for all $\tau \to  0$.
+\end{theorem}
+
+\begin{example}
+	$n = 1$, the tori converges to several 2-spheres. We take a dual graph, a simplical construction that is a good candiate for $B$. 
+
+	This construction comes from non-archemedean geometry.
+
+	Another way to get the triangle is to look at tropicalization of the torus and tropical variety.
+\end{example}
+
+\begin{theorem}
+	(main result 2 '22)
+	If $\Delta  \subset  \partial \{\text{unit simplex in} \mathbb{R}^{n+1} \} $ THen exists solutions to the MA equation for any symmetric measure $\mu$.
+\end{theorem}
+
+\begin{proof}
+	(sketch). Use the \textbf{variational solution}. (A technical in PDE, energy functional, a space of weak solutions) How is convex on the polygon? We define a geometrical lagangre transform.
+
+	Extensible to complex MA equations.
+
+	Ties in with NA-MA equation.
+\end{proof}
+
+
+
+

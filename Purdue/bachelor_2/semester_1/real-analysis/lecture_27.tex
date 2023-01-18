@@ -1,0 +1,150 @@
+\lecture{27}{Fri 04 Nov 2022 11:31}{}
+
+\subsection{One-sided limits}
+
+Assume $c \in [a,b)$.
+We define the \textit{right limit} of $f$ at $c$ as
+\[
+	\lim_{x \to c+} f(x) = \lim_{x \to c; x \in [c,b]} f(x) = \lim_{x \to c} f|_{[c,b]}
+.\] 
+
+Similarly if $c \in (a,b]$, we define
+\[
+	\lim_{x \to c-} f(x) = \lim_{x \to c; x \in [a,c]} f(x) = \lim_{x \to c} f|_{[a,c]}
+.\] 
+
+\begin{proposition}
+	If $c \in (a,b)$, then $\lim_{x \to c} f(x)$ exists iff $\lim_{x \to c-} f(x)$ and $\lim_{x \to c+} f(x)$ both exist and are equal to each other.
+\end{proposition}
+\begin{proof}
+	Very straightforward using $\varepsilon-\delta$ definition.
+\end{proof}
+
+\begin{example}
+	(Monotone Functions)
+	We say $f: [a,b] \to \mathbb{R}$ is \textit{nondecreasing} if $x\le y$ implies $f(x) \le f(y)$ for all  $x,y \in E$.
+
+	We say $f$ is \textit{strictly increasing} if $x<y$ implies $f(x) <f(y)$.
+\end{example}
+
+\begin{proposition}
+	Let $f: [a,b] \to \mathbb{R}$ be increasing on $[a,b]$. Then 
+	\begin{enumerate}
+		\item 
+	for any $c \in [a,b)$ we have $f(c+):= \lim_{x \to c+} f(x)$ exists. Moreover, $f(c+) = \operatorname{inf}_{x \in (c,b]}f(x)$.
+\item 
+	Similarly, if $c \in (a,b]$, we have $f(c-) = \operatorname{sup}_{x \in [a,c)}f(x)$.
+\item For $c \in (a,b)$,
+	\[
+	f(c-) \le f(c) \le f(c+)
+.\] 
+\item If $c < d, c \in [a,b), d \in (a,b]$, then
+	\[
+		f(c+) \le f(d-)
+	.\] 
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item The set $S = \{f(x): c < x \le b\}$ is bounded below by $f(c)$, hence $\alpha:= \operatorname{inf} S = \operatorname{inf}_{c<x\le b}f(x)$ exists.
+
+			Note: $f(c)\le \alpha$ since $f(c)$ is a lower bound. We now claim $\alpha = \lim_{x \to c+} f(x)$. Fix any $\varepsilon>0$. By definition of inf, there is $x_\varepsilon$ such that $c<x_\varepsilon\le b$ and $\alpha \le f(x_\varepsilon)< d + \varepsilon$. 
+			Then if $c < x < x_\varepsilon$, we have $\alpha \le f(x) \le f(x_\varepsilon) < \alpha + \varepsilon$.
+			In particular this means  $|f(x) - \alpha| < \varepsilon$. If we define $\delta(\varepsilon) = x_\varepsilon - c$, we have
+			\[
+				c<x<c+\delta(\varepsilon) \implies |f(x) - \alpha| < \varepsilon
+			.\] 
+			Hence $\lim_{x \to c+} f = \alpha$.
+	\item Symmetric.
+	\item Showed in part of proof for $(1)$.
+	\item Pick $e \in [c,d]$. Then
+		\[
+			f(c+) = \operatorname{inf}_{(c,b]} f(x) \le  f(e) \le  \operatorname{sup}_{[a,d)} f = f(d-)
+		.\] 
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+	If $f: [a,b] \to \mathbb{R}$ is monotone (nondecreasing or nonincreasing), then $f$ is continuous at all but at most countably many points in  $[a,b]$.
+\end{theorem}
+\begin{proof}
+	Assume $f$ is increasing. If $c \in (a,b)$ is a point of discontinuity, then $f(c-) < f(c+)$. Then there exists a rational $r \in (f(c-), f(c+))$. Let $S$ be the set of discontinuity of $f$. We obtain the injection
+	 \begin{align*}
+		\varphi: S &\longrightarrow \mathbb{Q} \\
+		c &\longmapsto \varphi(c) = r_c
+	.\end{align*}
+
+	We know $r_{c_1} \neq r_{c_2}$ whenver $c_1\neq c_2$, since if  $c_1<c_2$, we have $r_{c_1}<f(c_1+) < f(c_2-) < f_{c_2}$.
+\end{proof}
+\begin{proof}
+	(Simpler) Define $J_c = (f(c-), f(c+))$. We verify that $\mathcal{F} = \{J_c\}_{f \text{ discontinuous at }c}$ is a disjoint family of open nonempty intervals in $\mathbb{R}$, hence it is at most countable.
+\end{proof}
+
+\subsection{Limsup and Liminf at a point}
+
+Let $f: E \to \mathbb{R}, c$ is a cluster point of $E$.
+
+\begin{definition}
+	We say $M$ is a \textit{local upper bound} of $f$ near $c$ if there is an open set $U$ such that \[
+		f(x) \le M \impliedby x \in \left( U \setminus \{c\}  \right) \cap E
+	.\] 
+\end{definition}
+Equivalently,
+\begin{proposition}
+	$M$ is a \textit{local upper bound} of $f$ near $c$ iff there is $r>0$ such that for any $x \in E$,
+	 \[
+		f(x) \le M \impliedby 0 < |x-c| < r
+	.\] 
+\end{proposition}
+
+\begin{definition}
+	We define
+	\[
+		\limsup_{x \to c} f =
+		\operatorname{inf} \{M: M \text{ local upper bound of $f$ near $c$}\}
+	.\] 
+\end{definition}
+\begin{proposition}
+	For $r>0$ define
+	\[
+		\varphi(r) = \operatorname{sup} \{f(x): x \in \left( B_r(c)\setminus \{c\} \right) \cap E \}
+	\]
+	Then 
+	\[
+		\limsup_{x \to c} f(x) = \lim_{r \to 0+} \varphi(r) = \operatorname{inf}_{r>0}\varphi(r)
+	.\] 
+	So formally,
+	\[
+		\limsup_{x \to c} f(x) = \lim_{r \to 0+} \operatorname{sup}_{\left( B_r(c) \setminus \{c\} \right) \cap E }f
+	.\] 
+\end{proposition}
+
+\begin{proposition}
+	Let $f,g : E \to \mathbb{R}$, $c$ cluster point of $E$. Then \[
+		\limsup_{x \to c} f(x) + g(x) \le 
+		\limsup_{x \to c} f(x) + \limsup_{x \to c} g(x)
+	.\] 
+\end{proposition}
+\begin{proof}
+	Let $x \in \left( B_r(c) \setminus \{c\}  \right) \cap E =: E_r$. Then
+	\[
+		f(x) + g(x) \le \operatorname{sup}_{E_r}f + \operatorname{sup}_{E_r} g
+	.\] 
+	Then
+	\[
+		\operatorname{sup}_{E_r} f(x) + g(x) \le \operatorname{sup}_{E_r}f + \operatorname{sup}_{E_r} g
+	.\]
+	Hence
+	 \[
+		\varphi_{f+g}(r) \le \varphi_f(r) + \varphi_g(r)
+	.\] 
+	Therefore
+	\[
+		\lim_{r \to 0+} \varphi_{f+g} (r) \le \lim_{r \to 0+} \varphi_f(r) + \lim_{r \to 0+} \varphi_g(r)
+	.\] 
+	And the result follows.
+\end{proof}
+\begin{remark}
+	Other results of limsup and liminf can also be generalized. Should be able to prove them myself.
+\end{remark}
+

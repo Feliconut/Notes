@@ -1,0 +1,50 @@
+\lecture{22}{Fri 21 Oct 2022 11:31}{}
+
+\subsection{Preservation of connectedness}
+\begin{proposition}
+	A set is connected iff it cannot be split into two disjoint relatively open sets.
+\end{proposition}
+\begin{theorem}
+	If $f: E \to \mathbb{R}^q$ is continuous and $E$ is connected, then $f(E)$ is also connected.
+\end{theorem}
+
+\begin{corollary}
+	If $f: E \to \mathbb{R}^q$ is continuous and $C \subset E$ is connected, then $f(C)$ is connected.
+\end{corollary}
+
+\begin{theorem}[Bolzano's Intermediate Value Theorem]
+	Let $f: E \to \mathbb{R}$ be continuous, and $E$ be connected, then $f(E)$ is an interval. Equivalently, $f$ takes all values $k$ such that \[
+		\operatorname{inf}_E f < k < sup_E f
+	.\] 
+	If $a,b \in E$, then $f$ takes all values between $f(a)$ and $f(b)$.
+\end{theorem}
+\begin{proof}
+	$f(E) \subset \mathbb{R}$ must be connected, but the only connected set in $\mathbb{R}$ must are interval.
+\end{proof}
+
+Fun exercise: If $p(x) $ is a polynomial with odd degree, then it always has real roots.
+
+\subsection{Preservation of Compactness}
+
+\begin{theorem}
+	Let $f: E \to \mathbb{R}^q$ be continuous and $E$ be compact, then $f(E)$ is compact.
+\end{theorem}
+
+\begin{corollary}
+	SUppose $f: E \to \mathbb{R}^q$ and $K \subset E$ compact, $f$ continuous on $K$, then $f(K)$ compact.
+\end{corollary}
+
+\begin{theorem}[Extreme Value theorem]
+	Let $f: K \to \mathbb{R}$ be continuous and $K$ compact. Then $f$ is bounded on $K$ and moreover, there exists $x_*$ and $x^* \in K$ such that $f(x_*) = \operatorname{inf} _K f, f(x^*) = \operatorname{sup} _K f$.
+\end{theorem}
+\begin{proof}
+	$f(K) \subset \mathbb{R}$ is compact, so $f(K)$ is bounded is closed. Any closed set contains its extremums.
+\end{proof}
+
+\begin{lemma}
+	If $E \subset \mathbb{R}$ is compact, then $\operatorname{inf} E \in E$ and $\operatorname{sup} E \in E$.
+\end{lemma}
+\begin{proof}
+	$\operatorname{sup} E$ cannot be an exterior point of $E$. Since $E$ is closed, $a$ not in the exterior implies $a \in E$.
+\end{proof}
+

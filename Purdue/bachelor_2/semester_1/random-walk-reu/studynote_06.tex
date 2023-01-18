@@ -1,0 +1,122 @@
+\studynote{6}{Sun 20 Nov 2022 18:32}{Adapted K-S Test for discrete sampling}
+
+\section{Adapted K-S Test for discrete sampling}
+
+\subsection*{Motivation}
+Simulation of continuous random processes are discrete in nature. Two factors primarily contribute to the discretization:
+\begin{enumerate}
+	\item Numerical precision limit.
+	\item The approximation of continuous process via discrete process. 
+\end{enumerate}
+
+Discretization gives rise to the \textbf{oversampling effect:} When we generate a sample, the sample we get is from a discretized version of the underlying distribution. Hence, if we increasing the size of the sample, the empirical cdf cannot converge uniformly to the true underlying distribution. This brings huge problem to goodness-of-fit tests, since their consistency relies on Glivenko-Cantelli Theorem, the fact that empirical cdf must uniformly converge to true distribution.
+
+Therefore, we need to develop techniques to perform goodness-of-fit tests on discrete simulations and avoid the oversampling effect.
+
+\subsection*{Problem Background}
+\textbf{Partition}. We define a partition $P$ of $\mathbb{R}$ as a countable set of distinct real numbers. We say $P$ is finer or equal to $P'$ if $P' \subset P$, and write  $P > P'$.
+
+\textbf{Discretization}. Let $F$ be a continuous real-valued distribution. Let $P$ be a partition of $\mathbb{R}$. We say $F^{(P)}$ is a discretization of $F$ with respect to partition $P$ if $\tilde F(x) = F(y)$,  
+where $y \in P$ minimizes $|x - y|$. We may verify that $F^{(P)}$ is indeed discrete, since it takes values in $F(P)$ which has at most countably many values.
+
+\subsection*{Contribution}
+We have developed and implemented techniques to perform k-s test to samples from a discretized distribution. The techniques are applicable to the two following cases:
+\begin{enumerate}
+	\item (One sample test) The underlying distribution $F_0$ is continuous real-valued. We have a sample $\mathbf{X} = X_1, \ldots, X_n$ drawn independently from some distribution $F_X^{(P)}$ that is discretization of continuous  $F_X$ with respect to $P$. We want to test if $F_0 \equiv F_X$. 
+	\item (Two sample test)
+		We have samples $\mathbf{X}$ and $\mathbf{Y}$ from discretizations $F_X^{(P)}$ and $F_Y^{(P')}$ with respect to partitions $P$ and $P'$, where $P \le  P'$. We want to test if $F_X \equiv F_Y$.
+\end{enumerate}
+
+\subsection*{Development}
+Our null hypothesis in the one-sample case is:
+ \[
+	H_0: F_0 \equiv F_X
+.\] 
+Under the null hypothesis, we must have
+\[
+	H_0': F_0^{(P)}\equiv F_X^{(P)}
+.\] 
+That is, the discretizations of $F_0$ and $F_X$ are equal.
+
+We see that $H_0 \implies H_0'$, so whenever we reject $H_0'$ we must also reject $H_0$. Since our sample is from $F_X^{(P)}$, we have just enough information to test $H_0'$. Hence, the decision criterion is set to reject $H_0$ if we reject $H_0'$.
+
+	On one hand, we can control type I error if we assume we can control type I error in testing $H_0'$, since
+	\begin{align*}
+		&\operatorname{Pr} \left[ H_0 | \text{reject }H_0 \right] \\
+		&=\operatorname{Pr} \left[ H_0 | \text{reject }H_0' \right] \\
+		&=\operatorname{Pr} \left[ H_0 | H_0' \land \text{reject }H_0' \right] \operatorname{Pr} \left[ H_0' | \text{reject }H_0' \right]\\
+		&\quad +\operatorname{Pr} \left[ H_0 | \lnot H_0' \land \text{reject }H_0' \right] \operatorname{Pr} \left[ \lnot H_0' | \text{reject }H_0' \right]  \\
+		&=\operatorname{Pr} \left[ H_0 | H_0' \land \text{reject }H_0' \right] \operatorname{Pr} \left[ H_0' | \text{reject }H_0' \right]\\
+		&\le \operatorname{Pr} \left[ H_0' | \text{reject }H_0' \right]
+	.\end{align*} 
+	 On the other hand, we cannot control type II error, and the method above yields upper bound $1$. Intuitively, even if $H_0'$ is true, we can say nothing about probability that $H_0$ is true, unless we have a notion of measure within the space of all continuous distributions. But we are treating $F_0$ as an \textit{arbitrary} distribution, so we cannot obtain meaningful probability bound.
+
+What remains is to find a way to test $H_0'$. K-S test is not directly applicable to discretizations, since it only works for continuous distributions. Nevertheless, we can use \textbf{linear interpolation} to transform $F_0^{(P)}$ and $F_X^{(P)}$ to continuous piecewise-linear distributions. Then the K-S test would be applicable. It is easy to see that
+
+\begin{claim}
+	There is a 1-1 correspondence between discrete distributions wrt $P$ and piecewise linear functions wrt $P$. Moreover, $F_0^{(P)} \equiv F_X^{(P)}$ iff $\tilde F_0^{(P)} \equiv \tilde F_X^{(P)}$.
+\end{claim}
+
+For two-sample case, the null hypothesis is:
+\[
+	H_0: F_X \equiv F_Y
+.\] 
+We weaken the null hypothesis to the partition $P$ (the coarser partition).
+\[
+	H_0': F_X^{(P)} = F_Y^{(P)}
+.\] 
+Then the same reasoning holds. 
+
+\subsection*{Linear Interpolation}
+Calculation of discretization of a continuous distribution is straightforward from the definition. What we need to develop here is a method to perturb the sample in the way that performs linear interpolation on its underlying distribution.
+
+Let $X_1, X_2, \ldots, X_m$ be samples from $F_X^{(P)}$. We define the noisy sample $\tilde X_i$ as follows: if $X_i = x_i \in P$, then let $\tilde X_i$ be a random sample from the distribution with pdf
+\[
+	\tilde f_i (x) = \begin{cases}
+		0 & x < \frac{x_{i-1} + x_i}{2}\\
+		\frac{1}{x_i - x_{i-1}} & x < x_i \\
+		\frac{1}{x_{i+1} - x_{i}} & x < \frac{x_i + x_{i+1}}{2} \\
+		0 & x \ge \frac{x_i + x_{i+1}}{2}
+	\end{cases}
+.\] 
+
+Then $\tilde X_1, \ldots, \tilde X_m$ is a sample from $\tilde F_X^{(P)}$, the linear interpolation of $F_X^{(P)}$.
+
+In the special case when $P = \{q \Delta x + r: q \in \mathbb{Z}\} $ for some fixed $\Delta x>0$ and $0\le r < \Delta x$, we have
+\[
+	\tilde X_i \equiv_d X_i + \text{Unif}(-\Delta x / 2, \Delta x / 2)
+.\] 
+
+\subsection*{Application to SSRW simulation}
+
+For SSRW simulation, we take $F_0$ to be the cdf of standard normal distribution. Because the discreteness is due to independent steps of same length, the partition $P$ falls into the special case. It remains to find $\Delta x$ and $r$.
+
+Suppose we simulate $n$ steps of a SSRW. Then the range of scaled distribution is
+\[
+	\frac{n[-1, 1]}{\sqrt{n} } = [-\sqrt{n}, \sqrt{n} ] 
+.\]
+When $n$ is even, due to parity of steps, there are $n+1$ possible final positions after $n$ steps. So the range is evenly divided into $n$ intervals. Hence the resolution, $\Delta x$, is
+\[
+	\Delta x = \frac{2 \sqrt{n} }{n} = \frac{2}{\sqrt{n} }
+.\] 
+
+Since $0$ gets mapped to $0$ during the rescaling, $r = 0$.
+
+Using these knowledge of $P$, we can calculate the discretized-interpolated $\tilde F_0 ^{(P)}$ and noised samples. 
+
+\subsection*{Result}
+
+See notebook for implementation and experiment result.
+
+
+
+\subsection*{Some considerations regarding different partitions}
+\begin{itemize}
+	\item Justify that in the two-sample case where $\mathbf{X}$ and $\mathbf{Y}$ are drawn from $F_X^{(P)}$ and $F_Y^{(P')}$, if $P < P'$, then the decision power does not depend on how fine $P'$ is.
+	\item In the two-sample case, if $P \cap P' = \emptyset $, i.e. $P$ and $P'$ does not share common points, can we obtain any information about goodness of fit? What extra assumptions do we need about $ F_X$ and $F_Y$? May we conjecture some $F_0$ and test it on both $\mathbf{X}$ and $\mathbf{Y}$? Impose $c-$Lipchitz continuity on $F_0$?
+\end{itemize}
+
+\subsection*{Further steps}
+\begin{itemize}
+	\item When studying edge reinforced random walks, where discrete simulation is applied extensively, the adapted k-s test can give reliable goodness-of-fit test.
+\end{itemize}

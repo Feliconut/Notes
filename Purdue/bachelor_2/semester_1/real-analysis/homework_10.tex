@@ -1,0 +1,219 @@
+\homework{10}{Wed 30 Nov 2022 21:17}{}
+
+\begin{itemize}
+	\item 29.E. If $f$ is integrable on $[a, b]$ with respect to $f$, then
+\[
+\int_a^b f d f=\frac{1}{2}\left\{(f(b))^2-(f(a))^2\right\} .
+\]
+(a) Prove this by examining the two Riemann-Stieltjes sums for a partition $P=\left(x_0, x_1, \ldots, x_n\right)$ obtained by taking $\xi_k=x_{k-1}$ and $\xi_k=x_k$.
+\begin{proof}
+	Define partition $P: a = x_0 < x_1 < \ldots < x_n = b$. Now let $S(P, f, f)$ be the Riemann sum taking $\xi_k = x_{k-1}$  and $S'(P, f, f)$ be the Riemann sum taking $\xi = x_k$. We have
+	\[
+		S(P, f, f) = \sum_{k=1}^{n} f(x_{k-1})\left( f(x_k) - f(x_{k-1}) \right) 
+	.\] 
+	and
+	\[
+		S'(P, f, f) = \sum_{k=1}^{n} f(x_k)\left( f(x_k) - f(x_{k-1 }) \right) 
+	.\] 
+	Since $f$ integrable wrt $f$, as  $\max_k \Delta f_k \to 0$, we have $S(P, f, f) \to I$ and $S'(P, f, f) \to I$, where $I = \int _a^b f df$. Hence
+	\[
+		S + S' = \sum_{k=1}^{n} f(x_k)^2 - f(x_{k-1 })^2 = f(x_n)^2 - f(x_0)^2 = f(b)^2 - f(a)^2 \to 2I
+	.\] 
+	Hence $I = \frac{1}{2}\left( f(b)^2 - f(a)^2 \right) $
+\end{proof}
+
+(b) Prove this by using the Integration by Parts Theorem 29.7.
+\begin{proof}
+	By integration by parts formula,
+	\[
+		ff|_a^b = \int_a^b f df + \int _a^b f df =2 I 
+	.\] 
+	Hence
+	\[
+		I = \frac{1}{2} \left( f(b)f(b) - f(a)f(a) \right) 
+	.\] 
+\end{proof}
+
+\item 29.M. Suppose that $f$ is $g$-integrable on $[a, b]$. If $g_1:[a, b] \rightarrow \boldsymbol{R}$ is such that $g_1(x)=g(x)$ except for a finite number of points in $(a, b)$ at which $f$ is continuous, then $f$ is $g_1$-integrable and
+\[
+\int_a^b f d g_1=\int_a^b f d g .
+\]
+\begin{proof}
+	\begin{align*}
+		&S(P, f, g) - S(P, f, g_1) \\
+		&= \sum_{k=1}^{n} f(\xi_k)\left[ g(x_k) - g(x_{k-1}) \right] -  \sum_{k=1}^{n} f(\xi_k)\left[ g_1(x_k) - g_1(x_{k-1}) \right] \\
+		&= \sum_{k=1}^{n} f(\xi_k)\left[ g(x_k) - g(x_{k-1}) - g_1(x_k) + g_1(x_{k-1}) \right] \\
+		&= \sum_{k=1}^{n} f(\xi_k)\left[ g(x_k) - g_1(x_k)\right] - \sum_{k=1}^{n} f(\xi_k)\left[g(x_{k-1})  - g_1(x_{k-1}) \right] \\
+		&= \sum_{k=1}^{n} f(\xi_k)\left[ g(x_k) - g_1(x_k)\right] - \sum_{k=0}^{n-1} f(\xi_{k+1})\left[g(x_{k})  - g_1(x_{k}) \right] \\
+		&= f(\xi_{n})\left[ g(x_n) - g_1(x_n) \right] - f(\xi_0)\left[ g(x_0) - g_1(x_0) \right]  + 
+	\sum_{k=1}^{n-1} \left[ g(x_k) - g_1(x_k) \right] \left[ f(\xi_k) - f(\xi_{k+1}) \right]
+	\intertext{since $g_1$ and $g$ may mismatch only inside $(a,b)$, the first two terms vanish:}
+	&= \sum_{k=1}^{n-1} \left[ g(x_k) - g_1(x_k) \right] \left[ f(\xi_k) - f(\xi_{k+1}) \right]
+	.
+	\end{align*}
+	By continuity of $f$, we may choose fine enough $P$ such that $|f(\xi_k) - f(\xi_{k-1})| < \varepsilon$ for all $k$. Hence
+	\begin{align*}
+	&|S(P, f, g) - S(P, f,g_1)|\\
+	&\le  \sum_{k=1}^{n-1} \left|g(x_k) - g_1(x_k) \right| \left|f(\xi_k) - f(\xi_{k+1}) \right|\\
+	&< \varepsilon\sum_{k=1}^{n-1} \left|g(x_k) - g_1(x_k) \right|
+	.\end{align*}
+	Now since $g(x)\neq g_1(x)$ for at most $m$ points in $(a,b)$, where $m$ does not depend on $P$, we have
+	\[
+		\sum_{k=1}^{n-1} \left|g(x_k) - g_1(x_k) \right| \le \sum_{x: g(x) \neq g_1(x)} \left| g(x) - g_1(x) \right| 
+	.\] 
+	which is a bounded quantity independent of $P$ or $\varepsilon$. Hence
+	\[
+		|S(P, f, g) - S(P, f,g_1)| \to 0
+	.\] 
+	This means
+	\[
+		\left| S(P, f, g_1) - \int_a^b f dg\right| \to  0 
+	.\] 
+	Hence $f$ is integrable wrt $g_1$. From the proof above it is obvious that the integrals converge to the same value.
+\end{proof}
+
+\item 29.S. Let $f$ be Riemann integrable on $J$ and let $f(x) \geq 0$ for $x \in J$. If $f$ is continuous at a point $c \in J$ and if $f(c)>0$, then
+\[
+\int_a^b f>0
+\]
+\begin{proof}
+	Let $0 < \varepsilon < f(c)$. By continuity of $f$ there exists $\delta>0$ such that $f(x) \ge  f(c) - \varepsilon$ on $[c - \delta, c+\delta] \cap J$. Let $c_* = \max \{a, c - \delta\} $ and $c^* = \min \{b, c+\delta\} $. Now
+	\begin{align*}
+		\int _a^b f 
+		&= \int_a^{c_*} f + \int _{c_*}^{c^*}f + \int _{c^*}^b f \\
+		&\ge \int _{c_*}^{c^*}f \\
+		&\ge (c^* - c_*) \left( f(c) - \varepsilon \right)  \\
+		&>0
+	.\end{align*}
+\end{proof}
+
+\item 30.A. Show that a bounded function which has at most a finite number of discontinuities is Riemann integrable.
+\begin{proof}
+	We use without verify the fact that if $f$ is bounded on a closed interval  $[a,b]$ and discontinuous only at $a$ and $b$, then $f$ is integrable on $[a,b]$.
+
+	Consider $J = [a, b]$, and let the points of discontinuities be $y_1, \ldots, y_{m-1}$, and for convenience write $a = y_0 \le y_1<y_2<\ldots < y_{m-1} \le y_m = b$. We know that $f$ restricted to $J_k := [y_{k-1}, y_k]$ is integrable, for $k = 1, \ldots, m$.  
+
+For each $\varepsilon>0$, for each $k$, choose $P_{\varepsilon}^k$ such that for any partition $P>P_\varepsilon^k$,
+\[
+	\left| S(P,f, x) - S(P_\varepsilon^k, f, x) \right| < \frac{\varepsilon}{m} 
+.\] 
+Now let $P_\varepsilon = \bigcup_{k} P_\varepsilon^k$. Then $P_\varepsilon$ is a partition of $J$. Now for any partition $Q > P_\varepsilon$, we let $Q^k$ be $Q$ restricted to $J_k$, and $Q^k$ is a partition of $J_k$, and $Q^k \ge P_\varepsilon^k$. Thus for all $k$,
+\[
+	\left| S(Q^k, f, x) -  S(P_\varepsilon^k, f, x) \right| < \frac{\varepsilon}{m}
+.\] 
+Now we have
+\begin{align*}
+	&\left| S(Q, f, x) -  S(P_\varepsilon, f, x)\right| \\
+	&= \left| \sum_{k=1}^{m} S(Q^k, f, x) - \sum_{k=1}^{m} S(P_\varepsilon^k, f, x) \right|  \\
+	&\le \sum_{k=1}^{m} \left| S(Q^k, f, x) -  S(P_\varepsilon^k, f, x) \right| \\
+	&< \varepsilon
+.\end{align*}
+Hence for all $Q, Q' > P_\varepsilon$, we have
+\[
+	\left| S(Q, f, x) - S(Q', f, x) \right| < 2 \varepsilon
+.\] 
+Hence the Cauchy criterion for integrability is satisfied. Hence $f$ is Riemann integrable on $J$.
+\end{proof}
+
+
+\item 30.D. Give an example of a function $f$ which is not Riemann integrable over $J$ but such that $|f|$ and $f^2$ are Riemann integrable over $J$.
+\begin{proof}
+	Define
+	\[
+		f(x) = \begin{cases}
+			1 & x \in \mathbb{Q}\\
+			-1 & x \not\in \mathbb{Q}
+		\end{cases} 
+	.\] 
+\end{proof}
+
+
+\item 30.F. Show that the First Mean Value Theorem $30.6$ may fail if $f$ is not continuous.
+\begin{proof}
+	Let $g(x) = x$ and $f(x) = 1$ when $x > \frac{1}{2}$ and $f(x) = 0$ when $x\le \frac{1}{2}$. Consider $J = [0,1]$. Then
+	\[
+		\int _0^1 f dg = \int_0^{\frac{1}{2}} 0 dg + \int _{\frac{1}{2}}^1 1 dg = \frac{1}{2}
+	.\] 
+	If the First Mean Value Theorem holds then we have $\frac{1}{2} = \left(g(b) - g(a)\right) f(c) = f(c)$ for some $c \in J$, but $f$ never attains the value $\frac{1}{2}$.
+\end{proof}
+
+
+\item 31.D. If $a>0$, show that
+\[
+\lim _n \int_a^\pi \frac{\sin n x}{n x} d x=0 .
+\]
+What happens if $a=0$ ?
+\begin{proof}
+	Since $f(x) = \frac{\sin n x}{n x}$ is continuous and bounded when $x \neq 0$, $f$ is integrable.
+	In $[a, \pi]$ we have
+	\[
+		|\frac{\sin nx}{nx}| \le  |\frac{1}{n x}|
+		\le  \frac{1}{n a}
+	.\] 
+	Hence by increasing $n$ we can make it vanish. Thus
+	\[
+		\int_a^\pi \left| \frac{\sin nx}{nx} \right| dx \le \frac{\pi - a}{n a} \to  0
+	.\] 
+	This implies the desired result.
+
+	When $a = 0$, since $f$ is undefined at $0$, the integral becomes improper. We may be interested in evaluating instead
+	\[
+		\lim_{n \to \infty} \lim_{a \to 0+} \int _a^\pi f(x) dx
+	.\] 
+
+	We may also redefine $f$ at $0$ to $f(0) = 1$, so $f$ becomes continuous and well-defined in $[0, \pi]$. As $n\to \infty $, $f$ converges point-wise to the function $\mathcal{X}_0$ which is $1$ at $0$ and $0$ at everywhere else. Then for each $\varepsilon$ and each $a$ we may choose $n$ sufficiently large such that $f(x) < \varepsilon$ whenever $x > a$. Hence for sufficiently large $n$,
+	\[
+		\int_0^\pi |f(x)| dx \le  \int_0^a 1 dx + \int _a^\pi \varepsilon dx = a + \varepsilon(\pi - a)
+	.\] 
+	Both $a$ and $\varepsilon$ can be made arbitrarily small. Hence
+	 \[
+		\lim_{n \to \infty} \int_0^\pi f(x) = 0
+	.\] 
+\end{proof}
+
+
+\item 31.F. Let $h_n(x)=n x e^{-n x^2}$ for $x \in[0,1]$ and let $h(x)=0$. Show that
+\[
+0=\int_0^1 h(x) d x \neq \lim \int_0^1 h_n(x) d x=\frac{1}{2}
+\]
+\begin{proof}
+	On one hand, 
+	\[
+		\lim_{n \to \infty} h_n(x) = \lim_{n \to \infty} \frac{nx }{e^{n x^2}} = 0
+	.\] 
+	So
+	\[
+		\int _0^1 h(x) dx = \int _0^1 0 dx = 0
+	.\] 
+	On the other hand,
+	\[
+		\int_0^1 h_n(x)dx = -\frac{1}{2}e^{-n} + \frac{1}{2}
+	.\] 
+	Hence
+	\[
+		\lim_{n \to \infty} \int _0^1 h_n(x) dx = \frac{1}{2}
+	.\] 
+\end{proof}
+
+\item 31.K. Use the Fundamental Theorem $30.8$ to show that if a sequence $\left(f_n\right)$ of functions converges on $J$ to a function $f$ and if the derivatives $\left(f_n^{\prime}\right)$ are continuous and converge uniformly on $J$ to a function $g$, then $f^{\prime}$ exists and equals $g$. (This result is less general than Theorem $28.5$, but it is easier to establish.)
+\begin{proof}
+	By fundamental theorem of calculus, since $f_n'$ continuous,
+	\[
+		f_n(x) - f_n(a) = \int _a^x f_n'
+	.\] 
+	Since $f_n \to f$, we have
+	\[
+		\lim_{n \to \infty} f_n(x) - f_n(a) = f(x) - f(a)
+	.\] 
+	Since $f_n' \to g$ uniformly,
+	\[
+		\lim_{n \to \infty} \int _a^x f_n' = \int_a^x \lim_{n \to \infty} f_n' = \int_a^x g
+	.\] 
+	Also $g$ continuous due to uniform convergence. Combined with the result that
+	\[
+		f(x) - f(a) = \int _a^x g
+	.\] 
+	We conclude, by FTC, that $f' = g$.
+\end{proof}
+
+\end{itemize}

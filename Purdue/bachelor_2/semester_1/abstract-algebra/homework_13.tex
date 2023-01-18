@@ -1,0 +1,131 @@
+\homework{13}{Wed 30 Nov 2022 13:51}{}
+
+Herstein, section 4.5, page 164 , Questions 10 (but use your knowledge from section 4.6). 
+
+\begin{itemize}
+	\item [10.] Show that the following polynomials are irreducible over the field $F$ indicated.\\
+(a) $x^2+7$ over $F=$ real field $=\mathbb{R}$.
+\begin{proof}
+	If $p(x) = x^2 + 7 \in F[x]$ is reducible, then it be factored into the form  $p(x) = (x-a)(x-b)$. Thus $p(x) = 0$ for some $x \in F$. However from our knowledge of the reals, $x^2 + 7 \ge  7 > 0$. Hence $p(x)$ is irreducible.
+\end{proof}
+
+(b) $x^3-3 x+3$ over $F=$ rational field $=\mathbb{Q}$.
+\begin{proof}
+	Observe that $3$ is prime, $3 \nmid a_3=1$, $3 | a_2 = 0$, $3 | a_1 = -3$, $3 | a_0 = 3$, and $3^2 \nmid a_0 = 3$. Hence Eisenstein Criterion applies, so $p(x)$ irreducible over $\mathbb{Q}$.
+\end{proof}
+
+(c) $x^2+x+1$ over $F=\mathbb{Z}_2$.
+\begin{proof}
+	Since $p(x)$ has degree $2$, if it is reducible then it has a root. However $p(0) = 1$ and $p(1) = 1$, so $p$ does not have a root. Hence $p$ irreducible.
+\end{proof}
+
+(d) $x^2+1$ over $F=\mathbb{Z}_{19}$.
+\begin{proof}
+	Since $p(x)$ has degree $2$, in order to be reducible it has to have a root. Suppose $p(a) = 0$. Then  $a^2  \equiv -1 \pmod {19}$. However this congruence equation does not have a solution.
+\end{proof}
+
+(e) $x^3-9$ over $F=\mathbb{Z}_{13}$.
+\begin{proof}
+	Since $p(x)$ has degree $3$, in order to be reducible it has to have a root. Suppose $p(a) = 0$, then $a^3 - 9 \equiv 0 \pmod {13}$. However this congruence equation does not have a solution.
+\end{proof}
+
+(f) $x^4+2 x^2+2$ over $F=\mathbb{Q}$.
+\begin{proof}
+	Pick $p = 2$, and Eisenstein Criterion applies.
+\end{proof}
+
+
+\end{itemize}
+\newpage
+
+Herstein, section 4.6, page 171, Questions 2, 3, 6, 10 .
+\begin{itemize}
+	\item [2.] Prove that $f(x)=x^3+3 x+2$ is irreducible in $\mathbb{Q}[x]$.
+\begin{proof}
+	$f(x)$ irreducible iff $f(x+1) = 6 + 6 x + 3 x^2 + x^3$ is irreducible. By picking  $p = 3$  we see that Eisenstein Criterion applies to  $f(x+1)$, so $f$ irreducible in $\mathbb{Q}[x]$.
+\end{proof}
+
+	\item [3.] Show that there is an infinite number of integers $a$ such that $f(x)=$ $x^7+15 x^2-30 x+a$ is irreducible in $\mathbb{Q}[x]$. What $a$ 's do you suggest?
+\begin{proof}
+	Pick $p = 5$ and apply Eisenstein Criterion. For the criterion to apply we only need $p | a$ and $p^2 \nmid a$. 
+	Therefore, it suffices to let $a = 5q$ where $q$ is prime and $q \neq  5$.
+\end{proof}
+
+\item [6.] Let $F$ be the field and $\varphi$ an automorphism of $F[x]$ such that $\varphi(a)=a$ for every $a \in F$. If $f(x) \in F[x]$, prove that $f(x)$ is irreducible in $F[x]$ if and only if $g(x)=\varphi(f(x))$ is.
+\begin{proof}
+	Use exercise 10 below (which is proved without using this exercise), we conclude that $\varphi$ preserves degree of all $f(x) \in F[x]$.
+
+	If $f(x)$ is reducible, say $f(x) = a(x)b(x)$ where $a,b $ have degree at least $1$, then 
+	\[
+		\varphi(f(x)) = \varphi(a(x)b(x)) = \varphi(a(x))\varphi(b(x))
+	.\] 
+	where $a(x)$ and $b(x)$ both have degree at least $1$. Thus $\varphi(f(x))$ reducible. Conversely, considering $\varphi^{-1} $, we see that $\varphi(f(x))$ reducible implies $f(x)$ reducible. Take contrapositives and we have the claim.
+\end{proof}
+
+\item [10.] Let $\varphi$ be an automorphism of $F[x]$, where $F$ is a field, such that $\varphi(a)=a$ for every $a \in F$. Prove that if $f(x) \in F[x]$, then $\operatorname{deg} \varphi(f(x))=\operatorname{deg} f(x)$.
+\begin{proof}
+	We proceed by strong induction on $\operatorname{deg} f$. The statement is clearly true when $\operatorname{deg} f = 0$, where $f(x) = a \in F$. Now assume $\operatorname{deg} \varphi(f(x)) = \operatorname{deg} f(x)$ whenever $\operatorname{deg} f < n$ for some $n \in \mathbb{N}$. Now let $g(x) \in F[x]$ and $\operatorname{deg}  g(x) = n$. Let $h(x) \in F[x]$ and $1 \le \operatorname{deg} h < \operatorname{deg} g$. 
+
+	Now since $F$ is a field, $F[x]$ is a Euclidean Domain. Hence we may apply the division algorithm: there exists $a, r \in F[x]$ such that $g = a h + r$, $\operatorname{deg} r < \operatorname{deg} h$. Hence $\operatorname{deg} g = \operatorname{deg} a + \operatorname{deg}  h$, so $\operatorname{deg}  a < n$. Now by the induction hypothesis,  $\varphi$ preserves degree of $a, h $ and $r$. Hence
+	\begin{align*}
+		\operatorname{deg} \varphi(g) &= \operatorname{deg} \left( \varphi(a)\varphi(h) + \varphi(r) \right) \\
+		&= \max \{\operatorname{deg} \varphi(a) + \operatorname{deg} \varphi(h), \operatorname{deg} \varphi(r)\}\\
+		&= \max \{\operatorname{deg} a + \operatorname{deg} h, \operatorname{deg} r\}\\
+		&= \operatorname{deg} (ah+r) \\
+		&= \operatorname{deg} g  
+	.\end{align*} 
+	This concludes the induction, so $\varphi$ preserves degree of all elements in $F[x] $.
+\end{proof}
+
+\end{itemize}
+Herstein, section 5.1, page 179, Questions 4, 7, 8, 9, 10 (not to be handed in - but do these at your leisure and compare against the solutions).
+
+\begin{itemize}
+	\item [4.] If $D$ is an integral domain, show that $D[x, y]$ is an integral domain.
+\begin{proof}
+	We observe that
+	\[
+		D[x,y] = (D[x])[y]
+	.\] 
+	To justify, first note that each polynomial $p(x,y)$ in $D[x,y]$ can be rearranged to the form  $q_n(x) y^n + \ldots + q_1(x) y + q_0(x)$, so $D[x,y] \subset D[x][y]$. Conversely, for each polynomial $p(x,y) \in (D[x])[y]$, we may simply expand it, so $(D[x])[y] \subset D[x,y]$.
+
+	Hence this follows from using this fact twice: If $D$ is integral domain then $D[x]$ is integral domain.
+\end{proof}
+
+	\item [7.] If $F$ is a field of characteristic $p \neq 0$, show that $(a+b)^p=a^p+b^p$ for all $a, b \in F$. (Hint: Use the binomial theorem and the fact that $p$ is a prime.)
+\begin{proof}
+	By binomial theorem,
+	\[
+		(a+b)^p = \sum_{k=0}^p \binom{p}{k} a^k b^{p-k}
+	.\] 
+	But for $k = 1, \ldots, p-1$, we have $p | \binom{p}{k}$. Thus only the terms  $k=0$ and  $k=p$ survive. Hence
+	 \[
+		 (a+b)^p = a^p + b^p
+	.\] 
+\end{proof}
+
+	\item [8.] If $F$ is a field of characteristic $p \neq 0$, show that $(a+b)^m=a^m+b^m$, where $m=p^n$, for all $a, b$ in $F$ and any positive integer $n$.
+\begin{proof}
+	Almost same as last exercise.
+\end{proof}
+
+	\item [9.] Let $F$ be a field of characteristic $p \neq 0$ and let $\varphi: F \rightarrow F$ be defined by $\varphi(a)=a^p$ for all $a \in F$.
+(a) Show that $\varphi$ defines a monomorphism of $F$ into itself.
+\begin{proof}
+	\[
+		\operatorname{ker} \varphi = \{a \in F: a^p = 0\} = \{0\}  
+	.\] 
+	Since $F$ is a field (so it has no zero divisor). Hence $\varphi$ injective.
+\end{proof}
+
+(b) Give an example of a field $F$ where $\varphi$ is not onto. (Very hard.)
+\begin{proof}
+	$\mathbb{Z}_2(x)$ is such an example. The characteristic is $2$. Also, there does not exists $a$ such that $a^p = x \in \mathbb{Z}_2(x)$.
+\end{proof}
+
+\item [10.] If $F$ is a finite field of characteristic $p$, show that the mapping $\varphi$ defined above is onto, hence is an automorphism of $F$.
+\begin{proof}
+	Since $\varphi$ is a monomorphism, and $F$ is finite, $\varphi$ is onto by counting, therefore an automorphism.
+\end{proof}
+
+\end{itemize}
