@@ -1,0 +1,128 @@
+\homework{3}{Thu 26 Jan 2023 20:52}{}
+
+\begin{itemize}
+	\item Let $(M, \rho)$ be an arbitrary metric space. Prove that if a Cauchy sequence $x_n \in M$ has a convergent subsequence, then the whole sequence converges.
+\begin{proof}
+	By property of Cauchy sequence, for any $\varepsilon>0$ there exists  $N \in \mathbb{N}$ such that $\left| x_n - x_m \right| <\varepsilon$ for all $n, m > N$. 
+
+	Now there exists a convergent subsequence, say $x_{n_i}$, so there exists $x \in M$ such that $\left| x - x_{n_i} \right| <\varepsilon$ for $n_i > N'$, $N' \in \mathbb{N}$. Fix some $n_i$ such that $n_i > N'$ and $n_i > N$. Now we have $\left| x_{n_i} - x \right| <\varepsilon$ and $\left| x_{n_i} - x_m \right| <\varepsilon$ for $m > N$. By triangle inequality, $\left| x_m - x \right| < 2 \varepsilon$ for all $m > N$. Since $\varepsilon$ is arbitrary, the sequence $x_n$ converges to $x$.
+\end{proof}
+\item Let $M$ consist of absolutely convergent series of real numbers. That is, $(x_1, x_2, \ldots, x_n, \ldots) \in M$ means: each $x_n \in \mathbb{R}$, and $\sum_{n=1}^{\infty} \left| x_n \right| <\infty $.\\
+	a) show that if $x = (x_1, x_2, \ldots)$ and $y = (y_1, y_2, \ldots) \in M$ then $\sum_{n=1}^{\infty} \left| x_n - y_n \right| $ converges.
+	\begin{proof}
+		We know for each $N \in \mathbb{N}$,
+		\[
+			\sum_{n=1}^{N} \left| x_n - y_n \right| \le \sum_{n=1}^{N} |x_n| + |y_n| = \sum_{n=1}^{N} |x_n| + \sum_{n=1}^{N} |y_n| 
+		.\] 
+		Now because $x$ and $y$ are absolutely convergent, the RHS of the above equation has finite limit when $N \to \infty $. Thus $\sum_{n=1}^{N} \left| x_n - y_n \right|$ is bounded above by some real number. Also, this series is monotone increasing with respect to $N$. Hence by monotone convergence theorem, this series converges.
+	\end{proof}
+	b) Denoting the sum by $\rho(x,y)$, prove that $\rho$ is a metric on $M$.
+	\begin{proof}
+		We verify the definitions of metric.
+		\begin{itemize}
+			\item (Non-negativity) $\rho(x,y)$ is a series of nonnegative terms, so it's nonnegative. Also, it is zero iff each term is zero, iff $x = y$.
+			\item (symmetry) Note that $\rho(x,y) = \sum_{n=1}^{\infty} \left| x_n - y_n \right|  = \sum_{n=1}^{\infty} \left| y_n - x_n \right|  = \rho(y,x)$.
+			\item (triangle inequality) We note that $\rho(x,y) + \rho(y,z) = \sum_{n=1}^{\infty} \left| x_n - y_n \right| +\left| y_n - z_n \right| \ge  \sum_{n=q}^{\infty} \left| x_n - z_n \right| = \rho(x,z)$.
+		\end{itemize}
+		All properties are satisfied, so $\rho$ is a metric on $M$.
+	\end{proof}
+\item Prove that $(M, \rho)$ is a complete metric space.
+	\begin{proof}
+	Take a Cauchy sequence $x^{(1)}, x^{(2)},\ldots$ in $(M, \rho)$. Thus for any $\varepsilon>0$ there exists $M = M_\varepsilon$ such that $\rho(x^{(m)}, x^{(m')}) < \varepsilon$ for $m, m' \ge  M_\varepsilon$. Write down this explicitly, we have
+	\[
+		\sum_{n=1}^{\infty} \left|x^{m}_n - x^{m'}_n  \right|  < \varepsilon
+	.\] 
+	Since each term is nonnegative, we have $\left| x^{m}_n - x^{m'}_n \right| <\varepsilon$ for each $n \in \mathbb{N}$ and $m, m' \ge  M_\varepsilon$.
+	This shows that for each fixed $n$, the sequence $\left( x^{m}_n \right)_{m \in \mathbb{N}} $ is a Cauchy sequence. By completeness of $\mathbb{R}$, $\left( x^{m}_n \right)_{m \in \mathbb{N}} $ converges to some $x_n \in \mathbb{R}$. Define $x := (x_n)_{n \in \mathbb{N}}$. To complete the proof we need to show $x \in M$ and $x^{(m)}\to x$ wrt the metric $\rho$.
+
+	We claim that the convergence of $\lim_{K \to \infty} \sum_{n=1}^{K} \left| x^{(m)}_n \right| $ is uniform in $m$, i.e. there exists $N$ such that for all $m$ we have $\sum_{n=N}^{\infty} \left| x^{(m)}_n \right| <\varepsilon$. To prove this, first let $N_M \in \mathbb{N}$ be such that $\sum_{n=N_M}^{\infty} \left| x^{(M)}_n \right|<\varepsilon $. Now for all $m > M$ we have 
+	\[
+		\sum_{n=N_M}^{\infty} \left| x^{(m)}_n - x^{(M)}_n \right|\le \sum_{n=1}^{\infty} \left| x^{(m)}_n - x^{(M)}_n \right| < \varepsilon
+	.\] 
+	Thus
+	\[
+		\sum_{n=N_M}^{\infty} \left| x^{(m)}_n \right| \le \sum_{n=N_M}^{\infty} \left| x^{M}_n \right| +\left| x^{(m)}_n - x^{(M)}_n \right| < 2\varepsilon
+	.\] 
+	Then for each $i = 1,\ldots, M -1$, let $N_i$ be such that $\sum_{n=N_i}^{\infty} \left| x^{(i)}_n \right| <\varepsilon$. Now set $N := \max\{N_1, \ldots, N_{M-1 }, N_M\}$ and the claim is proved.
+	Because of uniform convergence, we can exchange the order of limit of $K$ and $m$ in the expression $\lim_{K \to \infty} \lim_{m \to \infty} \sum_{n=1}^{K} |x^{(m)}_n|$.
+
+
+	Next, we verify that $x \in M$. Consider
+	\begin{align*}
+		\sum_{n=1}^{\infty} |x_n| 
+		&= \lim_{K \to \infty} \lim_{m \to \infty} \sum_{n=1}^{K} |x^{(m)}_n| \\
+		&= \lim_{m \to \infty} \lim_{K \to \infty} \sum_{n=1}^{K} |x^{(m)}_n| 
+	.\end{align*} 
+	The last expression converges since the sequence $\left( \lim_{K \to \infty} \sum_{n=1}^{K} \left| x^{(m)}_n \right|  \right) _{m \in \mathbb{N}}$ is Cauchy:
+	\[
+		\lim_{K \to \infty} \sum_{n=1}^{K} \left| x^{(m)}_n \right| - 
+		\lim_{K \to \infty} \sum_{n=1}^{K} \left| x^{(m')}_n \right| < 
+		\sum_{n=1}^{\infty} \left|x^{m}_n - x^{m'}_n  \right|  < \varepsilon \text{ for } m, m' > M
+	.\] 
+	Hence 
+	$\sum_{n=1}^{\infty} |x_n|  < \infty $, 
+	whence $x \in M$. 
+
+	Using a similar argument as above we can show that for $m> M$, the convergence of $\lim_{K \to \infty} \sum_{n=1}^{K} \left| x^{(m')}_n - x^{(m)}_n \right|$ is uniform in  $m'$. 
+	Now we show that $x^{(m)}\to x$ with respect to $\rho$. Recall that $\left( x^{(m)} \right) $ being Cauchy implies $\rho\left(x^{(m)}, x^{(m')}\right) < \varepsilon$ for $m, m' > M$. Hence for $m > M$,
+	\begin{align*}
+		\rho(x, x^{(m)}) 
+		&= \sum_{n=1}^{\infty} \left| \lim_{m' \to \infty}  x^{(m')}_n - x^{(m)}_n \right|  \\
+		&= \lim_{K \to \infty} \lim_{m' \to \infty} \sum_{n=1}^{K} \left| x^{(m')}_n - x^{(m)}_n \right|  \\
+		&= \lim_{m' \to \infty} \lim_{K \to \infty} \sum_{n=1}^{K} \left| x^{(m')}_n - x^{(m)}_n \right| \\
+		&= \lim_{m' \to \infty} \rho\left(x^{(m')}, x^{(m)}\right) \\
+		&\le \varepsilon
+	.\end{align*}
+	\end{proof}
+\item Let $(M, \rho)$ be a complete metric space and $f: M \to  M$ a function such that $\rho(f(x), f(y)) \le  \rho(x,y) / 2$ for all  $x, y \in M$. With an arbitrary $x \in M$ consider $x, f(x), \ldots, f^{[n]}(x), \ldots$
+	Prove that the sequence $f^{[n]}(x)$ converges, and its limit $z$ satisfies $f(z) = z$.
+	\begin{proof}
+		By inducting on the assumption, we have for  $n \le m$,
+		\[
+			\rho\left(f^{[n]}(x) f^{[m]}(x)\right) \le  \rho\left( x, f^{[m-n]}(x) \right)/ 2^n
+		.\] 
+		Also, by triangle inequality,
+		\begin{align*}
+			&\rho\left(x, f^{[m-n]}(x)\right) \\
+			&\le  \sum_{i=1}^{m-n} \rho\left(f^{[i-1]}(x), f^{[i]}(x)\right) \\
+			&\le  \sum_{i=1}^{m-n} \rho\left(x, f(x)\right) / 2^{i-1} \\
+			&\le 2 \rho(x, f(x))
+		.\end{align*} 
+		Combining these, we have 
+		\[
+			\rho\left(f^{[n]}(x) f^{[m]}(x)\right) \le  \rho\left(x, f(x)\right) / 2^{n-1}
+		.\] 
+		This is enough to show that the sequence is Cauchy. Hence the sequence converges to some limit $z$. To verify $f(z) = z$, simply take limit on both sides of the following equation: $f^{[n+1]}(x) = f\left( f^{[n]}(x) \right) $.
+	\end{proof}
+\item Prove that a closed subset of a compact metric space is always compact.
+\begin{proof}
+	Let $(M, \rho)$ be compact and $E \subset M$ be closed. Take $\mathcal{C}$ to be an open cover of $E$. Now $\mathcal{C} \cup \{E^c\} $ is an open cover of $M$. By compactness of $M$, there exists a finite subcover $\mathcal{C}' \subset  \mathcal{C} \cup \{E^c\} $ of $M$. Since $E \subset M$, $\mathcal{C}'$ is a cover of $E$. Hence $E$ is compact.
+\end{proof}
+
+\item Let $(M, \rho)$ be any metric space, $K \subset M$ compact, $F \subset M$ closed. Prove that if $K \cap F = \emptyset $ then $\exists  r > 0$ such that  $\forall k \in K, \forall f \in F$, $\rho(k, f) > r$.
+\begin{proof}
+	Suppose that for all $r > 0$ there exists $k \in K$ and $f \in F$ such that $\rho(k, f) < r$. Let $r_n = \frac{1}{n}$ and choose a sequence $k_n$ and $f_n$ such that $\rho(k_n, f_n) < r_n$ for all $n \in \mathbb{N}$. Now by compactness of $K$, there exists a subsequence $k_{n_i}$ such that $k_{n_i} \to k^*$ for $k^* \in K$. 
+ 
+	Now we have $\rho(k^*, f_{n_i}) < r_n + o(n)$. Hence $f_{n_i} \to  k^*$. Since $F$ is closed, $k^* \in F$. But this means  $k^* \in K \cap F$, a contradiction.
+\end{proof}
+\item For a subset $F \subset M$ show $F$ closed iff $\partial F \subset F$.
+\begin{proof}
+	Assume $F$ is closed. Since any boundary point of $F$ is limit of some sequence of element in $F$, and $F$ is closed, we know that any boundary point must be itself inside $F$.
+
+	Assume $\partial F \subset F$. Take some convergent sequence $x_n \to x$ such that $x_n \in F$. By convergence, the set $B_\varepsilon(x) \cap \{x_n : n \in \mathbb{N}\} $ is nonempty for any $\varepsilon >0$. Therefore $x \in \partial F \subset F$. This shows $F$ closed.
+\end{proof}
+\item Prove that any totally bounded metric space is separable.
+\begin{proof}
+	We want to construct a countable dense set. Let $M$ be the metric space. Let $r_n = \frac{1}{n}$. For each $n$, since $M$ totally bounded, we can find $a^{(n)}_{1}, \ldots, a^{(n)}_{M_n} \in M$, with some finite $M_n$, such that  $M \subset \bigcup_{i = 1 \ldots M_n} B_{r_n}(a^{(n)}_i)$. 
+
+	Now let $S$ be the set
+	\[
+		S := \bigcup_{n \in \mathbb{N}} \{a^{(n)}_1, \ldots, a^{(n)}_{M_n}\}   
+	.\] 
+	Then $S$ is countable since it's countable union of finite sets. We then verify $S$ dense. For each point $x \in M$ and any $\varepsilon >0$ there exists $r_n$ such that $r_n < \varepsilon$ and $x \in B_{r_n}(a^{(n)}_i)$ for some $i \in \{1, \ldots, M_n\} $. Thus $a^{(n)}_i \in B_{r_n}(x) \subset B_\varepsilon(x)$. Thus $B_\varepsilon(x) \cap  S \neq \emptyset $. This proves $S$ dense. Therefore $M$ separable.
+\end{proof}
+
+
+
+
+\end{itemize}

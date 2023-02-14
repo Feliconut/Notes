@@ -1,0 +1,37 @@
+\lecture{2}{Tue 31 Jan 2023 09:37}{Implicit Function Theorem}
+
+\begin{theorem}[Implicit Function Theorem]
+	to be added
+\end{theorem}
+\begin{proof}
+	We want to solve
+	\[
+		F(x,y) = c, \qquad \text{ solve as }y = \varphi(x,c)
+	.\] 
+	Those sets $\{F(x,y) = c\} $ are \textit{level sets}. Essentially we want to ``straighten'' the level sets. 
+
+	Now consider the following mapping:
+	\[
+		H(x,y) = (x,F(x,y)): \Omega \to \mathbb{R}^p \times \mathbb{R}^q
+	.\] 
+We verify  $H \in C^1(\omega)$, and $[H] = \left[ I_p, 0; D_xF, D_y F \right] $. $\operatorname{det}[H(a,b)] = |I_p| |D_yF(a,b)| \neq 0$.
+	
+We apply the inverse mapping theorem, there exists open $U \subset \Omega$, $(a,b) \in U$, open $V \subset \mathbb{R}^{p + q}, H(a,b) = (a,0) \in V$.
+
+We have $H^{-1} : V \to  U$, $H^{-1}  \in C^1(V)$. Let $H^{-1}  = \Phi = (\varphi_1, \varphi_2)$.  Then $\Phi \circ H = I$, thus $\Phi(x, F(x,y)) = (x,y)$. Expand it, we have
+\[
+	\varphi_1(x, F(x,y)) = x \qquad \varphi_2(x, F(x,y)) = y
+.\] 
+Also,
+\[
+	H(\varphi_1(u,v), \varphi_2(u,v)) = (u,v)\qquad
+	\varphi_1(u,v) = u
+.\] 
+\[
+	F(\varphi_1(u,v), \varphi_2(u,v)) = v \qquad F(u,\varphi_2(u,v)) = v
+.\] 
+Now let $W = V \cap  \{v=0\} $. Define $\varphi(x) = \varphi_2(x,0)$.
+
+Now $F(x, \varphi(x)) = 0$ for any $x \in W$, and also if $(x,y) \in U$ and $F(x,y) = 0$, then $H(x,y) = (x, 0)$, iff $(x,y) = \Phi(x,0)$, iff $y = \varphi_2(x,0) = \varphi(x)$.
+\end{proof}
+

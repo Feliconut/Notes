@@ -1,0 +1,93 @@
+\homework{2}{Thu 19 Jan 2023 19:35}{homework}
+
+\begin{enumerate}
+	\item Suppose $(M, \rho)$ is complete, $x_n \in M$, $n \in \mathbb{N}$.\\
+		a)Prove that $\forall n \rho(x_n, x_{n+1}) < \frac{1}{2^n}$ implies $(x_n)$ converges
+		\begin{proof}
+			For any $N$, and $m\ge N$ we have
+			\begin{align*}
+				\rho(x_m, x_N) &\le \rho(x_N, x_{N+1}) + \ldots + \rho(x_{m-1}, x_m) \\
+				&\le \frac{1}{2^N} + \frac{1}{2^{N+1}} + \ldots + \frac{1}{x^m} \\
+				&< \frac{1}{2^{N-1}}
+				& \to  0 \quad \text{as }N \to  \infty 
+			.\end{align*}
+			Hence for all $\varepsilon>0$ there exists $N \in \mathbb{N}$, for all $m, n \ge N$ we have $\rho(x_m, x_n) < \varepsilon$. Hence $x_n$ is a Cauchy sequence. Hence $(x_n)$ converges by completeness of $(M, \rho)$.
+		\end{proof}
+		b) Give example that $\rho(x_n, x_{n+1}) < \frac{1}{n}$ but $x_n$ does not converge.
+		\begin{proof}
+			Take the Euclidean metric space on $\mathbb{R}$. Let $x_n = \sum_{i=1}^{n} \frac{1}{i} - \frac{1}{2^i}$. Hence
+			\[
+				\rho(x_n, x_{n+1}) = \left| x_n - x_{n+1} \right|  = \frac{1}{n} - \frac{1}{2^n} < \frac{1}{n}
+			.\] 
+			But
+			\[
+				x_n = \sum_{i=1}^{n} \frac{1}{i} - \sum_{i=1}^{n} \frac{1}{2^i} \ge - 1 + \sum_{i=1}^{n} \frac{1}{i} \to  \infty \quad \text{as } n \to \infty 
+			.\] 
+		\end{proof}
+	\item If $(M, \rho)$ is any metric space, the diameter of a subset $E \subset M$ is
+		\[
+			\text{diam }E = \operatorname{sup} \{\rho(x, y): x, y \in E\}  \in [0,\infty ]
+		.\] 
+		a)Prove $\text{diam} B_r(a) \le  2 r$
+		\begin{proof}
+			We prove the contrapositive. If $\text{diam }B_r(a) > 2 r$ then there must exist $\varepsilon > 0$ such that $\text{diam }B_r(a) > 2 r + \varepsilon$. 
+			By property of supremum there exists $x, y \in B_r(a)$ such that $\rho(x, y)> 2 r$. But by definition of the ball we must have $\rho(x, y) \le \rho(x, a) + \rho(y, a) < r + r = 2 r$. Hence we have a contradiction. Therefore we must have $\text{diam }B_r(a) \le 2r$.
+		\end{proof}
+		b) Must even $\text{diam }B_r(a) = 2 r$ hold? (Either prove that it must or give example where it does not hold).
+		\begin{proof}
+			No. Consider the discrete metric space and the ball $B_{\frac{1}{2}}(a) = \{a\} $. Then we must have $\text{diam }B_{\frac{1}{2}}(a) = 0 < \frac{1}{2}$.
+		\end{proof}
+	\item Prove that a totally bounded set in any metric space is bounded.
+		\begin{proof}
+			Consider the set $E \subset M$ in the metric space $(M, \rho)$. Pick arbitrary $r > 0$. By totally boundedness there exists a finite collection of balls $B_r(a_1), B_r(a_2), \ldots, B_r(a_m)$, $m \in \mathbb{N}, a_i \in M$ such that $E \subset \bigcup_{i = 1} ^m B_r(a_i)$.
+
+			Now take arbitrary $x \in E$, so it's contained in some $B_r(a_i)$. So
+			\[
+			\rho(x, a_1) \le \rho(x, a_i) + \rho(a_i, a_1) < r + \max_j(a_1, a_j) < C \in \mathbb{R}
+			.\] 
+			Hence $x \in B_C(a_1)$. Since $C$ does not depend on $x$ we conclude that $E \subset B_C(a_1)$. Hence $E$ bounded.
+		\end{proof}
+		
+	\item Consider a convergent sequence in any metric space $M$, $x_n \to  x$. Using the definition of compactness, prove that the set $K = \{x, x_1, x_2, \ldots\} \subset M$ is compact.
+		\begin{proof}
+			Take any open cover $\mathcal{C}$ of $K$. Then we have $A \in K$ open such that $x \in A$. Thus there exists $\varepsilon > 0$ such that $B_\varepsilon(x) \subset A$. Sicne $x_n \to x$ there exists $N \in \mathbb{N}$ such that for all $n > N$, $x_n \in B_\varepsilon(x) \subset A$. Now choose $B_1, \ldots, B_{N}\in \mathcal{C}$ such that $x_1 \in B_1, \ldots, x_{N} \in B_{N}$. Now the subcollection $\{B_1, \ldots, B_{N}, A\} $ is a finite subset of $\mathcal{C}$ that covers $K$.
+		\end{proof}
+		
+	\item If $(M, \rho)$ is a metric space, define
+		\[
+			\sigma(x, y) = \min \{1, \rho(x, y)\} , \quad x, y \in M
+		.\] 
+		Show that $\sigma$ is a metric and $x_n \to  x$ in $(M, \rho)$ iff $x_n \to  x$ in $(M, \sigma)$.
+		
+		\begin{proof}
+			We first verify the definition of metric.
+			\begin{itemize}
+				\item (Zero-degeneracy and positivity) Inherited from $\rho$.
+				\item (Symmetry) Inherited.
+				\item (Triangle Inequality) Give $x, y, z \in (M, \rho)$ we want to show
+					\[
+						\min \{1, \rho(x, z)\}  \le  \min \{1, \rho(x, y)\} + \min \{1, \rho(y, z)\}
+					.\] 
+				Suppose $\rho(x, z) \le 1$. Then it suffices to show
+				\[
+					\min \{1, \rho(x, y)\} + \min \{1, \rho(y, z)\} \ge \rho(x, z)
+				.\] 
+				If $\rho(x, y) \le  1$ or $\rho(y, z) \le  1$, then $\text{LHS} \ge 1 \ge \rho(x, z)$. Otherwise, we have $\text{LHS} = \rho(x, y) + \rho(y, z) \ge \rho(x, z)$ by triangle inequality on $(M, \rho)$.
+
+				If $\rho(x, z) \ge 1$ then it suffices to show
+				 \[
+				\min(1, \rho(x, y)) + \min(1, \rho(y, z))\ge 1
+				.\] 
+				If either $\rho(x, y) > 1$ or $\rho(x, y) > 1$ then $\text{LHS} \ge 1$. Otherwise, we have $\rho(x, y) \le 1$ and $\rho(y, z) \le 1$, thus $\text{LHS} = \rho(x, y) + \rho(y, z) \ge \rho(x, z) \ge 1$.
+
+				We have proved all cases, so the proof is done.
+			\end{itemize}
+			Note that $\rho$ and $\sigma$ coincide then $\rho(x, y)<1$. If $x_n \to x$ in $(M, \rho)$ then for $0<\varepsilon<1$ there exists $N$ such that  $\rho(x_n, x) < \varepsilon < 1$ whenever $n > N$. This implies $\sigma(x_n, x) < \varepsilon$, so $x_n \to x $ in $(M, \sigma)$.
+
+			On the other direction, the proof is identical.
+		\end{proof}
+		
+		
+		
+		
+\end{enumerate}

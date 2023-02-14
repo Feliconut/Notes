@@ -1,0 +1,236 @@
+\homework{3}{Mon 30 Jan 2023 18:35}{}
+
+41.D, 41.J, 41.K, 41. L, 41.U, 41.V, 41.W
+\begin{itemize}
+	\item 41.D. Let $f: \boldsymbol{R} \rightarrow \boldsymbol{R}$ be defined by $f(x)=x^3$. Show that $f$ belongs to Class $C^{1}(\boldsymbol{R})$ and that it is a bijection of $\boldsymbol{R}$ onto $\mathbf{R}$ with inverse $g(x)=x^{1 / 3}$ for all $x \in \mathbf{R}$. However $D f(0)$ is neither injective or surjective. Does $g$ belong to Class $C^1(\boldsymbol{R})$ ?
+\begin{proof}
+	$f$ is a polynomial, hence differentiable. We may compute $f'(x) = 3 x^2$. This is also a polynomial, so  $f'$ is continuous. Thus $Df(c)(x) = c^3 + 3 x^2$. The norm of  $Df(c)$ is
+	\[
+		\|Df(c)\| = \operatorname{sup} \{\|c^3 + 3 x^2\|: x \in [-1,1]\} = \begin{cases}
+			\|c^3 + 3\| & c^3 \ge  -\frac{3}{2} \\
+			\|c^3\| & c^3 < -\frac{3}{2}
+		\end{cases}
+	\]
+	It is easy to see that $\|Df(c)\|$ is a continuous function of $c$. Hence $f$ belongs to the $C^1$ class. Now we verify $f$ strictly monotone increasing. We have
+	\begin{itemize}
+		\item $f$ strictly monotone increasing in any interval not containing $0$, because $f'(x) = 3x^2 > 0$ whenever $x \neq 0$.
+		\item For any $x < 0$ we have $f(x) < f(0)$. Let $y = -x > 0$, so $f(x) = (-y)^3 = -y^3 < 0 = f(0)$. Similarly, we have for any $x>0$, $f(x) > f(0).$
+		\item For any $x < 0 < y$, we have $f(y) > f(x)$, because $f(y) > f(0) > f(x)$.
+	\end{itemize}
+	Combining these statements, we see $f$ strictly monotone increasing on $\mathbb{R}$, so it is injective. Also, $f$ is unbounded from up and below: for any $M > 0$ we have $f(M) = M^3 > M$, and $f(-M) = -M^3 < -M$. Also, $f$ is continuous, so by IVT it takes all intermediate values. Combining these we know $f$ is surjective. Hence $f$ is a bijection.
+
+	We regard $x^{\frac{1}{3}}$ as a well-defined function (according to rules of elementary arithmetics). Thus we can verify 
+	\[
+		g(f(x)) = (x^3)^{\frac{1}{3}} = x^1 = (x^{\frac{1}{3}})^3 = f(g(x))
+	.\] 
+
+	However $g$ is not in class $C^1(\mathbb{R})$ because is not differentiable at $0$, since the following limit is not finite:
+	\[
+		\lim_{h \to 0} \frac{g(h) - g(0)}{h} = \lim_{h \to 0} \frac{h^{\frac{1}{3}}}{h} = \lim_{h \to 0} h^{-\frac{2}{3}} = +\infty 
+	.\] 
+
+	Finally we verify $Df(0)$ is not injective or surjective. Since $Df(0)(x) = 0^3 + 3 x^2 = 3 x^2$,
+	\begin{itemize}
+		\item $Df(0)$ not injective, because $Df(0)(1) = Df(0)(-1) = 3$ 
+		\item $Df(0)$ not surjective, because $Df(0)(x) = 3x^2 \ge 0$, i.e. $Df(0)$ not attaining negative values.
+	\end{itemize}
+\end{proof}
+
+	\item 41.J. Let $h: \boldsymbol{R} \rightarrow \boldsymbol{R}$ be defined by
+\[
+\begin{aligned}
+h(x) & =x+2 x^2 \sin \frac{1}{x} & & \text { for } x \neq 0, \\
+& =0 & & \text { for } x=0 .
+\end{aligned}
+\]
+Show that $h$ does not belong to Class $C^1(\boldsymbol{R})$ and that $h$ is not injective on a neighborhood of 0 . However, it is surjective on a neighborhood of 0 and $D h(0)$ is invertible.
+\begin{proof}
+	$h$ is differentiable at $0$ because
+	\[
+		\frac{h(u) - h(0)}{u}  = \frac{u + 2 u^2 \sin \frac{1}{u}}{u} = 1 + 2 u \sin \frac{1}{u} \to 1 \quad \text{as } u\to 0
+	.\]
+	where we have used the result that $\lim_{u \to 0} u \sin \frac{1}{u} = 0$.
+
+	We can thus compute its derivative:
+	\[
+		h'(x) = \begin{cases}
+			1 + 4x \sin \frac{1}{x} - 2 \cos \frac{1}{x} & x \neq  0\\
+			1 & x = 0
+		\end{cases}	.\] 
+	However $h'(x)$ is not continuous: due to the $2 \cos \frac{1}{x}$ term, the $\lim_{x \to 0} h'(x)$ does not exist. Thus $h$ does not belong to the class $C^1(\mathbb{R})$.
+
+	Let $\varepsilon>0$ and we want to show $h$ not injective on $(-\varepsilon, \varepsilon)$. Let $m \in \mathbb{N}$ be very large such that $\frac{1}{2m \pi} < \varepsilon$. Now $h'(\frac{1}{2 m \pi}) = 1 + 0 - 2 < 0$ but $h'(\frac{1}{(2 m + 1) \pi}) = 1 + \frac{4}{(2 m + 1) \pi} > 0$. Also $h'$ continuous, so by IVT, there exists $\delta \in (\frac{1}{(2 m + 1)\pi}, \frac{1}{2m \pi})$ and $h'(\delta) = 0$, and $\frac{1}{(2m+1)\pi} < \alpha < \delta < \beta < \frac{1}{2m \pi}$ such that $h'(x) > 0$ for $\alpha < x < \delta$ and $h'(x) < 0$ for $\delta < x < \beta$, showing $h$ not monotone. But it is known that continuous injections on intervals are strictly monotone. Hence $h$ not injective on $(\alpha, \beta)$, hence not injective on $(-\varepsilon, \varepsilon)$.
+
+	Let $\varepsilon > 0$ and we want to show $h$ surjective near $0$. Given a neighborhood $(-\varepsilon, \varepsilon)$ of $h(0) = 0$, we want to find a suitable neighborhood  $(-\delta, \delta)$ of $0$ whose image contains $(-\varepsilon, \varepsilon)$. We verify that $h$ is unbounded and continuous. $\sin \frac{1}{x} >0 > \sin -\frac{1}{x} $ for $x>0$ large enough, so $h(M) \ge  M$ and $h(-M) < -M$. Also we can assume $(-\varepsilon, \varepsilon) \subset (-M, M)$ since $M$ is assumed to be large. Thus we can choose  $\alpha \in (-M, 0)$ and $\beta \in (0, M)$ such that $h(\alpha) = -\varepsilon$ and $h(\beta) = \varepsilon$. Now $h(\alpha, \beta) \supset (-\varepsilon, \varepsilon)$ by IVT.
+
+	Finally we verify $Dh(0)$ invertible. This is obvious because
+	\[
+		Dh(0)(x) = h(0) + h'(0) x = 0 + 1 x = x
+	.\] 
+\end{proof}
+
+\item 41.K. Let $f: \mathbf{R}^2 \rightarrow \mathbf{R}^2$ be defined by $f(x, y)=\left(y, x+y^2\right)$ for $(x, y) \in \mathbf{R}^2$. Show that $f$ belongs to Class $C^1\left(\boldsymbol{R}^2\right)$ and that $f$ is invertible on some neighborhood of an arbitrary point of $\boldsymbol{R}^2$. Draw the image under $f$ of the lines $x=0, \pm 1, \pm 2$ and $y=0$, $\pm 1, \pm 2$. Find the inverse $g=f^{-1}: \mathbf{R}^2 \rightarrow \mathbf{R}^2$ and show that $\operatorname{Dg}\left(f\left(x_0, y_0\right)\right)=$ $D f\left(x_0, y_0\right)^{-1}$
+\begin{proof}
+	We compute partial derivatives of $f$. 
+	\[
+		[Df(x,y)] = 
+		\begin{bmatrix}
+		D_1f_1(x,y) & D_2f_1(x,y)\\
+		D_1f_2(x,y) & D_2f_2(x,y)
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+		0 & 1\\
+		1 & 2y
+		\end{bmatrix}
+	.\] 
+	Each partial derivative is continuous, so $Df(x,y)$ is continuous. Hence $f \in C^1(\mathbb{R})$. Moreover, $Df(x,y)$ is always a bijection, since its Jacobian matrix always has rank $2$ regardless of the value of $y$. Hence by Inversion Theorem, there exists an open neighborhood $U$ of $(x,y)$ such that $V = f(U)$ is an open neighborhood of $f(x,y)$ and the restriction of $f$ to $U$ is a bijection onto $V$ with continuous inverse $g$. Moreover,
+	\[
+		Dg(y) = [Df(g(y))]^{-1}
+	.\] 
+\end{proof}
+	\newpage
+
+\item 41.L. (This exercise assumes familiarity with the notion of the determinant of a square matrix.) Let $L \in \mathscr{L}\left(\mathbf{R}^p, \mathbf{R}^p\right)$ and let $\left[c_{i j}\right]$ be the matrix representation of $L$ with respect to the standard basis in $\boldsymbol{R}^p$. It is shown in linear algebra that $L$ is invertible if and only if $\Delta=\operatorname{det}\left[c_{i y}\right]$ is not zero. Furthermore, if $\Delta \neq 0$, then the matrix of $L^{-1} h$ the form $\left[p_{i j} / \Delta\right]$, where the $p_{i j}$ are polynomials in the $c_{i j}$.
+(a) Show that if $L_0$ is invertible and if $\left\|L-L_0\right\|_{p p}$ is sufficiently small, then $L$ is invertible.
+\begin{proof}
+	The determinant is a linear function $\operatorname{det}: \mathcal{L}(\mathbb{R}^p) \to  \mathbb{R}$, thus a continuous function. Hence for all $\varepsilon>0$ there exists $\delta>0$ such that $|\operatorname{det} L - \operatorname{det}L_0| < \varepsilon $ whenever $\|L - L_0\|_{pp}<\delta$. 
+	Since  $\operatorname{det} L_0 \neq 0$, let $\varepsilon < |\operatorname{det}L_0| / 2$, we have $\operatorname{det}L \neq 0$ whenever $\|L - L_0\|_{pp}<\delta$. Thus $L$ invertible whenever $L$ is $\delta$-close to $L_0$ wrt the metric in $\mathcal{L}(\mathbb{R}^p)$.
+\end{proof}
+
+(b) Show that if $L_0$ is invertible, then the map $L \mapsto L^{-1}$ is continuous on a neighborhood of $L_0$ with respect to the norm in $\mathscr{L}\left(\boldsymbol{R}^p, \mathbf{R}^p\right)$.
+\begin{proof}
+	We know that for any $i, j$, $L \mapsto p_{ij}(L)$ is a continuous function $\mathcal{L}(\mathbb{R}^p) \to \mathbb{R}$. Since $L_0$ invertible, there exists some $\delta>0$ such that  where $L$ invertible for all $L \in B_\delta(L_0)$. Thus $\operatorname{det} L \neq 0$. Hence $L \mapsto p_{ij}(L) / \operatorname{det} L$ is a continuous mapping.
+
+	Now we have
+	\begin{align*}
+		\|L_0^{-1} - L^{-1}\|
+		&\le  \sqrt{\sum_{i,j} \left( p_{ij}(L_0) / \operatorname{det}L_0 - p_{ij}(L) / \operatorname{det} L \right)^2 } \\
+		&\le \sqrt{p^2 \varepsilon^2} = p \varepsilon 
+	.\end{align*}
+	To justify the last inequality, note that for each $i,j$ there exists $\delta_{ij} >0$ such that $\left\| p_{ij}(L_0) / \operatorname{det}L_0 - p_{ij}(L) / \operatorname{det} L' \right\| < \varepsilon$ whenever $\|L_0 - L\|< \delta_{ij}$. Let $\delta = \min_{ij} \delta_{ij}$, we see that the last inequlity holds when $\|L_0 - L\|<\delta$. The proof is now complete.
+\end{proof}
+
+(c) Let $\Omega \subseteq \mathbf{R}^p$ be open and $f: \Omega \rightarrow \mathbf{R}^p$ belong to Class $C^1(\Omega)$. If $D f(c)$ is invertible for some $c \in \Omega$, then $D f(x)$ is invertible on some neighborhood of $c$.
+\begin{proof}
+	Since $f \in C^1(\Omega)$, the mapping $x \mapsto Df(x)$ is continuous. Since $Df(c)$ is invertible, by $(b)$ the map $Df(x) \mapsto Df(x)^{-1}$ is continuous on some neighborhood $N$ of $Df(c)$. Since $x \mapsto Df(x)$ is continuous, the preimage of $N$ is a neighborhood $M$ of $c$ such that $Df(x)$ is invertible for $x \in M$.
+\end{proof}
+
+\item 41.U. Let $L \in \mathscr{L}\left(\boldsymbol{R}^p, \mathbf{R}^q\right)$ be injective and let $r>0$ be such that $r\|x\| \leq\|L(x)\|$ for all $x \in \mathbf{R}^p$. Show that if $L_1 \in \mathscr{L}\left(\mathbf{R}^p, \mathbf{R}^q\right)$ is such that $\left\|L_1-L\right\|_{p q}<r$, then $L_1$ is injective. (Hence, the set of injective maps is open in $\mathscr{L}\left(\boldsymbol{R}^p, \mathbf{R}^q\right)$.)
+\begin{proof}
+	From definition of $\|L\|$ we can infer from assumption that $0<r \le \|L\|_{pq}$.  Let $x_1, x_2  \in \mathbb{R}^p$ be distinct and we have
+	\[
+		\|L_1(x_1) - L_1(x_2)\|
+		= \|L_1(x_1-x_2)\|
+		=\|x_1-x_2\| \|L_1 u\|
+		.
+	\]
+	where $u = \frac{x_1-x_2}{\|x_1-x_2\|}$.
+
+Since $\|L_1 - L\|_{pq}<r$, we have $\|L_1 u - L u\|<r$. Also by assumption we have  $\|L u\| \ge  r$. Thus
+\[
+	\|L_1 u\| \ge \|L u\| - \|L_1 u - L u\| > 0
+.\] 
+Thus we have $\|L_1 x_1 - L_1 x_2\| >0$ for arbitrary distinct $x_1, x_2$. This shows $L_1$ is injective.
+\end{proof}
+
+\item 41.V. Let $L \in \mathscr{L}\left(\boldsymbol{R}^p, \mathbf{R}^q\right)$ be surjective and let $m>0$ be as in the proof of 41.6. Show that if $L_1 \in \mathscr{L}\left(\mathbf{R}^p, \mathbf{R}^q\right)$ is such that $\left\|L_1-L\right\|_{p q}<m / 2$, then $L_1$ is surjective. (Hence, the set of surjective maps is open in $\mathscr{L}\left(\boldsymbol{R}^p, \mathbf{R}^q\right)$.
+\begin{proof}
+	Define $M$ as in proof of 41.6, so $M$ is right inverse of $L$. Fix $y \in \mathbb{R}^q$, define $x_0 = M y$. Now define $x_1 = x_0 - M(y - L_1 x_0)$ so that $\|x_1 - x_0\|\le m\|\left( L_1 - L \right)  x_0\| \le m \|L_1 - L\| \|x_0\| \le \frac{1}{2} \|x_0\| =: \frac{1}{2} \alpha$.
+
+	Next we suppose inductively that $x_0, x_1, \ldots, x_n$ have been chosen in $\mathbb{R}^p$ such that for $k = 1,\ldots, n$,
+	\[
+		\|x_k - x_{k-1}\|\le  \alpha / 2^k \qquad 
+		\|x_k - x_0\|\le (1 - \frac{1}{2^k})\alpha
+	.\] 
+	We now define $x_{n+1}$ by
+	\[
+		x_{n+1} = x_n - M (L_1 - L) (x_n - x_{n-1})  
+	.\] 
+	It follows that
+	\[
+		\|x_{n+1} - x_n\| \le  m \|L_1 - L\| \|x_n - x_{n-1 }\| \le \frac{1}{2} \|x_n - x_{n-1}\| \le \alpha / 2^{k+1}
+	.\] 
+	We also have
+	\[
+		\|x_{n+1} - x_0\|\le \|x_{n+1} - x_n\| + \|x_n - x_0\| \le  \frac{\alpha}{2^{n+1 }} + (1-\frac{1}{2^n} \alpha) = (1 - \frac{1}{2^{n+1}}) \alpha
+	.\] 
+	This completes the induction, so we can construct a sequence $(x_n)$ in $\mathbb{R}^p$. Then  $(x_n)$ is Cauchy, same as the proof of 41.6. Then $x_n$ converges to some element $x \in \mathbb{R}^p$. Now
+	\[
+		L(x_1 - x_0) = L M (y - L_1 x_0) = (L - L_1) x_0
+	\] 
+	and
+	\[
+	L(x_{n+1} -  x_{n}) = - L M (L_1 - L)(x_n - x_{n-1}) = (L - L_1)(x_n - x_{n-1})
+	.\] 
+	Thus
+	\[
+		L(x_{n+1} - x_n) = (L - L_1)x_n
+	\] 
+	Thus
+	\[
+		L_1 \left( x_n \right)  = L (x_n) - L(x_{n+1} - x_n) \to L(x)  = y
+	.\] 
+	But $L_1$ is linear, so $L_1(x_n) \to  L_1(x)$. Thus $L_1(x) = y$. Since $y$ is arbitrary, $L_1$ is surjective.
+\end{proof}
+
+\item 41.W. Let $g: \mathbf{R}^p \rightarrow \mathbf{R}^p$ belong to Class $C^1\left(\boldsymbol{R}^p\right)$ and satisfy $\|D g(x)\|_{p p} \leq a<1$ for all $x \in \mathbf{R}^p$. If $f(x)=x+g(x)$ for $x \in \mathbf{R}^p$, show that $f$ satisfies
+\[
+\left\|f\left(x_1\right)-f\left(x_2\right)-\left(x_1-x_2\right)\right\| \leq a\left\|x_1-x_2\right\|
+\]
+for all $x_1, x_2$ in $\mathbf{R}^p$ and that $f$ is a bijection of $\boldsymbol{R}^p$ onto $\mathbf{R}^p$.
+\begin{proof}
+	We first prove the inequality:
+	\begin{align*}
+		&\|f(x_1) - f(x_2) - (x_1-x_2)\|\\
+		&= \|x_1 + g(x_1) - x_2 - g(x_2) - x_1 + x_2\| \\
+		&= \|g(x_1) - g(x_2)\| \\
+		&= \|Dg(c) (x_1 - x_2)\|\qquad \text{by MVT where $c \in (x_1, x_2)$} \\
+		&\le \|Dg\left( c \right) \|\|x_1 - x_2\|\\
+		&\le a \|x_1 -x_2\|
+	.\end{align*}
+	We write $f = I + g$ where $I(x) = x$ is the identity mapping. Now
+	\[
+		\|Df(x)\| \ge \|DI(x)\|-\|Dg(x)\| \ge  1 - a > 0 
+	.\] 
+	Pick $x_1, x_2$ distinct in $\mathbb{R}^p$. Now
+	\begin{align*}
+		\|f(x_1) - f(x_2)\| = \|Df(c) (x_1 - x_2)\| > 0
+	.\end{align*}
+	Thus $f$ is injective.
+
+	Now we proceed as in proof 41.6 to show $f$ surjective. Fix arbitrary $x_0 =0$ and $y$. Now define
+	\[
+		x_1 = y - f(x_0)
+	.\] 
+	and define inductively
+	\[
+		x_{n+1} = x_n - (f(x_n) - f(x_{n-1}) - (x_n - x_{n-1}))
+	.\] 
+	Now
+	\[
+		\|x_{n+1} - x_n\| \le  a \|x_{n} - x_{n-1}\|
+	.\] 
+	Thus by induction,
+	\[
+		\|x_{n+1}- x_{n}\| \le a^n \|x_1- x_0\| =: a^n \alpha
+	.\] 
+	Also, if $m \ge n$,
+	\[
+		\|x_{n} - x_m\| \le \frac{\alpha}{a^{n+1}} + \frac{\alpha}{a^{n+2}} + \ldots + \frac{\alpha}{a^m} \le \sum_{i=0}^{\infty} \frac{\alpha}{a^{n+1} a^i} = \frac{\alpha}{a^{n+1}} \frac{1}{1-a}
+	.\] 
+	Hence $(x_n)$ is a Cauchy sequence, hence it converges to some limit  $x$ in $\mathbb{R}^p$. Now
+	\begin{align*}
+		x_{n+1} - x_n &= (x_n - x_{n-1}) - \left(f(x_n) - f(x_{n-1 })\right) \\
+		&= (x_{n-1} - x_{n-2}) - \left( f(x_n) - f(x_{n-2 }) \right)  \\
+		&\ldots\\
+		&= x_1 - x_0 - \left( f(x_n) - f(x_0) \right)  \\
+		&= y - f(x_n)
+	.\end{align*}
+	Thus
+	\[
+		y - f(x_n) \to 0
+	.\] 
+	But since $f(x_n) \to  f(x)$, we have $y = f(x)$, completing the proof.
+\end{proof}
+\end{itemize}

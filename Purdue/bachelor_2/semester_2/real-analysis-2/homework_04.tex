@@ -1,0 +1,245 @@
+\homework{4}{Wed 08 Feb 2023 11:46}{}
+
+41.O, 41.P, 41.R, 42.A(a-c), 42.D, 42.E
+\begin{itemize}
+	\item 41.O. Let $F: \boldsymbol{R}^5 \rightarrow \boldsymbol{R}^2$ be defined by
+\[
+F(u, v, w, x, y)=\left(u y+v x+w+x^2, u v w+x+y+1\right),
+\]
+and note that $F(2,1,0,-1,0)=(0,0)$.
+(a) Show that we can solve $F(u, v, w, x, y)=(0,0)$ for $(x, y)$ in terms of $(u, v, w)$ near $(2,1,0)$.
+\begin{proof}
+	We attempt to solve
+	\[
+		\begin{cases}
+			uy + vx + w + x^2 = 0 \\
+			uvw + x + y + 1 = 0
+		\end{cases}
+	.\] 
+	Use the second equation to eliminate $x$ from the first equation,
+	\[
+		-u^2 vw - ux - u + vx + w + x^2 = 0
+	.\] 
+	Simplify,
+	\[
+		x^2 + \left( v - u \right)x + (w - u^2 vw - u)  =0
+	.\] 
+	This can be solved directly by quadratic formula when determinant is nonnegative. We can compute
+	\[
+		\Delta = (v-u)^2 - 4\left( w - u^2 vw - u \right) 
+	.\] 
+	and
+	\[
+		\Delta(2,1,0) = 1^2 - 4(-2) > 0
+	.\] 
+	Also $\Delta$ is a continuous function of $u,v,w$. Hence $\Delta$ is nonnegative near $(2,1,0) $. Hence the equations are solvable near $(2,1,0)$.
+\end{proof}
+
+(b) If $(x, y)=\varphi(u, v, w)$ is the solution in part (a), show that $D \varphi(2,1,0)$ is given by the matrix
+\[
+-\left[\begin{array}{rr}
+-1 & 2 \\
+1 & 1
+\end{array}\right]^{-1}\left[\begin{array}{rrr}
+0 & -1 & 1 \\
+0 & 0 & 2
+\end{array}\right]=\frac{1}{3}\left[\begin{array}{rrr}
+0 & -1 & -3 \\
+0 & 1 & -3
+\end{array}\right] .
+\]
+\begin{proof}
+	Using implicit differentiation,
+	\[
+		DF(c_1, c_2) = \frac{\partial F}{\partial (u,v,w)}(c_1) + \frac{\partial F}{\partial (x,y)}(c_2) \frac{\partial (x,y)}{\partial (u,v,w)}(c_1) = 0
+	.\] 
+	And note that
+	\[
+		D \varphi (c_1) = \frac{\partial (x,y)}{\partial (u,v,w)}(c_1)
+	.\] 
+	Let $L_1: \mathbb{R}^3 \to \mathbb{R}^2$ be a linear map defined as
+	\[
+		L_1(c_1)(\Delta u)=D F(c_1,c_2)(\Delta u, 0)
+	.\] 
+	where $\Delta u \in \mathbb{R}^3$. Similarly define $L_2 : \mathbb{R}^2 \to \mathbb{R}^2$ as
+	\[
+		L_2(c_2)(\Delta x) = DF(c_1,c_2)(0,\Delta x)
+	.\] 
+	Now we can rewrite the equation as
+	\[
+		DF(c_1,c_2) = L_1(c_1) + L_2(c_2) D\varphi(c_1) = 0
+	.\] 
+	Hence
+	\[
+		D\varphi(c_1) = \left( L_2(c_2)^{-1} \right) \left( - L_1(c_1) \right) 
+	.\] 
+	Finally we compute the matrices:
+	\[
+		\left[ L_1(c_1) \right] = 
+\left[\begin{array}{rrr}
+\frac{\partial F_1}{\partial u}(c) & \frac{\partial F_1}{\partial v}(c) & \frac{\partial F_1}{\partial w}(c) \\
+\frac{\partial F_2}{\partial u}(c) & \frac{\partial F_2}{\partial v}(c) & \frac{\partial F_2}{\partial w}(c) 
+\\\end{array}\right]
+= \left[\begin{array}{rrr}
+0 & -1 & 1 \\
+0 & 0 & 2
+\end{array}\right]
+	.\] 
+On the other hand,
+\[
+		\left[ L_2(c_2) \right] = 
+\left[\begin{array}{rr}
+\frac{\partial F_1}{\partial x}(c) & \frac{\partial F_1}{\partial y}(c) \\
+\frac{\partial F_2}{\partial x}(c) & \frac{\partial F_2}{\partial y}(c)
+\end{array}\right]
+= \left[\begin{array}{rr}
+-1 & 2 \\
+1 & 1 
+\end{array}\right]
+	.\]
+\end{proof}
+
+\item 
+41.P. Let $A \subseteq \boldsymbol{R}^3$ and let $F: A \rightarrow \boldsymbol{R}$ represent a surface $S_F$ in $\boldsymbol{R}^3$ implicitly as the "level surface"
+\[
+S_{\mathrm{F}}=\{(x, y, z) \in A: F(x, y, z)=0\} .
+\]
+If $F$ is differentiable at a point $\left(x_0, y_0, z_0\right) \in S_{\mathrm{F}}$ which is interior to $A$, then the tangent space to $S_F$ at this point is the set of points
+\[
+\left\{(x, y, z) \in \boldsymbol{R}^3: A_{\left(x_0, y_0, z_0\right)}(x, y, z)=0\right\},
+\]
+where $A_{\left(x_0, y_0, z_0\right)}$ is the affine map of $\boldsymbol{R}^3 \rightarrow \boldsymbol{R}$ defined by
+\[
+\begin{aligned}
+A_{\left(x_0, y_0, z_0\right)}(x, y, z) & =F\left(x_0, y_0, z_0\right)+D F\left(x_0, y_0, z_0\right)\left(x-x_0, y-y_0, z-z_0\right) \\
+& =D F\left(x_0, y_0, z_0\right)\left(x-x_0, y-y_0, z-z_0\right) .
+\end{aligned}
+\]
+(a) Show that the tangent space at $\left(x_0, y_0, z_0\right)$ is given by
+\[
+\left\{(x, y, z): D_1 F\left(x_0, y_0, z_0\right)\left(x-x_0\right)+D_2 F\left(x_0, y_0, z_0\right)\left(y-y_0\right)+D_3 F\left(x_0, y_0, z_0\right)\left(z-z_0\right)=0\right\} .
+\]
+Hence the tangent space to $S_F$ is a plane if at least one of the numbers $D_1 F\left(x_0, y_0, z_0\right), D_2 F\left(x_0, y_0, z_0\right), D_3 F\left(x_0, y_0, z_0\right)$ is different from 0 . In this case the tangent space to $S_{\mathrm{F}}$ is called the tangent plane to $S_{\mathrm{F}}$ at $\left(x_0, y_0, z_0\right)$.
+\begin{proof}
+	Direct application of Exercise 39W.
+\end{proof}
+
+\item 41.R. (a) Suppose that, in addition to the hypotheses of the Inversion Theorem 41.8, it is known that the function $f$ has continuous partial derivatives of order $m>1$. Show that the inverse function $g: V \rightarrow \boldsymbol{R}^{\mathrm{p}}$ has continuous partial derivatives of order $m$.
+\begin{proof}
+	Use the relation
+	\[
+		Dg(y) = \left( Df(g(y)) \right) ^{-1}
+	.\] 
+	We want show that the RHS is a $C^{m-1}$ function of $y$. But this follows from the fact that the map $y \mapsto g(y)$ is $C^{m}$, the map $x \mapsto Df(x)$ is $C^{m-1}$, and the map $L \mapsto L^{-1}$ is $C^{\infty }$ in a small neighborhood surrounding $Dg(y)$.
+\end{proof}
+
+(b) Prove the analogous result for the Implicit Function Theorem 41.9.
+\begin{proof}
+	Suppose that in Theorem 41.9 the function $F$ is in $C^{m}(\Omega)$ where $m>1$, then we want to show $\varphi \in C^m(W)$ for some open neighborhood $W$ of $a \in \mathbb{R}^p$.
+
+	We re-prove theorem 41.9 with the stronger result.
+	WLOG we assume $a=0$ and $b=0$. Define 
+	 \begin{align*}
+		H: \Omega &\longrightarrow \mathbb{R}^p \times \mathbb{R}^q \\
+		(x,y) &\longmapsto H((x,y)) = \left(x,F(x,y)\right)
+	.\end{align*}
+	Then $H$ belongs to class $C^{m}(\Omega)$ and that for $(x,y) \in \Omega$ and $(u,v) \in \mathbb{R}^p \times \mathbb{R}^q$,
+	 \[
+		D H(x,y)(u,v) = \left( u, D F(x,y)(u,v) \right) 
+	.\] 
+	We now claim $D H(0,0)$ is invertible on $\mathbb{R}^p \times \mathbb{R}^q$. We define
+	$ L_1 \in \mathcal{L}(\mathbb{R}^p, \mathbb{R}^q)$ such that 
+	\[
+		L_1(u) = D F(0,0)(u,0)
+	.\] 
+	and define $L_2(v)$ likewise. We know
+	 \[
+		D F(0,0)(u,v) = L_1(u) + L_2(v)
+	.\] 
+	Now define $K \in \mathcal{L}\left( \mathbb{R}^p \times \mathbb{R}^q, \mathbb{R}^p \times \mathbb{R}^q  \right) $ by
+	\[
+		K(x,z) = \left( x, L_2^{-1} \left( z - L_1(x) \right)  \right) 
+	.\] 
+	By direct calculation we know $K$ is an inverse of $D H(0,0)$. 
+
+	Using the stronger version of inversion theorem, there is an open neighborhood $U$ of $(0,0) \in \mathbb{R}^{p} \times \mathbb{R}^q$ such that $V = H(U)$ is an open neighborhood of $(0,0) \in \mathbb{R}^p \times \mathbb{R}^q$ and restriction of $H$ to $U$ is a bijection onto $V$ with a continuous inverse $\Phi: V \to  U$ which belongs to class $C^{m}(V)$ and with $\Phi(0,0) = (0,0)$.
+
+	Now  $\Phi$ has the form
+	\[
+		\Phi(x,z) = \left( \varphi_1(x,z), \varphi_2(x,z) \right) 
+	.\] 
+	Similar to the original proof, we infer that $\varphi_1(x, z) = x$ and $\varphi_2$ belongs to $C^m(V)$,  and
+\[
+	\Phi(x,z) = \left( x, \varphi_2(x,z) \right) \qquad \text{ for }(x,z) \in V
+.\] 
+	Now define $\varphi(x) = \varphi_2(x,0)$ for $x \in W = \{x \in \mathbb{R}^p: (x,0) \in V\} $. We have
+	\[
+		F(x, \varphi(x)) = 0 \qquad \text{ for }x \in W
+	.\] 
+	Moreoever, $D\varphi(x)(u) = D\varphi_2(x_0)(u,0)$ for $x \in W$, $u \in \mathbb{R}^p$, whence $\varphi$ belongs to $C^m(W)$. This proves the first part of the theorem.
+
+	The proof of the second part is not affected.
+\end{proof}
+
+\item 42.A. Find the critical points of the following functions and determine the nature of these points.
+(a) $f(x, y)=x^2+4 x y$,
+\begin{proof}
+	Solve
+	 \[
+		 [Df(x,y)] = [2x+4y \quad 4x] = 0
+\]
+We have $(x,y) = (0,0)$. Then apply the second derivative test:
+\[
+	D_{11}f(0,0) = 2 \quad D_{22}f(0,0) = 0 \quad D_{12} f(0,0) = 4
+.\] 
+\[
+	\Delta = 2 \times 0 - 4^2 < 0
+.\] 
+Thus $f$ has a saddle point at $(0,0)$.
+\end{proof}
+
+(b) $f(x, y)=x^4+2 y^4+32 x-y+17$,
+\begin{proof}
+	Solve
+	\[
+		[Df(x,y)] = [4x^3 + 32 \quad 8y-1] = 0
+	.\] 
+	We have $(x,y) = (-2, \frac{1}{8}) =:c$. Calculate determinant,
+	\[
+		D_{11} f(c) = 12x^2 = 48 \quad D_{12}f(c) = 0 \quad D_{22}f(c) = 8
+	.\] 
+	Thus
+	\[
+		\Delta > 0 \qquad D_{11}f(c) > 0
+	.\] 
+	Therefore $f$ has relative strict maximum at $(-2, \frac{1}{8})$.
+\end{proof}
+
+(c) $f(x, y)=x^2+4 y^2-12 y^2-36 y$
+\begin{proof}
+	Solve
+	\[
+		[Df(x,y)] = [2x \quad -16y - 36] = 0
+	.\] 
+	We have $(x,y) = (0,- \frac{9}{4})$. Calculate the determinant,
+	\[
+		D_{12} f(c) = 0 \quad D_{11} f(c) = 2 \quad D_{22} f(c) = -16
+	.\] 
+	\[
+		\Delta  = 2 \times  -16 - 0 < 0
+	.\] 
+	Thus by second derivative test, $f$ has a saddle point at $c$.
+\end{proof}
+
+
+\item 42.D. Let $f: \boldsymbol{R}^p \rightarrow \boldsymbol{R}$ be differentiable on $\boldsymbol{R}^p$ and $f(x)=0$ for all $x \in \boldsymbol{R}^p$ with $\|x\|=1$. Show that there exists a point $c \in \boldsymbol{R}^p$ with $\|c\|<1$ such that $D f(c)=0$. (This is a version of Rolle's Theorem in $\boldsymbol{R}^p$.)
+\begin{proof}
+	The closed unit ball is compact, so extremum value is attained somewhere, call the extremum point $x$. If $\|x\|<1$ then we are done since $x$ is also a critical point with zero derivative. If $\|x\| = 1$ then we must have $f$ constantly zero, $Df$ is zero across the whole unit ball.
+\end{proof}
+
+\item 42.E. Use the Surjective Mapping Theorem $41.6$ to establish Corollary $42.2$.
+\begin{proof}
+	If $Df(c) \neq 0$ then it's necessarily a surjection to $\mathbb{R}$. Then by surjective mappint theorem there exists a open neighborhood of $f(c)$ covered by image of $f$. But this contradicts the fact that $f(c)$ is the extremum, i.e. at boundary of image.
+\end{proof}
+
+\end{itemize}
