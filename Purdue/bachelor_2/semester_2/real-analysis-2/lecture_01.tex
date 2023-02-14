@@ -1,0 +1,108 @@
+\lecture{1}{Tue 24 Jan 2023 09:21}{Mapping Theorems}
+
+\section{Mapping Theorems}
+
+\textbf{Motivation.} What can we say of $f$ from properties of $Df(c)$?
+
+Main results are:
+\begin{itemize}
+	\item $Df(c)$ injectives implies $f$ injective near $c$, when $Df$ is continuous near $c$.
+	\item $Df(c)$ surjective implies $f$ surjective near $c$, when $Df$ is continuous near $c$.
+\end{itemize}
+
+\begin{proposition}
+	$f \in C^1(\Omega) \iff  D_j f_i \in C(\Omega)$ ofor all $i = 1..q, j=1..p$.
+\end{proposition}
+\begin{proof}
+	We have $|a_{ij}| \le \|L\|$ (since $a_{ij} = e_i \cdot L e_j$ ), hence $|D_j f_i(x) - D_j f_i(x_0)| \le  \|D_f(x) - Df(x_0)\|$.
+
+	On the other direction, we use the previous result that
+	\[
+		\|L\|\le \left( \sum_{i, j}^{} a_{ij}^2 \right) ^{\frac{1}{2}}
+	.\] 
+	Hence
+	\[
+		\|Df(x) - Df(x_0)\|\le \left( \sum_{i, j}^{} \left| D_jf_i(x) - D_jf_i(x_0) \right| ^2 \right) ^{\frac{1}{2}} \le \sqrt{pq}\varepsilon 
+	.\] 
+\end{proof}
+
+\begin{lemma}
+	Suppose $a,b \in \Omega$, $[a,b] \subset \Omega$ and $f: \Omega \to \mathbb{R}^q$ differentiable in $\Omega$.
+	Then for any $x_0 \in \Omega$,
+	\[
+		\|f(b) - f(a) - Df(x_0)(b-a)\|\le \|b-a\|\operatorname{sup}_{x \in \left[ a,b \right] } \|Df(x) - Df(x_0)\|_{pq}
+	.\] 
+\end{lemma}
+\begin{proof}
+	Look at $g(x)=f(x) - Df(x_0)(x - x_0)$. Now
+	\[
+		Dg(x) = Df(x) - Df(x_0)
+	.\] 
+	Now by mean value theorem, there is $c \in [a,b]$ such that
+	\[
+		\|g(b) - g(a)\|\le \|Dg(c)(b-a)\|\le \|Dg(c)\|\|b-a\| \le \|b-a\| \operatorname{sup}_{x \in [a,b]} Dg(x)
+	.\] 
+\end{proof}
+
+
+\begin{lemma}[Approximation Lemma]
+	Let $f \in C^1(\Omega)$, $x_0 \in \Omega$. Then for any $\varepsilon>0$ there exists $\delta>0$ such that
+	\[
+		\|f(x) - f(y) - Df(x_0)(x-y)\|\le \varepsilon\|x-y\| \quad \text{for }x, y \in B_\delta(x_0)
+	.\] 
+\end{lemma}
+Note: both $x,y$ can be different from $x_0$.
+\begin{proof}
+	Take $\delta(\varepsilon)$ such that $\|Df(x) - Df(x_0)\|<\varepsilon$ for $\|x-x_0\|<\delta$. Now pick $x,y$ be $\delta$-close, apply the previous lemma. Hence
+	\[
+		\|f(x) - f(y) - Df(x_0)(x-y)\|\le \operatorname{sup} _{c \in [x,y]} \|Df(c) - Df(x_0)\|\|x-y\|\le \varepsilon \|x-y\|
+	.\] 
+\end{proof}
+
+
+	Suppose $L:\mathbb{R}^p \to \mathbb{R}^q$ is linear. Then $L$ injective iff $u_1 = Le_1, \ldots, u_p = Le_p$ are linearly independent. We can complete  $u_1, \ldots, u_p$ to a basis $u_1, u_2, \ldots, u_p, \ldots, u_q$ of $\mathbb{R}^q$. 
+
+	Define a linear mapping $M: \mathbb{R}^q \to \mathbb{R}^p$ as follows: 
+	\begin{align*}
+		M: \mathbb{R}^q &\longrightarrow \mathbb{R}^p \\
+		u_i &\longmapsto M(u_i) = \begin{cases}
+			e_i & i = 1, \ldots, p \\
+			\text{arbitrary} & i = p+1, \ldots, q
+		\end{cases}
+	.\end{align*}
+	We claim that $ML = I_p$ the identity mapping on $\mathbb{R}^p$.
+	Indeed, $M(L(e_i)) = M(u_i) = e_i$. Hence $M$ is called \textit{left inverse} of $L$.
+
+	We claim that $f$ injective iff $f $ has left inverse.
+\begin{proof}
+	We have just seen $(\implies)$. To prove $\left( \impliedby \right) $, suppose $M$ is such that $ML = I_p$, then $Lx \neq 0$ for any $x\neq 0$.
+\end{proof}
+
+\begin{lemma}
+	If $L$ is injective, then there is $m >0$ such that $\|L x\|> m \|x\|$.
+\end{lemma}
+\begin{proof}
+	(Analytic) First prove that there exists $m>0$ such that $\|Lx\|\ge m$ for $\|x\| = 1$. Since $S = \{\|x\| = 1\} $ is compact in $\mathbb{R}^p$,  $\{\|Lx\|: x \in S\} $ is compact in $\mathbb{R}$. Hence $f(x) \ge m > 0$ for $x \in S$.
+	Then for any $x \neq 0$, let $e = \frac{x}{\|x\|}\in S$, hence
+	\[
+		\|Lx\| = \| L(\|x\|e)\| = \|x\|\|Le\| \ge m \|x\|
+	.\] 
+\end{proof}
+\begin{proof}
+	Let $M$ linear be such that $ML = I_p$. $x = MLx$, so $\|x\| = \|MLx\| \le \|M\| \|Lx\|$. Hence $\|Lx\| \ge \frac{1}{\|M\|} \|x\|$.
+\end{proof}
+
+\begin{theorem}[Injective Mapping Theorem]
+	Suppose $\Omega \subset \mathbb{R}^p$ open, $f: \Omega \to \mathbb{R}^q$ belong to class $C^1(\Omega)$, and $L =  Df(c)$ is an injection. Then there exists $\delta>0$ such that $f$ restricted to $B_\delta(c)$ is an injection, and its inverse is continuous.
+\end{theorem}
+\begin{proof}
+	Let $m>0$ be such that $\|Lx\| > m \|x\|$ for any $x \in \mathbb{R}^p$. Take $\varepsilon < \frac{m}{2}$. Find $\delta$ be such that the approximation lemma holds. Thus
+	\[
+		\|f(x) - f(y) - L(x-y)\|\le \varepsilon \|x-y\| \quad \text{for } x,y \in B_\varepsilon(x_0)
+	.\] 
+We also know $\|L(x-y)\| \ge m \|x-y\|$. Now apply the triangle inequality. Hence
+\[
+	\|f(x) - f(y)\| \ge  \|L(x-y) \| - \|f(x) - f(y) - L(x-y)\| \ge m \|x-y\| - \varepsilon \|x-y\| \ge \frac{m}{2} \|x-y\|
+.\] 
+\end{proof}
+

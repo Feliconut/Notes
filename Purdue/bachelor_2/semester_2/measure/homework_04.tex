@@ -1,0 +1,48 @@
+\homework{4}{Mon 30 Jan 2023 16:41}{}
+\begin{itemize}
+	\item Let $E \subset M$ be arbitrary. SHow $E \cup \partial E$ is closed, and if $F \supset E$ is closed, then $F \supset E \cup \partial E$.
+\begin{proof}
+	Take $x \in \partial E$. Then there exists a sequence $x_n$ entirely in $E$ that converges to $x$. Thus $x_n$ is a sequence in $F$ that converges to $x$. Because $F$ is closed, $x \in F$. Therefore $\partial E \subset  F$. Also $E \subset F$, so $E \cup \partial E \subset F$.
+\end{proof}
+
+
+	\item Show that $f:M\to P$ is continuous, $Z \subset M$ is closed does not imply $F(Z) \subset P$ is closed. Give an example.
+\begin{proof}
+	Let $f$ be the identity map on real numebrs, $M$ be the half-open interval $[0,1)$,  $Z = M$, $P = [0,1]$. Now $Z$ is closed in $M$ but $f(Z)$ is not closed in $P$.
+\end{proof}
+
+	\item Give an example of a continuous map $g: M \to  P$ and a compact $K \subset P$ such that $g^{-1} K $ is not compact.
+\begin{proof}
+	Let $f:\mathbb{R} \to  \mathbb{R}^2$ defined by $f(x) = \left( \cos x, \sin x \right)$. Thus $f$ maps $\mathbb{R}$ to $S^1$, the 1-dimensional sphere. Now $f$ is continuous, $S^1$ is compact (since it is closed an bounded in $ \mathbb{R}^2$, but $f^{-1} (S^1) = \mathbb{R}$ is not bounded hence not compact.
+\end{proof}
+\item Let $x_n \in M$ form a Cauchy sequence. If $g: M \to  P$ is continuous, does it follow that $g(x_n) \in P$ form a Cauchy sequence? Does it follow if we assume $g$ is uniformly continuous?
+\begin{proof}
+	We first give a counterexample when $g$ is continuous but not uniformly continuous. Consider  $f: \mathbb{R}  \to  \mathbb{R}$ defined as $f(x) = \frac{1}{x}$ for $x \neq 0$ and $f(0) = 0$. Let $x_n \to 0$ be a convergent sequence. Now $f(x_n)$ is unbounded, hence diverge, hence not Cauchy (otherwise it should converge since $\mathbb{R}$ is complete).
+
+	Now we prove the statement given $g$ uniformly continuous.Fix $\varepsilon>0$. Now by uniform continuity of $g $ there exists $\delta>0$ such that $|x - y| < \delta$ implies $\left| g(x) - g(y) \right| <\varepsilon$. Now since $x_n$ Cauchy, $\left| x_m - x_n \right| <\delta$ for all $m, n > N$ for some $N$. Hence $\left| g(x_m) - g(x_n) \right| <\varepsilon$ for all $m, n > N$. This shows that the sequence $g(x_n)$ is Cauchy.
+\end{proof}
+
+
+\item Suppose $\left( M, \rho \right) $ is a compact metric space, $\left( P, \sigma \right) $ some metric space, and $f: M \to  P$ continuous and bijective. Prove that then $f^{-1} :P \to  M$ is also continuous.
+\begin{proof}
+	To prove $f^{-1}$ is continuous, it suffices to show $f$ is an open map, i.e. it preserves open sets. Take $A \subset M$ be open, we want to show $f(A)$ is open. But $A^c$ is closed in $M$ and hence compact, and $f(A^c) \subset P$ is compact. Therefore $f(A^c)$ is closed in $P$. Therefore $\left( f(A^c) \right)^c $ is open in $P$. But since $f$ is a bijection,
+	\[
+		\left( f(A^c) \right) ^c = \left( f(A)^c \right) ^c = f(A)
+	.\] 
+	Thus $f$ is an open map. Therefore $f^{-1}$ continuous.
+\end{proof}
+
+\item If $\varphi: M \to  \mathbb{R}$ and $\psi : M \to  R$ are u.s.c, show that $\varphi + \psi$ is also u.s.c.
+n
+\begin{proof}
+	From assumption we know that for any $a \in \mathbb{R}$, $\varphi^{-1} [a, \infty )$ and $\psi^{-1} [a,\infty)$ is closed. Thus
+	\begin{align*}
+		&(\varphi+\psi)^{-1} [a, \infty )\\
+		&= \{m \in M: \varphi(m) + \psi(m) \ge a\}  \\
+		&= \bigcap_{b \in \mathbb{R}} \{m \in M: \varphi(m) \ge b\} \cap \{m \in M: \varphi(m) \ge a-b\}  \\
+		&= \bigcap_{b \in \mathbb{R}} \varphi^{-1} [b,\infty ) \cap \psi^{-1} [a-b, \infty )
+	.\end{align*} 
+	But both $\varphi^{-1} [b,\infty )$ and $\psi[a-b, \infty )$ are closed, and closedness is preserved under arbitrary intersection. Hence $(\varphi + \psi)^{-1}[a, \infty )$ is closed for arbitrary $a$. Hence $\varphi + \psi$ is u.s.c.
+\end{proof}
+
+\end{itemize}

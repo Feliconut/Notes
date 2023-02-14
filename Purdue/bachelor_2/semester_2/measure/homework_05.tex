@@ -1,0 +1,62 @@
+\homework{5}{Thu 09 Feb 2023 20:01}{}
+\begin{itemize}
+	\item Let $E \subset M$ nonempty and $f(x) = \operatorname{inf} _{y \in E} \rho(x,y)$. Prove that $f$ is uniformly continuous and $f^{-1} (0) = E \cup \partial E$.
+\begin{proof}
+	Fix some $x \in M$. For each $\varepsilon>0$ there exists $y_\varepsilon \in E$ such that $f(x) \le  \rho(x,y_\varepsilon) < f(x) + \varepsilon$. Now consider any $z \in M $ such that $\rho(x,z) < \delta$. Then $f(z) \le \rho(z, y_\varepsilon) \le \rho(x,y_\varepsilon) + \rho(x,z) < f(x) + \varepsilon + \delta$. Thus  $f(z) - f(x) < \varepsilon + \delta$ whenever $\rho(x,z)<\delta$. 
+
+	Symmetrically we can also choose $y_\varepsilon' \in E$ such that $\rho(z, y_\varepsilon') < f(z) + \varepsilon$. Now $f(x) \le \rho(x, y_\varepsilon') \le \rho(z, y_\varepsilon') + \rho(x, z) < f(z) + \varepsilon + \delta$. Thus $f(x) - f(z) < \varepsilon + \delta$. Therefore $\|f(x)-f(z)\|<\varepsilon + \delta $ whenever $\rho(x, z) < \delta$.
+
+	Since $\varepsilon$ is arbitrary, we see $\left| f(z) - f(x) \right| \le  \delta$ whenever $\rho(x,z) < \delta$ for any $x, z \in M$. This shows $f$ is uniformly continuous.
+
+	Now we show $f^{-1} (0) = E \cup \partial E$. First we show $f^{-1} (0) \subset  E \cup \partial E$. Take $x \in M \setminus E$ such that $f(x) = 0$. Then for each $n$ there exists $x_n \in E$ such that $\rho(x, x_n) < \frac{1}{n}$. This shows $x \in \partial E$. On the other direction, suppose $x \in E \in \partial E$. If $x \in E$ then the claim is trivial. If $x \in \partial E$ then there exists a sequence of elements in $E$ converging to $x$, so again we have $f(x) = 0$.
+\end{proof}
+\item Suppose $f_n: M \to  P$ converge uniformly to a continuous $f: M \to  P$. If $x_n \in M$ converge to $x \in M$, prove that $f_n(x_n) \to f(x)$.
+\begin{proof}
+	Since $f$ is continuous, for all $\varepsilon$ there exists $\delta>0$ such that $\|f(x_n) - f(x)\| < \varepsilon$ whenever $\|x_n - x\|<\delta$. By uniform continuity, there exists natural number $N$ depending only on $\varepsilon$ such that for all $n \ge N$ we have $\|f_n(x_n) - f(x_n)\|<\varepsilon$. By triangle inequality, $\|f_n(x_n) - f(x)\|< 2 \varepsilon$. Since $\varepsilon$ is arbitrary, $f_n(x_n) \to f(x)$.
+\end{proof}
+\item Suppose u.s.c. functions $\varphi_k:M \to \mathbb{R}$ converge uniformly to $\varphi: M \to \mathbb{R}$. Prove that $\varphi$ is also u.s.c.
+\begin{proof}
+	Let $a \in \mathbb{R}$ be arbitrary, we want to prove $\varphi^{-1} ([a, \infty ))$ is closed. Take any convergent sequence sequence $x_n \in M$ with limit $x$ such that $\varphi(x_n) \ge a$ for all $n$. We want to show $\varphi(x) \ge a$. Now for each $\varepsilon>0$ there exists $N>0$ such that $\|\varphi_n(y) - \varphi(y)\|<\varepsilon$ for all $n \ge N$ and all $y \in M$. Thus for large enough $n$ we have $\|\varphi_n(x_n) - \varphi(x_n)\|<\varepsilon$. Thus $\varphi_n(x_n) \ge a - \varepsilon$. By the last exercise we know $\varphi_n(x_n) \to \varphi(x)$ and taking limit on both sides of the inequality we ahve $\varphi(x) \ge a$. This completes the proof.
+\end{proof}
+
+\item Prove that if the space of maps $\text{Map}(M, P)$ with the metric $\tau(f, g) = \operatorname{sup}_{x \in M} \overline{\sigma} \left( f(x), g(x) \right) $ is complete, then $(P, \sigma)$ is complete.
+\begin{proof}
+	Take some Cauchy sequence $y_n  \in P$. Now fix some arbitrary element $x^* \in M$ and define a sequence of mappings as follows:
+	\[
+		f_n(x) = y_n
+	.\] 
+	Then $\tau(f_n, f_m) = \sigma(y_n, y_m) \wedge 1$. Since $y_n$ Cauchy, $f_n$ Cauchy. Hence by completeness of $\text{Map}(M, P)$ there exists some $f: M \to  P $ such that $\tau(f_n, f) \to  0$. Evaluate $f$ at any point $x \in M$ we have $f_n(x) = y_n \to f(x) \in M$, thus $y_n$ is convergent. 
+\end{proof}
+\item Suppose $f, g, f_n, g_n: M \to  \mathbb{R}$ satisfy $f_n \to  f$ uniformly, $g_n \to  g$ uniformly. Does it follow that $f_n + g_n \to  f + g$ uniformly? Does it follow that $f_n g_n \to  fg $ uniformly?
+\begin{proof}
+	Additivity is true. Fix some $\varepsilon > 0$ and let $N_1, N_2$ be such that for all $x \in M$, $\|f_n(x) - f(x)\|< \frac{\varepsilon}{2}$ whenever $n > N_1$ and $\|g_n(x) - g(x)\|< \frac{\varepsilon}{2}$ whenever $n > N_2$. Then for $n > N_1 \vee N_2$, we have
+	\[
+		\|(f+g)(x) - (f_n + g_n)(x)\|\le \|f_n(x) - f(x)\|+\|g_n(x) - g(x)\| <\frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+	.\] 
+	This proves uniform convergence.
+
+Multiplicativity is false. Consider the counterexample: Take $M = \mathbb{R}$, and define $f_n(x) = g_n(x) = x + \frac{1}{n}$, both converge uniformly to $x$. We have $(f_n\cdot g_n)(x) = x^2 + \frac{2}{n} x + \frac{1}{n^2}$. This does not go uniformly to $x^2$, since the $\frac{2}{n} x$ term can be arbitrarily large for any fixed $n$.
+\end{proof}
+\item Consider a set $F \subset M$. If $F \cap K$ is closed for every compact $K \subset M$, show that $F $ is closed.
+\begin{proof}
+	Take a convergent sequence $x_n \to  x \in M$ where $x_n \in F$. We first show the set $A:=\{x_n: n \in N\} \cup \{x\} $ is compact. Let $\mathcal{C}$ be a open cover of $A$, then some $B_x \in \mathcal{C}$ covers $x$. By convergence, only finitely many elements in $A$ lies outside of $B_x$, thus we can pick an open set from $\mathcal{C}$ for each of them, and have a finite subcover of $A$.
+
+	Now since $A$ is compact, $F \cap A$ is closed. This shows $x \in F \cap A$, whence $x \in F$. Hence $F$ closed.
+\end{proof}
+
+\item Suppose $(M, \rho)$ is complete, $M \supset F_1 \supset F_2 \supset \ldots$ are closed and non-empty. Assuming $\lim_{n \to \infty} \text{diam} F_n = 0$, prove that $\bigcap_{n \in \mathbb{N}} F_n \neq \emptyset $.
+\begin{proof}
+	Take arbitrary $x_n \in F_n$. Since $\text{diam}F_n \to 0$, for $n \ge m$ we know $\rho(x_n, x_m) \le \text{diam} F_n \to 0$, so $x_n$ is Cauchy. By completeness, $x_n \to x$ for some $x \in M$. Now $F_n$ is closed and $x_n$ eventually stays in $F_n$, so $x \in F_n$. This is true for all $n$, so $x \in \bigcap_{n \in \mathbb{N}} F_n$.
+\end{proof}
+
+\item Consider a family $\mathcal{U} \subset \text{Map}(M, \mathbb{R})$, $\mathcal{U} \neq \emptyset $. Suppose each $u \in \mathcal{U}$ is u.s.c. and takes only non-negative values. Show that the function $v: M \to  \mathbb{R}$ defined by $v(x) = \operatorname{inf} \{u(x): u \in \mathcal{U}\} $ is also u.s.c.
+\begin{proof}
+	Fix $a \in \mathbb{R}$. Take a convergent sequence $x_n \to x$ in $M$ such that $v(x_n) \ge a$. We want to show $v(x) \ge a$. 
+
+	For any $\varepsilon>0$, by definition of $v$, there exists $u_\varepsilon \in \mathcal{U}$ such that $v(x) \le  u_\varepsilon(x) < v(x) + \varepsilon$. Also, we have $u_\varepsilon(x_n) \ge v(x_n) \ge a$. By u.s.c. of $u_\varepsilon$, $u_\varepsilon(x) \ge a$. Thus $v(x) \ge  a - \varepsilon$. Since $\varepsilon$ is arbitrary, $v(x) \ge a$. This proves that $v$ is u.s.c.
+\end{proof}
+
+
+
+
+\end{itemize}

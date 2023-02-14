@@ -1,0 +1,48 @@
+\lecture{3}{Thu 09 Feb 2023 09:10}{Lagrange Theorem}
+
+ \begin{lemma}
+	If $\varphi, \psi \in C^m$ and $\psi \circ \varphi$ is defined, then $\psi \circ \varphi \in  C^m$ where defined.
+\end{lemma}
+\begin{proof}
+	Using a bootstrapping argument. Argue by induction, using chain rule and that
+	\[
+		\varphi \in C^m \iff D \varphi \in C^{m-1}
+	.\] 
+\end{proof}
+
+\begin{theorem}[Lagrange's Theorem]
+	$\Omega \subset \mathbb{R}^p$ open, $f, g_1, \ldots, g_k \in C^1(\Omega)$, and $S = \{x \in \Omega: g_i(x) = 0, i = 1,\ldots,k\} $. If $c \in S$ is a local extremum of $f$ on $S$, then there exist $\mu, \lambda_1,\ldots,\lambda_k$ not all zero such that 
+	\[
+		\mu Df(c) = \lambda_1 Dg_1(c) + \ldots + \lambda_k Dg_k(c)
+	.\] 
+	Moreover, if $Dg(c)$ has rank $k$, one can take $\mu =1$.
+\end{theorem}
+\begin{proof}
+	We only need to prove for local minimum. Let $F: \Omega \to \mathbb{R}^{k+1}$ defined by $F(x) = \left( f(x), g_1(x), \ldots, g_k(x) \right) $. Let $U$ be open, $U \ni c$ be such that $f(x) \le f(c)$ for $x \in S \cap U$. Thus
+	\[
+		F(U) \subset \mathbb{R}^{k+1} \setminus \{(y_1,0,\ldots,0) \in \mathbb{R}^{k+1}:y_1>f(c)\}
+	.\] 
+Thus $F(c)$ is not interior point of $F(U)$. Thus $DF(c)$ cannot be surjective. Hence $\operatorname{rank} DF(c) < k+1$. Hence rows are linearly dependent. This proves our result.
+
+If $Dg(c)$ has full rank then $Dg_1(c),\ldots, Dg_k(c)$ are linearly independent, so $\mu\neq 0$, so we can divide by $\mu$.
+
+\end{proof}
+
+\subsection{Inequality Constraints}
+
+The ``boundary'' of constrained set: 
+ \[
+	 \bigcup_{\emptyset \neq I \subset [k]} \{h_i(x) = 0 \text{ for } i \in I \text{ and }h_i(x) >0 \text{ for }i \not\in I\} 
+.\] 
+
+In 2d it is like ``quadrants'' and in general it is a corner of $\Omega$ where its boundary consists of may different parts depending on which constraints equal to zero.
+
+\begin{theorem}[Lagrange's Theorem with Inequality Constraints]
+	Let $f: \Omega \to \mathbb{R}$ be $C^1(\Omega)$ and $c \in A$ as defined before is a local extremum. Then
+	\begin{itemize}
+		\item $Df(c), Dh_1(c), \ldots,Dh_k(c)$ are linearly dependent.
+		\item If $h_i(c)>0$ for some $i$ then one can take $\lambda_i = 0$.
+		\item If $i_1, \ldots, i_r$ are only indices such that $h_i(x) = 0$ and $Dh_{i_1}(c), \ldots, Dh_{i_r}(c)$ are linearly independent, then one can take $\mu = 1$.
+		\item If $c$ is a local minimum then one can take $\lambda_i\ge 0$ for $i = i_1, \ldots, i_r$.
+	\end{itemize}
+\end{theorem}

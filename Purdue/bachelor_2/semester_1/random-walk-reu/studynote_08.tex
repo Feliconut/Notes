@@ -1,0 +1,125 @@
+\studynote{8}{Mon 13 Feb 2023 22:48}{Time spent to the right of origin}
+
+\begin{theorem}
+(Continuity Theorem)  
+	  Assume $Z_n$ is a sequence of $D$ -valued random variables, $Z_n \Rightarrow Z$ . Let $F: D \to \mathbb{R}$ be continuous on $C \subset D$ such that $P(Z \in C) = 1$ . Then $F(Z_n) \Rightarrow F(Z)$ .  
+\end{theorem}
+\begin{theorem}
+	  If our random walk has a scaled limit of brownian motion perturbed at extrema:  
+	  $$
+	  \left(\frac{X_{\left\lfloor nt  \right\rfloor}}{\sqrt{n} }\right)_{t \in [0,1]} \implies (\alpha, \beta)\text{-BMPE}
+	  $$  
+	  then the fraction of time spent to the right of origin converges to a specific Beta distribution:  
+	  $$
+	  	\frac{1}{n} \sum_{k=1}^{n} 1_{X_k > 0} \implies \text{Beta}\left( \frac{1-\alpha}{2}, \frac{1-\beta}{2} \right) 
+	  .$$  
+\end{theorem}
+\begin{proof}
+	
+
+Apply continuity theorem. In our theorem, $F(x) = \int_0^1 1_{x(t) > 0} dt$ .  
+What remains to prove is that
+		  the set of all possible paths form a subset of $D$ on which the function $F$ is continuous.  
+
+		Write $J = [0,1]$ . Let $C:= \{x \in \mathcal{C}(J) \subset D: \mu(x^{-1}(0)) = 0\}$ , the set of all continuous paths whose zero set has zero Lebesgue measure. We claim that $F$ is continuous on $C$ . Once we establish this fact, the proof will be complete since $C$ is a set of probability $1$ .  
+
+		Fix some $x \in C$ and arbitrary $\varepsilon >0$ . Since $x^{-1}(0)$ has zero Lebesgue measure, there exists some open subset $A \subset J$ where $x^{-1}(0)\subset A$ and $\mu(A) < \varepsilon$ .  
+
+		Now $A^c = J \setminus A$ is a closed subset of compact set $J$ , hence $A^c$ is compact, therefore $x(A^c)$ is compact. This implies that $x(A^c)$ is bounded away from zero, so there exists some $\delta>0$ such that $x(A^c) \cap (-\delta, \delta) = \emptyset$ .  
+
+		 Finally let $0<r<\delta$ . We show that there exists $n>0$ such that $|F(x) - F(y)| < 2 n r+\varepsilon$ whenever $d(x, y)< r$ where $d$ is the Skorokhod Metric (the J1 metric).  
+		  \begin{align*}
+		  &\left| F(x) - F(y) \right| \\
+		  	&= \left| \int _J \mathbf{1}\left( x(t)  >0 \right) d\mu - \int _J \mathbf{1}\left( y(t) >0 \right) d\mu \right| \\
+		  	&\le \int_{J} \left| \mathbf{1}\left( x(t) > 0 \right)  - \mathbf{1}\left( y(t) > 0 \right)  \right| d\mu \\
+		  	&\le \int_{A^c} \left| \mathbf{1}\left( x(t) > 0 \right)  - \mathbf{1}\left( y(t) > 0 \right)  \right| d\mu 
+		  	+ \int_{A} \left| \mathbf{1}\left( x(t) > 0 \right)  - \mathbf{1}\left( y(t) > 0 \right)  \right| d\mu 
+		  .
+		  \end{align*}
+		    
+		where  
+		  \begin{align*}
+		  &\int_{A} \left| \mathbf{1}\left( x(t) > 0 \right)  - \mathbf{1}\left( y(t) > 0 \right)  \right| d\mu \\
+		  	&\qquad \le \mu(A) \operatorname{sup}  \left| \mathbf{1}\left( x(t) > 0 \right)  - \mathbf{1}\left( y(t) > 0 \right)  \right| = \varepsilon
+		  .
+		  \end{align*}
+		    
+		and  
+		  \begin{align*}
+		  &\int_{A^c} \left| \mathbf{1}\left( x(t) > 0 \right)  - \mathbf{1}\left( y(t) > 0 \right)  \right| d\mu \\
+		  	&\le \int _{A^c} \left| \mathbf{1}\left( x(t) >0 \right) -\mathbf{1}\left( x \circ \lambda(t) > 0 \right)  \right| d \mu\\
+		  	& \quad + \int _{A^c} \left| \mathbf{1}\left( x \circ \lambda(t) > 0 \right) - \mathbf{1}\left( y(t) >0 \right) \right| d \mu
+		  .
+		  \end{align*}
+		    
+		Now we bound the second term. By definition of the metric, $\left| x\circ \lambda(t) - y(t) \right| < r < \delta$ , so they either both $>0$ or both $<0$ , therefore  
+		  \begin{align*}
+		  &\int _{A^c} \left| \mathbf{1}\left( x \circ \lambda(t) > 0 \right) - \mathbf{1}\left( y(t) >0 \right) \right| \\
+		  	&\le \mu(A^c) \operatorname{sup}  \left| \mathbf{1}\left( x \circ \lambda(t) > 0 \right) - \mathbf{1}\left( y(t) >0 \right) \right|\\
+		  	&= 0 
+		  .
+		  \end{align*}
+		    
+		Finally we bound the integral $\displaystyle \int_{A^c}|\mathbf{1}(x(t)>0)-\mathbf{1}(x \circ \lambda(t)>0)| d \mu$ .  
+		First observe that $A^c$ can be decomposed to finitely many disjoint closed intervals $I_1, I_2, \ldots, I_n$ . By definition of $A^c$ we see that for each $I_k$ , $x(I_k)$ is either entirely positive or entirely negative.  
+		Now  
+		  \begin{align*}
+		  & \int _{A^c} \left| \mathbf{1}\left( x(t) >0 \right) -\mathbf{1}\left( x \circ \lambda(t) > 0 \right)  \right| d \mu\\
+		  	&= \sum_{k=1}^{n} \int _{I_k}   \left| \mathbf{1}\left( x(t) >0 \right) -\mathbf{1}\left( x \circ \lambda(t) > 0 \right)  \right| d \mu\\
+		  	&\le  \sum_{k=1}^{n} \int _{I_k}   \mathbf{1}\left( \lambda(t) \not\in I_k \right)  d \mu\\
+		  	&\le \sum_{k=1}^{n} 2 r \\
+		  	&= 2 n r
+		  .
+		  \end{align*}
+		    
+		The last inequality follows from the fact that the change of sign of $x(t)$ can only happen on the boundary of each component $I_k$ when it is "stretched or squeezed" by $\lambda$ . The effect of stretching can be at most $r$ from each side.  
+
+		Combining all inequalities we obtain the desired result.   
+\end{proof}
+
+\begin{proposition}
+	With probability $1$, the zero set of $\left( \alpha, \beta \right) $-BMPE on $[0,1]$ has zero lebesgue measure.
+\end{proposition}
+\begin{proof}
+	We write
+	\[
+		X_t=B_t+\alpha M_t^X-\beta I_t^X \quad t \geqslant 0
+	.\] 
+	where $M_t^X=\sup _{s \leqslant t} X_s$ and $I_t^X=\sup _{s \leqslant t}\left(-X_s\right)$. 
+
+	Let  $X_t$ run for time  $\varepsilon>0$. Then with probability $1$ there exists $\delta>0$ such that $M_\varepsilon^X > \delta$ and $I_\varepsilon^X < - \delta$. This can be justified using the fact that zero set of $X$ does not have isolated points. 
+
+	Now define hitting times
+	\[
+		T_t = \inf\{u>t: X_u = \pm \frac{\delta}{2} \} \wedge 1
+	.\]
+	\[
+		R_t = \inf \{u>t: X_u = \pm \delta\} \wedge 1
+	.\] 
+	Now let $t_0 = \varepsilon $ and $t_1 = T_{t_0}$. If $X_\varepsilon \in \left( - \delta, \delta \right) $, then $X_t = B_t$ for $t \in [t_0, t_1]$, and $X_{t_1}$ is fixed. Then $X$ is exactly a brownian bridge between $t_0$ and $t_1$, whence
+	\begin{equation}\label{eqn: pr0}
+		\operatorname{Pr} (X_t=0 | X_{t_0} = x_0, X_{t_1} = x_1) =0
+	\end{equation}
+	for all $t \in [t_0, t_1]$. Otherwise, if $X_\varepsilon \not\in \left( -\delta, \delta \right) $, then $X_t \not\in [-\delta, \delta]$ for all $t \in [t_0,t_1]$, so \eqref{eqn: pr0} still holds.
+
+	Now we let $t_2 = R_{t_1}$. Since $X_{t_1} = x_1 \in \{-\frac{\delta}{2}, \frac{\delta}{2}\} $, we know that $X_{t} \in \left[ -\delta, \delta \right] $ for $t \in [t_1, t_2]$. This implies that $X_t$ is a brownian bridge in the interval $[t_1, t_2]$, so 
+	\[
+		\operatorname{Pr} (X_t = 0|X_{t_1} = x_1, X_{t_2} = x_2) = 0 \qquad \text{ for }t \in [t_1,t_2]
+	.\] 
+
+	Now let $t_3 = T_{t_2}$ and argue that $X_t \not\in (-\frac{\delta}{2}, \frac{\delta}{2})$ for $t \in [t_2, t_3]$. Continue in this fashion and define
+	\[
+		t_{2n+1} = T_{t_{2n}}, \qquad t_{2n} = R_{t_{2n-1}}
+	.\] 
+	Using the same argument we know that 
+	 \[
+		 \operatorname{Pr} (X_t = 0|X_{t_i} = x_i, i = 1\ldots N) = 0 \qquad \text{ for } t \in [\varepsilon, t_N], \forall N
+	.\] 
+	
+	If there exists finite $N$ such that $t_N = 1$, we can apply the result above and Fubini's Theorem to show that the zero set has zero measure:
+	\[
+		\mathbb{E}\left[ \int _0^1 \mathbf{1}(X_t = 0) dt \right] = \int _0^1 \operatorname{Pr} \left[ X_t = 0 \right] dt = 0 
+	.\] 
+	It remains to show that such $N$ is finite with probability one. Suppose not. Then for  $\varepsilon'>0$ there exists $n$ such that $t_{2n}- \varepsilon' < t_{2n-1} < t_{2n} < 1 $. This is same as saying that a standard brownian motion makes displacement greater than $\frac{\delta}{2}$ within time $\varepsilon'$. By choosing small $\varepsilon'$ we see that the probability for this to happen is arbitrarily small.
+\end{proof}
+

@@ -30,6 +30,18 @@ By the Glivenko-Cantelli Theorem, as $n \to \infty $, $S_{m, n}\to F_m$ uniforml
 
 We hypothesize that the random walk has limiting distribution $F_0$, that is, $F_m \to F_0$ uniformly in distribution as $m\to \infty$.
 
+\begin{theorem}
+	(Kolmogorov's Theorem)
+	If $F_X$ is any continuous distribution function, then for every $d>0$ ,  
+\[
+  \lim _{n \rightarrow \infty} P\left(D_n \leq d / \sqrt{n}\right)=L(d)
+  \] 
+  where  
+\[
+  L(d)=1-2 \sum_{i=1}^{\infty}(-1)^{i-1} \mathrm{e}^{-2 i^2 d^2}
+  \]
+\end{theorem}
+
 \subsection*{Development of The Test}
 
 Our null hypothesis is
@@ -200,26 +212,32 @@ Now we obtain a concentration bound for $|D_{m, n} - \Delta |$:
 Write as convolution and apply Kolmogorov Theorem:
 \begin{equation}
 	\label{eqn:2samp-bounds}
-	 \int _0^d L(d-a, n) dL(a, n) \le 
+	 \int _0^d L(d-a) L(da) \le 
 	 \operatorname{Pr} \left[ |D_{m, n} - \frac{\Delta}{\sqrt{n} }| < \frac{d}{\sqrt{n} }| H_0 \right] \le 
-	\int _0^\infty  \int_{a - d}^{a + d} dL(b, n) dL(a, n)
+	 \int _0^\infty  \left[ L(a+d) - L(a-d) \right] L(da)
 .\end{equation}
 
 
-where $a$ and $b$ are variables for integration. The left hand side is $0$ when $d < 0$.
+where $a$ is variable for integration. The left hand side is $0$ when $d < 0$.
 
-For simplicity of notation, we write the inequality above as
+For simplicity of notation, we define
+\[
+	A(d) := \int _0^d L(d-a) L(da)  \qquad
+	B(d) := \int _0^\infty  \left( L(a+d) - L(a-d) \right) L(da)
+.\] 
+
+and write the inequality above as
 \begin{equation}
-	 A(d,n) \le 
+	 A(d) \le 
 	 \operatorname{Pr} \left[ |D_{m, n} - \frac{\Delta}{\sqrt{n} }| < \frac{d}{\sqrt{n} }| H_0 \right] \le 
-	B(d, n) 
+	B(d) 
 .\end{equation}
 
 After some manipulations,
 \begin{equation}
-	 A(d - \Delta, n) \le 
+	 A(d - \Delta) \le 
 \operatorname{Pr} \left[ D_{m, n}  < \frac{d}{\sqrt{n} }| H_0 \right] \le 
-1 - A(\Delta - d, n)
+1 - A(\Delta - d)
 .\end{equation} 
 
 Now we can proceed in the same way as 1 sample test.

@@ -1,0 +1,62 @@
+\homework{6}{Mon 13 Feb 2023 17:07}{}
+
+\begin{itemize}
+	\item Suppose $C \subset M$ has the property that any cover of $C$ by balls has a finite subcover. Prove that $C$ is compact.
+\begin{proof}
+	Let $\mathcal{C}$ be a open cover of $C$. For each  $A \in \mathcal{C}$, define the collection of open sets $\mathcal{C}_A$ as
+	\[
+		\mathcal{C}_A := \{B_{r(a)}(a): a \in A\} 
+	.\] 
+	where $r(a)$ is some positive real number such that $B_{r(a)}(a) \subset A$. Such $r$ always exists by openness of $A$. Since each element in $\mathcal{C}_A$ is contained in $A$, we have $\cup \mathcal{C}_A \subset A$. Also each $a \in A$ is contained in $B_{r(a)}(a)$, so $A \subset \cup \mathcal{C}_A$. Finally
+	\[
+		\mathcal{D}:=\cup_{A \in \mathcal{C}} \mathcal{C}_{A}	.\] 
+		covers $\cup \mathcal{C}$ by open balls, thus also covers $C$. Using the assumption we have a finite subset $\mathcal{D}' \subset \mathcal{D}$ that covers $C$. Let $\tau: \mathcal{D} \to \mathcal{C}$ which assigns to each $B_{r(a)}(a) \in \mathcal{D}$ some $A \in \mathcal{C}$ such that $a \in A$. This induces a corresponding subset of $\mathcal{C}$ :
+		\[
+		\mathcal{C}' = \tau(\mathcal{D}') 
+		.\] 
+		Since $D'$ is finite, $ \mathcal{C}'$ is finite. Also, for each $x \in C$ we have $x \in B_{r(a)}(a)$ for some $B_{r(a)}(a) \in \mathcal{D}'$. Furthermore, $ B_{r(a)}(a) \subset \tau(B_{r(a)}(a))  \in \mathcal{C}'$ by definition of $r$ and $\tau$. Hence for each $x \in C$ there exists some set in $\mathcal{C}'$ that contains $x$. Therefore $\mathcal{C}'$ is the finite subcover we want. Since $\mathcal{C}$ is arbitrary open cover, $C$ is compact.
+\end{proof}
+
+\item A map $\varphi: M \to  M$ is called an isometry if $\rho(\varphi(x), \varphi(y)) = \rho(x,y)$ for all $x, y \in M$. Prove that $I = \{\varphi: M \to  M \text{ is an isometry}\} \subset \text{Map}(M, M)$ is compact.
+\begin{proof}
+It suffices to show $I$ is totally bounded and complete. We first show $I$ is totally bounded.
+
+Fix arbitrary $\varepsilon>0$. Using compactness of $M$, choose a finite collection of points $A \subset M$ such that the balls $B_{\varepsilon}(a_i)$ cover $M$ where $a_i \in A, i = 1\ldots n$. In other words, let $A$ be a $\varepsilon$-net of $M$. Now define the set $X \subset A^A$ be
+\[
+	X = \{f \in A^A: \exists g_f \in I, \forall a \in A, \left| g_f(a) - f(a) \right| < \varepsilon\} 
+.\] 
+$X$ is finite since  $A^A$ has finite cardinality $n^n$. Now for each $f \in X$, choose $g_f \in I$ as in the definition of $X$. We claim that for every isometry $h \in I$ there exists $f \in X$ such that $\tau(g_f, h) \le  4 \varepsilon$.
+
+Fix $h \in I$. For each $a_i \in A$, let $f(a_i) \in A$ be such that $\rho\left( h(a_i) , f(a_i) \right) < \varepsilon$. We know $f \in X$ exists by total-boundedness of $M$. Fix arbitrary $x \in M$, then there exists  $a_i$ such that $\rho(x, a_i) < \varepsilon$. 
+
+By property of isometry, $\rho\left( h(x), h(a_i) \right) <\varepsilon$ and $\rho\left( g_f(x), g_f(a_i) \right) <\varepsilon$. By definition of $g_f$, $\rho\left(g_f(a_i), f(a_i)\right)<\varepsilon$.
+Now by triangle inequality
+\begin{align*}
+	\rho\left(g_f(x), h(x)\right) &\le \rho\left( g_f(x), g_f(a_i) \right) + \rho\left( g_f(a_i) , f(a_i) \right) \\
+				      &\qquad +\rho\left( f(a_i), h(a_i) \right) +\rho\left(h(a_i), h(x)\right) \\
+				      &< 4 \varepsilon
+.\end{align*} 
+
+This is true for all $x$, so $\tau(g_f, h) \le 4 \varepsilon$. This implies total boundedness since the collections of balls centered at $\{g_f: f \in X\} $ with radius $4 \varepsilon$ would cover $I$. 
+
+Finally we show completeness. Consider some Cauchy sequence $f_n \in I$.  Since $M$ compact, $M$ is complete, so $\text{Map}(M, M)$ is complete. Hence $f_n$ uniformly converges to some $f \in \text{Map}(M, M)$. It remains to show $f$ is an isometry. 
+\[
+	\rho(f(x), f(y)) = \rho(\lim f_n(x), \lim f_n(y)) = \lim \rho(f_n(x), f_n(y)) = \lim \rho(x,y) = \rho(x,y)
+.\] 
+
+We could exchange the limit with $\rho$ because $\rho$ is continuous.
+\end{proof}
+\item Suppose $f: \mathbb{R}\to \mathbb{R}$ has only finitely many points of discontinuity. Prove that there is a sequence $f_k: \mathbb{R}\to \mathbb{R}$ of continuous functions with $f_k \to f$ as $k \to \infty $.
+\begin{proof}
+	Let $x_1<  \ldots < x_n $ be all the points of discontinuity and let $\varepsilon = \max_i x_i - x_{i-1} > 0$. For $k > \frac{2}{\varepsilon}$ we define $f_k$ to be
+	\[
+		f_k(x) = \begin{cases}
+			f(x) & |x-x_i| \ge  \frac{1}{k} \text{ for all $i$}\\
+			f(x) & x = x_i \text{ for some $i$} \\
+			\text{ linear in between }
+		\end{cases}
+	.\] 
+	by choosing large enough $k$, $f_ k$ is well-defined. We verify $f_k$ is continuous. Fix arbitrary $x \in \mathbb{R}$. If $x = x_i$ for some $i$ then $f$ is continuous at $x$ since it is linear interpolation at $x$. If not, then for large enough $k$ we have $x$ is at least $\frac{1}{k}$-far from any $x_i$, so $f_k(x)$ eventually coincides with $f(x)$ which is continuous at $x$. Moreover, by the argument above, we also see that $f_k(x)$ eventually coincides with $f(x)$ for all $x \in \mathbb{R}$. Hence $f_k$ pointwise converges of $f$.
+\end{proof}
+
+\end{itemize}

@@ -1,0 +1,135 @@
+\homework{2}{Fri 27 Jan 2023 19:20}{}
+
+40.E, 40.L, 40.R, 40.S, 40.T, 40.U
+\begin{itemize}
+	\item 40.E. If Cartesian axes are rotated in the plane by the angle $\theta$, then the new coordinates $u, v$ of a point are related to the original coordinates $x, y$ by
+\[
+x=u \cos \theta-v \sin \theta, \quad y=u \sin \theta+v \cos \theta .
+\]
+Let $f: \mathbf{R}^2 \rightarrow \mathbf{R}$ be differentiable on $\boldsymbol{R}^2$ and let $F(u, v)=f(x, y)$ for all $x, y$. Show that
+\[
+\left[D_1 F(u, v)\right]^2+\left[D_2 F(u, v)\right]^2=\left[D_1 f(x, y)\right]^2+\left[D_2 f(x, y)\right]^2
+\]
+\begin{proof}
+	Let $\varphi \in \mathcal{L}(\mathbb{R}^2)$ be the coordinate transformation such that $(x,y) = \varphi(u,v)$. Write $c = (u,v)$ and $z = \varphi(c)$. Then by definition $\varphi$ is linear, and thus $F = f \circ \varphi$ is differentiable, and the derivative is given by
+	\[
+		DF(c) = D(f \circ \varphi)(c) = Df(z) D\varphi(c)
+	.\] 
+	Therefore
+	\begin{align*}
+		D_1F(c) &= Df(z)D\varphi(c)(e_1) \\
+			&= Df(z) D_1\varphi(c)\\
+			&= Df(z) \left( e_1 D_1x(c) + e_2 D_1y(c) \right)  \\
+			&= Df(z) (e_1 \cos \theta + e_2 \sin \theta) \\
+			&= \cos \theta D_1 f(z) + \sin \theta D_2 f(z)
+	.\end{align*} 
+	Similarly,
+	\begin{align*}
+		D_2F(c) &= Df(z)\left( e_1 D_2x(c) + e_2 D_2 y(c) \right)  \\
+		&= Df(z) \left(- e_1 \sin \theta + e_2 \cos \theta \right)  \\
+		&= - \sin \theta D_1f(z) + \cos \theta D_2f(z)
+	\end{align*}
+	Now we verify the identity:
+	\begin{align*}
+		&D_1F\left( c \right) ^2 + D_2F(c)^2\\
+		&=  \left( \cos \theta D_1 f(z) + \sin \theta D_2 f(z) \right) ^2+ 
+		\left( - \sin \theta D_1f(z) + \cos \theta D_2f(z) \right) ^2 \\
+		&=  D_1f(z)^2 + D_2f(z)^2
+	.\end{align*}
+\end{proof}
+
+\item 40.L. Let $A \subseteq \boldsymbol{R}^p, f: A \rightarrow \boldsymbol{R}^p$, and let the function $g: f(A) \rightarrow \boldsymbol{R}^p$ be inverse to $f$ in the sense that
+\[
+f \circ g(x)=x, \quad g \circ f(y)=y
+\]
+for all $x \in A$ and $y \in f(A)$. If $f$ is differentiable at a point $a \in A$ and if $g$ is differentiable at $b=f(a)$, show that the linear functions $D f(a)$ and $D g(b)$ are inverse to each other; that is, $\operatorname{Df}(a) \circ D g(b)$ and $D g(b) \circ D f(a)$ are the identity on $\boldsymbol{R}^{\mathrm{p}}$.
+\begin{proof}
+	By Chain Rule,  $g \circ f$ is differentiable at $a$ and
+	\[
+		D (gf) (a) = Dg(b) \circ Df(a)
+	.\] 
+	To apply chain rule on $f \circ g$ at $b$ we need to verify $f$ is differentiable at $g(b)$. It suffices to prove $g(b) = a$. Since $f(g(b)) = b$ we know $g(b) \in f^{-1} (b)$. If $f(a) = f(a') = b$ then  $g(f(a)) = a = g(b)$ and $g(f(a') ) = a' = g(b)$ thus $a = a'$, therefore $f$ is injective. This shows $g(b) = a$.
+
+	Now by Chain Rule, $f \circ g$ is differentiable at $b$ and 
+	\[
+		D(fg) (b) = Df(a) Dg(b)
+	.\] 
+	Moreover, since $fg(x) = x$ and $gf(y) = y$ we have
+	\[
+		D(fg)(a) = I, D(gf)(b) = I
+	.\] 
+	Therefore the desired claim follows.
+\end{proof}
+
+\item 40.R. Let $\Omega \subseteq \boldsymbol{R}^{\mathrm{p}}$ be an open connected set and let $f: \Omega \rightarrow \mathbf{R}^{\mathrm{q}}$ be differentiable on $\Omega$. If $D f(x)=0$ for all $x \in \Omega$, show that $f(x)=f(y)$ for all $x, y \in \Omega$. Show that this conclusion may fail if $\Omega$ is not connected.
+\begin{proof}
+	We use without proving the following fact: in an open connected set it is always posible to connect two points with finitely many line segments lying inside the set.
+
+	Fix $x, y \in \Omega$, and it suffices to prove $f(x) = f(y)$. Since $\Omega$ is open connected, $x$ and $y$ can be connected by finitely many line segments. In other words, there exists $x_0 = x$, $x_1 \in \Omega, \ldots, x_{p-1} \in \Omega, x_p = y$ such that $[x_i, x_{i+1}] \subset \Omega$ for $i = 0, \ldots, p-1$. Applying induction, we see that it suffices to prove the claim in the case when $[x,y] \subset \Omega$. 
+
+	Assume $[x,y] \subset \Omega$. Then we can apply the Mean Value Theorem, we know $f(y) - f(x) = Df(c) (y - x)$ for some $c \in [x,y]$. But $Df(c) = 0$, so $f(y) = f(x)$, and the proof is complete.
+
+	If $\Omega$ is not connected, we can have two disjoint sets $A, B \subset \Omega$ where $f(A) = \{0\}$ and $f(B) = \{1\} $. Now $Df(x) = 0$ and $f$ is nonconstant.
+\end{proof}
+
+
+\item 40.S. Let $J \subseteq \mathbf{R}^{\mathrm{p}}$ be an open cell and suppose that $f: J \rightarrow \boldsymbol{R}$ is differentiable on $J$. Show that if the partial derivative $D_1 f(x)=0$ for all $x \in J$, then $f$ does not depend on the first variable in the sense that
+\[
+f\left(x_1, x_2, \ldots, x_p\right)=f\left(x_1^{\prime}, x_2, \ldots, x_p\right)
+\]
+for any two points in $J$ whose second, $\ldots, p$ th coordinates are the same.
+\begin{proof}
+	Since $J$ is an open cell, it is convex. Therefore it contains the line segment $S$ joining the point $x = (x_1, \ldots, x_p)$ and $x' = (x_1', x_2, x_3, \ldots, x_p)$, where $x$ and $x'$ are both in $J$. 
+
+	Now apply Mean Value Theorem, and we have $f(x) - f(x') = Df(c) (x - x')$ where $c \in S$. Now observe that
+	\begin{align*}
+		&Df(c) (x - x')\\
+		&= Df(c) \left(e_1(x_1 - x_1')\right)\\
+		&= (x_1 - x_1')D_1f(c) \\
+		&= 0
+	.\end{align*}
+	Therefore $f(x) = f(x')$.
+\end{proof}
+
+
+\item 40.T. Show that the conclusion of the preceding exercise may fail if $J$ is not assumed to be a cell.
+\begin{proof}
+	Let $J_1$ be a cell and  $J_2 = J_1 + M e_1 = \{x + Me_1: x \in J_1\} $ where $M$ is big enough such that $J_1$ and $J_2$ are disjoint. Define $J = J_1 \cup J_2$. Now let $f(J_1) = \{0\} $ and $f(J_2) = \{1\} $. Thus $D_1f(x) = 0$ for $x \in J$, and yet for any point $c$ in $J_1$, $f(c) = 0 \neq 1 = f(c+Me_1)$. 
+\end{proof}
+
+	
+\item 40.U. Let $f: \boldsymbol{R}^2 \rightarrow \boldsymbol{R}$ be defined by
+\[
+\begin{array}{rlr}
+f(x, y) & =\frac{x y\left(x^2-y^2\right)}{x^2+y^2} & \text { for }(x, y) \neq(0,0) \\
+& =0 & \text { for }(x, y)=(0,0)
+\end{array}
+\]
+Show that the second partial derivatives $D_{x y} f$ and $D_{y x} f$ exist at $(0,0)$ but are not equal.
+\begin{proof}
+	$D_y f(0,0) = \lim_{h \to 0; h\neq 0} \frac{f(0,h) - f(0,0)}{h} = \lim_{h \to 0; h\neq 0} \frac{0}{h} = 0$.
+	Hence $D_yf$ exists at $0$ and $D_y(0,0) = 0$. It is obvious that $D_y f$ exists everywhere in $\mathbb{R}^2 \setminus \{(0,0)\} $ because $f$ is composition of well-defined differentiable functions in $\mathbb{R}^2 \setminus \{(0,0)\} $. We can further compute $D_yf(x,y)$:
+	 \[
+		D_y f(x,y) = \begin{cases}
+			\frac{x\left(x^4-4 x^2 y^2-y^4\right)}{\left(x^2+y^2\right)^2} & (x,y) \neq (0,0)\\
+			0 & (x,y) = (0,0)
+		\end{cases}
+	.\] 
+	The same reasoning holds for $D_x f(x,y)$ and we can compute
+	\[
+		D_x f(x,y) = \begin{cases}
+			\frac{y\left(x^4+4 x^2 y^2-y^4\right)}{\left(x^2+y^2\right)^2} & (x,y) \neq (0,0) \\
+			0 & (x,y) = (0,0)
+		\end{cases}
+	.\] 
+	Now we show $D_x D_yf(x,y)$ exists at $(0,0)$. 
+	\[
+		\left(D_x D_y f(x,y)\right)(0,0) = \lim_{h \to  0;h\neq 0} \frac{D_yf(h, 0) - D_yf(0,0)}{h} = \lim_{h \to 0;h\neq 0} \frac{\frac{h^5}{h^4}}{h} = 1
+	.\] 
+	In contrast,
+	\[
+		\left(D_y D_x f(x,y)\right)(0,0) = \lim_{h \to 0; h\neq 0} \frac{D_xf(0,h) - D_xf(0,0)}{h} = \lim_{h \to 0;h\neq 0} \frac{-h^5}{h^5} = -1
+	.\] 
+\end{proof}
+
+\end{itemize}
