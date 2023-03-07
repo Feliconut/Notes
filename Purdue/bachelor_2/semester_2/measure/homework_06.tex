@@ -58,5 +58,71 @@ We could exchange the limit with $\rho$ because $\rho$ is continuous.
 	.\] 
 	by choosing large enough $k$, $f_ k$ is well-defined. We verify $f_k$ is continuous. Fix arbitrary $x \in \mathbb{R}$. If $x = x_i$ for some $i$ then $f$ is continuous at $x$ since it is linear interpolation at $x$. If not, then for large enough $k$ we have $x$ is at least $\frac{1}{k}$-far from any $x_i$, so $f_k(x)$ eventually coincides with $f(x)$ which is continuous at $x$. Moreover, by the argument above, we also see that $f_k(x)$ eventually coincides with $f(x)$ for all $x \in \mathbb{R}$. Hence $f_k$ pointwise converges of $f$.
 \end{proof}
+\item Prove that a function $\varphi: M \to P$ is continuous at $a \in M$ iff for any sequence $x_n \in M$ with  $\lim_{n \to \infty} x_n = a$ we have $\varphi(a) = \lim_{n \to \infty} \varphi(x_n)$.
+\begin{proof}
+	Suppose that  $\varphi$ is continuous at $a$. Take a sequence $x_n \in M$ with limit $a$. Now by continuity of the function, for all $\varepsilon>0$ there exists $\delta>0$ such that $\left| f(x) - f(a) \right| <\varepsilon$ whenever $\left| x - a \right| <\delta$. By convergence of $x_n$, $\left| x_n - a \right| <\delta$ is satisfied by sufficiently large $n \ge N$. Thus $\left| f(x_n) - f(a) \right| <\varepsilon$ for sufficiently large $n$. This proves $f(x_n) \to f(a)$.
+
+	Now suppose $f$ preserves limits of all sequences in $M$, we want to prove $f$ continuous. Suppose $f$ discontinuous at $a$, then there exists  $\varepsilon>0$ such that for any $\delta>0$ there exists $x \in M$ such that $\left| x - a \right| < \delta$ and yet $\left| f(x) - f(a) \right| >\varepsilon$. We can let $\delta = \frac{1}{n}$ and choose a sequence $x_n$. Now $x_n \to  a$, so by the assumption we have $f(x_n) \to f(a)$, but $\left| f(x_n) - f(a) \right| >\varepsilon$ for all $n$, a contradiction. Therefore $f$ must be continuous at $a$.
+\end{proof}
+\item For $f, g: [a,b] \to  \mathbb{R}$, show that $T(f \pm g) \le T(f) + T(g)$, and if $c \in \mathbb{R}$, then $T(cf) = |c| T(f)$.
+\begin{proof}
+	Fix some partition $x_0, \ldots, x_n$ of $[a,b]$. By triangle inequality we have for each $i = 1,\ldots, n$,
+	\begin{align*}
+		&\left| \left( f \pm g \right)(x_i) -  \left( f \pm g \right)(x_{i-1}) \right| \\
+		&= 
+\left| \left( f(x_i) - f(x_{i-1}) \right) \pm \left( g(x_i) - g(x_{i-1}) \right)  \right|\\
+		&\le \left| f(x_i) - f(x_{i-1}) \right| + \left| g(x_i) - g(x_{i-1}) \right| 
+	.\end{align*} 
+	Passing to the sum, we have
+	\[
+		\sum_{i=1}^{n} \left( f \pm g \right) |_{x_{i-1}}^{x_i} 
+		\le \sum_{i=1}^{n} f |_{x_{i-1}}^{x_i}
+		+ \sum_{i=1}^{n} g |_{x_{i-1}}^{x_i}
+	.\] 
+	Taking supremum over the partition, we have
+	\[
+		T(f \pm g) \le  T(f) + T(g)
+	.\] 
+	To prove the second part of the proposition, fix some partition and observe that for each $i = 1,\ldots, n$,
+	\[
+		\left| (cf)(x_i) - (cf)(x_{i-1}) \right| 
+		= |c| \left| f(x_i) - f(x_{i-1}) \right| 
+	.\] 
+	Now we can pass to sum and supremum and obtain the result.
+\end{proof}
+\item If $\varphi, \psi \in \text{BV}[a,b]$, does it follow that $\varphi \psi \in \text{BV}[a,b]$?
+\begin{proof}
+	Yes. We use that fact that BV functions are differences of positive increasing functions. Let $\varphi = \varphi_1 - \varphi_2$ and $\psi = \psi_1 - \psi_2$ where $\varphi_1, \varphi_2, \psi_1, \psi_2$ are positive increasing. Then
+	\[
+		\varphi\psi = (\varphi_1-\varphi_2)(\psi_1-\psi_2) = (\varphi_1\psi_1+\varphi_2\psi_2) - (\varphi_2 \psi_1 + \varphi_1 \psi_2)
+	.\] 
+	where the pairwise products of $\varphi_i \psi_i$ are also positive increasing.
+\end{proof}
+\item Show that $E \subset \mathbb{R}$ is of measure $0$ iff there exists collection of intervals $I_1, I_2, \ldots$ of finite total length such that each $x \in E$ is contained in infinitely many $I_j$.
+\begin{proof}
+	For each $n \in \mathbb{N}$, let $\{I^{(n)}_i\}_{i \in \mathbb{N}}$ be a collection of intervals that cover $E$ and with total length $\frac{\varepsilon}{2^n}$. Then for each point in $E$ and each $n$ there exists some $I^{(n)}_i$ containing $x$. Furthermore, the total length of all intervals is $\sum_{n=1}^{\infty} \frac{\varepsilon}{2^n} = \varepsilon$.
+\end{proof}
+
+	
+\item Let us say that a number $c \in \mathbb{R}$ is unlucky if it can be written as a decimal without the digit $7$. Prove that the unlucky numbers form a set of measure $0$.
+\begin{proof}
+	We mimic the argument that Cantor set has measure zero.
+
+	Let $F_0$ be the interval $[0,1]$. Let $F_1 = [0,0.7) \cup [0.8,1]$. Define $F_2$ as the set of all numbers whose second digit is not $7$. Proceed in this way, define
+	\[
+		F_n = \{x \in [0,1]: n\text{-th decimal digit of }x\neq 7\}  
+	.\] 
+	Let $c(X)$ denote the content of set $X$. We see that $c(F_n) = \frac{9}{10}$. Also, since each digits are independent of each other, we see that
+	\[
+		c\left(\cap_{n = 0}^{N}F_n\right) = \left( \frac{9}{10} \right) ^N
+	.\] 
+	Therefore
+	\[
+		c\left( \bigcap_{n=0} ^{\infty }F_n \right) =0
+	.\] 
+	Then note that, by definition of $F_n$, the unlucky numbers are exactly $\bigcap_{n=0} ^\infty F_n$.
+\end{proof}
+
+
 
 \end{itemize}

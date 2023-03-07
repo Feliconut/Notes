@@ -1,0 +1,86 @@
+\lecture{5}{Wed 22 Feb 2023 16:38}{}
+
+\begin{theorem}
+	Let $\mathcal{B}$ be collection of Borel sets, and $\mathcal{M}$ be collection of measurable sets. Then
+	\[
+		|\mathcal{B}| = |\mathbb{R}|
+	.\] 
+	and
+	\[
+		|\mathcal{M}| > |\mathbb{R}|
+	.\] 
+\end{theorem}
+\begin{proof}
+	We only prove the second part partially. Let $C \subset [0,1]$ be the Cantor set. Then $|C| = |\mathbb{R}|$, for $C \subset \mathbb{R} \implies |C| \le |\mathbb{R}|$, and there exists a surjection $C \to [0,1]$.
+
+	To construct this surjection, note that every number in $C$ can be represented in base 3, which corresponds to some number in base 2, which corresponds to some element in $[0,1]$.
+
+	Hence $|C| \ge |[0,1]| = |\mathbb{R}|$. Hence $|C| = |\mathbb{R}|$ by trichotomy of cardinality.
+
+	Note that any  $E \subset C$ is measurable with $m(E) = 0$. By a theorem of Cantor, $|2^C| > |C|$. Hence
+	 \[
+		|\mathcal{M}| \ge |2^C| > |C| = |\mathbb{R}|
+	.\] 
+\end{proof}
+
+\begin{theorem}
+	Every measurable set can be approximated from above by open set and below by closed set, in the sense that for any $\varepsilon>0$ there exists closed $F$ and open $G$ such that
+	\[
+		F \subset E \subset G
+	.\] 
+	and
+	\[
+		m(E\setminus F), m(G \setminus E) < \varepsilon
+	.\] 
+\end{theorem}
+\begin{proof}
+	We first prove for upper approximation by open sets. 
+	When $m(E) < \infty $, there exists open intervals $I_j$ such that $\cup I_j \supset E$, and $\sum_{j=1}^{\infty} |I_j| < m(E) + \varepsilon$. Let $G = \bigcup_{j \in \mathbb{N}} I_j$ which is open. Then
+	\[
+		m(G) \le \sum_{j=1}^{\infty} m(I_j) = \sum_{j=1}^{\infty} |I_j| < m(E) + \varepsilon
+	.\] 
+	Also,
+	\[
+		m(G) = m(G \setminus E) + m(E)
+	.\] 
+	Hence
+	\[
+		m(G \setminus E) = m(G) - m(E) < \varepsilon
+	.\] 
+
+	Now consider general $E$. Let $E_n = E \cap B\left( 0 , n\right) $. Now there exists $G_n \supset E_n$ open such that
+	\[
+		m(G_n \setminus E_n) < \frac{\varepsilon}{2^n}
+	.\] 
+	Let $G = \cup G_n$. Hence
+	\[
+		m(G \setminus E) = m\left( \cup G_n \setminus \cup  E_n \right) \le m\left( \cup (G_n \setminus E_n) \right) \le \sum_{n=1}^{\infty} \frac{\varepsilon}{2^n} =\varepsilon
+	.\] 
+	To prove the lower approximation by closed sets, pass to complement of $E$.
+\end{proof}
+
+Generalization of lebesgue measure: 
+\subsection{Lebesgue-Steltjes Measure}
+
+Let $g: \mathbb{R} \to  \mathbb{R}$ be increasing. For every interval we define the generalized length $|I|_g$ be
+\[
+	|(a,b)|_g = \lim_{b^-} g - \lim_{a^+} g 
+.\] 
+and
+\[
+	|[a,b]|_g = \lim_{b^+} g - \lim_{a^-} g
+.\] 
+
+Then the Lebesgue measure corresponds to the special case $g(x) = x$.
+
+\subsection{Spectral Measure}
+
+Another variant is matrix-valued measure, where $g$ is an operator on Hilbert space:
+
+\[
+	g: \mathbb{R} \to  \{m \times m \text{symmetric real matrices}\}  
+.\] 
+We say $g$ is  \textit{increasing} if $s\le t$ implies $g(t) - g(s)$ positive semidefinite.
+
+Introduced by von Neumann.
+

@@ -1,0 +1,235 @@
+\homework{5}{Sat 18 Feb 2023 19:24}{homework}
+
+6-1 A uniform string of length $2.5 \mathrm{~m}$ and mass $0.01 \mathrm{~kg}$ is placed under a tension $10 \mathrm{~N}$.
+(a) What is the frequency of its fundamental mode?
+\begin{proof}[Solution]
+	Use equation 6.8:
+	\[
+		\nu_1 = \frac{1}{2 L}\left( \frac{T}{\mu} \right)^{\frac{1}{2}} 
+	.\] 
+	Where
+	\[
+		\mu = \frac{m}{L}
+	.\] 
+	Calculate,
+	\[
+		\nu_1 = \SI{10}{Hz}
+	.\] 
+\end{proof}
+
+(b) If the string is plucked transversely and is then touched at a point $0.5 \mathrm{~m}$ from one end, what frequencies persist?
+\begin{proof}[Solution]
+	Those frequencies where  $0.5$ m is a node will persist. This corresponds to 
+	\[
+		n = 5 k, \qquad k \text{ integer}
+	.\] 
+	Thus the frequencies that are $5, 10, 15, \ldots$ times the fundamental frequency 3ill persist.
+\end{proof}
+
+
+\newpage
+
+7-2 The equation of a transverse wave traveling along a string is given by $y=0.3 \sin \pi(0.5 x-50 t)$, where $y$ and $x$ are in centimeters and $t$ is in seconds.
+
+(a) Find the amplitude, wavelength, wave number, frequency, period, and velocity of the wave.
+\begin{proof}[Solution]
+	Rewrite:
+	\[
+		y(x,t) = 0.3 \sin \left[ \frac{2 \pi}{4}\left( x - 100 t \right)  \right] 
+	.\] 
+	Compare with
+	\[
+		y(x,t) = A \sin\left[ \frac{2 \pi}{\lambda}(x - v t) \right] 
+	.\] 
+	\begin{itemize}
+		\item Amplitude: $A = 0.3$
+		\item Wavelength: $\lambda = 10$
+		\item Velocity: $v = 100$
+		\item Wave number:  $k = \frac{2 \pi}{\lambda} = \frac{\pi}{5}$ 
+		\item Frequency: $\nu = \lambda v = 1000$
+		\item Period: $T = \frac{1}{\nu} = \frac{1}{1000}$
+	\end{itemize}
+\end{proof}
+
+(b) Find the maximum transverse speed of any particle in the string.
+\begin{proof}[Solution]
+	\[
+		\frac{\partial y}{\partial t}  = A k(-v) \cos \left[ k(x - v t) \right] 
+	.\] 
+	The maximum value is
+	\[
+		A k v = 6 \pi
+	.\] 
+\end{proof}
+
+\newpage
+
+6-5 A stretched string of mass $m$, length $L$, and tension $T$ is driven by two sources, one at each end. The sources both have the same frequency $\nu$ and amplitude $A$, but are exactly $180^{\circ}$ out of phase with respect to one another. What is the smallest possible value of $\omega$ consistent with stationary vibrations of the string?
+\begin{proof}[Solution]
+	We assume a steady-state motion of
+	\[
+		y(x,t) = B \sin(\frac{\omega x}{v}  + \alpha) \cos \omega t
+	.\] 
+	subject to the following conditions:
+	\[
+		y(0,t) = A \cos \omega_d t 
+	.\] 
+	\[
+		y(L,t) = -A \cos \omega_d t
+	.\] 
+	The stead state solution forces $\omega = \omega_d$. 
+
+	Then
+	\[
+		\sin (\frac{\omega L}{v} + \alpha) = - \sin (\alpha)
+	.\] 
+	This implies
+	\[
+		\frac{\omega L}{v} = (2 k+1) \pi
+	.\] 
+	Let $k = 0$, we have
+	\[
+		\omega = \frac{\pi v}{L} = \pi \left( \frac{T}{m L} \right) ^{\frac{1}{2}}
+	.\] 
+\end{proof}
+
+\newpage
+
+$6-11$ (a) Find the total energy of vibration of a string of length $L$, fixed at both ends, oscillating in its $n$th characteristic mode with an amplitude $A$. The tension in the string is $T$ and its total mass is $M$. (Hint: Consider the integrated kinetic energy at the instant when the string is straight so that it has no stored potential energy over and above what it would have when not vibrating at all.)
+\begin{proof}[Solution]
+	The normal mode solution is of the form
+	\[
+		y_n(x,t) = A_n \sin\left( \frac{n \pi x}{L} \right)  \cos\left( n \omega_1 t \right) 
+	.\] 
+	where
+	\[
+		\omega_1 = \frac{\pi}{L} \left( T / \mu \right) ^{\frac{1}{2}} = \pi \left( \frac{T}{M L} \right) ^{\frac{1}{2}}
+	.\] 
+
+	We have
+	\[
+		K = \int _0^L \frac{1}{2} \frac{m}{L}dx \left( \frac{\partial y}{\partial t}  \right) ^2
+	.\] 
+	Calculate,
+	\[
+		K = \frac{\sin \left(n \omega_1 t\right)^2 \omega_1^2 A_n^2 M n^2}{4}
+	\]
+	Take the trigonometric term to be $1$, which corresponds to the zero potential energy case, we see
+	\[
+		E = \frac{\omega_1^2 A_n^2 M n^2}{4}
+	.\] 
+
+\end{proof}
+
+(b) Calculate the total energy of vibration of the same string if it is vibrating in the following superposition of normal modes:
+\[
+y(x, t)=A_1 \sin \left(\frac{\pi x}{L}\right) \cos \omega_1 t+A_3 \sin \left(\frac{3 \pi x}{L}\right) \cos \left(\omega_3 t-\frac{\pi}{4}\right)
+\]
+(You should be able to verify that it is the sum of the energies of the two modes taken separately.)
+
+\begin{proof}[Solution]
+	We directly calculate:
+	\begin{align*}
+		K &= \int _0^L \frac{1}{2} \frac{m}{L}dx \left( \frac{\partial y}{\partial t}  \right) ^2\\
+		&= -\frac{\left(A_3^2 \omega_3^2 \sin \left(2 \omega_3 t\right)+A_1^2 \omega_1^2 \cos \left(2 \omega_1 t\right)-A_1^2 \omega_1^2-A_3^2 \omega_3^2\right) M}{8}
+	.\end{align*}
+	Take the trigonometric terms be $-1$ and obtain
+	 \[
+		E = \frac{A_1^2 \omega_1^2+A_3^2 \omega_3^2}{4}M =  
+		\frac{A_1^2 \omega_1^2}{4}M
+		+
+ \frac{A_3^2 \omega_3^2}{4}M
+ = E_1 + E_2
+	.\] 
+\end{proof}
+\newpage
+
+5. Consider a uniform elastic string of length $l$ and mass per unit length $\mu$. The tension in the string is $T$. Ignore effects of gravity. The string is attached at both ends to either a fixed point, or to a vertical frictionless rod via a massless ring. For each of the three boundary conditions (1-3) shown in the figure, find the following:
+(a) Write down the boundary conditions mathematically.
+
+(b) Find the normal modes and their frequencies for small transverse oscillations.
+
+(c) Sketch the shapes of the first three normal modes.
+
+\begin{proof}[Solution]
+	Assume the solution is of the form
+	\[
+		y(x,t) = A \sin\left( \frac{\omega_n x}{v} + \alpha\right) \cos(\omega_n t)  
+	.\] 
+\end{proof}
+
+\begin{proof}[Case 1]
+	Boundary conditions are
+	\begin{align*}
+		y(l, t) &= 0 \\
+		y(0, t) &= 0
+	.\end{align*}
+
+	Thus
+	\[
+		\sin\left(\frac{\omega_n l}{v} + \alpha\right) = 0 \qquad \sin(\alpha) = 0
+	.\] 
+
+	Hence
+	\[
+		\alpha = 0 \qquad \frac{\omega_n l}{v} = n \pi
+	.\] 
+	Thus
+	\[
+		\omega_n = \frac{n \pi v}{l} = n \pi \left( \frac{T}{m l} \right) ^{\frac{1}{2}}
+	.\] 
+
+
+\end{proof}
+
+
+\begin{proof}[Case 2]
+	Boundary conditions are
+	\begin{align*}
+		y(0, t) &= 0 \\
+		\frac{\partial }{\partial x} y(l, t) &= 0
+	.\end{align*}
+
+	Thus
+	\begin{align*}
+		\sin(\alpha) &=  0\\
+		\cos \left(\frac{\alpha v+l \omega_n}{v}\right)&= 0 \\
+	.\end{align*} 
+
+	Hence
+	\[
+		\alpha = 0 \qquad \frac{\omega_n l}{v} = (n - \frac{1}{2}) \pi
+	.\] 
+	Thus
+	\[
+		\omega_n = \frac{(n-\frac{1}{2}) \pi v}{l} = (n-\frac{1}{2}) \pi \left( \frac{T}{m l} \right) ^{\frac{1}{2}}
+	.\] 
+
+
+\end{proof}
+\begin{proof}[Case 3]
+	Boundary conditions are
+	\begin{align*}
+		\frac{\partial }{\partial x} y(0, t) &= 0\\
+		\frac{\partial }{\partial x} y(l, t) &= 0
+	.\end{align*}
+
+	Thus
+	\begin{align*}
+		\cos(\alpha) &=  0\\
+		\cos \left(\frac{\alpha v+l \omega_n}{v}\right)&= 0 \\
+	.\end{align*} 
+
+	Hence
+	\[
+		\alpha = \frac{\pi}{2} \qquad \frac{\omega_n l}{v} = n  \pi
+	.\] 
+	Thus
+	\[
+		\omega_n = \frac{n \pi v}{l} = n \pi \left( \frac{T}{m l} \right) ^{\frac{1}{2}}
+	.\] 
+
+
+\end{proof}
+
+Figures: see attached file.

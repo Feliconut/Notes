@@ -1,0 +1,181 @@
+\homework{8}{Mon 27 Feb 2023 20:22}{}
+
+\begin{itemize}
+	\item In prevous problem 1, show that it may not be possible to choose $A$ to be closed, not just $F_\sigma$: 
+\begin{proof}
+	Take $E = [0,1] \setminus \mathbb{Q}$. Then $m(E) = m\left( [0,1] \right) = 1$. However the only closed set contained in $E$ are singleton sets, so $E\setminus A$ always has nonzero measure. 
+\end{proof}
+
+	\item Let $q_n \in (0,1), n \in \mathbb{N}$. Modify Cantor's original construction of his set so that in the $m$-th step we remove the middle $q_n$-th of each remaining interval; starting with $[0,1]$. So in cantor's construction $q_n = \frac{1}{3}, \forall n$. What measure does the $q_n$-Cantor set have? Can it have positive measure for some choice of $q_n$?
+\begin{proof}
+	Let $F_n$ be the set after performing the $n$-th step. We know $F_0 = [0,1]$ so $m(F_0) = 1$. From previous proof we know that if  $m(F_n) = m(F_{n-1})(1 - q_n)$. Thus
+	\[
+		m(F_n) = \prod_{i = 1}^{n} (1 - q_i) 
+	.\] 
+	To have positive measure, we need
+	\[
+		\lim_{n \to \infty} \prod_{i = 1}^{n} (1 - q_i) > 0
+	.\] 
+	This true iff
+	\[
+		\sum_{n=1}^{\infty} q_n \in \mathbb{R}
+	.\] 
+	We have used the following standard result about infinite product:
+	\begin{proposition}
+		An infinite product $\prod_{n=1}^{\infty}  (1 + a_n)$ converges to a nonzero element iff the series $\sum_{n=1}^{\infty} a_n$ converges.
+	\end{proposition}
+\end{proof}
+
+\newpage
+	\item Let $r_1, r_2,\ldots \in \mathbb{R}$ be a sequence, and $g: \mathbb{R} \to  \mathbb{R}$ defined by $g(x) = \sum_{r_n < x}2^{-n}$. Show that for any $A \subset \mathbb{R}$ we have $m^* _g(A) = \sum_{n: r_n \in A} 2^{-n}$. What $A$ will be measurable?
+\begin{proof}
+	Denote $R = \{r_n: n \in \mathbb{N}\}$. First verify that an interval $I$ such that $I \cap R = \emptyset $ will have content zero. 
+
+	Consider any countable cover $I_j$ of $A$. Assumingm $I_j$ is open, we have
+	\begin{align*}
+		|I_j|
+		&=  \lim_{x \to b^-} \sum_{r_n < x}{2^{-n}}  - \lim_{x \to a^+} \sum_{r_n < x} 2^{-n}   \\
+		&= \sum_{r_n < b} 2^{-n} - \sum_{r_n \le a} 2^{-n} \\
+		&= \sum_{a < r_n < b} 2^{-n}\\
+		&= \sum_{r_n \in I_j} 2^{-n} 
+	.\end{align*}
+	Similarly, it holds for any interval $I_j$ that
+	\[
+		|I_j| = \sum_{r_n \in I_j} 2^{-n}
+	.\] 
+	Now
+	\begin{align*}
+		\sum_{j=1}^{\infty} |I_j|
+		&= \sum_{j=1}^{\infty} \sum_{r_n \in I_j} 2^{-n}\\
+		&\ge \sum_{r_n \in A} 2^{-n}
+	.\end{align*}
+
+	Now we have a lower bound, and it remains to get an upper bound. Fix $\varepsilon>0$ and let $N$ be such that 
+	\[
+		\sum_{n=N}^{\infty} 2^{-n} < \varepsilon
+	.\] 
+	We pick $I_n$ such that $R \cap A \subset \cup_n I_n$, and $\{r_n: n \le  N\} \cap A^c$ is not covered by any $I_n$. This is possible because: we can just use $\mathbb{R} \setminus \left( \{r_n: n \le N\} \cap A^c \right)$ as our cover, which is disjoint union of at most $N + 1$ open intervals that satisfies the two properties. 
+	Now we have
+	\begin{align*}
+		\sum_{j=1}^{\infty} |I_j|
+		&= \sum_{j=1}^{\infty} \sum_{r_n \in I_j} 2^{-n} \\
+		&= \sum_{r_n \in A} 2^{-n} + \sum_{j=1}^{\infty} \sum_{r_n \in I_j \setminus A} 2^{-n} \\
+		&\le \sum_{r_n \in A}2^{-n} + \sum_{r_n \not\in A, n > N} 2^{-n}\\
+		&\le \sum_{r_n \in A}2^{-n} + \sum_{n> N} 2^{-n} \\
+		&< \sum_{r_n \in A}2^{-n} + \varepsilon
+	.\end{align*}
+	Therefore
+	\[
+		m^*_g(A) = \operatorname{inf} 
+		\left\{ \sum_{j=1}^{\infty} |I_j|: A \subset \bigcup_{j \in \mathbb{N}} I_j\right\}
+		= \sum_{r_n \in A} 2^{-n}
+	.\] 
+	Now we discuss what $A$ are measurable. 
+
+	Any subset of $\mathbb{R}$ is measurable in this sense. Consider any $A \subset \mathbb{R}$ and $X \subset \mathbb{R}$. Now we have
+	\[
+		A = \left( A \cap X \right)  \cup \left( A \setminus X \right) 
+	.\] 
+	Thus
+	\[
+		R \cap A = \left( R \cap \left( A \cap X \right)  \right)  \cup \left( R \cap (A \setminus X) \right)  
+	.\] 
+	But this directly implies
+	\[
+		\sum_{r_n \in A} 2^{-n} = \sum_{r_n \in A \cap X} 2^{-n} + \sum_{r_n \in A \setminus X} 2^{-n}
+	.\] 
+	which reads as
+	\[
+		m^*(A) = m^*(A \cap X) + m^*(A \setminus X)
+	.\] 
+	This is precisely the measurability criterion.
+\end{proof}
+\newpage
+
+	\item Express the characteristic functions $\chi_{ A \cap B}, \chi_{A \cup B}$ and $\chi_{\Omega \setminus A}$ through $\chi_A, \chi_B$; here $A, B \subset \Omega$.
+\begin{proof}
+	We have
+	\[
+		\chi_{A \cap B} = \chi_A \chi_B \qquad
+		\chi_{\Omega \setminus A} = 1 - \chi_A
+	.\] 
+	and
+	\[
+		\chi_{A \cup B} = \chi_{\Omega\setminus \left( \left( \Omega \setminus A \right) \cap (\Omega \setminus B) \right) }
+		= 1 - (1 - \chi_A) (1 - \chi_B)
+		= \chi_A + \chi_B - \chi_A\chi_B
+	.\] 
+\end{proof}
+
+	\item If $f_n \in L(\Omega, \mathcal{A}, \mu)$, prove that $\{x: \lim_{n \to \infty} f_n(x) \text{ exists}\} $ is measurable.
+\begin{proof}
+	For each $x \in S = \{x: \lim_{n \to \infty} f_n(x) \text{ exists}\} $, we define $L_x = \lim_{n \to \infty} f_n(x)$.
+	Use the sequential definition of limit,
+	\[
+		S = \{x: \left( \forall \varepsilon>0 \right)  \left( \exists N \in \mathbb{N} \right)  \left( \forall n > N \right)  \left| f_n(x) - L_x \right|< \varepsilon \} 
+	.\] 
+	Write $A(n, x, \varepsilon) = \{x: \left| f_n(x) - L_x \right| <\varepsilon\} $. Note that
+	\[
+		A(n, x, \varepsilon) = \{x: f_n(x) < \varepsilon + L_x\} \cap \{x: f_n(x) > L_x - \varepsilon\} 
+	.\] 
+	Hence $A(n, x, \varepsilon)$ is measurable. We may write $S$ set-theoretically:
+	\[
+		S = \bigcap_{\varepsilon_j \to 0+} \bigcup_{n \in \mathbb{N}} \bigcap_{n > N} A(n, x, \varepsilon_j)
+	.\] 
+	note that we take a sequence $\varepsilon_j$ that approach $0$ from above. This is a countable boolean operation of measurable sets, which stays in the  $\sigma$-algebra, so $S$ is measurable.
+\end{proof}
+
+	\item Let $\varphi \in L(\Omega, \mathcal{A}, \mu)$ and $\mathcal{E} = \{S \subset \mathbb{R}: \varphi^{-1} (S) \in \mathcal{A}\} $. Prove that $\mathcal{E}$ is a $\sigma$-algebra. Conclude from this that the preimage $\varphi^{-1} (B)$ of any Borel set $B \subset \mathbb{R}$ is in $\mathcal{A}$.
+\begin{proof}
+	Trivially, $\varphi^{-1} \emptyset  = \emptyset $ so $\emptyset  \in \mathcal{E}$.
+
+	Let $S_n \in \mathcal{E}$ where $n \in \mathbb{N}$, then $\varphi^{-1} S_n \in \mathcal{A}$. From set-theoretic properties of inverse images,
+\[
+		\varphi^{-1} \left( \bigcup_{n \in \mathbb{N}} S_n \right)  = \bigcup_{n \in \mathbb{N}} \varphi^{-1} S_n  \in \mathcal{A}
+	.\]
+	Also
+	\[
+		\varphi^{-1} \left( \mathbb{R} \setminus S_n \right) = \varphi^{-1} \mathbb{R} \setminus \varphi^{-1} S_n
+		= \Omega \setminus \varphi^{-1} S_n \in \mathcal{A}
+	.\] 
+	We have seen that $\mathcal{E}$ contains empty set and is closed under countable union and complement, so $\mathcal{E}$ is a $\sigma$-algebra.
+\end{proof}
+\newpage
+\item Let $f\ge 0$ be measurable and $N = \{x \in \Omega: f(x) >0\} $. Prove that $\int f \le \left( \operatorname{sup} f \right) \mu(N)$. We take the convention that if $\mu(N) = 0$ then $\mu(N) \cdot \infty  = 0$.
+\begin{proof}
+Take any simple  $g$ such that $0 \le  g \le f$. Consider a partition $P$ of $\Omega$ into finitely many measurable sets such that $g$ is constant on each $E_j \in P$, say $g(E_j) = \{a_j\} $. We may assume WLOG that for each $E_j$ either $E_j \subset N$ or $E_j \subset \Omega \setminus N$, since we can take refinement of $P$ and it is known that simple integral does not depend on partition.
+
+Note that for any $E_j \subset \Omega \setminus N$, we have $\mu(E_j) = 0$.
+Now
+\begin{align*}
+	\int g d \mu &= \sum_{j} a_j \mu(E_j)\\
+	&= \sum_{j: E_j \subset N} a_j \mu(E_j) \\
+	&\le \sum_{j: E_j \subset N} \operatorname{sup} g \mu(E_j) \\
+	&= \operatorname{sup} g \sum_{j: E_j \subset N}  \mu(E_j) \\
+	&= \operatorname{sup} g \mu(N)\\
+	&\le \operatorname{sup} f \mu(N) 
+.\end{align*}
+Therefore
+\[
+	\int f d \mu
+	= \operatorname{sup} _{0\le g\le f, g \text{ simple}} \int g d \mu \le \operatorname{sup} f \mu(N)
+.\] 
+\end{proof}
+
+
+\item If $g \in L, g \ge 0$, and $\int  g =0$, prove $g = 0$ a.e.
+\begin{proof}
+	We prove the contrapositive. Let $Z = \{g > 0\} $ and suppose $\mu(Z) > 0$. We claim that there exists $\varepsilon>0$ such that $\mu\left( \{g > \varepsilon\}  \right) >0$. If not, then we must have $\mu\left( \{g > \varepsilon\}  \right)  = 0$ for all $\varepsilon$, implying that $g = 0$ a.e., contradicting our assumption.
+
+	Now we define
+	\[
+		h(x) = \begin{cases}
+			\varepsilon & g(x) > \varepsilon \\
+			0 & g(x) \le \varepsilon
+		\end{cases}
+	.\] 
+	We see that $h(x)$ is a simple function, and we have $0 \le  h \le  g$. Furthermore, since $\mu\left( \{g > \varepsilon\}  \right) >0$, we have $\int h > 0$. By monotonicity, $\int g \ge  \int  h > 0$. This proves the contrapositive: if $g > 0$ on a set with positive measure, then $\int g > 0$.
+\end{proof}
+
+
+\end{itemize}

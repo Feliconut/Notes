@@ -33,6 +33,34 @@ def generate_greek_scheme():
 	return greek_complete	
 
 greek_complete = generate_greek_scheme()
+
+def create_matrix(snip):
+
+        matrix_str = (snip.buffer[snip.line].split('mat')[0]+'matrix').strip()
+
+        rows = 'x'.join(snip.buffer[snip.line].split("x", 2)[:-1])
+        cols = 'x'.join(snip.buffer[snip.line].split("x", 2)[-1:])
+
+        int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
+
+        rows = int_val(rows)
+        cols = int_val(cols)
+
+        offset = cols + 1
+        old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+
+        snip.buffer[snip.line] = ''
+
+        final_str = old_spacing + "\\begin{"+matrix_str+"}\n"
+        for i in range(rows):
+                final_str += old_spacing + '\t'
+                final_str += " & ".join(['$' + str(i * cols + j + offset) for j in range(cols)])
+
+                final_str += " \\\\\\\n"
+
+        final_str += old_spacing + "\\end{"+matrix_str+"}\n$0"
+
+        snip.expand_anon(final_str)
 endglobal
 
 
@@ -125,13 +153,9 @@ snippet =< "implied by" Ai
 \impliedby
 endsnippet
 
-context "math()"
-snippet iff "iff" Ai
-\iff
-endsnippet
-
+context "not math()"
 snippet mk "Math" wA
-$${1}$`!p
+$${1:${VISUAL}}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
 	snip.rv = ' '
 else:
@@ -141,7 +165,7 @@ endsnippet
 
 snippet dm "Math" wA
 \[
-${1:${VISUAL}}
+	${1:${VISUAL}}
 .\] $0
 endsnippet
 
@@ -224,31 +248,43 @@ snip.rv = subprocess.check_output(['wolframscript', '-code', code])
 `
 endsnippet
 
-#snippet == "equals" iA
-#&= $1 \\\\
-#endsnippet
+context "math()"
+snippet == "iff ali" iA
+&= $1 \\\\
+endsnippet
 
-snippet != "equals" iA
+context "math()"
+snippet &= "toggle ali" i
+&\iff $1
+endsnippet
+
+context "math()"
+snippet &\iff "toggle ali" i
+&= $1
+endsnippet
+
+context "math()"
+snippet != "not equal" iA
 \neq 
 endsnippet
 
 context "math()"
 snippet ceil "ceil" iA
-\left\lceil $1 \right\rceil $0
+\left\lceil ${1:${VISUAL}} \right\rceil $0
 endsnippet
 
 context "math()"
 snippet floor "floor" iA
-\left\lfloor $1 \right\rfloor$0
+\left\lfloor ${1:${VISUAL}} \right\rfloor$0
 endsnippet
 
-snippet pmat "pmat" iA
-\begin{pmatrix} $1 \end{pmatrix} $0
-endsnippet
+#snippet pmat "pmat" iA
+#\begin{pmatrix} $1 \end{pmatrix} $0
+#endsnippet
 
-snippet bmat "bmat" iA
-\begin{bmatrix} $1 \end{bmatrix} $0
-endsnippet
+#snippet bmat "bmat" iA
+#\begin{bmatrix} $1 \end{bmatrix} $0
+#endsnippet
 
 context "math()"
 snippet () "left( right)" iA
@@ -260,35 +296,42 @@ snippet [] "left[ right]" iA
 \left[ ${1:${VISUAL}} \right] $0
 endsnippet
 
+context "math()"
+snippet <> "langle rangle" iA
+\left\langle ${1:${VISUAL}} \right\rangle $0
+endsnippet
+
+context "math()"
 snippet lr "left( right)" i
 \left( ${1:${VISUAL}} \right) $0
 endsnippet
 
-snippet lr( "left( right)" i
+context "math()"
+snippet lr( "left( right)" iA
 \left( ${1:${VISUAL}} \right) $0
 endsnippet
 
-snippet lr| "left| right|" i
+context "math()"
+snippet lr| "left| right|" iA
 \left| ${1:${VISUAL}} \right| $0
 endsnippet
 
-snippet lr{ "left\{ right\}" i
+context "math()"
+snippet lr{ "left\{ right\}" iA
 \left\\{ ${1:${VISUAL}} \right\\} $0
 endsnippet
 
-snippet lr[ "left[ right]" i
+context "math()"
+snippet lr[ "left[ right]" iA
 \left[ ${1:${VISUAL}} \right] $0
 endsnippet
 
+context "math()"
 snippet lra "leftangle rightangle" iA
 \left\langle${1:${VISUAL}} \right\rangle$0
 endsnippet
 
 context "math()"
-snippet conj "conjugate" iA
-\overline{$1}$0
-endsnippet
-
 snippet sum "sum" w
 \sum_{${1:n}=${2:1}}^{${3:\infty}} ${4:a_$1 z^$1}
 endsnippet
@@ -297,14 +340,17 @@ endsnippet
 #\sum_{${1:k}=${2:0}}^{${3:\infty}} ${4:c_$1} (x-a)^$1 $0
 #endsnippet
 
+context "math()"
 snippet lim "limit" w
 \lim_{${1:n} \to ${2:\infty}} 
 endsnippet
 
+context "math()"
 snippet limsup "limsup" w
 \limsup_{${1:n} \to ${2:\infty}} 
 endsnippet
 
+context "math()"
 snippet liminf "liminf" w
 \liminf{${1:n} \to ${2:\infty}} 
 endsnippet
@@ -313,6 +359,7 @@ snippet prod "product" w
 \prod_{${1:n=${2:1}}}^{${3:\infty}} ${4:${VISUAL}} $0
 endsnippet
 
+context "math()"
 snippet part "d/dx" w
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
 endsnippet
@@ -344,11 +391,6 @@ endsnippet
 
 context "math()"
 snippet oo "\infty" i
-\infty
-endsnippet
-
-context "math()"
-snippet inf "\infty" iA
 \infty
 endsnippet
 
@@ -461,8 +503,15 @@ endsnippet
 
 priority 200
 context "math()"
-snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
-\\`!p snip.rv = match.group(1)`
+snippet '(?<!\\)(infty|arcsin|arccos|arctan|arccot|arccsc|arcsec|int|nabla|iff)' "math cmd" rwA
+\\`!p snip.rv = match.group(1)` $0
+endsnippet
+
+
+priority 200
+context "math()"
+snippet '(?<!\\)(sup|inf|Re|Im|cis|arg|Arg|Log|sh|ch|deg|rank|ker|coker|Ker|Coker|Pr|char)' "operators" rw
+\\operatorname{`!p snip.rv = match.group(1)`} $0
 endsnippet
 
 
@@ -490,18 +539,13 @@ snippet :> "mapsto" iA
 endsnippet
 
 context "math()"
-snippet -1 "inverse" i
-^{-1}
+snippet "([A-Za-z]|\\[a-z]+)(comp)" "complement" irA
+`!p snip.rv=match.group(1)`^{c} $0
 endsnippet
 
 context "math()"
-snippet -1 "inverse" i
-^{-1}
-endsnippet
-
-context "math()"
-snippet c "complement" i
-^{c}
+snippet "([A-Za-z]|\\[a-z]+)(-1|inv)" "inverse" ir
+`!p snip.rv=match.group(1)`^{-1} $0
 endsnippet
 
 context "math()"
@@ -522,11 +566,11 @@ endsnippet
 
 context "math()"
 snippet ~~ "~" iA
-\sim 
+\sim $0
 endsnippet
 context "math()"
 snippet ~= "~=" iA
-\simeq 
+\simeq $0
 endsnippet
 
 context "math()"
@@ -536,64 +580,108 @@ endsnippet
 
 context "math()"
 snippet || "mid" iA
-\mid 
+\mid $0
 endsnippet
 
 
 context "math()"
 snippet cc "subset" Ai
-\subset 
+\subset $0
 endsnippet
 
 context "math()"
 snippet nin "not in " iA
-\not\in 
+\not\in $0
 endsnippet
 
 context "math()"
 snippet inn "in " iA
-\in 
+\in $0
 endsnippet
 
 context "math()"
-snippet nn "cap" iA
-\cap
+snippet nn "cap" iwA
+\cap $0
 endsnippet
-
 context "math()"
-snippet uu "cup" iA
-\cup
-endsnippet
-
-context "math()"
-snippet \cupu "bigcup" iA
-\bigcup_{${1:i \in ${2: I}}} $0
-endsnippet
-
-context "math()"
-snippet \capn "bigcap" iA
+snippet \cap "bigcap" i
 \bigcap_{${1:i \in ${2: I}}} $0
 endsnippet
 
 context "math()"
+snippet uu "cup" iwA
+\cup $0
+endsnippet
+context "math()"
+snippet \cup "bigcup" i
+\bigcup_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet ww "wedge" iwA
+\wedge $0
+endsnippet
+context "math()"
+snippet \wedge "bigwedge" i
+\bigwedge_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet vv "vee" iwA
+\vee $0
+endsnippet
+context "math()"
+snippet \vee "bigvee" i
+\bigvee_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet O. "odot" iwA
+\odot $0
+endsnippet
+context "math()"
+snippet \odot "big odot" i
+\bigodot_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet Ox "odot" iwA
+\otimes $0
+endsnippet
+context "math()"
+snippet \otimes "big otimes" i
+\bigotimes_{${1:i \in ${2: I}}} $0
+endsnippet
+
+context "math()"
+snippet O+ "oplus" iwA
+\oplus $0
+endsnippet
+context "math()"
+snippet \oplus "big oplus" i
+\bigoplus_{${1:i \in ${2: I}}} $0
+endsnippet
+
+
+context "math()"
 snippet O\ "emptyset" iA
-\emptyset
+\emptyset $0
 endsnippet
 
 context "math()"
 snippet <| "normal" iA
-\triangleleft 
+\triangleleft $0
 endsnippet
 
 context "math()"
 snippet |> "normal" iA
-\triangleright 
+\triangleright $0
 endsnippet
 
-context "math()"
-snippet <> "diamond" iA
-\diamond 
-endsnippet
+#context "math()"
+#snippet <> "diamond" iA
+#\diamond $0
+#endsnippet
 
 context "math()"
 snippet tt "text" iA
@@ -625,27 +713,42 @@ endsnippet
 priority 10
 context "math()"
 snippet "bar" "bar" riA
-\overline{$1}$0
+\overline{${1:${VISUAL}}} $0
 endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])bar" "bar" riA
-\overline{`!p snip.rv=match.group(1)`}
+snippet "(\\[a-z]+|[a-zA-Z])bar" "bar" wriA
+\overline{`!p snip.rv=match.group(1)`} $0
 endsnippet
 
 priority 10
 context "math()"
-snippet "hat" "hat" riA
-\hat{$1}$0
+snippet "hat" "hat" wriA
+\hat{${1:${VISUAL}}} $0
 endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])hat" "hat" riA
-\hat{`!p snip.rv=match.group(1)`}
+snippet "(\\[a-z]+|[a-zA-Z])hat" "hat" wriA
+\hat{`!p snip.rv=match.group(1)`} $0
 endsnippet
 
+context "math()"
+snippet conj "conjugate" iA
+\overline{${1:${VISUAL}}} $0
+endsnippet
+
+priority 100
+context "math()"
+snippet "(\\[a-z]+|[a-zA-Z])conj" "conjugate" wriA
+\overline{`!p snip.rv=match.group(1)`} $0
+endsnippet
+
+context "not math()"
+snippet bf "textbf" i
+\textbf{${1:${VISUAL}}}$0
+endsnippet
 priority 100
 context "math()"
 snippet "([0-9a-zA-Z])bf" "mathbf" riA
@@ -658,40 +761,75 @@ snippet "([0-9a-zA-Z])bb" "mathbb" riA
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
-priority 100 context "math()" snippet "([a-zA-Z])cal" "mathcal" riA
-\mathcal{`!p snip.rv=match.group(1)`}
+context "not math()"
+snippet it "textit" i
+\textit{${1:${VISUAL}}}$0
 endsnippet
+
+context "not math()"
+snippet sf "textsf" i
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+priority 100 
+context "math()" 
+snippet "([a-zA-Z])sf" "mathsf" riA
+\mathsf{`!p snip.rv=match.group(1)`}
+endsnippet
+
 priority 100
 context "math()"
-snippet "([a-zA-Z])cal" "mathcal" riA
+snippet "([a-zA-Z])cal" "mathcal" rA
 \mathcal{`!p snip.rv=match.group(1)`}
 endsnippet
 
-priority 20
+priority 100
 context "math()"
-snippet "(?<!\\)(;?\b[a-zA-Z]+)" "greek letters" wriA
+snippet "([a-zA-Z])scr" "mathscr" rA
+\mathscr{`!p snip.rv=match.group(1)`}
+endsnippet
+
+
+priority 1
+context "math()"
+snippet "(\b(?<!\\)[a-z]{2,}|;[A-Za-z])" "greek letters" wrA
 `!p
 l=match.group(1)
-snip.rv=greek_complete(l)
+snip.rv=greek_complete(l) 
 `
 endsnippet
 
 priority 21
 context "math()"
-snippet "(Z|Q|R|N|H|D|C){2}" "fields" wriA
+snippet "(Z|Q|R|N|H|D|C){2}" "fields" wrA
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
-priority 21
-context "math()"
-snippet "([A-Zx-z])([ijkmnt])" "common subscript" wriA
-`!p snip.rv=match.group(1)`_{`!p snip.rv=match.group(2)`}
+#priority 21
+#context "math()"
+#snippet "([A-Zx-z])([ijkmnt])" "common subscript" wrA
+#`!p snip.rv=match.group(1)`_{`!p snip.rv=match.group(2)`}
+#endsnippet
+
+context "not math()"
+snippet proof "solution env" bA
+\begin{proof}
+$1
+\end{proof}
+$0
 endsnippet
 
 context "not math()"
-snippet solution "Solution environment" wriA
-\begin{proof}[Solution.]
-$1
+snippet pf "solution env" b
+\begin{proof}
+	$1
+\end{proof}
+$0
+endsnippet
+
+context "not math()"
+snippet sol "solution env" bA
+\begin{proof}[${1:Solution}]
+	$2
 \end{proof}
 $0
 endsnippet
@@ -702,7 +840,31 @@ snippet div "divergence" wi
 endsnippet
 
 context "math()"
+snippet grad "grad" wi
+\nabla  $0
+endsnippet
+
+context "math()"
 snippet curl "curl" wi
 \nabla \times $0
 endsnippet
+
+context "math()"
+snippet ,. "vector" wiA
+\vec{$1} $0
+endsnippet
+context "math()"
+snippet "(\\[a-z]+|[a-zA-Z]),\." "vector" wriA
+\vec{`!p snip.rv=match.group(1)`} $0
+endsnippet
+
+context "math()"
+snippet +- "pm" wiA
+\pm $0
+endsnippet
+
+pre_expand "create_matrix(snip)"
+snippet "(small|[bBpvV])?mat(rix)?(\d+)x(\d+)" "Generate (small|[bBpvV])?matrix of *rows* by *columns*" br
+endsnippet
+
 # vim:ft=snippets

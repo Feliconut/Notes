@@ -61,7 +61,12 @@ What remains to prove is that
 		  \end{align*}
 		    
 		Finally we bound the integral $\displaystyle \int_{A^c}|\mathbf{1}(x(t)>0)-\mathbf{1}(x \circ \lambda(t)>0)| d \mu$ .  
-		First observe that $A^c$ can be decomposed to finitely many disjoint closed intervals $I_1, I_2, \ldots, I_n$ . By definition of $A^c$ we see that for each $I_k$ , $x(I_k)$ is either entirely positive or entirely negative.  
+		Write 
+		\[
+			A^c = \biguplus I_n
+		.\] 
+
+		From uniform continuity of $x(t)$, we there exists some $\varepsilon' > 0$ such that  $|x(t) - x(s)|< \frac{\delta}{2}$ whenever $|t - s| < \varepsilon'$. This implies that $\mathbf{1}(x(t)>0) - \mathbf{1}(x\circ \lambda(t)) = 0$ across $x \in I_n$ whenever $|I_n| < \varepsilon'$. Therefore, we can remove all small intervals from $A^c$ since they do not contain zeros. Now $A^c$ can be expressed as union of finitely many disjoint open intervals $I_1, I_2, \ldots, I_n$ . By definition of $A^c$ we see that for each $I_k$ , $x(I_k)$ is either entirely positive or entirely negative.  
 		Now  
 		  \begin{align*}
 		  & \int _{A^c} \left| \mathbf{1}\left( x(t) >0 \right) -\mathbf{1}\left( x \circ \lambda(t) > 0 \right)  \right| d \mu\\
@@ -118,7 +123,7 @@ What remains to prove is that
 	
 	If there exists finite $N$ such that $t_N = 1$, we can apply the result above and Fubini's Theorem to show that the zero set has zero measure:
 	\[
-		\mathbb{E}\left[ \int _0^1 \mathbf{1}(X_t = 0) dt \right] = \int _0^1 \operatorname{Pr} \left[ X_t = 0 \right] dt = 0 
+		\mathbb{E}\left[ \int _0^1 \mathbf{1}(X_t = 0) dt \right] = \int _0^\varepsilon \operatorname{Pr} \left[ X_t = 0 \right] dt + \int _\varepsilon^1 \operatorname{Pr} \left[ X_t = 0 \right] dt \le \varepsilon 
 	.\] 
 	It remains to show that such $N$ is finite with probability one. Suppose not. Then for  $\varepsilon'>0$ there exists $n$ such that $t_{2n}- \varepsilon' < t_{2n-1} < t_{2n} < 1 $. This is same as saying that a standard brownian motion makes displacement greater than $\frac{\delta}{2}$ within time $\varepsilon'$. By choosing small $\varepsilon'$ we see that the probability for this to happen is arbitrarily small.
 \end{proof}
