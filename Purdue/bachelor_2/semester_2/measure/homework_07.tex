@@ -1,0 +1,135 @@
+\homework{7}{Wed 22 Feb 2023 16:43}{}
+
+\begin{itemize}
+	\item Suppose $A \subset [0,\infty )$, $B \subset (-\infty , 0]$. Prove $m^*(A \cup B) = m^*(A) + m^*(B)$.
+\begin{proof}
+	From subadditivity, we have $m^*(A) + m^*(B) \le  m^*(A \cup B)$.
+		It suffices to prove $m^*(A) + m^*(B) \le  m^*(A \cup B)$. This is trivial if $A \cup B$ has infinite Lebesgue outer measure, so we assume without loss of generality that $A \cup B$ has finite Lebesgue outer measure. Then for all $\varepsilon>0$ there exists a sequence of intervals $I_n$ such that 
+		\[
+			\bigcup_{n \in \mathbb{N}} I_n \supset A \cup B \qquad
+			\sum_{n=1}^{\infty} |I_n| < m^*(A \cup B) + \varepsilon
+		.\] 
+		Now for each $I_n$ let $J_n := [0,\infty ) \cap I_n$ and $K_n := (-\infty , 0] \cap I_n$. We see that $\sum_{n=1}^{\infty} |I_n| = \sum_{n=1}^{\infty} |J_n| + \sum_{n=1}^{\infty} |K_n|$. Moreover, 
+		\[
+			A \subset [0,\infty ) \cap \bigcup_{n \in \mathbb{N}} I_n = \bigcup_{n \in \mathbb{N}} J_n
+		.\] 
+		and similarly,
+		\[
+			B \subset \bigcup_{n \in \mathbb{N}}K_n 
+		.\] 
+		Hence $J_n$ is a cover of $A$ and $K_n$ is a cover of $B$. This implies that
+		\[
+			m^*(A) + m^*(B) \le \sum_{n=1}^{\infty} |J_n| + \sum_{n=1}^{\infty} |K_n|
+		.\] 
+		Therefore
+		\[
+			m^*(A) + m^*(B) \le  \sum_{n=1}^{\infty} |I_n| \le m^*(A \cup B) + \varepsilon
+		.\] 
+		Since $ \varepsilon$ is arbitrary, we have the desired inequality.
+\end{proof}
+\item Suppose $E \subset \mathbb{R}$ has the following property: for any interval $I$, $m^*(E \cap I) \le |I| / 2$. Prove that $E$ has measure zero.
+\begin{proof}
+	Fix some interval $I = [a,b]$, $a < b$. We prove that $E \cap I$ has measure zero. It suffices to prove that $E \cap I$ has zero Lebesgue outer measure. By assumption we have $m^*(E \cap I) \le |I| / 2$. Therefore we can choose a countable collection of intervals $\mathcal{C}_1 = (I^1_n)_{n \in \mathbb{N}}$ such that $\bigcup_{n \in \mathbb{N}} I^1_n \supset E \cap I$ and $\sum_{n=1}^{\infty} |I^1_n| < |I| / 2 + |I| / 4 = \frac{3}{4} |I|$. 
+
+	Now for each $J \in \mathcal{C}_1$, we pick a countable collection of intervals $\mathcal{C}(J)$ that covers $E \cap J$ and whose sum of length is less than $\frac{3}{4} |J|$. Define $\mathcal{C}_2 = \bigcup_{J \in \mathcal{C}_1} \mathcal{C}(J)$. We have $\mathcal{C}_2$ countble, $\cup \mathcal{C}_2 \supset E$ and
+	\[
+		\sum_{K \in \mathcal{C}_2} |J| =
+		\sum_{J \in \mathcal{C}_1} \sum_{K \in \mathcal{C}(J)} |K| <
+		\sum_{J \in \mathcal{C}_1} \frac{3}{4} |J| <
+		\left( \frac{3}{4} \right) ^2 |I|
+	.\] 
+	Continue in this fashion, we construct $\mathcal{C}_n$ a countable cover of $E \cap I$ by intervals whose total length is less than $\left( \frac{3}{4} \right) ^n |I|$. Since $|I|$ is fixed, for arbitrary $\varepsilon$ we can take large $n$ such that $\sum_{K \in \mathcal{C}_n} |K| < \varepsilon$. Hence $E \cap I$ has measure zero.
+
+	Finally we verify that $E$ has measure zero. To prove this, we simply let $(I_n)_{n \in \mathbb{N}}$ be a countable cover of $\mathbb{R}$ by finite intervals. Now for each $n \in \mathbb{N}$, let $\mathcal{C}_n$ be a countable cover of $E \cap I_n$ by intervals whose sum of length is less than $\frac{\varepsilon}{2^n}$. Now $\mathcal{C} := \bigcup_{n \in \mathbb{N}} \mathcal{C}_n$ is a countable cover of $E \cap \mathbb{R} = E$ and 
+	\[
+		\sum_{J \in \mathcal{C}}|J| = \sum_{n \in \mathbb{N}} \sum_{J \in \mathcal{C}_n}|J| < \sum_{n \in \mathbb{N}} \frac{\varepsilon}{2^n} = 2 \varepsilon
+	.\] 
+	This shows that $E$ has zero measure.
+\end{proof}
+
+\item Suppose $f: [0,1] \to \mathbb{R}$ is differentiable and $f'$ is continuous. Let $C = \{x : f'(x) = 0\} $ denote the set of critical points. Show that $f(C) \subset \mathbb{R}$, the set of critical values, has measure zero.
+\begin{proof}
+	Since $f'$ is continuous, $C = \left( f' \right) ^{-1}\left( \{0\}  \right) $ is closed. Since $[0,1]$ is compact, $C$ is compact, whence $f(C)$ is compact.
+
+	Consider $x \in C$. By continuity of $f'$, for all $\varepsilon>0$ there exists $\delta>0$ such that $\left| f'(y) \right| <\varepsilon$ whenever $\left| x - y \right| < \delta$. Suppose $f\left( (x-\delta, x+\delta) \right)  = (a,b)$. Then
+	\[
+		a = f(x) + \int _x^{x-\delta} f'(y) dy \ge f(x) - \delta \varepsilon
+	.\] 
+	and
+	\[
+		b = f(x) + \int _x^{x + \delta}f'(y) dy \le  f(x) + \delta \varepsilon
+	.\]
+	Therefore
+	\[
+		m\left( f (x - \delta, x+\delta) \right) 
+		= b - a \le 2 \delta \varepsilon
+	.\] 
+	Generalizing this argument, if $|f'(y)| < \varepsilon$ is satisfied on some bounded interval $I$, then $m(f(I)) \le \varepsilon |I|$.
+	
+	Now for each $x \in C$ we pick  $\delta_x$ such that $|f'(y)|< \varepsilon$ whenever $|x - y| < \delta_x$. We see that all the intervals $(x - \delta_x, x+\delta_x)$ cover $C$. Since $C$ is compact, there exists a finite cover $\mathcal{C}$. Moreover, by taking set exclusions, we obtain a finite cover of $C$ by disjoint intervals. For each such interval $I$, we have $m(f(I)) \le \varepsilon |I|$. Hence
+	\begin{align*}
+		m(f(C)) 
+									    &\le m\left(\bigcup_{I \in \mathcal{C}} f(I) \right)  & \text{monotonicity}\\
+									    &\le  \sum_{I \in \mathcal{C}} m\left( f(I) \right)  &\text{subadditivity}\\
+		&\le \varepsilon \sum_{I \in \mathcal{C}} |I| \\
+		&= \varepsilon m\left( \bigcup_{I \in \mathcal{C}} I \right)  &\text{additivity for disjoint intervals}\\
+		&\le \varepsilon m\left( [0,1] \right) & \text{monotonicity} \\
+		&= \varepsilon
+	.\end{align*} 
+	Since $\varepsilon$ is arbitrary, $m(f(C)) = 0$.
+\end{proof}
+
+\item Prove that the outer measure is translation invariant.
+\begin{proof}
+	Let $E \subset \mathbb{R}$, and $x \in \mathbb{R}$. For $\varepsilon>0$, there exists intervals $I_n$ such that $\bigcup_{n \in \mathbb{N}} I_n \supset E$ and $\sum_{n=1}^{\infty} |I_n| < m^*(E) + \varepsilon$. 
+
+	 Now we have  $x + E \subset x + \bigcup_{n \in \mathbb{N}} I_n = \bigcup_{n \in \mathbb{N}}  x + I_n$, and $\sum_{n=1}^{\infty} |x+I_n| = \sum_{n=1}^{\infty} |I_n|$. From these we conclude that $m^*(x + E) \le \sum_{n=1}^{\infty} |I_n| < m^*(E ) + \varepsilon$. By taking arbitrary small $\varepsilon$, we conclude that $m^*(x + E) \le  m^*(E)$.
+
+	 By symmetry, we have $m^*(E) \le m^*(x + E)$. Hence $m^*(E) = m^*(x + E)$.
+\end{proof}
+
+\item If $f : \mathbb{R}\to \mathbb{R}$ is continuous, prove its graph is closed in $\mathbb{R}^2$. Is the converse true?
+\begin{proof}
+	Take a sequence of points $(x_n, f(x_{n})) \in \mathbb{R}^2$ and suppose it has a limit $(x, y)$. By continuity, as $x_n \to x$ we have $f(x_n) \to f(x)$, so $y = f(x)$. This implies $(x,y)$ is in the graph, so graph of $f$ is closed.
+
+	To disprove the converse, consider the function $f(x) = \frac{1}{x}$. Consider a sequence of points $(x_n, f(x_n))$ in graph of $f$ that converges fo $(x,y)$. We know that $x \neq 0$, since $f(x_n)$ does not converge if $x_n \to 0$. But $f$ is continuous at every point $x \neq 0$, so $f(x_n) \to  f(x) = y$ whenever $x \neq 0$. Hence graph of $f$ is closed, but $f$ is not continuous.
+\end{proof}
+
+\item Suppose that $g:[0,1) \to [0,1)$ is defined by
+	\[
+		g(x) = \begin{cases}
+			2x & x<\frac{1}{2}\\
+			2x-1 & x\ge \frac{1}{2}
+		\end{cases}
+	.\] 
+	If $A \subset [0,1]$, show $m^*(A) = m^*(g^{-1} (A))$.
+\begin{proof}
+	We first prove that for any interval $I \subset [0,1)$, we have $m^*(I) = m^*(g^{-1} (I))$. Let $I = (a,b)$. Then $g^{-1} (I) = \left(\frac{a}{2}, \frac{b}{2}\right) \cup \left( \frac{1-b}{2}, \frac{1-a}{2} \right) $, the disjoint union of two intervals. We have
+	\[
+		m^*(g^{-1} (I)) = m\left( \left(\frac{a}{2}, \frac{b}{2}\right) \right)  + m\left( \left(  \frac{1-b}{2}, \frac{1-a}{2}\right)  \right)  = 2 \cdot \frac{b-a}{2} = b-a = m^*(I)
+	.\] 
+	The above result can be generalized to half-closed or closed intervals. Now take any sequence of intervals $I_n \subset [0,1]$ such that $A \subset \bigcup_{n \in \mathbb{N}} I_n$ and $\sum_{n=1}^{\infty} |I_n| < m^*(A) + \varepsilon$, we have
+	\[
+		g^{-1} (A) \subset \bigcup_{n \in \mathbb{N}} g^{-1} (I_n) \qquad \sum_{n=1}^{\infty} |g^{-1} I_n| = \sum_{n=1}^{\infty} |I_n|
+	.\] 
+	This proves $m^*(g^{-1} A) \le m^*(A)$.
+
+	The other part is proven similarly.
+\end{proof}
+\item If $E \subset \mathbb{R}$ is measurable, prove that there is an $F_\sigma$ set $A$ and a $G_\delta$ set $B$ such that $A \subset E \subset B$ and $B \setminus E$, $E  \setminus A$ have zero measure.
+\begin{proof}
+	
+\end{proof}
+
+
+\item Suppose $X \subset [0,1]$ is measurable, $m(X) > \frac{1}{2}$. Prove that the difference set
+	\[
+		X - X = \{x - y: x, y \in X\} 
+	.\] 
+	contains some interval $[0,\varepsilon]$ with $\varepsilon>0$.
+\begin{proof}
+	This is the Steinhaus Theorem, to be proved in tao.
+\end{proof}
+
+
+\end{itemize}

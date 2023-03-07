@@ -1,0 +1,79 @@
+\lecture{3}{Fri 17 Feb 2023 16:38}{Outer measure of interval}
+
+\begin{definition}[Lebesgue outer measure]
+	If $E \subset \mathbb{R}$ we define 
+	\[
+		m^*(E) = \operatorname{inf} \{\sum_{k=1}^{\infty} |I_k| : I_k \text{ interval }, \bigcup_{k=1} ^\infty I_k \supset E\} 
+	.\] 
+\end{definition}
+
+\begin{proposition}
+	If $I \subset \mathbb{R}$ is an interval then $m^*(I) = |I|$.
+\end{proposition}
+\begin{proof}
+	We show for $I = [0,1]$. We will show if $\bigcup_{k \in \mathbb{N}} I_k \supset [0,1]$ then $\sum_{k=1}^{\infty} |I_k| \ge 1$. Indeed: since $[0,1]$ compact, we can choose finite $K \subset \mathbb{N}$ such that $\bigcup_{k \in K} I_k \supset [0,1]$. Let $k_1 \in K$ be such that $0 \in I_{k_1} = (a_1, b_1)$.
+	
+	Now if $b_{k_i} \le 1$, let $k_{i+1}$ be such that $b_{k_i}\in I_{k_{i+1}} = \left( a_{k_{i+1}}, b_{k_{i+1}} \right) $.
+	Such process must terminate since 1) we always get a different interval, 2) $K$ is finite. Now
+	\begin{align*}
+		\sum_{k=1}^{\infty} |I_k| &\ge 
+		\sum_{i=1}^{n} \left| I_{k_i} \right| \\
+		&= (b_1-a_1) + \ldots + (b_n - a_n) \\
+		&\ge (b_1-0) + (b_2-b_1) + \ldots + (b_n - b_{n-1}) \\
+		&= b_n >1 \\
+	.\end{align*} 
+	Hence $m^*([0,1]) \ge 1$. Also $m^*([0,1]) \le 1$, as
+	\[
+		I_1 = [0,1], I_{k} = \emptyset , k\ge 2
+	.\] 
+	is a cover of $I$.
+\end{proof}
+
+\begin{proposition}(Countable subadditivity of Lebesgue inner measure)
+	\[
+		m^*\left(\bigcup_{k \in \mathbb{N}} E_k\right) \le  \sum_{k=1}^{\infty} m^*(E_k)
+	.\] 
+\end{proposition}
+\begin{proof}
+	Let $\varepsilon>0$. For each $E_k$ we cover it by intervals $I_j^k$ such that $\sum_{j=1}^{\infty} \left| I_j^k \right| < m^*(E_k) + \frac{\varepsilon}{2^k}$.
+
+	Then $\bigcup_{j,k \in \mathbb{N}} I_j^k \supset \bigcup_{k \in \mathbb{N}} E_k$, so
+	\begin{align*}
+		m^*(\bigcup_{k \in \mathbb{N}} E_k)
+		&\le \sum_{j=1}^{\infty} \sum_{k=1}^{\infty} \left| I_j^k \right|  \\
+		&= \sum_{k=1}^{\infty} \sum_{j=1}^{\infty} \left| I_j^k \right|  \\
+		&< \sum_{k=1}^{\infty} \left( m^*(E_k) + \frac{\varepsilon}{2^k} \right)  \\
+		&= \sum_{k=1}^{\infty} m^*(E_k) + \varepsilon
+	.\end{align*}
+\end{proof}
+
+\begin{definition}[Lebesgue measurability]
+	Let $E \subset [0,1]$. We define
+	\[
+		m_*(E) = 1 - m^*([0,1] \setminus E) \le  m^*(E)
+	.\] 
+	We say $E$ is \textit{measurable} if $m^*(E) = m_*(E)$.
+\end{definition}
+c.f. [[@taoIntroductionMeasureTheory2011]] page 17, 28
+
+\begin{definition}[Carathéodory's definition of measurability]
+	We say $E \subset \mathbb{R}$ is measurable if for any $A \subset \mathbb{R}$, 
+	\[
+		m^*(A) = m^*(A \cap E) + m^*(A \setminus E)
+	.\] 
+\end{definition}
+c.f. page 33
+\begin{intuition}
+	$E$ cuts $A$ clearly.
+\end{intuition}
+
+\begin{remark}
+	$\le $ is automatic; so it suffices to require $\ge $. Thus it suffices to require $m^*(A)$ finite.
+\end{remark}
+
+\begin{example}
+	\begin{itemize}
+		\item If $m^*(E) = 0$ then $E$ measurable.
+	\end{itemize}
+\end{example}
+

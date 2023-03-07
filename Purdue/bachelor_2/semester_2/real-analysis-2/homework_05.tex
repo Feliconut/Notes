@@ -1,0 +1,320 @@
+\homework{5}{Thu 16 Feb 2023 21:30}{}
+42.F(d,e), 42.P, 42.Q, 42.R, 42.S(c), 42.U
+
+\begin{itemize}
+	\item [42.F.] Show that each of the following functions has a critical point at the origin. Find which have relative extrema and which have saddle points at the origin.\\
+(d) $f(x, y)=x^4-x^2 y^2+y^4$
+\begin{proof}
+	$f$ has a critical point $(0,0)$ if $Df(0) = 0$. We calculate
+	 \[
+		 \left[ Df(0) \right] = 
+		\begin{bmatrix}
+			D_1 f(0) & D_2 f(0) \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			4x^3 - 2xy^2 & -2yx^2 + 4y^3 \\
+		\end{bmatrix}
+		= 
+		\begin{bmatrix}
+			0 & 0 \\
+		\end{bmatrix}
+	.\] 
+	Now we apply the second derivative test.
+	\[
+		\Delta = f_{x x} f_{y y} - f^2_{x y} = (12x^2-2y^2)(-2x^2+12y^2) - (-4xy)^2 = -24 x^{4}+132 x^{2} y^{2}-24 y^{4} = 0	
+	.\] 
+	Thus the second derivative test is inconclusive. 
+
+	But since for any two real numbers $a,b$ we have
+	\[
+		(ab)^{\frac{1}{2}} \le \left( a+b \right) /2
+	.\] 
+	We have
+	\[
+		2 ab \le a^2 + b^2
+	.\] 
+	Since $x^2, y^2 \ge 0$, we have $x^2 y^2 \le 2x^2 y^2 \le x^4 + y^4$. Hence
+	\[
+		f(x,y) \ge 0
+	.\] 
+	Moreover, $f(0,0) = 0$.
+	Hence $f$ attains a minimum at $0$.
+\end{proof}
+
+(e) $f(x, y)=x^3 y-x y^3$
+\begin{proof}
+	\[
+		\begin{bmatrix}
+			D_1f\left( 0 \right)  & D_2f(0) \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			3x^2y-y^3 & x^3-3xy^2 \\
+		\end{bmatrix}
+	.\] 
+	Hence $Df(0,0) = 0$. Now observe that
+	\[
+		f(x,y) = (xy) (x^2 - y^2)
+	.\] 
+	For any neighborhood of  $0$ in $\mathbb{R}^2$, we can find $x,y$ such that $x>0, y>0, x>y$ and we can find $x',y'$ such that $x'>0, y'>0, x'<y'$. Hence $f(x,y)$ attains positive and negative values in any neighborhood of $0$. Also, $f(0,0) = 0$. Hence $f$ has a saddle point at $0$.
+\end{proof}
+
+\item [42.P.] Let $f: \boldsymbol{R}^2 \rightarrow \boldsymbol{R}$ be the quadratic function $f(x, y)=a x^2+2 b x y+c y^2$ for $(x, y) \in \boldsymbol{R}^2$. We wish to find the relative extrema of $f$ on the unit circle $\left\{(x, y): x^2+\right.$ $\left.y^2=1\right\}$. Use Lagrange's Theorem to show that the points $\left(x_0, y_0\right)$ at which these relative extrema are taken must satisfy the system
+\[
+\begin{aligned}
+& (a-\lambda) x_0+b y_0=0 \\
+& b x_0+(c-\lambda) y_0=0
+\end{aligned}
+\]
+where the Lagrange multiplier $\lambda$ is a root of the equation
+\[
+\lambda^2-(a+c) \lambda+\left(a c-b^2\right)=0 .
+\]
+Show that the corresponding value of the multiplier $\lambda$ is equal to the extreme value of $f$ at such a relative extremum.
+\begin{proof}
+	The region of interest $S$ is defined by the level set of the function $g(x,y) = x^2 + y^2 - 1$ at $g = 0$.
+	First we find the singular points of $S$. Compute
+	\[
+		[Dg(x,y)]=
+		\begin{pmatrix}
+			2x & 2y \\
+		\end{pmatrix}
+	.\] 
+	which has rank $0$ iff $x+y = 0$. Hence $(1,-1)$ and $(-1,1)$ are two singular points of $S$.
+
+	We also compute
+	\[
+		[Df(x,y)] =
+		\begin{pmatrix}
+			2xa+2by & 2bx+2cy \\
+		\end{pmatrix}
+	.\] 
+
+	Next we note that by Lagrange's Theorem, at any nonsingular extrema, we have $Df$ given by a linear combination of components of $Dg$. Thus
+	 \[
+		 [Df(x_0,y_0)] = \lambda [Dg(x_0,y_0)]
+	.\] 
+	Expand the equations,
+	\[
+		\begin{matrix}
+			2 x_0 a + 2 b y_0 = 2 \lambda x_0 \\
+			2 b x_0 + 2 c y_0 = 2 \lambda y_0 \\
+		\end{matrix}
+	.\] 
+	Rearrange and simplify, we get
+\[
+\begin{aligned}
+& (a-\lambda) x_0+b y_0=0 \\
+& b x_0+(c-\lambda) y_0=0
+\end{aligned}
+\]
+	Now use these two equations to eliminate $x_0$ and $y_0$ in the equation $g(x_0, y_0) = 0$, we obtain
+	\[
+\lambda^2-(a+c) \lambda+\left(a c-b^2\right)=0 
+	.\] 
+
+Rearrange the equations we have
+\[
+	\lambda = \frac{a x_0 + b y_0}{x_0} = \frac{b x_0 + c y_0}{y_0}
+.\] 
+Also
+\[
+	f(x_0,y_0) = a x_0^2 + 2 b x_0 y_0 + c y_0^2
+.\] 
+I could not show that $f(x_0,y_0)$ is equal to $\lambda$.
+
+
+\end{proof}
+\begin{correction}
+	On the other hand, the $2 \times 2$ linear system has a nonzero solution iff
+\[
+\operatorname{det}\left[\begin{array}{cc}
+a-\lambda & b \\
+b & c-\lambda
+\end{array}\right]=\lambda^2-(a+c) \lambda+\left(a c-b^2\right)=0
+\]
+Note: $\lambda$ is an eigenvalue of the system, and $(x_0, y_0)$ is the corresponding eigenvector.
+	Finally, for the extremum point $\left(x_0, y_0\right)$ with such $\lambda$ we have
+\[
+f\left(x_0, y_0\right)=\left(x_0, y_0\right)\left[\begin{array}{ll}
+a & b \\
+b & c
+\end{array}\right]\left[\begin{array}{l}
+x_0 \\
+y_0
+\end{array}\right]=\left(x_0, y_0\right) \lambda\left[\begin{array}{l}
+x_0 \\
+y_0
+\end{array}\right]=\lambda\left(x_0^2+y_0^2\right)=\lambda
+\]
+\end{correction}
+
+\item [42.Q.] The sum of three real numbers is 9 . Find these numbers if their product is to be maximized.
+\begin{proof}
+	We consider an optimization problem in $\mathbb{R}^3$, the objective functions is 
+	\[
+		f(x,y,z) = xyz
+	.\] 
+	and the constraint function is
+	\[
+		g(x,y,z) = x+y+z -9 = 0
+	.\] 
+
+	The lagrange equation is
+	\[
+		\begin{bmatrix}
+			yz & xy & xz \\
+		\end{bmatrix}
+		= \lambda
+		\begin{bmatrix}
+			1 & 1 & 1 \\
+		\end{bmatrix}
+	.\] 
+	$Dg$ is always nonzero so there is no singular point. Solve the equation, we obtain
+	\[
+		x=y=z\neq 0 \qquad \text{or} \qquad x=y= 0 \lor y=z=0 \lor x=z=0
+	.\] 
+	Hence a maximum is achieved when
+	\[
+		x=y=z=3
+	.\] 
+	and
+	\[
+		f(3,3,3) = 27
+	.\] 
+
+	However, we could let $x = -1, y = -N, z = 10+N$ where $N > 0$. Then $x+y+z = 9$ and $xyz = N(10+N) > N^2$. By picking large enough $N$ we see that the product of $x,y,z$ can be arbitrarily large. This is not detected by Lagrange multipliers, because this extremum is at infinity, not at a critical point.
+\end{proof}
+
+\item [42.R.] Show that the volume of the largest box that can be inscribed in the ellipsoidal region
+\[
+\left\{(x, y, z): \frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2} \leq 1\right\}
+\]
+(where $a, b, c$ are strictly positive numbers) is equal to $8 a b c / 3 \sqrt{3}$.
+\begin{proof}
+	The objective function and constraint are
+	\[
+		f(x,y,z) = 8 xyz
+	.\] 
+	\[
+		g(x,y,z) = \frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2} \le  1
+	.\] 
+	By Lagrange's Theorem, we have
+	\[
+		8
+		\begin{bmatrix}
+			yz  & xz  & xy \\
+		\end{bmatrix}
+		=
+		\lambda
+		\begin{bmatrix}
+			\frac{2}{a^2} x  & \frac{2}{b^2 }y  & \frac{2}{c^2 }z \\
+		\end{bmatrix}
+	.\] 
+	We may assume that the constraint is active, for we can always stretch the box to touch the boundary of the region. Thus we can substitute the equations to eliminate $x,y,z$ in the equation $g(x,y,z) = 0$ and obtain
+	\[
+		x = \frac{l}{4 c b},
+		y = \frac{l}{4 a c},
+		z = \frac{l}{4 b a}
+	.\] 
+	\[
+		g(x,y,z) = \frac{3 l^{2}}{16 a^{2} c^{2} b^{2}} = 1
+	.\] 
+	Thus
+	\[
+		f(x,y,z) = 8 xyz = \frac{l^{3}}{8 a^{2} b^{2} c^{2}} = \frac{1}{(2abc)^2} \frac{(4abc)^3}{3 \sqrt{3} } = \frac{8abc}{3\sqrt{3} }
+	.\] 
+\end{proof}
+
+\item [42.S.] For each of the following functions, find the maximum and minimum values on the given set. (When appropriate, consider the signs of the multipliers.)
+(c) $f(x, y)=x^2+2 x+y^2, \quad S=\{(x, y),|x| \leq 1,|y| \leq 1\}$.
+\begin{proof}
+	$S$ can be expressed by the four inequality constraints:
+	\[
+		g_1(x,y) = x\ge -1\quad g_2(x,y) = x\le 1\quad
+		g_3(x,y) = y \ge -1 \quad g_4(x,y) = y \le 1
+	.\] 
+	By Lagrange Theorem, at nonsingular extremums we have
+	\[
+		[2x+2, 2y] = [\lambda_1 + \lambda_2, \lambda_3 + \lambda_4]
+	.\] 
+	We say an inequality contraint is \textit{active} at a point if the strict equality is satisfied at this point. By Lagrange Theorem, when a constraint $g_i$ is inactive we may take the corresponding $\lambda_i=0$.
+
+	We split into cases. Note that $g_1$ and $g_2$ cannot be simultaneously active; neither can $g_3$ and $g_4$. Also, note that active constraints are always linearly independent in this problem, so we can take $\mu = 1$ in the theorem.
+	\begin{itemize}
+		\item $g_1$ active: then 
+			\[
+				[2x+2, 2y] = [\lambda_1, 0]
+			.\] 
+			Thus
+			\[
+				y = 0, x = -1
+			.\] 
+		\item $g_2$ active: then
+			\[
+				y=0, x=1
+			.\] 
+		\item $g_3$ active: then
+			\[
+				[2x+2, 2y] = [0, \lambda_3]
+			.\] 
+			Thus
+			\[
+				y = -1, x = -1
+			.\] 
+			so $g_1$ must also be active.
+		\item $g_4$ active: then
+			\[
+				y = 1, x = -1
+			.\] 
+			so $g_1$ must also be active.
+		\item $g_2, g_3$ active:
+			\[
+				y = -1, x = 1
+			.\] 
+		\item $g_2, g_4$ active:
+			\[
+				y = 1, x = 1
+			.\] 
+		\item None of constraints are active:
+			\[
+				[2x+2, 2y] = [0,0]
+			.\] 
+			Thus
+			\[
+			y = 0, x = -1
+			.\] 
+			which requires $g_1$ to be active. So this case does not exist.
+	\end{itemize}
+	Iterate through all those candidates, we find that
+	\begin{itemize}
+		\item $f$ achieves local maximum at $(1, 1)$ and $(1,-1)$, the value of $f$ is $3$.
+		\item $f$ achieves local minimum at $(-1, 0)$, the value of $f$ is $-1$.
+	\end{itemize}
+\end{proof}
+
+\item [42.U.] Find the extreme values of $f(x, y, z)=x^3+y^3+z^3$ subject to the constraints $x^2+y^2+z^2=1$ and $x+y+z=1$.
+\begin{proof}
+	Apply the theorem: at nonsingular extremum points we have
+	\[
+		\mu [3x^2, 3y^2, 3z^2] = \lambda_1 [2x, 2y, 2z] + \lambda_2 [1,1,1]
+	.\] 
+	We see that $Dg(x,y,z)$ has rank $2$ whenever $x,y,z$ are not identical. If $x=y=z$ then by solving the equation we have
+	\[
+		x^2 = \frac{1}{3}, x = \frac{1}{3}
+	.\] 
+	which is a contradiction. Therefore there is no singular point.
+
+	Therefore we can take $\mu = 1$. Using the five equations (3 from Lagrange multiplier, 2 from constraints), we solve for  $x,y,z \lambda_1, \lambda_2$ :
+\begin{itemize}
+	\item [solution 1] $\lambda_1 = \frac{3}{2}, \lambda_2 = 0, (x,y,z) = (1,0,0)$ or $(0,1,0)$ or  $(0,0,1)$ : $f(1,0,0) = 1$. 
+	\item [solution 2] $\lambda_1 = \frac{1}{2}, \lambda_2 = \frac{2}{3}, (x,y,z) = (-\frac{1}{3}, \frac{2}{3}, \frac{2}{3})$ or any permutation of $(x,y,z)$ : $f(x,y,z) = \frac{5}{9}$
+\end{itemize}
+Hence maximum value of $1$ and minimum value is $\frac{5}{9}$.
+	
+
+\end{proof}
+
+\end{itemize}
+

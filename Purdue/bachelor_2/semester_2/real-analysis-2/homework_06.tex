@@ -1,0 +1,199 @@
+\homework{6}{Fri 24 Feb 2023 01:38}{}
+
+43.B, 43.D, 43.L, 43.M, 43.Q, 43.R, 43.S
+\begin{itemize}
+	\newpage
+	\item 
+43.B. Show that a set $Z \subseteq \boldsymbol{R}^p$ has content zero if and only if for each $\varepsilon>0$ there exists a finite set $K_1, \ldots, K_n$ of cubes whose union contains $Z$ and such that $c\left(K_1\right)+\cdots+c\left(K_n\right)<\varepsilon$
+\begin{proof}
+	Every cover by cubes is a cover by cells, so the ``if'' part is trivial. Now we prove the ``only if'' part of the claim.
+
+		Fix $\varepsilon>0$ and we take a finite collection of cells $I_n$ that covers $Z$ and with total length less than $\varepsilon$. Now, for each cell $I_n$, let $J_n \supset I_n$ be such that $c(J_n) < c(I_n) + \frac{\varepsilon}{2^n}$ and $J_n$ has positive, rational sidelengths.
+		
+		Now we elaborate on how to pick such a $J_n$. WLOG we assume $I_n$ is closed. We write
+		\[
+			I_n = [a_1, b_1] \times \ldots\times [a_p, b_p]
+		.\] 
+		We define, for some $\delta>0$,
+		\[
+			J_n = [a_1 - \delta, b_1 + \delta] \times \ldots \times [a_p - \delta, b_p + \delta]
+		.\] 
+		After some calculations we know
+		\[
+			c(J_n) - c(I_n) = \prod_{i = 1}^{p} (b_i - a_i + 2 \delta) - \prod_{i = 1}^{p} (b_i - a_i) = o(\delta)  
+		.\] 
+		Thus, we can make the difference arbitrarily small by choosing small $\delta$.
+
+		Now that we have a cover of $Z$ by cells $J_n$ with positive rational sidelengths, we can take $\eta$ to be the greatest common divisor for all its sidelengths. Since all sidelengths are positive rational, we have $\eta \in \mathbb{Q}^{+}$. 
+
+		Finally we can disect each cell $J_n$ into finitely many cubes of sidelength $\eta$. We call those cubes $K_n$. It is seen that $\cup J_n \subset \cup K_n$, and yet $\sum c(J_n)  = \sum c(K_n)$. Therefore
+		\[
+			Z \subset \cup K_n  
+		.\] 
+		and
+		\[
+			\sum c(K_n) = \sum c(J_n) < \sum c(I_n) + \frac{\varepsilon}{2^n} < \varepsilon + \sum c(I_n) < 2 \varepsilon
+		.\]
+\end{proof}
+
+\newpage
+\item 43.D. If $J$ is a closed cell in $\boldsymbol{R}^2$ and $g: J \rightarrow \boldsymbol{R}$ is continuous, show that the graph $\{(x, y, g(x, y)):(x, y) \in J)\} \subseteq \boldsymbol{R}^3$ of $g$ has content zero.
+\begin{proof}
+	Since $J$ is closed and bounded, $J$ is compact by Heine-Borel. Since $g$ continuous on $J$, $g$ is uniformly continuous on $J$. Thus for any $\varepsilon>0$ there exists $\delta>0$ such that $\left| g(x,y) - g(x', y')  \right| <\varepsilon$ whenever $d\left( (x,y), (x', y') \right) < \delta$, where $d$ is the Euclidean metric. 
+
+	Now we take a partition $P_\varepsilon$ of $J$ fine enough such that for any cell $A \in P_\varepsilon$, we have $\text{diam} A < \delta$. This implies $\left| g(x,y) - g(x', y') \right| <\varepsilon$ for $(x,y)$ and $(x', y')$ in the same cell $A$. Now we define the following cover of $\text{graph of }g$ :
+	\[
+		Q_\varepsilon = \{A \times \left[ f(x_A)-\varepsilon, f(x_A)+ \varepsilon \right] \subset \mathbb{R}^3: A \in P_\varepsilon \} 
+	.\] 
+	where $x_A \in A$ is chosen arbitrarily for each $A \in P_\varepsilon$.
+	Now the total content of $Q_\varepsilon$ is
+	\[
+		c(Q_\varepsilon) = \sum_{A \in P_\varepsilon} |A| \times 2\varepsilon = 2 \varepsilon |J|
+	.\] 
+	Since $|J|$ is fixed and $\varepsilon$ is arbitrary, the graph of $g$ has measure zero.
+\end{proof}
+
+\newpage
+\item 43.L. Let $A \subseteq \boldsymbol{R}^{\mathrm{p}}$ be bounded and let $I, J$ be closed cells in $\boldsymbol{R}^{\mathrm{p}}$ such that $A \subseteq I \subseteq J$. If $f: A \rightarrow \boldsymbol{R}$ is a bounded function, define $f_I: I \rightarrow \boldsymbol{R}$ (respectively, $\left.f_J: J \rightarrow \boldsymbol{R}\right)$ to be the function which agrees with $f$ on $A$ and vanishes on $I \backslash A$ (respectively, $J \backslash A$ ). Show that the integral of $f_I$ over $I$ exists if and only if the integral of $f_J$ over $J$ exists in which case these integrals are equal.
+\begin{proof}
+	 Assume  the integral of $f_I$ over $I$ exists. Fix $\varepsilon>0$, and by Cauchy criterion there exists a partition $Q_\varepsilon$ of $I$ such that if $P$ and $Q$ are finer than $Q_\varepsilon$, we have 
+	 \[
+	 	\left| S(P;f_I) - S(Q;f_I) \right| \le \varepsilon
+	 .\] 
+	 Now we may extend $Q_\varepsilon$ naturally to make a partition of $J$. Write $I = \prod [a_k, b_k]$ and $J = \prod [a_k, b_k']$. If $Q_k$ is the partition of $[a_k, b_k]$ as a component of $Q_\varepsilon$, we let $Q_k' = Q_k \cup \{[a_k', a_k], [b_k, b_k']\}$. Having defined $Q_k'$ for each $i = 1,\ldots, p$, we obtain a partition $Q_\varepsilon'$ of $J$. Now if $P'$ and $Q'$ are finer than $Q_\varepsilon'$, we may restrict them to $P$ and $Q$ finer than $Q_\varepsilon$, and 
+	\begin{align*}
+	 	 S(P, f_I) 
+		&= \sum_{A \in P}f_I(x_A) c(A)  \\
+		&= \sum_{A \in P'}f_J(x_A) c(A) \\
+		&= S(P', f_J) 
+	 .\end{align*} 
+	 Where the second equality is true because the way we defined $f_J$ forces $f(x_A)$ to be zero whenever $A \in P $ is not contained in $I$. 
+	 We have the exactly same result for $S(Q, f_I) = S(Q', F_J)$.
+	 Thus
+	 \begin{align*}
+	 	\left| S(P, f_J) - S(Q, f_J) \right| 
+		&= \left| S(P;f_I) - S(Q ;f_I) \right| \\
+		&\le \varepsilon
+	 .\end{align*} 
+	 This establishes the existence of integral of $f_J$ over $J$.
+	 
+	 Now we assume the integral of $f_J$ over $J$ exists. Take a partition $Q_\varepsilon'$ of $J$ by Cauchy Criterion. 
+	 Without loss of generality we may assume that for every cell $A \in Q_\varepsilon'$, either $A \subset I$ or $A \cap I = \emptyset $. This can be achieved by taking refinements.
+	 
+	 Now we can naturally restrict $Q_\varepsilon'$ to a partition of $I$, call it $Q_\varepsilon$. For every partition $P$ of $I$ finer than $Q_\varepsilon$, let $P' = P \cup \left( Q_\varepsilon' \setminus Q_\varepsilon \right) $, and $P'$ is a partition finer than $Q_\varepsilon'$. We have the exactly same equality as above, and existence of integral of $f_I$ over $I$ is proven similarly.
+
+	 To show equality of integrals, take fine enough $P, P'$ such that
+	 \[
+	 	\left| \int _{I}f(I) - S(P, f_I) \right| < \varepsilon \qquad
+	 	\left| \int _{J}f(J) - S(P', f_J) \right| < \varepsilon
+	 .\] 
+	 and apply triangle inequality.
+ \end{proof}
+
+ \newpage
+\item 43.M. Let $A \subseteq \boldsymbol{R}^p$ be bounded and let $I_1$ and $I_2$ be closed cells in $\boldsymbol{R}^p$ such that $A \subseteq I_1$. Let $f: A \rightarrow \boldsymbol{R}$ be a bounded function, and, for $j=1,2$, define $f_i: I_1 \rightarrow \boldsymbol{R}$ by $f_1(x)=f(x)$ for $x \in A$ and $f_1(x)=0$ for $x \in I_{\mathrm{j}} \backslash A$. Show that the integral of $f_1$ and $I_1$ exists if and only if the integral of $f_2$ over $I_2$ exists, in which case these integrals are equal.
+\begin{proof}
+	Note that $I_1 \cap I_2$ is still a cell. Define $f_3: I_1 \cap I_2 \to \mathbb{R}$ by $f_3 = f(x)$ for $x \in A$ and $f_3(x) = 0$ otherwise. Apply the last exercise where $I = I_1 \cap I_2$ and $J = I_1$, we get  $\int _{I_1}f_1$ exists iff $\int _{I_1 \cap I_2}f_3$ exists and the integrals are equal. 
+
+	Do the same for $J = I_2$, we get  $\int _{I_2}f_2$ exists iff $\int _{I_1 \cap I_2}f_3$ exists and the integrals are equal. Combining these two results and we are done.
+\end{proof}
+
+\item 43.Q. Let $I \subseteq \boldsymbol{R}^p$ be a closed cell and let $f: I \rightarrow \boldsymbol{R}$ be bounded by $M$. If $f$ is integrable on $I$, show that the function $|f|$ is integrable on $I$ and that $\int_I|f| \leq M c(I)$.
+\begin{proof}
+	Define $f_+ = \max(f, 0)$ and $f_- = \min(f, 0)$. Then we can verify that  $f_+$ and $f_-$ are both integrable, and $f = f_+ + f_-$. 
+
+	Now
+	\[
+		\int_I |f| = \int _I f_+ - f_- = \int _E f_+ - \int _{I \setminus E} f_-
+	.\] 
+	where $E = \{x: f(x) \ge 0\} $.
+	By boundedness of $f$, $f_+ \le M$ and $f_- \ge -M$. Hence
+	\[
+		\int _I |f| \le \int _E M - \int _{I \setminus E} -M = \int _I M =  M c(I)
+	.\] 
+\end{proof}
+\newpage
+
+\item 43.R. Let $I \subseteq \boldsymbol{R}^p$ be a closed cell and let $f, g: I \rightarrow \boldsymbol{R}$ be integrable on $I$. Show the product function $f g$ is integrable on $I$.
+\begin{proof}
+	We write $f_+ = \max (f, 0)$ and $f_- = \min(f, 0)$. Thus $f = f_+ + f_-$. Similarly we decompose $g$ to $g = g_+ + g_-$. Thus $fg = f_+ g_+ + f_+ g_- + f_- g_+ + f _- g_-$. $\max$ and $\min$ preserves integrability, so those component functions are all integrable.
+
+	To prove $fg$ integrable, it suffices to prove $f_+ g_+ , f_+ g_- , f_- g_+ , f _- g_-$ are each integrable. By symmetry we only need to prove for $f_+ g_+$.
+
+	Since we are talking about Riemann integrability, $f, g$ are bounded. Thus there exists $M >0$ such that for all $x \in I$, 
+	\[
+		0\le f_+(x) \le M\qquad
+		0\le g_+(x) \le M
+	.\] 
+	Now fix $\varepsilon>0$. Use Riemann Criterion of integrability, we take a partition $P_\varepsilon$ of $I$ such that for any $P$ finer than $P_\varepsilon$, 
+	\[
+		\sum_{A \in P} (M_A(f_+) - m_A(f_+)) c(A) < \varepsilon
+	.\] 
+	where $M_A(f_+) := \operatorname{sup} \{f_+(x) : x \in A\} $ and $m_A(f_+) := \operatorname{inf} \{f_+(x) : x \in A\} $. Similar result holds for $g_+$.
+
+	Now for any $A \in P$ and $x \in A$,
+	\[
+		0\le m_A(f_+) m_A(g_+)\le m_A(f_+g_+) 
+		\le (f_+g_+)(x) \le M_A(f_+g_+)
+		\le M_A(f_+)M_A(g_+)
+	.\] 
+	Hence
+	\[
+		\sum_{A \in P} (M_A(f_+g_+) - m_A(f_+g_+)) c(A)  
+		\le \sum_{A \in P} (M_A(f_+)M_A(g_+) - m_A(f_+)m_A(g_+)) c(A)  
+	.\] 
+	But we have for all $x$,
+\begin{align*}
+	&M_A(f_+)M_A(g_+) - m_A(f_+)m_A(g_+) \\
+	&= M_A(f_+) \left( M_A(g_+) - m_A(g_+) \right) +
+	m_A(g_+) \left( M_A(f_+) - m_A(f_+) \right) A\\
+	&\le M \left( M_A(g_+) - m_A(g_+) \right) + M\left(M_A(f_+ ) - m_A(f_+)\right) 
+.\end{align*} 
+Hence
+\begin{align*}
+		&\sum_{A \in P} (M_A(f_+g_+) - m_A(f_+g_+)) c(A)  \\
+		&\le M \sum_{A \in P} \left( M_A(g_+) - m_A(g_+) \right) c(A) +
+		M \sum_{A \in P} \left( M_A(f_+) - m_A(f_+) \right) c(A)\\
+		&< 2 M \varepsilon
+.\end{align*}
+This implies integrability of $f_+ g_+$. Similarly we can prove integrability for $f_+ g_- , f_- g_+ $, and $f _- g_-$. Therefore, $fg$ is integrable on $I$.
+\end{proof}
+\newpage
+
+\item 43.S. Let $I \subseteq \boldsymbol{R}^p$ be a closed cell and let $\left(f_n\right)$ be a sequence of functions which are integrable on $I$. If the sequence converges uniformly on $I$ to $f$, show that $f$ is integrable on $I$ and that
+\[
+\int_I f=\lim _n\left(\int_I f_n\right) .
+\]
+\begin{proof}
+	Fix $\varepsilon>0$. Using monotone convergence of $f$, we have some $N_\varepsilon$ such that for all $n> N_\varepsilon$, we have $|f(x) - f_n(x)| < \frac{\varepsilon}{c(I)}$ for all  $x$.
+
+	Fix some $n > N_\varepsilon$. Use integrability of $f_n$, have some partition  $P_\varepsilon$ of $I$ such that whenever $P$ is finer than $P_\varepsilon$, we have
+	\[
+		|S(P, f) - \int _I f| < \varepsilon
+	.\] 
+	
+	Now
+	\begin{align*}
+		&\left| S(P, f) - S(P, f_n) \right|  \\
+		&= \left| \sum_{A \in P} f(x_A) c(A) -  \sum_{A \in P} f_n(x_A) c(A) \right|   \\
+		&\le \sum_{A \in P} \left| f(x_A) - f_n(x_A) \right| c(A) \\
+		&< \sum_{A \in P} \frac{\varepsilon}{c(I)} c(A) \\
+		&= \varepsilon
+	.\end{align*}
+	Therefore, 
+	\[
+		\left| S(P, f_n) - \int _I f \right| < 2 \varepsilon
+	.\] 
+	This implies integrability of $f_n$. Now we can take fine partition $P$ such that 
+	\[
+		\left| S(P, f_n) - \int _I f_n \right| < \varepsilon
+	.\] 
+	Combining those, we have proven that for all $\varepsilon$ there exists large enough $n$ such that
+	\[
+		\left| \int _I f_n - \int _I f \right| < 3 \varepsilon
+	.\] 
+	This establishes the claim that $\int _I f = \lim _n \int _I f_n$.
+\end{proof}
+
+\end{itemize}
+

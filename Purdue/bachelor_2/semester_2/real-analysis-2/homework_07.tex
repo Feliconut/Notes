@@ -1,0 +1,378 @@
+\homework{7}{Sun 05 Mar 2023 20:08}{First Exam}
+
+1. (Direct proof of the Inversion Theorem)
+
+Let $\Omega \subset \mathbb{R}^p$ be open, and $f: \Omega \rightarrow \mathbb{R}^p$ be of class $C^1(\Omega)$. Suppose also that for some $x_0 \in \Omega$ the linear mapping $D f\left(x_0\right)$ is a bijection. Let $\Gamma=D f\left(x_0\right)^{-1}$.
+
+(a) Show that there exists $r>0$ such that
+\[
+\|I-\Gamma \circ D f(x)\|_{p p} \leq \frac{1}{2} \quad \text { for }\left\|x-x_0\right\| \leq r .
+\]
+
+\begin{proof}
+	Since $f$ is $C_{1}(\Omega)$, for any $\varepsilon>0$ there exists $\delta(\varepsilon)$ such that
+	\[
+		\|Df(x) - Df(x_0)\|_{pp} < \varepsilon \quad \text{ for } \|x - x_0\| < \delta(\varepsilon) 
+	.\] 
+	Using the equivalent definition of norm of a linear map given in Exercise 21.M, for any $\varepsilon>0$ there exists nonzero $u(\varepsilon) \in \mathbb{R}^p$ such that
+	\[
+		\left(\|\Gamma \circ Df(x_0) - \Gamma \circ Df(x)\|_{pp} - \varepsilon\right) \|u\| < \|\Gamma \circ Df(x_0)(u) - \Gamma \circ Df(x)(u)\| 
+	.\] 
+	By property of $\|\cdot \|_{pp}$ we also have
+\[
+		\|\Gamma \circ Df(x_0)(u) - \Gamma \circ Df(x)(u)\| 
+		\le 
+		\|\Gamma\|_{pp} \|Df(x_0)(u) - Df(x)(u)\|
+		\le 
+		\|\Gamma\|_{pp} \|Df(x_0)- Df(x)\|_{pp} \|u\|
+	.\]
+	Combining the inequalities and dividing out $\|u\|$, we obtain
+	\[
+		\|\Gamma \circ Df(x_0) - \Gamma \circ Df(x)\|_{pp} - \varepsilon < \|\Gamma\|_{pp} \|Df(x_0)- Df(x)\|_{pp} 
+	.\] 
+	Take $\varepsilon \to  0$,
+\[
+		\|\Gamma \circ Df(x_0) - \Gamma \circ Df(x)\|_{pp} \le  \|\Gamma\|_{pp} \|Df(x_0)- Df(x)\|_{pp} 
+	.\]
+	Finally take $\|x - x_0\|< \delta\left(\frac{1}{2} \|\Gamma\|_{pp}^{-1} \right)  =: r$,
+	\[
+		\|\Gamma \circ Df(x_0) - \Gamma \circ Df(x)\|_{pp} \le  \|\Gamma\|_{pp} \frac{1}{2} \|\Gamma\|_{pp}^{-1} = \frac{1}{2}
+		.
+	\]
+	Note that $\Gamma \circ Df(x_0) = I$ and we are done.
+\end{proof}
+
+\newpage
+(b) Let $s \leq \frac{r}{2\|\Gamma\|_{p p}}$ and fix $y$ with $\left\|y-f\left(x_0\right)\right\| \leq s$. Define
+\[
+F_y(x)=f(x)-y \quad \text { for }\left\|x-x_0\right\| \leq r .
+\]
+Prove that $F_y$ is differentiable for $\left\|x-x_0\right\|<r$ and that
+\[
+\left\|\Gamma \circ F_y\left(x_0\right)\right\| \leq \frac{r}{2}, \quad\left\|I-\Gamma \circ D F_y(x)\right\|_{p p} \leq \frac{1}{2} \quad \text { for }\left\|x-x_0\right\|<r
+\]
+\begin{proof}
+	$F_y$ is differentiable because $f$ is differentiable at $x$, and $y$ is a constant. Furthermore,
+	\[
+		D F_y(x) = D(f - y)(x) = Df(x) - Dy(x) = Df(x)
+	.\] 
+	Combined with part (a), this implies the second inequality. For the first inequality, note that
+	\[
+		\|\Gamma \circ F_y(x_0)\| \le
+		\|\Gamma\|_{pp} \|f(x_0) - y\| \le 
+		\|\Gamma_{pp}\| s \le 
+		\|\Gamma_{pp}\|\frac{r}{2\|\Gamma\|_{p p}} = \frac{r}{2}
+	.\] 
+\end{proof}
+\newpage
+(c) If $\left\|y-f\left(x_0\right)\right\| \leq s$, let $G_y$ be defined by
+\[
+G_y(x)=x-\Gamma \circ F_y(x) \text { for }\left\|x-x_0\right\| \leq r .
+\]
+Prove that $G_y$ is a contraction ${ }^1$ with constant $1 / 2$ on this ball.
+\begin{proof}
+	By Mean Value Theorem, whenever $x, x' \in B_r(x_0)$, there exists some $x^* \in [x, x']$ such that $F_y(x) - F_y(x') = DF_y(x^*)(x - x')$. Therefore
+	\begin{align*}
+		\|G_y(x) - G_y(x')\|&= 
+		\|x - \Gamma \circ F_y(x) - x' + \Gamma \circ F_y(x')\|\\
+		&= \|(x - x') - \Gamma \left( F_y(x) - F_y(x') \right) \| \\
+		&= \|\Gamma \circ D F_y(x_0)(x - x') - \Gamma \left( F_y(x) - F_y(x') \right) \| \\
+		&\le \|\Gamma\|_{pp} \|D F_y(x_0) (x - x') - \left( F_y(x) - F_y(x') \right) \| \\
+		&= \|\Gamma\|_{pp} \|D F_y(x_0) (x - x') - DF_y(x^*) (x - x') \| \\
+		&\le  \|\Gamma\|_{pp} \|D F_y(x_0) - DF_y(x^*) \|_{pp} \|x - x_0\| \\
+		&\le \|\Gamma\|_{pp} \left( \frac{1}{2} \|\Gamma\|_{pp}^{-1}  \right)\|x - x_0\| \\
+		&= \frac{1}{2} \|x - x_0\| 
+	.\end{align*}
+	Therefore $\Gamma_y$ is a contraction with constant $\frac{1}{2}$ on $B_r(x_0)$.
+\end{proof}
+
+\newpage
+(d) If $\left\|y-f\left(x_0\right)\right\| \leq s$, define
+\[
+\phi_0(y)=x_0, \quad \phi_{n+1}(y)=G_y\left(\phi_n(y)\right) \quad \text { for } n=0,1,2, \ldots
+\]
+Show that
+\[
+\left\|\phi_{n+1}(y)-\phi_n(y)\right\| \leq 2^{-n}\left\|\phi_1(y)-\phi_0(y)\right\| \leq 2^{-n-1} r,
+\]
+whence it follows that $\left\|\phi_{n+1}(y)-\phi_m(y)\right\| \leq 2^{-m} r$ for $n \geq m \geq 0$. In particular, $\| \phi_k(y)-$ $x_0 \| \leq r$, so that this iteration is possible.
+\begin{proof}
+	Note that
+	\[
+		\phi_{n+1}(y) - \phi_n(y)=
+		G_y\phi_{n}(y) - G_y\phi_{n-1}(y)=
+		G_y\left(\phi_{n}(y) - \phi_{n-1}(y)\right)
+	.\] 
+	Apply induction on $n$,
+	\[
+		\phi_{n+1}(y) - \phi_n(y)=
+		(G_y)^n \left(\phi_1(y) - \phi_0(y)\right)
+	.\] 
+	By the property of contraction,
+\[
+		\|\phi_{n+1}(y) - \phi_n(y)\|\le 
+		2^{-n}\| \phi_1(y) - \phi_0(y)\|
+	.\]
+	Finally
+	\[
+		\|\phi_1(y) - \phi_0(y)\|=
+		\|G_y(x_0) - x_0\|=
+		\|\Gamma \circ F_y(x_0)\| \le  \frac{r}{2}
+	.\] 
+	Thus
+	\[
+		\|\phi_{n+1}(y) - \phi_n(y)\|\le 
+		2^{-n-1}r
+	.\]
+\end{proof}
+\newpage
+(e) Show that each of the functions $\phi_k$ is continuous for $\left\|y-f\left(x_0\right)\right\| \leq s$ and that the sequence $\left(\phi_k\right)$ is uniformly convergent to a continuous function $\phi$ which is such that $G_y(\phi(y))=\phi(y)$ for $\left\|y-f\left(x_0\right)\right\| \leq s$, whence it follows that $f(\phi(y))=y$ for $\left\|y-f\left(x_0\right)\right\| \leq s$. Hence the function $\phi$ is the inverse of $f$ on the set $\left\{y:\left\|y-f\left(x_0\right)\right\| \leq s\right\}$ and maps it into the set $\left\{x:\left\|x-x_0\right\| \leq r\right\}$
+\begin{proof}
+	$G_y$ is continuous since it is sum and composition of continuous functions. Also $\phi_0$ is constant. By induction we know $\phi_k = \left( G_y \right) ^k \phi_0$ is continuous on $B_s(f(x_0))$ for all $k$. 
+
+	To establish uniform convergence, we use Weierstrass M-Test. Consider the telescoping sum
+	\[
+		\phi_n = \phi_0 + \sum_{k = 1}^{n} \phi_k - \phi_{k - 1}
+	.\] 
+	And note that
+	\[
+		\sum_{k=1}^{\infty} \|\phi_k - \phi_{k-1}\| \le 
+		\sum_{k=1}^{\infty} 2^{-n}r 
+		< \infty 
+	.\] 
+	Hence $\sum_{k=1}^{\infty} \phi_k - \phi_{k-1}$ converges uniformly. This implies that $ \phi_n$ converges uniformly to some continuous function $\phi$.
+
+	To verify that $G_y(\phi_y) = \phi(y)$, note that $\|\phi_k - \phi_{k-1}\| \to  0$ as $k \to  \infty $, and by continuity of $G_y$ we have $\|G_y\phi_k(y) -G_y \phi_{k-1}(y)\| \to  0$ as $k \to \infty $. So
+	\[
+		\|G_y(\phi(y)) - \phi(y)\| = 
+		\lim_{k \to \infty} \|G_y \phi_k (y) -  \phi_{k} (y)\|=
+		\lim_{k \to \infty} \|G_y \phi_k (y) - G_y \phi_{k-1} (y)\| = 0
+	.\] 
+\end{proof}
+
+\newpage
+
+2. (Tangent vectors and Lagrange's Theorem)
+Let $\Omega \subset \mathbb{R}^p$ be open, $g: \Omega \rightarrow \mathbb{R}^k(k \leq p)$ be of class $C^1$, and consider the constraint set $S=\{x \in \Omega: g(x)=0\}$. Recall that we call a point $x_0 \in S$ regular, if $D g\left(x_0\right)$ has a rank $k$.
+
+(a) We say that a vector $\tau \in \mathbb{R}^p$ is tangent to $S$ at $x_0$, if there is a continuously differentiable curve $x=\gamma(t) \in S, t \in(-\delta, \delta)$ for some $\delta>0$, such that
+\[
+\gamma(0)=x_0, \quad \tau=\gamma^{\prime}(0)
+\]
+Define the tangent space $T_{x_0}$ of $S$ at $x_0$ as
+\[
+T_{x_0}=\left\{\tau \in \mathbb{R}^p: \tau \text { is tangent to } S \text { at } x_0\right\} .
+\]
+Prove that if $x_0 \in S$ is regular, then
+\[
+\tau \in T_{x_0} \Longleftrightarrow D g\left(x_0\right)(\tau)=0 .
+\]
+Conclude that $T_{x_0}$ is a $(p-k)$-dimensional linear subspace of $\mathbb{R}^p$.
+[Hint. For $(\Leftarrow)$ in $(*)$ you have to construct a curve passing through $x_0$ with tangent $\tau$ at that point. Use the Implicit Function Theorem.]
+\begin{proof}
+	Assume $\tau \in T_{x_0}$, so there exists a continuously differentiable curve $\gamma: (-\delta, \delta) \to  S$ such that $\gamma(0) = x_0$ and $\tau = \gamma'(0)$. Now
+	\begin{align*}
+		D g(x_0)(\tau)
+		&= Dg(x_0)(\gamma'(0)) \\
+		&= Dg(x_0)(D_1 \gamma(0)) \\
+		&= \left(Dg(\gamma(0)) \circ D\gamma(0)\right) (e_1)\\
+		&= D(g \circ \gamma)(0)(e_1) \\
+		&= D_1(g \circ \gamma)(0) 
+	.\end{align*}
+	But  $g \circ \gamma$ is constantly $0$, hence $D_1(g \circ \gamma) (0) = 0$.
+
+	Now we prove the converse. Assume $Dg(x_0) (\tau) = 0$.
+	Let $\mathbb{R}^p = A \oplus A^{\perp}$ be an orthogonal decomposition of $\mathbb{R}^p$, where $A \simeq \mathbb{R}^{p - k} $ and $A^{\perp} \simeq \mathbb{R}^k$, and $x_0 = (a_0, b_0) \in A \oplus A^{\perp}$ and $Dg|_{A^{\perp}} (b_0)$ has rank $k$. From now on, for simplicity of notation, we slightly abuse notation to denote $A$ as $\mathbb{R}^{p - k}$ and $A^{\perp}$ as $\mathbb{R}^k$.
+
+	By Implicit Function Theorem, there exists a neighborhood $W$ of $a \in \mathbb{R}^{p - k}$ and a function $\varphi: W \subset \mathbb{R}^{p - k} \to \mathbb{R}^k$ such that whenever $a \in W$ we have $g(a, \varphi(a)) = 0$. Moreover, there exists a neighborhood $U$ of $x_0 \in \mathbb{R}^p$ such that for all $(a,b) \in U$, $(a,b) \in S$ if and only if $a \in W$ and $b = \varphi(a)$.
+
+	Now let $\tau = (\tau_1, \tau_2) \in \mathbb{R}^{p - k} \times \mathbb{R}^k$ be the orthogonal decomposition of $\tau$. Let $\delta>0$ be such that $B_\delta(a_0) \subset W$. Define $\gamma_1: (-\delta, \delta) \to W$ be such that $\gamma_1(t) = a_0 + t\tau_1$. Next define 
+	\begin{align*}
+		\gamma: (-\delta,\delta) &\longrightarrow U \\
+		t &\longmapsto \gamma(t) =  \left( \gamma_1(t), \varphi\left( \gamma_1(t) \right)  \right) 
+	.\end{align*}
+	It is obviously seen that  $\gamma(0) = (a_0 , \varphi(a_0)) = (a_0, b_0) = x_0$. Now we claim that $\gamma'(0) = \tau$.
+
+	First, from assumption we have
+	\[
+		Dg (x_0) (\tau) = 
+		D^{(1)} g(a_0) (\tau_1) + 
+		D^{(2)} g(b_0) (\tau_2)
+		= 0
+	.\] 
+	Next, from implicit differentiation to the equation $g(a, \varphi(a)) = 0$ we obtain
+	\[
+		D^{(1)}g(a_0) + D^{(2)}g(b_0) D\varphi(a_0) = 0
+	.\] 
+	Hence 
+	\[
+		D \varphi(a_0) = - \left[ D^{(2)}g(b_0) \right] ^{-1} \left[ D^{(1)}g(a_0) \right] 
+	.\] 
+	Now we have
+	\begin{align*}
+		D\varphi(a_0)(\tau_1) &= - \left[ D^{(2)}g(b_0) \right] ^{-1} \left[ D^{(1)}g(a_0) \right](\tau_1) \\
+		&= - \left[ D^{(2)}g(b_0) \right] ^{-1} \left[ D^{(1)}g(a_0)(\tau_1) \right] \\
+		&= - \left[ D^{(2)}g(b_0) \right] ^{-1} \left[ - D^{(2)}g(b_0)(\tau_2) \right] \\
+		&= - \left[ D^{(2)}g(b_0) \right] ^{-1} \left[ - D^{(2)}g(b_0) \right](\tau_2) \\
+		&= \tau_2 
+	.\end{align*} 
+	Therefore
+	\begin{align*}
+		D^{(1)}\gamma(0) &= D \gamma_1(0) = \tau_1\\
+		D^{(2)}\gamma(0) &= D\varphi(a_0)D \gamma_1(0) = D \varphi(a_0)(\tau_1) = \tau_2
+	.\end{align*}
+	Finally
+	\[
+		D\gamma(0) = \left(D^{(1)}\gamma(0), D^{(2)}\gamma(0)\right) = (\tau_1, \tau_2) = \tau
+	.\] 
+	For the final claim, since $\operatorname{rank} D_g(x_0) = k$, we have $\operatorname{dim} \operatorname{null} D_g(x_0) = p - k $ by Rank-Nullity Theorem. By the claim we just proved, $T_{x_0}$ is isomorphic to $\operatorname{null} Dg(x_0)$. This establishes that $T_{x_0}$ is a linear subspace, and that $\operatorname{dim} T_{x_0} = p - k $.
+\end{proof}
+\newpage
+(b) Suppose now $f: \Omega \rightarrow \mathbb{R}$ is of class $C^1$. Prove directly that if $f$ has a relative extremum on $S$ at a regular point $x_0$, then
+\[
+D_\tau f\left(x_0\right)=0 \text { for any } \tau \in T_{x_0} .
+\]
+You are not allowed to use Lagrange's Theorem here.
+Remark. Note that ( $\dagger)$ is equivalent to the statement of Lagrange's Theorem that there are constants $\lambda_1, \ldots, \lambda_k$ (a.k.a. Lagrange multipliers) such that
+\[
+D f\left(x_0\right)=\lambda_1 D g_1\left(x_0\right)+\cdots+\lambda_k D g_k\left(x_0\right) .
+\]
+Indeed, it is a pure Linear Algebra: if $T_{x_0}^{\perp}$ is the orthogonal complement of $T_{x_0}$ in $\mathbb{R}^p$ (so-called normal vectors at $\left.x_0\right)$, then $(*)$ just means $T_{x_0}^{\perp}=\operatorname{span}\left(\nabla g_1\left(x_0\right), \ldots, \nabla g_k\left(x_0\right)\right)$. On the other hand, (†) means $\nabla f\left(x_0\right) \in T_{x_0}^{\perp}$ and thus $\nabla f\left(x_0\right)$ is a linear combination of $\nabla g_1\left(x_0\right), \ldots, \nabla g_k\left(x_0\right)$.
+\begin{proof}
+	Consider the tangent space $T_{x_0}$. For any $\tau \in T_{x_0}$, there exists $\delta>0$ and $\gamma:(-\delta, \delta) \to S$ such that $\gamma(0) = x_0$ and $\gamma'(0) = \tau$. Now
+	\[
+		D(f\gamma)(0) = Df(x_0)D\gamma(0) = D_\tau f(x_0)
+	.\] 
+	We now claim that $D(f \gamma)(0) = 0$. Since $f$ has extremum point at $x_0$, there exists $\delta>0$ such that for all $x \in B_\delta(x_0) \cap S$, we have $f(x) \le  f(x_0)$. But since $\gamma$ is class $C^1$ and $\gamma(0) = x_0$, there exists $\eta>0$ such that for all $t \in (-\eta, \eta)$, we have $\gamma(t) \in B_\delta(x_0) \cap S$. Hence for all such $t$ we have $f(\gamma(t)) \le f(x_0) =  f(\gamma(0))$. Therefore $t=0$ is a relative extremum of $f \circ \gamma$. By Extremum Value Theorem, $D(f \circ \gamma)(0) = 0$.
+
+	Therefore $D_\tau f(x_0) = 0$ for any $\tau$.
+\end{proof}
+
+\newpage
+
+3. (Lebesgue's Criterion for Integrability)
+Let $I \subset \mathbb{R}^p$ be a closed cell and let $f: I \rightarrow \mathbb{R}$ be bounded. For $\alpha>0$, let
+\[
+D_\alpha=\left\{x \in I: \omega_f(x) \geq \alpha\right\},
+\]
+where $\omega_f(x)$ denotes the oscillation of $f$ at $x$ defined by
+\[
+\omega_f(x)=\lim _{\delta \rightarrow 0+}\left(\sup _{B_\delta(x) \cap I} f-\inf _{B_\delta(x) \cap I} f\right)
+\]
+(see also Project 23. $\alpha$ in the textbook for an alternative definition). Note that $f$ is continuous at $x$ iff $\omega_f(x)=0$ (you don't have to prove this).
+
+(a) Suppose that $D_\alpha$ has content zero. Show that there exists a partition $P_\alpha=\left\{J_1, \ldots, J_N\right\}$ of $I$ such that\\
+(i) $D_\alpha$ is contained the union of the cells $J_1, \ldots, J_r(r \leq N)$\\
+(ii) $c\left(J_1\right)+\cdots+c\left(J_r\right) \leq \alpha$, and\\
+(iii) if $x, y \in J_k$ for $k=r+1, \ldots, N$, then $|f(x)-f(y)|<\alpha$.\\
+Show that for such partition
+\[
+\sum_{k=1}^N\left(M_k-m_k\right) c\left(J_k\right) \leq \alpha\left(c(I)+2\|f\|_I\right) \quad\left(\text { here }\|f\|_I=\sup _I|f|\right) .
+\]
+[Hint. One way is to start with a "coarser" partition $Q=\left\{I_j\right\}$ that satisfies $\sum_{I_j \cap D_\alpha \neq \emptyset} c\left(I_j\right) \leq \alpha$ and then construct a refinement that satisfies (i)-(iii)]
+\begin{proof}
+	%Recall that for a finite collection of cells $\left\{ B_j \right\} _{j = 1}^n$ in $I$, there is a partition $P$ of $I$ generated by $B_j$, defined as the coarsest partition such that each  $B_j$ is a union of cells in $P$. This can be done by a laborious argument of extending the edges of the cells $B_j$.
+
+	Because $D_\alpha$ has content zero, there exists finitely many cells $\left\{ E_j \right\}_{j = 1}^{r} $ such that $D_\alpha$ is contained in the union of $E_j$ and $ \sum_{j=1}^{m} c(E_j) \le \alpha $. 
+	Without loss of generality we may assume that $E_j$ are open cells. Since we are working in $\mathbb{R}^1$, we may assume the $E_j$ are mutually disjoint, since the union of any two non-disjoint open cells in $\mathbb{R}^1$ is yet another open cell.
+
+	%Generate a partition $\left\{ I_j \right\}_{j = 1}^N$ where $\bigcup_{j = 1} ^r I_j = \bigcup_{j = 1} ^m E_j \supset D_\alpha$, and $\sum_{j=1}^{r} c(I_j) \le \alpha - \varepsilon$, thus $\bigcup_{j = r+1} ^N \subset I \setminus D_\alpha$.
+
+	%For each $1 \le j \le r$, we may find open cell $\tilde I_j \supset I_j$ such that  $c(\tilde I_j) < c(I_j) + \frac{\varepsilon}{r}$. Therefore we have the open cover $\left\{ \tilde I_j \right\} _{j= 1}^{r} \supset D_\alpha$ and $\sum_{j=1}^{r} \tilde I_j \le \alpha$. 
+
+	Now $I \setminus \bigcup_{1\le j \le r} E_j$ is also a union of finitely many disjoint cells. Combining these cells with $\{E_j\} $ we obtain a partition $P = \left\{ I_j \right\}_{j = 1}^N $ of $I$ where  $I_j = E_j$ for  $0\le j\le r$, so $D_\alpha \subset \bigcup_{j = 1}^r I_j$, $\sum_{j=1}^{r} c(I_j) < \alpha $, $r \le N$.
+
+	Now the union $\bigcup_{j = 1} ^r I_j$ is open, so its complement $\bigcup_{j = r+1} ^N I_j$ is closed. Since $I$ is bounded, by Heine-Borel,  $\bigcup_{j = r+1} ^N I_j$ is compact.
+
+	Now for each $x \in \bigcup_{j = r+1} ^N I_j$, define
+	\[
+		\overline{\delta} (x) = 
+		\sup \{\delta\ge 0 : \sup _{B_\delta(x) \cap I} f - \inf _{B_\delta(x) \cap I}f < \alpha\} 
+	.\] 
+	For each $x \in \bigcup_{j = r+1} ^N I_j$, we have $\overline{\delta} (x) > 0$, because the limit $\omega_f(x) < \alpha$. Since we are working on $\mathbb{R}^1$, $B_{\overline{\delta}(x)} (x) =: B(x)$ is an open box. By compactness, there exists finitely many points $x_1, \ldots, x_n \in \bigcup_{j = r+1} ^N I_j$ where $\left\{B(x_i)\right\}_{i = 1}^n $ is an open cover of $\bigcup_{j = r+1} ^N I_j$.
+
+	Now let  $P' = \left\{ J_j \right\}_{j = 1}^{N'} $ be a refinement of $P$  by $\left\{B(x_i)\right\}_{i = 1}^n$. Index the sets in a way such that there exists $r'$ such that $J_j \subset I_i$ for some $i $ whenever $j \le r'$, and $J_j \subset B(x_i)$  for some $i$ whenver $j > r'$. 
+
+	Now we verify property (iii). Take $x, y \in J_k$ where $k > r'$. Now $J_k \subset B(x_i)$ for some $i$. By definition of $B(x_i)$, we have
+	\[
+		\left| f(x) - f(y) \right| \le 
+		\sup_{B(x_i) \cap I} f - \inf _{B(x_i) \cap I}f < \alpha
+	.\] 
+
+	For $k = 1, \ldots, r'$, we have
+	\[
+		M_k - m_k \le 2 \|f\|_{I} \qquad \sum_{k=1}^{r'} c(J_k) \le \alpha
+	.\] 
+	Hence
+	\[
+		\sum_{k=1}^{r'} (M_k- m_k)c(J_k) \le 2 \alpha \|f\|_{I}
+	.\] 
+	For $k > r'$, we have
+	\[
+		M_k - m_k \le  \alpha \qquad \sum_{k=r'+1}^{N'} c(J_k) \le c\left( I \right) 
+	.\] 
+	Hence
+	\[
+		\sum_{k=r'+1}^{N'} (M_k - m_k) c(J_k) \le \alpha c(I)
+	.\] 
+	Combining those,
+\[
+		\sum_{k=1}^{N'} (M_k - m_k) c(J_k) \le \alpha \left(c(I) + 2\|f\|_{I}\right)
+	.\]
+\end{proof}
+
+
+\newpage
+(b) Deduce that if $D_\alpha$ has content zero for each $\alpha>0$, then $f$ is integrable on $I$.
+\begin{proof}
+	%If $D_\alpha$ has content zero for each $\alpha$, then by countable subadditivity of content,
+	%\[
+	%	c\left(\bigcup _{n = 1}^{\infty } D_{\frac{1}{n}}\right) = 0
+	%.\] 
+	Fix $\varepsilon>0$ and let $\alpha = \varepsilon \left(c(I)+2\|f\|_I\right)^{-1}$. Hence for some partition $P$ of $I$ and any refinement $P'$ of $P$,
+	\[
+		U(P', f) - L(P', f) = \sum_{k=1}^N\left(M_k-m_k\right) c\left(J_k\right) \le \varepsilon
+	.\] 
+	Since $\varepsilon$ is arbitrary, we have verified the Riemann integrability criterion for $f$. Therefore $f$ is integrable on $I$.
+
+\end{proof}
+
+\newpage
+(c) Conversely, show that if $f$ integrable on $I$ then $D_\alpha$ has content zero for any $\alpha>0$.
+
+[Hint. You may want to relate this to Riemann's Criterion for Integrability.]
+
+Remark. Parts (b) and (c) give a statement equivalent to Lebesgue's Criterion for Integrability: $f$ is integrable on $I \Longleftrightarrow D_\alpha$ has content zero for any $\alpha>0 \Longleftrightarrow D=\bigcup_{n=1}^{\infty} D_{1 / n}$ has "measure" zero.
+\begin{proof}
+	Fix $\varepsilon>0$ and Take partition $P$ of $I$ such that for any refinement $P'$ of $P$,
+	\[
+		\sum_{J \in P'} (M_J - m_J) c(J) \le \varepsilon
+	.\] 
+	We may assume without loss of generality that all intervals in $P'$ are either open or singleton, since the boundary points do not contribute to the Riemann sum.
+
+	Now by definition of $D_\alpha$, whenever $J \in P'$, $m(J) > 0$ and $J \cap D_\alpha \neq  \emptyset $, $J$ must contain some neighborhood of $x$. Therefore  $\sup_J f - \inf_J f \ge \omega_f(x) \ge \alpha$. Applying this to the Riemann sum, we have
+	\[
+		\sum_{J \in P', J \cap D_\alpha \neq \emptyset } (M_J - m_J) c(J) \ge 
+		\sum_{J \in P', J \cap D_\alpha \neq \emptyset } \alpha c(J) = \alpha \sum_{J \in P', J \cap D_\alpha \neq \emptyset } c(J)
+	.\] 
+	On the other hand, by restricting the range of the sum,
+	\[
+	\sum_{J \in P^{\prime}, J \cap D_\alpha \neq \emptyset }\left(M_J-m_J\right) c(J) \le 
+	\sum_{J \in P^{\prime}}\left(M_J-m_J\right) c(J) \le \varepsilon
+	.\] 
+	Combining these inequalities,
+	\[
+		 \alpha \sum_{J \in P', J \cap D_\alpha \neq \emptyset } c(J) \le \varepsilon
+	.\] 
+	Note that $\{J \in P' : J \cap D_\alpha \neq \emptyset \} $ is a finite cover of $D_\alpha$ by cells. Hence
+	\[
+		m^*(D_\alpha)\le \frac{\varepsilon}{\alpha}
+	.\] 
+	Since $\varepsilon$ is arbitrary,
+	\[
+		m^*(D_\alpha) = 0
+	.\] 
+	This implies $m(D_\alpha) = 0$.
+\end{proof}
+
+
