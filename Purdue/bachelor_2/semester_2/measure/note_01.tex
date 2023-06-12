@@ -1,0 +1,26 @@
+\note{1}{Fri 14 Apr 2023 03:40}{Rising Sun Lemma}
+
+\begin{lemma}[Rising Sun Lemma]
+	Let $F: \mathbb{R} \to  \mathbb{R}$ be continuous. Define
+	\[
+		E = \{x \in \mathbb{R}: \exists y < x \text{ s.t. } g(y) < g(x)\} 
+	.\] 
+	Then there exists an at most countable collection of pairwise disjoint intervals $(a_i, b_i)$ so that
+	 \[
+		E = \bigcup_{i \in \mathbb{N}} (a_i, b_i)
+	.\] 
+	Furthermore, for each $i$, if $a_i > - \infty $ and $b_i < \infty $, then
+	\[
+		f(a_i)= f(b_i)
+	.\] 
+\end{lemma}
+\begin{proof}
+	Since $f$ is continuous, $E$ is open. Then $E$ must be an at most countable collection of disjoint open intervals $(a_i, b_i)$.
+	Using continuity of $f$, we may also verify that the intervals are separated, i.e. $a_i \neq  b_j$ for all $i, j$.
+
+	We only have to consider functions  $f$ where we can choose an $i \in \mathbb{N}$ such that $\left(a_i, b_i\right)$ is bounded. Let us fix such an $i$ and consider $l:=\inf _{x \leq b_i-\varepsilon} f(x)$ for some $\varepsilon>0$ with $a_i<b_i-\varepsilon$. 
+	Since any $x$ with $a_i<x \leq b_i-\varepsilon$ is in $E$, we have $l < f(x)$ on $\left(a_i, b_i-\varepsilon\right]$. 
+
+	For $a_i - \delta < x<a_i$, where $\delta$ is small, we have $a_i \notin E$, so $f(x) \geq f\left(a_i\right)$, and $f(y) \ge f(x)$ for all $y \le x$. Thus, it follows that the infimum is attained at $a_i$ and therefore, $f\left(a_i\right) \leq f\left(b_i\right)$. However, since $b_i \notin E$, we also have $f\left(a_i\right) \geq f\left(b_i\right)$.
+\end{proof}
+

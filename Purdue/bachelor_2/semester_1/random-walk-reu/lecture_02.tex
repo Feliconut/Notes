@@ -1,0 +1,150 @@
+\lecture{2}{Sat 03 Jun 2023 23:00}{Bad Bound actually works}
+
+
+%\begin{lemma}
+%	There exists $\delta>0$, such that for $\frac{n}{2} \le i \le  I \le n$, we have
+%	\[
+%		\operatorname{Cov} \left(
+%			\sum_{j = 0}^{\xi_{i}}  \alpha(i,\sum_{\le i}\xi_.)\,\,, \quad
+%			\sum_{j = 0}^{\xi_{I}}  \alpha(I,\sum_{\le I}\xi_.)
+%		\right) = \Theta(n^{-2p-1})
+%	.\] 
+%\end{lemma}
+
+\subsection{$o(\sqrt{n}) $ Bound for local variance}
+
+\textbf{Notations.} For simplicity of notation, define $\alpha(i,j) := \frac{- l(i) + r(j)}{l(i) + r(j)} = \frac{-w(2 i - 1) + w(2j)}{w(2i-1)+w(2j)}$. This is the encountered drift at some node when the Polya Urn state is $(i,j)$.
+
+Also, $\mathcal{E}$ refers to $\mathcal{E}_y^{(x,m)}$, unless otherwise specified.
+
+Write $\xi_i$ for the number of descendents of the $i$-th ancestor in the BLP. Then we have the branching process representation of $\rho_y^{(x,m)}$ :
+\[
+	\rho_y^{(x,m)} = \mathbb{E}\left[ \sum_{i = 1}^{\mathcal{E}_{y-1}^{(x,m)}} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{k < i} \xi_k) \right] 
+.\] 
+
+The heuristic computation is as follows.
+ 
+First compute variance by conditioning. By martingale property, the second term in conditional variance vanishes:
+ \begin{align*}
+	  &\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)}  \right]\\
+	 &=  \mathbb{E} \left[\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)} | \mathcal{E}_{y-1}^{(x,m) } \right]\right] + 0\\
+	 &= \mathbb{E}\left[ \operatorname{Var} \left[ \sum_{i = 1}^\mathcal{E} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right]  \right] 
+.\end{align*}
+
+Now begin the heuristic calculation. Consider some fixed $\mathcal{E}$. We claim
+\[
+	\operatorname{Var} \left[ \sum_{i = 1}^\mathcal{E} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right] 
+	= O(\mathcal{E}^{1 - 2 p})
+.\] 
+
+Split the first sum into sum of covariances; apply Hölder inequality to control all terms by the diagonal. Then it suffices to justify
+\[
+	\operatorname{Var} \left[ \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right] 
+	= O\left( i^{-1-2p} \right) 
+.\] 
+
+Asymptotically all the $\xi_i$ converge in distribution to $\text{Beta}(\frac{1}{2})$, so they can be treated as $O(1)$. Then we can apply the result of lemma~\ref{lemma:variance-diagonal} to obtain the claim above. (Also, this claim about diagonal terms has been verified by simulation.)
+
+Now let's take expectation over $\mathcal{E}$. Combining process-level tightness result and control of rarely visited sites, we see that the distribution of $\mathcal{E}$ is concentrated around $\sqrt{n} $. Now suppose that the concentration is strong enough, so that
+\[
+	\mathbb{E}\left[ \operatorname{Var} \left[ \sum_{i = 1}^\mathcal{E} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right]  \right] 
+	= O\left( (\sqrt{n} )^{1-2p} \right)  = O(n^{\frac{1}{2}-p}) = o(\sqrt{n} )
+.\] 
+
+This concludes the heuristic control of local variance.
+
+\begin{remark}
+	We cannot do any better than this, since there is no difference in scale (but only up to a multiplicative constant) between the non-diagonal terms and the diagonal terms in the covariance matrix of the sectional drifts. 
+
+	This is made precise in Lemma~\ref{lemma:local-variance-exact}.
+\end{remark}
+
+\subsection{From bound of local variance to the full proof}
+
+From tightness estimate, the range is $O(\sqrt{n})$. Ignore the covariances, the variance of accumulated drift is
+ \[
+	 \operatorname{Var} \left[ \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right]  = O(n^{1 - p})
+.\] 
+
+Apply the second-moment tail bound,
+
+\[
+	P\left( \left| \sum_{y} \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon\sqrt{n}  \right)
+	\le  \frac{\operatorname{Var} \left[ \sum_{y} \Delta_y^{(x,m)} - \rho_y^{(x,m)}\right] }{\varepsilon^2 n}
+	= O( n^{-p})
+.\] 
+
+This bound is much weaker than the one in (\cite{kosyginaFunctionalLimitLaws2016}) given by Azuma's inequality. In particular, this bound is not exponential, and converges to zero in a polynomial of $n$ in small order. Hence we cannot afford a multiplication of $n$ in tightness bounding.
+
+I am still trying to find a more "economical" way to do the tightness bounding. However it is unlikely to be successful , since we cannot lose anything polynomial in $n$.
+
+If apply the second-moment tail bound to local drift, we obtain
+\[
+	P\left( \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon n^{\frac{1}{4} + \frac{\kappa}{2}}  \right)
+	\le  \frac{C n^{\frac{1}{2} - p}}{\varepsilon^2 n^{\frac{1}{2} + \kappa}} = O(n^{-p - \kappa})
+\]
+
+When $p > \frac{1}{2}$, this shows the martingale sum is almost Lipchitz, allowing application of relaxed Azuma Inequality. Let $\kappa \in (0,p - \frac{1}{2})$,
+
+\[
+	\sum_y \operatorname{Pr} \left[ \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| >  \varepsilon n^{\frac{1}{4} + \frac{\kappa}{2}} \right]
+	= O\left( n^{\frac{1}{2} - p + \kappa} \right) 
+	= o(1)
+	< \eta
+.\] 
+
+\[
+	\operatorname{Pr} \left[ \sum_y  \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| >  \varepsilon \sqrt{n}  \right]
+	\le \eta + 
+	2 \exp\left( - \frac{\varepsilon^2 n}{ 2 \sqrt{n} (\varepsilon n^{\frac{1}{4} + \frac{\kappa}{2}})^2 } \right) 
+	= O\left( \exp\left( - \frac{n^\kappa}{2} \right)  \right)   
+.\] 
+
+
+
+When $p < \frac{1}{2}$, this gives nothing.
+
+
+\subsection{Observations regarding local covariance}
+
+\begin{lemma}
+	Covariance matrix is strictly positive.
+\end{lemma}
+\begin{lemma}
+	Local variance is $\Theta(\mathcal{E}^{1 - 2p})$.
+	\label{lemma:local-variance-exact}
+\end{lemma}
+\begin{proof}
+	(unfinished)
+	We already know it is $O(\mathcal{E}^{1 - 2p})$. $\Omega(\mathcal{E}^{1 - 2p})$ is to be done.
+\end{proof}
+
+Note: this is numerically verified.
+
+\begin{corollary}
+	When $p < \frac{1}{2}$, variance diverges.
+\end{corollary}
+Note: this is numerically verified.
+
+Also, we observe a particularly strong dependence on the initial step.
+
+\begin{lemma}(Dependence on first step)
+	\[
+		\operatorname{Cov} \left( \sum_{j = 0}^{\xi_0} \alpha(0, j), \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot ) \right)  
+		\ge \ldots
+.\] 
+\end{lemma}
+\begin{proof}
+	(unfinished)
+	For simplicity we only treat the case $y = 0$.
+
+	Apply the estimate $\xi_0 \ge \xi_0 \wedge 1$, and observe that $\xi_0 \wedge 1$ is fair coin. We can then exploit this symmetry, and some calculation yield
+	\begin{align*}
+		\operatorname{Cov} \left( \sum_{j = 0}^{\xi_0} \alpha(0, j), \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot ) \right)  
+		&\ge \alpha(0,1) \, \mathbb{E}\left[   \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot )  \bigg| \xi_0 \neq 0\right] \\
+	.\end{align*} 
+
+	$\alpha(0,1)$ is an extreme value among the variance temrs; this explains why the dependence on first step is significantly larger.
+\end{proof}
+
+

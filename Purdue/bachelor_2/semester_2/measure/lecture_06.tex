@@ -1,0 +1,65 @@
+\lecture{6}{Fri 10 Mar 2023 16:46}{Connection with Riemann Integration}
+
+\begin{theorem}
+	A function is Riemann Integrable iff its is continuous a.e.
+\end{theorem}
+\begin{proof}
+	TODO ($\implies$) direction TBD.
+
+	($\impliedby$) If $P: a = x_0 < x_1 < \ldots < x_n = b$, let
+	\[
+		l_P(x) = \begin{cases}
+			\inf_{x_{j-1}, x_j} f & x \in (x_{j-1}, x_j)\\
+			f(x_j) & x = x_j
+		\end{cases}
+	.\] 
+\[
+		u_P(x) = \begin{cases}
+			\sup_{x_{j-1}, x_j} f & x \in (x_{j-1}, x_j)\\
+			f(x_j) & x = x_j
+		\end{cases}
+	.\]
+	For any partition $P$, let
+	\[
+		\delta(P) = \max_{j = 1\ldots, n} (x_j - x_{j-1})
+	.\] 
+	We claim: If $P_k$ are partitions, $k \in \mathbb{N}$, such that $\delta(P_k) \to 0$, and $f$ is continuous at $c \in [a,b]$, then $l_{P_k}(c) \to  f(c)$ and $u_{P_k}(c) \to f(c)$.
+
+	Now we verify the claim. Let $\varepsilon>0$. Then there exists $\delta>0$ such that $\left| x - c \right| < \delta$ implies $\left| f(x) - f(c) \right| <\varepsilon$. Choose $k_0$ such that $\delta(P_k) < \delta$ as $k > k_0$. Take such $k$, say $P_k: a = x_0 < x_1 < \ldots < x_n = b$. Let $c \in [x_{j-1}, x_j]$, then $l_{P_k}(c) \ge f(c) - \varepsilon$. Similarly $u_{P_k} \le f(c) +\varepsilon$. Combining the inequalities we get the desired convergence. 
+
+	So
+	\[
+		L_{P_k} = \int _{[a,b]} l_{P_k} \to \int _{[a,b]} f
+	.\] 
+	and similarly $U_{P_k} \to  \int _{[a,b]}f$.
+
+	Therefore
+	\[
+		\sup_P L_P \ge \lim_{k \to \infty }L_{P_k} = \lim_{k \to  \infty } U_{P_k} \ge \inf_P U_P \ge \sup _P L_P
+	.\] 
+	Hence everything is equal, so the lower and upper integral matches, so $f$ is integrable.
+\end{proof}
+
+\subsection{Improper Integral}
+
+\begin{proposition}
+	If $h: [a, \infty ) \to  [0,\infty )$ has improper integral $\int _a^{\infty }h$, then $h$ has Lebesgue integral
+	\[
+		\int _{[a, \infty  )} h = \int _a^\infty  h
+	.\] 
+\end{proposition}
+\begin{proof}
+	\[
+		\int _a^b h = \int _{[a,b]}h = \int _{[a, \infty )} h \chi_{[a,b]}
+	.\] 
+	As $b \in \mathbb{N}$ increases, $h \chi_{[a,b]}$ increases pointwise. By MCT, 
+	\[
+		\int _{[a, \infty )} h \chi_{[a,b]}\to  \int _{[a, \infty )} h
+	.\] 
+	But by assumption
+	\[
+		\int _a^b h \to  \int _a^{\infty }h
+	.\] 
+
+\end{proof}
+

@@ -1,0 +1,106 @@
+\homework{13}{Thu 13 Apr 2023 20:22}{}
+
+\begin{itemize}
+	\item If $\mu(\Omega) < \infty $, if $f$ is $L^q$, $q \ge p$, then $f$ is $L^p$.
+\begin{proof}
+	Define
+		\begin{align*}
+a=\frac{-1+q}{p-1}, b=-\frac{-1+q}{p-q}, \gamma=\frac{q(p-1)}{-1+q}
+\end{align*}
+Apply Holder Inequality,
+\begin{align*}
+	\int |f|^p
+	&= \int |f|^\gamma |f|^{p - \gamma} \\
+	&\le \left( \int (f^\gamma)^a \right)^{\frac{1}{a}}\left( \int (f^{p - \gamma})^b \right)^{\frac{1}{b}}  \\
+	&= \|f\|_q^{\frac{q}{a}} \|f\|_1^{\frac{1}{b}}
+.\end{align*}
+If both $\|f\|_1$ and $\|f\|_q$ are finite, we know $\|f\|_p$ must be finite. 
+
+To verify that $f$ is $L^1$, suppose $\|f\|_1$ is infinite. Then since  $\mu(\Omega) < \infty $, $f$ must be infinite on a set with positive measure. This directly implies $\|f\|_{q}$ is infinite. Since it is assumed that $\|f\|_q$ is finite, $\|f\|_1$ must be finite.
+\end{proof}
+
+\item Suppose  $f: \Omega \to  [-\infty , \infty ]$. A number $M \in [-\infty, \infty]$ is an essential upper bound if $f \le M$ a.e. Prove that the set of essential upper bounds of $f$ has a least element.
+\begin{proof}
+	Let the set be $S$. It suffices to show $\inf S \in S$. If $\inf S = - \infty $, then any real number is a essential upper bound of $f$. This can happen only if $f = - \infty $ a.e. Hence $- \infty \in S$.
+
+	If $\inf  S  \in \mathbb{R}$, then we can pick a decreasing sequence of real numbers $x_n \in S$, that converge to $\inf  S$. Let $E_n = \{x \in \Omega: f > x_n\} $, then $m(E_n) = 0$. Then
+	 \[
+		m\left( \{f > \inf  S\}  \right) 
+	=m\left( \{f > x_n \text{ for some } n\} \right) 
+	= m\left( \cup_n E_n   \right) 
+	\le \sum_n m(E_n) = 0
+	.\] 
+	Hence $\inf  S \in S$.
+
+	Finally, by definition of $f$, obviously $+\infty  \in S$.
+\end{proof}
+\item Construct $f \in L^1(0,1)$ such that for no $p>1$ is $f$ $L^p$.
+\begin{proof}
+	So far I don't know.
+\end{proof}
+\item Consider $\mathbb{N}$ with discrete $\sigma$-algebra and counting measure. The space $L^p(\mathbb{N}, 2^{\mathbb{N}}, \mu)$ is denoted $l^p$. Prove that if $p \le q$, then $l^p \subset l^q$.
+\begin{proof}
+	Each integral $\int |f|^p$ corresponds to some infinite series  $\sum_{n=1}^{\infty} |f(n)|^p$. If this converges, then after finitely many terms, $|f(n)| < 1$, so $|f(n)|^q < |f(n)|^p$. Then we can apply comparison test and conclude that $\sum_{n=1}^{\infty} |f(n)|^q$ is convergent.
+\end{proof}
+\item If $p \neq q$, show that neither of $L^p$ or  $L^q$ Lebesgue spaces contain the other.
+\begin{proof}
+	Suppose $p < q$.
+
+	Counterexample 1: Define $f$ to be constant between integers, zero on negative real line, and $f(n) = \frac{1}{n^{\frac{1}{p}}}$ for $n >0$.
+	Then $\|f\|_p^p = \sum_{n= 1}^{\infty} \frac{1}{n}$ which diverges. But since $\frac{q}{p}>1$, $\|f\|_q$ converges. Hence $L^q$ does not contain $L^p$.
+
+	Counterexample 2: Define $f$ to be $\frac{1}{x^{\frac{1}{q}}}$ on $[0,1]$ and $0$ elsewhere. Then $\|f\|_q$ diverges but $\|f\|_p$ converges. Hence $L^p$ does not contain $L^q$.
+\end{proof}
+
+
+	\item Suppose $f_n$ is absolutely continuous on $[a,b]$, monotone increasing. Also $\sum_{n=1}^{\infty} f_n$ converges pointwise. Prove that $\sum_{n=1}^{\infty} f_n$ is absolutely continuous.
+\begin{proof}
+	Since $f_n$ absolutely continuous and monotone increasing, we know that $f_n$ are differentiable a.e., $f_n'$ are nonnegative, and for all $a\le x \le  y \le b$,  and all $n$,
+	\[
+		\int _x^y f_n' d \mu = f_n(y) - f_n(x)
+	.\] 
+	Next we would like to show that $\sum_{n=1}^{\infty} f_n'$ converges. Apply Fatou's Lemma to the partial sums,
+	\[
+		\int \sum_{n=1}^\infty  f_n' \le \lim_{N \to \infty } \int \sum_{n = 1}^N f_n' = \lim_{N \to \infty } \sum_{n=1}^N \int f_n' = \sum_{n=1}^{\infty} f_n < \infty 
+	.\] 
+	Since $f_n' \ge 0$, we know $\sum_{n=1}^\infty  f_n'$ is absolutely integrable. Also it dominates the partial sums, so from DCT,
+	\[
+		 \int \sum_{n=1}^{\infty} f_n'= \lim_{N\to \infty } \int \sum_{n=1}^{N} f_n' 
+		 = \sum_{n=1}^{\infty} f_n
+	.\] 
+
+	But since the integral of absolutely integrable function is absolutely continuous, $\sum_{n=1}^{\infty} f_n$ must be absolutely continuous.
+	
+\end{proof}
+\item Suppose $\mu(\Omega) < \infty $ and $f$ is $L^\infty $. Prove that $\lim \|f\|_p = \|f\|_\infty $.
+\begin{proof}
+	Let $\|f\|_\infty  = M$. Let $\varepsilon>0$. It suffices to show that $M + \varepsilon > \|f\|_p$ and $M - \varepsilon < \|f\|_p$ for large enough $p$. The first claim is obvious; we prove the second claim.
+	
+	Let $E = \{f(x) \in (M - \varepsilon, M]\} $. Then  $\mu(E) > 0$. We have
+	\[
+		\sqrt[p]{\int _\Omega |f|^p}
+		\ge \sqrt[p]{\int _E |f|^p}
+		\ge \sqrt[p]{(M - \varepsilon)^p \mu(E)}
+		= (M - \varepsilon) \sqrt[p]{\mu(E)}  
+		 \to  M - \varepsilon
+	.\] 
+\end{proof}
+\item A family of functions $\mathcal{F} \subset L^p$ is uniformly $p$-integrable if $\forall \varepsilon>0 \exists \delta>0$ such that $\int _E |f|^p < \varepsilon$ whenever $\mu(E) < \delta$ and $f \in \mathcal{F}$.
+	Here $1\le p < \infty $. Suppose $K \subset L^p$ is a compact subset. Prove that it is uniformly  $p$-integrable.
+\begin{proof}
+	Let $\varepsilon>0$ and use compactness of  $K$ to choose a  $\varepsilon$-net of $K$, consisting of finitely many  $f_n \in K$, and each $f$ is at most $\varepsilon$-away from one of the $f_n$.
+
+	For each of the $f_n$, there exists $\delta_n>0$ such that
+	\[
+		\int _E |f_n|^p < \varepsilon\quad
+		\text{whenever } \mu(E) < \delta_n
+	.\] 
+	Let $\delta = \min_n \delta_n$. Then $\delta>0$. For each $f \in K$, there exists $f_n$ that is $\varepsilon$-close to $f$, so
+	\[
+		\int_E |f|^p \le \int_E |f_n|^p + \int _\Omega |f_n - f|^p \le \varepsilon + \varepsilon = 2 \varepsilon
+	.\] 
+	whenever $\mu(E) < \delta$.
+\end{proof}
+
+
+\end{itemize}

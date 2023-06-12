@@ -1,0 +1,147 @@
+\lecture{11}{Mon 10 Apr 2023 16:33}{Lp space}
+
+\begin{lemma}
+	If $\psi \in L^1(\Omega, \mathcal{A}, \mu)$ and $c \in \mathbb{R}$ are such that for all simple $f$,
+	\[
+		\int |\psi f| \le  c \| f\|_p
+	.\] 
+	Then $\|\psi\|_q \le c$.
+\end{lemma}
+\begin{proof}
+	Choose simple $\varphi_n\ge 0$ that converge upward monotonely to $\phi$, and  $\phi_n \in L^1$. Then $\phi_n$ satisfies the equation. Thus $\|\phi_n\|_q \le c$ (Holder inequality for simple functions). Hence $\|\psi\|_q\le c$. 
+
+	To estimate $\|\psi\|_q$, divide by need to work with $\int |\psi|^q$. Using lemma, you work with $\int \psi f$, linear in $\psi$.
+\end{proof}
+
+Application.
+
+Let $(\Pi, \mathcal{D}, \nu)$ be product measure of $(\Omega, \mathcal{A}, \lambda)$ and $(\Theta, \mathcal{C}, \mu)$.
+
+\begin{theorem}
+	Let $G \in L(\Pi), G \ge 0$. Assume for almost every $y \in \Theta$, $G(\cdot, y) \in L^q(\Omega)$. Put
+	\[
+		g(x) = \int _\Theta G(x,y) d \mu(y)
+	.\] 
+	Then
+	$g$ is measurable, and
+	\[
+		\|g\|_q \le \int _\Theta \|G(\cdot, y)\|_q d \mu(y)
+	.\] 
+\end{theorem}
+\begin{proof}
+	Take $f \in L^p$, then
+	\begin{align*}
+		\int _\Omega |g f | d \lambda
+		&= \int _\Omega |f(x)| \int _\Theta G(x,y) d \mu(y) d \lambda(x) \\
+		&= \int _{\Omega \times \Theta} |f(x)| G(x,y) d\nu(x,y) \\
+		&= \int _\Theta \int _\Omega |f(x)| G(x,y) d\lambda(x) d \mu(y) \\
+		&\le \int _\Theta \|f\|_p \|G(\cdot, y)\|_q  d \mu(y)\\
+		&= \|f\|_p  \int _\Theta \|G(\cdot, y)\|_q d \mu(y)\\
+	.\end{align*} 
+	Then by lemma, we obtain the claim.
+\end{proof}
+
+\subsection{Convolution in Rn}
+
+\begin{theorem}
+	\begin{enumerate}
+		\item 
+	If $f, g \in L(\mathbb{R}^n)$, then $H(x,t) = f(x-t) g(t)$ is measurable in $\mathbb{R}^n \times \mathbb{R}^n$. 
+\item Suppose $g \in L^q(\mathbb{R}^n)$, then if $f \in L^p(\mathbb{R}^n)$, then $f * g$ exists, and $h = f * g \in L^p(\mathbb{R}^n)$.
+\item If $f \in C(\mathbb{R}^n)$ is bounded, then $h \in C_b(\mathbb{R}^n)$.
+\item  If $f$ bounded and for some $j$, $\frac{\partial f}{\partial x_j} \in C_b(\mathbb{R}^n)$, then $\frac{\partial h}{\partial x_j}  \in C_b(\mathbb{R}^n)$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Write $H = FG$ where $F(x,t) = f(x-t)$ and  $G(x,t) = g(t)$.  Then $F, G \in L(\mathbb{R}^n \times \mathbb{R}^n)$ (need to verify). Then $H = F G$ is measurable.
+
+	Now we prove (3). Take  $x^\nu \in \mathbb{R}^n$ , where $x ^\nu \to x$ as $\nu \to \infty $. We have
+	\[
+		h(x_\nu) = \int f(x^\nu - t) g(t) d t
+	.\] 
+	By DCT, for $\|f(x^\nu - t) g(t)\|\le  \sup |f| g(t) \in L^p$,
+	 \[
+		h(x_\nu) \to  \int f(x -t) g(t)
+	.\] 
+	
+	Now prove (4). Let $x \in \mathbb{R}^n$, 
+	\begin{align*}
+		&\frac{h(x_1 + u, x_2, \ldots, x_n) - h(x_1, x_2, \ldots, x_n)}{u}\\
+		&= \int \frac{f(x_1 + u - t_1, x' - t') - f(x_1 - t, x' - t')}{u} g(t) dt
+	.\end{align*}
+	For every $x$, as $u \to  0$,
+	\[
+		\frac{f(x_1 + u - t_1, x' - t') - f(x_1 - t, x' - t')}{u} g(t) \to 
+		\frac{\partial f}{\partial x_1}  (x_1 - t, x' - t') g(t)
+	.\] 
+	Also by Lagrange's Mean Value Theorem applied to the first coordinate, we have for $\xi \in (x_1 - t_1, x_1 + u - t_1)$,
+	\[
+		\frac{f(x_1 + u - t_1, x' - t') - f(x_1 - t, x' - t')}{u} = \frac{\partial f}{\partial x_1} (\xi, x' - t')
+	.\] 
+	And $\frac{\partial f}{\partial x_1} $ is dominated. Hence
+	\[
+		\left| \frac{f(x_1 + u - t_1, x' - t') - f(x_1 - t, x' - t')}{u} g(t) \right|  \le  \sup \left| \frac{\partial f}{\partial x_1}  \right|  \left| g(t) \right| 
+	.\] 
+	By DCT,
+	\[
+		\lim_{u \to 0} \frac{h(x+u, x') - h(u)}{u} 
+		= \int  \frac{\partial f}{\partial x_1}  (x - t) g(t) dt
+		= \left( \frac{\partial f}{\partial x_1}  * g \right) (x)
+	.\] 
+	Apply (3), $\frac{\partial f}{\partial x_1} * g \in C_b(\mathbb{R}^n)$.
+
+\end{proof}
+
+\begin{corollary}
+	If $f$ has partial derivatives of all order, that are bounded, then $f* g \in C^{\infty }$.
+\end{corollary}
+
+\begin{theorem}
+	Convolution is commutative.
+\end{theorem}
+
+If $f$ and $g$ are each 1 time differentiable, then $f*g$ can be differentiated two times! The convolution has a smoothing effect.
+
+\begin{theorem}
+	Let $f_k \in L^1(\mathbb{R}^n)$, $k \in \mathbb{N}$, such that
+	\begin{enumerate}
+		\item $f_k \ge 0$ 
+		\item $\int f_k = 1$
+		\item $\forall r > 0$, $\int _{\mathbb{R}^n\ B_r(0)} f_k \to  0$
+	\end{enumerate}
+	Then:
+	\begin{itemize}
+		\item If $1 \le p < \infty $, $g \in L^p$, then $f_k * g \to  g$ in $L^p$.
+		\item If $g \in C_b(\mathbb{R}^n)$, then $f_k * g \to  g$ pointwise, and uniformly if $g$ is uniformly continuous.
+		\item If $\frac{\partial g}{\partial x_j}  \in C_b(\mathbb{R}^n)$, then $\frac{\partial f_k * g}{\partial x_j}  \to  \frac{\partial g}{\partial x_j} $ pointwise.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Proof of (a): 
+	\begin{align*}
+		(f_k * g - g)(x)
+		&= \int f_k (t) g(x-t) dt - \int  f_k (t) g(x) dt \\
+		&= \int f_k(t) \left( g(x-t) - g(x)  \right) dt 
+	.\end{align*}
+
+	Thus 
+	\[
+		\|f_k * g - g\|_p = \|\int f_k (t) \left( g(\cdot - t) - g \right) \|_p
+		\le \int  \|f_k(t) \left\{ g(\cdot  - t) - g \right\} \|_p d t
+	.\] 
+	where we used a generalized Minkowski theorem from last lecture for the inequality.
+
+	Then
+	\[
+		\int  \|f_k(t) \left\{ g(\cdot  - t) - g \right\} \|_p d t = 
+\int  f_k(t) \| \left\{ g(\cdot  - t) - g \right\} \|_p d t
+	.\] 
+	Let $\varepsilon>0$. Since $t \mapsto g(\cdot - t) \in L^p$ is continuous, there exists $r > 0$ such that $\|g(\cdot - t) - g\|_p < \varepsilon$. Choose $k_0$ such that for $k > k_0$, $\int _{\mathbb{R}^n \setminus B_r(0)}f_k < \varepsilon$. Now split the integral into two parts.
+	\begin{align*}
+		I &= \int _{B_r(0)} f_k(t) \|g(\cdot - t) - g\|_p d t +  \int _{\mathbb{R}^n \setminus B_r(0)} f_k(t) \|g(\cdot - t) - g\|_p d t  \\
+		&\le \varepsilon \int _{\mathbb{R}^n} |f_k(t)| d t + \int _{\mathbb{R}^n \setminus B_r(0)} |f_k(t)| \cdot 2 \|g\|_p \\
+		&\le \varepsilon + \varepsilon \cdot 2 \|g\|_p
+	.\end{align*}
+\end{proof}
+
+

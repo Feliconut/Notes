@@ -1,0 +1,84 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/outer/beamerouterthemepurdue.sty,v 1.0 2007/08/229 Rusin Exp $
+
+% Copyright 2007 by Walter Rusin <rusin018@math.umn.edu>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\mode<presentation>
+
+\setbeamercolor*{author in head/foot}{parent=palette primary}
+\setbeamercolor*{title in head/foot}{parent=palette primary}
+\setbeamercolor*{date in head/foot}{parent=palette primary}
+
+\setbeamercolor*{section in head/foot}{parent=palette primary}
+\setbeamercolor*{subsection in head/foot}{parent=palette primary}
+
+%\defbeamertemplate*{footline}{infolines theme}
+%{
+%  \leavevmode%
+%  \hbox{%
+%  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+%    \usebeamerfont{author in head/foot}\insertshortauthor~\insertshortinstitute
+%  \end{beamercolorbox}%
+%  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+%    \usebeamerfont{title in head/foot}\insertshorttitle
+%  \end{beamercolorbox}%
+%  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+%    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+%    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+%  \end{beamercolorbox}}%
+%  \vskip0pt%
+%}
+
+%\defbeamertemplate*{headline}{infolines theme}
+%{
+%  \leavevmode%
+%  \hbox{%
+%  \begin{beamercolorbox}[wd=.5\paperwidth,ht=4.5ex,dp=1ex,left]{section in head/foot}%
+%    \usebeamerfont{section in head/foot}\vspace*{-2px}~\includegraphics[width=0.22\paperwidth]{Wordmark.jpg}~\hspace*{2ex}
+%  \end{beamercolorbox}%
+%  \begin{beamercolorbox}[wd=.5\paperwidth,ht=4.5ex,dp=1ex,left]{subsection in head/foot}%
+%    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertsectionhead
+%  \end{beamercolorbox}}%
+%  \vskip0pt%
+%}
+
+\defbeamertemplate*{headline}{infolines theme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
+    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertsectionhead
+  \end{beamercolorbox}}%
+  \vskip0pt%
+  \vskip0pt%
+}
+
+\defbeamertemplate*{footline}{infolines theme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=3.5ex,dp=1ex,left]{section in head/foot}%
+    \usebeamerfont{section in head/foot}
+%\vspace*{-3px}~\includegraphics[width=.15\paperwidth]{LittleP.png}~\hspace*{2ex}
+\vspace*{-3px}~\includegraphics[width=.10\paperwidth]{PurdueUniversity.png}~\hspace*{2ex}
+%\vspace*{2px}\insertshortinstitute
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=3.5ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\vspace*{2px}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=3.5ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\vspace*{2px}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+}
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+
+
+\mode<all>

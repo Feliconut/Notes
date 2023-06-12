@@ -1,0 +1,230 @@
+\homework{11}{Mon 27 Mar 2023 15:45}{}
+
+\begin{itemize}
+	\item Evaluate asymptotically $\int _0^\infty \exp{(- \lambda x)} f(x) dx$ as $\lambda \to  \infty $, in the spirit of an example in class. Here $f \in C[0, \infty )$ is assumed to be bounded.
+\begin{proof}
+	Let $M$ be the bound for $f$. Then
+	\[
+		\exp ( - \lambda x) f(x) \le  \exp(- \lambda x) M
+	.\] 
+	Also $\exp(- \lambda x) \in L^1[0, \infty$. Hence $\exp( - \lambda x) f(x) \in L^1[0, \infty )$.
+
+	Now apply change of variable:
+	\[
+		\int _0^\infty  \exp( - \lambda x) f(x) dx = \int _0^\infty \exp( - y) f(y / \lambda) dy \frac{1}{\lambda}
+	.\] 
+	
+	By dominated convergence, as $\lambda \to  \infty $,
+	\[
+		\int_0^\infty  \exp(-y) f(y / \lambda) d y \to  \int _0^\infty  \exp(-y) f(0) dy = f(0)
+	.\] 
+	Hence
+	\[
+		\lambda I(\lambda) \to f(0)
+	.\] 
+\end{proof}
+
+	\item A measure space $(\Omega, \mathcal{A}, \mu)$ is $\sigma$-finite if $\Omega = \bigcup_{n = 1} ^{\infty }  \Omega_n$ with $\mu(\Omega_n) < \infty $, for all $n \in \mathbb{N}$. Suppose $\varphi_1, \varphi_2 \ge 0$ are measurable functions on such $\Omega$ and 
+		\[
+			\int _E \varphi_1 d\mu = \int _E \varphi_2 d \mu \qquad \forall  E \in \mathcal{A}
+		.\] 
+		Prove that $\varphi_1 = \varphi_2$ a.e.
+\begin{proof}
+	For $r > 0$, define
+	\[
+		E_r = \{x: \varphi_1(x) - \varphi_2(x) > r\} 
+	.\] 
+	Then $E_r \in \mathcal{A}$. By assumption,
+	\[
+		0 = \int _{E_r} (\varphi_1 - \varphi_2) d \mu \ge  r \mu(E_r) \ge 0
+	.\] 
+	Hence $\mu(E_r) = 0$. Since $r$ is arbitrary, we have
+	\[
+		\varphi_1(x) - \varphi_2(x) \le  0 \qquad \text{a.e.}
+	.\] 
+	By symmetry,
+	\[
+		\varphi_1 = \varphi_2 \qquad \text{a.e.}
+	.\] 
+\end{proof}
+
+	\item If $u: \mathbb{R}\to \mathbb{R}$ is Lebesgue measurable, prove that there exists $v : \mathbb{R} \to  \mathbb{R}$ Borel measurable such that $u = v $ a.e.
+\begin{proof}
+	\textbf{Step 1.} Assume $u$ is the characteristic function of some Lebesgue measurable set $A \in \mathcal{M}$. We know that the Lebesgue $\sigma$-algebra $\mathcal{M}$ is the completion of the Borel $\sigma$-algebra $\mathcal{B}$, so we can find a borel set $B \in \mathcal{B}$ such that the symmetric difference $A \Delta B$ has zero Lebesgue measure. Thus for almost all $x \in \mathbb{R}$, we have $\chi_A = \chi_B$. Define $v = \chi_B$ and we are done.
+
+	\textbf{Step 2.} By linearity, this statement extends to $u$ being a simple function.
+
+	\textbf{Step 3.} Consider $u \in L(\mathbb{R}, \mathcal{M}, m)$, $u \ge 0$. There exists a monotone increasing sequence of simple functions $u_n \ge 0$ that converges pointwise to $u$. For each $u_n$ we can define a corresponding $v_n \in L(\mathbb{R}, \mathcal{B}, \mu)$. By MCT, $v_n$ converge to some $v \in L(\mathbb{R}, \mathcal{B}, \mu)$. Let $E_n  = \{x: u_n(x) \neq v_n(x)\} $. Then  $m(E_n) = 0$. Thus $m\left( \bigcup_{n = 1} ^\infty  E_n \right)  = 0$. For any $x \in \mathbb{R} \setminus \bigcup_{n = 1} ^\infty $, we have
+	\[
+		v(x) = \lim v_n(x) = \lim u_n(x) = u(x)
+	.\] 
+	Hence $v = u$ a.e.
+
+	\textbf{Step 4.} Consider $u \in L(\mathbb{R}, \mathcal{M}, m)$. We may split into positive and negative parts, $u = u^+ - u^-$. Apply step 3 to both parts, we obtain  $v^+$ and $v^-$ a.e. equal to $u^+$ and $u^-$, respectively. Define $v := v^+ - v^-$. Then
+	\[
+		|u-v| \le |u^+ - v^+| + |u^- - v^-|
+	.\] 
+	For almost every $x$, the RHS is zero. Hence $u = v$ a.e.
+\end{proof}
+
+\item Suppose $I_n, n \in \mathbb{N}$ are intervals, $\sum_{n=1}^{\infty} |I_n| < \infty $, and $g(x)= \sum_{n=1}^{\infty} \left| I_n \cap (-\infty , x] \right| $. Prove that $g(x) $ increases, and is not differentiable at $x$ if $x$ is contained in infinitely many $I_n$ 's. Show that given an arbitrary set $E \subset \mathbb{R}$ of measure $ 0$, there is an increasing function $h: \mathbb{R} \to \mathbb{R}$ that is not differentiable there.
+\begin{proof}
+	To show $g$ increases, let $x, x' \in  \mathbb{R}$ such that $x' > x$. Now
+	\[
+		g(x') - g(x) = \sum_{n=1}^\infty |I_n \cap ( - \infty , x']| - |I_n \cap (-\infty , x]| = \sum_{n=1}^\infty  |I_n \cap (x, x']| \ge  0
+	.\] 
+	Now we show the second part of the claim. If $x$ is contained in infinitely many $I_n$ 's, then at least one of the following happens: 1) $x$ is not the right end-point of $I_n$ for infinitely many $n$. 2) $x$ is not the left end-point of $I_n$ for infinitely many $n$. These two cases are symmetric so we focus on the first case. Then there exists some $A \subset \mathbb{N}$, $|A| = \infty $, such that for all $\alpha \in A$, there exists  $h_\alpha > 0$ such that $[x, x+h_\alpha) \subset I_\alpha$. Pick a finite subset $B \subset A$, and pick $h = \min_{\alpha \in B} h_\alpha$. Now
+	\[
+		\frac{1}{h} \left( g(x+h) - g(x) \right) = \frac{1}{h} \sum_{n = 1}^\infty \left| I_n \cap (x, x+h) \right|  \ge \frac{1}{h} \sum_{\alpha \in B} \left| I_\alpha \cap (x, x+h) \right|  = |B|
+	.\] 
+	As $h\to 0$, $|B|$ is unbounded, so LHS does not converge to a real number. Hence $h$ is not differentiable at $x$.
+
+	Fix $\varepsilon>0$. For each $n$, let $\mathcal{F}_n$ be a countable collection of intervals that cover $E$ and with $\sum_{I \in \mathcal{F}_n} |I| < \frac{\varepsilon}{2^n}$. Now consider the union $\mathcal{F} = \bigcup_{n \in \mathbb{N}} \mathcal{F}_n$. $\mathcal{F}$ is countable, with total length $\le 2 \varepsilon$, and for each $x \in E$ and $n \in \mathbb{N}$ there exists $I_n \in \mathcal{F}_n$ that contains $x$. Hence $x$ is contained in infinitely many $I_n$ 's. Now apply the previous parts of the claim.
+\end{proof}
+
+\item Construct an increasing function $\mathbb{R}\to  \mathbb{R}$, discontinuous at every rational point.
+\begin{proof}
+	Pick some bijection
+	\begin{align*}
+		n: \mathbb{Q} &\longrightarrow \mathbb{N} \\
+		q &\longmapsto n(q)
+	.\end{align*}
+	Define
+	\begin{align*}
+		\varphi: \mathbb{R} &\longrightarrow \mathbb{R} \\
+		x &\longmapsto \varphi(x) = \sum_{q \in \mathbb{Q} \cap (-\infty , x] }2^{-n(q)}
+	.\end{align*}
+	Then:
+	\begin{itemize}
+		\item $\varphi$ is well-defined since it is a partial sum of a convergent unsigned infinite sum.
+		\item $\varphi$ is strictly increasing by construction.
+		\item at any rational number $q$, the left limit and right limit, if exist, will differ by at least $2^{-n(q)}$. Hence $\varphi$ is discontinuous at $q$.
+	\end{itemize}
+
+\end{proof}
+
+\item Prove that any $F \in \mathcal{L}^1 (\Omega, \mathcal{A}, \mu)$ is uniformly integrable in the following sense: for all $\varepsilon>0$ there exists $\delta > 0$ such that if $\mu(E) < \delta$, then $\left| \int _E F \right| < \varepsilon$.
+\begin{proof}
+	Observe that, by MCT, $f$ does not escape to vertical or width infinity:
+	\[
+		\int _{|f| \ge M} |f| d \mu \to 0 \qquad \text{as } M \to +\infty 
+	.\] 
+	\[
+		\int _{|f| \le \delta}|f| d \mu \to 0 \qquad \text{as } \delta \to 0
+	.\] 
+
+	Fix $\varepsilon>0$, we pick $M$ large enough that $\int _{|f| \ge M} |f| d \mu < \varepsilon$. Now for any $E \in \mathcal{A}$,
+	 \[
+		\left| \int _E f \right| \le 
+		\left| \int _{E \cap \{|f| \ge M\} } f \right| + 
+		\left| \int _{E \cap \{|f| \le  M\} }f \right| 
+	.\] 
+	For the first term, we have
+	\[
+		\left| \int _{E \cap \{|f| \ge M\} } f \right| \le 
+		\left| \int _{\{|f| \ge M\} } f \right|  \le \varepsilon
+	.\] 
+	For the second term, we have
+	\[
+		\left| \int _{E \cap \{|f| \le  M\} }f \right|  \le \mu(E) M
+	.\] 
+	Therefore we have the bound
+	\[
+		\left|\int _E f\right| \le \varepsilon + \mu(E) M
+	.\] 
+	By letting $\varepsilon$ small and then picking small enough $E$, we can make the RHS arbitrarily small.
+\end{proof}
+\item \logseq{Lebesgue Differentiation Theorem} Let $f:\mathbb{R} \to \mathbb{R}$ be absolutely integrable wrt the Lebesgue measure. Define $F(x) = \int _{-\infty }^x f$. Prove $F(x)$ is differentiable almost everywhere.
+\begin{proof}
+	We prove that $F$ is of bounded variation. Then since $F$ is the difference of two monotone increasing functions, we apply the Monotone Differentiation Theorem to both parts and obtian the claim.
+
+	The proof that $F$ is of BV is given below.
+\end{proof}
+\item (Tao Measure Exercise 1.6.39) Let $f : \mathbb{R} \to  \mathbb{R}$ be absolutely integrable, and $F$ defined as $F(x) := \int _{-\infty }^x f$. Show that $F$ is of bounded variation, and $\|F\|_{TV} = \|f\|_{L^1}$. 
+\begin{proof}
+	For upper bound,
+	\begin{align*}
+	\|F\|_{TV} 
+	&= \sup _{x_0<\ldots<x_n} \sum_{i=1}^{n} \left| F(x_i) - F(x_{i-1 }) \right|  \\
+	&= \sup _{x_0<\ldots<x_n} \sum_{i=1}^{n} \left| \int _{x_{i-1}}^{x_i } f \right|  \\
+	&\le  \sup _{x_0<\ldots<x_n} \sum_{i=1}^{n} \int _{x_{i-1}}^{x_i } \left| f \right|  \\
+	&\le  \sup _{x_0<\ldots<x_n} \int _{x_0}^{x_n } \left| f \right|  \\
+	&\le  \int_{\mathbb{R}} \left| f \right|  \\
+	&= \|f\|_{L^1}
+	.\end{align*}
+For lower bound, first assume $f$ is continuous and absolutely integrable. Fix some $\varepsilon'>0$, we can pick interval $I'$ such that for any interval $I \supset I'$, $\left| \int |f| - \int_I |f| \right| <\varepsilon'$.
+
+WOLG assume $I$ is closed interval. Now using uniform continuity of $f$ on $I$, for any $\varepsilon>0$ we can pick $\delta>0$ such that $\left| f(x) - f(y) \right| <\varepsilon$ whenever $|x-y| < \delta$ for all $x, y \in I$.
+
+Pick a partition $x_0<x_1<\ldots<x_n$ such that $x_i - x_{i-1} <  \delta$ for all $i$. Then
+\[
+	\|F\|_{TV} \ge \sum_{i = 1}^n \left| \int _{x_{i-1}}^{x_i} f \right| 
+.\] 
+Split the integral into two parts:
+\[
+	 \int _{x_{i-1}}^{x_i} f  = 
+	 \int_{[x_{i-1}, x_i] \cap  \{|f| > \varepsilon\} }f  +
+	 \int_{[x_{i-1}, x_i] \cap  \{|f| \le  \varepsilon\} }f
+.\] 
+Consider the first integral on the right: we know that $f$ does not change sign on $[x_{i-1}, x_{i}] \cap \{|f| > \varepsilon\} $. Hence
+\[
+	 \left|  \int_{[x_{i-1}, x_i] \cap  \{|f| > \varepsilon\} }f\right| 
+	 = 
+	 \int_{[x_{i-1}, x_i] \cap  \{|f| > \varepsilon\} }|f|
+.\] 
+Consider the second integral: its absolute value is boundd from above by
+\[
+	 \left|  \int_{[x_{i-1}, x_i] \cap  \{|f| \le  \varepsilon\} }f\right|  \le  (x_{i} - x_{i-1 }) \varepsilon
+.\] 
+Put these together:
+\begin{align*}
+	\|F\|_{TV}
+ &\ge  \sum_{i = 1}^n \left| \int _{x_{i-1}}^{x_i} f \right|\\
+ &= \sum_{i = 1}^n\left|  
+	 \int_{[x_{i-1}, x_i] \cap  \{|f| > \varepsilon\} }f  +
+	 \int_{[x_{i-1}, x_i] \cap  \{|f| \le  \varepsilon\} }f
+ \right|  \\
+&\ge \sum_{i = 1}^n\left| \int_{[x_{i-1}, x_i] \cap  \{|f| > \varepsilon\} }f \right| 
+- \left| \int_{[x_{i-1}, x_i] \cap  \{|f| \le  \varepsilon\} }f \right| 
+\\
+&\ge \sum_{i = 1}^n \int_{[x_{i-1}, x_i] \cap  \{|f| > \varepsilon\} }|f| - (x_{i} - x_{i-1 }) \varepsilon\\
+&=  \int_{I \cap  \{|f| > \varepsilon\} }|f| - |I| \varepsilon\\
+&\ge \int _I |f| - 2 |I| \varepsilon\\
+&\ge  \|f\|_{L^1} - \varepsilon' - 2 |I| \varepsilon
+.\end{align*}
+Since $\varepsilon'$ is arbitrary and $\varepsilon$ does not depend on $I$, we can let the error terms go to zero and have
+\[
+	\|F\|_{TV}\ge \|f\|_{L^1}
+.\] 
+\end{proof}
+
+\item If $f$ is absolutely integrable on $\mathbb{R}$ with Lebesgue measure, and $\int _I f$ is nonnegative for any bounded nondegenerate interval $I$, prove that $\int _Ef$ is nonnegative for any measurable $E$.
+\begin{proof}
+	 Since $E$ measurable, for each $n \in \mathbb{N}$ there exists a set $A_n$, which is an at most countable disjoint union of intervals, such that  $A_n \supset E$ and $m(A_n \setminus E) < \frac{\varepsilon}{2^n}$.
+	 
+	 Let $A = \cap A_n$. It satisfies $A \supset E$ and $m(A \setminus E)  = 0$. Therefore
+	 \[
+	 	\int _E f = \int _A f
+	 .\] 
+	 
+	 For each $A_n$, we may write $A_n = \bigcup_{i \in \mathbb{N}} I_{ni}$. Then
+	 \[
+	 	\int _{A_n} f = \sum_{i \in \mathbb{N}} \int _{I_{ni}} f \ge 0
+	 .\] 
+
+	 We can dominate $A $ with $\cup A_n$. We have
+	 \[
+	 	m\left( \cup A_n \right) \le m(A) + \sum_{n=1}^{\infty} m(A_n \setminus E) \le m(A) + \varepsilon
+	 .\] 
+
+	 Since $\chi_{A_n} \to \chi_A$ pointwise a.e., by DCT,
+	 \[
+	 	\int _A f = \lim_{n \to \infty}  \int_{A_n} f
+	 .\] 
+	 Hence
+	 \[
+	 	\int _E f = \int _A f \ge 0
+	 .\] 
+\end{proof}
+
+\end{itemize}

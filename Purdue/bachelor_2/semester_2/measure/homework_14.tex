@@ -1,0 +1,55 @@
+\homework{14}{Wed 26 Apr 2023 15:36}{}
+
+\begin{itemize}
+	\item If $f \in C_0(\mathbb{R}^n)$ and $f_t(x) = f(x-t)$, prove that the function $\mathbb{R}^n \ni t \mapsto f_t \in L^p(\mathbb{R}^n)$ is continuous. Here $1 \le p \le  \infty $.
+	\item Give example of more than countably many functions $g_\alpha \in L^\infty [0,1]$ such that $\| g_\alpha - g_\beta\|_{\infty }\ge 1$ when $\alpha \neq  \beta$. Show hence that $L^\infty [0,1]$ is not separable.
+	\item Suppose $\mu(\Omega) < \infty $ and $f \in L^{p_0}(\Omega, \mathcal{A}, \mu)$. Prove that the function
+		\[
+			[1, p_0] \ni p \mapsto \|f\|_p \in \mathbb{R}
+		\] 
+		is continuous.
+	\item Consider $\Omega = \{1, 2, \ldots, m\} $, $\mathcal{A} = 2^\Omega$, and $\mu$ is counting measure. Show that $\left( L^2(\Omega, \mathcal{A}, \mu), \|\cdot\|_2 \right) $ and $\left( \mathbb{R}^m, \text{Euclidean norm} \right) $ are isometrically isomorphic.
+	\item If $a, b \in \mathbb{R}, a < b$, let $C^1[a,b] $ consist of differentiable functions $f: [a,b] \to \mathbb{R}$, where derivative is continuous. Let $\|f \| = \max_{[a,b]}|f| + \max_{[a,b]}|f'|$. SHow that $\left( C^1[a,b], \|\,\| \right) $ is a Banach space. Check only two of the axioms;l one can be any of your choice, the other should be completeness, though.
+	\item If $1 \le p \le \infty $, construct $\omega_j \in L^p[0,1]$, $j \in \mathbb{N}$, such that $\|\varphi_j\|_p \le 1$ for all $j$, and $\| \varphi_j - \varphi_k\|_p \ge 1$ for all $j \neq k$. From this sequence, you cannot select a convergent subsequence; therefore the closed unit ball of $L^p[0,1]$ is not compact.
+	\item If $f \in L^p[a,b]$, $a \le x \le y \le b$, show that $\left| \int _x^y f \right|  \le  C |y - x| ^{\frac{1}{q}}$, with some $C$ independent of $x, y$ and $\frac{1}{p} + \frac{1}{q} = 1$ .
+\begin{proof}
+	Consider the space $L^p[x,y]$, and apply Holder inequality to $f$ and $1$.
+\end{proof}
+
+	\item If $(\Omega, \mathcal{A}, \mu)$ is a measure space, how would you define the ``exponential space''?
+	\item Prove the case $p = 1$ of the Lemma in class: Suppose that $\psi \in L^1(\Omega, \mathcal{A}, \mu)$ has the property that with some $c \in \mathbb{R}$,
+		\[
+			\left| \int \psi f \right|  \le  c \|f\|_1
+		.\] 
+		Then $\psi$ is essentially bounded and even $\|\psi\|_\infty \le c$.
+
+\begin{proof}
+	First verify $\varphi$ essentially bounded. Pick some very big $M$, let $E_M = \{|\varphi| > M\} $, suppose $\mu(E_M) > 0$. Let $f = \chi_{E_M}$. Then $\|f\|_1 = \mu(E_M)$, and 
+	\[
+		\int |\varphi f| \ge \mu(E_M) M
+	.\] 
+	But we have $M \le c$, so such $M$ must be bounded.
+
+	For $\varepsilon>0$, let $E_\varepsilon = \{x \in \Omega: \varphi > \|\varphi\|_\infty  - \varepsilon\} $. Define $f = \frac{1}{\mu(E_\varepsilon)} \chi_{E_\varepsilon}$. Then  $\|f\|_1 = 1$. Also we have
+	\[
+		\int \varphi f > \mu(E_\varepsilon) (\|\varphi\|_\infty   - \varepsilon) \frac{1}{\mu(E_\varepsilon)} = \|\varphi\|_\infty - \varepsilon
+	.\] 
+	This implies
+	\[
+		\|\varphi\|_\infty  - \varepsilon < c
+	.\] 
+\end{proof}
+
+
+	\item Construct a measurable function from the square $[0,1]^2 \subset \mathbb{R}^2$ for which
+		\[
+			\forall x \quad \int _0^1 f(x,y) d y = 0, \qquad \forall  y \quad \int _0^1 f(x,y) d x = 1
+		.\] 
+		Can you arrange that $f$ is integrable?
+
+	\item A sequence of measurable functions $g_k$ on a measurable spoace $(\Omega, \mathcal{A}, \mu)$ converges to a measurable $g: \Omega \to (- \infty , \infty )$ \textit{in measure} if $\forall \varepsilon>0$, 
+		\[
+			\lim_{k \to \infty } \mu \{x \in \Omega: \left| g_k(x) - g(x) > \varepsilon \right| \}  = 0
+		.\] 
+		If $1 \le p \le \infty $ and $h_k \to h$ in $L^p(\Omega, \mathcal{A}, \mu)$, prove that $h_k \to h$ in measure as well.
+\end{itemize}

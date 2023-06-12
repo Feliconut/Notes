@@ -1,0 +1,117 @@
+\lecture{8}{Mon 03 Apr 2023 16:40}{Lebesgue Differentiation Theorem}
+
+\subsection{Lebesgue Differentiation Theorem}
+
+\begin{theorem}[Lebesgue Differentiation Theorem]
+	If $f \in L^1[a,b]$, and  $F(x) = \int _a^x f$, then  $F$ is differentiable a.e. and $F' = f$ a.e.
+\end{theorem}
+\begin{proof}
+	From hw, $F$ continuous. WLOG, $f \ge 0$, since we can split into positive and negative parts. Hence $F$ increasing.
+
+	Then by Monotone Differentiation Theorem, $F$ differentiable a.e. and $\int _a^x F' \le F(x) - F(a) = \int _a^x f$ a.e. Hence for all $x$, $\int _a^x (F' - f) \le 0$.
+
+	In fact, $\int _t^x (F' - f) \le 0$ if $t < x$. For, let $G(y) = \int _t^y f = F(y) - F(t)$, replacing $a$ by $t$ above, we get
+	\[
+		0 \ge \int _t^x \left( G' - f \right) =  \int _t^x (F' - f)
+	.\] 
+	(Note: need to establish beforehand that differentiation for monotone increasing functions is linear).
+
+	Thus $\int _E (F' - f) \le 0$ for any measurable  $E \subset [a,b]$. Let $E = \{x \in [a,b]: F'(x) \ge f(x)\} $. Then $\int _E (F' - f) = 0$. Hence $F' \le f$ a.e. on $E$. Also $F' < f$ on $[a,b] \setminus E$. Hence $F' \le f$ a.e.
+
+	Now we show the other side of inequality. When $f$ is bounded, let $f \le M \in \mathbb{R}$. Let $g = M - f  \ge 0$. Then
+	\[
+		G(x) = \int _a^x g = M(x-a) - F(x)
+	.\] 
+	By what we proved, $G' \le g$ a.e. Hence
+	\[
+		M - F' \le  M - f \implies f \le  F' 
+	.\] 
+
+	Now consider unbounded $f$. Let $f_n(x) = \min\left( f(x), n \right) $. Apply the bounded case to each $f_n$ and apply upward monotone convergence. Specifically, note that $F(x) - F_n(x) = \int_a^x (f - f_n)$ which increases with  $x$. Hence
+	\[
+		F'(x) \ge F_n'(x) = f_n(x) \to f(x)
+	.\] 
+	Hence $F'(x) \ge f(x)$ a.e.
+\end{proof}
+
+
+\subsection{Condition for Differentiability}
+
+\begin{definition}[Absolute Continuity]
+	$F: [a,b] \to \mathbb{R}$ is absolutely continuous if for all $\varepsilon>0$ there exists $\delta>0$ such that whenever $(x_i, y_i) \subset [a,b]$ are disjoint, $i = 1, \ldots, n$ such that $\sum_{i=1}^{n} (y_i - x_i) < \delta $ implies $\sum_{i=1}^{n} |F(x_i) - F(y_i)| < \varepsilon$.
+\end{definition}
+\begin{remark}
+	\begin{enumerate}
+		\item 
+	Absolute continuity implies uniform continuity (take $n = 1$ ).
+\item Absolute continuity also implies bounded variation.
+\item If $g$ increasing, then $m_g$ is a Lebesgue-Steltjes measure (on $\mathcal{B}$, Borel sets). Then $g$ is absolutely continuous iff $m_g$ is absolutely continuous wrt Lebesgue measure ( $m_g \ll m$).
+	\end{enumerate}
+\end{remark}
+
+\begin{proposition}(Compatibility of definitions of \logseq{Absolute Continuity})
+If $g$ increasing, then $m_g$ is a Lebesgue-Steltjes measure (on $\mathcal{B}$, Borel sets). Then $g$ is absolutely continuous iff $m_g$ is absolutely continuous wrt Lebesgue measure ( $m_g \ll m$).
+\end{proposition}
+\begin{proof}
+	Assume $m_g \ll m$. Pick $\varepsilon>0$. Then there exists $\delta>0$ such that $m_g(E) < \varepsilon$ if $m(E) < \delta$, for all Borel  $E \subset [a,b]$. Take $(x_i, y_i)$ as in definition of absolute continuity of $g$. 
+	We have 
+	\[
+		m_g [x,y] = |[x,y]|_g \ge  g(y) - g(x)
+	.\] 
+	Then
+		\begin{align*}
+			\sum_{i=1}^{n} |g(y_i) - g(x_i)| 
+			&\le m_g[x_i, y_i] \\
+			&= m_g(E) < \varepsilon
+		.\end{align*}
+
+	The other direction is homework.
+\end{proof}
+
+\begin{theorem}[a.e. Differentiability equivalent to Absolute Continuity]
+	For $F:[a,b] \to \mathbb{R}$, then $F$ absolutely continuous on $[a,b]$ iff there exists $f$ absolutely integrable such that $F(x) = F(a) + \int _a^x f$.
+	
+\end{theorem}
+\begin{proof}
+	If $F'$ absolutely integrable, then by HW, $F'$ is uniformly integrable, i.e. for all $\varepsilon>0$ there exists $\delta>0$ such that $\int _E |F'| < \varepsilon$ when $m(E) < \delta$. Now, for $x < y$, we have
+	\[
+		\int _x^y F' = \int _a ^y F' - \int _a^x F = F|_x^y
+	.\] 
+	Hence, if $(x_i, y_i) \subset [a,b]$ as in definition, then for $E = \cup (x_i, y_i)$,
+	\[
+		\sum |F(y_i) - F(x_i)| = \sum_i |\int _{x_i}^{y_i} F'| \le \sum_i \int_{x_i}^{y_i}|F'| = \int_E |F'| < \varepsilon
+	.\] 
+
+
+	On the other direction, $F$ absolutely continuous implies $F$ is of bounded variation (by HW), which implies $F'$ exists almost everywhere and integrable on $[a,b]$.
+
+	Let $G(x) = \int _a^x F'$. By Lebesgue Differentiation Theorem, $G'(x) = F'(x)$ a.e., i.e. $(G - F)' = 0$ a.e. THe proof of the first part gives $G$ is absolutely continuous. The theorem follows from the next lemma.
+
+	
+\end{proof}
+\begin{lemma}
+		If $g$ is absolutely continuous and $g' = 0$ a.e., then $g$ is constant.
+	\end{lemma}
+\begin{proof}
+	Need to prove $g(a) = g(c)$ for any $c \in (a, b]$. Let $E = \{x \in [a,c]: g'(x) = 0\} $. Then $m([a,c] \setminus E) =0$.
+
+	Let $\mathcal{F}_\varepsilon = \{J \subset [a,c]: J \text{ interval, } J \text{ closed}, [g]_J < \varepsilon |J|\} $, where $[g]_{[p,q]} = |g(q) - g(p)|$. Then  $F_\varepsilon$ is a Vitali cover of $E$: since $g'(x)$ exists at some $x$, for all closed enough $y$ we have $\left| \frac{g(y) - g(x)}{y - x} \right| <\varepsilon$.
+
+	Now apply Vitali's Theorem, there exists disjoint $J_1, J_2, \ldots \in \mathcal{F}_\varepsilon$ such that $m\left( E \setminus  \cup _k J_k \right) = 0$. Since $g$ absolutely continuous, there exists $\delta>0$ for our $\varepsilon>0$ as in the definition. Choose $n$ such that $m\left( E \setminus  \bigcup_{k \le n} J_k \right) < \delta$. Also, $[a,c] \setminus \bigcup_{k \le n} J_k$ is a union of intervals $\bigcup_{k = 1} ^m I_k$.
+
+	Then
+	\begin{align*}
+		|g(c) - g(a)|
+		&\le  \sum_{k=1}^{n} [g]_{J_k} + \sum_{k=1}^{m} [g]_{I_k}\\
+		&\le  \sum_{k=1}^{n} \varepsilon |J_k| + \varepsilon\\
+		&\le \varepsilon (c-a + 1)
+	.\end{align*}
+\end{proof}
+
+\subsection{Summary of theory of differentiation}
+\begin{enumerate}
+	\item If $F$ is of bounded variation, then $F'$ exists a.e., and $F'$ integrable. If $F$ increases, then $\int _a^b F' \le  F|_a^b$.
+	\item If $f$ integrable, then  $F(x) = \int _a^x f$ satisfies $F' = f$.
+	\item If $F$ is absolutely continuous, then $F(x) = F(a) + \int _a^x F'$.
+\end{enumerate}
+

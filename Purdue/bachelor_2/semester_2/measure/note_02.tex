@@ -1,0 +1,29 @@
+\note{2}{Wed 31 May 2023 18:37}{Convergence Theorems}
+
+In Measure Theory, a sequence of functions $(f_n)_{n \in \mathbb{N}}$ in some measure space $(X, \mathcal{F}, \mu)$ may converge to some $f$ as its limit. The notion of "convergence" is a very versatile one; the are many different formulations of convergence available. 
+
+Those different convergence notions may be (partially) ranked with respect to their "strength", namely how "uniform" the convergence is, and how "large" is the set where convergence occurs.
+
+The convergence theorems are summarized in the following diagram:
+
+\begin{figure}[ht]
+    \centering
+    \incfig{convergence-theorems}
+    \caption{Schematic diagram of implications between various convergences.}
+    \label{fig:convergence-theorems}
+\end{figure}
+
+The definitions are as follows:
+
+\begin{itemize}
+	\item [Uniform] We say $f_n \to f$ \textit{uniformly} if for all $\varepsilon>0$ there exists $N>0$ such that for all $x \in X$ and all $n > N $ we have $|f_n(x) - f(x)| < \varepsilon$.
+	\item [PW] We say $f_n \to f$ \textit{pointwise} if for all  $x \in X$, $f_n(x) \to f(x)$ as $n \to \infty $.
+	\item [AE] We say $f_n \to f$ \textit{pointwise almost everywhere} if there exists a set $E \subset X$ with $\mu(E) = 0$ such that for all $x \in X \setminus E$, $f_n(x) \to f(x)$ as $n \to \infty $.
+	\item [AU] We say $f_n \to f$ \textit{almost uniformly} if for all $\varepsilon>0$ there exists a set  $E \subset X$ with $\mu(E) < \varepsilon$ such that $f_n \to f$ uniformly outside $E$.
+	\item [$L^\infty $ ] We say $f_n \to f$ \textit{uniformly almost everywhere}, or \textit{in $L^\infty $ norm}, if there exists a set $E \subset X$ with $\mu(E) = 0$, such that $f_n \to f$ uniformly outside $E$.
+	\item [$L^p$ ] We say $f_n \to f$ \textit{in $L^p$ norm} if $\int_X |f_n - f|^p \to 0$ as $n \to  \infty $.
+	\item [M] We say $f_n \to f$ \textit{in measure} if for any $\varepsilon>0$ and $E_{n, \varepsilon}:= \{x \in X: |f_n(x) - f(x)| > \varepsilon\} $, we have $\mu(E_{n, \varepsilon} \to 0$ as $n \to \infty $.
+	\item [dist] We say $f_n \to f$ \textit{in distribution}, if for all $a \in \mathbb{R}$ where $f $ is continuous at $a$, we have $\mu\left( \{x \in X: f_n(x) < a\}  \right) \to  \mu\left( \{x \in X: f(x) < a\}  \right) $ as $n \to \infty $.
+\end{itemize}
+
+

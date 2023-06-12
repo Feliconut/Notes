@@ -1,0 +1,169 @@
+\homework{12}{Wed 5 Apr 2023 16:30}{}
+
+\begin{itemize}
+	\item If $h \in L^1(\Omega, \mathcal{A}, \mu)$, show that there is a sequence $g_n : \Omega \to \mathbb{R}$ of simple functions such that
+		\[
+			\int _\Omega (g_n - h) d \mu \to  0
+		.\] 
+\begin{proof}
+	WLOG we may assume that $h \ge 0$, and result for more general $h$ would follow from splitting into positive and negative parts.
+
+	Since $h$ is unsigned integrable, there exists a sequence of simple functions $g_n$ such that $0\le g_n \le h$, $g_n$ monotone increasing, and $g_n \to h$ a.e. Then 
+	\[
+		\int _\Omega (h - g_n) d \mu \le \int _\Omega h d \mu < \infty
+	.\] 
+	We know that $(h - g_n)$ is monotone decreasing. Hence by downward monotone convergence theorem,
+	\[
+		\int _\Omega(h - g_n) d \mu \to 0
+	.\] 
+	Hence
+	\[
+		\int _\Omega(g_n - h) d \mu \to  0
+	.\] 
+\end{proof}
+
+	\item A function $g$ on an interval $[a,b]$ is piecewise constant if there are $a = t_0 < t_1 < \ldots < t_m = b$ such that the restrictions $g|_{(t_{j-1}, t_j)}$ are constant for all $j$. If $f \in L^1[a,b]$ and $\varepsilon>0$, show that there is a piecewise constant $g: [a,b] \to  \mathbb{R}$ such that 
+		\[
+			\int _a^b |f-g| < \varepsilon
+		.\] 
+\begin{proof}
+	We can have $L^1$ approximation of $f$ by simple functions to arbitrary precision, so it suffices to prove the claim assuming  $f$ is a simple function. Furthermore, since $f$ is finite linear combination of indicator functions of measurable sets, and that finite linear combinations of piecewise constant functions are still piecewise constant, we may assume $f$ is an indicator function of some Lebesgue measurable $E \subset [a,b]$.
+
+	But for any Lebesgue measurable $E \subset [a,b]$ , we can approximate $E$ by an open set $A$ such that $m(E \Delta A)$ can be arbitrarily small, where $\Delta$ is the symmetric difference. Hence we may assume $E$ is open. But then $E$ is a countable union of disjoint open cells $I_n$, and
+	 \[
+		m(E) = \sum_{n=1}^{\infty} |I_n| < b-a
+	.\] 
+	By truncating the sum at some $N$, we can have $E_N = \bigcup_{n \le N} I_n$ such that
+	\[
+		\int_{[a,b]} |\chi_{E} - \chi_{E_N}| = \sum_{n = N+1}^{\infty }|I_n| < \delta
+	.\] 
+	where $\delta$ can be arbitrarily small. Note that $\chi_{E_N}$ is piecewise constant, so we are done.
+\end{proof}
+
+	\item Suppose $\varphi_j \in L(\Omega, \mathcal{A}, \mu)$ are uniformly bounded, $j \in \mathbb{N}$, and $\sup  \left\{ \left| \varphi_j(x) \right| : j \in \mathbb{N} , x \in \Omega\right\}  <\infty $. Also assume $\mu(\Omega) < \infty $. If $\int _\Omega \varphi_i \varphi_j = 0$ whenever $i \neq j$, prove that the average 
+		\[
+			\psi_n = \frac{\varphi_1 + \varphi_2 + \ldots + \varphi_{n^2}}{n^2} \to 0 \qquad \text{a.e.}
+		.\] 
+\begin{proof}
+	Note that
+	\[
+		\int_\Omega \psi_n^2 = \frac{1}{n^4}\int _\Omega( \varphi_1 ^2 + \ldots + \varphi_{n^2}^2) \le \frac{1}{n^2} M^2 \mu(\Omega)
+	.\] 
+	Thus following series converges:
+	\[
+		\sum_{n = 0}^\infty  \int_\Omega \psi_n^2
+	.\] 
+	By monotone convergence theorem, we may exchange sum and integral:
+\[
+		\int_\Omega \sum_{n = 0}^\infty  \psi_n^2< \infty 
+	.\]
+	Hence $\sum_{n = 0}^\infty  \psi_n^2$ is finite a.e., Hence  $\psi_n \to 0$ a.e.
+\end{proof}
+
+	\item If $f, g: [a,b] \to \mathbb{R}$ are absolutely continuous, prove that so is $fg$.
+\begin{proof}
+	Let $\delta>0$, and choose $\delta>0$ be as in the definition of absolutely continuity of $f$. Assume that the same $\delta$ also satisfies absolute continuity of $g$.
+
+	$f,g$ absolutely continuous implies $f, g$ are of bounded variation, implies $f, g$ bounded on $[a,b]$. Let $M$ be the bound.
+
+	Let  $I_j$ be disjoint intervals in  $[a,b]$ with total length less than $\delta$. We want to bound the quantity
+	\[
+		\sum_{j = 1}^n [fg]_{I_j}
+	.\] 
+	Note that if $I = [\alpha, \beta]$,
+	\[
+		[fg]_{I} = |f(\beta) [g]_{I} + g(\alpha) [f]_{I}| \le M \left( [f]_I + [g]_I \right) 
+	.\] 
+	Hence
+	\[
+		\sum_j [fg]_{I_j} \le  M \left( \sum_j [f]_{I_j} + \sum_j [g]_{I_j} \right) 
+	.\] 
+	By using absolute continuity of $f$ and $g$, we can get
+	\[
+		\sum_j [fg]_{I_j} \le  2 M \varepsilon
+	.\]
+	Hence, by choosing small enough $\delta$, we can make sum $\sum_j [fg]_{I_j}$ arbitrarily small, where $I_j$ is any finite collection of intervals whose total length is smaller than $\delta$. Hence $fg$ is absolutely continuous.
+\end{proof}
+
+	\item  Prove that any absolutely continuous function $\varphi:[a,b] \to \mathbb{R}$ is of bounded variation.
+\begin{proof}
+	Fix $\varepsilon>0$ and  choose $\delta>0$ as in the definition of absolutely continuity of $\varphi$. Let $P$ be a partition of $[a,b]$ where each cell has length at most $\delta$. We focus on one of the cells, call it $A = [\alpha, \beta]$. 
+
+	For any partition of $A$, say $Q: x_0 < \ldots < x_n$, the partition can be viewed as finite union of disjoint intervals with total length less than $\delta$. Thus
+	\[
+		\sum_{i = 1}^n |F(x_i) - F(x_{i-1})| < \varepsilon
+	.\] 
+	If we take supremum over the partitions, we obtain
+	\[
+		\|\varphi\|_{TV(A)} \le \varepsilon
+	.\] 
+	By property of $\varphi$,
+	\[
+		\|\varphi\|_{TV([a,b])} = \sum_{A \in P}\|\varphi\|_{TV(A)} \le N \varepsilon
+	.\] 
+	where $N$ is the number of intervals in the partition $P$. We see that $N \varepsilon$ is finite, so $\varphi$ has bounded variation.
+\end{proof}
+
+	\item If $g:[a,b] \to \mathbb{R}$ is increasing and absolutely continuous, prove that the associated Lebesgue-Stieltjes measure $m_g$ is absolutely continuous with respect to Lebesgue measure $m$, i.e.  $m_g \ll m$.
+\begin{proof}
+	Take $E \subset [a,b]$ such that $m(E) = 0$. We want to prove $m_g(E) = 0$. Fix $\varepsilon>0$, we want to cover $E$ with disjoint open intervals $I_n$ where $\sum_{n = 1}^\infty  m_g(I_n) < \varepsilon$. 
+
+	Take $\delta$ as in the definition of absolute continuity of $g$.
+	Since $m(E) = 0$, we can pick disjoint open intervals $I_n$ where $\sum_{n = 1}^\infty  m(I_n) < \delta$. Then by absolute continuity,
+	\[
+		\sum_{n = 1}^{\infty } [g]_{I_n} < \varepsilon
+	.\] 
+	By definition of $m_g$, for $I_n = (a, b)$,
+	\[
+		m_g (I_n) = \lim_{b^-} g - \lim_{a^+} g = g(b) - g(a) = [g]_{I_n}
+	.\] 
+	Hence $\sum_{n = 1}^\infty  m_g(I_n) \le \sum_{n = 1}^\infty  [g]_{I_n} < \varepsilon$.
+\end{proof}
+
+	\item If $f, g$ are absolutely continuous on $[a,b]$, prove $\int _a^b f' g = f g|_a^b - \int _a^b fg'$.
+\begin{proof}
+	Since $f, g$ are absolutely continuous, so if $fg$. Hence $fg$ is differentiable a.e. and
+	\[
+		\int _a^b (fg)' = fg|_a^b
+	.\] 
+	By product rule of differentiation, $(fg)' = f'g + fg'$, apply linearity of integral and we are done.
+\end{proof}
+
+	\item If $g:[a,b] \to \mathbb{R}$ is increasing and absolutely continuous, and $m_g$ is the associated Lebesgue-Stieltjes measure, prove that for any Borel set $E \subset [a,b]$, we have
+		\[
+			\int _E g' = m_g (E)
+		.\] 
+\begin{proof}
+	When $E$ is an open interval $(a,b)$, using definitions and continuity of $g$,
+	\[
+		\int _E g' = g|_a^b = g(b) - g(a) = m_g(E)
+	.\] 
+	Every open set is a countable union of disjoint open intervals. We can use upward MCT on both sides of the equation, to extend the result to open sets.
+
+	Each closed set is countable intersection of open sets. By applying intersections one at a time, we arrive at a decreasing sequence of open sets that converge to that closed set. Apply downward MCT to both sides of the equation, we can extend the result to closed sets.
+
+	Every Borel set can be approximated from inside by a compact set $B$ and from above by an open set $A$. Pick those two sets close enough to each other such that $m_g(A \setminus B) < \varepsilon$. Then we have both
+	\[
+		\int _B g' \le \int _E g' \le \int _A g'
+	.\] 
+	since $g' \ge 0$, and
+	\[
+		m_g(B) \le m_g(E) \le m_g(A)
+	.\] 
+	by monotonicity of measure.
+
+	By what we have proved, $\int _B g' = m_g(B)$ and $\int _A g' = m_g (A)$. Also $m_g(A) - m_g(B) < \varepsilon$, so
+	\[
+		\left| \int _E g' - m_g(E) \right| <  \varepsilon
+	.\] 
+	Since $\varepsilon$ is arbitrary, 
+	\[
+		\int _E g'  = m_g (E)
+	.\] 
+	for arbitrary Borel set $E$.
+	
+
+\end{proof}
+
+\end{itemize}
+

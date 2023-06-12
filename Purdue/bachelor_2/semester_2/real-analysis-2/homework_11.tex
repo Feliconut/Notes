@@ -1,0 +1,490 @@
+\homework{11}{Wed 19 Apr 2023 00:46}{Exam 2}
+
+\textbf{1. (Cutoff functions)}
+(a) Show that for any $\epsilon>0$ there is a $C^{\infty}$ function $h_{\epsilon}: \mathbb{R} \rightarrow[0,1]$ such that $h_{\epsilon}(x)=0$ for $x \leq 0$ and $h_{\epsilon}(x)=1$ for $x \geq \epsilon$.
+
+[Hint: If $f$ is a $C^{\infty}$ function which is positive on $(0, \epsilon)$ and 0 elsewhere, let $h_{\epsilon}(x)=\int_{0}^{x} f / \int_{0}^{\epsilon} f$.]
+
+\begin{lemma}
+	In $\mathbb{R}$, convolution of an $L^1$, bounded and compactly supported function $g$ and a $C^\infty $, compactly supported function $f$ is $C^\infty $.
+\end{lemma}
+\begin{proof}
+	We use Lebesgue integral in the proof.
+	\begin{align*}
+		(f * g)'(x)
+		&= \lim_{h \to 0} \frac{\int f(y) g(y - t + h) dy - \int f(y) g(x - y)}{h}dy \\
+		&= \lim_{h \to 0} \int \frac{\left(f\left( t+h \right) -f(t) \right)g(x-t)}{h}
+	.\end{align*}
+
+	Since $f$ is compactly supported, it is uniformly continuous. Hence the function $\frac{f(t+h) - f(t)}{h}g(x-t)$ can be dominated uniformly of $t$, for all small $h$. Since $g$ is bounded, everything in the integral can be dominated.
+
+	Also we know that $f$ is $C^\infty $, so we can apply the dominated convergence theorem to conclude 
+	\[
+		\lim_{h \to 0} \int \frac{\left(f\left( t+h \right) -f(t) \right)g(x-t)}{h}
+		= \int f'(t) g(x-t)
+		= (f' * g) (x)
+	.\] 
+
+	But since $f \in C^\infty _c$, we can replace $f$ by $f^{(n)}$ in the previous proof. Then by induction, $(f * g)$ is $C^\infty $ and compactly supported.
+\end{proof}
+
+\newpage
+\begin{proof}[Proof of part 1]
+	From textbook, there exists $f \in C^\infty (\mathbb{R})$ such that $\int _{\mathbb{R}} f = 1$ and $f$ compactly supported on  $[0,\varepsilon]$.
+
+	Now define
+	\[
+		h_{\varepsilon, M} = f * \chi_{[\varepsilon, M]}
+	.\] 
+	It can be easily verified that $h_{\varepsilon, M} \ge 0$. By lemma, $h_{\varepsilon, M}$ is $C^\infty $.For $x \le 0$,
+	\[
+		h_{\varepsilon, M}(x)
+		= \int_{\mathbb{R}} f(t)\chi_{[\varepsilon, M]}(x - t) d t
+		= \int_{x - M}^{x - \varepsilon} f(t) d t
+		\le \int _{t \le 0} f(t) d t  
+		= 0
+	.\] 
+	For $x \in [2\varepsilon, M ]$, we have
+	\[
+		h_{\varepsilon, M}(x)
+		= \int _{x - M}^{x - \varepsilon} f(t) d t
+		= \int _{0}^\varepsilon f(t) d t = 1
+	.\] 
+
+	Thus we see that $h_{\varepsilon, M}$ is constantly $0$ for $x \le 0$ and constantly $1$ for  $2 \varepsilon \le x \le M$. Now define $h_{\varepsilon}$ be such that
+	\[
+		h_\varepsilon(x) = 
+		\begin{cases}
+			h_{\varepsilon, M}(x) & x \le M \\
+			1 & x > M
+		\end{cases}
+	.\] 
+	Then $h_\varepsilon(x)$ is constantly $1$ for $x \ge 2 \varepsilon$, hence also infinitely differentiable.
+
+	The problem required $h_\varepsilon$ to be constantly $1$ for $x \ge \varepsilon$ instead of $h \ge 2 \varepsilon$, but this doesn't matter since $\varepsilon$ is arbitrary in our proof.
+\end{proof}
+\newpage
+
+\begin{lemma}
+	In $\mathbb{R}^n$, the convolution of a bounded $L^1$ function $g$ and a compactly supported $C^\infty $ function $f$ is $C^{\infty } $.
+\end{lemma}
+\begin{proof}
+	We consider the partial derivatives:
+	\begin{align*}
+		\frac{\partial }{\partial x_j} (f * g) (y) 
+		&= \lim_{h \to 0} \frac{\int f(z)g(y+h e_1  - z ) - \int f(t) g(x - t)}{h} \\
+		&= \lim_{h \to 0} \frac{1}{h} \int  \left( f(z + h e_1) - f(z) \right) g(y - z) d z 
+	.\end{align*}
+	Using the result from one dimension, we have
+	\[
+		\frac{\partial }{\partial x_j} (f * g)(y)= \left( \frac{\partial }{\partial x_j} f * g \right) (y)
+	.\] 
+	Since $f$ is $C^\infty $, in particular $\frac{\partial }{\partial x_j} f$ is continuous, so $\frac{\partial }{\partial x_j} (f * g)$ is continuous for all $j$. Then we know that $D(f * g) $ exists.
+
+	Again, we may replace $f$ by $D^nf$ in the previous proof, so by induction, $D^n (f * g) = D^n  f * g$ for all $n \ge 0$. Thus $f * g$ is $C^\infty $.
+	
+\end{proof}
+
+
+
+(b) If $\Omega \subset \mathbb{R}^{n}$ is open and $K \subset \Omega$ is compact, show that there is a non-negative $C^{\infty}$ function $f: \Omega \rightarrow \mathbb{R}$ such that $f(x)>0$ for $x \in K$ and $f=0$ outside of some closed set contained in $\Omega$.
+
+\begin{proof}
+	$K$ and $\Omega$ are disjoint, both closed and $K$ is compact, so $K$ and $\Omega$ are separated by a distance $d>0$. Fix $\varepsilon>0$ such that $3 \varepsilon < d$. 
+
+	Define
+	\[
+		V = \{x \in \Omega: \inf_{y \in K} \|y - x\| \le \varepsilon\} 
+	.\] 
+	\[
+		H = \{x \in \Omega: \inf _{y \in V} \|y - x\|\le \varepsilon\} 
+	.\] 
+	Then clearly $K \subset V \subset H \subset \Omega$. We would like to verify that $K \Subset V \Subset H \Subset \Omega$.
+
+	We verify $V, H$ are compact. From previous homework we know that for a compact set $K$, the distance function $d_K(x):= \inf _{y \in K}\| y - x\|$ is continuous. Hence $V$ is a closed set. By triangle inequality we know that $V$ is bounded, so $V$ is compact. Now apply the same argument to $H$ and we know $H$ is compact.
+
+	Then verify $K \Subset V$. For any $x \in K$, since $\varepsilon < d$, $B_\varepsilon(x) \subset \Omega$. Also, by definition of $V$ we know that $B_\varepsilon(x) \subset V$. Hence there exists an open neighborhood of $x$ contained in $V$. By shrinking the ball a bit, we know that the ball is contained in the interior of $V$. Thisis true for all $x$, so $K \subset \text{int} V$.
+
+	The same argument works for $V \Subset H$ and $H \Subset \Omega$. Due to our choice $\varepsilon$, any ball centered at $x \in H$ with radius $\varepsilon$ is contained in $\Omega$, so the previous argument works fine.
+
+	Therefore $\chi_{V} \in L^1(\mathbb{R}^n)$.
+
+	Now let  $g$ be a kernel compactly supported on $\overline{B_\varepsilon(0)}$. Define $f = g * \chi_V$. Then by lemma, $f$ is $C^ \infty $, also $f$ clearly $\ge 0$. Now we check if $f$ satisfies other desired properties.
+
+	Fix $x \in K$. What is $f(x)$? Since $g$ is a kernel and $\chi_V \le 1$ pointwise, clearly $f(x) \le 1$. Also,
+	\begin{align*}
+		f(x) 
+		&= \int_{\mathbb{R}^n } g(y) \chi_V(x -y) d y \\
+		&= \int _{x - y \in V} g\left( y \right) d y \\
+		&\ge \int_{\overline{B_\varepsilon(0)}} g(y) d y \\
+		&= 1 
+	.\end{align*}
+	To justify the second step in the calculation above, note that whenever $y \in \overline{B_\varepsilon(0)} $, we have 
+	\[
+		\inf_{z \in K} \|z - (x - y)\| = \|y\| \le \varepsilon
+	.\] 
+	Hence $x -y \in V$. Thus $\{y: x - y \in V\} \supset \overline{B_\varepsilon(0)} $, justifying the inequality above. Therefore $f(x) = 1$ for $x \in K$.
+
+	Now fix $x \in \Omega \setminus H$, what is $f(x)$? We have $f(x) = \int _{x- y \in V} g(y) d y$. Since $x \in \Omega\setminus H$, there exists $\delta>0$ such that for all $z \in V$, $\| z - x\| > \varepsilon + \delta$. Since $x - y \in V$, this implies
+	\[
+		\|(x-y) - x\| = \|y\| > \varepsilon + \delta
+	.\] 
+	Hence $y \not\in \overline{B_\varepsilon(0)} $. Threfore
+	\begin{align*}
+		f(x) 
+		&= \int_{\mathbb{R}^n } g(y) \chi_V(x -y) d y \\
+		&= \int _{x - y \in V} g\left( y \right) d y \\
+		&\le  \int_{\overline{B_\varepsilon(0)}^c} g(y) d y \\
+		&= 0
+	.\end{align*}
+
+
+	
+\end{proof}
+
+\newpage
+(c) Show that in part (b) we can choose such an $f$ that $0 \leq f(x) \leq 1$ for $x \in \Omega$ and $f(x)=1$ for $x \in K$. (Such function is called a cutoff function).
+
+[Hint: If the function $f$ of part (b] satisfies $f(x) \geq \epsilon$ for $x \in K$, consider $h_{\epsilon} \circ f$, where $h_{\epsilon}$ is the function of part (a).]
+
+\begin{proof}
+	This is proved together in (b).
+\end{proof}
+
+
+\newpage
+(d) Give a direct proof of part (c) by using a partition of unity. 
+
+\begin{proof}
+	Let $\varepsilon$ be as in part (b).
+	Use compactness of $K$ to generate a finite open cover of $K$ by balls $B(x, \varepsilon)$ where $x \in K$. Add the open set $\Omega \setminus K$ to the collection, and we have an open cover of $\Omega$, call this $\mathcal{A}$.
+
+	Let $\{\phi_i\} _{i \in \mathbb{N}}$ be a $C^\infty $ partition of unity having compact support and dominated by $\mathcal{A}$. 
+
+	Now define
+	\[
+		I = \{i \in \mathbb{N}: \text{supp }\phi_i \cap K \neq  \emptyset \} 
+	.\] 
+	And define
+	\[
+		f(x) = \sum_{i \in I; \text{supp }\phi_i \supset x} \phi_i(x)
+	.\] 
+
+	At any $x \in \Omega$, this is a finite sum, so $f(x)$ is well-defined and $C^{\infty }$. For $x \in K$, whenever $\text{supp }\phi_i \supset x$ we will have $i \in I$, so
+	\[
+		f(x) = \sum_{\text{supp }\phi_i \supset x} \phi_i(x) = 1
+	.\] 
+	For $x \not\in V$ where $V$ is defined as in part b, we know that $x$ is at least $\varepsilon$-away from any point in $K$. By our construction of $A$, $\{i \in I: \text{supp }\phi_i \supset x\}  = \emptyset $, so $f(x) = 0$.
+\end{proof}
+
+
+\newpage
+
+
+\textbf{2. (Sard's theorem)} Give a careful proof of the following theorem due to Sard:
+
+Let $g: \Omega \rightarrow \mathbb{R}^{p}$ be of class $C^{1}(\Omega)$, where $\Omega \subset \mathbb{R}^{p}$ is open and let $\Sigma=\{x \in \Omega: \operatorname{det}[D g(x)]=0\}$. Then for any compact $K \Subset \Omega$ the image $g(\Sigma \cap K)$ has content zero. (As a consequence, $g(\Sigma)$ has measure zero.)
+
+[Hint: Let $Q \subset \Omega^{\prime} \Subset \Omega$ be a cube of side length $h$ such that
+
+$$
+\|g(y)-g(x)-D g(x)(y-x)\| \leq \epsilon\|x-y\| \leq \epsilon \sqrt{p} h, \quad \text { for all } x, y \in Q
+$$
+
+Next observe that if $Q$ intersects $\Sigma$ and $x \in Q \cap \Sigma$, then $D g(x)\left(\mathbb{R}^{p}\right)=\left\{D g(x)(u): u \in \mathbb{R}^{p}\right\}$ lies in a $(p-1)$-dimensional subspace $\Pi$ of $\mathbb{R}^{p}$. Thus, the set $g(Q)$ lies within distance $\epsilon \sqrt{p} h$ from $g(x)+\Pi$. More precisely, show that $g(Q)$ is contained in a cylinder whose height is $\leq 2 \epsilon \sqrt{p} h$ and whose base is $(p-1)$-dimensional ball of radius $\leq M h$ for some constant $M$ (depending on $\Omega^{\prime}$ ). Conclude from here that
+
+$$
+c(g(Q)) \leq 2^{p} M^{p-1} \sqrt{p} \epsilon c(Q)
+$$
+
+Then use this fact to finish the proof of the theorem.] 
+
+\begin{proof}
+	Let $Q \subset \Omega' \Subset \Omega$ be a cube of side length $h$, such that
+	\[
+		\|g(y) - g(x) - D g(x) (y - x)\| \le  \varepsilon \|x - y\| \le \varepsilon \sqrt{p}  h \quad \text{ for all } x, y \in Q
+	.\]
+	We know such $Q $ exists by differentiability of $g$.
+
+	Now consider $x \in Q \cap \Sigma$, assuming $Q \cap \Sigma \neq \emptyset $. Then $Dg\left( x \right) $ has determinant $0$, therefore $\operatorname{dim} Dg(x)(\mathbb{R}^p) < p$. We may extend $Dg(x) (\mathbb{R}^p)$ to a $p - 1$ dimensional subspace of $\mathbb{R}^p$, call it $\Pi$. (A lemma in linear algebra says that in finite-dimensional vector space, every linearly independent list of vectors can be extended to a basis; we perform the extension and then throw out one added vector to obtain basis for a $p-1$ -dimensional subspace). Write $\Pi^\perp$ as the $1$-d orthogonal complement of $\Pi$.
+	
+	Then we have $Dg(x) (\mathbb{R}^p) \in \Pi$, in particular $Dg(x) (y - x) \in \Pi$. Therefore for all $y,x \in Q$,
+	\[
+		\inf_{z \in g(x) + \Pi}\|g(y) - g(z) \|
+		\le \|g(y) - (g(x) + Dg(x) (y-x)\|
+		\le \varepsilon \sqrt{p}  h
+	.\] 
+	In other words, if we let $v_\perp$ denote the component of $v$ orthogonal to $\Pi$,
+	\[
+	\|(g(y) - g(x))_\perp\| \le  \varepsilon \sqrt{p}  h
+	.\] 
+
+	Since $Q$ is compact as a closed cube, $\|Dg(x)\|$ is bounded over $Q$. Hence there exists $M>0$ such that for all $x, y \in Q$, 
+	\[
+		\|Dg(x)(y-x)\|\le M \| y - x\|
+	.\] 
+	Therefore
+	\[
+		\|g(y) - g(x)\| \le \varepsilon \| x - y\| + M \| x - y\| = (\varepsilon + M) \sqrt{p}  h
+	.\] 
+	Use this as an estimate for the parallel component:
+	\[
+		\|\left( g(y) - g(x) \right) _{\parallel}\|\le (\varepsilon + M) \sqrt{p}  h
+	.\] 
+	Now fix $x$. We know that
+	\[
+		g(y) - g(x) \in \{v \in \Pi: \|v\|\le (\varepsilon+M) \sqrt{p} h\} \times \{w \in \Pi^{\perp}: \| w  \| \le  \varepsilon \sqrt{p}  h\}  
+	.\] 
+	This is true for all $y \in Q$, so
+	\[
+		g(Q) \subset g(x) +  \{v \in \Pi: \|v\|\le (\varepsilon+M) \sqrt{p} h\} \times \{w \in \Pi^{\perp}: \| w  \| \le  \varepsilon \sqrt{p}  h\}
+	.\] 
+	What is the content of RHS? It is just the product of content in each subspace. 
+	\[
+		c_{\mathbb{R}^{p-1}} \left( \{v \in \Pi: \|v\| \le  (\varepsilon + M) \sqrt{p}  h\}  \right)  < (2 (\varepsilon + M) \sqrt{p} h)^{p - 1} 
+	.\] 
+	\[
+		c_{\mathbb{R}^1} \left( \{w \in \Pi^{\perp}: \|w \|\le \varepsilon \sqrt{p}  h \}  \right) =  2 \varepsilon \sqrt{p}  h 
+	.\] 
+	Therefore
+	\[
+		c(g(Q)) \le (2 (\varepsilon + M) \sqrt{p} h)^{p - 1} \times \left( 2 \varepsilon \sqrt{p}  h \right) = 2^p (\varepsilon + M)^{p - 1} (\sqrt{ p}  h)^p \varepsilon
+	.\] 
+	Since $c(Q) = h^{p}$,
+	\[
+		c(g(Q)) \le 2^p (\varepsilon + M)^{p - 1} p^{\frac{p}{2}} c(Q) \varepsilon =: C_{p, M} c(Q) \varepsilon
+	.\] 
+	This can be made arbitrarily small by choosing small $\varepsilon$.
+
+
+	Now consider compact $K \Subset \Omega$. Since $\|Dg(x)\|$ is continuous, $\Sigma$ is closed, hence $\Sigma \cap K$ is compact, and $\|Dg(x)\|\le M < \infty $ for all $x \in \Sigma \cap K$. Fix $\varepsilon>0$. For every $x \in \Sigma \cap K$, there exists $h_x>0$ and cube $Q_x$ centered at $x$ with sidelength $h_x$, such that for all $y \in Q_x$, 
+	\[
+		\|g(y) - g(x) - Dg(x) (y-x)\|\le \varepsilon \sqrt{p}  h
+	.\] 
+	Using all the $\text{int }Q_x$ as an open cover, we can use compactness of $\Sigma \cap K$ to obtain a finite subcover $\{\text{int }Q_x\}_{x \in I}, I \subset K \cap \Sigma$. 
+
+	Now for each $x \in I$, we have
+	\[
+		c(g(Q_x)) \le  C_{p, M} \varepsilon
+	.\] 
+	And by the open cover
+	\[
+		c(g(\Sigma \cap K)) \le \sum_{x \in I} c(g(\text{int }Q_x)) = \sum_{x \in I} c(g(Q_x)) \le C_{p, M} \varepsilon \sum_{x \in I} c(Q_x) \le  C_{p, M} \varepsilon c(K)
+	.\] 
+	Now $\varepsilon$ does not depend on $p, M$ or $K$, so $c(g(\Sigma \cap K))$ is arbitrarily small. Therefore $c(g(\Sigma \cap K)) = 0$.
+\end{proof}
+
+
+\newpage
+
+\textbf{3. (Additive functions)} Let $\Omega \subset \mathbb{R}^{p}$ be open and let $\mathcal{D}(\Omega)$ be the collection of all sets $A \in \mathcal{D}\left(\mathbb{R}^{p}\right)$ such that $A \Subset \Omega$. We then have the following definitions.
+
+\begin{itemize}
+  \item A function $G: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ is said to be additive if
+\end{itemize}
+
+$$
+G(A \cup B)=G(A)+G(B), \quad \text { whenever } A, B \in \mathcal{D}(\Omega) \text { and } A \cap B=\emptyset
+$$
+
+\begin{itemize}
+  \item A function $G: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ is said to be absolutely continuous if for any $\epsilon>0$ and $K \Subset \Omega$ there is $\delta=\delta_{\epsilon, K}>0$ such that $|G(A)|<\epsilon$ for any $A \in \mathcal{D}(\Omega)$ with $A \subset K$ and $c(A)<\delta$.
+
+  \item A function $G: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ is said to have a strong density $g: \Omega \rightarrow \mathbb{R}$, if for any $\epsilon>0$ and $K \Subset \Omega$ there exists $\delta=\delta_{\epsilon, K}>0$ such that if $Q$ is a closed cube with side length less than $\delta$ contained in $\Omega$, and if $x \in K \cap Q$ then
+
+\end{itemize}
+
+$$
+\left|\frac{G(Q)}{c(Q)}-g(x)\right|<\epsilon
+$$
+
+(a) If $f: \Omega \rightarrow \mathbb{R}$ is continuous and and $F: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ is defined by
+
+$$
+F(A)=\int_{A} f
+$$
+
+then show that $F$ is additive, absolutely continuous, and has a strong density $f$ in $\Omega$.
+
+\begin{proof}
+	Additivity follows from (Robert G Bartle, Theorem 44.8). Now we show $f$ absolutely continuous. Fix $K \in \mathcal{D}(\Omega)$, $\overline{K} $ is compact, so $f$ is bounded by some $M \in \mathbb{R}$ over $K$. Fix $\varepsilon$ and let $\delta = \frac{\varepsilon}{M}$, we have that for any $A \in \mathcal{D}(\Omega)$ and $A \subset K$ and $c(A) < \delta$,
+	\[
+		|F(A)| \le \int _A |f| \le c(A) M \le \varepsilon
+	.\] 
+
+	Finally we show $F$ has strong density $f$. For any $\varepsilon>0$, there exists $\delta>0$ such that whenever $\|y - x\|<\delta$ we have $\| f(y) - f(x)\|<\varepsilon$. Take $Q$ to be a closed cube with side length $\frac{2\delta}{\sqrt{p} }$ centered at $x$. We may decrease $\delta$ to ensure $Q \subset \Omega$. Then
+	\[
+		F(Q) = \int _Q  f \in \left( c(Q) (f(x) - \varepsilon), c(Q) (f(x) + \varepsilon) \right) 
+	.\] 
+	Then
+	\[
+		\frac{F(Q)}{c(Q)} \in \left( f(x) - \varepsilon, f(x) + \varepsilon \right) 
+	.\] 
+	Therefore
+	\[
+		\left| \frac{F(Q)}{c(Q)} - f(x) \right| < \varepsilon
+	.\] 
+
+
+\end{proof} 
+
+
+\newpage
+(b) If $G: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ has a strong density $g: \Omega \rightarrow \mathbb{R}$, show that $g$ is continuous on $\Omega$.
+\begin{proof}
+	For every $\varepsilon>0$ and $K \Subset \Omega$, choose $\delta$ as in definition of strong density, and let $Q $ be the cube as in the definition. Let $x \in \text{int } Q$. Then there exists $\nu >0$  such that $B_\nu (x) \subset Q$. Then for any $y \in B_\nu(x)$,
+	\[
+		\left| \frac{G(Q)}{c(Q)} - g(y) \right|  < \varepsilon
+	.\] 
+	Therefore for any $x, y \in B_\nu(x)$,
+	\[
+		\left| g(y) - g(x) \right| < 2\varepsilon
+	.\] 
+	Now for each $x \in \Omega$, since $\Omega$ is open, we can always choose some $K \Subset \Omega$ and $K \ni x$, and proceed the proof as above. Hence $g$ is continuous throughout $\Omega$.
+\end{proof}
+
+
+\newpage
+(c) Suppose that $G: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ is additive, absolutely continuous, and has a strong density identically zero on $\Omega$. Show that $G(Q)=0$ for all closed cubes $Q \subset \Omega$.
+
+[Hint. For any $\epsilon>0$, partition $Q$ into smaller cubes $Q_{1}, \ldots, Q_{r}$ such that $\left|G\left(Q_{j}\right)\right| \leq \epsilon c\left(Q_{j}\right)$.]
+\begin{proof}
+	Pick $\varepsilon>0$ and let $\delta = \delta_{\varepsilon, Q}$ be as in the definition. Partition $Q$ into cubes $Q_1, \ldots Q_r$ where each $Q_i$ has side length less than  $\delta$. Then for each $Q_i$,
+	\[
+		\left| \frac{G(Q_i)}{c(Q_i)}  \right| < \varepsilon
+	.\] 
+	Rearrange and sum over $i$,
+	\[
+		G(Q) 
+		= \sum_{i = 1}^r G(Q_i)
+		< \sum_{i = 1}^r \varepsilon c(Q_i)
+		= \varepsilon c(Q)
+	.\] 
+	Since $\varepsilon$ does not depend on $Q$, we have $G(Q) = 0$ for all closed cube $Q$.
+\end{proof}
+
+
+\newpage
+(d) Show that if $G$ is as in part (c), then $G(A)=0$ for any $A \in \mathcal{D}(\Omega)$.
+
+\begin{proof}
+	For all $\delta>0$ there exists almost disjoint cells $Q_1,\ldots Q_r \in \mathcal{D}(\Omega)$ such that $\cup_i Q_i \supset A$ and $c(\cup_i Q_i \setminus A) = \left(\sum_i c(Q_i)\right) - c(A) < \delta$.
+
+	To apply definition of absolute continuity, we can fix some arbitrary $\delta_0$ and define $K = \cup_i \overline{ Q_i(\delta_0)}$, then we have a compact set that covers $\cup_i Q_i \setminus A$ and can apply the definition.
+
+	Apply part $c$ to each $Q_i$. Also, by absolute continuity, we may pick small $\delta$ such that $G(\cup _i Q_i \setminus A) < \varepsilon$, for arbitrary $\varepsilon$. Now by additivity,
+
+	 \[
+		G(A) = \sum_{i = 1}^r G(Q_i) + G(\cup_i Q_i \setminus A) \le \sum_{i} \varepsilon c(Q_i) + \varepsilon \le \varepsilon + \varepsilon c(A) + \varepsilon \delta
+	.\] 
+	$\varepsilon, \delta$ can be arbitrarily small, so $G(A) = 0$.
+\end{proof}
+
+
+\newpage
+(e) If $f: \Omega \rightarrow \mathbb{R}$ is continuous, show that the only additive absolutely continuous function $F: \mathcal{D}(\Omega) \rightarrow \mathbb{R}$ with strong density $f$ is the one defined in part a.
+\begin{proof}
+	Let $G $ be another such function. Fix $x \in \Omega$, let $K \Subset \Omega$ such that $x \in K$. 
+
+	We first show that $F$ and $G$ agree on closed cubes $P \in \mathcal{D}(\Omega)$.
+
+	By strong density, for any $\varepsilon>0$ and $x \in P$ we may pick small $\delta = \delta_{\varepsilon, P}>0$ such that for all cube $Q$ with side length less than $\delta$ and $x \in Q \cap P$,
+	\[
+		\left| \frac{F(Q)}{c(Q)} - f(x) \right| < \varepsilon \qquad
+		\left| \frac{G(Q)}{c(Q)} - f(x) \right| < \varepsilon
+	.\] 
+	Let $Q_1, \ldots, Q_r$ be a partition of $P$ into cubes of side length less than $\delta$. Then 
+	\[
+		\left| F(Q) - G(Q) \right| < 2 \varepsilon c(Q)
+	.\] 
+	By additivity,
+	\[
+		\left| F(P) - G\left(P \right)  \right| 
+		= \left| \sum_{i = 1}^r F(Q_i) - G(Q_i) \right| 
+		\le 2 \varepsilon \sum_{i = 1}^r c(Q_i)
+		= 2 \varepsilon c(P)
+	.\] 
+	Since $\varepsilon$ does not depend on $P$, $F(P) = G(P)$.
+
+	Now we may apply absolute continuity as in part (d) to show that $F$ and  $G$ agree over all $\mathcal{D}(\Omega)$.
+\end{proof}
+
+
+\newpage
+(f) Let now $\phi: \Omega \rightarrow \mathbb{R}^{p}$ be an injective $C^{1}$ mapping with $J_{\phi}(x)=\operatorname{det}[D \phi(x)] \neq 0$ for any $x \in \Omega$ and let $f: \phi(\Omega) \rightarrow \mathbb{R}$ be continuous. Define
+
+$$
+F_{\phi}(A)=\int_{\phi(A)} f
+$$
+
+for any $A \in \mathcal{D}(\Omega)$. Show that $F_{\phi}$ is additive absolutely continuous function with strong density $f \circ \phi\left|J_{\phi}\right|$. Hence, by part (e), we have the change of variables formula
+
+$$
+\int_{\phi(A)} f=\int_{A} f \circ \phi\left|J_{\phi}\right|
+$$
+
+for any $A \in \mathcal{D}(\Omega)$.
+
+\begin{proof}
+	First show $F_\phi$ additive. Let $A_1, A_2 \in \mathcal{D}(\Omega)$ be almost disjoint. Since $\phi$ is $C_1$ with nonzero Jacobian, by Theorem 45.4,  $\phi(A_1), \phi(A_2) \in \mathcal{D}(\phi(\Omega))$. Since $\phi$ is injective, $\phi(A_1)$ and $\phi(A_2)$ are almost disjoint. Therefore
+	\[
+		\int _{\phi(A_1) \cup \phi(A_2)} f = \int _{\phi(A_1)}f + \int _{\phi(A_2)}f
+	.\] 
+	Since $\phi(A_1) \cup \phi(A_2) = \phi(A_1 \cup A_2)$, we can apply the definitions to obtain
+	\[
+		F_{\phi}(A_1 \cup A_2) = F(A_1) + F(A_2)
+	.\] 
+
+	Next show $F_ \phi$ absolutely continuous. 
+	Fix $\varepsilon>0$ and $K \Subset \Omega$. Then  $\phi(K)$ is compact, so $f$ is bounded on $\phi(K)$ by $M \in \mathbb{R}$. By Jacobian Theorem, if $A \Subset K$ has content then there exists $\gamma>0$ such that if $Q$ is a cube with center $x \in A$ and side length less than $2 \gamma$, then
+	\[
+		\frac{c(\phi(Q))}{c(Q)}\le |J_{\phi}(x)| (1 + \varepsilon)^p
+	.\] 
+	The Jacobian of $\phi$ is continuous, hence bounded over $K$ by some $M' \in \mathbb{R}$. 
+
+	Now we can estimate $F_ \phi(Q)$ :
+	\[
+		F_ \phi(Q) 
+		\le c(\phi(Q)) M
+		\le MM' (1+\varepsilon)^p c(Q)
+	.\]
+	Since we have a uniform bound on $|J_ \phi|$, we may remove the requirement that $Q$ must have sidelength less then $2 \gamma$. Then we see that $F_ \phi(Q) < \varepsilon$ whenever
+	\[
+		c(Q) < \delta := \frac{1}{M M' (1+\varepsilon)^p}
+	.\] 
+
+	By additivity, whenever $A$ is finite disjoint union of cubes with content less than $\delta$, we have $F_ \phi(A) < \varepsilon$.
+
+	To extend to all $A \in \mathcal{D}(\Omega)$ and $A \subset K$, note that $A$ can be approximated by union of almost disjoint cubes $Q_1, \ldots, Q_r$ where $A \subset \cup_i Q_i$ and $c\left( \cup _i Q_i \setminus A \right)  < \kappa$. Then if $c(A) < \delta - \kappa$, then $\sum_{i} c(Q_i)  < \delta$, hence
+	\[
+		F_ \phi(A) \le F_ \phi (\cup_i Q_i) < \varepsilon
+	.\] 
+	Since $\kappa$ is arbitrary, we see that whenever $c(A) < \delta$, we have $F_ \phi\left(A \right)  < \varepsilon$. This proves that $F_ \phi$ is absolutely continuous.
+
+	Finally we show that $F_ \phi$ has strong density $f \circ \phi |J_ \phi|$. Fix $\varepsilon>0$ and some compact $K \subset \mathcal{D}(\Omega)$.
+	By continuity of $f$ and $\phi$, we can choose $\delta>0$ such that  $\|f (\phi(x)) - f(\phi(y))\| < \varepsilon$ whenever $\|x - y\| < \delta$, for $x, y \in K$. Let $Q$ be a cube with diameter less than $\delta$, then we have
+	\[
+		\left| \frac{\int _{\phi (Q)} f}{c(Q)} - \frac{c(\phi(Q))}{c(Q)}f(\phi(x)) \right|  < \frac{c(\phi(Q))}{c(Q)} \varepsilon
+	.\] 
+	By Jacobian Theorem, for $Q$ small enough,
+	\[
+		|J_ \phi(x)| (1 - \kappa)^p \le  \frac{c(\phi(Q))}{c(Q)}  \le  |J_ \phi(x)| (1 + \kappa)^p 
+	.\] 
+	Rearrange and choose small enough $\kappa$, we obtain
+	\[
+		\left| \frac{c(\phi(Q))}{c(Q)}f(\phi(x)) - |J_ \phi(x)| f( \phi(x)) \right|  \le  f(\phi(x)) |J_{\phi}(x)| \varepsilon
+	.\] 
+	Combining Inequalities,
+	\[
+		\left| \frac{F_ \phi (Q)}{c(Q)} - |J_ \phi(x)| f \circ \phi(x)\right| \le \left| J_ \phi(x) \right|\left( (1 + \kappa)^p + f \circ \phi(x)\right) \varepsilon
+	.\] 
+	Let $(1 + \kappa)^p < \varepsilon$,
+\[
+		\left| \frac{F_ \phi (Q)}{c(Q)} - |J_ \phi(x)| f \circ \phi(x)\right| \le \left| J_ \phi(x) \right|\left(\varepsilon^2 + f \circ \phi(x) \varepsilon\right)
+	.\]
+	Since $K$ is compact, both $\left| J_ \phi(x) \right|  $ and $f \circ \phi (x)$ are uniformly bounded by some constant $M \in \mathbb{R}$. Therefore
+\[
+		\left| \frac{F_ \phi (Q)}{c(Q)} - |J_ \phi(x)| f \circ \phi(x)\right| \le M \left(\varepsilon^2 + M \varepsilon\right) = M(M + \varepsilon) \varepsilon
+	.\]
+	$\varepsilon$ is arbitrary, so $F_ \phi$ has strong density $\left| J_ \phi(x)\right| f \circ \phi(x)  $.
+\end{proof}

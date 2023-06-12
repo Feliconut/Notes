@@ -1,0 +1,10 @@
+\lecture{9}{Wed 05 Apr 2023 17:12}{General Measure Theory}
+
+\subsection{General Measure Theory}
+
+Consider two measure spaces $(\Omega_1, \mathcal{A}_1, \mu_1)$ and $(\Omega_2, \mathcal{A}_2, \mu_2)$. We can construct the following operations:
+
+\textbf{Sum} of the two measure spaces is defined as $(\Omega, \mathcal{A}, \mu)$ where $\Omega = \Omega_1 \coprod \Omega_2$, $\mathcal{A} = \{E \subset \Omega: E \cap  \Omega_1 \in \mathcal{A}_1, E \cap \Omega_2 \in \mathcal{A}_2\} $, $\mu(E) = \mu_1(E \cap \Omega_1) + \mu_2 (E \cap \Omega_2)$.
+
+\textbf{Cartesian Product}. 
+Take $\Omega$ to be the cartesian product of $\Omega_1$ and $\Omega_2$. Define the content of $E_1 \times E_2$ to be $\left| E_1 \times E_2 \right|  = \mu_1(E_1) \mu_2(E_2)$, take the convention that  $(0 \cdot \infty ) = 0$. THen define outer measure on $\Omega$. Then $\mathcal{A}$ is defined to be all the subsets of $\Omega$ that satisfies Caradeothory Measurability Criterion.

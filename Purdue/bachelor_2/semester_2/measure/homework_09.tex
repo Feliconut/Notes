@@ -1,0 +1,141 @@
+\homework{9}{Sat 11 Mar 2023 13:54}{}
+
+\begin{itemize}
+	\item Suppose $\psi \in L(\Omega, \mathcal{A}, \mu)$ is nonnegative. For $E \in \mathcal{A}$ define $\nu(E) = \int \psi \chi_E \in [0, \infty ]$. (Here $\chi_E$ is the characteristic function of $E$.) Prove that $(\Omega, \mathcal{A}, \nu)$ is a measure space.
+\begin{proof}
+	First we compute  $\nu(\emptyset ) = \int \psi \chi_{\emptyset }= \int  0  = 0$. It remains to verify countable additivity of $\nu$. Take $E_1, E_2, \ldots$ be a sequence of disjoint measurable sets, then
+	\[
+		\nu\left(\bigcup_{n=1 } ^\infty E_n \right) 
+		= \int \psi \sum_{n=1}^{\infty} \chi_{E_n}
+		= \sum_{n=1}^{\infty}\int \psi  \chi_{E_n}
+		= \sum_{n=1}^{\infty} \nu(E_n)
+	.\] 
+\end{proof}
+
+	\item Let $\mathcal{A}$ be a $\sigma$-algebra of subsets of $\Omega$ and $A_n \in \mathcal{A}$, $n \in \mathbb{N}$. Prove that $\{x \in \Omega: \exists  \text{ infinitely many }n \text{ such that }x \in A_n\} \in \mathcal{A}$.
+\begin{proof}
+	Let the set of interest be $S$. We have
+	\[
+		x \in S \iff  \exists  \text{ infinitely many } n \text{ such that }x \in A_n \iff \left( \forall N \in \mathbb{N} \right)  \left( \exists n >N \right)  x \in A_n
+	.\] 
+	Hence
+	\[
+		x \in S \iff x \in \bigcap_{N \in \mathbb{N}} \bigcup_{n = N+1}^{\infty } A_n 
+	.\] 
+	We can see that $S \in \mathcal{A}$  since it is countable boolean operation of $A_n$.
+\end{proof}
+
+	\item Suppose $f \in L(\Omega, \mathcal{A}, \mu)$ and $\int f < \infty $. Prove that $f < \infty $ a.e.
+\begin{proof}
+	We prove this statement for $f$ an absolutely integrable function. Prove by contradiction. Suppose $f = \infty $ on some set $A$ with measure $m(A) > 0$. Then
+	\[
+		\int  f^+ \ge \int _A f^+ = \infty  m(A) = \infty 
+	.\] 
+	If $\int f^- = \infty $ then $\int f$ is undefined; otherwise $\int f =\infty $. In either case we cannot have $\int f \in \mathbb{R}$.
+\end{proof}
+
+	\item Let $\psi$ and $\nu$ be as in problem 1 above. Suppose $g \in \mathcal{L}^1(\Omega, \mathcal{A}, \nu)$, and prove $\int _\Omega g d \nu = \int _\Omega g \psi d\mu$.
+\begin{proof}
+	We know that both integral exists. Hence
+	\begin{align*}
+		\int _\Omega g^+ d\nu
+		&= \sup_{0\le g_n \le g^+; g_n \text{ simple}} \int _\Omega g_n d\nu\\
+		&= \sup_{0\le g_n \le g^+; g_n \text{ simple}} \sum_{j} c_j\nu(E_j)\\
+		&= \sup_{0\le g_n \le g^+; g_n \text{ simple}} \sum_{j} c_j\int \psi \chi_{E_j} d \mu\\
+		&= \sup_{0\le g_n \le g^+; g_n \text{ simple}}  \int \psi\sum_{j} c_j\chi_{E_j} d \mu\\
+		&= \sup_{0\le g_n \le g^+; g_n \text{ simple}}  \int \psi g_n d \mu\\
+		&= \int \psi g^+ d \mu
+	.\end{align*}
+	Similarly for $g^-$. Combining these results we have the claim for absolutely integrable $g$.
+\end{proof}
+
+
+
+	\item Consider the measure space $(\mathbb{N}, 2^{\mathbb{N}}, \mu)$, where $\mu$ is counting measure. A function $f: \mathbb{N}\to \mathbb{R}$ is the same as a sequence. What functions are measurable? Which are integrable?
+\begin{proof}
+	Any subset of $\mathbb{N}$ is a measurable set, and any inverse image $f^{-1} \mathbb{R}$ is a subset of $\mathbb{N}$. Thus all functions are measurable.
+
+	We say a function $f$ is integrable if $\int |f| < \infty $. Expanding the definition of counting measure and we obtain
+	\[
+		\int |f| d\mu = \sum_{n=0 }^{\infty} |f(n)| < \infty 
+	.\] 
+	Hence integrable functions are those sequences that are absolutely summable.
+\end{proof}
+
+	\item If $F_n \in L(\Omega, \mathcal{A}, \mu), n \in \mathbb{N}, F_n \ge 0$, and $\sum_{n=1}^{\infty} \int  F_n < \infty$, prove that $\sum_{n=1}^{\infty} F_n$ converge, a.e., and $F_n \to 0$ a.e.
+\begin{proof}
+	By Tonelli's Theorem, since $F_n$ are unsigned, we have
+	\[
+	 \int \sum_{n=1}^{\infty}F_n= 	\sum_{n=1}^{\infty} \int F_n  < \inf 
+	.\] 
+	Use the third exercise, this implies $\sum_{n=1}^{\infty} F_n$ exists and is finite a.e. This implies $F_n \to 0$ a.e.
+\end{proof}
+
+	\item Prove that if $f: \mathbb{R}\to \mathbb{R}$ is integrable wrt Lebesgue measure and $t \in \mathbb{R}$, then the function $g(x) = f(x + t)$ is also integrable and $\int _{\mathbb{R}} f = \int _{\mathbb{R}} g$.
+\begin{proof}
+	We know that
+	\[
+		\int_{B(0,a)} g(x) \mu(dx) = \int_{B(0, a)} f(x+t) \mu(dx) = \int _{B(0,a) + t} f(x) \mu(dx)
+	.\] 
+	Apply upward monotone convergence to the left and right hand side, as $a \to \infty $, we obtain
+	\[
+		B\left(0,a \right) \to \mathbb{R}\qquad
+		B(0,a) + t \to \mathbb{R}
+	.\] 
+	Hence
+	\[
+		\int_{B(0,a)}g \to \int _{\mathbb{R}}g \qquad 
+		\int _{B(0,a) + t}f \to  \int _{\mathbb{R}} f
+	.\] 
+	But due to the equality in the begining, we know that these two limits are identical.
+\end{proof}
+
+	\item In an earlier hw you proved that $f \in L(\Omega, \mathcal{A}, \mu), f\ge 0, \int f = 0$ implies $f = 0 $ a.e. Show that the following approximate version is false: If $f_k \in L(\Omega, \mathcal{A}, \mu), f_k \ge 0, k \in \mathbb{N}, \lim_{k \to \infty} \int f_k = 0$, then $\lim_{k \to \infty} f_k = 0$ a.e.
+\begin{proof}
+	By Fatou's Lemma, 
+	\[
+		\int \lim \inf f_k \le \lim \inf \int f_k = \lim \int f_k = 0
+	.\] 
+	Thus
+	\[
+		\int \lim \inf f_k = 0
+	.\] 
+	Hence $\lim \inf f_k = 0$ a.e.
+	However it may not be the case that $\lim\inf f_k = \lim \sup f_k$ a.e. 
+
+	Consider the following "moving typewritter" example: Let $(\Omega, \mathcal{A}, \mu)$ be the real line with Lebesgue measure. Construct a sequence of functions $f_k$ compactly supported on $[0,1]$ as follows: Let $f_0 = \chi_{[0,1]}$. Then divide $[0,1]$ equally into two intervals $E_1 = [0,2^{-1}], E_2 = [2^{-1}, 1]$, and let $f_1 = \chi_{E_1}, f_{2} = \chi_{E_2}$. Then divide $[0,1]$ into $2^{2}$ intervals, and continue in this way indefinitely.
+
+	We see that for every point $x$ in $[0,1]$ we have $x \in E_k$ for infinitely many $k$. Thus $\lim \sup f_k = 1$. Hence there is no pointwise everywhere convergence of $f_k$ to $0$.
+\end{proof}
+
+	\item Let $\left\lfloor x \right\rfloor$ denote the largest integer $\le x$, where $x \in \mathbb{R}$. Define a function $A(x) = \frac{(-1)^{\left\lfloor x \right\rfloor}}{\left\lfloor x \right\rfloor}$, $x \ge 1$. Show that the improper Riemann integral $\int _1^\infty A$ exists, but $A$ is not Lebesgue integrable on $[1, \infty )$.
+\begin{proof}
+	We calculate the improper Riemann integral:
+	\begin{align*}
+		\int _1^{\infty } A 
+		&= \lim_{b \to \infty } \int _1^b A \\
+		&= \lim_{b \to \infty }  \int _1^{\left\lfloor b \right\rfloor} A + \lim_{b \to \infty }\int _{\left\lfloor b \right\rfloor}^b A
+	.\end{align*}
+	The second term goes to zero:
+	\[
+		\int _{\left\lfloor b \right\rfloor}^b A\le \int _{\left\lfloor b \right\rfloor}^{\left\lfloor b \right\rfloor+1}A = A(\left\lfloor b \right\rfloor) \to 0
+	.\] 
+	The first term is a infinite series:
+	\[
+		 \lim \int _1^{\left\lfloor b \right\rfloor} A
+		 =\lim \sum_{n=1}^{\left\lfloor b \right\rfloor} A(n)
+		 = \sum_{n=1}^{\infty} A(n)
+		 = \sum_{n=1}^{\infty} (-1)^{n}/n
+	.\] 
+	By alternating series test, this converges.
+
+	Finally we verify that $A$ is not Lebesgue measurable. Let $E_n := \{x \ge 1: |A(x)| = \frac{1}{n}\} $. We see that $\left( E_n \right) _{n = 1}^{\infty }$ is a disjoint cover of $[1, \infty )$ where each $m(E_n) = 1$. Now we evaluate the unsigned integral for positive part:
+	\[
+		\int _1^{\infty }A^{+} = \sum_{n=1}^{\infty} \max( (-1)^{n}/n , 0) m(E_n) = \sum_{n=1}^{\infty} \frac{1}{2n} = \frac{1}{2} \sum_{n=1}^{\infty} \frac{1}{n} = \infty 
+	.\] 
+	Similarly, the unsigned integral for negative part of $A$ is also infinity. Hence
+	$A$ is not absolutely integrable, and the Lebesgue integral for $A$ is not defined.
+\end{proof}
+
+
+\end{itemize}
