@@ -1,0 +1,235 @@
+\homework{8}{Sat 22 Mar 2023 23:10}{}
+44.G, 44.H(a), 44.J (Use 43.R), 44.K, 44.O, Project 44.$\beta$
+\begin{itemize}
+	\item 44.G. If $A \in \mathscr{D}\left(\boldsymbol{R}^p\right)$ and $c(A)>0$, prove that there exists a closed cell $K \subseteq A$ such that $c(K) \neq 0$.
+\begin{proof}
+	Since $A$ has content, $\partial A$ has content zero. Since $A = \text{int} A \cup \partial A$, we must have $c\left( \text{int} A \right)  > 0$, in particular  $\text{ int } A $ is nonempty. Take $a \in \text{int} A$, and we can pick a nondegenerate closed cell $K$ such that $a \in K \subset \text{int }A$. Since $ K$ is nondegenerate, $c(K) > 0$ and we are done.
+\end{proof}
+
+	\item 44.H. If $A \subseteq \boldsymbol{R}^p$, we define the inner and outer content of $A$ to be
+\[
+c_*(A)=\sup c(U), \quad c^*(A)=\inf c(V)
+\]
+where the supremum is taken over the set of all finite unions of cells contained in $A$, and the infimum is taken over the set of all finite unions of cells containing points of $A$.
+
+(a) Prove that $c_*(A) \leq c^*(A)$ and that $A$ has content if and only if $c_*(A)=$ $c^*(A)$, in which case $c(A)$ is this common value.
+\begin{proof}
+	Take any $U$ and $V$ as per the definition. Then
+	\[
+		U \subset A \subset V
+	.\] 
+	Thus
+	\[
+		c(U) \le c(V)
+	.\] 
+	Take supremum and infimum,
+	\[
+		c_*(A) \le  c^*(A)
+	.\] 
+
+	Now suppose $A$ has content. Let $I$ be a big cell bounding $A$ and $g$ be the indicator function of $A$ defined on $I$. We have by definition
+	\[
+		c(A) = \int _I g_I
+	.\] 
+	Take $\varepsilon>0$, we have a partition $P$ of $I$, where any refinement $Q$ satisfies the property
+	\[
+		\left|c(A) -  \sum_{J \in Q} \inf _J (g_I) c(J) \right| <\varepsilon
+	.\] 
+	and
+	\[
+		\left|c(A) -  \sum_{J \in Q} \sup _J (g_I) c(J) \right| <\varepsilon
+	.\] 
+
+	Now define
+	\[
+		U_Q = \bigcup \{J \in Q: \inf _J (g_I) = 1\}  
+	.\] 
+	and
+	\[
+		V_Q = \bigcup \{J \in Q: \sup _J (g_I) = 1 \} 
+	.\] 
+	Now
+	by finite additivity, $c(U_Q) = \sum_{J \in Q} \inf _J (g_I) c(J)$, so $|c\left(A \right)  - c(U_Q)| < \varepsilon$. Similarly $|c(V_Q) - c(A)| < \varepsilon$. 
+
+	$\inf  _J(g_I) = 1$ implies $\sup _J (g_I) = 1$, so $U_Q \subset V_Q$. $\inf _J (g_I) = 1$ implies $J \subset A$, so  $U_Q \subset A$. Any point in $A$ is contained in some $J \in Q$, and that forces $\sup _J (g_I) = 1$, which implies $V_Q \supset A$. Combining all, we have constructed the $U_Q$ and $V_Q$ satisfying $U_Q \subset A \subset V_Q$ and both having content  $\varepsilon$-close to $c(A)$. $\varepsilon$ is arbitrary so we are done.
+
+	Conversely, suppose $c_*(A) = c^*(A)$. It suffices to show $A$ has content, then by monotonicity we must have
+	$c_*(A) \le c(A) \le c^*(A)$
+	so $c(A) = c_*(A)$.
+
+	It must be also assumed in this direction that $c^*(A)$ is finite, otherwise $A$ cannot have content. Under this assumption, we can take finitely many cells $B_1,B_2, \ldots, B_M $, which are assumed to be all open without loss of generality. Let $B$ be the finite union of all $B_m$, and
+	\[
+		B \supset A \qquad 
+		c(B) < c^*(A) + \varepsilon
+	.\] 
+	Since $B$ is open, it must also contain the boundary of $A$. Similarly, we can choose finitely many open cells $C_i$, where
+	\[
+		C := \bigcup_{i = 1} ^{m'} C_i \subset A \qquad
+		c(C) > c_*(A) - \varepsilon
+	.\] 
+	
+	Since $C \subset B$ and $C \subset \text{int }A$, we must have 
+	\[
+		\partial A \subset  B \setminus C
+	.\] 
+	But $c(B \setminus C) = c(B) - c(C) < 2 \varepsilon$. $\varepsilon$ is arbitrary, so we conclude that $\partial A$ has content zero.
+\end{proof}
+
+
+\item 44.J. Let $I \subseteq \boldsymbol{R}^p$ be a closed cell and let $f: I \rightarrow \boldsymbol{R}$ be integrable on $I$. If $A \subseteq I$ has content, then the restriction of $f$ to $A$ is integrable on $A$. (Hint: Use Exercise 43.P.)
+\begin{proof}
+	By definition, $f|_A$ integrable on $A$ is equivalent to saying
+	\[
+		f \chi_A = \begin{cases}
+			f|_A & \text{ on }A\\
+			0 & \text{otherwise}
+		\end{cases}
+		\text{ is integrable on }I
+	.\] 
+	Now $A$ has content iff $\chi_A$ is integrable on $I$. Product preserves Riemann integrability, so $f \chi_A$ is integrable on $I$.
+\end{proof}
+
+\item 44.K. Let $A \in \mathscr{D}\left(\boldsymbol{R}^p\right)$ and suppose that $f$ and $g$ are integrable on $A$ and that $g(x) \geq 0$ for all $x \in A$. If $m=\inf f(A), M=\sup f(A)$, then there exists a real number $\mu \in[m, M]$ such that
+\[
+\int_A f g=\mu \int_A g .
+\]
+\begin{proof}
+	First, we verify $\int _A m g \le \int_A f g$. Consider any partition, then $fg$ dominates $mg$ on any cell in that partition since $f$ dominates $m$. Then our claim follows from use of definition of integral.
+
+	Similarly, $\int _A M g \ge  \int _A f g$.
+
+	By IVT, it suffices to show that $\int_A c g$ is continuous function of the real variable  $c$. But this is true by linearity of integral:
+	\[
+		\int_A (c+h) g - \int_A c g = h \int_A g \to  0 \qquad \text{ as } h\to 0
+	.\] 
+\end{proof}
+
+\item 44.O. Let $a \leq b$ and let $f:[a, b] \rightarrow \boldsymbol{R}$ be continuous and such that $f(x) \geq 0$ for all $x \in[a, b]$. Let $S_f=\{(x, y): a \leq x \leq b, 0 \leq y \leq f(x)\}$ be called the ordinate set of $f$. By examining the boundary of $S_f$, show that it has content. Show that
+\[
+c\left(S_f\right)=\int_a^b\left\{\int_0^{y=f(x)} 1 d y\right\} d x=\int_a^b f(x) d x .
+\]
+\begin{proof}
+	The first equality follows from the properties of iterated integral and property of integral of indicator functions. To finish the proof we need to show
+	\[
+		c(S_f) = \int _{[a,b]}f
+	.\] 
+	Let $\varepsilon>0$. We can obtain a partition $P: a = x_0 \le x_1 \le \ldots \le x_n = b$ of $[a,b]$ with a good enough upper Riemann sum:
+	 \[
+		 \int _{[a,b]}f \ge \sum_{i=1}^{n} (x_i - x_{i-1}) \sup _{[x_{i-1}, x_i]}f  - \varepsilon
+	.\] 
+	Now define $f^P$ to be the piecewise supremum of  $f$ wrt $P$:
+	 \[
+		 f^P(x):= \begin{cases}
+		 \sup _{[x_{i-1}, x_i]}f & x \in [x_{i-1}, x_i) \\
+		 \sup _{[x_{n-1}, x_n]}f & x = x_n
+	 \end{cases}
+ \]
+	We may verify from definition that $S(f^P)$, the ordinate set of $f^P$, is a super set of $S_f$. Moreover, we have
+	\begin{align*}
+		c(S(f^P)) &=  c\left(\bigcup_{i = 1}^n  S(f^P) \cap \left( [x_{i-1}, x_{i}] \times \mathbb{R} \right)  \right) \\
+		 &= \sum_{i=1}^{n} c\left( S(f^P) \cap \left( [x_{i-1}, x_{i}] \times \mathbb{R} \right)  \right) \\
+			  &= \sum_{i=1}^{n} c\left( [x_{i-1}, x_i] \times \left[0,\sup_{[x_{i-1}, x_i]}f\right] \right)  \\
+			  &= \sum_{i=1}^{n} (x_i - x_{i-1}) \sup_{[x_{i-1}, x_i]}f
+	.\end{align*} 
+
+	This implies $\int_{[a,b]}f \ge  c(S(f^P)) - \varepsilon \ge c(S_f) - \varepsilon$.
+
+	Symmetrically, by considering lower Riemann sums, we can show $\int _{[a,b]}f \le c(S_f) + \varepsilon$. Since $\varepsilon$ is arbitrary, $\int _{[a,b]}f = c(S_f)$.
+
+\end{proof}
+
+\item 44. $\beta$. This project considers lower and upper integrals (introduced in Project 43. $\alpha$ ) and their iterations. Let $I \subseteq \boldsymbol{R}^r$ and $J \subseteq \boldsymbol{R}^s$ be closed cells, $p=r+s$, and let $K=I \times J \subseteq \boldsymbol{R}^p=\boldsymbol{R}^r \times \boldsymbol{R}^s$. Suppose that $f: K \rightarrow \boldsymbol{R}$ is bounded.
+(a) For eoach $x \in I$, define $g_x: J \rightarrow \boldsymbol{R}$ by $g_x(y)=f(x, y)$ for $y \in J$. Let $\lambda: I \rightarrow \boldsymbol{R}$ be defined to be the lower integral $\lambda(x)=L\left(g_x\right)$ of $g_x$, and let $\mu: I \rightarrow \boldsymbol{R}$ be defined to be the upper integral $\mu(x)=U\left(g_x\right)$ of $g_x$. If $R$ is any partition of $I$, and $S$ is any partition of $J$, and $P=R \times S$ the resulting partition of $K$, then show that
+\[
+L(P ; f) \leq L(R ; \lambda) \leq U(R ; \lambda) \leq U(R ; \mu) \leq U(P ; f)
+\]
+\begin{proof}
+	By symmetry we only need to show the first two inequalities. The second inequality is from property of Riemann lower and upper sums.
+
+	For the first inequality,
+	\begin{align*}
+		L(R;\lambda)
+		&= \sum_{A \in R} c(A) \inf _{A} \lambda \\
+		&= \sum_{A \in R} c(A) \inf _{x \in A} L(g_x) \\
+		&\ge \sum_{A \in R} c(A) \inf _{x \in A} L(S, g_x) \\
+		&= \sum_{A \in R} c(A) \inf _{x \in A} \sum_{B \in S} c(B) \inf_{y \in B} g_x(y) \\
+		&\ge   \sum_{A \in R} c(A) \sum_{B \in S} \inf _{x \in A}  c(B) \inf_{y \in B} g_x(y) \\
+		&=   \sum_{A \in R} \sum_{B \in S} c(A)c(B)  \inf _{x \in A}  \inf_{y \in B} f(x,y) \\
+		&=   \sum_{C \in P} c(C)  \inf _{C}   f \\
+		&= L(P; f)
+	.\end{align*}
+\end{proof}
+
+(b) Show that
+\[
+L(f) \leq L(\lambda) \leq U(\lambda) \leq U(f), \quad L(f) \leq L(\mu) \leq U(\mu) \leq U(f)
+\]
+Hence, if $f$ is integrable on $K$, then $\lambda$ and $\mu$ are integrable on $I$ and
+\[
+\int_{\mathrm{K}} f=\int_I \lambda=\int_I \mu
+\]
+\begin{proof}
+	The middle inequalities are trivial; by symmetry we only need to show the leftmost inequalities.
+
+	We have $\lambda(x) = L(g_x) \le U(g_x) = \mu(x)$ for all $x$. So it suffices to only show $L(f) \le L(\lambda)$.
+
+	\begin{align*}
+		L(\lambda)
+		&= \sup _{Q \text{ partition of }I}L(Q, \lambda)\\
+		&= \sup _{Q\text{ partition of }I}\sum_{A \in Q} \inf_{A} \lambda\\
+		&= \sup _{Q\text{ partition of }I}\sum_{A \in Q} \inf_{x \in A} \sup_{Q' \text{ partition of }J} \sum_{B \in Q'} \inf_{y \in B} f(x,y)\\
+		&\ge  \sup _{Q\text{ partition of }I}\sum_{A \in Q} \sup_{Q' \text{ partition of }J} \inf_{x \in A}\sum_{B \in Q'}  \inf_{y \in B} f(x,y)\\
+		&\ge  \sup _{Q\text{ partition of }I} \sup_{Q' \text{ partition of }J} \sum_{A \in Q}\inf_{y \in B} \sum_{B \in Q'}\inf_{x \in A}  f(x,y)\\
+		&\ge  \sup _{Q\text{ partition of }I} \sup_{Q' \text{ partition of }J} \sum_{A \in Q}\sum_{B \in Q'}\inf_{y \in B} \inf_{x \in A}  f(x,y)\\
+		&= \sup _{P \text{ partition of }K} \sum_{C \in P} \inf_C f\\
+		&= L(f)
+	.\end{align*}
+
+	Where we used the property that for $X, Y$ nonempty and $f$ a bounded real-valued function,
+	\[
+		\sup_{x \in X} \inf_{y \in Y} f(x,y) \ge 
+		 \inf_{y \in Y}\sup_{x \in X} f(x,y) 
+	.\] 
+
+	and the fact that when $X$ is finite,
+	\[
+		\sum_{x \in X} \sup_{y \in Y} f(x,y) \ge \sup_{y \in Y} \sum_{x \in X} f(x,y)
+	.\] 
+	and
+\[
+		\sum_{x \in X} \inf_{y \in Y} f(x,y) \le \inf_{y \in Y} \sum_{x \in X} f(x,y)
+	.\]
+\end{proof}
+
+(c) For each $y \in J$, define $h_y: I \rightarrow \boldsymbol{R}$ by $h_y(x)=f(x, y)$ for $x \in I$. Let $\lambda^{\prime}: J \rightarrow \boldsymbol{R}$ and $\mu^{\prime}: J \rightarrow \boldsymbol{R}$ be defined by
+\[
+\lambda^{\prime}(y)=L\left(h_y\right), \quad \mu^{\prime}(y)=U\left(h_y\right)
+\]
+Show that if $f$ is integrable on $K$, then $\lambda^{\prime}$ and $\mu^{\prime}$ are integrable on $J$ and
+\[
+\int_K f=\int_J \lambda^{\prime}=\int_J \mu^{\prime}
+\]
+\begin{proof}
+	Simply change $I$ to $J$, $J$ to $I$, $R$ to $S$, $S$ to $R$, $\lambda$ to $\lambda'$, and $\mu$ to $\mu'$ in the previous proofs.
+\end{proof}
+
+(d) If $g_x: J \rightarrow \boldsymbol{R}$ is integrable on $J$ for each $x \in I$, then $\lambda=\mu$ and
+\[
+\int_K f(x, y) d(x, y)=\int_K f=\int_I\left\{\int_J f(x, y) d y\right\} d x .
+\]
+Similarly, if $h_y: I \rightarrow \boldsymbol{R}$ is integrable on $I$ for each $y \in J$, then
+\[
+\int_K f(x, y) d(x, y)=\int_K f=\int_I\left\{\int_J f(x, y) d x\right\} d y .
+\]
+\begin{proof}
+	The two parts are symmetric so we only need to prove the first part.
+
+	\begin{align*}
+		\int _I \int _J f dy dx
+		&= \int _I L(g_x) dx & \text{by integrability of $g_x$}\\
+		&= \int _I \lambda & \text{by definition}\\
+		&= \int _K f & \text{by part (b)}
+	.\end{align*}
+\end{proof}
+
+\end{itemize}

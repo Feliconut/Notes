@@ -1,0 +1,408 @@
+\lecture{10}{Mon 10 Apr 2023 16:33}{Lp space}
+
+\subsection{Norm in Lp Space}
+
+\begin{theorem}[Minkowski Inequality]
+	Let $\|f_p\|  = \left( \int _\Omega \left| f \right| ^p d \mu \right)^{\frac{1}{p}}$ .
+	where $a \le p \le \infty $, $f \in L(\Omega, \mathcal{A},\mu)$.
+	Then
+	\[
+		\|f + g\|_p \le \|f\|_p + \|g\|_p
+	.\] 
+\end{theorem}
+
+\begin{definition}[Convexity]
+	$\varphi:(a, b) \to \mathbb{R}$ is \textit{convex} if for any $x, y \in (a, b)$, $\lambda \in (0,1)$,
+	\[
+		\varphi(\lambda x + (1 - \lambda) y) \le  \lambda \varphi(x) + (1 - \lambda) \varphi(y)
+	.\] 
+\end{definition}
+
+If $\varphi''$ exists, then
+\[
+	\varphi \text{ convex} \iff \varphi'' > 0
+.\] 
+
+\begin{example}
+	$\varphi(x) = e^x$ is convex.
+	\[
+		e^{\lambda x + (1 - \lambda) y} \le  \lambda e^x + (1 - \lambda) e^{y}
+	.\] 
+	If $e^x = u$, $e^y = v$, then
+	\[
+		u^\lambda v ^{1 - \lambda} \le  \lambda u + (1 - \lambda) v \quad (u , v > 0)
+	.\] 
+	Then we have an inequality between weighted arithmetic and geometric means.
+\end{example}
+
+\begin{proposition}[Young's Inequality]
+	If $p, q>1$, and $\frac{1}{p} + \frac{1}{q} = 1$, then 
+	\[
+		a b \le \frac{a^p}{p} + \frac{b^q}{q}
+	.\] 
+	We say $p, q$ are \textit{conjugate exponents}.
+\end{proposition}
+\begin{proof}
+	Set $\lambda = \frac{1}{p}$, then $1 - \lambda = \frac{1}{q}$. Set $a = u^\lambda$ and $b = v^\lambda$. From the inequality above,
+	\[
+		ab \le  \frac{1}{p} a^p + \frac{1}{q} b^q
+	.\] 
+	If $a = 0$ or $b=0$, then there is nothing to prove.
+\end{proof}
+
+\begin{proposition}[Hölder's Inequality]
+	If $f \in L^p$, $g \in L^q$, $p, q > 1$, $\frac{1}{p} + \frac{1}{q } = 1$, then $fg \in L^1$, and
+	\[
+		\int |fg| \le \left( \int |f|^p \right) ^{\frac{1}{p}} \left( \int |g|^q \right) ^{\frac{1}{q}}
+	.\] 
+\end{proposition}
+Special Case: When $p = q = 2$, this is \logseq{Cauchy-Schwarz Inequality}.
+
+\begin{proof}
+	\begin{align*}
+		\int |f(x)| |g(x)| d \mu(x)
+		&\le \int \frac{|f(x)|^p}{p} + \frac{|g(x)|^q}{q} d \mu(x)
+	.\end{align*}
+	If $\int |f|^p = \int |g|^q$, then it simplifies to
+	\[
+		\int |f|^p \left( \frac{1}{p} + \frac{1}{q} \right)  = \int |f|^p  = \left( \int |f|^p \right) ^{\frac{1}{p}} \left( \int |g|^q \right) ^{\frac{1}{q}}
+	.\] 
+	In general, if $f = 0$ or $g = 0$ a.e., then the inequality is obvious since LHS is zero.
+
+	If both $f$ and $g$ are not zero a.e., then $\int |f|^p$ and $\int |g|^q$ are strictly positive. Let $t$ be such that 
+	\[
+		\int |tf|^p = \int |g|^p
+	.\] 
+	Now
+	\[
+		\int |tf| |g| d \mu \le \left( \int |tf|^p \right) ^{\frac{1}{p}} \left( \int |g|^q \right) ^{\frac{1}{q}}
+	.\] 
+	Then factor out $t$ and we get the wanted inequality.
+\end{proof}
+
+\begin{proof}
+	(Proof of Minkowski Inequality) 
+	\begin{align*}
+		\left( \int |f+g|^p \right) ^{\frac{1}{p}} 
+		&\le \left( \int \left( |f| + |g| \right) ^p \right) ^{\frac{1}{p}} 
+	.\end{align*}
+	Set $h = |f| + |g|$. Then
+\begin{align*}
+	\int h^p &= \int h^{p-1} |f| + \int h^{p-1}|g| \\
+		 &\le \sqrt[q]{\int h^{(p-1) q}} \left( \sqrt[p]{\int |f|^p} + \sqrt[p]{\int |g|^p}   \right)  
+.\end{align*}
+Where  we have used Hölder's Inequality. Note that
+\[
+	\frac{1}{q} + \frac{1}{p} = 1 \iff  p = (p-1)q
+.\] 
+Hence
+\begin{align*}
+	\int h^p &\le  \left( \int  h^p \right) ^{\frac{1}{q}} \left( \|f\|_p + \|g\|_p \right) \\
+\frac{\int h^p}{ \left( \int  h^p \right) ^{\frac{1}{q}}} &\le  \left( \|f\|_p + \|g\|_p \right) \\
+ \left( \int  h^p \right) ^{\frac{1}{p}} &\le  \left( \|f\|_p + \|g\|_p \right) \\
+ \|h\|_p &\le  \left( \|f\|_p + \|g\|_p \right) 
+.\end{align*}
+
+Above claim is true for $\int  h^p \neq 0$. Otherwise,  $h = 0$ a.e., then $f = g = 0$ a.e., and Minkowski inequality trivially follows. 
+\end{proof}
+
+\subsection{Lp metric}
+
+Let $\rho(f, g) = \| f - g\|_p$, for $f, g \in L^p$. Is $\rho$ a metric? Symmetry is obvious. Triangle inequality is given by Minkowski Inequality. Nondegeneracy not true in general:
+\[
+	\rho(f, g) = 0 \implies \int |f - g|^p = 0 \implies f = g \quad a.e.
+.\] 
+When does $f = g$ a.e. imply $f = g$? Only when the only set of measure zero is $\emptyset $. 
+
+We introduce a equivalence relation of \textbf{a.e. equality}. 
+
+We refer to the quotient space by $L^p(\Omega, \mathcal{A}, \mu)$, the Lp space.
+
+It can be checked that $L^p$ is a vector space.
+The Lp norm satisfies
+\[
+	\rho([f], [g]) = 0 \iff  [f] = [g]
+.\] 
+where on the LHS the value of $\rho$ does not depend on choice of representatives.
+
+\begin{notation}
+	$f \in L^p$ is a ``function'' $\Omega \to [-\infty , \infty ]$, defined almost-everywhere, up to almost-everywhere coincidence.
+\end{notation}
+
+\subsection{Generalize to infinity}
+
+\begin{definition}
+	We say $f \in L^\infty (\Omega, \mathcal{A}, \mu)$ if $f$ measurable and essentially bounded, i.e. there exists $M \in \mathbb{R}$ such that $|f| \le M$ a.e.
+
+	The least such $M$ is denoted
+	\[
+		\text{ess} \, \sup  |f| = \|f\|_{\infty }
+	.\] 
+\end{definition}
+
+We may verify that Minkowski, Holder, and triangle inequality holds when $p = \infty $.
+
+\begin{example}
+	For Holder inequality,
+	\[
+		\int |fg| \le \int \|f\|_\infty = \|f\|_{\infty } \|g\|_1
+	.\] 
+\end{example}
+
+\subsection{Properties of Lp space}
+
+\begin{theorem}[Riesz-Fisher Theorem]
+	$L^p$ is complete. 
+\end{theorem}
+\begin{proof}
+	Let $f_n \in L^p$ be a Cauchy sequence, we need to produce $f$ such that $f_n \to f$ in $L^p$ metric. When $p = \infty $, for all $\varepsilon$ exists $\nu$ such that for all $n, m > \nu$,
+	\[
+		\text{ess sup} |f_n - f_m| < \varepsilon
+	.\] 
+	Thus there exists $E_{nm}$, $m(E_{nm}) = 0$, and
+	\[
+		\text{sup}_{E_{n, m}^c} |f_n - f_m| < \varepsilon
+	.\] 
+	Let $E = \cup_{n, m > \nu} E_{n, m}$, then $m(E) = 0$. Then on $E^c$, $f_n$ satisfies uniform Cauchy criterion. Hence $f_n$ converges to some $f$ in $E^c$. We can then extend $f$ arbitrarily on $E$. Hence $f_n \to f$ a.e.
+
+	When $p < \infty $, we use
+	\begin{lemma}
+		Suppose $g_n \in L^p$, $\sum_{n=1}^{\infty} \|g_n\|_p < \infty $, then $\sum_{n=1}^\infty  g_n$ converges a.e. to $g \in L^p$, and 
+		\[
+			\|g - \sum_{n=1}^{k} g_n\|_p \to  0 \qquad \text{ as }k\to \infty 
+		.\] 
+		So, $\sum_{n=1}^{\infty} g_n$ also converges in $L^p$.
+	\end{lemma}
+	\begin{proof}
+		We have $\sum_{n=1}^{\infty} \left| g_n \right|  \in L^p$. We consider its $L^p$ norm:
+		\begin{align*}
+			\int  \left( \sum_{n=1}^{\infty} |g_n| \right) ^p
+			&= \lim_k \int \left(\sum_{n=1}^{k} |g_n| \right)^p & \text{MCT}
+		.\end{align*}
+		Now by Minkowski,
+		\begin{align*}
+			\|\sum_{n=1}^{k} |g_n|\|_p 
+			&\le \sum_{n=1}^{k} \|g_n\|_p \\
+			&\le \sum_{n=1}^{\infty} \|g_n\|_p =:S
+		.\end{align*}
+		Hence
+		\[
+			\int \left(\sum_{n=1}^{k} |g_n| \right)^p \le S^p
+		.\] 
+		Therefore
+		\[
+			\int  \left( \sum_{n=1}^{\infty} |g_n| \right) ^p \le S^p < \infty 
+		.\] 
+		Hence $ \sum_{n=1}^{\infty} |g_n| $ is finite a.e. Hence  $\sum_{n=1}^{\infty} g_n$ converges a.e., equal to $g$.
+
+		By triangle inequality,
+		\[
+			|g|^p \le \left( \sum_{n=1}^{\infty} |g_n| \right) ^p \in L^1
+		.\] 
+		Hence $g^p \in L^1$, hence $g \in L^p$.
+
+		Finally,
+		\[
+			\|g - \sum_{n=1}^{k} g_n\|_p 
+			= \|\sum_{n=k+}^{\infty} g_n\|_p
+			\le  \|\sum_{n=k+1}^{\infty} |g_n|\|_p
+			\le \sum_{n=k+1}^{\infty} \|g_n\|_p \to 0 \quad \text{as } k \to \infty 
+		.\] 
+		
+	\end{proof}
+	\begin{lemma}
+		In any metric space, if a Cauchy sequence has a convergent subsequence, then whole sequence converges.
+	\end{lemma}
+
+	Suppose $f_n \in L^p$ is Cauchy, we need to find a subsequence that converges. For $k \in \mathbb{N}$ choose $n_k \in \mathbb{N}$ increasing such that
+	\[
+		\|f_n - f_m\|_p < 2^{-k}
+	.\] 
+	whenever $n, m \ge  n_k$.
+
+	Define $g_k = f_{n_k} - f_{n_{k-1}}$. Then
+	\[
+		\sum_{k=1}^{\infty} \|g_k\|_p \le \sum_{k=1}^{\infty} 2^{1-k}
+	.\] 
+	By lemma 1, 
+	\[
+		\sum_{k=1}^{m} g_k \to  g \quad \text{a.e. as }m\to \infty  \text{ in }L^p
+	.\] 
+	Thus
+	\[
+		f_{n_k} = f_{n_1} + \sum_{j=2}^{k} g_j \to  f_{n_1} + g
+	.\] 
+	By Lemma 2,
+	\[
+		f_n \to f_{n_1} + g
+	.\] 
+
+
+	
+\end{proof}
+
+Is $L^p$ separable? Not when $p = \infty$. 
+
+\begin{definition}
+	$(\Omega, \mathcal{A}, \mu)$ is separable if there exists $\mathcal{A}_0 \subset \mathcal{A}$ countable, with the following property:
+
+	$\forall  E \in \mathcal{A}, \mu(E) < \infty , \forall  \varepsilon>0, \exists A \in \mathcal{A}_0$ such that $\mu(A \Delta E) < \varepsilon$.
+\end{definition}
+
+\begin{example}
+	$\mathbb{R}$ with Lebesgue measure is separable.
+
+	To see this, let $\mathcal{A}_0$ be generated by all rational bounded intervals. Then $\mathcal{A}_0$ countable.
+
+	Let $\varepsilon>0$, $E$ measurable with $m(E) < \infty $. Choose intervals $I_j$ such that $E \subset \bigcup_{i \in \mathbb{N}} I_j$, and $\sum_{j=1}^{\infty} |I_j| < m(E) + \varepsilon$. WLOG, let $I_j$ be all rational. Choose $N$ such that $\sum_{j=N+1}^{\infty} |I_j| < \varepsilon $.
+
+	Let $A = \bigcup_{j \le N} I_j \in \mathcal{A}_0$.  Then
+	\[
+		E \setminus A \subset \bigcup_{j \in \mathbb{N}}  I_j \setminus  \bigcup_{j \ge N} I_j
+		\subset \bigcup_{j > N} I_j
+	.\] 
+	Thus $\mu(E \setminus A) < \varepsilon$.
+
+	On the other hand,
+	\[
+		A \setminus E \subset \bigcup_{j \in \mathbb{N}} I_j \setminus E
+	.\] 
+	Hence 
+	\[
+		\mu(A \setminus E)
+		< (\mu(E) + \varepsilon) - \mu(E) = \varepsilon
+	.\] 
+\end{example}
+
+\begin{theorem}
+	If $(\Omega, \mathcal{A}, \mu)$ is separable, $1 \le p < \infty $, then $L^p(\Omega, \mathcal{A}, \mu)$ is separable.
+\end{theorem}
+\begin{proof}
+	None.
+\end{proof}
+
+\begin{theorem}
+	Let $\Omega \subset \mathbb{R}^m$ be measurable, $(\Omega, \mathcal{M}|_\Omega, m|_\Omega)$ is the measure space. If $1 \le p < \infty $, then 
+	\[
+		C_* (\Omega) = \{f|_\Omega: f \in C(\mathbb{R}^n), \text{vanishes outside some ball}\} 
+	.\] 
+	is dense in $L^p$.
+\end{theorem}
+\begin{proof}
+	We prove this when $\Omega = \mathbb{R}$.
+
+	We show if $f \in L^p$, $\varepsilon>0$, then there exists some $g \in C(\mathbb{R}), g = 0$ outside some ball, such that $\|f - g\|_p < \varepsilon$.
+
+	First consider the case where $f = \chi_{[a,b]}$. Define $g$ to be
+	\[
+		g = 
+		\begin{cases}
+			f \text{ on } (-\infty , a], [a + \frac{\varepsilon^p}{2}, b - \frac{\varepsilon^p}{2}], [b, \infty )\\
+			\text{linear in between}
+		\end{cases}
+	.\] 
+	Then
+	\[
+		\int_{\mathbb{R}}|f - g|^p
+		< 
+		\int _a^{a + \frac{\varepsilon^p}{2}} 1 + 
+		\int _{b - \frac{\varepsilon^p}{2}}^b 1
+		= \varepsilon^p
+	.\] 
+	Hence $\|f - g\|_p < \varepsilon$.
+
+	Next consider $f$ to be linear combination of indicator functions for intervals. Then we can choose $g_j$ such that
+	\[
+		\|\chi_{[a_j, b_j]} - g_j\|_p < \frac{\varepsilon}{M}
+	.\] 
+	Then
+	\[
+		\|f - \sum_{j=1}^{M} c_j g_j\| = \|\sum_{j=1}^{M} c_j(\chi_{[a_j, b_j]} - g_j)\|_p \le \sum_{j=1}^{M} c_j\| \chi_{[a_j, b_j]} - g_j\|_p < \frac{\varepsilon}{M} \sum_{j=1}^{M} c_j
+	.\] 
+
+	Now conider general $f$. By HW, for $p = 1$, there exists piecewise constant function $h: \mathbb{R} \to  \mathbb{R}$, such that $\| f - h \|_p < \frac{\varepsilon}{2}$. Then we apply part 2 to each constant component of $h$.
+\end{proof}
+
+\begin{proposition}(Translation is continuous)
+	Let $1 \le p < \infty $, $f \in L^p(\mathbb{R}^n)$, for  $t \in \mathbb{R}^n$, define
+	\[
+		f_t(x)  =f(x - t)
+	.\] 
+	Then $\mathbb{R}^n \ni t \mapsto f_t \in L^p$ is continuous.
+\end{proposition}
+\begin{proof}
+	Apply the density argument. First verify this for $f \in C_0(\mathbb{R}^n)$, continuous and compact supported functions. (HW) Next, for general $f \in L^p$, choose $g_k \in C_0(\mathbb{R}^n)$ such that $g_k \to f$ uniformly in $L^p$. Then $t \mapsto g_{k, t}$ converge to $t \mapsto f_t$ uniformly. 
+
+	Indeed:
+	\begin{align*}
+		\int _{\mathbb{R}^n} \left| g_{k, t} - f_t \right| ^p 
+		&= \int _{\mathbb{R}^n} \left| g_{k}(x - t) - f(x - t) \right| ^p d m(x)\\
+		&= \int _{\mathbb{R}^n} \left| g_{k}(x) - f(x) \right| ^p d m(x) \to  0
+	.\end{align*} 
+
+	Hence $t \to f_t$ is uniform limit of continuous functions, hence continuous.
+\end{proof}
+
+\begin{theorem}
+	If  $\Omega\subset R^n$ is bounded, Polynomials aer dense in $L^p$.
+\end{theorem}
+\begin{proof}
+	Use Weierstrass approximation theorem to approximate $f \in C_* (\Omega)$.
+\end{proof}
+
+\begin{corollary}
+	If $\Omega \subset \mathbb{R}^n	$ is bounded then $L^p(\Omega)$ is separable (with polynomials with coefficients in $\mathbb{Q}$ ).
+\end{corollary}
+
+
+\begin{definition}[Banach Space]
+	A Banach space over $\mathbb{R}$ or $\mathbb{C}$ is a vector space $V$ over $\mathbb{R}$ or $\mathbb{C}$, with a norm $\|\cdot\|: V \to [0, \infty )$, such that the metric space induced is complete.
+\end{definition}
+
+\begin{example}
+	$L^p$ space with $L^p$ norms are Banach spaces.
+
+	If $M$ is a metric space, $C_b(M)$ is continuous bounded functions from $M$ to $\mathbb{R}$, then the $L^\infty $ norm makes $C_b(M)$ a Banach space.
+\end{example}
+
+\begin{definition}
+	 If $(V, \|\cdot\|_V)$, $(W, \|\cdot\|_W)$ are Banach spaces, then
+	 \[
+	 	L(V, W) = \{\varphi: V \to  W \text{ linear continuous}\} 
+	 .\] 
+\end{definition}
+
+\begin{example}
+	For $V, W$ euclidean spaces, any linear map is uniquely determined by the image of standard basis $\varphi e_1, \varphi e_2 , \varphi e_m$. Then we can construct matrices.
+\end{example}
+
+\begin{definition}
+	$V, W$ are \textit{isomorphic} if there exists $\varphi \in L(V, W)$ such that $\varphi$ bijective and $\varphi^{-1} \in L(W, V)$. 
+
+	$V, W$ are isometrically isomorphic if such $\varphi$ also preserves norms.
+\end{definition}
+
+\begin{proposition}
+	A linear map $\varphi:V \to W$ is continuous iff there exists $C \in \mathbb{R}$ such that for all $v \in V$, $\|\varphi(v)\|_W\le C \|v\|_V$.
+\end{proposition}
+\begin{proof}
+	Necessarity:
+	\[
+		\|\varphi(v) - \varphi(w)\|_W = \|\varphi(v - w)\|_W \le C \|v - w\|_V
+	.\] 
+
+	Sufficiency:
+	Since $\varphi$ is continuous at $0 \in V$, there exists $\delta>0$ such that $\varphi(B_\delta(0)) \subset [0,1]$.
+	Now for any $v \neq 0$, we can scale it by $\frac{\delta}{\|v\|_V}$ and apply the above.
+\end{proof}
+
+\begin{definition}
+	For $\varphi \in L(V, W)$, let $\|\varphi\| = \inf \{C \in \mathbb{R}: \forall  v \|\varphi(v)\|\le C \|v\|\} $
+\end{definition}
+Then, $L(V, W)$ is a vector space.
+
+
+\begin{theorem}
+	$L(V, W)$ is a Banach space.
+\end{theorem}
+

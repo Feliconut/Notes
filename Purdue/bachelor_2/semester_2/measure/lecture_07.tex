@@ -1,0 +1,396 @@
+\lecture{7}{Mon 27 Mar 2023 16:31}{}
+
+\subsection{Induced measure spaces}
+
+If $(\Omega, \mathcal{A}, \mu)$ is a measure space, then $f: \Omega \to \Theta$ induces a measure space on $\Theta$, $(\Theta, \mathcal{T}, \upsilon)$ where
+\[
+	\mathcal{T} = \{Y \subset \Theta : f^{-1} Y \in \mathcal{A}\} \qquad \upsilon Y = \mu f^{-1} Y
+.\] 
+
+\begin{proposition}
+	$\mathcal{T}$ is a $\sigma$-algebra, and $\upsilon : \mathcal{T} \to  [0,\infty ]$ is a measure.
+\end{proposition}
+\begin{proof}
+	Let $Y_n \in \mathcal{T}$, $Y = \cup  Y_n$. Then $f^{-1}  Y = \cup f^{-1} Y_n \in \mathcal{A}$.
+
+	Then
+	\[
+		\upsilon Y = \mu f^{-1} Y = \mu \cup f^{-1} Y_n = \sum_n \mu f^{-1} Y_n = \sum _n \upsilon Y_n
+	.\] 
+\end{proof}
+
+
+\begin{definition}[Absolute Continuity]
+If $\lambda, v$ are measures on $(\Omega, \mathcal{A})$, we say $v$ is finer than $\lambda$, or $v$ is absolutely continuous w.r.t $\lambda$, if
+ \[
+	\lambda(E) = 0 \to v(E) = 0
+.\] 
+\end{definition}
+
+\begin{theorem}[Change of Variables]
+	Let $\varphi: \Theta \to  \overline{\mathbb{R}} $. Then $\varphi \in L(\upsilon) \iff \varphi \circ f \in L(\mu)$. Moreover, in this case we have
+	\[
+		\int _\Theta \varphi d \upsilon =
+		\int _\Omega \varphi \circ f d \mu
+	.\] 
+\end{theorem}
+\begin{proof}
+	First let $Y \in \mathcal{T}$ and $\varphi = \chi_Y$. Then
+	\[
+		\int _\Theta \varphi d \upsilon = \upsilon(Y) = \mu f^{-1} Y = \int _\Omega \chi_{f^{-1} Y} d\mu = \int _\Omega \varphi \circ f d \mu
+	.\] 
+	(Draw a picture to justify the last equality). Note that $\chi_{f^{-1} Y} = \chi_Y \circ f$.
+
+	Second, let $\varphi = \sum_{i=1}^k c_i \chi_{Y_i}$ be a simple function. Then $\varphi \circ f = \sum_i c_i \chi_{Y_i} \circ f$. Now
+	\[
+		\int _\Theta \varphi d \upsilon = \sum_i c_i \int _\Theta \chi_{Y_i} d \upsilon = \sum_i c_i \int _\Omega \chi_{Y_i} \circ f d \mu = \int _\Omega \varphi\circ f d \mu
+	.\] 
+	Third, let $\varphi\ge 0$ be measurable. Then there exists $\varphi_n$ monotone increasing and $\varphi_n \to  \varphi$. We have
+	\[
+		\int _\Theta \varphi d \upsilon = \lim_{n \to  \infty } \int _\Theta \varphi_n d \upsilon = \lim_{n \to \infty} \int _\Omega \varphi_n \circ f d \mu = \int _\Omega \varphi \circ f d \mu
+	.\] 
+	Finally, $\varphi \in L(\upsilon)$, split into positive and negative parts. $\varphi = \varphi^+ - \varphi^-$, so $\varphi \circ f = \varphi^+ \circ f - \varphi^- \circ f$.
+
+	Hence
+	\begin{align*}
+		\int _\Theta \varphi d \upsilon &= \int _\Theta \varphi^+ d \upsilon - \int \varphi^- d \upsilon\\
+		&= \int _\Omega \varphi^+ \circ f d \mu - \int _\Omega \varphi^- \circ f d \mu \\
+		&= \int _\Omega \varphi \circ f d \mu 
+	.\end{align*} 
+
+\end{proof}
+
+\subsection{Motivating The R-N Theorem}
+
+As a special case, let $\Theta = \mathbb{R}$, and $f : \Omega \to  \Theta = \mathbb{R}$ be measurable. Then
+\[
+	\mathcal{T} = \{Y \subset \mathbb{R} : f^{-1} Y \in \mathcal{A}\}
+.\] 
+$(a, \infty ) \in \mathcal{T}$ since $f$ measurable, so $f^{-1} (a, \infty ) \in \mathcal{A}$, so $\mathcal{T}$ contains the Borel sets.
+
+\begin{example}[Distribution Function]
+	Let $\mathcal{T} = 2^{\mathbb{R}}$.
+
+	Let $g(t) = \mu \{x \in \Omega: f(x) < t\} $. Assume $g(t) < \infty $. Then $g: \mathbb{R} \to  [0, \infty )$ is increasing. 
+
+	$g$ is right continuous: Let $t_n > t$ and $\lim t_n = t$. WLOG $t_n$ decreases, so
+	\begin{align*}
+		\lim g(t_n) &=  \lim \mu \{x \in \Omega : f(x) < t_n\}  \\
+		&= \lim \mu \cap_{i=1}^n \{x \in \Omega :f(x) < t_i\}  \\
+		&= \mu \cap _{n=1}^\infty  \{x \in \Omega: f(x) < t_n\}  \\
+		&= \mu \{x \in \Omega : f_(x) < t\}  \\
+		&= g(t)
+	.\end{align*}
+
+	 $g$ is called the \textit{distribution function} of $f$.
+
+	 Consider the Lebesgue Stieltjes Measure $m_g$.
+	 \begin{align*}
+		 \left| (s, t] \right| _g &= g(t^+) - g(s^+) \\
+		 &= g(t) - g(s) \\
+		 &= \mu \{x \in \Omega : s < f(x) \le t\}  \\
+		 &= \mu f^{-1} (s, t]\\
+		 &= \upsilon (s, t]
+	 .\end{align*}
+
+	 In general, for any interval $I$ we have $|I|_g = \upsilon(I)$.
+\end{example}
+
+
+\begin{proposition}
+	If $E \subset \mathbb{R}$ Borel, then $\upsilon E = m_g E$.
+\end{proposition}
+\begin{proof}
+	For any $E \subset \mathbb{R}$, let $E \subset \bigcup_{j = 1}^{\infty } I_j $, $I_j$ are intervals. Then
+	\[
+		\upsilon E \le  \sum \upsilon I_j = \sum |I_j|
+	.\] 
+	Take infimum on choice of intervals,
+	\[
+		\upsilon E \le  m_g^*(E)
+	.\] 
+
+	If $E \subset [a,b] = I$ is bounded, then
+	\[
+		\upsilon(I) = \upsilon(E) + \upsilon(I \setminus E) \le m_g E + m_g(I \setminus E) = m_g(I) = \upsilon(I)
+	.\] 
+	Hence $\upsilon E = m_g E$. (because we also have $\upsilon(I \setminus E) \le  m_g(I \setminus E)$).
+
+	For any Borel $E$, let $E_n = E \cap [-n, n]$. Then
+	\[
+		\upsilon E = \lim \upsilon E_n = \lim m_g E_n = m_g E
+	.\] 
+\end{proof}
+
+\begin{corollary}
+	If $\varphi \in L(\mathbb{R}, \mathcal{B}, m_g)$, then
+	\[
+		\int _\Omega \varphi \circ f d \mu = \int _{\mathbb{R}}\varphi d \upsilon = \int _{\mathbb{R}} \varphi d m_g
+	.\] 
+\end{corollary}
+\begin{proof}
+	Note that the first equality is given by last theorem. We only prove the second equality.
+
+	First we verify it for $\varphi$ being indicator function for Borel measurable sets, $\varphi = \chi_E$. 
+	\[
+		\int _\mathbb{R} \varphi d \upsilon = \upsilon E = m_g E = \int _{\mathbb{R}} \varphi d m_g
+	.\] 
+
+	By linearity, this extends to $\varphi$ being a simple Borel function. Apply MCT, this is true when $\varphi$ is a unsigned borel-measurable function. Split into positive and negative parts, we show this is true for  $\varphi$ a borel measurable function.
+\end{proof}
+
+\begin{example}
+	Let $\varphi(t) = t$, then $\int _\Omega f d \mu = \int _{\mathbb{R}} t d m_g =: \int _{\mathbb{R}} t d g(t)$. Note, the later equality is a matter of notation.
+\end{example}
+
+\subsection{The R-N Theorem}
+
+Recall: If $\psi \in L(\Omega, \mathcal{A}, \lambda)$, $\psi \ge 0$, then $\upsilon E = \int _E \psi d \lambda$. So we have a new measure space $(\Omega, \mathcal{A}, \upsilon)$. By hw, if $\varphi \in L(\Omega, \mathcal{A}, \upsilon)$ then
+\[
+	\int _\Omega \varphi d \upsilon = \int _\Omega \varphi \psi d \lambda
+.\] 
+
+Given $\lambda$ and $\upsilon$ on $(\Omega, \mathcal{A})$, does there necessarily exist $\psi \in L(\lambda)$, $\psi \ge 0$, such that $\upsilon E = \int _E \psi d \lambda$?
+
+\begin{proposition}
+Assume $\lambda(\Omega) < \infty $. Then if $\psi_1$ and $\psi_2$ both are solutions, they agree almost everywhere.
+\end{proposition}
+\begin{proof}
+	Let $E_n = \{x \in \Omega : \psi_1 < \psi _2, |\psi_1(x)| < n\} $. Then
+	\[
+		\upsilon E_n = \int _{E_n} \psi_1 d \lambda = \int _{E_n} (\psi_2 - \psi_1) d \lambda + \int _{E_n} \psi_1 d \lambda
+	.\] 
+	We have $\int _{E_n}\left(  \psi_2 - \psi_1 \right)  d \lambda = 0$,and $\psi_2 - \psi_1 \ge 0$ on $E_n$, so $\psi_2 = \psi_1$ on $E_n$ $\lambda$-a.e. Hence $\lambda E_n = 0$. Therefore
+	\[
+		\lambda \{x \in \Omega: \psi_1 < \psi_2\} = \lambda \bigcup_{n} E_n = 0 
+	.\] 
+
+	Also by symmetry, $\lambda \{ x \in \Omega: \psi_2 < \psi_1\}  = 0$.
+	Hence $\psi_1 = \psi_2 $ $\lambda$-a.e. (essentially unique).
+\end{proof}
+
+Note that for $\psi$ to exist we must have
+\[
+	\lambda E = 0 \implies \upsilon E =0
+.\] 
+This motivates the definition of \textit{absolute continuity}.
+
+
+
+
+\begin{definition}
+	We say a measure space $(\Omega, \mathcal{A}, \mu)$ is $\sigma$-finite if $\Omega$ is countable union of sets with finite measure.
+\end{definition}
+\begin{example}
+	$(\mathbb{R}, \mathcal{M}, m)$ is $\sigma$-finite.
+
+	$(\Omega, 2^\Omega, \#)$ is $\sigma$-finite iff $\Omega$ is at most countable.
+\end{example}
+
+\begin{theorem}[Radon-Nikodyn Theorem]
+	Supppose $(\Omega, \mathcal{A}, \lambda)$ is $\sigma$-finite and $\upsilon \ll \lambda$. Then $\exists  \varphi \in L(\Omega, \mathcal{A}, \lambda)$, $\varphi \ge 0$, such that
+	\[
+		\upsilon(E) = \int _E \varphi d \lambda
+	.\] 
+\end{theorem}
+\begin{remark}
+	If $\varphi^*$ also satisfies the theorem, then $\varphi = \varphi^*$ $\lambda$-a.e. In other words, the $\varphi$ in the theorem is unique up to a $\lambda$-null set.
+\end{remark}
+
+\begin{proposition}[Absolute Continuity]
+	Let $\lambda, \upsilon$ be measures on $(\Omega, \mathcal{A})$, $\upsilon(\Omega) < \infty $. Then $\upsilon \ll\lambda \iff $\\$ \forall  \varepsilon>0, \exists \delta > 0, \lambda(E) < \delta \implies \upsilon(E) < \varepsilon$.
+\end{proposition}
+\begin{proof}
+	Necessity direction: Let $\lambda(E) = 0$, and let $\varepsilon>0$. Pick $\delta>0$ as above. As $\lambda(E) < \delta$, we have $\upsilon(E) < \varepsilon$. $\varepsilon$ is arbitrary, hence $\upsilon(E) = 0$.
+
+	Sufficiency direction: Prove by contradiction. Suppose $\upsilon\ll\lambda$, and that there exists $\varepsilon>0$ where there is no such $\delta>0$. Then let $\delta = \frac{1}{2^n}$, and there exists $E$ where $\lambda(E) < \delta_n$ and $\upsilon(E) \ge  \varepsilon$. 
+
+	Let $E = \{x \in \Omega: x \in E_n \text{ for infinitely many }n\} $. Then $E$ is measurable (from set-theoretic argument). 
+	Then $\lambda(E) \le \lambda\left(\bigcup_{n \ge k} E_n\right) \le  \sum_{n=k}^{\infty} \lambda(E_n) = \frac{2}{2^k}$ for any $k$. Thus $\lambda(E) = 0$.
+
+	Then by downward monotone convergence, $\upsilon(E) = \lim_{k \to \infty} \upsilon\left(\bigcup_{n \ge k} E_n\right) \ge \varepsilon$. This contradicts $\upsilon \ll \lambda$.
+\end{proof}
+
+\begin{remark}
+	Recall: In situation of \logseq{Radom-Nikodyn Theorem}, 
+	\[
+		\int _\Omega \varphi d \upsilon = \int _\Omega \varphi \psi d \lambda =: \int _\Omega \varphi \frac{d \upsilon}{d\lambda} d\lambda
+	.\] 
+	for $\varphi \in L(\Omega, \mathcal{A}, \lambda)$.
+
+	$\psi$ is the Radon-Nikodyn derivative, denoted  $\frac{d \upsilon}{d \lambda}$. $\psi$ is unique $\lambda$-a.e.
+
+	This beautifully resembles the change of variable formula.
+\end{remark}
+
+\subsection{Differentiation on the real line}
+
+\begin{itemize}
+	\item When $\Omega = \mathbb{R}$, $d \upsilon / d \lambda$ can be obtained as limits of ``difference quotients''.
+
+\end{itemize}
+
+		\begin{theorem}[Monotone Differentiation Theorem]
+	Let $g:[a,b] \to \mathbb{R}$ be increasing, then $g$ is differentiable almost everywhere. $g' \ge 0$ everywhere and is measurable. $\int _a^b g' \le g(b) - g(a)$.
+\end{theorem}
+\begin{proof}
+	(Sketch)
+	Define the upper and lower derivatives. c.f. \logseq{Dini Derivatives}
+	\[
+		\overline{D} (x) = \lim \sup \frac{g(x+h) - g(x)}{h} \le \infty 
+	.\] 
+	\[
+		\underline{D}(x) = \lim \inf  \frac{g(x+h) - g(x)}{h} \ge 0
+	.\] 
+
+	Then we need to show $m\left( x: \overline{D} (x) > \underline{D}(x) \right) =0$.
+
+	To establish the claim, for $u > v$ we define
+	\[
+		E _{u, v} = \{x: \overline{D} (x) > u > v > \underline{D}(x) \} 
+	.\] 
+	Then $E = \bigcup_{u, v:u> v} E_{u, v}$. It suffices to show $m(E_{u, v}) = 0$. If $x \in E_{u, v}$, then there exists $h>0$, such that
+	\[
+		g(x+h) - g(x) > u h, \quad g(x) - g(x-h) > u h
+	.\] We call such a interval $[x, x+h]$ or $[x-h, x]$ \textit{steep}.
+
+	On the other hand, there exists $h'$, such that
+	\[
+		g(x+h) - g(x) < v h, \quad g(x) - g(x-h) < v h
+	.\] 
+	We call the interval \textit{flat}.
+
+
+
+In other notation, there exists intervals  $I$ (steep) and $J$ (flat) such that
+\[
+	\frac{[g]_I}{|I|}> u \qquad \frac{[g]_J}{|J|} < v
+.\] 
+
+The key is that there exists disjoint flat $J_1, J_2,\ldots$ such that
+\[
+	m^*\left(E_{uv} \setminus \cup_k J_k\right) = 0
+.\] 
+For each $k$, exists disjoint steep $I_1, I_2,\ldots \subset J_k$ such that 
+ \[
+	 m^*(E_{uv} \cap J_k) \le \sum_k |I_k| < \sum_k \frac{[g]_{I_k}}{u} \le  \frac{1}{u} [g]_{J_k} < \frac{v}{u} [g] _{J_k} < \frac{v}{u} |J_k|
+.\] 
+	Since $\frac{v}{u}<1$, we have $m^*(E_{uv}) =0$. (analogous to the fact when $J_k$ is arbitrary)
+
+\end{proof}
+
+In the ``key'' step in the previous proof, we need
+
+\begin{theorem}[Vitali's Covering Theorem]
+	Suppose $\mathcal{F}$ is a collection of intervals, $A \subset \mathbb{R}$, satisfying $\forall x \in A, \exists  J \in \mathcal{F}$, $J$ arbitrarily short such that $x \in J$. Then there exists countably many disjoint $J_1, J_2, \ldots \in \mathcal{F}$, such that $m^*(A \setminus \cup _k J_k) = 0$. 
+\end{theorem}
+
+\begin{proof}(Proof for Monotone Differentiation Theorem)
+
+\textbf{Step 1.}
+	For some $\varepsilon>0$, using property of outer measure on $E_{uv}$, choose open $G \subset \mathbb{R}, E_{uv} \subset G$, and
+	\[
+		m^*(E_{uv}) + \varepsilon > m(G)
+	.\] 
+	For instance, we can pick $G$ to be union of suitable intervals $I$, $m(G) \le  \sum m(I_i) < m^*(E_{uv}) + \varepsilon$.
+
+	Let $\mathcal{F} = \{J \subset G: J \text{ flat}\} $. By Vitali Covering Theorem, there exists  disjoint $J_1, J_2, \ldots \in \mathcal{F}$ such that $m^*(E_{uv }\setminus \cup _k J_k) = 0$.
+
+	Fix $k$, let $\mathcal{F}_k = \{I \subset \text{int }J_k: I \text{ steep}\} $. Then $\mathcal{F}_k$ covers $E_{uv} \cap  \text{int }J_k $ as in Vitali's Theorem. Apply Vitali, there exist disjoint $I_1, I_2,\ldots \in \mathcal{F}_k$.
+	As in the proof sketch,
+	\[
+		m^*\left( E_{uv } \cap \text{int }J_k \right) < \frac{v}{u} |J_k|
+	.\] 
+We can ignore the $\text{int}$, since the difference can be at most two points. Now
+\begin{align*}
+	m^*(E_{uv}) &\le m^*\left(E_{uv } \setminus \cup _k J_k\right) + \sum m^*(E_{uv} \cap J_k)\\
+		    &\le 0 + \frac{v}{u} \sum_k |J_k|\\
+		    &\le \frac{v}{u} m(G)\\
+		    &\le \frac{v}{u} \left(m^*(E_{uv}) + \varepsilon\right) 
+.\end{align*} 
+
+This implies
+\[
+	m^*(E_{uv}) = 0
+.\] 
+Hence $\overline{D}  = \underline{D}$ almost everywhere.
+
+\textbf{Step 2}.
+
+If $g$ is differentiable at $x$, perhaps with $g'(x) = \infty $, then $g'(x) \ge 0$.
+
+Now $g'$ is defined only a.e. We have $g' \in L$ in the sense that there exists $h \in L$ such that $h = g'$ a.e.
+
+Then for almost every $x$,
+\[
+	h(x) = \lim_{n \to \infty} \frac{g(x + \frac{1}{n}) - g(x)}{\frac{1}{n}}
+.\] 
+The functions inside limit are measurable, so $h(x)$ itself is measurable.
+
+We extend $g$ by letting $g(x) = g(b)$ for $x > b$.
+Now consider the integral
+\begin{align*}
+	\int _a^b  \frac{g(x + \frac{1}{n}) - g(x)}{\frac{1}{n}} dx 
+	&= n\left( \int _{a+\frac{1}{n}}^{b+\frac{1}{n}} g - \int _a^b g \right) \\
+	&= n\left( \int _{a + \frac{1}{n}}^b + \int _b^{b+\frac{1}{n}} - \int _a^{a + \frac{1}{n}} - \int _{a + \frac{1}{n}}^b \right)  \\
+	&= n\left( \int _b^{b+\frac{1}{n}} - \int _a^{a + \frac{1}{n}} \right)  \\
+	&\le n\left( \frac{1}{n} g(b) - \frac{1}{n}g(a) \right)  \\
+	&= g(b) - g(a)
+.\end{align*} 
+
+Also the integrands $\ge 0$ and goes to $g'(x)$ almost everywhere. By Fatou's Lemma,
+\[
+	\int _a^b g' \le  g(b) - g(a)
+.\] 
+
+Hence $g'< \infty $ almost everywhere. This gives almost-everywhere differentiability.
+\end{proof}
+
+\begin{proof}[Proof of Vitali Theorem]
+	WOLG, assume all $J \in \mathcal{F}$ is closed (we can pass to $\overline{J} $ if needed). Split into cases:
+
+	\textit{Case 1}. $A \subset (\alpha, \beta)$. Then WLOG all $J \in \mathcal{F}$ satisfies $J \subset (\alpha, \beta)$. We choose $J_1, J_2, \ldots$ greedily. Let $l_1 = \sup \{|J|: J \in \mathcal{F}\} $. Then choose $J_n$ such that $|J_1| > \lambda_1 / 2$. Assume $J_1, \ldots, J_{k-1}$ chosen, we let
+	\[
+		\mathcal{F}_k = \{J \in \mathcal{F}: J \cap J_i = \emptyset , i = 1,\ldots, k-1\} 
+	.\] 
+	Then define $l_k = \sup  \{|J|: J \in \mathcal{F}_k\} $, and pick $J_k \in \mathcal{F}_k$ such that $|J_k| > l_k / 2$.
+
+	If $\mathcal{F}_k = \emptyset $ (we terminate somewhere) and $x \in A$, then $x \in \bigcup_{i=1} ^{k-1} J_i$. Otherwise, since $\left( \bigcup_{i=1} ^{k-1} J_i \right)^c $ is open, and by assumption there is a very small interval $J$ in $\mathcal{F}$ such that $x \in J $ and $J$ disjoint from $\bigcup_{i=1} ^{k-1} J_i$, so $ J \in \mathcal{F}_k$, contradiction. Then $A \subset \bigcup_{i < k} J_i$.
+
+	If $\mathcal{F}_k \neq \emptyset $ for all $k$ (the process does not terminate), we get desired $l_k$ and $J_k$. We claim
+	\begin{claim}
+		If $\kappa \in \mathbb{N}$ then 
+		\[
+			A \setminus \bigcup_{i=1} ^\kappa J_k \subset \bigcup_{i = \kappa + 1} ^\infty  5 J_k
+		.\] 
+		Where $5J_k$ means keeping the center but scaling the radius by $5$.
+	\end{claim}
+	To prove the claim, let $x \in A \setminus \bigcup_{i=1} ^\kappa J_k$, which is closed. Then there exists $J \in \mathcal{F}$ such that $x \in J$, and $J$ disjoint from $J_1, \ldots, J_\kappa$. Since $\sum_{k=1}^{\infty} m(J_k) \le \beta - \alpha < \infty $, we have $m(J_k) \to  0$, $l_k \to  0$. Then there exists $k$ such that $m(J) > l_{k+1}$. Thus $J \not\in \mathcal{F}_{k+1}$. Pick smallest such $k$, then $J \in \mathcal{F}_k$. As $J \in \mathcal{F}_{\kappa + 1}$, $k > \kappa$. Thus $J \cap J_k \neq \emptyset $. As $J \in \mathcal{F}_k$, we have $l_k \ge |J|$, $|J_k| > l_{k} /2$, hence $|J| \le  2 |J_k|$. Let $c$ be the center of $J_k$. Then we can see from a picture-drawing that
+	\[
+		|x - c| \le \frac{|J_k|}{2}+ |J| \le \frac{5}{2} |J_k|
+	.\] 
+	Thus $x \in 5 J_k$.
+
+	With the claim proved, we have
+	\[
+		m^*\left( A \setminus  \bigcup_{i \in \mathbb{N}}  J_k\right) \le  m^* \left( A\setminus \bigcup_{k = 1}^\kappa J_k  \right) 
+		\le m^*\left( \bigcup_{k > \kappa} 5 J_k \right) \le 5 \sum_{k > \kappa} |J_k|
+	.\] 
+	This goes to zero as $\kappa \to \infty $.
+
+	\textit{Case 2}. $\mathbb{R}$ is $\sigma$-finite so we can split $A$ into countably many bounded sets. Then apply  case 1 to each part.
+\end{proof}
+
+\begin{remark}
+	In Lebesgue's Theorem, it can occur that $g$ has zero derivative almost everywhere but $\int _a^b < g(b) - g(a)$.
+
+	Even $g$ continuous, the same can happen. For example, consider \logseq{Cantor–Vitali function}.
+\end{remark}
+
+\begin{corollary}
+	If $h: [a,b] \to \mathbb{R}$ is of bounded variation, then $h$ is differentiable almost everywhere.
+\end{corollary}
+
+\begin{theorem}[Lebesgue Differentiation Theorem]
+	Let $f \in L^1[a,b]$, $F(x) = \int _a^x f$, $x \in [a,b]$. Then $F \in C[a,b]$, and $F$ is a.e. differentiable, $F' = f$ a.e.
+\end{theorem}

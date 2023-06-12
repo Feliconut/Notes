@@ -1,0 +1,125 @@
+\lecture{5}{Tue 04 Apr 2023 09:33}{Integration on Manifolds}
+
+\begin{definition}[Parametrized Manifold]
+	Let $A \subset \mathbb{R}^k$ be open, $k \le n$. Let $\alpha: A \to \mathbb{R}^n$ be of class $C^r$. Let $Y = \alpha(A)$. $Y_\alpha = (Y, \alpha)$ form a parameterization.
+
+	Two parametrizations $(Y, \alpha)$ and $(Z, \beta)$ are equivalent if there exists $\varphi: A \to B$ invertible of class $C^r$ such that  $\alpha = \beta \circ \varphi$. We have $Y = Z$.
+
+	A \textit{parametrized manifold} is a class of equivalency of parameterizations $(Y, \alpha)$. We abuse notations and call it $Y$.
+\end{definition}
+
+\begin{definition}[Integration on Manifold]
+	Let $f: Y \to \mathbb{R}$, $(Y, \alpha)$ is a parametrization of $Y$. We define
+	\[
+		\int _Y f dV = \int _A f \circ \alpha V(D\alpha)
+	.\] 
+	where $D \alpha = \left[\frac{\partial x}{\partial x_1} \, \frac{\partial x}{\partial x_2} \ldots \frac{\partial x}{\partial x_l} \right]$ is a $n \times k$ matrix.
+\end{definition}
+
+\begin{proposition}(Well-defined)
+	$\int _Y f dV$ does not depend on parametrization.
+\end{proposition}
+\begin{proof}
+	Let $\alpha: A \to Y$ and $\beta: B \to Y$ and $\varphi: A \to B$, all of class $C^r$, and $\varphi$ invertible. We want to show
+	\[
+		\int _A f \circ \alpha V(D \alpha) = \int _B f \circ \beta V(D \beta)
+	.\] 
+	Directly compute:
+	\begin{align*}
+		D \alpha  &= (D \beta) \circ \varphi D \varphi \\
+		V(D \alpha) &= V\left( (D \beta) \circ \varphi D \varphi \right)  \\
+		&= \text{det}\left( D \varphi ^T (D \beta \circ \varphi)^T D \beta \circ \varphi D \varphi \right)^{\frac{1}{2}}  \\
+		&= \left(( \text{det}D \varphi)^2 \text{det}\left(( D \beta \circ \varphi)^T D \beta \circ \varphi \right)  \right) ^{\frac{1}{2}} \\
+		&= \left| \text{det}D\varphi \right| V(D \beta) \circ \varphi
+	.\end{align*}
+	Now
+	\[
+		\int _A f \circ \alpha V(D \alpha) = \int _A f \circ \beta \circ \varphi V(D \beta) \circ \varphi |\text{det}D\varphi| = \int _B f \circ \beta V(D \beta)
+	.\] 
+\end{proof}
+
+\begin{example}
+	When $k=1$, consider the integral along a curve  $\gamma: (a,b) \to \mathbb{R}^n$. Now $dV = ds$ is the line element.
+	\[
+		\int _\gamma f ds = \int _a^b f\left(\gamma(t)\right) |\gamma'(t)| dt
+	.\] 
+\end{example}
+\begin{example}
+	Let $g: A \to \mathbb{R}, A \subset \mathbb{R}^2$. The graph of $g$ is $\Gamma_g: x \mapsto (x, g(x))$. Now
+	\[
+		\int _{\Gamma_g} f ds = \int _A f\left( g(x) \right) \sqrt{1 + g_{x_1}^2 + g_{x_2}^2} 
+	.\] 
+	Where
+	\[
+		\sqrt{1 + g_{x_1}^2 + g_{x_2}^2} = V\left( 
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & 1 \\
+		g_{x_1} & g_{x_2} \\
+	\end{bmatrix}
+		\right) 
+	.\] 
+\end{example}
+\begin{example}
+	More generally, take $\alpha: A \to \mathbb{R}^3$, $A \subset \mathbb{R}^2$, $Y = \alpha(A)$. We have
+	\[
+		\int _Y f ds = \int _A f \circ \alpha \left|  \frac{\partial \alpha}{\partial x_1} \times  \frac{\partial \alpha}{\partial x_2}  \right|  dx_1 dx_2
+	.\] 
+	By pythagorean theorem, $V(D\alpha) = \left|  \frac{\partial \alpha}{\partial x_1} \times  \frac{\partial \alpha}{\partial x_2}  \right|$
+\end{example}
+
+\begin{intuition}
+	The idea of a manifold is a collection of local parametrizations with good matching.
+\end{intuition}
+
+Two ideas used to generate manifolds:
+\begin{itemize}
+	\item Exhaustion by compacts
+	\item Partition by unity
+\end{itemize}
+
+\begin{definition}[Exhaustion by Compact]
+	We say the sequence $C_1, \ldots, C_k, \ldots$ of compact subsets of $A$ is an \textit{exhaustion} of $A$, if
+	\begin{enumerate}
+		\item $C_k \subset \text{int} C_{k+1}$
+		\item $\cup C_k = A$
+		\item $C_k$ have content (Jordan-rectifiable).
+	\end{enumerate}
+\end{definition}
+\begin{proposition}[Existence of Exhaustion]
+	For any open $A \subset \mathbb{R}^n$, there is an exhaustion by compacts.
+\end{proposition}
+\begin{proof}
+	Let $D_k = \{x \in A: \text{dist}(x, A^c) \ge \frac{1}{k}, |x| \le k\} $. The first condition is continuous and makes $D_k$ closed; the second condition makes $D_k$ bounded, hence $D_k$ compact. Also
+	\[
+		D_k \subset \{x \in A: \text{dist}(x, A^c) > \frac{1}{k+1}, |x| < k+1\} \subset \text{int}D_{k+1} 
+	.\] 
+	The second property is obvious.
+
+	The third property may not hold for $D_k$. To fix this, we replace each $D_k$ by rectifiable sets. Cover $D_k$ with cubes $K_x$ compactly contained in $\text{int} D_{k+1}$. $D_k$ compact so there is a subcover, $D_k \subset \bigcup_{i = 1} ^N \text{int} K_{x_i}$. Define $C_k = \bigcup_{i = 1} ^N K_{x_i}$ be finite union of closed cubes. Then 
+	\begin{enumerate}
+		\item $C_k \subset \text{int}D_{k+1} \subset \text{int}C_{k+1}$
+		\item $\cup C_k \supset \cup  D_k = A$ 
+		\item Rectifiability of $C_k$ is obvious.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[Improper Integral]
+	Let $A \subset \mathbb{R}^n$ be open and $f: A \to \mathbb{R}$.
+	If $f \ge 0$, define
+	\[
+		\int _A f = \sup_{C \text{rectifiable}, C \subset \subset A} \int _C f \in [0,\infty ]
+	.\] 
+	We say $f$ is \textit{integrable} if $\int _A f < \infty $.
+
+	More generally, we say $f$ is integrable if
+	\[
+		\int _A |f| < \infty 
+	.\] 
+	and define
+	\[
+		\int _A f = \int _A f^+ - \int _A f^-
+	.\] 
+where $f^+ = \max(f, 0)$ and $f^- = \min (-f, 0)$
+
+\end{definition}

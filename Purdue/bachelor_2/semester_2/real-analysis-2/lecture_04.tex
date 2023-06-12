@@ -1,0 +1,180 @@
+\lecture{4}{Thu 30 Mar 2023 09:27}{Volume of Parallelopiped}
+
+A \textit{parallelopiped} is of the form
+\[
+	L([0,1]^k)
+.\] 
+where $L: \mathbb{R}^k \to \mathbb{R}^n$, $k\le n$, is a linear map. We say $L e_i = x_i$. The parallelopiped is spanned by $x_1, \ldots, x_k$.
+
+The desired properties of the volume $V(X)$ are:
+\begin{itemize}
+	\item (Rotation Invariance) If $A^T A = I$, then $V(AX) = V(X)$.
+	\item (Projection Invariance) If $X$ is entirely contained in $\mathbb{R}^k \times \{0\}$, such that $x_i = z_i \oplus 0_{\mathbb{R}^{n-k}}$, then the volume $V(X)$ concides with the $k$-dimensional parallelopiped.
+\end{itemize}
+
+\begin{theorem}
+	\[
+		V(X) = \text{det}(X^T X)^{\frac{1}{2}}
+	.\] 
+	satisfies the desired properties.
+\end{theorem}
+\begin{proof}
+	Let $F(X) = \text{det }(X^T X)$, so 
+	\[
+		F(AX) = \text{det}\left( (AX)^T (AX) \right) = \text{det}(X^T A^T A X) = \text{det} (X^T X) = F(X)
+	.\] 
+
+	Also, if $x_k = z_k \oplus 0$, then
+	\[
+		X^T X = 
+	\begin{bmatrix}
+		Z^T & 0 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		Z \\
+		0 \\
+	\end{bmatrix}
+	= Z^T Z
+	.\] 
+
+	Hence 
+	\[
+		f\left( X \right)  = \text{det}(Z^T Z) = \text{det}Z^T \text{det}Z =( \text{det}Z)^2
+	.\] 
+
+\end{proof}
+
+
+
+\begin{lemma}
+	$X^T X$ is symmetric nonnegative matrix (positive semidefinite)
+\end{lemma}
+\begin{proof}
+	If $Q = X^T X$, we show $u \cdot Q u \ge 0$.
+	$u \cdot X^T Xu = Xu \cdot Xu \ge 0$.
+
+	Note
+	\[
+		(X^T X)^T = X^T X
+	.\] 
+	Hence it is symmetric, ad with nonnegative eigenvalues.
+\end{proof}
+
+Therefore 
+	$\text{det}(X^T X) = \lambda_1 \ldots \lambda_k\ge 0$. Thus $F(X) \ge 0$, $V(X) = F(X)^{\frac{1}{2}}$ is well-defined. 
+
+
+\begin{lemma}
+	If $W$ is a $k$-dimensional subspace of $\mathbb{R}^n$, then there is an orthonormal basis $\{b_1, \ldots, b_n\} $ of $\mathbb{R}^n$ such that $b_1, \ldots, b_k$ is a basis for $W$.
+\end{lemma}
+\begin{proof}
+	Apply the Gram-Schmidt process.
+\end{proof}
+
+
+We claim:
+\begin{proposition}
+	For any $x_1, \ldots, x_k$, there is a rotation $h(x) = Ax$ such that  $A x_1, \ldots, Ax_k \in \mathbb{R}^k \times \{0\} $.
+\end{proposition}
+\begin{proof}
+	Let $W = \left\langle x_1, \ldots, x_k \right\rangle $ subspace spanned by $x_1, \ldots, x_k$. WLOG assume $\operatorname{dim} W = k$. Then, let $\{b_1, \ldots, b_n\} $ be orthonormal basis be as in lemma. Define $h$ by
+	\begin{align*}
+		h: \mathbb{R}^n &\longrightarrow \mathbb{R}^n \\
+		b_i &\longmapsto h(b_i) = Ab_i = e_i 
+	.\end{align*}
+	Thus $AB = I$, $B = [b_1, \ldots, b_n] $.
+	\[
+		A(W) \subset \mathbb{R}^k \times \{0\} 
+	.\] 
+\end{proof}
+
+Once we have the claim, we have uniqueness of the volume:
+\[
+	V(X) = V(AX) = V([Z;0]) = |\text{det}Z| = \text{det}(X^T X)^{\frac{1}{2}}
+.\] 
+
+
+\begin{theorem}[Pythagorean Theorem]
+	\[
+		V(X)^2 = \sum_{[I]} \text{det}(X_I)^2
+	\]
+	where $[I]$ is sum over asending $k-$ tuples.
+\end{theorem}
+\begin{example}
+
+\begin{itemize}
+\item $k=1$.
+	
+	\begin{align*}
+		x &= (x_1, \ldots, x_k)\\
+		\|x\|^2 &=  x_1^2 + \ldots + x_k^2 
+	.\end{align*}
+	This coincides with the elementary Pythagorean theorem.
+\item $k = 2, n = 3$
+\[
+	X = [X_1, X_2] = 
+ 	\begin{bmatrix}
+		x_{11} & x_{21} \\
+		x_{12} & x_{22} \\
+		x_{13} & x_{23} \\
+	\end{bmatrix}
+\]
+Hence
+\[
+	V(X)^2 = 
+\begin{vmatrix}
+	x_{11} & x_{21} \\
+	x_{12} & x_{22} \\
+\end{vmatrix}
++ \ldots \text{ (3 minors in total)}
+= |X_1 \times X_2|^2
+.\] 
+
+\item $k = n$, $X_I = X$.
+
+	Now $V(X)^2 = \text{det}(X)^2 = \text{det}(X^T X)$
+\end{itemize}
+\end{example}
+
+\begin{proof}
+	Cases $k = 1$ and $k=n$ are immediate.
+
+	Let $F(X) = \text{det}(X^T X)$ and $G(X) = \sum_{[I]}\text{det}(X_I)^2$.
+
+	The elementary row operations on $M$ is $EM$. The column operation can be done via transpose:
+	\[
+		(EM^T)^T = ME^T
+	.\] 
+
+	Let $E$ be elementary row operations, then
+	\begin{align*}
+		F(X E^T) &=  \text{det}\left( (X E^T) ^T (XE^T) \right)  \\
+		&= \text{det}E \text{det}X^T X \text{det }E^T \\
+		&= F(X) \text{det}\left(E \right) ^2\\
+		&= F(X) 
+	.\end{align*}
+	Note that
+	\[
+		(XE^T)_I = X_I E^T
+	.\] 
+	Hence
+	\begin{align*}
+		G(X E^T) &= \sum_{[I]} \text{det}(X_I E^T)^2\\
+			 &= \sum_{[I]}\text{det}(X_I)^2 \text{det}(E)^2 \\
+			 &= \sum_{[I ]}\text{det}(X_I)^2 \\
+			 &= G(X) 
+	.\end{align*}
+
+	\textbf{Claim}. We can transform $X$ to the form
+	\[
+	\begin{bmatrix}
+		b_1 & b_2 & \ldots & b_{k-1} & b_k \\
+		0 & 0 & \ldots & 0 & \lambda \\
+	\end{bmatrix}
+\]
+where $\lambda\ge 0$ and $b_1, \ldots, b_k \in \mathbb{R}^{n-1}$ and orthogonal.
+
+\end{proof}
+
+
+

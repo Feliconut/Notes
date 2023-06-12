@@ -1,0 +1,129 @@
+\homework{10}{Thu 23 Mar 2023 12:57}{}
+\begin{itemize}
+	\item Suppose $f_n \in L(\Omega, \mathcal{A}, \mu)$ and $\lim_{n \to \infty} \int f_n^2 = 0$. Prove that there is a subsequence such that $f_{n_k} \to  0$ a.e.
+\begin{proof}
+	Since $f_n$ converges to $0$ in $L^2$ norm, it can be shown using Holder's inequality that $f_n$ converges to $0$ in $L^1$ norm. This implies
+	\[
+		\mu\left( \{|f_n| > \delta\}  \right)  \to  0 \qquad \text{for all }\delta>0
+	.\] 
+	This implies existence of some subsequence $f_{n_k} \to 0$ that converges almost uniformly, in the sense that for each $\varepsilon$ there exists an exceptional set $E \subset \Omega$ where $\mu(E) < \varepsilon$, such that $f_{n_k} \to 0$ uniformly on $\Omega \setminus E$.
+	To verify, we take $f_{n_i}$ such that $\mu\left( \{\left| f_{n_i} \right| > c_i\}  \right)  < 2^{-i}$, where $c_i$ is any sequence of positive numbers that converge to $0$. 
+	Define $A_K$ to be the region where convergence is uniform:
+	\[
+		A_K = \{\left| f_{n_i} \right| \le c_i \text{ for all } i \ge  K\} 
+	.\] 
+	Then
+	\[
+		A_K = \cap_{i = K}^{\infty } \{|f_{n_i}| > c_i\} ^c = \left( \bigcup_{i = K} ^\infty \{|f_{n_i}| > c_i\} \right) ^c 
+	.\] 
+	\[
+		\mu(A_K^c) \le \sum_{i=K}^{\infty} 2^{-i} = 2^{-i-1} \to 0
+	.\] 
+	Thus $A_K^c$ is the exceptional set whose measure can be made arbitrarily small. Inside $A_K$, the convergence of $f_{n_i}$ to $0$ is uniform since the bound  $c_i$ is uniform for each $i$.
+
+	Finally we show that $f_{n_i}$ converges pointwise almost everywhere. This is a matter of definition: If there exists some exceptional set  $E \subset \Omega$ with positive measure, where $f_{n_i}$ does not converge to $0$ at each point on $E$, then we can take $\mu(A_K^c) < \mu(E)$ and this immediately contradicts almost uniform convergence.
+
+	
+	
+\end{proof}
+
+	\item Prove Egorov's Theorem for any measure space and $E$ is a measurable subset of finite measure. Suppose $f_n \to  f$ pointwise a.e. on a set $X$ with finite measure, show that for $\varepsilon>0$ there exists some $A \subset X$, $m(A) < \varepsilon$, such that $f_n \to  f$ uniformly on $X \setminus A$.
+\begin{proof}
+	By modifying $f_n$ on a set of measure zero, we may assume WLOG that $f_n$ converges to $f$ pointwise everywhere on the set $X$. Thus for all $x \in X$ and $m > 0$ there exists $N > 0$ such that $|f_n(x) - f(x)| < \frac{1}{m}$ for all $n \ge  N$. Written set-theoretically,
+	\[
+		\bigcap _{N = 0}^\infty  E_{N, m} = \emptyset 
+	.\] 
+	where
+	\[
+		E_{N, m}= \{x \in X: |f_n(x) - f(x)| > \frac{1}{m} \text{ for some } n \ge N\} 
+	.\] 
+	We see that $E_{N, m}$ monotone decreases as $N$ increases. Since $X$ is finite, by downward MCT, 
+	\[
+		m(E_{N, m}) \to  0 \text{ as } N \to \infty 
+	.\] 
+	Now for each $m$, we pick $N_m$ such that $m(E_{N, m}) \le  \frac{\varepsilon}{2^m}$ for all $N \ge  N_m$. Define
+	\[
+		A = \bigcup_{m = 1} ^\infty E_{N_m, m}
+	.\] 
+	We see that $m(A) \le \sum_{m=1}^{\infty} \frac{\varepsilon}{2^m} = \varepsilon$, and for any $x \in X\setminus A$, we have $\left| f_n(x) - f(x) \right| \le \frac{1}{m}$ for all $n \ge  N_m$. This shows $f_n \to f$ uniformly on $X \setminus A$.
+\end{proof}
+
+	\item Let $a, b \in \mathbb{R}$, $a < b$, and $E \subset [a, b]$. Prove that the characteristic function $\chi_E$ is Riemann integrable over $[a,b]$ iff $\partial E$ has measure $0$.
+\begin{proof}
+	By Riemann Lebesgue Theorem, a function is Riemann integrable iff its set of discontinuities has measure zero. 
+
+	For a characteristic function $\chi_E$, its set of discontinuities are exactly its boundary points.
+\end{proof}
+
+	\item If $g \in \mathcal{L}^1[a, b]$ wrt Lebesgue measure, prove that $G(x) = \int _a^x g$ is a continuous function of $x \in [a,b]$.
+\begin{proof}
+	Since $g$ is absolutely integrable, it is essentially bounded (has an almost-everywhere finite bound). Let the essential bound be $M$. We have
+	\[
+	|G(x+h) - G(x)| = \left|\int _x^{x+h} g\right| \le \int _x^{x+h}M = hM
+	.\] 
+	Let $h\to 0$ we have $G(x+h) - G(x) \to 0$. The same proof works for $G(x-h) - g(x) \to 0$. Hence $G(x)$ is a continuous function of $x$.
+\end{proof}
+\begin{correction}
+	absolutely integrable functions may not be essentially bounded. To prove the theorem, take a sequence $x_n \to  x$, and attempt to show $G(x_n) \to  G(x)$. It suffices to prove the theorem for $x_n$ monotone increasing. Then by upward monotone convergence,
+	\[
+		G(x) = \int _a^x g = \int _{\bigcap_{n = 1}^\infty [a, x_n] } g = \lim_{n \to \infty} \int _{[a, x_n]} g = \lim G(x_n)
+	.\] 
+\end{correction}
+
+	\item Given a measure space $(\Omega, \mathcal{A}, \mu)$ and $E_1, \ldots, E_n \in \mathcal{A}$ of finite measure, prove that the matrix $\left( \mu(E_i \cap E_j) \right) _{i, j = 1}^n$ is positive semidefinite, i.e.  $\sum_{i, j=1}^{n} \mu(E_i \cap E_j) \xi_i \xi_j \ge 0$ whenever $\xi_i \in \mathbb{R}$, $i = 1,\ldots, n$.
+\begin{proof}
+	Induct on $n$. Base case is trivial. Now we prove the inductive case. Write the matrix $\left( \mu(E_i \cap E_j) \right) _{i, j = 1}^n$ as  $A$. By inductive hypothesis, $x^T A x \ge 0$ for all $x \in \mathbb{R}^n$. Now we consider the $(n+1)\times (n+1)$ matrix
+	\[
+		B = \begin{bmatrix}
+			A & b\\
+			b^T & c \\
+		\end{bmatrix}
+	.\] 
+	Let $x' = \left\langle x_1, \ldots, x_n, y \right\rangle $. Now
+	\[
+	x'^T B x' = x^T A x + x^T b y + y b^T x + c y^2
+	.\]
+Rearrange the terms,
+	\[
+	x'^T B x' = \frac{1}{2} \sum_{i=1}^{n} a_{ij} (x'_i + x'_j)^2 \ge 0
+.\] 
+\end{proof}
+\begin{correction}
+	\[
+		\sum \mu\left( E_i \cap E_j \right) \zeta_i \zeta_j = \int \sum \chi_{E_i} \chi_{E_j} \zeta_i \zeta_j d \mu 
+	.\] 
+	Where
+	\[
+		\sum_{i, j} \chi_{E_i} \chi_{E_j} \zeta_i \zeta_j = \left( \sum(\chi_{E_i}) \zeta_i \right)^2 
+	.\] 
+\end{correction}
+
+\item Let $(\Omega, \mathcal{A}, \mu)$ be a measure space, $\mu(\Omega) < \infty $, $f_n \in L(n \in \mathbb{N})$. If $f_n \to  \infty $ a.e., and $\varepsilon>0$, prove that $\exists  E \in \mathcal{A}$ with $\mu(E) < \varepsilon$ such that $f_n \to  \infty $ uniformly on $\Omega\setminus E$. But before you prove it, define what ``uniformly'' means.
+\begin{proof}
+	Uniformly means that for any $M>0$ there exists $N>0$ such that $\left| f_n \right| > M $ for all $n \ge N$.
+
+	Since $f_n \to \infty $ a.e., for every $x \in \Omega$ there exists $N>0$ such that $\left| f_n(x) - f(x) \right| > M$ for all $n \ge N$. We write this set-theoretically as
+	\[
+		\bigcap_{N = 0} ^{\infty } E_{N, m} = \emptyset 
+	.\] 
+	for each $m$, write
+	\[
+		E_{N, m} = \{x \in \Omega: |f_n(x)| \le M \text{ for some } n \ge N\}
+	.\] 
+	It is clear that $E_{N, m}$ are Lebesgue measurable, and are decreasing in $N$. Since $\mu(\Omega) <\infty $, we may apply downward monotone convergence to obtain
+	\[
+		\lim_{N \to \infty} m\left( E_{N, m} \right)  = 0
+	.\] 
+	In particular, for any $m \ge 1$, we can find $N_m$ such that
+	\[
+		m\left( E_{N, m} \right) \le \frac{\varepsilon}{2^m}\qquad \text{for all }N \ge N_m
+	.\] 
+	Now let $A = \bigcup_{m = 1} ^\infty E_{N_m, m}$. Then $A$ is Lebesgue measurable, and by countable subadditivity $m(A) \le \varepsilon$. By construction, we have
+	\[
+		\left| f_n(x) \right| > M
+	\] 
+	whenever $m \ge 1$, $x \in \Omega \setminus A$, $n \ge N_m$. In particular, $f_n$ converges uniformly to $f$ on $\Omega\setminus A$.
+\end{proof}
+
+
+\end{itemize}

@@ -1,0 +1,53 @@
+\studynote{9}{Thu 09 Mar 2023 15:00}{}
+
+\subsection{Continuity of $\mathbb{P}(Y_1 \in dx)dx$}
+
+Let the probability space be $(\Omega, \mathcal{F}, \mu)$. We only need to establish the continuity for
+\[
+	\mathbb{E}\left[\frac{M(x-M \sqrt{Z})}{1-Z} p\left(\frac{x-M \sqrt{Z}}{\sqrt{1-Z}}\right)\right]
+.\] 
+For simplicity of notation, define
+\[
+	h(m, z, x) := \frac{M(x_n-M \sqrt{Z})}{1-Z} p\left(\frac{x-M \sqrt{Z}}{\sqrt{1-Z}}\right)
+.\] 
+Let $x_n \to x$. Then we need to establish
+\[
+	\lim_{n \to  \infty } \mathbb{E}\left[h(M, Z, x)\right]=
+	 \mathbb{E}\left[\lim_{n \to  \infty } h(M, Z, x_n)\right]
+.\]
+By Dominated Convergence Theorem, it suffices to bound $h(m, z, x)$ pointwise for any fixed $(m, z)$. Note that when restricted to fixed $(m, z)$, $h_{m, z}(x)$ is a differentiable function that vanishes both as $x \to \infty $ and $x \to -\infty $. This implies it is bounded. Some computation shows
+\[
+	x_{\max}(m, z) = m \sqrt{z} \pm \sqrt{1 - z} 
+.\] 
+\[
+	h(m, z, x_{\max}(m, z)) = \pm \frac{m e^{\frac{1}{2}}}{\sqrt{1-z} }
+.\] 
+Define $g(m, z) = h(m, z, x_{\max}(m, z))$. Now
+\[
+	\left| h(m, z, x) \right| \le \left| g(m, z) \right| = \frac{ m e^{\frac{1}{2}}}{\sqrt{1-z} }
+.\] 
+This bound is uniform on $x$, and $g(M, Z)$ is integrable on $\Omega$, so we have verified the conditions for DCT. Hence we have $\mathbb{E}[h(M, Z, x)]$ continuous as expected.
+
+\subsection{Differentiability}
+
+Use the following theorem:
+
+\begin{theorem}
+	Let $X$ be an open subset of $\mathbf{R}$, and $\Omega$ be a measure space. Suppose $f: X \times \Omega \rightarrow \mathbf{R}$ satisfies the following conditions:\\
+	1. $f(x, \omega)$ is a Lebesgue-integrable function of $\omega$ for each $x \in X$.\\
+2. For almost all $\omega \in \Omega$, the partial derivative $f_x$ exists for all $x \in X$.\\
+3. There is an integrable function $\theta: \Omega \rightarrow \mathbf{R}$ such that $\left|f_x(x, \omega)\right| \leq \theta(\omega)$ for all $x \in X$ and almost every $\omega \in \Omega$.\\
+Then, for all $x \in X$,
+\[
+\frac{d}{d x} \int_{\Omega} f(x, \omega) d \omega=\int_{\Omega} f_x(x, \omega) d \omega
+\]
+\end{theorem}
+
+First we know $h(\omega, x)$ is lebesgue integrable.
+
+Next we verify that $h_x(\omega, x)$ exists for almost every $x$. Indeed, whenever $1-Z\neq 0$ the function is product of differnetiable functions. By direct computation,
+\[
+	h_x(\omega, x) = h_x(m, z, x) = -\frac{m \mathrm{e}^{\frac{(m \sqrt{z}-x)^2}{-2+2 z}}\left(z m^2-2 \sqrt{z} m x+x^2+z-1\right)}{(-1+z)^2}
+.\] 
+
+Finally we verify that $h_x(\omega, x)$ is bounded uniformly, i.e. $|h_x(\omega, x)|\le \theta(\omega)$ for some $\theta: \Omega \to  \mathbb{R}$. Again, for any fixed  $m, z$, we have $h_x(\omega, x)$ is a differentiable function wrt $x$ that vanishes at infinity. Hence it has some upper bound  $x_{\max}(\omega)$. Now define $\theta(\omega) = h_x(\omega, x_{\max}(\omega) )$ and we are done.
