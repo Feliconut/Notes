@@ -2,11 +2,160 @@
 
 \subsection{Moment Bound of General Order}
 
-In this section we try to generalize the moment bound in the previous section (variance bound) to higher order. We claim that a $K$-th moment bound gives
+In this section we try to generalize the moment bound in the previous section (variance bound) to higher order. Surprisingly all arguments generalize to higher order with little additional difficulty. We claim that a $K$-th moment bound gives
 
 \begin{equation}
 	P \left( \left| \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon \sqrt{n} \right) \le O\left( n^{-\frac{1}{4}K - \frac{1}{2} Kp + \frac{1}{2}} \right)
 	\label{eqn:general-moment-bound}
 .\end{equation} 
 
+Applying $K$-th moment bound to $\Delta_y^{(x,m)} - \rho_y^{(x,m)}$ for some specific $y, x$, we claim
 
+\[
+	P\left( \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}}  \right) \le  O\left( n^{-\frac{1}{2}K p + \frac{1}{2} K \kappa } \right)  
+.\] 
+
+When $p > \frac{1}{K}$ and take $\kappa \in (0,p - \frac{1}{k})$, we can apply relaxed Azuma Inequality and obtain an exponentially vanishing bound same as $\ref{eqn:azuma-bound-1}$.
+ \[
+	P \left( \left| \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon \sqrt{n} \right) 
+	\le O\left( \exp\left( -\frac{ n^{\kappa}}{2}  \right)  \right) 
+.\] 
+
+\textbf{Step 1. Moment of sectional drift}
+
+\begin{lemma}
+	\[
+		\mathbb{E}\left[ \left| \alpha(i, \tau_i^{\mathcal{B}} - i) \right| ^K \right] 
+		= O\left(i^{-Kp - \frac{1}{2}K}\right)
+	.\] 
+\end{lemma}
+\begin{proof}
+	Minor adaptation of Lemma~\ref{lem:sectional-drift-1} and the one following.
+\end{proof}
+
+\textbf{Step 2. Moment of local drift}
+
+\begin{lemma}
+	\[
+		\mathbb{E}\left[ \left| \sum_{i = 1}^{\mathcal{E}}\alpha(i, \tau_i^{\mathcal{B}} - i) \right| ^K \right] 
+		= O\left(\mathcal{E}^{-Kp + \frac{1}{2}K}\right)
+	.\]
+	\label{lem:local-drift-moment}
+\end{lemma}
+\begin{proof}
+	For simplicity of notation, write $\alpha_i$ for $\alpha(i, \tau_i^{\mathcal{B}} - i)$.
+
+	\begin{align*}
+		\mathbb{E}\left[ \left| \sum_{i = 1}^{\mathcal{E}} \alpha_i \right| ^K \right] 
+		&= \mathbb{E}\left[ 
+			\left|
+			\sum_{\left( i_m \right)_{m = 1}^K \in \{1, \ldots, \mathcal{E}\}^K} 
+			\prod_{m = 1}^{K} \alpha_{i_m} 
+		\right|
+		\right] \\
+		&\le  
+		\sum_{\left( i_m \right)_{m = 1}^K \in \{1, \ldots, \mathcal{E}\}^K} 
+		\mathbb{E}\left[ \left| \prod_{m = 1}^{K} \alpha_{i_m} \right| \right]
+	.\end{align*}
+
+	By generalized Holder Inequality and the previous lemma, for any $\left( i_m \right) _{m = 1}^K$,
+	\begin{align*}
+		\mathbb{E}\left[ \left| \prod_{m = 1}^{K} \alpha_{i_m} \right| \right]
+		&\le \prod_{m = 1}^{K} \left(
+			\mathbb{E}\left[
+			|\alpha_{i_m}|^K
+		\right] \right)^{\frac{1}{K}}  \\
+		&= O(i^{-Kp - \frac{1}{2}K}) 
+	.\end{align*}
+	where, $i$ stands for the minimum of all the $i_m$.
+	Finally, considering all $K$-tuples, we obtain
+\[
+		\mathbb{E}\left[ \left| \sum_{i = 1}^{\mathcal{E}} \alpha_i \right| ^K \right] 
+		\le 
+		\sum_{\left( i_m \right)_{m = 1}^K \in \{1, \ldots, \mathcal{E}\}^K}  
+		C \min(i_m)^{- K p - \frac{1}{2} K}
+		= O\left(\mathcal{E}^{-Kp + \frac{1}{2}K}\right)
+.\] 
+\end{proof}
+\begin{note}{Note}
+	The last equality may require a more careful analysis.
+\end{note}
+
+
+\begin{theorem}[Generalized Holder's Inequality]
+	(\cite{finnerHolderInequality1992})
+
+	Let $(\Omega, \mathscr{A}, \mu)$ be a measure space and let $L_p(\Omega, \mathscr{A}, \mu)$ be the set of $p$-integrable $(1 \leq p<\infty)$ measurable functions from $(\Omega, \mathscr{A})$ into $(\mathbb{R}, \mathscr{B})$, where $\mathscr{B}$ denotes the Borel $\sigma$-field over $\mathbb{R}$. Let $m \geq 2, p_j>1$ with $\sum_{j=1}^m p_j^{-1}=1$ and let $f_j \in L_{p_j}(\Omega, \mathscr{A}, \mu), j=1, \ldots, m$. Then it is well known [see, e.g., Kufner, John and Fučik (1977), page 67] that $\Pi_{j=1}^m\left|f_j\right| \in L_1(\Omega, \mathscr{A}, \mu)$ and
+\[
+\int \prod_{j=1}^m\left|f_j\right| d \mu \leq \prod_{j=1}^m\left(\int\left|f_j\right|^{p_j} d \mu\right)^{1 / p_j}
+\]
+with equality iff either there exists at least one $j$ with $\int\left|f_j\right|^{p_j} d \mu=0$ or there exist constants $A_j>0, j=1, \ldots, m$, such that
+\[
+A_1\left|f_1\right|^{p_1}=\cdots=A_m\left|f_m\right|^{p_m}[\mu] .
+\]
+\end{theorem}
+
+
+\textbf{Step 3. Martingale moment has zero cross terms}
+
+\begin{lemma}
+	\[
+		\mathbb{E}\left[ \left| \sum_y \Delta_y - \rho_y \right| ^K \right]
+		=
+		\sum_y \mathbb{E}\left[ \left| \Delta_y - \rho_y \right| ^K \right]
+	.\] 
+	\label{lem:martingale-moment}
+\end{lemma}
+\begin{note}{Note}
+	This lemma is not true: when $K > 2$, we encounter cross terms where the largest $y$ has degree more than $1$. Then the tower property of martingale can no longer be applied directly.
+\end{note}
+\begin{lemma}
+	Take $K = 2$, we obtain
+	\[
+	\operatorname{Var} \left[ \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right]  
+		=
+		\sum_y \operatorname{Var}  \left[  \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right]  
+	.\] 
+\end{lemma}
+
+\begin{proof}
+	We first prove this for $K = 2$.
+	\begin{align*}
+		\mathbb{E}\left[ \left| \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right|^2 \right] 
+		&\le \sum_{y, z} 
+		\left|  \mathbb{E}\left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) \right]  \right|
+	.\end{align*}
+	For $y \neq z$, assume $y < z$. Then
+	\begin{align*}
+		\mathbb{E}\left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) \right]
+		&= \mathbb{E}\left[ \mathbb{E} \left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) | \mathcal{E}_{z-1}\right] \right]\\
+		&= \mathbb{E}\left[ \left( \Delta_y - \rho_y \right) \mathbb{E} \left[  (\Delta_z - \rho_z) | \mathcal{E}_{z-1}\right] \right]\\
+		&= 0
+	.\end{align*}
+
+	Hence the sum only contains $y, z$ such that  $y = z$. This establishes our claim.
+\end{proof}
+
+
+
+\textbf{Step 4. Apply estimate  $\mathcal{E}$ and diffusion scaling}
+
+We may let $\mathcal{E} = O(\sqrt{n}) $ and $\sum_y 1  = O(\sqrt{n} )$, though these need to be carefully justified later.
+
+From Lemma~\ref{lem:local-drift-moment} and apply Lemma~\ref{lem:martingale-moment}, then apply the estimate for $\mathcal{E}$ and range of $y$, we obtain
+\[
+		\mathbb{E}\left[ \left| \sum_y \Delta_y - \rho_y \right| ^K \right]
+		= O\left( n^{-\frac{1}{2} K p + \frac{1}{4} K + \frac{1}{2}} \right) 
+.\] 
+
+Use the moment tail bound, 
+\[
+		P\left( \left| \sum_y \Delta_y - \rho_y \right| > \varepsilon \sqrt{n}  \right)
+		= O\left( n^{-\frac{1}{2} K p - \frac{1}{4} K + \frac{1}{2}} \right) 
+.\]
+
+Alternatively, we may apply the tail bound to local drift, and obtain
+\[
+		P\left( \left| \Delta_y - \rho_y \right| > \varepsilon \sqrt{n}  \right)
+		= O\left( n^{-\frac{1}{2} K p - \frac{1}{4} K} \right) 
+.\]

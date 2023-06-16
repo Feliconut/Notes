@@ -20,7 +20,8 @@ Also, $\mathcal{E}$ refers to $\mathcal{E}_y^{(x,m)}$, unless otherwise specifie
 Write $\xi_i$ for the number of descendents of the $i$-th ancestor in the BLP. Then we have the branching process representation of $\rho_y^{(x,m)}$ :
 \[
 	\rho_y^{(x,m)} = \mathbb{E}\left[ \sum_{i = 1}^{\mathcal{E}_{y-1}^{(x,m)}} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{k < i} \xi_k) \right] 
-.\] 
+	.
+\]
 
 The heuristic computation is as follows.
  
@@ -66,6 +67,26 @@ From tightness estimate, the range is $O(\sqrt{n})$. Ignore the covariances, the
 	 \operatorname{Var} \left[ \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right]  = O(n^{1 - p})
 .\] 
 
+\begin{lemma}
+	We may ignore the covariance terms.
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		\mathbb{E}\left[ \left| \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right|^2 \right] 
+		&\le \sum_{y, z} 
+		\left|  \mathbb{E}\left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) \right]  \right|
+	.\end{align*}
+	For $y \neq z$, assume $y < z$. Then
+	\begin{align*}
+		\mathbb{E}\left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) \right]
+		&= \mathbb{E}\left[ \mathbb{E} \left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) | \mathcal{E}_{z-1}\right] \right]\\
+		&= \mathbb{E}\left[ \left( \Delta_y - \rho_y \right) \mathbb{E} \left[  (\Delta_z - \rho_z) | \mathcal{E}_{z-1}\right] \right]\\
+		&= 0
+	.\end{align*}
+
+	Hence the sum only contains $y, z$ such that  $y = z$. This establishes our claim.
+\end{proof}
+
 Apply the second-moment tail bound,
 
 \[
@@ -80,25 +101,25 @@ I am still trying to find a more "economical" way to do the tightness bounding. 
 
 If apply the second-moment tail bound to local drift, we obtain
 \[
-	P\left( \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon n^{\frac{1}{4} + \frac{\kappa}{2}}  \right)
-	\le  \frac{C n^{\frac{1}{2} - p}}{\varepsilon^2 n^{\frac{1}{2} + \kappa}} = O(n^{-p - \kappa})
+	P\left( \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}}  \right)
+	\le  \frac{C n^{\frac{1}{2} - p}}{\varepsilon^2 n^{\frac{1}{2} - \kappa}} = O(n^{-p + \kappa})
 \]
 
 When $p > \frac{1}{2}$, this shows the martingale sum is almost Lipchitz, allowing application of relaxed Azuma Inequality. Let $\kappa \in (0,p - \frac{1}{2})$,
 
 \[
-	\sum_y \operatorname{Pr} \left[ \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| >  \varepsilon n^{\frac{1}{4} + \frac{\kappa}{2}} \right]
+	\sum_y \operatorname{Pr} \left[ \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| >  \varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}} \right]
 	= O\left( n^{\frac{1}{2} - p + \kappa} \right) 
-	= o(1)
-	< \eta
 .\] 
 
-\[
+\begin{multline}
 	\operatorname{Pr} \left[ \sum_y  \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| >  \varepsilon \sqrt{n}  \right]
 	\le \eta + 
-	2 \exp\left( - \frac{\varepsilon^2 n}{ 2 \sqrt{n} (\varepsilon n^{\frac{1}{4} + \frac{\kappa}{2}})^2 } \right) 
-	= O\left( \exp\left( - \frac{n^\kappa}{2} \right)  \right)   
-.\] 
+	2 \exp\left( - \frac{\varepsilon^2 n}{ 2 \sqrt{n} (\varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}})^2 } \right) \\
+	= O\left( n^{\frac{1}{2} - p + \kappa} \right) + O\left( \exp\left( - \frac{n^\kappa}{2} \right)  \right)   
+	= O\left( n^{\frac{1}{2} - p + \kappa} \right)
+	\label{eqn:azuma-bound-1}
+.\end{multline} 
 
 
 
@@ -141,10 +162,11 @@ Also, we observe a particularly strong dependence on the initial step.
 	Apply the estimate $\xi_0 \ge \xi_0 \wedge 1$, and observe that $\xi_0 \wedge 1$ is fair coin. We can then exploit this symmetry, and some calculation yield
 	\begin{align*}
 		\operatorname{Cov} \left( \sum_{j = 0}^{\xi_0} \alpha(0, j), \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot ) \right)  
-		&\ge \alpha(0,1) \, \mathbb{E}\left[   \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot )  \bigg| \xi_0 \neq 0\right] \\
+		&\ge \alpha(0,1) \, \mathbb{E}\left[   \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot )  \bigg| \xi_0 \neq 0\right] 
 	.\end{align*} 
 
-	$\alpha(0,1)$ is an extreme value among the variance temrs; this explains why the dependence on first step is significantly larger.
+	$\alpha(0,1)$ is an extreme value among the variance terms; this explains why the dependence on first step is significantly larger.
+
 \end{proof}
 
 
