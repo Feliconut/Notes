@@ -1,5 +1,7 @@
 \lecture{1}{Thu 25 May 2023 02:21}{Summer Research}
 
+The current goal is to generalize the results in \cite{kosyginaConvergenceNonconvergenceScaled2022} about asymptotically free self-intereacting random walk (AF-SIRW) to the case  $p \le \frac{1}{2}$, since the proof in the paper works only for  $p > \frac{1}{2}$.
+
 \section{Proof of convergence of AF-SIRW to BMPE when $p < \frac{1}{2}$}
 
 The \textit{encountered total drift} at a point $x$ is defined as
@@ -103,12 +105,14 @@ Then according to Lemma 4.1 and Remark 4.2,
 	\[
 		P\left( \left|   \sum_{\le i}\xi_. - i\right| \ge m \right)  \le C e ^{\frac{-c m^2}{ m \vee n}}
 	.\] 
+	\label{lem:section-concentration}
 \end{lemma}
 
 \begin{lemma}
 	\[
 		\mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \right] \le O(i^{-p-\frac{1}{2}})
 	.\] 
+	\label{lem:sectional-drift-1}
 \end{lemma}
 \begin{proof}
 	Calculate by splitting into good and bad events. Define good event $G = \{|\tau_i^{\mathcal{B}} - 2i| < m \sqrt{ i} \} $. 

@@ -126,18 +126,20 @@
 \usepackage{mdframed}
 \mdfsetup{skipabove=1em,skipbelow=0em}
 \theoremstyle{definition}
-\newmdtheoremenv[nobreak=true]{definition}{Definition}
+\newmdtheoremenv[nobreak=true]{statement}{Statement}[subsection]
+\newmdtheoremenv[nobreak=true]{definition}{Definition}[subsection]
 %\newmdtheoremenv[nobreak=true]{characteristic}{Characteristic}
 %\newmdtheoremenv[nobreak=true]{consequence}{Consequence}
-\newmdtheoremenv[nobreak=true]{lemma}{Lemma}
-\newmdtheoremenv[nobreak=true]{proposition}{Proposition}
-\newmdtheoremenv[nobreak=true]{statement}{Statement}
-\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
-\newmdtheoremenv[nobreak=true]{axiom}{Axiom}
-\newmdtheoremenv[nobreak=true]{postulate}{Postulate}
+\newmdtheoremenv[nobreak=true]{lemma}{Lemma}[subsection]
+\newmdtheoremenv[nobreak=true]{theorem}{Theorem}[subsection]
+\newmdtheoremenv[nobreak=true]{proposition}{Proposition}[subsection]
+\newmdtheoremenv[nobreak=true]{axiom}{Axiom}[subsection]
+\newmdtheoremenv[nobreak=true]{postulate}{Postulate}[subsection]
+\newmdtheoremenv[nobreak=true]{prop}{Proposition}[subsection]
+\newmdtheoremenv[nobreak=true]{corollary}{Corollary}[subsection]
 \newmdtheoremenv{conclusion}{Conclusion}
 \newmdtheoremenv{bonus}{Bonus}
-\newmdtheoremenv{conjecture}{Conjecture}
+\newmdtheoremenv{conjecture}{Conjecture}[subsection]
 \newtheorem*{repetition}{Repetition}
 \newtheorem*{interlude}{Interlude}
 \newtheorem*{notation}{Notation}
@@ -162,9 +164,7 @@
 \newtheorem*{observe}{Observe}
 \newtheorem*{property}{Property}
 \newtheorem*{intuition}{Intuition}
-\newmdtheoremenv[nobreak=true]{prop}{Proposition}
 %\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
-\newmdtheoremenv[nobreak=true]{corollary}{Corollary}
 %\newtheorem{exercise}{Exercise}[section]
 
 % End example and intermezzo environments with a small diamond (just like proof
