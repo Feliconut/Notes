@@ -14,7 +14,7 @@ The result is that for all $\delta>0$ small,
 
 \subsubsection{Implication of the bound}
 
-The bound improves as $K$ increases; and by taking large enough $K$ we can get a bound better than any polynomial in $n$.
+The bound improves as $K$ increases; and by taking large enough $K$ we can get a bound better than any (general) polynomial in $n$.
 
 \subsubsection{Derivation of the bound}
 
@@ -37,7 +37,7 @@ By ``sectional drift'' we mean the drift attained at $y$ between two consecutive
 	(Control of sectional drift)
 	\[
 		\mathbb{E}\left[ \left|   
-			\sum_{j = \tau_{i-1}^{\mathcal{B}}-i}^{\tau_i^{\mathcal{B}}-i}   
+			\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
 			\alpha(i, j) 
 		\right| ^K \right]
 		= O\left(i^{-Kp - \frac{1}{2}K}\right)
@@ -55,7 +55,7 @@ By ``sectional drift'' we mean the drift attained at $y$ between two consecutive
 		\mathbb{E}\left[ \left| \Delta_y^{(x,m)}\right|^K  \right] =  
 		\mathbb{E}\left[ \left| 
 		\sum_{i = 1}^{\mathcal{E}_y^{(x,m)}} 
-			\sum_{j = \tau_{i-1}^{\mathcal{B}}-i}^{\tau_i^{\mathcal{B}}-i}   
+			\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
 			\alpha(i, j) 
 	\right| ^K \right] 
 		= O\left(\mathcal{E}^{-Kp + \frac{1}{2}K}\right)

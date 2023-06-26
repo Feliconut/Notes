@@ -1,4 +1,4 @@
-\lecture{2}{Sat 03 Jun 2023 23:00}{Bad Bound actually works}
+\lecture{2}{Sat 03 Jun 2023 23:00}{}
 
 
 %\begin{lemma}
@@ -11,105 +11,32 @@
 %	.\] 
 %\end{lemma}
 
-\subsection{$o(\sqrt{n}) $ Bound for local variance}
+\subsection{Bounding martingale part using variance bound}
 
-\textbf{Notations.} For simplicity of notation, define $\alpha(i,j) := \frac{- l(i) + r(j)}{l(i) + r(j)} = \frac{-w(2 i - 1) + w(2j)}{w(2i-1)+w(2j)}$. This is the encountered drift at some node when the Polya Urn state is $(i,j)$.
+By Markov property of $\Delta_y^{(x,m)}$, we have $\rho_y \in \sigma\left( \mathcal{E}_{y-1}^{(x,m)} \right) $. We claim that
 
-Also, $\mathcal{E}$ refers to $\mathcal{E}_y^{(x,m)}$, unless otherwise specified.
-
-Write $\xi_i$ for the number of descendents of the $i$-th ancestor in the BLP. Then we have the branching process representation of $\rho_y^{(x,m)}$ :
 \[
-	\rho_y^{(x,m)} = \mathbb{E}\left[ \sum_{i = 1}^{\mathcal{E}_{y-1}^{(x,m)}} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{k < i} \xi_k) \right] 
-	.
+	\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)} | \mathcal{E} \right] = O(\mathcal{E}^{1- 2p})
+.\] 
+
+From this we obtain a variance tail bound
+\[
+	P\left( \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}}   | \mathcal{E}_{y - 1} \right)
+	\le  \frac{C \mathcal{E}^{1 - 2 p}}{\varepsilon^2 n^{\frac{1}{2} - \kappa}} 
 \]
 
-The heuristic computation is as follows.
- 
-First compute variance by conditioning. By martingale property, the second term in conditional variance vanishes:
- \begin{align*}
-	  &\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)}  \right]\\
-	 &=  \mathbb{E} \left[\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)} | \mathcal{E}_{y-1}^{(x,m) } \right]\right] + 0\\
-	 &= \mathbb{E}\left[ \operatorname{Var} \left[ \sum_{i = 1}^\mathcal{E} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right]  \right] 
-.\end{align*}
-
-Now begin the heuristic calculation. Consider some fixed $\mathcal{E}$. We claim
-\[
-	\operatorname{Var} \left[ \sum_{i = 1}^\mathcal{E} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right] 
-	= O(\mathcal{E}^{1 - 2 p})
-.\] 
-
-Split the first sum into sum of covariances; apply Hölder inequality to control all terms by the diagonal. Then it suffices to justify
-\[
-	\operatorname{Var} \left[ \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right] 
-	= O\left( i^{-1-2p} \right) 
-.\] 
-
-Asymptotically all the $\xi_i$ converge in distribution to $\text{Beta}(\frac{1}{2})$, so they can be treated as $O(1)$. Then we can apply the result of lemma~\ref{lemma:variance-diagonal} to obtain the claim above. (Also, this claim about diagonal terms has been verified by simulation.)
-
-Now let's take expectation over $\mathcal{E}$. Combining process-level tightness result and control of rarely visited sites, we see that the distribution of $\mathcal{E}$ is concentrated around $\sqrt{n} $. Now suppose that the concentration is strong enough, so that
-\[
-	\mathbb{E}\left[ \operatorname{Var} \left[ \sum_{i = 1}^\mathcal{E} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right]  \right] 
-	= O\left( (\sqrt{n} )^{1-2p} \right)  = O(n^{\frac{1}{2}-p}) = o(\sqrt{n} )
-.\] 
-
-This concludes the heuristic control of local variance.
-
-\begin{remark}
-	We cannot do any better than this, since there is no difference in scale (but only up to a multiplicative constant) between the non-diagonal terms and the diagonal terms in the covariance matrix of the sectional drifts. 
-
-	This is made precise in Lemma~\ref{lemma:local-variance-exact}.
-\end{remark}
-
-\subsection{From bound of local variance to the full proof}
-
-From tightness estimate, the range is $O(\sqrt{n})$. Ignore the covariances, the variance of accumulated drift is
- \[
-	 \operatorname{Var} \left[ \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right]  = O(n^{1 - p})
-.\] 
-
-\begin{lemma}
-	We may ignore the covariance terms.
-\end{lemma}
-\begin{proof}
-	\begin{align*}
-		\mathbb{E}\left[ \left| \sum_y \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right|^2 \right] 
-		&\le \sum_{y, z} 
-		\left|  \mathbb{E}\left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) \right]  \right|
-	.\end{align*}
-	For $y \neq z$, assume $y < z$. Then
-	\begin{align*}
-		\mathbb{E}\left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) \right]
-		&= \mathbb{E}\left[ \mathbb{E} \left[ \left( \Delta_y - \rho_y \right) (\Delta_z - \rho_z) | \mathcal{E}_{z-1}\right] \right]\\
-		&= \mathbb{E}\left[ \left( \Delta_y - \rho_y \right) \mathbb{E} \left[  (\Delta_z - \rho_z) | \mathcal{E}_{z-1}\right] \right]\\
-		&= 0
-	.\end{align*}
-
-	Hence the sum only contains $y, z$ such that  $y = z$. This establishes our claim.
-\end{proof}
-
-Apply the second-moment tail bound,
-
-\[
-	P\left( \left| \sum_{y} \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon\sqrt{n}  \right)
-	\le  \frac{\operatorname{Var} \left[ \sum_{y} \Delta_y^{(x,m)} - \rho_y^{(x,m)}\right] }{\varepsilon^2 n}
-	= O( n^{-p})
-.\] 
-
-This bound is much weaker than the one in (\cite{kosyginaFunctionalLimitLaws2016}) given by Azuma's inequality. In particular, this bound is not exponential, and converges to zero in a polynomial of $n$ in small order. Hence we cannot afford a multiplication of $n$ in tightness bounding.
-
-I am still trying to find a more "economical" way to do the tightness bounding. However it is unlikely to be successful , since we cannot lose anything polynomial in $n$.
-
-If apply the second-moment tail bound to local drift, we obtain
+Now restrict our attention to a good event where all the $\mathcal{E}_y^{(x,m)}$ are bounded by $C \sqrt{n}$ uniformly in $y$, a event with probability arbitrarily close to 1. Then taking expectation yields
 \[
 	P\left( \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}}  \right)
 	\le  \frac{C n^{\frac{1}{2} - p}}{\varepsilon^2 n^{\frac{1}{2} - \kappa}} = O(n^{-p + \kappa})
 \]
 
-When $p > \frac{1}{2}$, this shows the martingale sum is almost Lipchitz, allowing application of relaxed Azuma Inequality. Let $\kappa \in (0,p - \frac{1}{2})$,
+When $p > \frac{1}{2}$, this shows the martingale sum is almost Lipchitz, allowing application of Azuma inequality. Let $\kappa \in (0,p - \frac{1}{2})$,
 
 \[
 	\sum_y \operatorname{Pr} \left[ \left| \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| >  \varepsilon n^{\frac{1}{4} - \frac{\kappa}{2}} \right]
 	= O\left( n^{\frac{1}{2} - p + \kappa} \right) 
+	=: \eta
 .\] 
 
 \begin{multline}
@@ -121,52 +48,148 @@ When $p > \frac{1}{2}$, this shows the martingale sum is almost Lipchitz, allowi
 	\label{eqn:azuma-bound-1}
 .\end{multline} 
 
+When $p >  \frac{1}{2}$ this is giving something that goes to zero. We need $o(n^{-1})$ bound, which is necessary for passing from stopping times $\lambda_{x,m}$ to general times $n$, and this happens only for $p > \frac{3}{2}$. It turns out that a higher moment tail bound is needed.
+
+\subsection{Controlling variance of local drift}
+
+\subsubsection{Background and Notation}
+
+The generation of steps at one fixed site can be described by the generalized Polya Urn model.
+
+\begin{notation}
+	$\mathcal{B}$ refers to blue ball or left step; $\mathcal{R}$ refers to red ball or right step.
+\end{notation}
 
 
-When $p < \frac{1}{2}$, this gives nothing.
+\begin{notation}
+	For simplicity of notation, define $\alpha(i,j) := \frac{- l(i) + r(j)}{l(i) + r(j)} = \frac{-w(2 i - 1) + w(2j)}{w(2i-1)+w(2j)}$. This is the encountered drift at some node when the Polya Urn state is $(i,j)$.
+\end{notation}
 
+Also, $\mathcal{E}$ refers to $\mathcal{E}_y^{(x,m)}$, unless otherwise specified.
 
-\subsection{Observations regarding local covariance}
+We have the following branching process representation of $\rho_y^{(x,m)}$, where the inner sum represents the ``descendants'' produced by the $i$-th ``ancestor'', i.e. the number of right excursions made from $y$ between the $i -1$-th and $i$-th left excursion.
+\[
+	\rho_y^{(x,m)} = \mathbb{E}\left[ \sum_{i = 1}^{\mathcal{E}_{y-1}^{(x,m)}} 
+		\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
+		\alpha(i, j) 
+\right] 
+	.
+\]
 
-\begin{lemma}
-	Covariance matrix is strictly positive.
-\end{lemma}
-\begin{lemma}
-	Local variance is $\Theta(\mathcal{E}^{1 - 2p})$.
-	\label{lemma:local-variance-exact}
-\end{lemma}
-\begin{proof}
-	(unfinished)
-	We already know it is $O(\mathcal{E}^{1 - 2p})$. $\Omega(\mathcal{E}^{1 - 2p})$ is to be done.
-\end{proof}
+\subsubsection{Estimation of variance}
+ 
+First compute variance by conditioning. By martingale property, the second term in conditional variance vanishes:
+ \begin{align*}
+	  &\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)}  \right]\\
+	 &=  \mathbb{E} \left[\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)} | \mathcal{E}_{y-1}^{(x,m) } \right]\right]
+	 +  \operatorname{Var}\left[ \mathbb{E} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)} | \mathcal{E}_{y-1}^{(x,m) } \right]\right]\\
+	 &=  \mathbb{E} \left[\operatorname{Var} \left[ \Delta_y^{(x,m)} | \mathcal{E}_{y-1}^{(x,m) } \right]\right]\\
+	 &= \mathbb{E}\left[ \operatorname{Var} \left[ 
+	 \sum_{i = 1}^\mathcal{E} 
+		\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
+		\alpha(i, j) 
+	 \bigg| \mathcal{E}_{y-1}^{(x,m)}
+\right]  \right] 
+.\end{align*}
 
-Note: this is numerically verified.
+We claim that
+\begin{equation}
+	\label{eqn:var-func}
+	\varphi(w):=\operatorname{Var} \left[ \sum_{i = 1}^w 
+		\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
+		\alpha(i, j) 
+\right] 
+	= O(w^{1 - 2 p})
+.\end{equation} 
 
-\begin{corollary}
-	When $p < \frac{1}{2}$, variance diverges.
-\end{corollary}
-Note: this is numerically verified.
-
-Also, we observe a particularly strong dependence on the initial step.
-
-\begin{lemma}(Dependence on first step)
-	\[
-		\operatorname{Cov} \left( \sum_{j = 0}^{\xi_0} \alpha(0, j), \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot ) \right)  
-		\ge \ldots
+Thus, 
+\[
+	  \operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)}  | \mathcal{E} \right]
+	  = O(\mathcal{E}^{1 - 2 p})
 .\] 
+
+Now justify \eqref{eqn:var-func}.
+Split the first sum into sum of covariances; apply Hölder inequality to control all terms by the diagonal. Then it suffices to justify
+\[
+	\operatorname{Var} \left[
+		\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
+		\alpha(i, j) 
+\right] 
+	= O\left( i^{-1-2p} \right) 
+.\] 
+
+Asymptotically all the $\tau_i - \tau_{i-1}$ converge in distribution to $\text{Geom}(\frac{1}{2})$, so they can be treated as $O(1)$. Then we can apply the result of lemma~\ref{lemma:variance-diagonal} to obtain the claim above. (Also, this claim about diagonal terms has been verified by simulation.)
+
+
+
+\subsubsection{Moment Estimates for variance bound}
+
+
+\textbf{Notations.} For simplicity of notation, define $\alpha(i,j) := \frac{- l(i) + r(j)}{l(i) + r(j)} = \frac{-w(2 i - 1) + w(2j)}{w(2i-1)+w(2j)}$. This is the encountered drift at some node when the Polya Urn state is $(i,j)$.
+
+
+We have the branching process representation of $\rho_y^{(x,m)}$ :
+\[
+	\rho_y^{(x,m)} = \mathbb{E}\left[ 
+	\sum_{i = 1}^{\mathcal{E}_{y-1}^{(x,m)}} 
+		\sum_{j = \tau_{i-1}^{\mathcal{B}}-i+1}^{\tau_i^{\mathcal{B}}-i}   
+		\alpha(i, j) 
+	\right] 
+.\] 
+
+
+\begin{lemma}
+(Lemma 4.1 and Remark 4.2, \cite{kosyginaFunctionalLimitLaws2016})
+	\[
+		P\left( \left| \tau_i^{\mathcal{B}} - 2i\right| \ge m \right)  \le C e ^{\frac{-c m^2}{ m \vee n}}
+	.\] 
+	\label{lem:section-concentration}
+\end{lemma}
+
+\begin{lemma}
+	\[
+		\mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \right] \le O(i^{-p-\frac{1}{2}})
+	.\] 
+	\label{lem:sectional-drift-1}
 \end{lemma}
 \begin{proof}
-	(unfinished)
-	For simplicity we only treat the case $y = 0$.
+	Calculate by splitting into good and bad events. Define good event $G = \{|\tau_i^{\mathcal{B}} - 2i| < m \sqrt{ i} \} $. 
 
-	Apply the estimate $\xi_0 \ge \xi_0 \wedge 1$, and observe that $\xi_0 \wedge 1$ is fair coin. We can then exploit this symmetry, and some calculation yield
-	\begin{align*}
-		\operatorname{Cov} \left( \sum_{j = 0}^{\xi_0} \alpha(0, j), \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot ) \right)  
-		&\ge \alpha(0,1) \, \mathbb{E}\left[   \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{<i}\xi_\cdot )  \bigg| \xi_0 \neq 0\right] 
-	.\end{align*} 
+\begin{align*}
+	\mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \right]
+	&= \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \mathbf{1}(G)\right] + \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \mathbf{1}(G^c)\right] \\
+	&\le \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)  | G\right] + P(G^c) \\
+	&= \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)  | G\right] + O(e^{-c m^2}) 
+.\end{align*}
 
-	$\alpha(0,1)$ is an extreme value among the variance terms; this explains why the dependence on first step is significantly larger.
+\begin{align*}
+	 \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)  | G\right]
+	 &\le \sup _{j:|i - j| < m \sqrt{i} } \alpha(i,j) \\
+	 &\le C \sup \left| 2^p B \left( \frac{1}{(2i - 1)^p}  - \frac{1}{(2j)^p} + O\left(\frac{1}{i^{\varkappa
+	 + 1}}\right) \right) \right|  \\
+	 &\le O\left(\frac{1}{i^{\varkappa + 1}}\right) 
+	 + C \sup \left| \frac{1}{i^p} - \frac{1}{j^p}\right| + C \sup \left| \frac{1}{(2i-1)^p} - \frac{1}{(2i)^p} \right| \\
+	 &\le O\left(\frac{1}{i^{\varkappa + 1}}\right) 
+	 + C m \sqrt{ i} \left( i - m \sqrt{ i}  \right) ^{- p - 1} + C 2^p (2 i - 1)^{ -p - 1}\\
+	 &= O\left(i^{- p - \frac{1}{2}}\right) 
+.\end{align*}
 
 \end{proof}
 
+\begin{lemma}
+	\[
+		\operatorname{Var} \left[ \alpha(i, \tau_i^{\mathcal{B}} - i) \right] \le    O(i^{- 2 p - 1})
+	.\] 
+	\label{lemma:variance-diagonal}
+\end{lemma}
+\begin{proof}
+	Since we have controlled expectation, it remains to control $\mathbb{E} [\alpha^2]$. Follow the same procedure, we obtain
+\begin{align*}
+	 \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)^2  | G\right]
+	 &\le \sup _{j:|i - j| < m \sqrt{i} } \alpha(i,j)^2 \\
+	 &\le C \sup \left| 2^p B \left( \frac{1}{(2^i - 1)^p}  - \frac{1}{(2j)^p} + O(\frac{1}{i^{\varkappa
+	 + 1}}) \right) \right|^2  \\
+	 &= O(i^{-2p-1}) 
+.\end{align*}
+\end{proof}
 
