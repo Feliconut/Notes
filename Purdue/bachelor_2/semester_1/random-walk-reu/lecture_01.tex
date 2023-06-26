@@ -1,189 +1,143 @@
 \lecture{1}{Thu 25 May 2023 02:21}{Summer Research}
 
-The current goal is to generalize the results in \cite{kosyginaConvergenceNonconvergenceScaled2022} about asymptotically free self-intereacting random walk (AF-SIRW) to the case  $p \le \frac{1}{2}$, since the proof in the paper works only for  $p > \frac{1}{2}$.
 
-\section{Proof of convergence of AF-SIRW to BMPE when $p < \frac{1}{2}$}
 
-The \textit{encountered total drift} at a point $x$ is defined as
+This document is in-progress work on a summer research project under guidance of Prof. Peterson.
+
+The current research goal is to generalize the results in (\cite{kosyginaConvergenceNonconvergenceScaled2022}) about functional limit law for asymptotically free self-interacting random walk (AF-SIRW). (\cite{kosyginaConvergenceNonconvergenceScaled2022}) establishes convergence to BMPE in the case $p > \frac{1}{2}$. This research aims to generalize to the case  $p \le \frac{1}{2}$.
+
+\begin{note}{Note}
+	Note boxes often refer to the work instead of the math. They may indicate parts of this draft where the analysis is not careful or missing and needs to be supplemented in future.
+\end{note}
+
+\section{Proof scheme of convergence of AF-SIRW to BMPE when $p < \frac{1}{2}$}
+
+\subsection{Background and Definitions}
+
+\subsubsection{Basic Notations}
+
+\begin{enumerate}
+	\item 
+Let $X_n$ be the AF-SIRW of consideration. Denote the running maximum and minimum by $M_n$ and $I_n$.
+
+\item Define $L_x(n) = \sum_{i = 0}^{n} \mathbf{1}(X_i = x)$ be the \textit{local time} of site $x$ at time $n$.
+
+\item Define $\lambda_{x, m} = \inf \{n: L_x(n) \ge m\} $ be the time when the site $x$ gets the $m$-th visit.
+Write $\mathcal{M}^{(x,m)}$ for $M_{\lambda_{x, m}}$.
+	\item The \textit{total consumed drift} at time $n$ is
+		\[
+	C_n = \sum_{i=0}^{n-1} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i^X \right] 
+		.\] 
+where $\mathcal{F}_i^X = \sigma\left( X_k | k \le i \right) $.
+
+	\item 
+The \textit{local drift} at a point $x$ is
 \[
-\delta_{x,m} = \sum_{i=1}^{\infty} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i^X \right] 
+\delta_{x} = \sum_{i=0}^{\infty} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i^X \right] 
 \mathbf{1}\left( X_i = x \right) 
-\mathbf{1}\left(\mathcal{L}_{x,i} \le m\right)
 .\] 
 
-Consider $y > x$.
+\item
+The \textit{local drift by $m$-th visit} at a point $x$ is
+\[
+\delta_{x,m} = \sum_{i=0}^{\lambda_{x, m}} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i^X \right] 
+\mathbf{1}\left( X_i = x \right) 
+.\]
+where $\lambda_{x,m}$ is the stopping time when $x$ has been visited $m$ times.
 
-We define 
- \begin{align*}
-	 \Delta_y^{(x,m)} &= \sum_{i=1}^{\mathcal{L}_y^{(x,m)}} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i^X \right] \mathbf{1}(X_i = y)\\
-	 \rho_y^{(x,m)} &= \mathbb{E}\left[ \Delta_y^{(x,m)} | \mathcal{G}_{y-1} ^{(x,m)} \right] 
-.\end{align*} 
+\item The local drift at site $y$ at time $\lambda_{x, m}$ is written as
+	\[
+		\Delta_y^{(x,m)} = \sum_{i=0}^{\lambda_{x, m}} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i^X \right] \mathbf{1}(X_i = y)
+	.\] 
 
-where $\mathcal{G}_{z}^{(x,m)} := \sigma\left( \mathcal{E}_y^{(x,m)}: x \le y \le z \right) $
+\end{enumerate}
+\subsubsection{Main scheme}
 
-We will decompose the sum $\delta_{x,m}$ into a martingale difference and a compensation term. First we would like to establish
 
+ To show convergence to $(\gamma, \gamma)$-BMPE, we first verify that $B_n = X_n - C_n$ is a martingale with respect to the filtration $\mathcal{F}_n$, and show that it converges to a Brownian motion.
+
+The next step is to control the accumulated drift:
+
+\begin{lemma}
+	For any $t \ge 0$ and any $\varepsilon>0$,
+	\[
+		\lim_{n \to \infty } P\left( 
+		\sup_{k \le n t}
+		\left| C_k - \gamma(M_k - X_k) - \gamma(I_k - X_k) \right| 
+		\ge \varepsilon \sqrt{n} 
+	\right)  =0
+	.\] 
+\end{lemma}
+For reference, see (Lemma 4.2, \cite{kosyginaFunctionalLimitLaws2016}).
+
+Write
+\begin{align}
+	C_n^+ &= \sum_{y > X_n} \sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i + 1} - X_i | \mathcal{F}_i^X \right] \mathbf{1}(X_i = y)\\
+	C_n^0 &= \sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i + 1} - X_i | \mathcal{F}_i^X \right] \mathbf{1}(X_i = y) \\
+	C_n^- &= \sum_{y < X_n} \sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i + 1} - X_i | \mathcal{F}_i^X \right] \mathbf{1}(X_i = y)
+.\end{align}
+
+$C_n^0$ should be negligible in the argument.
+We only discuss the first claim about $C_n^+$, and $C_n^-$ should follow by symmetry.
+
+
+	Loosely speaking, we want the following estimate (at most places) for local drifts
+\begin{equation}
+	\sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i + 1} - X_i | \mathcal{F}_i^X \right] \mathbf{1}(X_i = y)
+	\approx \text{sgn}(y) \gamma
+.\end{equation} 
+which amounts to showing
+\begin{equation}
+	\label{eqn:approx-goal}
+	C_n^+ \approx \sum_{y > X_n} \text{sgn}(y)\gamma = \begin{cases}
+		\gamma(M_n - X_n) & X_n \ge 0\\
+		\gamma(M_n + X_n) & X_n < 0\\
+	\end{cases}
+.\end{equation}
+
+
+
+\subsubsection{Restrict to excursion times}
+
+
+	We try to work on events $\{n = \lambda_{x, m}\}  = \{X_n = x, L_x(n) = m\} $ and establish \eqref{eqn:approx-goal}. Under this event we have
+	\[
+		C_n^+ = \sum_{y = x+1}^{\mathcal{M}^{(x,m)}} \Delta_y^{(x,m)}
+	.\] 
+
+	For simplicity of discussion, consider $y > x > 0$. Then our goal becomes showing
+	\begin{equation}
+		\label{eqn:goal-2}
+		\sum_{y = x+1}^{\mathcal{M}^{(x,m)}} \left(\Delta_y^{(x,m)} - \gamma\right) = o(\sqrt{n} )
+	.\end{equation} 
+
+\subsubsection{BLP construction}
+
+Let $\mathcal{E}_{y-1}^{(x,m)}$ denote the number of upcrossings from $y-1$ to $y$ by the time $\lambda_{x, m}$.
+	From now on we write $\mathcal{E}$ in place of $\mathcal{E}_{y-1}^{(x,m)}$ whenever there is no ambiguity. 
+	
+	We know that $\left( \mathcal{E}_y^{(x,m)} \right) _{y \ge  x}$ is a branching-like process (BLP). From analysis of BLP, $\Delta_y^{(x,m)} \in \sigma\left( \mathcal{E}_{y-1}^{(x,m)}, \mathcal{E}_y^{(x,m)} \right) $. 
+	Write $\mathcal{G}_{z}^{(x,m)} := \sigma\left( \mathcal{E}_y^{(x,m)}: x \le y \le z \right) $, and note that $\left( \Delta_y^{(x,m)} \right) _{y \ge  x}$ is adapted to $\left( \mathcal{G}_y^{(x,m)} \right) _{y \ge  x}$.
+	Let
+ \begin{equation*}
+	 \rho_y^{(x,m)} = \mathbb{E}\left[ \Delta_y^{(x,m)} | \mathcal{G}_{y-1} ^{(x,m)} \right] 
+.\end{equation*} 
+and we can decompose \eqref{eqn:goal-2} to a martingale term and a residue term:
+\[
+		\sum_{y = x+1}^{\mathcal{M}^{(x,m)}} \left(\Delta_y^{(x,m)} - \gamma\right) = \sum_y \left(\Delta_y^{(x,m)} - \rho_y^{(x,m)}\right) + \sum_y \left(\rho_y^{(x,m)} - \gamma\right)
+.\] 
+
+The rest of this document discusses how we can bound
 \[
 	\sum_{y = x+1}^{\mathcal{M}_{x,m}} \Delta_y^{(x,m)} - \rho_y^{(x,m)} = o(\sqrt{n}) 
 .\] 
 
-This is established by a variance bound
+
+\begin{note}{Note}
+	
+The residue term
 \[
-	P\left( \left| \sum_{y} \Delta_y^{(x,m)} - \rho_y^{(x,m)} \right| > \varepsilon\sqrt{n}  \right)
-	\le  \frac{\operatorname{Var} \left( \sum_{y} \Delta_y^{(x,m)} - \rho_y^{(x,m)}\right) }{\varepsilon^2 n}
-	\to 0
-.\] 
-
-Using tightness lemma, there are $O(\sqrt{n})$ terms in the sum.
-To achieve desired bound, we would expect for any $y$, $\operatorname{Var}\left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)}\right] = o(\sqrt{n})$. (Suppose, that covariance is negligible here).
-
-The second part is to establish
-\[
-	\sum_{y = x+1}^{\mathcal{M}_{x,m}} \rho_y^{(x,m)} - \rho = o(\sqrt{n}) 
-.\] 
-
-for some fixed $\rho$. We expect that $\rho = \gamma$ as in the paper, but the convergence $\rho_y^{(x,m)} \to \rho$ is less straightforward to establish.
-
-\subsection{Heuristic $O(1)$ bound for local variance}
-
-\textbf{Notations.} For simplicity of notation, define $\alpha(i,j) := \frac{- l(i) + r(j)}{l(i) + r(j)} = \frac{-w(2 i - 1) + w(2j)}{w(2i-1)+w(2j)}$. This is the encountered drift at some node when the Polya Urn state is $(i,j)$.
-
-Write $\xi_i$ for the number of descendents of the $i$-th ancestor in the BLP. Then we have the branching process representation of $\rho_y^{(x,m)}$ :
-\[
-	\rho_y^{(x,m)} = \mathbb{E}\left[ \sum_{i = 1}^{\mathcal{E}_{y-1}^{(x,m)}} \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{k < i} \xi_k) \right] 
-.\] 
-
-The heuristic computation is as follows.
- 
-First compute variance by conditioning.
- \begin{align*}
-	  &\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)}  \right]\\
-	 &=  \mathbb{E} \left[\operatorname{Var} \left[ \Delta_y^{(x,m)} - \rho_y^{(x,m)} | \mathcal{E}_{y-1}^{(x,m) } = n \right]\right]\\
-	 &= \mathbb{E}\left[ \operatorname{Var} \left[ \sum_{i = 1}^n \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right]  \right] 
-.\end{align*}
-
-Now begin the heuristic calculation. Consider very large $n$ and sum from $\frac{n}{2}$ to $n$. In this way we may assume that all $\xi_i$ are arbitrarily close to a $\text{Geom}(\frac{1}{2})$ random variable.
-
-\begin{align*}
-	&\operatorname{Var} \left[ \sum_{i = \frac{n}{2}}^n \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right]\\
-	&\approx \sum_{i = \frac{n}{2}}^n \operatorname{Var} \left[  \sum_{j = 0}^{\xi_i} \alpha(i, j + \sum_{< i} \xi_.) \right] \intertext{where we assume the covariances are small.} \\
-	&\approx \sum_{i = \frac{n}{2}}^n \operatorname{Var} \left[  \xi_i \alpha(i, \sum_{\le  i} \xi_.) \right] \intertext{since $\alpha$ is not sensitive to small perturbation to the second argument.} \\
-	&\approx \sum_{i = \frac{n}{2}}^n \operatorname{Var} \left[  \alpha(i, \sum_{\le  i} \xi_.) \right] + 2 \mathbb{E}\left[ \left( \alpha(i, \sum_{\le i} \xi_.) \right) ^2 \right] \intertext{by assuming $\xi_i \sim \text{Geom}(\frac{1}{2})$.} 
-\end{align*}
-
-Approximate $\sum_{\le i} \xi_.$ by $N(i, 2i)$, we may write out an integral for $\operatorname{Var} \left[\alpha(i, N(i, 2i))\right]$ and obtain the order of magnitude estimate
-\[
-	\operatorname{Var} \left[\alpha(i, \sum_{\le i}\xi_.)\right] = O(i^{-2p-1})
-.\] 
-
-Summing over $i$, we obtain
-\[
-	\sum_{i = \frac{n}{2}}^n \operatorname{Var} \left[  \alpha(i, \sum_{\le  i} \xi_.) \right] = O(n^{-2p})
-.\] 
-
-By repeatedly apply the bound, halfing $n$ each time until some fixed constant $N$, we obtain
-\[
-	\sum_{i = N}^n \operatorname{Var} \left[  \alpha(i, \sum_{\le  i} \xi_.) \right]  = O(N^{-2p}) + O((2N)^{-2p)} + \ldots + O\left( (\log_2 \frac{n}{N} N)^{-2p} \right) = O(1) 
-.\] 
-
-\begin{note}{Problems about this estimation}
-	Confusing notation was used in this part; $n$ should refer to the total number of steps taken by the walk, but it was also used to refer to the value of $\mathcal{E}_y^{(x, m)}$. These two things have different scale, in fact, we have approximately $\mathcal{E}_y^{(x,m)} = O(\sqrt{n} )$. From this we see that the ``cheapest'' estimate of covariance using variances, actually works.
-
-	The non-diagonal covariance terms turns out to be non-negligible, in fact of the same scale as the diagonal terms, and not dependent on the distance from diagonal.
+	\sum_{y = x+1}^{\mathcal{M}_{x,m}} \rho_y^{(x,m)} - \gamma = o(\sqrt{n}) 
+\]
+is yet to be done.
 \end{note}
-
-\subsection{Justifications of the variance bound}
-
-Our definition is related to the paper by
-\[
-	\sum_{\le i}\xi_. \equiv \tau_i^{\mathcal{B}} - i
-.\] 
-
-Then according to Lemma 4.1 and Remark 4.2,
-
-\begin{lemma}
-	\[
-		P\left( \left|   \sum_{\le i}\xi_. - i\right| \ge m \right)  \le C e ^{\frac{-c m^2}{ m \vee n}}
-	.\] 
-	\label{lem:section-concentration}
-\end{lemma}
-
-\begin{lemma}
-	\[
-		\mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \right] \le O(i^{-p-\frac{1}{2}})
-	.\] 
-	\label{lem:sectional-drift-1}
-\end{lemma}
-\begin{proof}
-	Calculate by splitting into good and bad events. Define good event $G = \{|\tau_i^{\mathcal{B}} - 2i| < m \sqrt{ i} \} $. 
-
-\begin{align*}
-	\mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \right]
-	&= \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \mathbf{1}(G)\right] + \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right) \mathbf{1}(G^c)\right] \\
-	&\le \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)  | G\right] + P(G^c) \\
-	&= \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)  | G\right] + O(e^{-c m^2}) 
-.\end{align*}
-
-After bounding possible $j$'s, follow the argument in proof of Lemma 2.3.
-\begin{align*}
-	 \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)  | G\right]
-	 &\le \sup _{|i - j| < m \sqrt{i} } \alpha(i,j) \\
-	 &\le C \sup \left| 2^p B \left( \frac{1}{(2i - 1)^p}  - \frac{1}{(2j)^p} + O\left(\frac{1}{i^{\varkappa
-	 + 1}}\right) \right) \right|  \\
-	 &\le O\left(\frac{1}{i^{\varkappa + 1}}\right) 
-	 + C \sup \left| \frac{1}{i^p} - \frac{1}{j^p}\right| + C \sup \left| \frac{1}{(2i-1)^p} - \frac{1}{(2i)^p} \right| \\
-	 &\le O\left(\frac{1}{i^{\varkappa + 1}}\right) 
-	 + C m \sqrt{ i} \left( i - m \sqrt{ i}  \right) ^{- p - 1} + C 2^p (2 i - 1)^{ -p - 1}\\
-	 &= O\left(i^{- p - \frac{1}{2}}\right) 
-.\end{align*}
-
-\end{proof}
-
-\begin{lemma}
-	\[
-		\operatorname{Var} \left[ \alpha(i, \tau_i^{\mathcal{B}} - i) \right] \le    O(i^{- 2 p - 1})
-	.\] 
-	\label{lemma:variance-diagonal}
-\end{lemma}
-\begin{proof}
-	Since we have controlled expectation, it remains to control $\mathbb{E} [\alpha^2]$. Follow the same procedure, we obtain
-\begin{align*}
-	 \mathbb{E}\left[ \alpha\left(i, \tau_i^{\mathcal{B}} - i\right)^2  | G\right]
-	 &\le \sup _{|i - j| < m \sqrt{i} } \alpha(i,j)^2 \\
-	 &\le C \sup \left| 2^p B \left( \frac{1}{(2^i - 1)^p}  - \frac{1}{(2j)^p} + O(\frac{1}{i^{\varkappa
-	 + 1}}) \right) \right|^2  \\
-	 &= O(i^{-2p-1}) 
-.\end{align*}
-\end{proof}
-
-\begin{lemma}
-	There exists $\delta>0$, such that for $\frac{n}{2} \le i < I \le n$, whenever $i_2 - i_1 > n^\delta$, we have
-	\[
-		\operatorname{Cov} \left(
-			\sum_{j = 0}^{\xi_{i}}  \alpha(i,\sum_{\le i}\xi_.)\,\,, \quad
-			\sum_{j = 0}^{\xi_{I}}  \alpha(I,\sum_{\le I}\xi_.)
-		\right) = o(n^{-2p-2})
-	.\] 
-\end{lemma}
-note: This lemma is experimentally shown to be \textbf{false}.
-
-\begin{proposition}
-	If $X_1 \in \mathcal{F}_1$ and $X_2 \in \mathcal{F}_1 \cup \mathcal{F}_2$, where $\mathcal{F}_1, \mathcal{F}_2$ are independent, then
-	\[
-		\operatorname{Cov} (X_1, X_2) = \operatorname{Cov} \left(X_1, \mathbb{E}\left[ X_2 | \mathcal{F}_1 \right] \right)
-	.\] 
-\end{proposition}
-
-
-\begin{proof}
-	\begin{align*}
-		\operatorname{Cov} (X_1, X_2)
-		&= \mathbb{E}\left[ \mathbb{E}\left[ (X_1 - \mathbb{E} X_1) (X_2 - \mathbb{E} X_2) | \mathcal{F}_1 \right]  \right]  \\
-		&= \mathbb{E}\left[(X_1 - \mathbb{E} X_1)  \mathbb{E}\left[ (X_2 - \mathbb{E} X_2) | \mathcal{F}_1 \right]  \right]  \\
-		&= \mathbb{E}\left[(X_1 - \mathbb{E} X_1)  (\mathbb{E}\left[ X_2  | \mathcal{F}_1 \right]- \mathbb{E} X_2)  \right]  \\
-		&= \mathbb{E}\left[(X_1 - \mathbb{E} X_1)  (\mathbb{E}\left[ X_2  | \mathcal{F}_1 \right]- \mathbb{E} \left[ \mathbb{E}\left[ X_2  | \mathcal{F}_1 \right] \right] )  \right]  \\
-		&= \operatorname{Cov} (X_1, \mathbb{E}\left[ X_2 | \mathcal{F}_1 \right] )
-	.\end{align*}
-\end{proof}
-
-
