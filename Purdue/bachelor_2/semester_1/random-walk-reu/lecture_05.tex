@@ -1,0 +1,42 @@
+\lecture{5}{Thu 29 Jun 2023 08:34}{Drift control without moment bound}
+
+Conditioned on 
+\[
+	\left| \tau_i^{\mathcal{B}} - 2 i \right| < \sqrt{ i} \log n \quad \forall i < K \sqrt{n} 
+.\] 
+and
+\[
+	\left| \tau_{i+1}^{\mathcal{B}} - \tau_i^{\mathcal{B}} \right| < i^{\kappa'} \log n \quad \forall i < K \sqrt{n} 
+.\] 
+
+We want a deterministic bound on local drift at $y$ consumed up until $K\sqrt{n}$-th left step. Assume $y > x > 0$, fix some $m \in \mathbb{N}$ to be specified later.
+
+\begin{align*}
+	&\sum_{i = 0}^{K \sqrt{n} } 
+	\sum_{l = \tau_i^{\mathcal{B}}} ^{\tau_{i+1}^{\mathcal{B}}  -1}
+	\left|\frac{-w(2 \mathcal{B}_l + 1) + w(2 \mathcal{R}_l)}{w(w\mathcal{B}_l + 1) + w(2 \mathcal{R}_l)}\right|\\
+	&\le C_w \sum_i \sum_l \left| \frac{1}{w(2 \mathcal{R}_l)} - \frac{1}{w(2 \mathcal{B}_l + 1)} \right|  \\
+	&= C_w \sum_i \sum_l \left| \frac{1}{w(2 l - 2 i)} - \frac{1}{w(2i + 1)} \right|  \\
+	&= C_w \sum_i \sum_{j = \tau_i^{\mathcal{B}} - i}^{\tau_{i+1}^{\mathcal{B}} - i - 1} \left| \frac{1}{w(2j)} - \frac{1}{w(2i + 1)} \right|  \\
+	&= C_w \sum_i \sum_{j = \tau_i^{\mathcal{B}} - i}^{\tau_{i+1}^{\mathcal{B}} - i - 1} \left|  2^p B\left( \frac{1}{(2j)^p} - \frac{1}{(2i + 1)^p} \right)  + O\left( \frac{1}{i^{\kappa + 1}} \right) \right|  \\
+	&\le C_w \sum_i i^{\kappa'}\log n \sup_{|j - i| \le 2 \sqrt{i}  \log n} \left|  2^p B\left( \frac{1}{(2j)^p} - \frac{1}{(2i + 1)^p} \right)  + O\left( \frac{1}{i^{\kappa + 1}} \right) \right| \\
+	&\le C_{w, p} \sum_i i^{\kappa'} \log n \left( 
+		(4 \sqrt{ i } \log n) (2 i - 2 \sqrt{ i } \log n)^{- p - 1} + (2 i)^{- p - 1} + O(i^{- \kappa - 1})
+	\right)  \\
+	&\le  C_{w, p} \sum_i i^{\kappa'} \log n \left( i ^{-p - \frac{1}{2}} \log n +  i^{- \kappa - 1} \right)  \\
+	&= C_{w, p} \sum_i i^{- p - \frac{1}{2} + \kappa'} \log^2 n + i^{- \kappa - 1 + \kappa'} \log n \\
+	&\le C_{w, p} \left( \log^2 n (K \sqrt{ n} )^{-p+ \frac{1}{2} + \kappa'} + \log n (K \sqrt{ n} )^{- \kappa + \kappa'} \right)  \\
+	&= C_{w, p, K} \log^2 n^{-\frac{1}{2}p + \frac{1}{4} + \kappa'} 
+.\end{align*} 
+
+Now, conditioned on the event that, at step $\{n = \lambda_{x, m}\}  $, the previous good conditions hold for each site  $y > x$, and furthermore $M_n - x < K \sqrt{n} $. Then for all $y$ the previous bound holds for $\Delta_y^{(x,m)}$ and hence $\Delta_y^{(x,m)} - \rho_y^{(x,m)}$.
+
+Then we can apply the Azuma's inequality.
+
+\begin{align*}
+	P\left( \sum_y (\Delta_y^{(x,m)} - \rho_y^{(x,m)}) > \varepsilon \sqrt{n}  \right) 
+	&\le \exp\left( - \frac{\varepsilon^2 n}{2 K \sqrt{n} \left( C_{w, p, K} \log^2 n^{-\frac{1}{2}p + \frac{1}{4} + \kappa'} \right)^2 } \right) \\
+	&= \exp\left( - C_{w, p, K, \varepsilon} \, n^{p - 2 \kappa'} \log^{-4} n \right) 
+.\end{align*}
+
+So this method makes sense if we choose $\kappa' < \frac{p}{2}$.
