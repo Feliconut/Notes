@@ -1,0 +1,193 @@
+\homework{1}{Tue 05 Sep 2023 23:25}{homework}
+
+\section{Homework 1}
+
+\subsection{Problem 1.12}
+
+We first compute the coordinate transformation from Cartesian to Polar coordinates: given
+\[
+	x = r \cos(\theta), y = r \sin(\theta)
+.\] 
+We can compute
+\[
+	r = \sqrt{x^2 + y^2} , \theta = \arctan (y / x)
+.\] 
+
+Now
+\[
+	\vec{e} _x = \left( r_x, \theta_x \right)  = \left( \frac{x}{\sqrt{x^2 + y^2} } - \frac{y}{x^2 + y^2} \right) 
+.\] 
+\[
+	\vec{e} _y = \left( r_y, \theta_y \right)  = \left( \frac{y}{\sqrt{x^2 + y^2} }, \frac{x}{x^2 + y^2} \right) 
+.\] 
+
+\subsection{Coordinate for Electrostatics}
+
+We first compute
+\[
+	J^{-1} = \frac{\partial u \partial v \partial z}{ \partial x \partial y \partial z} = 
+	\begin{bmatrix}
+y & x & 0\\ 
+2x & -2y & 0\\ 
+0 & 0 & 1
+\end{bmatrix}
+.\] 
+
+But we actually need its inverse:
+\[
+	J = 
+\left(\begin{array}{rrr}
+\frac{y}{x^{2} + y^{2}} & \frac{x}{2 \, {\left(x^{2} + y^{2}\right)}} & 0 \\
+\frac{x}{x^{2} + y^{2}} & -\frac{y}{2 \, {\left(x^{2} + y^{2}\right)}} & 0 \\
+0 & 0 & 1
+\end{array}\right)
+.\] 
+
+Finally
+\[
+	\text{det} J = - \frac{1}{2x^2 + 2 y^2}
+.\] 
+
+
+\subsection{Coriolis Force}
+
+How long does it take to strike earth?
+\[
+	v_0 T \sin(\alpha) - \frac{1}{2}  g T^2 = 0 \implies t = \frac{2 v_0 \sin(\alpha)}{g}
+.\] 
+
+What is the longitudinal velocity?
+\[
+	v_y = v_0 \cos(\alpha)
+.\] 
+What is the Coriolis Force associated with it?
+\[
+	a_x = 2 \vec{\omega} \times v_y = 2 (\omega \sin \lambda) (v_0 \cos \alpha)
+.\] 
+
+Integrate two times:
+\[
+	x(t) = v_0 t^2 \omega \sin(\lambda) v_0 \cos(\alpha)
+.\] 
+\[
+	x(T) = \frac{4 v_0^2 \sin(\alpha)^2}{g^2} \omega \sin(\lambda) v_0 \cos(\alpha) = \frac{4v_0^3}{ g^2} \omega \sin(\lambda) \sin^2(\alpha) \cos(\alpha)
+.\] 
+
+\subsection{1.20}
+
+Let $\hat{x} $, $\hat{y} $ and $\hat{z} $ be the global frame, and $\hat{x} '$, $\hat{y} '$, $\hat{z} '$ be the local rotating frame at the ship; $\hat{x} '$ facing north, $\hat{y} '$ facing west, $\hat{z} '$ facing orthogonally up.
+
+From a similar argument, total time of flight  $T = 2 v_0 \sin(\alpha) / g$.
+
+Now
+\[
+	\vec{\omega}  = \omega \hat{z}  = - \omega \cos(\lambda) \hat{x} ' + \omega \sin(\theta) \hat{z} ' 
+.\] 
+\[
+	\vec{v}  = v_0 \cos(\alpha) \hat{x} ' + (v_0 \sin(\alpha) - gt) \hat{z}' 
+.\] 
+
+Thus
+\[
+	a_y = 2 \vec{\omega}  \times \vec{v}  = 2\left( g \omega t \cos(\lambda) - v_0 \omega \cos(\lambda) \sin(\alpha) - v_0 \omega \cos(\alpha) \sin(\lambda) \right) 
+.\] 
+Use Maple to integrate twice, and plug in $t = T$,
+\[
+	r_y = - \frac{4 \left( \omega \cos(\theta) \sin (\alpha)^3 + 3 \omega \cos(\alpha) \sin(\alpha)^2 \sin(\theta) \right) v_0^3 }{3 g^2}
+.\] 
+Plug in all physical constants, our final result is
+
+\[
+	-270.1 \hat{y} ' \qquad \text{(270.1 metres to east)}
+.\] 
+
+
+
+
+\subsection{Coriolis Force for Falling object}
+
+\subsubsection{Coriolis Force Contribution}
+
+
+Let $\hat{x} $ point eastward, $\hat{y} $ point southward, $\hat{z} $ point radially upward.
+By assumption, the initial velocity in rotating frame is $v_0 \hat{z} $. The particle gets its velocity in $\hat{y} $ direction only through Coriolis Force: $F_{cor} = - 2 m (\vec{\omega}  \times (v_z \hat{z} ))$. $\vec{\omega} $ has no $\hat{y} $-component, so no acceleration is directly generated on $\hat{x} $ direction. After velocity builds up in $\hat{y} $ direction, we will have a secondary Coriolis effect $F_{cor} = -2m(\vec{\omega}  \times (v_y \hat{y} ))$, in the $\hat{x} $ direction. The $\hat{y} $ component will be order $O(\omega)$, and the $\hat{x} $ component will be order $O(\omega^2)$. Since we ignore higher order terms, we may assume that $v_z$ is only affected by gravity, $v_y$ is only affected by Coriolis Force from $v_z$, and $v_x$ is only affected by Coriolis Force from $v_y$.
+
+By our simplification, $v_z$ is only affected by gravity, so $v_z = v_0 - g t$ (assuming constant  $g$ ).
+
+To compute the first Coriolis effect, note that  $\vec{\omega} \cdot \hat{x} = -\omega\cos\lambda $. Therefore we have $F_{cor} = -2  m \left( \vec{\omega} \times (v_z \hat{z} ) \right) = 2 m v_z \omega \cos\left( \lambda  \right) \hat{y} $. Divide by $m$ and integrate, we have  $v_y = 2 (v_0 t - \frac{1}{2} g t^2) \omega \cos \lambda $.
+
+Now we use this to compute the second Coriolis effect. Note that $\vec{\omega} \cdot \hat{z}  = \omega \sin \lambda$. Therefore we have $F_{cor } = - 2m (\vec{\omega} \times v_y \hat{y} ) = - 2 m v_y \omega \sin \left( \lambda \right)  \hat{x}  = - 4 m (v_0 t - \frac{1}{2} g t^2) \omega^2 \cos(\lambda) \sin(\lambda)$. Divide by $m$ and integrate,
+
+\[
+	v_x = - 4 \left( \frac{1}{2} v_0 t^2 - \frac{1}{6} g t^3 \right) \omega^2 \cos(\lambda) \sin(\lambda)
+.\] 
+Integrate again and discarding the lower order term,
+\[
+	r_x(t) = - 4 \left( - \frac{1}{24} g t^4 \right) \omega^2 \cos(\lambda) \sin(\lambda)
+.\] 
+Plug in $T = \sqrt{\frac{2h}{g}} $,
+\[
+	r_x(T) = \frac{1}{6} g \frac{4 h^2}{g^2} = \frac{2}{3} \frac{h^2}{g}  \omega^2 \cos(\lambda) \sin(\lambda)
+.\] 
+
+\subsubsection{Centrifugal Force Contribution}
+
+The centrifugal contribution is calculated by $\vec{F} = - m \vec{\omega}  \times (\vec{\omega} \times (\vec{R} + \vec{r} ))$. Observe that this gives something of order $\omega^2$. Hence we only need to consider centrifugal contribution due to the change of position in $\hat{z} $ direction.
+
+The $z$-position is only affected by gravity, as long as we only care about $O(\omega^2)$ terms. Thus, we have
+\[
+	r_z = h - \frac{1}{2} g t^2
+.\] 
+The centrifugal force is
+\[
+	\vec{F} = - m \vec{\omega}  \times (\vec{\omega} \times \left( r_z \hat{z}  \right) )
+	= m \omega^2 r_z \cos(\lambda)\left( \sin (\lambda) \hat{x}  + \cos(\lambda) \hat{z}  \right) 
+.\] 
+Divide by $m$ and integrate twice to obtain $\hat{x} $-displacement:
+\[
+	r_x(t) = \omega^2 (\frac{1}{2} h t^2 - \frac{1}{24} g t^4) \cos(\lambda) \sin(\lambda)
+.\] 
+Plug in $T = \sqrt{\frac{2 h}{g}} $:
+\[
+	r_x(T) = \frac{5}{6} \omega^2 \frac{h^2}{g} \cos(\lambda) \sin(\lambda)
+.\] 
+
+\subsubsection{Gravitational Contribution}
+The effective gravity is
+\[
+	g_{\text{eff}} = g_0 - \frac{d ^2}{dt^2}\vec{R}
+.\] 
+For fixed observer at surface, its $\vec{R} $ is represented in the global coordinate as
+\[
+	\vec{R} (t) = \left\langle R \cos(\lambda) \cos(\omega t), R \cos(\lambda) \sin(\omega t) , R \sin(\lambda) \right\rangle 
+.\] 
+
+Compute
+\[
+	-\ddot{\vec{R} } = \left\langle R \omega^2 \cos(\omega t) \cos(\lambda), R \omega^2 \cos(\lambda) \sin(\omega t), 0 \right\rangle 
+.\] 
+
+We know that $g_0$ only in the rotating $\hat{z}' $ direction, so we do not need to include it in computation. Now we want to find out the $\hat{x} '$-component of $- \ddot{\vec{R} }$. To do this, we try to find a representation of $\hat{x} '$ in the global coordinate.
+
+To simplify calculation, first set $t = 0$ :
+\[
+	- \ddot{\vec{R} } = \left\langle R \omega^2 \cos(\lambda), 0, 0 \right\rangle 
+.\] 
+At this moment, the global representation $\hat{x} '$ is
+\[
+	\hat{x} ' = \left\langle \sin(\lambda), 0, \cos(\lambda) \right\rangle 
+.\] 
+Computing the dot product will give us the $\hat{x} '$ component of acceleration:
+\[
+	a_x = \hat{x} ' \cdot (- \ddot{\vec{R} }) = R \omega^2 \cos(\lambda) \sin(\lambda)
+.\] 
+By symmetry considerations, our calculation for $a_x$ at $t=0$ also applies to all values of $t$. Hence we can integrate $a_x$ to get total displacement in the $\hat{x} '$ direction:
+\[
+	r_x = R \omega^2 \frac{1}{2}t^2 \cos(\lambda) \sin(\lambda)
+.\] 
+Plug in $T = \sqrt{\frac{2h}{g}} $ :
+\[
+	r_x = R \omega^2 \frac{h}{g} \cos(\lambda) \sin(\lambda)
+.\] 
+
+This is the best I can do for now. Although it is not precisely $\frac{5}{2} \frac{h^2}{g} \omega^2 \sin(\lambda) \cos(\lambda)$, the formula is similar and has same dimension.

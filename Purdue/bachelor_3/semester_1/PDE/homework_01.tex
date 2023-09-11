@@ -1,0 +1,157 @@
+\homework{1}{Fri 08 Sep 2023 22:04}{homework}
+
+\begin{enumerate}
+	\item 
+Verify assertion (36) in $[\mathrm{E}, \S 3.2 .3]$, that when $\Gamma$ is not flat near $x^0$, the noncharacteristic condition is
+\[
+D_p F\left(p^0, z^0, x^0\right) \cdot \nu\left(x^0\right) \neq 0 .
+\]
+(Here $\nu\left(x^0\right)$ denotes the normal to the hypersurface $\Gamma$ at $x^0$ ).
+\begin{proof}
+	We regard $F$ as a function 
+	\begin{align*}
+		F: TU \times U &\longrightarrow \mathbb{R} \\
+		(\partial, x) &\longmapsto F(\partial, x) = F(\partial u(x), u(x), x)
+	.\end{align*}
+	Where $TU$ is the tangent space of $U$ at $x_0$ (which is isomorphic to $\mathbb{R}^n$ ), and $\partial$ is a tangent vector at $x$, which is identified with a directional derivative operator $ u \mapsto Du(x)(\partial) = D_\partial u(x)$.
+
+	Let $\Phi: U \to \mathbb{R}^n$ be a flattening of  $U$ at $x_0$, $\Phi_*: TU \to T(\Phi U)$ be its pushforward, and let  $\tilde{p}, v, y$ be image of $p, u, x$ under $\Phi_*$ or $\Phi$. That is, for some neighbor of $x_0$ in $U$ (which we just call $U$, a little abuse of notation), we have $\Phi(U) =: V$ and define $\tilde F: TV \otimes V \to \mathbb{R}$ such that the following diagram commutes:
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJUVSBcXG90aW1lcyBVIl0sWzIsMSwiXFxSIl0sWzAsMiwiVFYgXFxvdGltZXMgViJdLFswLDIsIlxcUGhpXyogXFxvdGltZXMgXFxQaGkiLDIseyJsYWJlbF9wb3NpdGlvbiI6MzAsIm9mZnNldCI6Mn1dLFswLDEsIkYiXSxbMiwxLCJcXHRpbGRle0Z9IiwyXSxbMiwwLCJcXFBoaV8qXnstMX0gXFxvdGltZXMgXFxQaGleey0xfSIsMix7ImxhYmVsX3Bvc2l0aW9uIjozMCwib2Zmc2V0IjoxfV1d
+\[\begin{tikzcd}
+	{TU \otimes U} \\
+	&& \R \\
+	{TV \otimes V}
+	\arrow["{\Phi_* \otimes \Phi}"'{pos=0.3}, shift right=2, from=1-1, to=3-1]
+	\arrow["F", from=1-1, to=2-3]
+	\arrow["{\tilde{F}}"', from=3-1, to=2-3]
+	\arrow["{\Phi_*^{-1} \otimes \Phi^{-1}}"'{pos=0.3}, shift right, from=3-1, to=1-1]
+\end{tikzcd}\]
+
+We have $\Phi^i(x_i) = x_i$ for $i < n$, and $\Phi^n(x_n) = y_n = 0 = x_n - \gamma(x_1, \ldots, x_{n-1})$ for some surface $\gamma$. Thus 
+\[
+	D \Phi (x)(\partial_{x_j}) = 
+	\begin{cases}
+		\partial_{y_j} - \gamma_{x_j}\partial_{y_n} & i < n \\
+		\partial_{y_n} &  i = n
+	\end{cases}
+.\] 
+Now how to describe $\Phi_*: TU \to TV$? We have
+\begin{align*}
+	\Phi_*(\partial) v(y_0) &= \partial(v(\Phi(x_0))) \\
+	&= D v (y_0) D \Phi(x_0) (\partial)\\
+	\Phi_* (\partial)
+	&= D_y \cdot D \Phi(x_0)(\partial)
+.\end{align*}
+Moreover,
+\[
+	\Phi_*^{-1}(\tilde{\partial})
+	= D_x \cdot D\Phi^{-1}(y_0)(\tilde{\partial}) 
+.\] 
+	We want to differentiate on $TU$, so we need to step one level higher and consider the double-pushforward map $\Phi_{* *}: TTU \to TTV$. Let $p$ be any tangent vector in $TTU$ at $x_0$. Then
+	\begin{align*}
+		\Phi_{* *}(\partial_p) \tilde{F}(\cdot, y_0)
+		&= \partial_p \tilde{F}\left( \Phi_*(\cdot), \Phi(x_0) \right)  \\
+		&= \partial_p F = F_p
+	.\end{align*}
+	If we denote $\partial_{\tilde{p}} := \Phi_{* *} (\partial_p)$, we have proved
+	\[
+		\tilde{F} _{\tilde{p}} = F_p
+	.\] 
+	For flat $\tilde{F}$, the non-characteristic condition reads
+	 \[
+		 \tilde{F}_{\tilde{p_n}} \neq 0 
+	.\] 
+	To find the equivalent formulation on $F$, we want to know what is the pre-image of  $\partial_{\tilde{p_n}}$ under  $\Phi_{* *}$. Thanks to the following commutative diagram
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUVSJdLFsyLDAsIlRWIl0sWzAsMiwiVFRVIl0sWzIsMiwiVFRWIl0sWzAsMiwiXFxwYXJ0aWFsIiwyXSxbMSwzLCJcXHBhcnRpYWwiLDJdLFswLDEsIlxcUGhpXyoiLDFdLFsyLDMsIlxcUGhpX3sqICp9IiwxXV0=
+\[\begin{tikzcd}
+	TU && TV \\
+	\\
+	TTU && TTV
+	\arrow["\partial"', from=1-1, to=3-1]
+	\arrow["\partial"', from=1-3, to=3-3]
+	\arrow["{\Phi_*}"{description}, from=1-1, to=1-3]
+	\arrow["{\Phi_{* *}}"{description}, from=3-1, to=3-3]
+\end{tikzcd}\]
+We only need to find the pre-image of $\tilde{p}_n$ under  $\Phi_*$. 
+We have
+\begin{align*}
+	\Phi_*^{-1}(\tilde{p_n})
+	&= \partial x_n + \sum_{j < n} - \gamma_{x_j}(x_0, \ldots, x_{n-1}) \partial x_j \\
+	&= p_n + \sum_{j < n} - \gamma_{x_j} p_j \\
+	&= p \cdot \vec{n}
+.\end{align*} 
+where $\vec{n}$ is some normal vector of boundary of $U$ at $x_0$. Recall from MA442 that a normal vector to $\Gamma$ at $x_0$ can be obtained as the gradient of $G(x):= x_n - \gamma(x_1, \ldots, x_{n-1})$.
+
+Now
+\begin{align*}
+	\tilde{F}_{\tilde{p}_n}
+	&= \Phi^{-1}_{* *}(\tilde\partial_{p_n}) F \\
+	&= \partial_{\Phi^{-1}_*(p_n)} F \\
+	&= \partial_{p \cdot \vec{n}} F \\
+	&= \partial_p F \cdot \vec{n} \\
+	&= F_p \cdot \vec{n}
+.\end{align*}
+Now $\vec{n}$ and $\vec{\nu}$ are identical up to scaling, by definition. So we have the claim.
+
+\end{proof}
+
+
+\item
+Confirm that the formula $u=g\left(x-t F^{\prime}(u)\right)$ from [E, §3.2.5] provides an implicit solution for the conservation law
+\[
+u_t+F(u)_x=0
+\]
+provided
+\[
+1+t g^{\prime}\left(x-t F^{\prime}(u)\right) F^{\prime \prime}(u) \neq 0
+\]
+Show that the solution develops a shock (becomes singular) for some $t>0$, unless $F^{\prime}(g(x)$ ) is a nondecreasing function of $x$.
+
+\begin{proof}
+	The implicit solution exists when condition for the Implicit Function Theorem is met. That is, we have characterize the condition
+	\[
+		|D_u (G)|(u, x, t) \neq  0
+	.\] 
+	where
+	\[
+		G(u, x, t) := u - g\left(x - t F'(u)\right)
+	.\] 
+	Compute:
+	\[
+		D_u(G) = 1 - g'\left(x - t F'(u)\right) \left(- t F''(u)\right)
+	.\] 
+	Therefore $D_u(G)$ has nonzero Jacobian iff $1 + t g'(x - tF'(u)) F''(u)  \neq 0$, for all $t, x, u$.
+
+	When we have decreasing $F'(g(x)) $, there exists $x_1 < x_2$ such that $F'(g(x_1)) > F'(g(x_2))$. Denote $k_1:=F'(g(x_1))$ and $k_2 :=F'(g(x_2))$. 
+
+	All characteristic curves are straight lines of the form $x(s) = F'(g(x_0)) s + x_0$, according to eqn.(60) in [Evans, Sect. 3]. Thus we have two characteristic curves
+	\[
+		x(t) = k_1 t + x_1
+	.\] 
+	\[
+		x'(t) = k_2 t + x_2
+	.\] 
+	Now $k_1 > k_2$ but $x_1 < x_2$, so there must be an intersection of $x(t)$ and $x'(t)$.
+\end{proof}
+
+
+\item
+Show that the function $u(x, t)$ defined for $t \geq 0$ by
+\[
+u(x, t)= \begin{cases}-\frac{2}{3}\left(t+\sqrt{3 x+t^2}\right) & \text { for } 4 x+t^2>0 \\ 0 & \text { for } 4 x+t^2<0\end{cases}
+\]
+is an (unbounded) entropy solution of the conservation law $u_t+\left(u^2 / 2\right)_x=0$ (inviscid Burger's equation).
+\begin{proof}
+	For any $x, t$ such that $4x + t^2 \neq 0$, direct differentiation verifies that $u(x,t)$ is a solution. Now we want to verify that it is physical. To do this, we calculate the Rankine-Hugoniot Condition along the shock wave. 
+
+	First, the expression of the shock wave is $x(t) = - t^2 / 4$. So $\sigma = x'(t) = - \frac{t}{2}$.
+
+	Next, we see that $u_l \equiv 0$ and $u_r = -\frac{2}{3}\left( t + \sqrt{-3 \frac{t^2}{4} + t^2}  \right) = -t $. Therefore, 
+	 \[
+		\frac{\llbracket F u \rrbracket}{\llbracket u \rrbracket} = \frac{0-t^2 / 2}{0 - (-t)} = - \frac{1}{2} t
+	.\] 
+	Therefore the Rankine-Hugoniot condition is satisfied.
+\end{proof}
+
+
+\end{enumerate}

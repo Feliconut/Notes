@@ -1,0 +1,28 @@
+\studynote{10}{Wed 30 Aug 2023 23:37}{Verify BLP sum convergence}
+
+In this note we verify the last centered equation in Lemma~3.4 on pg.~13 of (\cite{kosyginaFunctionalLimitLaws2016}).
+
+The following result is given.
+\begin{theorem}(Theorem~2.3 of previous reference)
+	Let $\varepsilon>0$. Consider sequence of BLP $Z^n$, with initial conditions $Z^n_0 = z_n$, where $z_n / n \to y > \varepsilon$.
+
+	We have convergence in distribution in the Skorohod topology on cadlag functions on $[0,\infty )$:
+	\[
+		Y^{\varepsilon, n}(t) := \frac{Z^n_{\left\lfloor nt  \right\rfloor \wedge \sigma_{\varepsilon n}^{Z^n}}}{n}
+		\Rightarrow
+		Y(t \wedge \sigma_\varepsilon^Y)
+	.\] 
+	where $Y$ solves the SDE
+	\[
+		dY (t) = b_Z d t + \sqrt{ \nu Y(t)}  d B(t), \qquad Y(0) = y
+	.\] 
+\end{theorem}
+Here we omit the specific BLPs and drift constants.
+
+We now prove
+\begin{lemma}
+	Consider BLP $U$ ( one of the 4 types). Then we have
+	\[
+		
+	.\] 
+\end{lemma}

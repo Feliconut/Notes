@@ -83,7 +83,6 @@
 %\newcommand\Q{\ensuremath{\mathbb{Q}}}
 %\newcommand\C{\ensuremath{\mathbb{C}}}
 
-
 % Easily typeset systems of equations (French package)
 \usepackage{systeme}
 
@@ -127,18 +126,20 @@
 \usepackage{mdframed}
 \mdfsetup{skipabove=1em,skipbelow=0em}
 \theoremstyle{definition}
-\newmdtheoremenv[nobreak=true]{definition}{Definition}
+\newmdtheoremenv[nobreak=true]{statement}{Statement}[subsection]
+\newmdtheoremenv[nobreak=true]{definition}{Definition}[subsection]
 %\newmdtheoremenv[nobreak=true]{characteristic}{Characteristic}
 %\newmdtheoremenv[nobreak=true]{consequence}{Consequence}
-\newmdtheoremenv[nobreak=true]{lemma}{Lemma}
-\newmdtheoremenv[nobreak=true]{proposition}{Proposition}
-\newmdtheoremenv[nobreak=true]{statement}{Statement}
-\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
-\newmdtheoremenv[nobreak=true]{axiom}{Axiom}
-\newmdtheoremenv[nobreak=true]{postulate}{Postulate}
+\newmdtheoremenv[nobreak=true]{lemma}{Lemma}[subsection]
+\newmdtheoremenv[nobreak=true]{theorem}{Theorem}[subsection]
+\newmdtheoremenv[nobreak=true]{proposition}{Proposition}[subsection]
+\newmdtheoremenv[nobreak=true]{axiom}{Axiom}[subsection]
+\newmdtheoremenv[nobreak=true]{postulate}{Postulate}[subsection]
+\newmdtheoremenv[nobreak=true]{prop}{Proposition}[subsection]
+\newmdtheoremenv[nobreak=true]{corollary}{Corollary}[subsection]
 \newmdtheoremenv{conclusion}{Conclusion}
 \newmdtheoremenv{bonus}{Bonus}
-\newmdtheoremenv{conjecture}{Conjecture}
+\newmdtheoremenv{conjecture}{Conjecture}[subsection]
 \newtheorem*{repetition}{Repetition}
 \newtheorem*{interlude}{Interlude}
 \newtheorem*{notation}{Notation}
@@ -148,13 +149,14 @@
 \newtheorem*{fact}{Fact}
 \newtheorem*{claim}{Claim}
 \newtheorem*{practice}{Practice}
-\newtheorem*{problem}{Problem}
+%\newtheorem*{problem}{Problem}
 \newtheorem*{terminology}{Terminology}
 \newtheorem*{application}{Application}
 \newtheorem*{example}{Example}
 \newtheorem*{nonexample}{Nonexample}
 \newtheorem*{question}{Question}
 \newtheorem*{previouslyseen}{As previously seen}
+\newmdtheoremenv[nobreak=true]{problem}{Problem}[subsection]
 
 %\newmdtheoremenv[nobreak=true]{definition}{Definition}
 %\newtheorem*{notation}{Notation}
@@ -163,9 +165,7 @@
 \newtheorem*{observe}{Observe}
 \newtheorem*{property}{Property}
 \newtheorem*{intuition}{Intuition}
-\newmdtheoremenv[nobreak=true]{prop}{Proposition}
 %\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
-\newmdtheoremenv[nobreak=true]{corollary}{Corollary}
 %\newtheorem{exercise}{Exercise}[section]
 
 % End example and intermezzo environments with a small diamond (just like proof
@@ -273,17 +273,6 @@
     \marginpar{\small\textsf{\mbox{#2}}}
 }
 
-\newcommand{\note}[3]{
-    \ifthenelse{\isempty{#3}}{%
-        \def\@doctype{Note #1}%
-    }{%
-        \def\@doctype{Note #1: #3}%
-    }%
-    \subsection*{\@doctype}
-    \marginpar{\small\textsf{\mbox{#2}}}
-}
-
-
 \newcommand{\submit}[3]
 
 
@@ -335,14 +324,14 @@
 ]}{\end{tcolorbox}}
 
 % Noot is note in Dutch. Same as 'verbetering' but color of box is different
-%\newenvironment{note}[1]{\begin{tcolorbox}[
-%    arc=0mm,
-%    colback=white,
-%    colframe=white!60!black,
-%    title=#1,
-%    fonttitle=\sffamily,
-%    breakable
-%]}{\end{tcolorbox}}
+\newenvironment{note}[1]{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=white!60!black,
+    title=#1,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
 
 
 
@@ -378,4 +367,3 @@
     \textbf{Disclaimer.} These are lecture notes taken in #1's course, #2. Correctness of material is not guaranteed. These notes are treated as derived work of #1, and distribution of the material to people unaffliated to the class without the professor's written permission is prohibited.
 }
 
-\newcommand{\EDIT}[1]{{\color{cyan}\textsf{ \logseq{EDIT} #1}}}

@@ -5,10 +5,10 @@
 Assume that $y > x >  0$, let $m > 0$. We want to show \eqref{eqn:msum-goal-1}.
 We work on the event $\left\{ X_n = x, n = \lambda_{x, m} \right\} $. Consider some $K>0$ and condition further on the events
 \begin{align}
-	\mathcal{M}^{(x,m)} &< K \sqrt{ n} \\
+	\mathcal{M}^{(x,m)} &< K \sqrt{ n} \label{eqn:good-event-1}\\
 	\mathcal{E}_y^{(x,m)} &< K \sqrt{n} \quad &\forall y>x\\
 	\left| \tau_i^{\mathcal{B}} - 2 i \right| &< \sqrt{ i} \log n \quad &\forall i < K \sqrt{n} \\
-	\left| \tau_{i+1}^{\mathcal{B}} - \tau_i^{\mathcal{B}} \right| &< \log n \quad &\forall i < K \sqrt{n}
+	\left| \tau_{i+1}^{\mathcal{B}} - \tau_i^{\mathcal{B}} \right| &< \log n \quad &\forall i < K \sqrt{n} \label{eqn:good-event-2}
 .\end{align} 
 
 We denote the four events above as the \textit{good event} $G$.
@@ -56,11 +56,11 @@ We assume it has been proved that $\rho_y^{(x,m)} \to \gamma$ at rate $o(n^{-\fr
 
 Then we can apply the Azuma's inequality on $G \cap F$:
 
-\begin{align*}
-	P\left( \sum_y (\Delta_y^{(x,m)} - \rho_y^{(x,m)}) > \varepsilon \sqrt{n}  \right) 
-	&\le \exp\left( - \frac{\varepsilon^2 n}{2 K \sqrt{n} \left( C_{w, p, K} n^{-\frac{1}{2}p + \frac{1}{4}} \log^2 n  \right)^2 } \right) + P(G^c) + P(F^c)\\
-	&= \exp\left( - C_{w, p, K, \varepsilon} \, n^{p } \log^{-4} n \right) +P(G^c) + P(F^c)
-.\end{align*}
+\begin{align}
+	P\left( \sum_y (\Delta_y^{(x,m)} - \rho_y^{(x,m)}) > \varepsilon \sqrt{n}  \right) \notag
+	&\le \exp\left( - \frac{\varepsilon^2 n}{2 K \sqrt{n} \left( C_{w, p, K} n^{-\frac{1}{2}p + \frac{1}{4}} \log^2 n  \right)^2 } \right) + P(G^c) + P(F^c) \notag \\
+	&= \exp\left( - C_{w, p, K, \varepsilon} \, n^{p } \log^{-4} n \right) +P(G^c) + P(F^c) \label{eqn:drift-martingale}
+.\end{align}
 
 \begin{remark}
 	The bound above is under assumption that  $p < \frac{1}{2}$. For $p = \frac{1}{2}$, we get

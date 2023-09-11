@@ -1,0 +1,75 @@
+\lecture{6}{Fri 21 Jul 2023 05:24}{Full proof}
+
+Technical results regarding process-level tightness and control of rarely visited sites still hold true for $p \le \frac{1}{2}$.
+
+We follow the general frame walk in \cite{kosyginaFunctionalLimitLaws2016}. 
+
+\textbf{Step 1: Control of martingale term.} We apply Doob decomposition to $X_n$:
+\[
+	X_n = \sum_{i = 0}^{n-1} X_{i+1}-X_i = \sum_{i = 0}^{n-1} X_{i+1}-X_i - \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i \right] +  \sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i \right] =: M_n + C_n
+.\] 
+
+\begin{lemma}
+	$\left(\frac{M_{\left\lfloor nt  \right\rfloor}}{\sqrt{n} }\right)_{t \ge 0}$ converges to standard Brownian motion in $J_1$ metric.
+\end{lemma}
+\begin{proof}
+ $M_n$ is a martingale of bounded steps, we need only to check
+ \[
+	 \lim_{n \to \infty } \frac{1}{n} \sum_{i = 0}^{n-1} \mathbb{E}\left[ (M_{i+1} - M_i)^2 | \mathcal{F}_i \right]  = 1
+ .\] 
+
+in probability, which is implied by
+
+\[
+	 \lim_{n \to \infty } \frac{1}{n} \sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i \right]^2 = 0
+.\] 
+
+We can rewrite the sum into a sum of local drifts, and isolate the first $M$ visits:
+
+\begin{align}
+	&\sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i \right]^2\\
+	&= \sum_{x \in \left[ I_n^X, S_n^X \right]} \sum_{i = 0}^{L_x(n) - 1} \mathbb{E}\left[ \mathcal{D}_{i+1}^{(x)} - \mathcal{D}_i^{(x)} | \mathcal{F}_{i}^{\mathcal{B}, \mathcal{R}} \right]^2  \\
+	&\le  \sum_{x \in \left[ I_n^X, S_n^X \right]} \sum_{i = 0}^{L_x(n) - 1} \mathbb{E}\left[ \mathcal{D}_{i+1}^{(x)} - \mathcal{D}_i^{(x)} | \mathcal{F}_{i}^{\mathcal{B}, \mathcal{R}} \right]^2 \mathbf{1}\left( L_x(i) > M \right) + 
+	\sum_{i = 0}^{n - 1} \mathbf{1}\left( L_{X_i}(i) \le  M \right) 
+	\label{eqn:lem-martingale-1}
+.\end{align}
+
+We now restrict ourselves to the good event $G$ stated in \eqref{eqn:good-event-1}-\eqref{eqn:good-event-2}. Under $G$,
+the inner sum in the first term is further controlled by
+\begin{align*}
+	&\sum_{i =0}^{ L_x(n) - 1} \mathbb{E}\left[ \mathcal{D}_{i+1}^{(x)} - \mathcal{D}_i^{(x)} | \mathcal{F}_{i}^{\mathcal{B}, \mathcal{R}} \right]^2 \mathbf{1}\left( L_{x}(i) > M \right) \\
+	&\stackrel{(x > 0)}{\le} C_w \sum_{i = M}^{\mathcal{B}_n} \sum_{l = \tau_i^{\mathcal{B}}}^{\tau_{i+1}^{\mathcal{B}}-1} 
+	\left| \frac{1}{w(2 \mathcal{R}_l)} - \frac{1}{w\left( 2 \mathcal{B}_l + 1 \right) } \right|^2 \\
+	&\le C_{w, p} \sum_i i^{- 2 p - 1} \log^3 n \\
+	&\le C_{w, p} \left[ M^{- 2 p} - \mathcal{B}_n^{- 2 p} \right] \log^3 n  \\
+	&< C_{w, p} M^{-2 p} \log^3 n
+	.
+\end{align*}
+
+Note that this bound is uniform in $x$. We remark that cases $(x=0)$ and $(x < 0)$ have the exactly same bounds. 
+
+Now apply the bound $\sum_{i = 0}^{n-1} \mathbf{1}\left( L_{X_i}(i) \le M \right) \mathbf{1}(X_i = x) \le  M$ to the second term in \eqref{eqn:lem-martingale-1}, we have
+
+\begin{multline}
+	\sum_{x \in \left[ I_n^X, S_n^X \right]} \sum_{i = 0}^{L_x(n) - 1} \mathbb{E}\left[ \mathcal{D}_{i+1}^{(x)} - \mathcal{D}_i^{(x)} | \mathcal{F}_{i}^{\mathcal{B}, \mathcal{R}} \right]^2 \\
+	< \sum_{x \in \left[ I_n^X, S_n^X \right]} (C_{w, p} M^{-2p} \log^3 n +M )
+\end{multline}
+
+Using process-level tightness, the summation only add a term of order $\sqrt{n}$, on a good event. Since we have a factor of $\frac{1}{n}$, and $M$ independent of $n$, we have the right hand side $\to 0$. More precisely,
+
+\begin{align*}
+	 &P\left( \left| \frac{1}{n} \sum_{i = 0}^{n-1} \mathbb{E}\left[ X_{i+1} - X_i | \mathcal{F}_i \right]^2  \right|  > \varepsilon \right)\\
+	 &\le P\left( \left| \sum_{x \in \left[ I_n^X, S_n^X \right]} (C_{w, p} M^{-2p} \log^3 n +M ) \right| > \varepsilon  n \right) + P(G^c) \\
+	 &\le 2 P\left( S_n^X \ge n^{3 / 4} \right) + P\left(  \left| \sum_{|x| \le n^{3 / 4}} (C_{w, p} M^{-2p} \log^3 n +M ) \right| > \varepsilon  n  \right) +P(G^c)  \\
+	 &\le 2 P\left( S_n^X \ge n^{3 / 4} \right) + P\left(  C_{w, p, M} \,\, n^{3 / 4} \log^3 n > \varepsilon  n  \right) + P(G^c)
+.\end{align*}
+The second term vanishes trivially; the first term vanishes by process-level tightness of $S_n^X / \sqrt{n} $. The last term goes to zero as shown in the previous section.
+
+\end{proof}
+
+\textbf{Step 2: Control of accumulated drift.} Now we control $C_n$. We need to show Lemma~\ref{lem:drift-term}. The proof is considered complete in view of \eqref{eqn:drift-martingale} and (\cite{wangLocalDrift2023}, Lemma~3.2).
+
+\textbf{Step 3: Tightness.} This is consequence of (\cite{kosyginaConvergenceNonconvergenceScaled2022}, Proposition~2.1). 
+
+\textbf{Step 4: Convergence to BMPE.} The proof follows word by word.
+

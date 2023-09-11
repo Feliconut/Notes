@@ -1,0 +1,84 @@
+\homework{1}{Tue 05 Sep 2023 12:07}{homework}
+
+\begin{itemize}
+	\item 
+1. In a Stern-Gerlach apparatus, the eigenstates of the $S_y$ observable can be expressed in terms of the $S_z$ eigenstates using,
+\[
+\begin{gathered}
+\left|S_y ;+\right\rangle=\frac{1}{\sqrt{2}}\left|S_z ;+\right\rangle+\frac{i}{\sqrt{2}}\left|S_z ;-\right\rangle \\
+\left|S_y ;-\right\rangle=\frac{1}{\sqrt{2}}\left|S_z ;+\right\rangle-\frac{i}{\sqrt{2}}\left|S_z ;-\right\rangle
+\end{gathered}
+\]
+Find an expression for the $S_y$ observable operator in the $\left|S_z ; \pm\right\rangle$ basis.
+\begin{proof}[Solution]
+	Let $\left| + \right\rangle , \left| - \right\rangle $ denote the $S_z$ eigenstates. Then we have
+	\begin{align*}
+		\left| + \right\rangle &=  \frac{1}{\sqrt{2}}\left( \left| S_y; + \right\rangle + \left| S_y; - \right\rangle  \right) \\
+		\left| - \right\rangle &= -\frac{i}{\sqrt{2} } \left( \left| S_y; + \right\rangle - \left| S_y; - \right\rangle  \right)  
+	.\end{align*}
+	Now we may compute
+	\begin{align*}
+		\left\langle + \right| S_y \left| - \right\rangle 
+		&= \left\langle + \right| \frac{-i}{\sqrt{2} }\left( \frac{\hbar}{2} \left| S_y; + \right\rangle + \frac{\hbar}{2} \left| S_y;- \right\rangle  \right)   \\
+		&= \left\langle + \right| \left( -i\frac{\hbar}{2} \left| + \right\rangle  \right)  \\
+		&= -i\frac{\hbar}{2} 
+	.\end{align*}
+	\begin{align*}
+		\left\langle - \right| S_y \left| + \right\rangle 
+		&= \left\langle - \right| \frac{1}{\sqrt{2} }\left( \frac{\hbar}{2} \left| S_y; + \right\rangle - \frac{\hbar}{2} \left| S_y; - \right\rangle  \right)  \\
+		&= \left\langle - \right| \frac{\hbar}{2} i \left| - \right\rangle  \\
+		&= i \frac{\hbar}{2}
+	.\end{align*}
+	Moreover, by the computation above it is clear that $\left\langle + \right| S_y \left| + \right\rangle  = \left\langle - \right| S_y \left| - \right\rangle  = 0$.
+
+	Hence
+	\[
+		S_y = \frac{\hbar}{2}\left( i \left| - \right\rangle \left\langle + \right|  - i \left| + \right\rangle \left\langle - \right|  \right) 
+	.\] 
+\end{proof}
+\item
+2. The spin observables can be represented in the $\left|S_z ; \pm\right\rangle$ basis using the $2 \times 2$ Pauli matrices: $\vec{S}=\frac{\hbar}{2} \vec{\sigma}$. Show that these satisfy the following commutation relations:
+\begin{align*}
+& {\left[S_x, S_y\right]=i \hbar S_z} \\
+& {\left[S_y, S_z\right]=i \hbar S_x} \\
+& {\left[S_z, S_x\right]=i \hbar S_y}
+\end{align*}
+
+\begin{proof}[Solution]
+	\begin{align*}
+		S_x S_y &= \frac{\hbar}{2}\left( \left| + \right\rangle \left\langle - \right| + \left| - \right\rangle \left\langle + \right|  \right)  \frac{\hbar}{2} \left( -i \left| + \right\rangle \left\langle - \right| + i \left| - \right\rangle  \left\langle + \right|  \right)  \\
+		&= i\frac{\hbar^2}{4} \left( \left| + \right\rangle \left\langle + \right|  - \left| - \right\rangle \left\langle - \right|  \right)
+	.\end{align*}
+	\begin{align*}
+		S_y S_x &=  \frac{\hbar}{2} \left( -i \left| + \right\rangle \left\langle - \right| + i \left| - \right\rangle  \left\langle + \right|  \right) \frac{\hbar}{2}\left( \left| + \right\rangle \left\langle - \right| + \left| - \right\rangle \left\langle + \right|  \right)  \\
+		&= -i\frac{\hbar^2}{4} \left( \left| + \right\rangle \left\langle + \right|  - \left| - \right\rangle \left\langle - \right|  \right)
+	.\end{align*}
+	From this we see that
+	\[
+		\left[ S_x, S_y \right]  = i \frac{\hbar^2}{2} \left( \left| + \right\rangle \left\langle + \right| - \left| - \right\rangle  \left\langle - \right|  \right) = i \hbar S_z
+	.\] 
+	To prove the other two equalities we use the Pauli matrices. It is well known that (can be checked directly from definitions)
+	\begin{align*}
+		[\sigma_1, \sigma_2] &= 2 i \sigma_3\\
+		[\sigma_2, \sigma_3] &=  2 i \sigma_1 \\
+		[\sigma_3, \sigma_1] &=  2 i \sigma_2
+	.\end{align*}
+	Multiply $\frac{\hbar^2}{4}$ to both sides and we obtain
+	\begin{align*}
+		\left[ S_y, S_z \right]  = \frac{\hbar^2}{4} [\sigma_2, \sigma_3] &=  2 i \frac{\hbar^2}{4} \sigma_1 = i \hbar S_x \\
+		\left[ S_z, S_x \right] = \frac{\hbar^2}{4}[\sigma_3, \sigma_1] &= 2 i \frac{\hbar^2}{4} \sigma_2 = i \hbar S_y
+	.\end{align*}
+\end{proof}
+
+
+
+\item
+3. Show that the operator $S^2=S_x^2+S_y^2+S_z^2$ is diagonal in the $\left|S_z ; \pm\right\rangle$ basis, that it commutes with the $S_z$ operator, and therefore that $S_z$ and $S^2$ are compatible observables.
+\begin{proof}[Solution]
+	Observe that when we multiply out $S_y^2$, we only get terms involving $\left| + \right\rangle \left\langle + \right| $ and $\left| - \right\rangle \left\langle - \right| $. The same is true for $S_x^2$ and $S_z^2$. This means $S_x^2, S_y^2, S_z^2$ are all have eigenvectors $\left| S_z; \pm  \right\rangle $. Thus they are all diagonalizable wrt the basis $\left| S_z; \pm  \right\rangle $. Hence $S^2$, being their sum, is diagonal.
+
+	Trivially, $S_z$ is diagonal in the basis $\left| S_z; \pm  \right\rangle $. Diagonality implies commutativity since $\mathbb{C}$ is commutative. They are compatible by definition.
+\end{proof}
+
+\end{itemize}
+

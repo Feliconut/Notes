@@ -1,0 +1,210 @@
+\homework{1}{Sat 09 Sep 2023 18:06}{homework}
+
+\begin{problem}
+	(i) (5 pts) Suppose $\mu, v$ and $\lambda$ are measures satisfying $\nu \ll \mu$ and $\mu \perp \lambda$. Then $\nu \perp \lambda$.\\
+(ii) ( 5 pts) Give an example of two measures $\nu$ and $\mu$ with $\nu \ll \mu$ but $\mu$ not absolutely continuous with respect to $\nu$.
+\end{problem}
+\begin{proof}	
+	Let $X$ be the total space.
+	Since $\mu \perp \lambda$, there exists two measurable sets $E, F$ that partitions $X$, so that $\mu(F) = \lambda(E) = 0$. Now since $\nu \ll \mu$, $\nu(F) = 0$. Hence $\nu \perp \lambda$.
+
+	Let $\nu$ be the Lebesgue measure and $\mu$ be the Borel measure on $\mathbb{R}$; then $\nu \ll \mu$ since every Borel measurable set is Lebesgue measurable; but the set $[0,1] \cap \mathbb{Q}$ has Lebesgue measure $0$ but Borel measure $1$.
+
+For another example, let $\mu$ be the measure on $\mathbb{R}$ such that $\mu(E) := \# \{E \cap \{0,1\} \} $. Then let $\nu(E) := \# \{E \cap \{0\} \}  $. Then $\mu(E) = 0$ implies $E$ disjoint from $\{0,1\} $, thus $\nu(E) = 0 $. But the set $\{1\}$ has $\nu$-measure zero yet $\mu$-measure 1.
+\end{proof}
+
+\begin{problem}
+	\begin{itemize}
+		\item Prove that Hahn decomposition need not be unique.
+		\item Prove a.e. uniqueness of the function $f$ in Radon-Nikodym Theorem.
+		\item Prove the uniqueness of the measures in Lebesgue decomposition.
+	\end{itemize}
+\end{problem}
+\begin{proof}
+	\begin{itemize}
+		\item Let $\mu$ be Lebesgue measure on $[0,1]$ and $\nu$ be Lebesgue measure on $[1,2]$. They are both identified with measures on $[0,2]$. Now $\mu$ is supported on $[0,1]$ and $\nu$ is supported on $(1,2]$. On the other hand, we can also say that $\mu$ is supported on $[0,1)$ and $\nu$ is supported on $[1,2]$. This gives two Hahn decompositions.
+
+		Generally, any set that is both $\mu$-null and $\nu$-null can be included in either side of the Hahn decomposition.
+
+	\item 
+		Let $(X, m)$ be a finite measure space. We want to show that for any $m$-measurable function $f$ and $g$, we have $m_f = m_g$ iff $f = g$ almost everywhere. The $\gets $ side is trivial, so we only prove that $\to $ side. Suppose that $f \neq g$ on a set with positive measure. Then either $f > g$ on a set with positive measure, or $f < g$ on a set with positive measure. By symmetry we assume $f > g$. Then there exists measurable  $E$ such that $m(E) > 0 $ and $f > g $ on $E$. Then
+		\[
+			m_f(E) - m_g(E) = \int _E (f-g) dm > 0 
+		.\] 
+		Therefore $m_f \neq m_g$. Taking contrapositive, we see that $m_f = m_g$ implies $f = g$ almost everywhere.
+
+		Now suppose $(X,m)$ is $\sigma$-finite. So we have $X = \bigcup_{i \in \mathbb{N}} X_i$, where $X_i \cap X_j = \emptyset $ for any $i \neq j$, and $m(X_i) < \infty $.  Suppose that $f > g$ on some measurable set $E$ with positive measure. Then there exists $i \in \mathbb{N}$ such that $f>g$ on $E \cap X_i$ and $m(E \cap X_i) > 0$. Now $E \cap X_i$ has finite $m$-measure, so we can apply the previous argument to obtain that $m_f \neq  m_g$ on $X_i$, therefore $m_f \neq  m_g$. Taking contrapositive, we see that $m_f = m_g$ implies $f = g$ almost everywhere.
+
+		\item
+			Let $\nu = \mu_f + \nu_{s}$ be Lebesgue decomposition of $\nu$, such that $\nu_s \perp \mu$ and $f \in L^1(\mu)$. Now suppose $g$ is another function in $L^1(\mu)$ such that $\nu - \mu_g \perp \mu$. Then $(\nu - \mu_g) - (\nu - \mu_f) = \mu_f - \mu_g\perp \mu$. This implies $\mu_f = \mu_g$.
+\end{itemize}
+\end{proof}
+
+\begin{problem}
+	Let $v$ be a signed measure on $(X, \mathcal{F})$ such that $|v|(X) < \infty $. Show that there is a height function $|h(x)| = 1$ such that
+	\[
+		v(E) = \int _E h(x) d |v|
+	.\] 
+\end{problem}
+\begin{proof}
+	 Let $X_+, X_-$, be Hahn decomposition of $X$ wrt $v$. Let $h = 1$ on $X_+$ and $h = -1$ on $X_-$. For any  $E \in \mathcal{F}$ write $E_+ = E \cap X_+$ and $E_- = E \cap X_-$. Now
+	 \[
+	 	v(E) = \int _{E_+} d v + \int _{E_-} (-1) d(-v) = \int _{E_+} h(x) d|v| + \int _{E_-} h(x) d |v| = \int _E h(x) d |v|
+	 .\] 
+\end{proof}
+
+\begin{problem}
+	Let $u: \mathbb{R}^d \to  \mathbb{R}$ be a superharmonic function. Let $\{\xi_k\} $ be i.i.d. uniform random variables in unit ball $B(0,1)$. Set $S_n = x + \sum_{k \le n} \xi_k$. Show that $M_n = u(S_n)$ is a supermartingale.
+\end{problem}
+\begin{proof}
+	Define $\mathcal{F}_n := \sigma\left( \xi_k: 1 \le k \le n \right) $, then $S_n \in \mathcal{F}_n$. Hence $M_n \in \mathcal{F}_n$. Using superharmonicity of $u$:
+	\begin{align*}
+		\mathbb{E}\left[ M_n | \mathcal{F}_{n-1} \right] 
+		&= \mathbb{E}\left[ u(S_{n-1} + \xi_k) | \mathcal{F}_{n-1} \right]  \\
+		&\ge u(S_{n-1})
+	.\end{align*}
+	Finally, we have $S_n \in B(0,n)$, thus $\mathbb{E}[M_n] \le \sup_{\|x\|<n} u(x) < \infty $.
+\end{proof}
+
+\begin{problem}[Chebyshev's inequality] (durett 4.1.2)
+	If $a > 0$, then
+	\[
+		P\left( |x| \ge a | \mathcal{F} \right) 
+		\le a^{-2} E\left( X^2 | \mathcal{F} \right) 
+	.\] 
+\end{problem}
+\begin{proof}
+	The proof without conditional expectation is
+	 \[
+		 E\left[ a^2 \mathbf{1}\left(|X| \ge a\right) ; A\right] 
+		 \le E\left[ X^2 \mathbf{1}\left( |X| \ge a \right) ; A  \right] 
+		 \le E[X^2 ; A]
+	.\] 
+	Where $A$ is any $P$-measurable set.
+
+	To prove the conditional version, note that for any $A \in \mathcal{F}$,
+	\[
+		E\left[ a^2 \mathbf{1}\left( |X| \ge a \right) ; A \right] 
+		= E\left[ E\left[ a^2 \mathbf{1}\left( |X| \ge a \right) | \mathcal{F} \right] ; A \right] 
+		= E\left[ a^2 P\left( |X| \ge a | \mathcal{F} \right)  ;A\right] 
+	.\] 
+	On the other side,
+	\[
+		E\left[ X^2 ; A \right] 
+		= E\left[ E\left[ X^2 | \mathcal{F} \right] ;A \right] 
+	.\] 
+	Hence
+	\[
+		\int _A P\left( |X| \ge a | \mathcal{F} \right) 
+		\le \int _A a^{-2} E\left( X^2 | \mathcal{F} \right) 
+	.\] 
+	Since this is true for all $A \in \mathcal{F}$, we may write
+	\[
+		P\left( |X| \ge  a | \mathcal{F} \right) 
+		\le a^2 E\left( X^2 | \mathcal{F} \right) 
+	.\] 
+\end{proof}
+
+\begin{problem}[Cauchy-Schwarz Inequality] (Durett 4.1.3)
+	\[
+		E\left( XY | \mathcal{G} \right) ^2
+		\le E(X^2 | \mathcal{G}) E(Y^2 | \mathcal{G})
+	.\] 
+\end{problem}
+\begin{proof}
+	\begin{equation}
+		E\left((X + \theta Y)^2 |\mathcal{G}\right)
+		= E(X^2 | \mathcal{G}) + \theta^2 E(Y^2 | \mathcal{G}) + 2 \theta E(X Y | \mathcal{G})
+	.\end{equation} 
+	Fix any $\omega \in \Omega$. We have
+\begin{equation}
+		E\left((X + \theta Y)^2 |\mathcal{G}\right)(\omega)
+		= E(X^2 | \mathcal{G})(\omega) + \theta^2 E(Y^2 | \mathcal{G})(\omega) + 2 \theta E(X Y | \mathcal{G})(\omega)
+	.\end{equation}
+	The quadratic polynomial in RHS has at most one real root. Hence
+	\[
+		E(XY | \mathcal{G})(\omega)^2 \le E(X^2 |\mathcal{G}) (\omega) E(Y^2| \mathcal{G})(\omega)
+	.\] 
+	This is equivalent to
+	\[
+		E(XY | \mathcal{G})^2 (\omega) \le \left( E(X^2 | \mathcal{G}) E(Y^2 | \mathcal{G}) \right) (\omega)
+	.\] 
+	But this inequality holds surely for all $\omega \in \Omega$. Therefore
+	\[
+		E(XY | \mathcal{G})^2 \le E(X^2 | \mathcal{G}) E(Y^2 | \mathcal{G})
+	.\] 
+\end{proof}
+
+\begin{problem}[Pythagorean Theorem](Durett 4.1.6)
+	Show that if $\mathcal{G} \subset  \mathcal{F}$ and $EX^2 < \infty $, then
+	\[
+		E\left( \left(X - E(X | \mathcal{F})\right)^2 \right) 
+		+ E\left( \left( E(X | \mathcal{F}) - E(X | \mathcal{G}) \right) ^2 \right) 
+		= E\left( \left( X - E(X | \mathcal{G}) \right) ^2 \right) 
+	.\] 
+\end{problem}
+\begin{proof}
+	From proof of Theorem. 4.1.15, for any $Y \in L^2(\mathcal{F})$ and $Z = E(X | \mathcal{F}) - Y$,
+	\[
+		E(X - Y)^2 = E\left( \left( X - E(X | \mathcal{F}) \right) ^2 \right) + E Z^2
+	.\] 
+	Now take $Y = E(X | \mathcal{G})^2$, and we have the claim.
+\end{proof}
+
+
+\begin{problem}(Durett 4.1.8)
+	Let $Y_1, Y_2, \ldots$ be iid with mean $\mu$ and variance $\sigma^2$. Let $N$ be an independent positive integer valued $r.v.$ with $EN^2 < \infty $ and $X = Y_1 + \ldots + Y_N$. Show that $\text{var}(X) = \sigma^2 EN + \mu^2 \text{var}(N)$.
+\end{problem}
+\begin{proof}
+	Use the previous result in special case $\mathcal{G} = \{\emptyset , \Omega\} $. Then
+	\[
+		\text{var}(X) = E\left( \text{var}(X | \mathcal{F}) \right) + \text{var}\left( E(X | \mathcal{F}) \right) 
+	.\] 
+	Now let $\mathcal{F} = \sigma(N)$. Then
+	\[
+		E\left( \text{var}(X | \mathcal{F}) \right) 
+		= E\left( N \text{var}(Y_1) \right) 
+		= E( N \sigma^2) = \sigma^2 EN
+	.\] 
+	Also
+	\[
+		\text{var}\left( E(X|\mathcal{F}) \right) 
+		= \text{var}\left( N E(Y_1) \right) 
+		= \text{var}(N \mu) = \mu^2 \text{var}(N)
+	.\] 
+\end{proof}
+
+\begin{problem}(Durett 4.2.2)
+	Give an example of a submartingale $X_n$ so that $X_n^2$ is a supermartingale.
+\end{problem}
+\begin{proof}
+	Take $X_n = - \frac{1}{n}$, which is strictly increasing. Now $X_n^2  = \frac{1}{n^2}$ which is strictly decreasing.
+\end{proof}
+
+\begin{problem}(Durett 4.2.3)
+	Generalize (i) of Theorem 4.2.7 by showing that if $X_n$ and $Y_n$ are submartingales wrt $F_n$, then $X_n \vee Y_n$ is also.
+\end{problem}
+\begin{proof}
+	Denote $A_n := 1(X_n > Y_n) $ and $A_{n}^c := 1 - A_{n}$. Denote $Z_n := X_n \vee Y_n$. Now we split into two cases:
+	\begin{align*}
+		A_{n-1} E(Z_n | Z_{n-1})
+		&\ge  A_{n-1} E(X_n | X_{n-1}) 
+		\ge A_{n-1} X_{n-1} 
+		= A_{n-1} Z_{n-1}\\
+		A_{n-1}^c E(Z_n | Z_{n-1})
+		&\ge  A_{n-1}^c E(Y_n | Y_{n-1}) 
+		\ge A_{n-1}^c Y_{n-1} 
+		= A_{n-1} Z_{n-1}
+	.\end{align*}
+	Thus 
+	\[
+		E(Z_n | Z_{n-1}) = (A_{n-1} + A_{n-1}^c) E(Z_n | Z_{n-1}) \ge (A_{n-1} + A_{n-1}^c) Z_{n-1} = Z_{n-1}
+	.\] 
+\end{proof}
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+\homework{1}{Fri 25 Aug 2023 08:51}{homework}
+
+\begin{enumerate}
+	\item [1.1]
+		\begin{enumerate}
+			\item Let $Y$ be the plane curve $y = x^2$. Show that $A(Y)$ is isomorphic to a polynomial ring in one variable over $k$.
+			\item Let $Z$ be the plane curve $xy = 1$. Show that $A\left(Z\right) $ is not isomorphic to a polynomial ring in one variable over $k$.
+			\item Let $f$ be any irreducible quadratic polynomial in $k[x,y]$, and let $W $ be the conic defined by $f$. Show that $A(W)$ is isomorphic to $A(Y)$ or $A\left( Z \right) $. Which one is it then?
+		\end{enumerate}
+		\begin{proof}
+			\begin{enumerate}
+				\item 
+					\[
+						A(Y) := A / I(Y) := k[x,y] / (y - x^2) \simeq k[t]
+					.\] 
+					Now we verify the last $\simeq $ by explicitly constructing the isomorphism. Define a pair of homomorphisms
+					\begin{align*}
+						\phi: k[x,y]/(y-x^2) &\longrightarrow k[t] \\
+						x &\longmapsto \phi(x) = t \\
+						y &\longmapsto \phi(y) = t^2
+					.\end{align*}
+					and
+					\begin{align*}
+						\varphi: k[t] &\longrightarrow k[x,y]/(y-x^2) \\
+						t &\longmapsto \varphi(t) = x
+					.\end{align*}
+					We see that $\phi$ is well-defined since $\phi(y - x^2) = t^2 - t^2 = 0$. 
+
+					Now
+					\[
+						\phi \circ \varphi (t) = \phi(x) = t
+					.\] 
+					and similarly
+					\[
+						\varphi \circ \phi(x) = \varphi(t) = x,
+						\varphi \circ \phi(y) = \varphi(t^2) = x^2 \equiv y \mod (y-x^2)
+					.\] 
+					Hence
+					\[
+						\phi \circ \varphi = \text{Id}, \varphi \circ \phi = \text{Id}
+					.\] 
+					Therefore the two sides are isomorphic.
+				\item
+					For arbitrary $a x^m y^n \in k[x,y]$ where $a \in k$ nonzero, we have \\$(a x^m y^n)(a^{-1} x^n y^m) = (xy)^{m + n} = \left(1_{A(W)}\right)^{m+n} = 1$, by the canonical homomorphism onto $A(W)$. However, on $k[z]$, the only units are the nonzero elements of $k$. Since the units of $k[x,y] / (xy - 1)$ and $k[z]$ do not correspond, they cannot be isomorphic.
+				\item
+					We claim that, up to change of variable, any quadratic polynomial over $k$ has the form $XY - d$.
+					A quadratic polynomial in $k[x,y]$ has the general form
+					\[
+						f = a x^2 + b y^2 + c x y + d x + e y + g
+					.\]  
+					Since $\overline{k}  = k$, $ax^2 + by^2 + cxy$ splits into $a'(x+b'y)(x+c'y)$. Make a change of variable $a' (x + b'y) \mapsto X$ and $(x + c'y) \mapsto Y$, we may assume without loss of generality that $f \in k[X,Y]$  and takes the form
+					\[
+						f = XY + d'X + e'Y + g'
+					.\] 
+					But this can be written as
+					\[
+						f = (X + e')(Y + d') + (g' - e'd')
+					.\] 
+					Make another change of variable $(X + e') \mapsto X'$ and $(Y + d') \mapsto d'$, we may assume WLOG that $f$ take the form
+					\[
+						 f = X'Y' - p
+					.\] 
+					Now we show that $A(W) \simeq A(Z)$.
+					Define the homomorphism
+					\begin{align*}
+						\phi: A(Z) &\longrightarrow A(W) \\
+						x + (xy-1) &\mapsto p^{-1} X' + (X'Y'-p) \\
+						y + (xy-1) &\mapsto Y' + (X'Y'-p)
+					.\end{align*}
+					To check well-definedness, observe
+					\[
+						\phi(xy - 1) = p^{-1}X'Y' - 1 + (X' Y' - p) = 0_{A(W)}
+					.\] 
+					Also define the homomorphism
+					\begin{align*}
+						\varphi: A(W) &\longrightarrow A(Z) \\
+						X' + (X'Y' - p) &\longmapsto p x + (xy-1) \\
+						Y' + (X'Y' - p) &\longmapsto y + (xy-1)
+					.\end{align*}
+					This map is also well-defined:
+					\[
+						\varphi(X'Y'-p) = pxy - p + (xy-1) = 0_{A(Z)}
+					.\] 
+					We verify that their compositions are identities:
+					\begin{gather}
+						\phi \circ \varphi(X') = \phi(p x) = p^{-1} (p X') = X'\\
+						\phi \circ \varphi(Y') = \phi(y) = Y'\\
+						\varphi \circ \phi(x) = \varphi(p^{-1} X') = p(p^{-1} x) = x \\
+						\varphi \circ \phi(y) = \varphi(Y') =  y
+					.\end{gather}
+					Therefore $A(W)$ and $A(Z)$ are isomorphic.
+			\end{enumerate}
+		\end{proof}
+	\item [1.2]
+			The Twisted Cubic Curve. Let $Y \subset \mathbb{A}^3$ be the set $Y = \{(t,t^2, t^3): t \in k\} $. Show that $Y$ is an affine variety of dimension $1$. Find generators for the ideal $I(Y)$. Show that $A(Y)$ is isomorphic to a polynomial ring in one variable over $k$. We say that $Y$ is given by the \textit{parametric representation} $x = t, y = t^2, z = t^3$.
+
+			 \begin{proof}
+				 First of all, it follows from definition of $Y$ that $Y = V(y - x^2, z -  x^3)$, so $Y$ is closed. To show that $Y$ is irreducible, we show that $I(Y)$ is prime. Suppose $fg \in I(Y)$. By definition, we have for all $t \in k$ that $(fg)(t, t^2, t^3) = f(t, t^2, t^3)g(t, t^2, t^3) = 0$. But since $k[x,y,z]$ is integral domain, either $f(t, t^2, t^3)  = 0$ or $g(t, t^2, t^3) = 0$, hence $f \in I(Y)$ or $G \in I(Y)$. Hence $Y$ irreducible, so $Y$ is an affine algebraic variety.
+
+				 Next we show that $I(Y) = (y - x^2, z - x^3)$. Obviously $(y - x^2, z - x^3) \subset I(Y)$ since both  $y - x^2 \in I(Y)$ and $z - x^3 \in I(Y)$. To show $I(Y) \subset (y - x^2, z - x^3)$, we use the fact that every polynomial in $A$ can be written in the form
+				 \[
+				 	f=h_1\left(y-x^2\right)+h_2\left(z-x^3\right)+r
+				 .\] 
+				 where $h_1, h_2$ are polynomials in $A$ and $r$ is a polynomial in $x$ alone. Then for such $f \in I(Y)$,for $(t, t^2, t^3) \in Y$, we have
+				 \[
+				 	0 = f(t, t^2, t^3) = h_1 (0) + h_2(0) + r(t)
+				 .\] 
+				 But then $r(t) = 0$ for all $t$, so $r = 0$, therefore $f \in (y - x^2, z - x^3)$. We have shown that $I(Y) = (y -x^2, z - x^3)$.
+
+				 Next we discuss the dimension of $Y$. By Proposition 1.7, we have $\operatorname{dim} Y = \operatorname{dim} A(Y)$. But $A(Y) \simeq k[x]$. Hence $\operatorname{dim} Y = \operatorname{dim} k[x] = 1$, by part (a) of Theorem 1.8A.
+
+				 Finally, we explicitly show the isomorphism $A(Y) \simeq k[x]$. Define the homomorphism
+				 \begin{align*}
+					 \phi: A &\longrightarrow k[t] \\
+				 	x &\longmapsto t \\
+				 	y &\longmapsto t^2 \\
+				 	z &\longmapsto t^3
+				 .\end{align*}
+				 First of all, $\phi(y - x^2) = t^2 - t^2 = 0$ and similarly $\phi(z - x^3) = 0$, hence $I(Y) \subset \operatorname{ker}  \phi$. We would like to show $I(Y) = \operatorname{ker} \phi$. Take $f(x,y,z) \in  \operatorname{ker} \phi$, then $f(t, t^2, t^3) = 0$. But then $f \in I(Y)$ by definition.
+				 Thus we have shown that $I(Y) = \operatorname{ker} \phi$. Finally the first homomorphism theorem gives us $A(Y) = A / \operatorname{ker} \phi \simeq k[t]$.
+			 \end{proof}
+		 \item [1.3]
+			Let $Y$ be the algebraic set in  $\mathbb{A}^3$ defined by the two polynomials $x^2 - yz$ and $xz - x$. Show that $Y$ is a union of three irreducible components. Describe them and find their prime ideals.
+			\begin{proof}
+				We claim that 
+				\[
+					V(x^2 - yz, xz - x) = V(x, y) \cup V(x,z) \cup V(z-1, y-x^2)
+				.\] 
+				To verify, take $(x,y,z) \in V(x^2 - yz, xz - x)$. From the second equation, either $x = 0$ or $z = 1$. In the case $x = 0$, by substitution to the first equation we have $yz = 0$, so either $y = 0$ or $z = 0$. In the case $z = 1$, by substitution we have $x^2 - y = 0$.
+
+				Next we claim that the three algebraic sets on the RHS are all irreducible. By Nullstellensatz, we show their ideals are prime. 
+				We have $(x,y) = k[x, y]$, so it is prime, hence  $I(V(x,y)) = (x,y)$ is prime. Similar for $V(x,z)$.
+
+				Finally, note that $k[x,y,z] / (z-1, y-x^2) \simeq k[x,y] / (y - x^2) \simeq k[x]$, which is an integral domain. Hence $(z-1, y-x^2)$ is prime. 
+			\end{proof}
+			
+			 
+			
+		
+\end{enumerate}

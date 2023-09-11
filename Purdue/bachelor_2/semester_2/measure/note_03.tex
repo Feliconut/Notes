@@ -1,0 +1,164 @@
+\note{3}{Mon 28 Aug 2023 17:33}{Signed Measure and Radon-Nikodym Derivative}
+
+This note is heavily influenced by \cite{taoEpsilonRoomReal2010} and lecture handout from Prof.~Ba\~nuelos.
+
+\EDIT{A lot of statements are not straightforward enough. Pictures may be helpful.}
+
+\subsection{Integration of measure}
+
+To a calculus student, Lebesgue integration of integrable functions in $\mathbb{R}$ resembles a functional $f(x) \mapsto F(x) = \int_{x_0}^x f(t) \,dt$. We fix a starting point $x_0$, and making partial evaluations to the definite integral:
+ \[
+	F(x) := \int_{x_0}^x f(t) dt = \left( \int f \, dx \right)  ([x_0,x])
+.\] 
+On $\mathbb{R}$ we have the fundamental theorem of calculus which allows us to recover $f$ from $F$ by differentiation; however on higher dimensions, such construction only gives us the integral over boxes, which is not very useful and versatile.
+
+The more natural viewpoint is that the integral of $f$ wrt the Lebesgue measure $m$ gives rise to a measure $\int f dm : \mathcal{F} \to [0,\infty ]$ that sends any measurable set $E$ to its measure $\int_E f dm$. 
+In general, for any measure $\mu$ and any nonnegative measurable function $f: X \to [0,\infty ]$ we may integrate $f$ wrt $\mu$ to form another measure:
+\[
+	\mu_f := \int _E f d\mu
+.\] 
+One could \textbf{check} that it is indeed a measure. We say that $f$ is the \textit{Radon-Nikodym derivative} of $\mu_f$ wrt $\mu$. In symbols, $f = \frac{d \mu_f}{d \mu}$. To justify that this notation is well-defined, we can \textbf{check} that, for a fixed $\mu$, there is a one-to-one correspondence between nonnegative measurable functions $f$ and integral measure $\mu_f$, up to null sets. That is, the Radon-Nikodym derivative, if exists, is unique.
+\[
+	\text{fix }\mu, \qquad f \leftrightarrow \mu_f
+.\] 
+On can also \textbf{check} that the \textit{change of variables formula} is satisfied: For any function $g$, we have $\int g d\mu_f = \int g f d\mu$, that is, $d\mu_f = f d\mu $. More compactly, $(\mu_f)_g = \mu_{fg}$. Hence integration is the action of $[0, \infty ]^X$ on the set of measures $\mathcal{M}(X, \mathcal{F})$. Both $[0,\infty ]^X$ and $\mathcal{M}(X, \mathcal{F})$ are additive semigroups. $[0,\infty ]^X$ is also a multiplicative semigroup, and $(0,\infty )^X$ is a field.
+
+In this manner, derivation can be regarded as an inverse problem of finding a function $f$ for each pair of measure $\mu$ and $\nu$, such that $\nu = \mu_f$. In calculus, we have a very nice criteria for monotone functions:
+
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+	If a monotone increasing function $f: E \to \mathbb{R}$ has a derivative $f'$ everywhere (in the sense of limit), then $f'$ is the Radon-Nikodym derivative of the Riemann-Steltjes measure induced by  $f$, wrt the Lebesgue measure. Specifically,
+	\[
+		f' = \frac{d \nu}{dm} \qquad \nu([a,b])\equiv f(b) - f(a)
+	.\] 
+	Conversely, if the derivative does not exist somewhere, then $\nu$ does not have a Radon-Nikodym derivative wrt $m$.
+\end{theorem}
+\begin{remark}
+	As we can see later, by considering the Radon-Nikodym theorem for signed measures, we have the Fundamental Theorem of Calculus for functions with bounded variation.
+\end{remark}
+
+So the existence of Radon-Nikodym measure is completely characterized in the real-analytic context. However, we want to find a way to find $\frac{d\nu}{d\mu}$ for $\mu$, $\nu$ in general measure spaces. 
+
+\subsection{Criterion of differentiability}
+
+It turns out the differentiability is equivalent to absolute continuity:
+
+\begin{definition}
+	Let $\mu, \nu$ be two measures. We say $\nu$ is \textit{absolutely continuous} wrt $\mu$, and write $\nu \ll \mu$, if every $\mu$-null set is a $\nu$-null set.
+\end{definition}
+
+\begin{theorem}[Radon-Nikodym Theorem]
+	Let $\mu, \nu$ be two $\sigma$-finite measures.
+	The following two statements are equivalent:
+	\begin{itemize}
+		\item $\nu \ll \mu$
+		\item There exists nonnegative measurable function $f$ such that $f = \frac{d \nu}{d \mu}$
+	\end{itemize}
+\end{theorem}
+
+But even with this theorem, we still don't have a full answer. We need to determine when two measures are absolutely continuous wrt each other; we also need a way to differentiate when $\mu, \nu$ are not absolutely continuous to each other. It turns out that, we can always separate out a bad part of $\nu$, and the good part of $\nu$ would be absolutely continuous wrt $\mu$.
+
+\begin{definition}
+	We say two measures $\mu$ and $\nu$ are \textit{mutually singular}, and write $\mu \perp \nu$, if their support are disjoint, up to null sets. That is, there exists $A, B \subset X$ disjoint such that $\mu(A^c) = 0$ and $\nu(B^c) = 0$.
+\end{definition}
+\begin{theorem}[Lebesgue Decomposition Theorem]
+	Let $\mu, \nu$ be $\sigma$-finite measures. Then there exists a unique decomposition $\nu = \nu_{ac} + \nu_s$ such that $\nu_{ac} \ll\mu$ and $\nu_s \perp \mu$.
+
+	$\nu_{ac}$ is referred to as the \textit{absolutely continuous} part of $\nu$ and $\nu_{s}$ is referred to as the \textit{singular} part of $\nu$.
+\end{theorem}
+\begin{remark}
+	Both theorems still hold if we replace $\nu$ with a $\sigma$-finite signed measure. In particular, for signed $\nu$, $\frac{d \nu}{d \mu}$ will be a measurable function that may take negative values; and both parts in the decomposition of $\nu$ may be signed measures.
+\end{remark}
+
+Those results are stated only with unsigned measure. However, to prove them, it turns out that signed measure is a very crucial technical tool. A proof of the results above without use of signed measure would be much more complicated. Much like calculating convergence of real-valued series by passing to complex numbers, we need some extension to the algebraic structure we are working with, in order to get more room for technical manipulations.
+
+
+\subsection{Algebraic Extension of space of measures}
+
+In the Lebesgue Decomposition Theorem we see that $\nu$ is decomposed into two parts. If we can attain one of them via explicit construction, then we want to \textit{subtract} it from $\nu$ to obtain the other part. That is, we want the space of measures to have additive inverses. Put in algebraic terms, we want to extend the structure of $\mathcal{M}(X, \mathcal{F})$ to an additive abelian group, with action from $L^1\left( \overline{\mathbb{R}}  \right) $. 
+
+This extended space of measures will be positive or negative (since we can, for example, let the constant function $-1$ act on any measure). Let $\mathcal{M}^+(X, \mathcal{F}) \equiv \mathcal{M}(X, \mathcal{F})$ be the space of positive measures and $\mathcal{M}^-(X, \mathcal{F})$ the negative measures. It is obvious that $\mathcal{M}^+ \simeq \mathcal{M}^-$. 
+
+More interestingly, there can be more objects in the group since we can add a positive measure and a negative measure, producing a measure that is neither positive nor negative. Denote all of them by $\overline{\mathcal{M}}(X, \mathcal{F}) $.
+
+We call them  \textit{signed measures}. Let's characterize signed measures.
+
+\begin{proposition}
+	$\overline{\mathcal{M}}(X, \mathcal{F}) $ contains exactly those functions $\mu: \mathcal{F} \to [- \infty , \infty ]$ such that
+	\begin{itemize}
+		\item $\mu$ satisfies all definition of measure, except nonnegativity. That is, $\mu(\emptyset ) =0$, and $\mu$ is countably additive.
+		\item $\mu$ takes at most one in $\{- \infty , \infty \} $. That is, either $\mu: \mathcal{F} \to (- \infty , \infty ] $ or $\mu: \mathcal{F} \to  [- \infty , \infty ) $.
+	\end{itemize}
+\end{proposition}
+
+By subtracting two measures we can get a signed measure. However, we need a way to go back from signed measure to measure. Fortunately, all signed measures can be decomposed into a positive part and a negative part:
+
+\begin{theorem}[Jordan Decomposition]
+	For any $\mu \in \overline{\mathcal{M}}(X, \mathcal{F})$, there uniquely exist $\mu_+ \in \mathcal{M}^+(X, \mathcal{F})$ and $\mu_- \in \mathcal{M}^-(X, \mathcal{F})$ such that $\mu_+ \perp \mu_-$ and $\mu = \mu_+ - \mu_-$.
+
+	More abstractly,
+	\[
+		(\overline{\mathcal{M}}/\sim) \simeq \mathcal{M} \oplus_\perp \mathcal{M}^*
+	.\] 
+	Where $\oplus_\perp$ means all direct sums (2-tuple of measures) which are mutually singular. $\sim$ is the equivalence relation such that $\mu \sim \nu$ iff $\mu = - \nu$. $\mathcal{M}^*$ is all finite measures.
+\end{theorem}
+
+Let's prove this decomposition. Note that, if we have such a decomposition, we can let $\mu_+$ and $\mu_-$ be supported on disjoint measurable sets $A$ and $B$. Then we have $\mu|A = \mu_+|A = \mu_+$ and $\mu|B = \mu_-|B = \mu_-$. Conversely, if we find such $A $ and $B$ with those properties, then we may directly define $\mu_+$ and $\mu_-$ by restriction of $\mu$ and obtain the Jordan Decomposition. Hence, we only need to prove the following:
+
+\begin{theorem}[Hahn Decomposition]
+	For any $\mu \in \overline{\mathcal{M}} (X, \mathcal{F})$, there $\mu$-uniquely exists a partition $X = X_+ \cup X_-$ such that $\mu|X_+$ is positive and $\mu|X_-$ is negative.
+\end{theorem}
+\begin{proof}
+	By symmetry, we assume without loss of generality that $\mu < \infty $ (though it may take the value $- \infty $ ).
+
+	We try to construct $X_+$ by taking supremum of all measurable sets on which $\mu$ is positive. Let
+	\[
+		\mathcal{G} := \{E \in \mathcal{F}: \mu|E \ge 0\} 
+	.\] 
+	Observe that $\mathcal{G}$ is a co-filter, which means it is closed under taking subsets and taking arbitrary unions. Then we may let  $X_+ := \cup \mathcal{G}$ and verify that $\mu(X_+) < \infty $ and $\mu| X_+ \ge 0$.
+
+	Now set $X_- := X \setminus  X_+$ and we verify that $\mu|X_- \le 0$. Suppose that $\mu$ is not totally negative on $X_-$. Then there exists a set $E_1 \subset X_-$ where $\mu(E_1) > 0$. We may assume that $\mu(E_1) > \frac{1}{n_1}$ where $n_1>0$ is the smallest integer such that  $E_1$ exists. Since $X_-$ is maximal in $\mathcal{G}$, so $\mu$ cannot be totally positive on $E_1$, hence there exists a set $E_2 \subset E_1$ where $\mu(E_2) > \mu(E_1)$. We further demand that $\mu(E_2) > \mu(E_1) + \frac{1}{n_2}$ where $n_2$ is the smallest possible positive integer. 
+
+	Continue in this fashion, we get a descending sequence of sets $E_1 \supset E_2 \supset \ldots$ in $X_-$ of strictly increasing positive measure $\mu(E_{j+1}) > \mu(E_j) + \frac{1}{n_{j+1}}$, and $n_j$ strictly increasing. Since each $n_j$ is minimal, we have $\mu(F) - \mu(E_j) < \frac{1}{n_j}$ for any $F \subset E_{j}$. The intersection $E := \cap _j E_j$ then also has positive measure, hence finite. But $E$ cannot have a subset with strictly greater measure: if there exists $F \subset E$ such that $\mu(F) - \mu(E) > \frac{1}{n_j}$, for some $n_j$, then we have $\mu(F) - \mu(E_j) > \mu(F) - \mu(E) > \frac{1}{n_j} > \mu(F) - \mu(E_j)$, a contradiction. Thus $E$ is totally positive and $\mu(E)>0$. This gives a another contradiction, so that $X_-$ must be totally negative.
+\end{proof}
+
+
+\subsection{Separation of Singularity}
+
+Now let's start to prove the Radon-Nikodym Theorem and Lebesgue Decomposition Theorem!
+
+First of all, note that if we consider the set of measures $\{\mu_f: f \in L^1(X, d\mu)\} $ this should cover our desired $\nu_{ac}$, if Radon-Nikodym Theorem were true. Therefore, we expect that in some way we can pick out $\nu_{ac}$ and remove it from $\nu$, and it remains to show that $\nu - \nu_{ac}$ is singular wrt $\mu$.
+
+\begin{proof}[Proof of Lebesgue Decomposition and Radon-Nikodym Theorem] 
+	
+
+As one can \textbf{check}, all functions of the form $\mu_f$ are absolutely continuous wrt $\mu$. Therefore, if we construct a $\mu_f$ such that $\nu - \mu_f$ is singular, then we have proven the Lebesgue Decomposition Theorem. Now, since $\nu \ll \mu$, $\nu_s \perp \mu$ implies $\nu_s = 0$, so that $\nu = \mu_f$, and we are done proving Radon Nikodym Theorem.
+
+All the remaining technical detail is how we construct such a $\mu_f$, and how to ensure it is the unique choice.
+These are given in the following lemma.
+\end{proof}
+
+\begin{lemma}
+	For $\mu$ a $\sigma$-finite measure and $\nu$ a $\sigma$-finite signed measure, there $\mu$-uniquely exists a function $f \in L^1(X, d \mu)$ such that $\nu - \mu_f \perp \mu$.
+\end{lemma}
+\begin{proof}
+	As one can \textbf{check}, after we prove this for \textit{finite} $\mu$ and $\nu$, the $\sigma$-case follows easily. We shall assume so. In view of Jordan Decomposition Theorem, we may assuming further without loss of generality that  $\nu$ is unsigned.
+
+	Now let  $M := \sup \{\mu_f(X) :  f \in L^1(X, d \mu), \mu_f \le \mu\} $. Since $\mu$ is a finite measure, $M$ is finite. We claim that the supremum is attained for some measurable $f$. Take an increasing sequence $\mu_{f_n}(X) \to \mu(X)$, we see that for $f = \sup f_n$, we have $f \in L^1(X, d \mu)$, $f \le  \mu$, and $\mu_f(X) = M$.
+
+	Since we required $\mu_f \le \mu$, the $\mu_s := \mu - \mu_f$ is an unsigned finite measure. Now it suffices to show $\mu_s \perp \mu$.
+
+	Suppose $\mu_s$ and $\mu$ are not mutually singular. Then there exists a measurable set $E$, $\mu(E) > 0$, and some $\varepsilon>0$, such that $\mu_s > \varepsilon \mu$ on $E$. But then we can add $\varepsilon1_E$ to $f$, and note that
+	\[
+		\mu - \mu_{f + \varepsilon1_E} = \mu_s - \varepsilon \mu_{1_E} > \varepsilon \mu - \varepsilon 1_E \mu \ge 0
+	.\] 
+	And yet
+	\[
+		\mu_{f + \varepsilon 1_E} (X) = \mu_f\left(X \right) + \varepsilon \mu(E) > M 
+	.\] 
+	This contradicts the fact that $M $ is the supremum. Hence $\mu_s$ and $\mu$ are mutually singular.
+
+	To prove uniqueness, suppose that there's some $g \in L^1(X, d\mu)$ such that $\nu - \mu_g \perp \mu$. Then by construction of $f$, $f - g\ge 0$. Then $(\nu - \mu_g) - (\nu - \mu_f) = \mu_{f - g} \perp \mu$. But then we must have $f - g = 0$ a.e. This implies $\mu_f = \mu_g$.
+\end{proof}
+
+
