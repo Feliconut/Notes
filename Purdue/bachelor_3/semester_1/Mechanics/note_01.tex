@@ -8,18 +8,99 @@ In this note we present the computational rules in $\mathbb{G}^3$, the three-dim
 \subsection{The Geometric Algebra}
 
 \begin{definition}
-	The 3-dimensional geometric algebra are spanned by the following base elements:
+	The 3-dimensional geometric algebra are spanned by:
 	\begin{itemize}
 		\item (Vectors) $e_1, e_2, e_3$
 		\item (Bivectors) $e_1 \wedge e_2, e_1 \wedge e_3, e_2 \wedge e_3$
-		\item (Trivector / Pseudoscalar) $e_1 \wedge e_2 \wedge e_3 =: i$
+		\item (Trivector / Pseudoscalar) $e_1 \wedge e_2 \wedge e_3 =: I$
 	\end{itemize}
 	The inner product $\cdot$ and outer product $\wedge$ follow the following rules:
 	\begin{enumerate}
 		\item Linear.
 		\item $\cdot$ is commutative;  $\wedge$ is anti-commutative.
-		\item 
+		\item We have $e_i \cdot e_j = \delta_{ij}$ and $e_i \wedge e_i = 0$.
 	\end{enumerate}
+	The geometric product is defined by $v_1 v_2 = v_1 \cdot v_2 + v_1 \wedge v_2
+	.$ 
+
+	For orthogonal vectors we have $v_1 v_2 = -v_2 v_1$; for parallel vectors we have $v_1 v_2 = v_2 v_1$. The dot and wedge products can be regarded as the \textit{symmetric} and \textit{antisymmetric} parts of the geometric product, respectively.
+
+	In particular, $e_1 e_2 = e_1 \wedge e_2$, $e_1 e_1 = 1$.
 \end{definition}
 
+\subsection{Canonical Basis}
+
+When we write a matrix for a vector or bivector, unless otherwise stated, we assume the following basis:
+\[
+	(e_1, e_2, e_3), (e_{12}, e_{13}, e_{23})
+.\] 
+
+A bivector may act on a vector by the inner product: $v \mapsto v \cdot B$. This defines a linear transformation in  $\text{span}\left( e_1, e_2, e_3 \right) $. 
+\[
+	B = B_{12} e_1 \wedge e_2 + B_{13} e_1 \wedge e_3 + B_{23} e_2 \wedge e_3
+.\] 
+\[
+	 v \cdot B = [B] v \doteq 
+	\begin{bmatrix}
+0 & B_{12} & B_{13}\\
+ & 0 & B_{23}\\
+ & & 0
+\end{bmatrix}
+[v_1, v_2, v_3]^T
+.\] 
+The omitted entries are defined by antisymmetry.
+
+\subsection{Moment of Inertia}
+
+The definition of Moment of Inertia is
+\[
+	\mathcal{I}(B) = \int dm \mathbf{x} \wedge \left( \mathbf{x} \cdot B \right) 
+.\] 
+
+We can write $B \mapsto x \wedge (x \cdot B)$ as a matrix in the canonical basis:
+\[
+	B \mapsto x \wedge (x \cdot B) \doteq
+\begin{bmatrix}
+x^2 + y^2 & yz & -xz\\
+ & x^2 + z^2 & xy\\
+ & & y^2 + z^2
+\end{bmatrix}
+.\] 
+where omitted entries are defined by symmetry.
+
+To compute $\mathcal{I}$, integrate this matrix.
+
+\begin{remark}
+	(How to compute this matrix) 
+	Take the rightmost column for an example,
+	\begin{align*}
+		&(x \hat{x} + y \hat{y}  + z \hat{z} ) \wedge \left(
+		(x \hat{x}  + y \hat{y}  + z \hat{z} ) \cdot
+		\hat{y}  \wedge \hat{z} \right)\\
+		&= (x \hat{x} + y \hat{y}  + z \hat{z} ) \wedge
+		(y \hat{z} - z \hat{y} )\\
+		&= xy \hat{x} \hat{z}  - xz \hat{x}  \hat{y}  + y^2 \hat{y}  \hat{z}  - z^2 \hat{z}  \hat{y}  \\
+		&= -xz \hat{x} \hat{y}  +  xy \hat{x}  \hat{z} + (y^2 + z^2) \hat{y} \hat{z} 
+	.\end{align*}
+\end{remark}
+\begin{remark}
+	(How to remember this formula)
+	Denote the entries of the matrix by be basis:
+\begin{equation*}
+\begin{bmatrix}
+ I_{x y x y} & I_{x z x y} & I_{y z x y}\\
+ & I_{x z x z} & I_{y z x z}\\
+ & & I_{y z y z}
+\end{bmatrix}
+\end{equation*}
+And other entries defined by symmetry. If we swap the first two indices with the last two indices, $I$ does not change; if we swap the first two indices or the last two indices, $I$ changes sign due to antisymmetry. The term is obtained by summing up all symmetries:
+\[
+	I_{a_1 a_2 a_3 a_4 } = a_1 a_3 \delta_{a_2,a_4} - a_1 a_4 \delta_{a_2,a_3}+ \ldots
+.\] 
+A fast way to remember: take $xzxy$ for an example. We see that $x$ and $x$ matches, so we cancel them out and have the product $y z$. 
+
+Take $y z x y$ for another example. Now we see two $y$ 's but they are not aligned. So we add a sign to swap the first $y$ and $z$, obtaining $- z y x y$. Now we may cancel out the two $y$ 's and have $- x z$, exactly same as the result above.
+
+Note that this is just an effective heuristic to memorize the formula. If you really want some explanation, then adding the signs correspond to the fact that $\wedge$ is antisymmetric.
+\end{remark}
 
