@@ -1,0 +1,76 @@
+\lecture{1}{Wed 13 Sep 2023 10:43}{Upcrossing Inequality}
+
+\begin{proof}
+	Define stopping times
+	\begin{align*}
+		N_0 &=  -1 \\
+		N_1 &= \inf \{m > N_0: X_m \le a\}  \\
+		N_2 &= \inf \{m > N_1: X_m \ge b\}
+	.\end{align*}
+	In general, $N_{2k-1}$ are downcrossing times of $a$, $N_{2k}$ are upcrossing times of $b$.
+
+	Then
+	\[
+		H_m = \begin{cases}
+			1 & N_{2k-1} < m \le N_{2k} \text{ for some $k$}\\
+			0 
+		\end{cases}
+	.\] 
+	is a predictable sequence. 
+
+	\begin{intuition}
+		$H$ is a ``switch'' that turns on during an upcrossing and turns off during a downcrossing.
+	\end{intuition}
+
+	Now define
+	\[
+		Y_{n} = (X_n - a)^{+} + a = \begin{cases}
+			a & X_n < a \\
+			X_n & X_n \ge a
+		\end{cases}
+	.\] 
+	We see that $Y_n$ is a submartingale.
+
+	Let $(H * Y)_y = \sum_{k - 1}^n H_n (Y_n - Y_{n-1})$ be the martingale transformation of $Y$ by $H$. Then $(H * Y)_N$ corresponds to the sum of variation of $Y$ across each upcrossing. For each complete upcrossing, the difference is at least $b-a$ ; it is possible that the last upcrossing is incomplete by time $N$, but the contribution is nonnegative in expectation since we are working with a submartingale.
+	\[
+		(b-a) U_N[a,b] \le (H * Y)_N
+	.\] 
+
+	Then we have $Y_n - Y_0 = (H * Y)_n + ((1-H)*Y)_n$. But $1 - H_n \ge 0$, so 
+	\[
+		E((H*Y)_N) =  E(Y_N - Y_0) - E\left( ((1-H)*Y)_N \right)  \le E(Y_N - Y_0)
+	.\] 
+\end{proof}
+
+\begin{remark}
+	This is a standard argument involving martingales. We count the upcrossings, and replace $X_n$ with $Y_n$ to make it a submartingale.
+\end{remark}
+
+\begin{corollary}
+	If $X_n \ge 0$ is a supermartingale, then $X_n \to X_{\infty }$ a.s.
+\end{corollary}
+\begin{proof}
+	Apply submartingale theorem to $Y_n = -X_n \le 0$. Then
+	$\sup _n E(Y_n^+) < \infty $. Then $Y_n \to Y < \infty $ a.s., so $X_n \to  X  > - \infty $ a.s.
+	Furthermore, 
+	Fatou's Lemma gives 
+	\[
+		EX \le \lim\inf  EX_n \le EX_0
+	.\] 
+\end{proof}
+
+\begin{theorem}[Borel-Cantelli Lemma]
+	Take $\mathcal{F}_n$ a filtration, $\mathcal{F}_0 = \{\emptyset , \Omega\} $. Then if $B_n \in \mathcal{F}_n$, we have
+	\[
+		\{B_n \text{ i.o.}\} \equiv \left\{ \sum_n 1_{B_n} = \infty  \right\}  = \left\{\sum_n P\left(B_n | \mathcal{F}_{n-1}\right)  = \infty \right\} 
+	.\] 
+
+	Furthermore, they go to infinity at the same rate:
+	\[
+		\lim_{n \to \infty }
+		\frac{\sum_i^n B_i}{\sum_i^n P\left( B_n | \mathcal{F}_{n-1} \right) }
+	.\] 
+\end{theorem}
+
+
+

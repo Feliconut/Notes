@@ -1,0 +1,129 @@
+\homework{7}{Fri 10 Nov 2023 21:54}{}
+
+\begin{problem}
+	Given a $C^2$ function $u$ defined on a set $U \subset \mathbb{R}^n \backslash\{0\}$, we define the function $\mathcal{K}[u]$ on $U^*$ by
+\[
+\mathcal{K}[u](x)=|x|^{2-n} u\left(x^*\right), \quad \text { where } x^*=x /|x|^2, U^*=\left\{x^*: x \in U\right\} ;
+\]
+the function $\mathcal{K}[u]$ is called the Kelvin transform of $u$. Prove that
+\[
+\Delta(\mathcal{K}[u])=\mathcal{K}\left[|x|^4 \Delta u\right] \quad \text { in } U^* .
+\]
+
+In particular, if $u$ is harmonic in $U$, then $\mathcal{K}[u]$ is harmonic in $U^*$.
+Hint: 1) Prove that for any polynomial $p$ on $\mathbb{R}^n$ homogeneous of degree $m$, one has
+\[
+\Delta\left(|x|^{2-n-2 m} p\right)=|x|^{2-n-2 m} \Delta p
+\]
+which is equivalent to $\Delta(\mathcal{K}[p])=\mathcal{K}\left[|x|^4 \Delta p\right]$. Start by computing $\Delta\left(|x|^k p\right)$ for arbitrary $k$ and use that $x D p(x)=m p(x)$ by homogeneity. 2) Conclude that the statement of the problem holds for any polynomial $p$, not necessarily homogeneous, and then use the density of polynomials in $C^2$ norm on compact subsets of $U$.
+\end{problem}
+
+\begin{proof}
+	Compute
+	\[
+		\frac{\partial }{\partial x_i} \left( |x|^k p \right) 
+		= \frac{k}{2} 2 x_i \left( x_1^2 + \ldots + x_n^2 \right) ^{k / 2 - 1} p + |x|^k p_{x_i}
+	.\] 
+	\[
+		\frac{\partial ^2}{\partial x_i^2} \left( |x|^k p \right) =
+		(k p + 2 k x_i) (x_1^2 + \ldots + x_n^2)^{\frac{k}{2} - 1} + k x_i (\frac{k}{2} - 1) 2 x_i \left( x_1^2 + \ldots + x_n^2 \right) ^{\frac{k}{2} - 2} p + |x|^k p_{x_i x_i}
+	.\] 
+	\[
+		\Delta\left( |x|^k p \right) = |x|^{k - 2} p \left( n k + 2 k \left( \frac{k}{2} - 1 \right) + 2 k m \right) + |x|^k \Delta p
+	.\] 
+	For homogeneity, we want
+	\[
+		nk + k^2 - 2 k + 2 k m = 0
+	.\] 
+	This is achieved when we take
+	\[
+		k = 2 - n - 2m
+	.\] 
+	Thus
+	\[
+		\Delta\left( |x|^{2 - n - 2m} p \right)  = |x|^{2 - n - 2m} \Delta p
+	.\] 
+
+	Now, we check that $\mathcal{K}$ is linear:
+	\[
+		K[p + q](x) = |x|^{2 - n} \left( (p + q)\left( x / |x|^2 \right)  \right) 
+		= \mathcal{K}[p](x)+ \mathcal{K}[q](x)
+	.\] 
+	From this and the linearity of $\Delta$, we can conclude that the statement holds for any polynomial, not necessarily homogeneous.
+
+	Finally use density of polynomials in $C^2(V)$ for any compact $V \subset U$ :
+	\begin{align*}
+		\|\Delta \mathcal{K}[u] - \mathcal{K}\left( |x|^4 \Delta u \right) \|
+		&\leq \|\Delta \mathcal{K}[u] - \Delta \left( \mathcal{K} [p] \right)\| + 
+		\|\mathcal{K}\left( |x|^4 \Delta u \right)  - \mathcal{K}\left( |x|^4 p \right) \|\\
+		&\leq \|\Delta \left( |x|^{2 - n} \left(  u\left( \frac{x}{|x|^2} \right) - p\left( \frac{x}{|x|^2} \right)  \right)  \right) \|
+		+ \| |x|^{-2 - n} \left( \Delta u - \Delta p \right) \|
+	.\end{align*}
+	Now, by density of polynomials in $C^2(V)$, there exists polynomial $p$ such that both terms become arbitrarily small. 
+\end{proof}
+
+\begin{problem}
+	Let $\Omega$ be a bounded domain with a $C^1$ boundary, $g \in C(\partial \Omega)$ and $f \in C(\bar{\Omega})$. Consider then the so-called Neumann problem
+\[
+\begin{aligned}
+-\Delta u=f & \text { in } \Omega \\
+\frac{\partial u}{\partial \nu}=g & \text { on } \partial \Omega,
+\end{aligned}
+\]
+where $\nu$ is the outer normal on $\partial \Omega$. Show that the solution of $(*)$ in $C^2(\Omega) \cap C^1(\bar{\Omega})$ is unique up to a constant; i.e., if $u_1$ and $u_2$ are both solutions of $(*)$, then $u_2=u_1+$ const in $\Omega$.
+
+Hint: Look at the proof of the uniqueness for the Dirichlet problem by energy methods, $[\mathrm{E}$, 2.2.5a].
+\end{problem}
+\begin{proof}
+	Let $w = u_1 - u_2$ where both $u_1$ and $u_2$ solve $(*)$. Then $\Delta w = 0$ in $U$ and $\frac{\partial w}{\partial \nu}  = 0$ on $\partial U$.
+
+	Use Green's formula,
+	\[
+		\int _U Dw \cdot Dw = - \int _U w \Delta w dx + \int _{\partial U}\frac{\partial w}{\partial \nu} w dS = 0
+	.\] 
+	Thus $D w \equiv 0$ on $U$. Thus $w$ is constant in connected components. Hence $u_1 = u_2 + c$ where $c$ is constant in connected components of $U$.
+\end{proof}
+
+\begin{problem}
+	Write down an explicit formula for a solution of
+\[
+\left\{\begin{array}{rlrl}
+u_t-\Delta u+c u & =f & & \text { in } \mathbb{R}^n \times(0, \infty) \\
+u=g & & \text { on } \mathbb{R}^n \times\{t=0\},
+\end{array}\right.
+\]
+where $c \in \mathbb{R}$. Assume that $g$ and $f$ are bounded and continuous on $\mathbb{R}^n$ and $\mathbb{R}^n \times(0, \infty)$, respectively.
+
+Hint: Rewrite the problem in terms of $v(x, t):=e^{c t} u(x, t)$.
+\end{problem}
+\begin{proof}
+	Compute
+	\begin{align*}
+		&u_t(x,t) e^{ct } + c e^{ct} u(x,t) = v_t (x,t) \\
+		& \Delta u(x,t) e^{ct } = \Delta v(x,t)
+	.\end{align*}
+	Hence the problem is equivalent to
+	\[
+		\begin{cases}
+			\left( v_t - c e^{c t} u \right)  e^{- c t} - \Delta v e^{- c t} + c v e^{- c t} = f \\
+			v e ^{- c t} = g
+		\end{cases}
+	.\] 
+	Simplify,
+	\[
+		\begin{cases}
+			v_t(x,t) - \Delta v(x,t) = f & \text{ in }U\\
+			v(x,t) = g e^{c t} & \text{on }\partial U
+		\end{cases}
+	.\] 
+	Write out explicit solution for $v$ using eqn. (18) in Section 2.3 in [Evans],
+	 \[
+		v(x,t) = \int _{\mathbb{R}^n} \Phi(x-y,t) g(y) e^{ c t} d y + \int _0^t \int _{\mathbb{R}^n} \Phi(x-y, t -s) f(y,s) dy ds
+	.\] 
+	\[
+		u(x,t) = \int _{\mathbb{R}^n} \Phi(x-y,t) g(y) d y + e^{ -  c t}\int _0^t \int _{\mathbb{R}^n} \Phi(x-y, t -s) f(y,s) dy ds
+	.\] 
+	Where $\Phi$ is the fundamental solution.
+\end{proof}
+
+

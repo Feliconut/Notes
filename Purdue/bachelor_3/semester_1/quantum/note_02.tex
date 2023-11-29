@@ -1,0 +1,167 @@
+\note{2}{Wed 04 Oct 2023 17:19}{Midterm Cheatsheet}
+
+\textbf{State Evolution in Schrodinger Picture.} Initial state is $\left| S_x, + \right\rangle $, Hamiltonian is $H = \omega S_z$, what is state at time $t$? ANS: $\left| S_x, +, t \right\rangle = \mathcal{U}(t) \left| S_x, + \right\rangle $ where $\mathcal{U}(t) = \exp\left( \frac{- i H t }{\hbar} \right) $. In eigenbasis of $S_z$, calculate $\exp\left( - i H t /\hbar \right) \left| S_x, + \right\rangle \doteq$
+\[
+	\begin{bmatrix}
+		\exp(- i \omega t / 2) & 0 \\
+		0 & \exp(i \omega t / 2) \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\frac{1}{\sqrt{2} } \\
+		\frac{1}{\sqrt{2} } \\
+	\end{bmatrix}
+	=
+	\frac{1}{\sqrt{2} }
+	\begin{bmatrix}
+		\exp(- i \omega t / 2) \\
+		\exp(i \omega t / 2) \\
+	\end{bmatrix}
+.\] 
+
+\textbf{State Evolution in Heisenberg Picture}. Initial state is $\left| S_x, + \right\rangle $, Hamiltonian is $H = \omega S_z$. What is time evolution for $S_x$? ANS: Use $S_x^{(H)} = \mathcal{U}(t)^\dag S_x \mathcal{U}(t)$, write in eigenbasis of $S_z$: $\exp\left( i \omega S_z t / \hbar \right) S_x \exp\left( - i \omega S_z t / \hbar \right) \doteq $
+\[
+	\begin{bmatrix}
+		\exp(i \omega t / 2) & 0 \\
+		0 & \exp(- i \omega t / 2) \\
+	\end{bmatrix}
+	\frac{\hbar}{2}
+	\begin{bmatrix}
+		0 & 1 \\
+		1 & 0 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\exp(- i \omega t / 2) & 0 \\
+		0 & \exp(i \omega t / 2) \\
+	\end{bmatrix}
+	=
+	\frac{\hbar}{2}
+	\begin{bmatrix}
+		0 & \exp(i \omega t) \\
+		\exp(- i \omega t) & 0 \\
+	\end{bmatrix}
+.\] 
+
+What is the time evolution for expectation value of $S_x$, $\left\langle S_x \right\rangle $ in Heisenberg picture? ANS: Use $\left\langle S_x \right\rangle _H = \left\langle S_x, + \right| \mathcal{U}(t)^\dag S_x \mathcal{U}(t) \left| S_x, + \right\rangle $. This is
+\[
+	\begin{bmatrix}
+		\frac{1}{\sqrt{2} } & \frac{1}{\sqrt{2} } \\
+	\end{bmatrix}
+	\frac{\hbar}{2}
+	\begin{bmatrix}
+		0 & \exp(i \omega t) \\
+		\exp(-i \omega t) & 0 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\frac{1}{\sqrt{2} } \\
+		\frac{1}{\sqrt{2} } \\
+	\end{bmatrix}
+	= \frac{\hbar}{2}\frac{1}{2}\left(\exp(- i \omega t) + \exp(i \omega t) \right) = \frac{\hbar}{2}\cos(\omega t)
+.\] 
+
+\textbf{Position representation of Translation Operator}.
+State $\left| \psi \right\rangle $ has wavefunction $\left\langle x \middle| \psi \right\rangle $ in $x$-representation. What is $x$-representation of translated wavefunction  $\psi'(x)$ where $\left| \psi \right\rangle  = \mathcal{J}(\Delta x) \left| \psi \right\rangle $? ANS: 
+$\left\langle x \middle| \psi' \right\rangle = \left\langle x \right| \mathcal{J}(\Delta x) \left| \psi \right\rangle = \int dx' \left\langle x \right| \mathcal{J}(\Delta x) \left|  x' \right\rangle  \left\langle  x' \right| \left| \psi \right\rangle = \int dx' \left\langle x \right|  \left| x' + \Delta x \right\rangle \psi(x') = \int  dx' \delta(x - (x' + \Delta x)) \varphi(x') = \varphi(x - \Delta x)$.
+
+
+
+\textbf{Momentum representation of Annihilation Operator.} For one-dimensional simple harmonic oscillator, find momentum representation of $a$. ANS: $\left\langle p' \right| a \left| p \right\rangle  = \left\langle p' \right| \sqrt{\frac{m \omega}{2 \hbar}} (x + \frac{i}{m \omega} p) \left| p \right\rangle$. We have $\left\langle p' \right| p \left| p \right\rangle  = p \delta(p - p')$ and $\left\langle p' \right| x \left| p \right\rangle = i \hbar \delta(p - p') \frac{\partial }{\partial p} $. Simplify.
+
+\textbf{Baker-Hausdorff Lemma.} $\begin{aligned} & \exp \left(\frac{i H t}{\hbar}\right) x(0) \exp \left(\frac{-i H t}{\hbar}\right) \\ & \quad=x(0)+\left(\frac{i t}{\hbar}\right)[H, x(0)]+\left(\frac{i^2 t^2}{2 ! \hbar^2}\right)[H,[H, x(0)]]+\cdots\end{aligned}$
+
+\textbf{Time evolution of position operator for simple harmonic oscillator.} We want to calculate $\exp(i H t / \hbar) x \exp\left( - i H t /\hbar \right) = x \cos \omega t+\frac{p}{m \omega} \sin \omega t$. Use the previous lemma, $[H, x(0)] = \frac{-i \hbar p(0)}{m}$ and $[H, p(0)] = i \hbar m \omega^2 x(0)$. 
+
+\newpage
+
+\textbf{Proof of uncertainty principle.} For hermitian $A, B$, we have  $\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle \ge \left| \left\langle \Delta A \Delta B \right\rangle  \right| ^2$ (Schwartz Inequality) 
+$= \left| \left\langle \frac{1}{2}[\Delta A, \Delta B] + \frac{1}{2} \left\{ \Delta A, \Delta B \right\}  \right\rangle  \right|^2 $ \\$= \frac{1}{4} \left( \left\langle [\Delta A, \Delta B] \right\rangle ^2 + \left\langle \left\{ \Delta A, \Delta B \right\}  \right\rangle  \right)  $ (since the commutator is anti-Hermitian and the anti-commutator is Hermitian, their expected values are purely imaginary and real), where $[\Delta A, \Delta B] = [A, B]$.
+
+\textbf{Measuring a wave function in continuous spectra. } Consider a state $\left| \alpha \right\rangle  = \int dx' \left| x' \right\rangle \left\langle x' \middle| \alpha \right\rangle $. An idealized measurement collapses the state to a single eigenstate $\left| x \right\rangle $ sampled from the continuous probability distribution $P(\left| x \right\rangle , a < x < b) = \int _a^b dx' \left\langle x' \middle| \alpha \right\rangle ^2 $. An realistic measurement has the same probability distribution, but collapses the state to $\int _{x - \Delta x}^{x + \Delta x} dx' \left| x' \right\rangle \left\langle x' \middle| \alpha \right\rangle $, up to normalization.
+
+\textbf{Identities about Translated States.}
+\begin{itemize}
+	\item $\int dx' \left| x' + \Delta x' \right\rangle \left\langle x' \right| = \int dx' \left| x' \right\rangle \left\langle x' - \Delta x' \right| $. In general we can make any translational change of variable.
+	\item $\left\langle x' - \Delta x' \right| \left| \alpha \right\rangle = \left\langle x' \middle| \alpha \right\rangle - \Delta x' \frac{\partial }{\partial x} \left\langle x' \middle| \alpha \right\rangle $, using continuity of $\left\langle x' \middle| \alpha \right\rangle $ and first-order taylor approximation.
+\end{itemize}
+
+\textbf{Proving position representation of momentum operator.} 
+Let $\Delta x$ be infinitesimal. Start from the infinitesimal translation: $\mathcal{J}(\Delta x) = \left( 1 - \frac{i p \Delta x}{\hbar} \right) \left| \alpha \right\rangle = \int dx' \left| x' + \Delta x' \right\rangle \left\langle x' \middle| \alpha \right\rangle = \int dx' \left| x' \right\rangle \left( \left\langle x' \middle| \alpha \right\rangle  - \Delta x' \frac{\partial }{\partial x'} \left\langle x' \middle| \alpha \right\rangle  \right)  $. From this, conclude $p \left| \alpha \right\rangle = \int dx' \left| x' \right\rangle \left( - i \hbar \frac{\partial }{\partial x'} \left\langle x' \middle| \alpha \right\rangle  \right) $. This gives $\left\langle x'' \right| p \left| x' \right\rangle = - i \hbar \delta(x' - x'') \frac{\partial }{\partial x'} $
+
+\textbf{Momentum representation of position operator.} \\$\left\langle p' \right| x \left| p'' \right\rangle = i \hbar \delta(p' - p'') \frac{\partial }{\partial p''} $.
+
+\textbf{Proving momentum representation of position operator.} Write $\left\langle p' \right| x \left| p'' \right\rangle = \int dx' \left\langle p' \right| x \left| x' \right\rangle \left\langle x' \right| \left| p'' \right\rangle = \int dx' x' \left\langle p' \middle| x' \right\rangle \left\langle x' \middle| p'' \right\rangle $ and use the transformation function (proved below). We are calculating $\frac{1}{2 \pi \hbar} \int dx' x' \exp\left( i (p' - p'') x' / \hbar \right) $. 
+Now calculate $\frac{\partial }{\partial p''} \exp(i (p' - p'') x' / \hbar) = -\frac{i x'}{\hbar} \exp(i (p - p'') x' / \hbar)$,
+so $\left\langle p' \right| x \left| p'' \right\rangle = \frac{1}{2 \pi \hbar} \int  dx' (- \frac{\hbar}{i}) \frac{\partial }{\partial p''}  \exp(i (p' - p'') x'/\hbar) =  - i \hbar \frac{\partial }{\partial p''} \delta(p' - p'') = i \hbar \delta(p' - p'') \frac{\partial }{\partial p''}  $.
+
+The last step is justified by applying integration by parts:\\
+$\int dp' \frac{\partial }{\partial p'} \delta(p' - p'') f(p') = \int  dp' \delta(p' - p'') \frac{\partial }{\partial p'} f(p')$
+
+\textbf{Proving transformation function} $\left\langle x' \middle| p' \right\rangle $. 
+From position representation of momentum operator, conclude $\left\langle x' \right| p \left| p' \right\rangle = - i \hbar \frac{\partial }{\partial x'} \left\langle x' \middle| p \right\rangle $. Therefore $p' \left\langle x' \middle| p' \right\rangle = - i \hbar \frac{\partial }{\partial x'} \left\langle x' \middle| p \right\rangle $. Solve for differential equation, get $\left\langle x' \middle| p' \right\rangle = N \exp\left( \frac{i p' x'}{\hbar} \right) $. To determine $N$, calculate $\int dp' \left\langle x' \middle| p' \right\rangle \left\langle p' \middle| x'' \right\rangle $. On one hand, it is $\delta(x - x')$. On the other hand, it is $N^2 \int dp' \exp\left( \frac{i p' (x' - x'')}{\hbar} \right) $. Use the orthogonality of different planar waves: $\int dp' \exp(i p' a) \exp(- i p' b) = 2 \pi \delta(a-b)$. Hence $\left\langle x' \middle| p' \right\rangle = 2 \pi \hbar N^2 \delta(x - x'')$. From this, find the normalization $N = \frac{1}{\sqrt{2 \pi \hbar} }$.
+
+
+\newpage
+
+\textbf{Matrix form of spin states.} (in $S_z$ basis) $S_z = \frac{\hbar}{2} \left( \left| + \right\rangle \left\langle + \right|  - \left| - \right\rangle \left\langle - \right|  \right) $,
+$S_x = \frac{\hbar}{2}\left( \left| + \right\rangle \left\langle - \right| + \left| - \right\rangle \left\langle + \right|  \right) $,
+$S_y = i \frac{\hbar}{2} \left( \left| - \right\rangle \left\langle + \right| - \left| + \right\rangle \left\langle - \right|  \right) $.
+
+
+\textbf{Fourier Transform of Wave Function.} A state $\left| \alpha \right\rangle $ may be represented in position wave function $\psi_\alpha (x') = \left\langle x' \middle| \alpha \right\rangle $ or momentum wave function $\phi_\alpha(p') = \left\langle p' \middle| \alpha \right\rangle $. To convert between them, use the identity $\left\langle x' \middle| p' \right\rangle = \frac{1}{\sqrt{2 \pi \hbar} }\exp\left( \frac{i p' x'}{\hbar} \right) $. For example of converting from position to momentum: $\left\langle x' \middle| \alpha \right\rangle = \int dp' \left\langle x' \middle| p' \right\rangle \left\langle p' \middle| \alpha \right\rangle = \int dp' \left\langle x' \middle| p' \right\rangle \phi_\alpha (p')$.
+
+\textbf{Solving SE for Time Independent Hamiltonian}.
+If there exists a complete set of mutually compatible observables $A_k$ that also commute with $H$, then $\mathcal{U}$ has a spectral decomposition:
+\[
+	\mathcal{U}_{t} = \exp\left( \frac{- i H t}{\hbar} \right) 
+	= \sum_{K'} \exp\left( \frac{- i E_{K'} t}{\hbar} \right) \left| K' \right\rangle \left\langle K' \right| 
+.\] 
+Where $\left| K' \right\rangle$ means some eigenstate labelled by its eigenvalues assigned by each $A_k$, and $E_{K'}$ is the eigenvalue assigned by $H$ to $\left| K' \right\rangle $.
+This guarantee that $\mathcal{U}$ is a unique linear combination of $A_k$.
+To solve the equation, we only need to decompose the initial state according to the eigenbasis, and apply the time evolution operator to each component.
+
+\textbf{Solution for one-dimensional potential well.}
+For a constant potential $V=V_0$ and $E>V$, the solution is
+\[
+\psi_E(x)=c_{+} e^{i k x}+c_{-} e^{-i k x} \quad \text { where } \quad k=\sqrt{\frac{2 m\left(E-V_0\right)}{\hbar^2}} .
+\]
+For $E<V$, that is the classically forbidden region, the solution is
+\[
+\psi_E(x)=c_{+} e^{\kappa x}+c_{-} e^{-\kappa x} \quad \text { where } \quad \kappa=\sqrt{\frac{2 m\left(V_0-E\right)}{\hbar^2}} .
+\]
+Note that $c_{ \pm}$must be set equal to 0 if $x= \pm \infty$ is included in the domain under discussion.
+
+For a well with infinitely high walls at $x=0$ and $x=L$, that is
+\[
+V= \begin{cases}0 & \text { for } 0<x<L \\ \infty & \text { otherwise }\end{cases}
+\]
+the wave functions and energy eigenstates are
+\[
+\begin{aligned}
+\psi_E(x) & =\sqrt{\frac{2}{L}} \sin \left(\frac{n \pi x}{L}\right), \quad n=1,2,3 \ldots \\
+E & =\frac{\hbar^2 n^2 \pi^2}{2 m L^2}
+\end{aligned}
+\]
+For a well with finite walls at $x= \pm a$, that is
+\[
+V= \begin{cases}0 & \text { for }|x|>a \\ -V_0 & \text { for }|x|<a \quad\left(V_0>0\right),\end{cases}
+\]
+
+the bound-state $(E<0)$ solutions are:
+\[
+\psi_E \sim\left\{\begin{array}{ll}
+e^{-\kappa|x|} & \text { for }|x|>a \\
+\cos k x & \text { (even parity) } \\
+\sin k x & \text { (odd parity) }
+\end{array}\right\} \text { for }|x|<a,
+\]
+where
+\[
+k=\sqrt{\frac{2 m\left(-|E|+V_0\right)}{\hbar^2}} \text { and } \kappa=\sqrt{\frac{2 m|E|}{\hbar^2}} .
+\]
+The allowed discrete values of energy $E=-\hbar^2 \kappa^2 / 2 m$ are to be determined by solving
+$k a \tan k a=\kappa a \quad$ (even parity)
+$k a \cot k a=-\kappa a \quad$ (odd parity).
+(B.16)
+Note also that $\kappa$ and $k$ are related by
+\[
+\frac{2 m V_0 a^2}{\hbar^2}=\left(k^2+\kappa^2\right) a^2
+\]

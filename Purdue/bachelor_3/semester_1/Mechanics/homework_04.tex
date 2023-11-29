@@ -1,0 +1,67 @@
+\homework{4}{Wed 25 Oct 2023 00:02}{}
+
+\begin{problem}
+	Find canonical transformation from straight line motion to action-angle.
+\end{problem}
+\begin{proof}[Solution]
+	Assume that at $t = 0$, the displacement of the object wrt the origin is orthogonal to its trajectory. The angle and angular velocities can be expressed in terms on the linear velocity and linear position:
+	\[
+		p_{\phi} = m \dot{x} r \cos(\phi) = m \dot{x} d
+	.\] 
+	where $d$ is distance of trajectory from the origin. Now evaluate the total action:
+	\[
+		J = \int _{\frac{\pi}{2}}^{\frac{\pi}{2}} p_{\phi} d \phi = \pi p_\phi
+	.\] 
+	To use Hamilton's equations, we need to compute hamiltonian. But it is just the energy of the object: $H = \frac{1}{2} m \dot{x}^2 = \frac{J^2}{ 2 m \pi^2 d^2}$.
+
+	By the hamilton equations,
+	\[
+		\dot{\theta} = \frac{\partial H}{\partial J} = \frac{J}{\pi^2 m d^2} = \frac{\dot{x}}{\pi^2 b}
+	.\] 
+	Hence, 
+	\[
+		\theta = \frac{1}{\pi^2} \tan(\phi)
+	.\] 
+	We have
+	\[
+		\theta = \frac{1}{\pi^2} \tan \phi = \frac{1}{\pi^2} \frac{x}{d}
+	.\] 
+	\[
+		J = \pi p_\phi
+	.\] 
+\end{proof}
+
+\begin{problem}
+	A simple harmonic oscillator with spring constant increasing linearly with time. Use Hamiltonian to derive the equation of motion, and identify constants.
+\end{problem}
+\begin{proof}[Solution]
+	\[
+		H = \frac{1}{2} k x^2 + \frac{1}{2} m \dot{x}^2 = \frac{1}{2} k x^2 + \frac{p^2}{ 2 m}
+	.\] 
+	Then, 
+	\[
+		\dot{x} = \frac{p}{m}, \quadd \dot{p} = - (k_0 + k_1 t) x
+	.\] 
+	SHM have closed orbits for each $k$ ; as $k$ changes, the total action would be conserved.
+\end{proof}
+
+\begin{problem}
+	Adiabatic increase of spring constant: Solve the previous problem using the concepts of adiabatic invariance.
+\end{problem}
+\begin{proof}[Solution]
+	For SHM, the action is the area enclosed by the trajectory in phase space; the area is a ellipsoid with area $\frac{1}{2} p_{max} x_{max}$. This is conserved as $k$ changes. Now use the equation $H = \frac{1}{2} k x_{max}^2 = \frac{1}{2 m} p_{max}^2$, solve and get 
+	\[
+		\omega = \sqrt{\frac{k}{m}} 
+	.\] 
+\end{proof}
+
+
+\begin{problem}
+	Adiabatic invariant: A mass on a frictionless horizontal plane is attached to the origin by a spring of spring constant $k$. The spring has vanishing length in the limit of no force. The mass executes circular motion in the plane, the centrifugal force balanced by the spring force. The spring constant begins to change slowly in time (adiabatically). How do the speed, radius, angular frequency, and energy change in time?
+\end{problem}
+\begin{proof}[Solution]
+	Save it for next time.
+\end{proof}
+
+
+

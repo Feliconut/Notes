@@ -1,0 +1,173 @@
+\homework{2}{Mon 18 Sep 2023 21:41}{}
+
+\begin{problem}
+	(IMD 1.22)
+	Projectile: A projectile is shot vertically with speed v from the Equator, rises to a maximum height (without air resistance) and falls back to Earth. What is the displacement of the projectile to first-order approximation?
+\end{problem}
+\begin{proof}[Solution]
+	Let $\mathsf{e}_1$ point northward, $\mathsf{e}_2$ point eastward, $\mathsf{e}_3$ point downward. The equation of motion is given by
+	\[
+		\ddot{x} = g \mathsf{e}_3 - 2 \Omega \cdot \dot{x} - \dot{\Omega} \cdot x - \Omega \cdot (\Omega \cdot x)
+	.\] 
+	Where $g > 0$, and $\Omega = \omega \mathsf{e}_2 \wedge \mathsf{e}_3$, $\omega>0$, is the angular velocity of the Earth's rotation. $\Omega$ is constant, so we have the following equation of motion
+	\[
+		\ddot{x} = g \mathsf{e}_3 - 2 \omega \mathsf{e}_2 \mathsf{e}_3 \cdot \dot{x} 
+		+ O(\omega^2)
+	.\] 
+	Integrate, we obtain
+	\[
+		\dot{x} = g t \mathsf{e}_3 + v e_3 + O(\omega)
+	.\] 
+	Where $v < 0$ is the initial speed. Plug this back,
+	\begin{align*}
+		\ddot{x} &= g \mathsf{e}_3 - 2 \omega \mathsf{e}_2 \mathsf{e}_3 \cdot \left( g t \mathsf{e}_3 + v \mathsf{e}_3 \right)  + O(\omega^2)\\
+		&= g \mathsf{e}_3 - 2 \omega \left( g t \mathsf{e}_2 + v \mathsf{e}_2 \right) + O(\omega^2)
+	.\end{align*} 
+	Integrate,
+	\[
+		\dot{x} = g t \mathsf{e}_3 + \omega\left( - g t^2 \mathsf{e}_2 - 2 v t \mathsf{e}_2 \right) + v e_3 + O(\omega^2)
+	.\] 
+	Integrate again,
+	\[
+		x = \left( \frac{1}{2} g t^2 + v t  \right) \mathsf{e}_3 + \left( - \frac{1}{3} g t^3 -  v t^2 \right) \omega \mathsf{e}_2 + O(\omega^2)
+	.\]
+	When the object hits ground, we have  $x \cdot  \mathsf{e}_3 = 0$, so 
+	\[
+		t = -2 v / g
+	.\] 
+	Plug this into the above expression,
+	\[
+		x = - \frac{4}{3} \frac{v^3}{g^2} \mathsf{e}_2
+	.\] 
+	Hence the deflection is to the west.
+
+\end{proof}
+
+\begin{problem}
+	Using Euler's equations, show that for an object with $I_1<I_2<$ $I_3$, there are two stable rotation axes and one unstable axis.
+\end{problem}
+\begin{proof}[Solution]
+	Suppose the body is rotating around $I_1$ axis. Then $\omega_2, \omega_3$ are small. According to the Euler equations, $\dot{\omega}_1$ is very small, so we take $\dot{\omega}_1 = 0$.
+
+	Then differentiate the Euler equation for $\omega_2$ and $\omega_3$ entries, we have $\ddot{\omega} _2 I_2 - (I_3 - I_1) \dot{\omega}_3 \omega_1 = 0$. Plug in $\dot{\omega}_3$, we have
+	\[
+		\ddot{\omega} _2 I_2 I_3 - (I_3 - I_1) (I_1 - I_2) \omega_1^2 \omega_2 = 0
+	.\] 
+	The coefficient $(I_3 - I_1)(I_1 - I_2)$ is negative, so the rotation in $\omega_2$ direction is resisted, so it tends to stabilize. 
+
+	On the other hand, if the body is rotating around $I_2$ axis, then we have
+	\[
+		\ddot{\omega} _3 I_3 I_1 - (I_1 - I_2) (I_2 - I_3) \omega_2^2 \omega_3 = 0
+	.\] 
+	Now $(I_1 - I_2)(I_2 - I_3) > 0$, so the small perturbation in $\omega_3$ direction tend to increase. So it is not stable.
+\end{proof}
+
+\begin{problem}
+	Euler's Equations: A bead of mass $M$ slides on a massless frictionless planar circular hoop of radius $\mathrm{R}$ rotating at constant angular speed $\omega$ about a central axis.
+a) Derive the full equations of motion (but don't solve them) for the bead using Euler's equations. (Hints: The inertia tensor (and hence the principle moments in the body frame for Euler's equation) is obtained by treating this as a mass at the end of a rigid massless rod of length $\mathrm{R}$ that pivots about the origin of the circle.)
+b) For the condition $\omega^2 R>g$, derive the equilibrium angle $\theta_0$.
+\end{problem}
+\begin{proof}[Solution]
+	Let the frame rotate with the body. Let  $\mathsf{e}_1$ be symmetric axis of the loop, $\mathsf{e}_3$ point radially inward from the ball, and $\mathsf{e}_2$ orthogonal to both of them. Now we have $i_1 = i_2$ and $i_3 = 0$, so we have simplified version of Euler equation:
+	\[
+		i_1 \dot{\omega}_1 \mathsf{e}_2 \mathsf{e}_3 + i_2 \dot{\omega}_2 \mathsf{e}_3 \mathsf{e}_1 = N \qquad \omega_3 = 0
+	.\] 
+	where $I_1 = I_2 = M R^2$. The torque comes from both gravity and the rotation of ring, $N = N_g + N_r$. For the gravity contribution, $N_g = r \wedge F = -R \mathsf{e}_3 \wedge  M g\left( - \cos \theta \mathsf{e}_3 + \sin \theta \mathsf{e}_2 \right) = R M g \sin \theta \mathsf{e}_2 \mathsf{e}_3$. 
+	Let $\mathsf{f}_3$ be the vertical upward direction, $\mathsf{f}_1$ on the plane spanned by $\mathsf{e}_2$ and $\mathsf{e}_3$. 
+	%The rotation of the ring provides angular momentum in this direction: $M (R \sin \theta)^2 \omega \mathsf{f}_1 \mathsf{f}_2$. The generated torque is $N_r = \left(2 M R^2 \sin \theta \cos \theta \omega \omega_1 \right)\mathsf{f}_1 \mathsf{f}_2$.
+
+	The centrifugal force is pointing to the direction $\mathsf{f}_1$ with magnitude $M R \sin \theta \omega^2$. The torque in the $\mathsf{f}_3 \mathsf{f}_1 = \mathsf{e}_2 \mathsf{e}_3$ plane is then $M R^2 \omega^2 \sin(\theta) \cos(\theta)$.
+
+
+	In equilibrium, the torques in $\mathsf{e}_2 \mathsf{e}_3$ plane is zero, hence
+	\[
+		M g R \sin(\theta) = M R^2 \omega^2 \sin(\theta) \cos(\theta) \implies
+		\cos(\theta) = \frac{g}{R \omega^2}
+	.\] 
+
+\end{proof}
+
+\begin{problem}
+	4) Physical Circular Pendulum.
+The period of rotation of the Moon is in a $1: 1$ resonance with its orbital period (caused by tidal dissipation by the oceans on Earth). This is why one side always faces Earth. This makes the Earth-Moon system a "rigid body". However, what would change in the physics if one face of the Moon always faced the Sun as it revolved around the Earth?
+Consider a physical pendulum mass of small but finite size, with mass $\mathrm{M}$ and moment $\mathrm{I}_3$ along its body axis. Assume it moves in a steady circular motion (fixed angle $\theta<90^{\circ}$, not small) on a massless wire of length $b$ (that exerts no torsion). Now consider the mass $\mathrm{M}$ to always point in the same direction in the fixed (laboratory) frame (note that the mass in this case is spinning very slowly with $\dot{\psi}=-\dot{\phi}$ ). Derive the angular frequency of this circular pendulum, expressed in terms of $\mathrm{m}$, $\mathrm{g}, \mathrm{b}, \theta$ and $\mathrm{I}_3$. Do not assume $\mathrm{I}_3$ is negligible (but you should test the limit when $\mathrm{I}_3$ goes to zero to make sure you get the well-known solution of a point-mass circular pendulum). (Show all work.)
+\end{problem}
+\begin{proof}[Solution]
+	Let $\mathsf{e}$ be the stationary frame and $\mathsf{f}$ be the moving frame. Let $\mathsf{e}_3$ point vertically upward and $\mathsf{f}_3$ point upward along the string.
+
+	We first note that
+	\[
+		\mathsf{e}_1 \cdot \mathsf{f}_2 
+		= \mathsf{e}_3 \cdot \mathsf{f}_2 = 0 
+	.\] 
+
+	To apply Euler equation, we find $\omega$ in the body frame. The angular velocity is
+	\[
+		\Omega = \dot{\phi} I\mathsf{f}_3 - \dot{\phi}I\mathsf{e}_3 = \dot{\phi} I \mathsf{f}_3 - \dot{\phi} \sum I\mathsf{f}_j \left( \mathsf{f}_j \cdot \mathsf{e}_3 \right) 
+	.\] 
+	The angular velocity in fixed body frame is
+	\[
+		\Omega_B = \dot{\phi}\left(I \mathsf{e}_3 - \sum_j I \mathsf{e}_j \left( \mathsf{f}_j \cdot  \mathsf{e}_3 \right) \right)
+	.\] 
+	The inertia tensor is 
+	\[
+		\mathcal{I}(\omega_1 I\mathsf{e}_1 + \omega_2 I \mathsf{e}_2 + \omega_3 I \mathsf{e}_3) = mb^2 \omega_1 I\mathsf{e}_1 + mb^2 \omega_2 I\mathsf{e}_2 + i_3 \omega_3 I\mathsf{e}_3
+	.\] 
+	We have the following equation of motion:
+	\[
+		\dot{L} = R\left( \mathcal{I}(\dot{\Omega}_B) \right) R^{\dag} + L \times \Omega
+	.\] 
+	The first term on the right hand side is
+	\begin{align*}
+		R\left( \mathcal{I}(\dot{\Omega}_B) \right) R^{\dag}
+		&= \frac{d}{dt}(\dot{\phi} (mb^2 (\mathsf{f}_1 \cdot \mathsf{e}_3) I\mathsf{f}_1 + (i_3+ 1) (\mathsf{f}_3 \cdot \mathsf{e}_3) I \mathsf{f}_3 ))\\
+		&= \ddot{\phi}  (-mb^2 \sin \theta I\mathsf{f}_1 + (i_3+ 1) \cos \theta I \mathsf{f}_3 )\\
+	.\end{align*}
+	We disregard this term since it is of higher order.
+
+	The second term on the right hand side is
+	\begin{align*}
+		L \times \Omega
+		&= (R \mathcal{I}(\Omega_B) R^{\dag} ) \times \Omega \\
+		&= \dot{\phi}\left( i_3 I \mathsf{f}_3 - mb^2 I\mathsf{f}_1 \left( \mathsf{f}_1 \cdot \mathsf{e}_3 \right) - i_3 I\mathsf{f}_3 (\mathsf{f}_3 \cdot \mathsf{e}_3) \right) \times \Omega \\
+		&= \dot{\phi}\left( (1 - \cos \theta) i_3 I \mathsf{f}_3 - \sin \theta mb^2 I \mathsf{f}_1  \right) \times \dot{\phi}\left( (1 - \cos(\theta)  I \mathsf{f}_3 - \sin \theta I \mathsf{f}_1 \right)  \\
+		&= \dot{\phi}^2 (1 - \cos \theta) \sin \theta(i_3 - m b^2) I \mathsf{f}_2
+	.\end{align*}
+
+	The gravitational torque is
+	\begin{align*}
+		N = r \wedge F
+		&= - b \mathsf{f}_3 \wedge - m g \mathsf{e}_3 \\
+		&= -m g b \sin \theta I \mathsf{f}_2
+	.\end{align*}
+
+	The centrifugal torque is
+	\[
+		N = m \dot{\phi}^2 b I \mathsf{f}_2
+	.\] 
+
+	Consider the equation in $I \mathsf{f}_2$ direction, ignore second order derivative, we have
+	\begin{align*}
+		 m \dot{\phi}^2 b I \mathsf{f}_2 - m g b \sin \theta I \mathsf{f}_2 = \dot{\phi}^2 (1 - \cos \theta) \sin \theta(i_3 - m b^2) I \mathsf{f}_2
+	.\end{align*}
+	Thus
+	\[
+		\dot{\phi}^2 = \frac{m g b}{(1 - \cos \theta) (i_3 - m b^2)+ m b^2}
+	.\] 
+
+	In the limit as $i_3 \approx 0$, it goes to the limit
+	\[
+		\dot{\phi}^2 = \frac{m g b}{m b^2 \cos \theta} = \frac{g}{b \cos \theta}
+	.\] 
+
+
+
+
+
+
+	
+\end{proof}
+
+
+
+

@@ -1,0 +1,122 @@
+\lecture{9}{Mon 23 Oct 2023 10:33}{}
+
+\begin{theorem}
+	Let $T$ be a.s. finite stopping time, then
+	\[
+		W_t = B_{T + t} - B_T
+	.\] 
+	is a Brownian motion independent of $\mathcal{F}_T$.
+\end{theorem}
+\begin{remark}
+	This implies
+	\[
+		E\left( f(B_{T + t}) | \mathcal{F}_T \right) 
+		= E_{B_T}\left( f(B_t) \right) 
+	.\] 
+\end{remark}
+
+\begin{theorem}
+	If $X_1, \ldots, X_n$ are independent and $X_n \sim  N(0,1)$, iff for all $\theta \in \mathbb{R}^n$, $Z := \sum X_i \theta_i \sim N(0,\sigma^2)$ where $\sigma^2 = \sum \theta_i^2 \sigma_i^2$. 
+
+	$\varphi_Z(\lambda) = E\left( \exp\left( i \lambda Z \right)  \right) = \exp\left( - \frac{\lambda^2 \sigma^2}{2} \right) $  for all $\lambda \in \mathbb{R}$. We may take $\lambda = 1$.
+\end{theorem}
+
+\begin{lemma}
+	$X_1, \ldots, X_n$ independent iff 
+	\[
+		\varphi(\theta) = E\left( \exp\left( i \left\langle \theta, X \right\rangle  \right)  \right) = \prod_{i=1}^{n} \varphi_{X_i}(\theta_i) 
+	.\] 
+\end{lemma}
+
+Need a slightly more generalized version:
+
+\begin{lemma}
+	$E\left( \exp\left( i Z \right) | \mathcal{G} \right) = \exp\left( - \sigma^2 / 2 \right) $
+	$\implies X_1, \ldots, X_n$ are independent normal, and independent of $\mathcal{G}$.
+\end{lemma}
+\begin{proof}
+	Take expectations,
+	\begin{align*}
+		E\left( e^{i Z} \right) = e^{- \sigma^2 / 2}
+		&= E\left( \exp\left( i \theta_n Y \right) \exp(- \sigma^2 / 2)\right)  \\
+		&= E\left( \exp(i \theta_n Y) \right) \prod_{k=1}^{n} \varphi_{X_k}(\theta)  \\
+		&= \varphi_{Y}(\theta_n) \prod_{k=1}^{n} \varphi_{X_k}(\theta_k)  
+	.\end{align*} 
+	By previous theorem: $X_1, \ldots, X_n$ are independent and $N(0, \sigma^2_k)$. Let $Y \in \mathcal{G}$. Then
+	\begin{align*}
+		E\left( \exp(i \theta_{n+1} Y) \exp(i Z) \right) 
+	.\end{align*}
+	Let $\tilde X = \left( X_1, .., X_n, Y \right) $, $\tilde \theta = \left( \theta_1, \ldots, \theta_n, \theta_{n+1} \right) $. 
+\end{proof}
+
+Recall: $M_t^\theta = \exp\left( i \theta B_t + \frac{\theta^2}{2} t \right) $ is a martingale. Assume $T$ is bounded.
+
+Let $t > s$,  $T+s, T+t$ are bounded stopping times. Now
+\[
+	E\left( e^{i \theta B_{T + t} + \frac{\theta^2}{2}(T + t)} \middle| \mathcal{F}_{T + s} \right) 
+	= e^{i \theta B_{T + s} + \frac{\theta^2}{2} (T + s)}
+.\] 
+Hence
+\[
+	E\left( e^{i \theta (B_{T + t} - B_{T + s}) + \frac{\theta^2}{2}(T + t - T - s)} \middle| \mathcal{F}_{T + s} \right) =1
+.\] 
+Now we can get rid of $T$ by taking expectation:
+\[
+	E\left( e^{i \theta} \left( B_{T + t} - B_{T + s} \right)  \right) = e^{- \frac{\theta^2}{2} (t - s)}
+.\] 
+
+
+Now, let $0 = t_0 < t_1 < \ldots < t_n$. 
+\[
+	E\left( \exp\left( i \theta \left( W_{t_k} - W_{t_{k-1}}  \right)  \right)  \middle| \mathcal{F}_{T + t_{k - 1}} \right) 
+	= \exp\left( - \frac{\theta^2}{2}\left( t_k - t_{k-1} \right)  \right) 
+.\] 
+
+Let $A \in \mathcal{F}_{T}$. Now
+\[
+	E\left( 1_A \exp\left( -i \sum_{k=1}^{n} \theta_k \left( W_{t_k} - W_{t_{k-1}} \right)  \right)  \right) 
+	= P(A) \exp\left( - \frac{1}{2} \sum_{k=1}^{n} \theta_k^2 \left( t_k - t_{k-1} \right)  \right) 
+.\] 
+
+Condition on $\mathcal{F}_{T + t_{n-1}}$:
+
+\begin{align*}
+	&E\left( 1_A \exp\left( -i \sum_{k=1}^{n} \theta_k \left( W_{t_k} - W_{t_{k-1}} \right)  \right)  \right) \\
+	&= E\left(E\left( 1_A \exp\left( -i \sum_{k=1}^{n} \theta_k \left( W_{t_k} - W_{t_{k-1}} \right)  \right) \middle| \mathcal{F}_{T + t_{n-1}} \right) \right)\\
+	&= E\left(1_A E\left( \exp\left( -i \sum_{k=1}^{n-1} \theta_k \left( W_{t_k} - W_{t_{k-1}} \right)  + i \theta_n \left( W_{t_n} - W_{t_{n-1}} \right)  \right) \middle| \mathcal{F}_{T + t_{n-1}} \right) \right)\\
+	&= E\left(1_A \exp\left( -i \sum_{k=1}^{n-1} \theta_k \left( W_{t_k} - W_{t_{k-1}} \right) \right) E\left( \exp\left(  i \theta_n \left( W_{t_n} - W_{t_{n-1}} \right)  \right) \middle| \mathcal{F}_{T + t_{n-1}} \right) \right)\\
+	&= E\left(1_A \exp\left( -i \sum_{k=1}^{n-1} \theta_k \left( W_{t_k} - W_{t_{k-1}} \right) \right) E\left( \exp\left( - \frac{\theta^2_n}{2} (t_n - t_{n-1}) \right)  \middle| \mathcal{F}_{T + t_{n-1}} \right) \right)\\
+	&= E(1_A) \exp\left( - \frac{1}{2} \sum_{k=1}^{n} \theta_k^2 (t_k - t_{k-1}) \right) 
+.\end{align*} 
+where the last step is by iteration of previous argument.
+
+Hence: \textbf{Conditioned on $\mathcal{F}_T$, $\{W_t - W_{t_{k-1}}\} $ are independent normal $N(0, t_{k} - t_{k-1})$ and independent of $t$}.
+
+
+For $T$ a.s. finite, apply the same argument to $T \wedge N$, and let $N \to \infty $.
+
+\begin{definition}[Brownian Motion]
+	(Brownian Motion adapted to a filtration)
+	Let $\{\mathcal{F}_t\} $ be a filtration, An $\mathcal{F}_t$ adapted process $\{B_t\} $ is said to be Brownian motion, if
+	\begin{enumerate}
+		\item $B_t - B_s  \sim N(0, t-s)$
+		\item $B_t - B_s$ independent of $\mathcal{F}_s$, $s < t$.
+		\item $t \mapsto B_t$ continuous a.s.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	(Characterization of $\mathcal{F}_t$ Brownian motion)
+	$B_t$ is $\mathcal{F}_t$ Brownian motion iff
+	\[
+		M_t^\theta = \exp\left( i \theta B_t + \frac{\theta^2}{2} t \right) 
+	\] 
+	is a martingale.
+
+\end{theorem}
+
+Furthermore, $B_t$ is a strong Markov process.
+
+\begin{remark}
+	This proof works for all stochastic process with characteristic function of the form $\varphi_{X_t}(\theta) = \exp(- \rho(\theta) t)$. That is, L\'evy processes. Even to stable process, $\exp( - |\theta|^\alpha$, $\alpha \in (0,2]$.
+\end{remark}

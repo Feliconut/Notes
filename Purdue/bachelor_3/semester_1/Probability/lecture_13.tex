@@ -1,0 +1,109 @@
+\lecture{13}{Fri 03 Nov 2023 10:36}{}
+
+We have for $1 < p < \infty $,
+\[
+	c_1 \sqrt{p} \|T^{\frac{1}{2}}\|_p \le 
+	\|B_T^*\|_p
+	\le c_2 \sqrt{p}  \|T^{\frac{1}{2}}\|_p
+.\] 
+
+\begin{proof}
+	\begin{align*}
+		E \left| \frac{B_T^*}{\beta} \right| ^p
+		&= p \int _0^\infty \lambda^{p-1} P\left( B_T^* > \beta \lambda \right) d \lambda \\
+		&\leq p \int _0 ^\infty  \lambda^{p - 1}P\left( B_T^* > \beta \lambda, T^{\frac{1}{2}} \le  \delta \lambda \right) d \lambda 
+		+ p \int _0 ^\infty  \lambda^{p - 1} P\left( T^{\frac{1}{2}} \le  \delta \lambda \right) d \lambda 
+	.\end{align*}
+	Thus
+	\[
+		\le  2 \exp\left( - \frac{(\beta - 1)^2}{2 \delta^2}	 \right) 
+		p \int _0^\infty \lambda^{p - 1} P\left( B_T^* > \lambda \right) d \lambda + p \int _0^\infty \lambda^{p - 1} P\left( \frac{T^{\frac{1}{2}}}{\delta} > \lambda \right) d \lambda
+	.\] 
+	\[
+		= 2 \exp\left(  - \frac{(\beta - 1)^2}{2 \delta^2} \right) E|B_T^*|^p + \frac{1}{\delta^p} E|T^{\frac{1}{2}}|^p
+	.\] 
+	Take small $\delta$ such that
+	\[
+		\frac{1}{\beta^p} - 2 \exp\left( - \frac{- \left( \beta - 1 \right) ^2}{2 \delta^2} \right) > 0
+	.\] 
+	Thus
+	\[
+		E|B_T^*|^p \le  \frac{1}{\delta^p \left( \frac{1}{\beta^p} - 2 \exp\left( - \frac{(\beta - 1)^2}{ 2 \delta^2} \right)  \right) } 
+		E|T^{\frac{1}{2}}|^p
+	.\]  
+	Take $\beta = 2$.
+	Let $\delta$ be such that
+	\[
+		\frac{1}{2^p} - 2 \exp\left( \frac{1}{2 \delta^2} \right)  = \frac{1}{2^{p + 1}}
+	.\] 
+
+	Now solve and get
+	\[
+		\frac{1}{\delta} = \sqrt{2 \log 2}  \sqrt{p + 2} 
+	.\] 
+	Thus
+	\begin{align*}
+		\frac{1}{\delta \left( \frac{1}{2^p} - 2 e^{-\frac{1}{ 2 \delta^2}} \right) ^{\frac{1}{p}}}
+		&= \sqrt{2 \log  2} \sqrt{p + 2} \left( 2^{p + 1} \right) ^{1 / p} \\
+		&= c \sqrt{p + 2}  2^{ 1 + \frac{1}{p}} \\
+		&\le  c \sqrt{p} 
+	.\end{align*}
+
+\end{proof}
+
+Rest of the semester: 
+\begin{itemize}
+	\item Ito Integral
+	\item Some remarks about stable distribution.
+	\item Levy processes
+\end{itemize}
+
+\begin{remark}
+	on normal distribution. $N(0,t)$ has density called the \textit{heat kernel}
+	\[
+		P_t(x) = \frac{1}{\left( 2 \pi t \right) ^{\frac{d}{2}}} e^{- \frac{|x|^2}{2 t}}
+	.\] 
+	\[
+		P_t(x,y) = P_t(x-y)
+	.\] 
+	Let $f: \mathbb{R}^d \to \mathbb{R}$ be nice. Define
+	\[
+		\mathcal{U}_f(x,t) = \int_{\mathbb{R}^d} P_t(x,y) f(y) dy = E_x\left(f(B_t)\right)
+	\]
+	Then $\mathcal{U}$ solves the heat equation:
+	\[
+		\begin{cases}
+			\frac{\partial \mathcal{U}_f}{\partial t} = \frac{1}{2} \Delta_x \mathcal{U} \\
+			u_t(x,0) = f(x)
+		\end{cases}
+	.\] 
+
+	To prove this using analysis requires differentiation under the integral. But using Brownian Motion, we have $E_x\left( f(B_0) \right) = f(x)$ since $B_t$ is continuous.
+\end{remark}
+Properties of the heat kernel:
+\begin{itemize}
+	\item $P_t(x) = \frac{1}{\sqrt{t} } P_t(x / \sqrt{t} )$
+	\item $P_t(0) = \frac{1}{\sqrt{2 \pi t} }$ 
+	\item \logseq{Chapman-Kolmogorov Equations} 
+		\[
+			\int _{\mathbb{R}} P_t(x,y) P_s(y) = P_{t + s} (x)
+		.\] 
+\end{itemize}
+This follows from $X\sim N(\alpha, \sigma^2_1), Y\sim N(\beta, \sigma^2_2)$, independent, then $X + Y \sim N(\alpha + \beta, \sigma^2_1 + \sigma^2_2)$.
+
+Using Fourier transform:
+\[
+	\hat{P} _t(\xi) \hat{P} _s(\xi)
+	= e^{- t \frac{|\xi|^2}{2}}e^{- s \frac{|\xi|^2}{2}}
+	= e^{- (t + s) |\xi|^2}
+.\] 
+
+Also, recall Polya's result 
+\begin{theorem}
+	(Durett Example 3.3.23)
+	$\exp(- |\xi|^\alpha)$ is a characteristic function iff $0 < \alpha < 2$.
+\end{theorem}
+
+If $\alpha$-norm of chf is finite, then $X$ has a density.
+
+

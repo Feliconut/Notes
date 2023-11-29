@@ -1,0 +1,15 @@
+\homework{3}{Tue 17 Oct 2023 23:10}{Poisson Bracket}
+
+\begin{problem}
+Poisson bracket: Evaluate the Poisson bracket of the dynamical quantity
+$G = p_aq^a$ for a Hamiltonian system.
+\end{problem}
+\begin{proof}[Solution]
+	\begin{align*}
+		\{G, H\}
+		&=\frac{\partial G}{\partial q^a} \frac{\partial H}{\partial p_a}-\frac{\partial G}{\partial p_a} \frac{\partial H}{\partial q^a}\\
+		&=\frac{\partial p_a q^a}{\partial q^a} \frac{\partial H}{\partial p_a}-\frac{\partial p_aq^a}{\partial p_a} \frac{\partial H}{\partial q^a}\\
+		&=p_a \frac{\partial H}{\partial p_a}-q_a \frac{\partial H}{\partial q^a}
+\end{align*}
+\end{proof}
+

@@ -1,0 +1,141 @@
+\homework{6}{Fri 03 Nov 2023 23:27}{Harmonic Functions and Poisson Equation}
+
+\begin{problem}
+	Prove the following extension of the Liouville's theorem: If a harmonic function $u$ in $\mathbb{R}^n$ grows no faster then a polynomial, i.e. if
+\[
+|u(x)| \leq C(1+|x|)^N, \quad \text { for all } x \in \mathbb{R}^n,
+\]
+then $u$ is a polynomial.
+\end{problem}
+\begin{proof}
+	We apply the estimation (Evans, Section 2, Theorem 7):
+	\[
+		\left| D^\alpha u(x_0) \right| 
+		\le \frac{C_k}{r^{n+k}} \|u\|_{L^1(B(x_0, r))}
+	.\] 
+	whenever  $u$ harmonic in $U$ and $B(x_0, r) \subset U$, $|\alpha| = k$.
+
+	Now
+	\begin{align*}
+		\left| D^\alpha u (x) \right| 
+		&\leq \frac{C_k}{r^{n +k}}  \alpha_n r^n \|u(x)\|_{L^\infty (B(x, r))} \\
+		&\leq \frac{C_k}{r^{k}}  \alpha_n C (1 + |x| + r)^N 
+	.\end{align*}
+	Take $r > 1 + |x|$, and we have
+	\[
+		|D^\alpha u(x)| \le C \frac{(2 ^{n+1} n k )^k}{r^k} (2 r)^N
+	.\] 
+	As we take $r \to \infty $, we have $D^\alpha u(x) = 0$ if $|\alpha| > N$. Hence $D^k u = 0$ for all $k > N$. This implies that $u $ is a polynomial of degree at most $k$.
+\end{proof}
+
+\begin{problem}
+	For $n=2$ find Green's function for the quadrant $\left\{x_1>0, x_2>0\right\}$ by repeated reflection.
+\end{problem}
+\begin{proof}
+	First calculate the Green's function for the upper half plane $x_2 > 0$ :
+	\[
+		G_1(x,y) = \Phi(x, y) - \Phi(\tilde x, y) \qquad
+		\tilde (x_1, x_2) = (x_1,-x_2)
+	.\] 
+	That is,
+	\[
+		G_1^{(x_1,x_2)} = \Phi^{(x_1, x_2)} - \Phi^{(x_1, - x_2)} \qquad x_2 \ge 0
+	.\] 
+	Now perform a reflection along $\{x_1 = 0\} $ :
+	\[
+		G^{(x_1,x_2)} := G_1^{(x_1, x_2)} - G_1^{(- x_1, x_2)} \qquad x_1\ge 0, x_2\ge 0
+	.\] 
+	Expand out the definition, we have
+	\[
+		G^x(y) = - \frac{1}{2 \pi} \left( 
+		\log|y - (x_1, x_2)| - \log|y - (x_1, -x_2)| - \log| y - (-x_1, x_2)| + \log|y - (-x_1, -x_2)| \right) 
+	.\] 
+\end{proof}
+
+\begin{problem}
+	(Precise form of Harnack's inequality) Use Poisson's formula for the ball to prove
+\[
+\frac{r^{n-2}(r-|x|)}{(r+|x|)^{n-1}} u(0) \leq u(x) \leq \frac{r^{n-2}(r+|x|)}{(r-|x|)^{n-1}} u(0)
+\]
+whenever $u$ is positive and harmonic in $B(0, r)=\left\{x \in \mathbb{R}^n:|x|<r\right\}$.
+\end{problem}
+\begin{proof}
+	Apply the poisson formula
+	\[
+		u(x) = \frac{r^2 - |x|^2}{n \alpha_n r}
+		\int _{\partial B(0,r)} \frac{u(y)}{|x - y|^n} d S_y
+	.\] 
+	And using the bound
+	\[
+		r - |x| \le |x - y| \le r + |x| \qquad \text{for } y \in B(0,r) 
+	.\] 
+	We get the desired inequality:
+	\begin{align*}
+		u(x) &\le 
+		\frac{r^2 - |x|^2}{n \alpha_n r}
+		\int _{\partial B(0,r)} \frac{u(y)}{(r - |x|)^n} d S_y\\
+		&\leq 
+		\frac{r^2 - |x|^2}{n \alpha_n r}
+		\frac{1}{(r - |x|)^n}
+		n \alpha_n r^{n-1} u(0)\\
+		&= \frac{r^{n-2} (r + |x|)}{(r - |x|)^{n-1}}u\left( 0 \right) 
+	.\end{align*}
+	The other side of inequality is proved similarly.
+\end{proof}
+
+\begin{problem}
+	Let $P_k(x)$ and $P_m(x)$ be homogeneous harmonic polynomials in $\mathbb{R}^n$ of degrees $k$ and $m$ respectively; i.e.,
+\[
+\begin{gathered}
+P_k(\lambda x)=\lambda^k P_k(x), \quad P_m(\lambda x)=\lambda^m P_m(x), \quad \text { for every } x \in \mathbb{R}^n, \lambda>0 \\
+\Delta P_k=0, \quad \Delta P_m=0 \quad \text { in } \mathbb{R}^n .
+\end{gathered}
+\]
+(a) Show that
+\[
+\frac{\partial P_k}{\partial \nu}=k P_k(x), \quad \frac{\partial P_m}{\partial \nu}=m P_m(x) \quad \text { on } \partial B(0,1),
+\]
+where $B(0,1)=\left\{x \in \mathbb{R}^n:|x|<1\right\}$ and $\nu$ is the outward normal on $\partial B(0,1)$.
+(b) Use (a) and Green's formula to prove that
+\[
+\int_{\partial B(0,1)} P_k(x) P_m(x) d \sigma=0, \quad \text { if } k \neq m
+\]
+\end{problem}
+\begin{proof}
+	Write \[
+		P_k = \sum_{|\alpha| = k} c_\alpha x^\alpha
+	.\] 
+	Note that on $\partial B(0,r)$ with $r = 1$,
+	\[
+		\nu_i = \frac{x_i}{r} = x_i
+	.\] 
+	\begin{align*}
+		\frac{\partial P_k}{\partial \nu} 
+		&= \sum_k \frac{\partial P_k}{\partial x_i} \nu_i \\
+		&= \sum_k \frac{\partial P_k}{\partial x_i} x_i \\
+		&= \sum_i \sum_\alpha c_\alpha \frac{\partial x^\alpha}{\partial x_i}  x_i \\
+		&= \sum_\alpha c_\alpha \sum_i \frac{\partial x^\alpha}{\partial x_i} x_i \\
+		&= \sum_\alpha c_\alpha \left( \sum_i \alpha_i \right)  x^\alpha \\
+		&= k \sum_\alpha c_\alpha x^\alpha \\
+		&= k P_k
+	.\end{align*}
+
+
+	Similarly for $P_m$.
+
+	Using the Green's formula, we have
+	\begin{align*}
+		\int _{\partial B(0,1)} P_k \frac{\partial P_m}{\partial \nu} - P_m \frac{\partial P_k}{\partial \nu} 
+		= \int _{B(0,1)} P_k \Delta P_m - P_m \Delta P_k = 0
+	.\end{align*}
+	Hence
+	\[
+		(m - k) \int _{\partial B(0,1)} P_k P_m = 0
+	.\] 
+
+	For $m \neq k$, this implies $\int _{\partial B(0,1)} P_k P_m=0$ .
+
+\end{proof}
+
+
+

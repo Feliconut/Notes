@@ -1,0 +1,132 @@
+\homework{4}{Fri 29 Sep 2023 23:22}{}
+
+\begin{problem}
+	(Legendre transform) Let $u\left(x_1, x_2\right)$ be a solution of the quasilinear equation
+\[
+a^{11}(D u) u_{x_1 x_1}+2 a^{12}(D u) u_{x_1 x_2}+a^{22}(D u) u_{x_2, x_2}=0
+\]
+is some region of $\mathbb{R}^2$, where we can invert the relations
+\[
+p^1=u_{x_1}\left(x_1, x_2\right), \quad p^2=u_{x_2}\left(x_1, x_2\right)
+\]
+to solve for
+\[
+x^1=x^1\left(p_1, p_2\right), \quad x^2=x^2\left(p_1, p_2\right)
+\]
+Define then
+\[
+v(p):=\mathbf{x}(p) \cdot p-u(\mathbf{x}(p)),
+\]
+where $\mathbf{x}=\left(x^1, x^2\right), p=\left(p_1, p_2\right)$. Show that $v$ satisfies a linear equation
+\[
+a^{22}(p) v_{p_1 p_1}-2 a^{12}(p) v_{p_1 p_2}+a^{11}(p) v_{p_2 p_2}=0 .
+\]
+(Hint: See [Evans, $4.4 .3 \mathrm{~b}]$, prove the identities (29))
+\end{problem}
+\begin{proof}[Solution]
+	It suffices to prove the identity as hinted. Compute $v_{p_1}$ :
+	\begin{align*}
+		v_{p_1}
+		&= \frac{\partial }{\partial p_1} \left( x_1 p_1 + x_2 p_2  - u(x(p))\right) \\
+		&= x^1_{p_1} p_1 + x_1 + x^2_{p_1} p_2 - u_{x_1} x^1_{p_1} - u_{x_2} x^2_{p_1} \\
+		&= x_1
+	.\end{align*}
+	We can write the Jacobian as
+	\begin{align*}
+		J &= u_{x_1 x_1} u_{x_2 x_2} - u_{x_1 x_2} u_{x_2 x_1} \\
+		&= p^1_{x_1} p^2_{x_2} - p^1_{x_2} p^2 _{x_1}
+	.\end{align*} 
+	Now 
+	\begin{align*}
+		J V_{p_1 p_1} = \left( p^1_{x_1} p^2_{x_2} - p^1_{x_2} p^2 _{x_1} \right) (p^1_{x_1})^{-1}
+		&= p^2_{x_2} - p^1_{x_2} p^2_{p_1} \\
+		&= p^2_{x_2} \\
+		&= u_{x_2 x_2}
+	.\end{align*}
+	The other two equations are similar.
+\end{proof}
+
+\begin{problem}
+	Find the solution $u(x, t)$ of the one-dimensional wave equation
+\[
+u_{t t}-u_{x x}=0
+\]
+in the quadrant $x>0, t>0$ for which
+\[
+\begin{aligned}
+& u(x, 0)=f(x), \quad u_t(x, 0)=g(x) \quad \text { for } x>0 \\
+& u_t(0, t)=\alpha u_x(0, t), \quad \text { for } t>0
+\end{aligned}
+\]
+where $\alpha \neq-1$ is a given constant. Show that generally no solution exists when $\alpha=-1$. (Hint: use a representation $u(x, t)=F(x-t)+G(x+t)$ for the solution)
+\end{problem}
+\begin{proof}
+	We first verify that the given solution form indeed solves the PDE. Calculate
+	\begin{align*}
+		u_{tt}- u_{xx}
+		&= \left( -F' + G' \right) _t - \left( F' + G' \right) _x  \\
+		&= (F'' + G'') - (F'' + G'') \\
+		&= 0
+	.\end{align*}
+	Use the first two boundary conditions,
+	\begin{align*}
+		u(x,0) &= F(x) + G(x) = f(x) \\
+		u_t(x,0) &= G'(x) - F'(x) = g(x)
+	.\end{align*}
+	From this we can solve for $F$ and $G$ :
+	\begin{align*}
+		F(x) &= \frac{1}{2}f(x) - \frac{1}{2} \int _0^x g(x) dx\\
+		G(x) &= \frac{1}{2}f(x) + \frac{1}{2} \int _0^x g(x) dx
+	.\end{align*}
+	When $\alpha = -1$, the third initial condition reads
+	\[
+		G'(t) - F'(-t) = -F'(-t) - G'(-t)
+	.\] 
+	which means $G'(t) = 0$. This is not true in general, unless we have specific values of $f$ and $g$ to make $G$ constant.
+\end{proof}
+
+\begin{problem}
+	(a) Let $u$ be a solution of the wave equation $u_{t t}-c^2 u_{x x}=0$ for $0<x<\pi, t>0$ such that $u(0, t)=u(\pi, t)=0$. Show that the "energy"
+\[
+E(t)=\frac{1}{2} \int_0^\pi\left(u_t^2+c^2 u_x^2\right) d x, \quad t>0
+\]
+is independent of $t$; i.e., $\frac{d}{d t} E=0$ for $t>0$. Assume that $u$ is $C^2$ up to the boundary.
+(b) Express the energy $E$ of the Fourier series solution
+\[
+u(x, t)=\sum_{n=1}^{\infty}\left(a_n \cos (n c t)+b_n \sin (n c t)\right) \sin n x
+\]
+in terms of coefficients $a_n, b_n$.
+\end{problem}
+\begin{proof}
+	\begin{align*}
+		\frac{d}{dt} E(t)
+		&= \frac{1}{2} \int _0^\pi \left( 2 u_t u_{t t} + c^2 2 u_x u_{x t} \right)  \\
+		&= c^2 \int _0^\pi u_x u_{x t} - u_t u_{x x} \\
+		&= c^2 u_x u_t |_0^\pi 
+	.\end{align*}
+	but $u_t = 0$ at $0$ and $\pi$, by the boundary condition.
+
+	Let $t = 0$, we have
+	\begin{align*}
+		u_t(x,0) &= \sum_{n=1}^{\infty} n c b_n \sin(nx)\\
+		u_x(x,0) &= \sum_{n=1}^{\infty} a_n n
+	.\end{align*} 
+
+	All cross terms vanish when we integrate $u_t^2$, so
+	 \[
+		\int _0^\pi u_t^2 = \sum_{n=1}^{\infty} \int _0^\pi n^2 c^2 b_n^2 \sin(nx)^2 = \sum_{n=1}^{\infty} n^2 c^2 b_n^2
+	.\] 
+	On the other hand,
+	\[
+		u_x^2(x,0) = \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} a_n a_m n m
+	.\] 
+
+	Hence
+	\[
+		E = \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} c^2 \pi (a_n a_m + \delta_{ n m } b_n^2) n m
+	.\] 
+
+
+\end{proof}
+
+

@@ -1,0 +1,60 @@
+\homework{3}{Tue 19 Sep 2023 12:20}{}
+
+\begin{problem}
+	The translation operator for a finite spatial displacement can be expressed
+\[
+\mathcal{J}(\boldsymbol{x})=\exp \left(-i \frac{\boldsymbol{P} \cdot \boldsymbol{x}}{\hbar}\right)
+\]
+where $\boldsymbol{P}$ are the momentum operators.\\
+(a) Evaluate the commutator
+\[
+\left[X_i, \mathcal{J}(\boldsymbol{x})\right]
+\]
+where $X_i$ is one of the position operators and show that in general,
+\[
+[X, \mathcal{J}(\boldsymbol{x})]=\boldsymbol{x} \mathcal{J}(\boldsymbol{x}) \text {. }
+\]
+Hint: First use the fundamental commutation relation $\left[X_i, P_j\right]=i \hbar \delta_{i j}$ to show that
+\[
+\left[X_i, P_j^n\right]=n i \hbar \delta_{i j} P_j^{n-1}
+\]
+Then write the exponential form of $\mathcal{J}(\boldsymbol{x})$ as a power series and apply this result.\\
+(b) Using (a), or otherwise, demonstrate how the expectation value $\langle\boldsymbol{X}\rangle$ changes under a finite translation.
+\end{problem}
+\begin{proof}[Solution]
+	\begin{align*}
+		[X_i, P_j^n]
+		&= X_i P_j^n - P_j^n X_i \\
+		&= X_i P_j P_j^{n-1} - P_j \left( X_i P_j^{n-1} - [X_i, P_j^{n-1}] \right)  \\
+		&= [X_i, P_j] P_j^{n-1} + P_j [X_i, P_j^{n-1}] \\
+		&= i \hbar \delta_{ij} P_{j}^{n-1} + P_j [X_i, P_j^{n-1}]
+	.\end{align*}
+	Now apply induction hypothesis:  $[X_i, P_j^{n-1}] = (n-1) i \hbar \delta_{ij} P_j^{n-2}$, and we have $\left[X_i, P_j^n\right]=n i \hbar \delta_{i j} P_j^{n-1}$ as desired.
+	
+	Now
+	\begin{align*}
+		[X_i, J(x)]
+		&= \left[X_i, \sum_{n = 0}^{\infty } \left( - i \frac{P \cdot x}{\hbar} \right)^n / n!  \right]  \\
+		&= \sum_{n = 0}^{\infty } \frac{(- i)^n}{\hbar^n n!}  [X_i, (P \cdot x)^n] \\
+		&= \sum_{n = 0}^{\infty } \frac{(- i)^n}{\hbar^n n!}  (n i \hbar P_i^{n-1} x_i^{n-1}) x_i\\
+		&= \sum_{n = 0}^{\infty } \frac{(- i)^n}{\hbar^n n!}  (n i \hbar (P_i x_i)^{n-1}) x_i\\
+		&= x_i J(x_i)
+	.\end{align*}
+	Using linearity, 
+	\[
+		[X, J(x)] = \sum_{i} [X_i, J(x)] = x J(x)
+	.\] 
+
+To understand the change in expectation, note that the expected position of a state $\left| \varphi \right\rangle $ is
+\[
+	\left\langle \varphi \right| X \left| \varphi \right\rangle 
+.\] 
+Now the expected position of $J(x) \left| \varphi \right\rangle $ is
+\begin{align*}
+	\left\langle \varphi \right| J^{\dag} (x) X J^{\dag} (x) \left| \varphi \right\rangle 
+	&= \left\langle \varphi \right| J^{\dag} (x) \left( J^{\dag} (x) X + [X, J(x)] \right)  \left| \varphi \right\rangle \\
+	&= \left\langle \varphi \right| (X + x)  \left| \varphi \right\rangle \\
+	&= \left\langle \varphi \right| X \left| \varphi \right\rangle  + x 
+.\end{align*} 
+\end{proof}
+

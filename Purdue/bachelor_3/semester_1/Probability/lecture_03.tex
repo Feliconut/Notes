@@ -1,0 +1,46 @@
+\lecture{3}{Fri 22 Sep 2023 10:41}{}
+
+Call the $A_n$ 's of $Y_n$ 
+\[
+	B_n - B_{n-1}  = E\left( \left( \frac{M_n - M_{n-1}}{f(A_n)} \right) ^2  | \mathcal{F}_{n-1} \right) = \frac{1}{f(A_n)^2} (A_n - A_{n-1})
+.\] 
+\[
+	B_\infty = \sum_{k = 1}^\infty \frac{1}{f(A_k)^2} (A_k - A_{k-1}) \le \sum_{n= 1}^\infty \int _{A_k, A_{k-1}} \frac{1}{f(t)^2} \le \int _0^\infty \frac{1}{f(t)^2} dt
+.\] 
+on $\{A_\infty  = \infty \} $.
+
+By corollary: If $\omega \in \{A_n = \infty \} $,
+$\sum_{k=1}^{\infty} \frac{1}{f(A_n)}(M_n - M_{n-1})$ converges a.s. to a finite number.
+
+By Kronecker's Lemma, on $\{A_n = \infty \} $,
+\[
+	\frac{1}{f(A_n)}\sum_{k=1}^{\infty} (M_k - M_{k-1}) \to  0 \text{ a.s.}
+.\] 
+or
+\[
+	\frac{M_n}{f(A_n)} \to  0 \text{ a.s.}
+.\] 
+
+\begin{corollary}
+	Let $B_n \in \mathcal{F}_n$, set $P_n = \sum_{k=1}^{n} E(1_{B_k} | \mathcal{F}_{k-1})$. Then $\frac{\sum_{k=1}^{n} 1_{B_k}}{\sum_{k=1}^{n} P_k} \to 1$ a.s. on $\{\sum_{k=1}^{\infty} P_k = \infty \} $.
+\end{corollary}
+\begin{proof}
+	$\frac{\sum_{k=1}^{\infty} 1_{B_k} - \sum_{k = 1}^n P_k}{\sum_{k=1}^{n} P_k} = \frac{M_n}{\sum_{k = 1}^n P_k}$, $M_n = \sum_{k = 1}1_{B_k} - \sum_{k = 1}^n P_k$.
+
+	\[
+		A_n = \sum_{k=1}^{n} (P_k - P_k^2) 
+		=\sum_{k=1}^{n} P_k (1 - P_k)
+		\le \sum_{k=1}^{n} P_k
+	.\] 
+	Thus $\{A_\infty = \infty \} \subset \{\sum_{k=1}^{\infty} P_k = \infty \} $.
+	Therefore
+	\[
+		\{\sum_{k=1}^{\infty} P_k = \infty \} 
+		= \{A_\infty  = \infty \}  \cup 
+		\left( \{A_\infty  < \infty \}  \cap  \{\sum_{k=1}^{\infty} P_k = \infty \}  \right) 
+	.\] 
+
+	For the first event, apply the previous corollary. For the second event, $M_n$ converges a.s. to a finite limit. So we are done.
+\end{proof}
+
+

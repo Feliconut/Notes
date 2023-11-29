@@ -1,0 +1,88 @@
+\homework{7}{Thu 16 Nov 2023 22:06}{}
+
+\begin{problem}
+	A system is composed of two distinguishable spin-1 particles which can be represented either in the total angular momentum basis $|j, m\rangle$ or in the basis of the spins for the individual particles, $\left|s_1, m_1\right\rangle \otimes\left|s_2, m_2\right\rangle$. Use a table of Clebsch-Gordon coefficients to write down all possible $|j, m\rangle$ states in terms of the individual particle spin basis.
+\end{problem}
+\begin{proof}[Solution]
+	Recall the symmetry relation
+	\[
+		\left\langle j_1, j_2 ; m_1, m_2 \mid j_1, j_2 ; J, M\right\rangle=(-1)^{J-j_1-j_2}\left\langle j_1, j_2 ;-m_1,-m_2 \mid j_1, j_2 ; J,-M\right\rangle
+	\]
+	Now, using the table we may read off directly
+	\begin{align*}
+		\left| 1, 1 ; j = 2, m = 2 \right\rangle &= \left| 1, 1; m_1=1, m_2=1 \right\rangle  \\
+		\left| 1, 1 ; j = 2, m = 1 \right\rangle &= \frac{1}{\sqrt{2} }\left| 1, 1; m_1=1, m_2=0 \right\rangle + \frac{1}{\sqrt{2} } \left| 1,1; m_1=0, m_2=1 \right\rangle   \\
+		\left| 1, 1 ; j = 2, m =0 \right\rangle &= \frac{1}{\sqrt{6} }\left| 1, 1; m_1=1, m_2=-1 \right\rangle + \frac{\sqrt{2} }{\sqrt{3} } \left| 1,1; m_1=0, m_2=0 \right\rangle + \frac{1}{\sqrt{6} } \left| 1,1; m_1=-1, m_2=1 \right\rangle    \\
+		\left| 1, 1 ; j = 2, m = -1 \right\rangle &= \frac{1}{\sqrt{2} }\left| 1, 1; m_1=-1, m_2=0 \right\rangle + \frac{1}{\sqrt{2} } \left| 1,1; m_1=0, m_2=-1 \right\rangle \\
+\left| 1, 1 ; j = 2, m = -2 \right\rangle &= \left| 1, 1; m_1=-1, m_2=-1 \right\rangle \\
+\left| 1, 1 ; j = 1, m = 1 \right\rangle &= \frac{1}{\sqrt{2} }\left| 1, 1; m_1=1, m_2=0 \right\rangle - \frac{1}{\sqrt{2} } \left| 1,1; m_1=0, m_2=1 \right\rangle \\
+\left| 1, 1 ; j = 1, m = 0 \right\rangle &= \frac{1}{\sqrt{2} }\left| 1, 1; m_1=1, m_2=-1 \right\rangle - \frac{1}{\sqrt{2} } \left| 1,1; m_1=-1, m_2=1 \right\rangle\\
+\left| 1, 1 ; j = 1, m = -1 \right\rangle &= \frac{1}{\sqrt{2} }\left| 1, 1; m_1=-1, m_2=0 \right\rangle - \frac{1}{\sqrt{2} } \left| 1,1; m_1=0, m_2=-1 \right\rangle \\
+\left| 1, 1 ; j = 0, m = 0 \right\rangle &= \frac{1}{\sqrt{3} }\left| 1, 1; m_1=1, m_2=-1 \right\rangle + \frac{1}{\sqrt{3} } \left| 1,1; m_1=0, m_2=0 \right\rangle - \frac{1}{\sqrt{3} } \left| 1,1; m_1=-1, m_2=1 \right\rangle
+	.\end{align*}
+\end{proof}
+
+\begin{problem}
+	A vector meson is a particle with spin-1 and odd parity. An example is the $\phi(1020)$ meson, which has a mass of $1019.461 \mathrm{MeV}$. The strong interaction allows the $\phi(1020)$ meson to decay into a pair of oppositely charged kaons, $\phi \rightarrow K^{+} K^{-}$. Kaons are pseudoscalar mesons, which have spin- 0 and odd parity. The strong interaction is invariant under both rotations and parity.\\
+(a) If a $\phi$ meson is in the angular momentum state $|1,1\rangle$ and decays to $K^{+} K^{-}$while at rest, calculate the angular distribution of the $K^{+}$in the rest frame of the $\phi$ decay.\\
+(b) If a $\phi$ meson is in the angular momentum state $|1,0\rangle$ and decays to $K^{+} K^{-}$while at rest, calculate the angular distribution of the $K^{+}$in the rest frame of the $\phi$ decay.\\
+(c) If the $\phi$ meson is in the angular momentum state $|1,-1\rangle$ and decays to $K^{+} K^{-}$ while at rest, calculate the angular distribution of the $K^{+}$in the rest frame of the $\phi$ decay.\\
+(d) If a $\phi$ meson can be found in each of these three initial $|j, m\rangle$ states with equal probability, calculate the expected angular distribution of the $K^{+}$in the decay.
+\end{problem}
+\begin{proof}[Solution]
+	The total angular momentum of meson should be conserved. The meson only has spin angular momentum; the K+K- system only has orbital angular momentum. Therefore,
+	\begin{enumerate}
+		\item When $\phi$ is in $\left| s=1, m_s = 1 \right\rangle $ state, $K^+ K^-$ is in $l = 1, m_l = 1$ state. The angular distribution is given by
+			\[
+				Y_1^1 (\theta, \phi) = -\frac{1}{2} \sqrt{\frac{3}{2 \pi}} \sin(\theta) e^{i \phi}
+			.\] 
+		\item When $\phi$ is in $\left| 1, 0 \right\rangle $ state, the kaons are in state $\left| l = 1, m = 0 \right\rangle $, with angular distribution
+			\[
+				Y_1^0(\theta, \varphi)=\frac{1}{2} \sqrt{\frac{3}{\pi}} \cos \theta
+			.\] 
+		\item When $\phi$ is in $\left| s=1, m_s = -1 \right\rangle $ state, $K^+ K^-$ is in $l = 1, m_l = -1$ state. The angular distribution is given by
+			\[
+				Y_1^{-1} (\theta, \phi) = \frac{1}{2} \sqrt{\frac{3}{2 \pi}} \sin(\theta) e^{-i \phi}
+			.\]
+		\item Calculate
+			\[
+				P (\theta, \phi) = \frac{1}{3}\left( Y_1^1(\theta, \phi)^2 + Y_1^0 (\theta, \phi)^2 + Y_1^{-1}(\theta, \phi)^2 \right) 
+			.\] 
+		We have
+		\[
+			P\left( \theta, \phi \right) =
+			-\frac{2 \sin (\phi)^2 \sin (\theta)^2-1}{4 \pi}
+		.\] 
+	\end{enumerate}
+\end{proof}
+
+
+
+\begin{problem}
+	An axis $\widehat{\boldsymbol{n}}$ is oriented at an angle $\theta$ with respect to the z-axis. A spin-1 particle is in a state $|1,1\rangle_{\hat{n}}$ where the spin is quantized along the $\widehat{\boldsymbol{n}}$ axis.
+(a) What is the probability of observing this state in each of the states $|j, m\rangle$ which are quantized along the z-axis? Show that the sum of these probabilities is 1 .
+(b) Alternatively, suppose the state is quantized along the z-axis in the state $|1,1\rangle$. What is the probability of finding it quantized along the $\widehat{\boldsymbol{n}}$ axis in each state $|1, m\rangle_{\hat{n}}$ ?
+\end{problem}
+\begin{proof}[Solution]
+	Consult eqn. (3.202) and (3.203), The states in  $\hat{z} $-frame can be described as linear combination of states in $\hat{n} $-frame:
+	\[
+		\left| 1,1 \right\rangle _{\hat{n} }
+		= D_{m, 1}^1 (\theta) \left| 1, m \right\rangle_{\hat{z} }
+	.\] 
+	Compute the Wigner D:
+	\begin{align*}
+		D_{1, 1}^1 &= \frac{1}{2}\left( \cos(\theta) + 1 \right) \\
+		D_{-1, 1}^1 &= \frac{1}{2}\left(- \cos(\theta) + 1 \right) \\
+		D_{0, 1}^1 &= \sqrt{2} \frac{\sin \theta}{2} 
+	.\end{align*}
+	The probabilities are given by
+	\[
+		P\left( \left| 1, m \right\rangle _{\hat{z} } | \left| 1, 1 \right\rangle _{\hat{n} } \right) = \left| D_{m, 1}^1 \right|^2 
+	.\] 
+	The total probability is
+	\[
+		\sin(\theta)^2/2 + \cos(\theta)^2/2 + 1/2 = 1
+	.\] 
+	The second part is symmetrical; we have the exactly same $\theta$.
+\end{proof}
+

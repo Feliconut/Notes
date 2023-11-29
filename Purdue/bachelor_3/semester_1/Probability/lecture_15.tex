@@ -1,0 +1,130 @@
+\lecture{15}{Thu 09 Nov 2023 23:59}{Kolmogorov Construction}
+
+\begin{claim}
+	(Semigroup property)
+	\[
+		\int _{\mathbb{R}} P_{t_j - t_{j-1}}(x_j - x_{j-1}) P_{t_{j+1} - t_j}\left( x_{j+1} - x_j \right) 
+		d x_j = 
+		P\left( t_{j+1} - t_{j-1} \right) \left( x_{j+1} - x_{j-1} \right) 
+	.\] 
+\end{claim}
+\begin{proof}
+	Set $t = t_{j+1} -t_j$ , $s = t_{j} - t_{j- 1}$, so $t + s = t_{j+1} - t_{j-1}$. Write $ z = x_{j+1}, y = x_j, x = x_{j-1}$.
+
+	This means
+
+	\begin{align*}
+		I &= \int _{\mathbb{R}} P_{t_{j} - t_{j-1}} \left( x_j - x_{j-1} \right)  P_{t _{j+1} - t_j}\left( x_{j+1} - x_{j-1}  \right)  d x_j \\
+		  &=\int _{\mathbb{R}} P_{s} (y - x) P_{t} (z - y) dy\\
+		  &= \int _{\mathbb{R}} P_s(y') P_t\left( z - (y' + x)) dy' \right)  \\
+		  \intertext{by Chapman-Kolmogorov Equation,}
+		  &= P_{s + t} (z - x) \\
+		  &= P_{t_{j+1} - t_{j-  1}} \left( x_{j+1} - x_{j-1} \right)  
+	.\end{align*}
+\end{proof}
+
+Using this claim, we show consistency of $\mu$ :
+\begin{align*}
+	&\mu_{x, t_1, \ldots, t_n} \left( A_1 \times \ldots\times A_{j-1} \times \mathbb{R} \times A_{j+1} \times \ldots\times A_n \right) \\
+	&= \int _{A_n}\ldots \int _{A_{j+1}} \int _{\mathbb{R}} \int _{A_{j-1}} \ldots \int _{A_1}
+	\prod_{i=1}^{n} P_{t_i - t_{i-1}}\left( x_i - x_{i-1} \right) dx_1 \ldots dx_n \\
+	&= \int _{A_n} \ldots \int _{A_{j+1}} \int _{A_{j-1}} \ldots \int _{A_1} 
+P_{t_1}(x_1 - x) P_{t_2}(x_2 - x_1) \ldots P_{t_{j-1}- t_{j-2}}\left( x_{j-1} - x_{j-2} \right) \\
+	& \qquad \qquad {\color{red} P_{t_{j+1} - t_{j-1}} \left( x_{j+1} - x_{j-1} \right)} P_{t_{j+2} - t_{j+1}}\left( x_{j+2} - x_{j+1} \right) \ldots P_{t_n - t_{n-1}}\left( x_n - x_{n-1} \right) \\
+	& \qquad \qquad dx_1 \ldots dx_{j-1} dx_{j+1} \ldots dx_n\\
+	&= \mu_{x, t_1, \ldots, t_{j-1}, t_{j+1}, \ldots, t_n} \left( A_1 \times \ldots\times A_{j-1} \times A_{j+1} \times \ldots\times A_n \right)  
+.\end{align*}
+
+So, $\mu_{x, t_1, \ldots, x_n}$ satisfies the hypothesis of Kolmogorov's extension theorem.
+
+Recall that we were talking about the $\alpha$-stable process with densities
+\[
+	P_t^{(\alpha)}(x) = \frac{1}{2 \pi} \int _{\mathbb{R}} e^{- t |\xi|^\alpha} e^{ - i x \cdot  \xi} d \xi
+.\] 
+
+The same claim holds for those $P_t$ 's since all we used was the Chapman-Kolmogorov equation which it satisfies.
+
+\subsubsection{The integral expression of the Laplacian}
+
+\[
+	\Delta f = \sum_{i=1}^{d} \frac{\partial ^2 f}{\partial x_i^2} 
+.\] 
+\[
+	\widehat{\frac{\partial f}{\partial x_j} }(\xi) = 
+	\int _{\mathbb{R}^d} e^{i x \cdot  \xi} \frac{\partial f}{\partial x_j} (x) dx =
+	- i \xi_j \int _{\mathbb{R}^d} e^{ i x \cdot  \xi} f(x) d x =
+	- i \xi_j \hat{f} (\xi)
+.\] 
+\[
+	\widehat {\frac{\partial ^2}{\partial x_j^2} }(\xi) = - \xi_j^2 \hat{f} (\xi)
+.\] 
+
+This means
+\[
+	\widehat{\Delta f}(\xi) = - |\xi|^2 \hat{f} (\xi)
+.\] 
+By the inversion formula, one has
+\[
+	\Delta f(x) = \frac{1}{\left( 2 \pi \right) ^{d / 2}} \int _{\mathbb{R}^d} - |\xi|^2 \hat{f} (\xi) e^{- i x \cdot  \xi} d \xi
+.\] 
+
+Define
+\[
+	T_t f(x) := \int _{\mathbb{R}^d} P_{2 t}(x - y) f(y) dy
+.\] 
+
+\begin{claim}
+	\[
+		\frac{\partial T_t f}{\partial t} |_{t = 0} = \Delta f
+	.\] 
+\end{claim}
+\begin{proof}
+	Since $T_t f(x) = P_{2t} * f (x)$, we have
+	\[
+		\widehat{T_t f} (\xi) = \hat{P} _{2 t}(\xi) \hat{f} (\xi)
+		= e^{ - t |\xi|^2} \hat{f} (\xi)
+	.\] 
+	Hence
+	\[
+		T_t f(x) = \frac{1}{\left( 2 \pi \right) ^d} \int _{\mathbb{R}^d} e^{- i x \cdot  \xi} e^{ - t |\xi|^2} \hat{f} (\xi) d \xi
+	.\] 
+	Take derivative,
+	\[
+		\frac{\partial T_t f}{\partial t} = \frac{1}{( 2 \pi)^d} \int _{\mathbb{R}} e^{- i x \cdot  \xi} \left( - |\xi|^2 \right)  e^{ - t |\xi|^2} \hat{f} (\xi) d \xi
+	.\] 
+	Thus
+\[
+		\frac{\partial T_t f}{\partial t}|_{t = 0} = 
+		\frac{-1}{( 2 \pi)^d} \int _{\mathbb{R}} |\xi|^2  e^{- i x \cdot  \xi} \hat{f} (\xi) d \xi = \Delta f(x)
+	.\]
+\end{proof}
+
+One can define
+\[
+	T_t f(x) = \frac{1}{(2 \pi)^d} \int _{\mathbb{R}^d} e^{- t |\xi|^\alpha} \hat{f} (\xi) e^{- i x \cdot  \xi} d \xi
+.\] 
+
+Now
+\[
+	\frac{\partial T_t f}{\partial t} = \frac{1}{(2 \pi)^d} \int _{\mathbb{R}^d} - |\xi|^\alpha e^{ - t |\xi|^\alpha} \hat{f} (\xi)  e^{- i x \cdot  \xi} d \xi
+.\] 
+Thus
+\[
+	\frac{\partial T_t f}{\partial t} |_{t = 0} =  \frac{1}{(2 \pi)^d} \int _{\mathbb{R}^d} - |\xi|^\alpha \hat{f} (\xi) e^{ - i x \cdot  \xi} d \xi
+.\]
+
+So
+\begin{itemize}
+	\item Laplacian goes with Brownian motion:
+		\[
+			\widehat{- \Delta f}(\xi) = |\xi|^2 \hat{f} (\xi) 
+		.\] 
+	\item Fractional Laplacian goes with $\alpha$-stable process:
+		\[
+			\widehat{(- \Delta)^{\alpha / 2}} f(\xi) = |\xi|^\alpha \hat{f} (\xi)
+		.\] 
+\end{itemize}
+
+
+
+

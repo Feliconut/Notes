@@ -1,0 +1,123 @@
+\lecture{6}{Wed 27 Sep 2023 10:50}{}
+
+\begin{theorem}
+	(Durett 4.6.3)
+	Suppose $X_n$ is $L^1$ bounded for all $n$. If $X_n \to  X$ in probability, then the following are equivalent: 
+	\begin{enumerate}
+		\item  $\{X_n\} $ is uniformly integrable.
+		\item $X_n \to  X$ in $L^1$
+		\item  $E|X_n| \to E|X| < \infty $.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}[Proof 1 for i implies ii]
+	\begin{align*}
+		E(|X_n - X|)
+		&\leq E(|X_n - X| ; > M) + E(|X_n - X| ; < M) \\
+		&\leq \varepsilon + E(|X_n - X| ; < M), \text{ for all $n $ for large $M$} \\
+		&\leq \varepsilon + E(|X_n - X| ; < M, < \varepsilon) + E(|X_n - X| ; < M, > \varepsilon) \\
+		&\leq \varepsilon + \varepsilon + E(|X_n - X| ; < M, > \varepsilon)
+	.\end{align*}
+	From convergence in probability $X_n \to X$, we have for all large enough $n$, $P(|X_n - X| > \varepsilon) < \frac{\varepsilon}{M}$. Thus
+	\[
+		E(|X_n - X|) \le 3 \varepsilon
+	.\] 
+	
+\end{proof}
+\begin{proof}[Proof 2 from textbook]
+	Define the cap function $\varphi_M(x) := \text{sgn}(x) |X|\wedge M$. Use triangle inequality,
+	\[
+		|X_n - X| = |X_n - \varphi_M(X_n)| + |\varphi_M(X_n) - \varphi_M(X)| + |\varphi_M(X) - X|
+	.\] 
+	Note that
+	\[
+		\left| \varphi_M(Y) - Y \right| \le |Y| \mathbf{1}_{|Y| > M}
+	.\] 
+	Hence $E\left( X_n - \varphi_M(X_n) \right) \le E\left( |X_n| ; |X_n| > M \right) \to  0$ as $M \to  \infty $, by UI. To control the third term, use Fatou's Lemma to justify $E|X| < \infty $, which concludes $E(\varphi_M(X) - X| \le E(|X| ; |X| > M) \to  0$. To control the second term, first concludes that $\varphi_M(X_n) \to \varphi_M(X)$ i.p. since $\varphi_M$ is continuous in this metric; and then apply DCT (to a subsequence) to establish convergence in $L^1$. (some nuances here: essentially the same argument as the previous proof be applied to demonstrate that $\varphi_M(X_n) $ is Cauchy sequence in $L^1$ space, using convergence in probability; DCT works for i.p. convergence.)
+\end{proof}
+
+
+\begin{theorem}
+	If $X_n$ is a submartingale, then the following a equivalent:
+	\begin{enumerate}
+		\item It is uniformly integrable
+		\item It converges a.s. and in $L^1$.
+		\item It converges in $L^1$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	1) implies 2): UI implies  $L^1$-boundedness. Doob inequality implies convergence  $X_n \to X$ a.s. hence in probability. Theorem 1 implies $L^1$ convergence.
+	
+	2) implies 3): trivial.
+
+	3) implies 1): Need two lemmas.
+
+	\begin{lemma}
+		If $X_n \to  X$ in $L^1$, then
+		\[
+			E(X_n ; A) \to  E(X ; A) \qquad \forall  A \in \mathcal{F}
+		.\] 
+	\end{lemma}
+	\begin{proof}
+		\[
+			\left| E(X_n - X; A) \right| 
+			\le E\left( \left| X_n - X \right| ;A  \right) 
+			\le E |X_n - X| \to  0
+		.\] 
+	\end{proof}
+	\begin{lemma}
+		\label{lem:mart-lemma}
+		If $X_n $ is a martingale and $X_n \to  X$ in $L^1$, then 
+		\[
+			X_n = E(X | \mathcal{F}_n)
+		.\] 
+	\end{lemma}
+	\begin{proof}
+		Fix $n$. Let $m > n$. Then $E(X_m | \mathcal{F}_n) = X_n$.
+		This means for all $ A \in \mathcal{F}_n$,
+		\[
+			E(X_m ; A) = E(X_n ; A)
+		.\] 
+		Let $ m\to \infty $. Then $E(X_m ; A) \to E(X;A)$ in $L^1$, by the previous lemma. Hence $X_n = E(X | \mathcal{F}_n)$.
+	\end{proof}
+	
+
+\end{proof}
+
+\begin{theorem}
+	For a martingale the following are equivalent:
+	\begin{enumerate}
+		\item It is uniformly integrable
+		\item It converges a.s. in $L^1$
+		\item It converges in $L^1$ 
+		\item There exists $X \in L^1$ such that $X_n = E(X | \mathcal{F}_n)$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	A martingale is a submartingale, so  $1 \implies 2 \implies 3$.
+	By second lemma above, $3 \implies 4$.
+	Finally, for $4 \implies 1$, we have previously shown that such a family must be UI.
+\end{proof}
+
+\begin{theorem}[Levy's upwards Theorem]
+	(Durett 4.6.8)
+	Suppose $\{\mathcal{F}_n\} $ is a sequence of $\sigma$-algebras increasing to $\mathcal{F}_\infty $. Let $X \in L^1$. Then
+	\[
+		E(X | \mathcal{F}_n ) \to  E(X | \mathcal{F}_\infty )
+	\] 
+	both a.s. and in $L^1$.
+\end{theorem}
+\begin{proof}
+	Assume $X \ge 0$ wlog. Let $Y_n = E(X | \mathcal{F}_n)$. Then $Y_n$ is a martingale, $Y_n \to  Y_\infty $ a.s. and in $L^1$. We need to show $Y_\infty  = E(X | \mathcal{F}_\infty )$.
+
+	By Lemma~\ref{lem:mart-lemma}, $Y_n = E(Y_\infty | \mathcal{F}_n)$ for all $n$, i.e. $E(X; A) = E(X_\infty ; A)$ for all $A \in \mathcal{F}_n$.
+	
+	Now we set $\mu_1(A) = E(X; A)$ and $\mu_2(A) = E(Y_\infty ; A)$. We know that these are two measures that agree on $\bigcup_{n = 1} ^\infty \mathcal{F}_n$. But this is a $\pi$-system. Hence the two measures agree on $\sigma\left( \cup \mathcal{F}_n \right) $, by the $\pi-\lambda$ Theorem.
+	This implies $Y_\infty = E(X | \mathcal{F}_\infty )$.
+\end{proof}
+
+\begin{corollary}[Levy's 0-1 Law]
+	If $\mathcal{F}_n$ increase to  $\mathcal{F}_\infty $ and $A \in \mathcal{F}_\infty $ then $E(1_A | \mathcal{F}_n) \to 1_A$.
+\end{corollary}
+
+
+

@@ -1,0 +1,89 @@
+\lecture{17}{Mon 13 Nov 2023 10:41}{}
+
+Let $R_n$ be Riemann integral. Then
+
+\begin{definition}[Young's Integral]
+	Let $f, g: [0,1] \to \mathbb{R}$ be such that $f$ is Holder continuous of order $\gamma$ and $g$ is Holder continuous of order $\alpha$, $\alpha + \beta > 1$. Then $R_n$ converges to a quantity $\int _0^1 g d f$.
+\end{definition}
+
+\begin{definition}[Paley-Wiener-Zygmund Integral]
+	If $g$ is continuously differentiable, $g(0) = g(1) = 0$, define
+	\[
+		\int _0^1 g d B_s = - \int _0^1 g'(s) B(s) ds
+	.\] 
+	Then
+	\begin{enumerate}
+		\item $E\left( \int _0^1 g(s) d B_s  \right)  = 0$
+		\item (Ito's isometry) $E\left( \int _0^1 g(s) d B_s \right) ^2 = \int _0^1 g(s)^2 ds$
+	\end{enumerate}
+\end{definition}
+\begin{proof}
+	To prove 1,
+	\[
+		E\left( \int _0^1 g'(s) B_s ds  \right) 
+		= \int _0^1 g'(s) E(B_s) ds = 0
+	.\] 
+	To prove 2,
+	\begin{align*}
+		E\left( \int _0^1 g'(s) B_s ds \right) ^2
+		&= E\left( \int _0^1 \int _0^1 g'(s) g'(t) B_s B_t ds dt \right)  \\
+		&= \int _0^1 \int _0^1 g'(s) g'(t) E(B_s B_t) ds dt \\
+		&= \int _0^1 \int _0^1 g'(s) g'(t) (s \wedge t) ds dt \\
+		&= \int _0^1 g'(t) \left(\int _0^t g'(s) (s \wedge t) ds + \int _t^1 g'(s) (s \wedge t) ds \right) dt \\
+		&= \int _0^1 g'(t) \left(\int _0^t g'(s) s ds + \int _t^1 g'(s) t ds \right) dt \\
+		&= \int _0^1 g'(t) \left(g(t) t - \int _0^t g(s) ds + t\left( g(1) - g(t) \right) \right) dt \\
+		&= - \int _0^1 g'(t) \int _0^t g(s) ds dt \\
+		&= - \int _0^1 g'(t) \int _0^1 g(s) 1_{[0,t]}(s) ds dt \\
+		&= - \int _0^1 g(s) \int_0^1 g'(t) 1_{[0,t]}(s) dt ds \\
+		&= - \int _0^1 g(s) \int_s^1 g'(t) dt ds \\
+		&= \int _0^1 g^2(s) ds
+	.\end{align*}
+\end{proof}
+
+We want to define  $\int _0^t B_s d B_s$.
+Recall that $Q_n = \sum_{k=0}^{n-1} \left( B_{t_{k+1}^{(n)}} - B_{t_{k}^{(n)}} \right)^2 \to  t$ in $L^2$ when $\Delta_n \to  0$.
+
+Let $0 \le  \lambda \le 1$, and set $\sigma_k^{(n)} = (1 - \lambda) t_k^{(n)} + \lambda t_{k+1}^{(n)}$. When $\lambda = 0$, it is left end point; $\lambda = 1$ is right end point; $\lambda = \frac{1}{2}$ is middle point.
+
+\begin{theorem}
+	Let $R_n = \sum_{k=0}^{n-1} B_{\sigma_k^{(n)}} \left( B_{t_{k+1}^{(n)}} - B_{t_k^{(n)}} \right) $. Then $R_n \to \frac{1}{2} B_t^2 + (\lambda - \frac{1}{2}) t$ in $L^2$.
+
+	We define this to be $\int _0^t B_s dB_s$.
+\end{theorem}
+If $\lambda = 0$, $R_n \to \frac{1}{2} B_t^2 - \frac{1}{2} t$, a martingale. It is called the Ito integral:
+\[
+	\int _0^t B_s dB_s = \frac{1}{2}\left( B_t^2  - t\right) 
+.\] 
+If $\lambda = \frac{1}{2}$, this is called the Stratonovich Integral:
+\[
+	\int _0^t B_s \circ d B_s = \frac{1}{2} B_t^2
+.\] 
+
+\begin{proof}
+	Consider the identity
+	\begin{align*}
+		R_n &= \sum_{k=0}^{n-1} B_{\sigma_k^{(n)}} \left( B_{t_{k+1}^{(n)}} - B_{t_k^{(n)}} \right)  \\
+		&= \frac{1}{2} \left( \sum_{k=0}^{n-1} B_{t_{k+1}} - B_{t_k} \right) ^2 - \frac{1}{2} \sum_{k=0}^{n-1} \left( B_{t_{k+1}} - B_{t_k} \right) ^2 \\
+		&+ \sum_{k=0}^{n-1} \left( B_{\sigma_k} - B_{t_k} \right) ^2 + \sum_{k=0}^{n-1} \left( B_{t_{k+1}} - B_{\sigma_k} \right) \left( B_{\sigma_k} - B_{t_k} \right) \\
+		&= \frac{1}{2}B_t^2 - \frac{1}{2} I + II + III
+	.\end{align*}
+	We have, by the fact that $Q_n \to  t$ in $L^2$,
+	\[
+		- \frac{1}{2} I \to  - \frac{t}{2}
+	.\] 
+	\[
+		II \to  \lambda t
+	.\] 
+	Finally we verify that $III \to  0$,
+	Let $Y_k = \left( B_{t_{k+1}} - B_{\sigma_k} \right) \left( B_{\sigma_k} - B_{t_k} \right) $. Then $EY_k = 0$ since they are independent increments. Now note also, that $Y_k, Y_j$ are independent if $k \neq j$. Thus
+	\[
+		E| \sum_{k=0}^{n-1} Y_k |^2 
+		= \sum_{k=0}^{n-1} E|Y_k|^2
+		= \sum_{k=0}^{n-1} E\left( B_{t_{k+1}} - B_{\sigma_k} \right) ^2 E\left( B_{\sigma_k} - B_{t_k} \right) ^2
+		= \sum_{k=0}^{n-1} (t_{k+1} - \sigma_k) (\sigma_k - t_k)
+	.\] 
+	This goes to $0$ as $\Delta_n \to  0$.
+
+\end{proof}
+
+

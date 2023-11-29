@@ -1,0 +1,91 @@
+\homework{5}{Tue 03 Oct 2023 22:01}{}
+
+\begin{problem}
+	
+Consider a function, known as the correlation function, defined by the expectation value
+\[
+C(t)=\langle X(t) X(0)\rangle
+\]
+where $X(t)$ is the position operator in the Heisenberg picture. Evaluate the correlation function explicitly for the ground state of a one-dimensional harmonic oscillator.
+\end{problem}
+\begin{proof}[Solution]
+	Recall the following identities:
+	\[
+		X(t) = \mathcal{U}(t)^\dag x \mathcal{U}(t)
+	.\] 
+	\[
+		X(0) = x
+	.\] 
+	\[
+		\mathcal{U}(t) = \exp\left( \frac{-i H t}{\hbar} \right) 
+	.\] 
+	\[
+		x = \sqrt{\frac{\hbar}{2 m \omega}}  (a + a^{\dag} )
+	.\] 
+	\[
+		p = i \sqrt{\frac{m \hbar \omega}{2}} (- a + a^{\dag} )
+	.\] 
+	\[
+		N = a^{\dag}  a \qquad a a^{\dag}  = N + 1
+	.\] 
+	The expectation value in Heiseberg picture is
+	\[
+		C(t) = \left\langle 0 \right| X(t) X(0) \left| 0 \right\rangle 
+	.\] 
+	By eqn. (2.171),
+	\[
+		\exp\left( \frac{i H t}{\hbar} \right) x \exp\left( \frac{- i H t}{\hbar} \right) 
+		= x \cos \omega t + \frac{p}{m \omega} \sin \omega t
+	.\] 
+	Use the identities to express $X(t) $ and $X(0)$ in terms of $a$ and $a^{\dag} $:
+	\begin{align*}
+		C(t) &= \left\langle X(t) X(0) \right\rangle  \\
+		&= \left\langle 0 \right| \exp\left( \frac{i H t}{\hbar} \right) x \exp\left( \frac{- i H t}{\hbar} \right) x \left| 0 \right\rangle  \\
+		&= \left\langle 0 \right| \left( x \cos \omega t + \frac{p}{m \omega} \sin \omega t \right) x \left| 0 \right\rangle  \\
+		&= \cos \omega t \left\langle 0 \right| x^2 \left| 0 \right\rangle + \frac{\sin \omega t}{m \omega} \left\langle 0 \right| p x \left| 0 \right\rangle 
+	.\end{align*}
+	Now note that $x^2 = \frac{\hbar}{2 m \omega}\left(a^2 + \left( a^{\dag}  \right) ^2 + 2 N + 1\right)$ and $px = i \frac{\hbar}{2}\left( -a^2 + (a^{\dag} )^2 - 1 \right) $. All terms involving only $a$ or only $a^{\dag} $ do not contribute to the expectation. So
+	\begin{align*}
+		C(t)
+		&= \cos \omega t \frac{\hbar}{2 m \omega} \left\langle 0 \right| (2N+1) \left| 0 \right\rangle + \frac{\sin \omega t}{m \omega} i \frac{\hbar}{2} \left\langle 0 \right| (-1) \left| 0 \right\rangle  \\
+		&= \cos \omega t \frac{\hbar}{2 m \omega} 
+		- i\frac{\sin \omega t}{m \omega} \frac{\hbar}{2}
+	.\end{align*}
+\end{proof}
+
+
+\begin{problem}
+	
+For the one-dimensional simple harmonic oscillator, calculate the expectation values of $X, P, X^2$, and $P^2$ for an arbitrary state $|n\rangle$ and show that
+\[
+\left\langle(\Delta X)^2\right\rangle\left\langle(\Delta P)^2\right\rangle=\left(n+\frac{1}{2}\right)^2 \hbar^2
+\]
+\end{problem}
+\begin{proof}
+	First or all $\left\langle x \right\rangle  = \left\langle p \right\rangle = 0$ since both of them consists of annihilators and generators that does not preserve any eigenstate of $N$. 
+	Therefore $\left\langle (\Delta x)^2 \right\rangle  = \left\langle x^2 \right\rangle  $ 
+	and $\left\langle \left( \Delta p \right) ^2 \right\rangle  = \left\langle p^2 \right\rangle $.
+
+For a state $\left| n \right\rangle $, what is expected value of $\left\langle x^2 \right\rangle $ and $\left\langle p^2 \right\rangle $? 
+\begin{align*}
+	\left\langle x^2 \right\rangle = \left\langle n \right| x^2 \left| n \right\rangle 
+	&= \frac{\hbar}{2 m \omega} \left\langle n \right| (2N+1) \left| n \right\rangle  \\
+	&= \frac{\hbar }{2 m \omega} (2 n + 1)
+.\end{align*}
+\begin{align*}
+	\left\langle p^2 \right\rangle = \left\langle n \right| p^2 \left| n \right\rangle 
+	&= - \frac{\hbar m \omega}{2} \left\langle n \right| \left(- a + a^{\dag}\right)^2 \left| n \right\rangle \\
+	&= - \frac{\hbar m \omega}{2}\left\langle n \right|  \left(a^2 + \left(a^{\dag}\right)^2 - 2N - 1\right)\left| n \right\rangle  \\
+	&= - \frac{\hbar m \omega}{2} (- 2 n - 1) \\
+	&= \frac{\hbar m \omega}{2} (2 n + 1) 
+.\end{align*}
+
+Combining those, we have
+\[
+	\left\langle x^2 \right\rangle \left\langle p^2 \right\rangle 
+	= \left( n + \frac{1}{2} \right) ^2 \hbar^2
+.\] 
+This implies the desired identity.
+\end{proof}
+
+

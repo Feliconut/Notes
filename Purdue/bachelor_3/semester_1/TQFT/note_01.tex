@@ -1,0 +1,30 @@
+\note{1}{Tue 26 Sep 2023 19:43}{Matrix representation matrix multiplication}
+
+
+We want to solve
+\[
+	A B = C A
+.\] 
+Where $A \in \operatorname{Hom}(V, W), B \in \operatorname{End}(V), C \in \operatorname{End}(W)$.
+
+Let $n = \operatorname{dim} V$, $m = \operatorname{dim} W$.
+
+We represent the left and right multiplications of $B$ and $C$ as matrix acting on vector $A$. Then we only need to solve
+\[
+	\mathcal{M}_r(B) \mathcal{V}(A) = \mathcal{M}_l (C) \mathcal{V}(A)
+.\] 
+
+The functions $\mathcal{M}_r, \mathcal{V}$ need to make the following diagram commute for all $B \in \text{End}(V, V)$, and $M_l, \mathcal{V}$ need to make the following diagram commute for all $B \in \text{End}(W, W)$.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG9wZXJhdG9ybmFtZXtIb219KFYsIFcpIl0sWzIsMCwiXFxvcGVyYXRvcm5hbWV7SG9tfShWLCBXKSJdLFswLDIsIlxcbWF0aGJie0N9XnttIG59Il0sWzIsMiwiXFxtYXRoYmJ7Q31ee20gbn0iXSxbMiwzLCJcXG1hdGhjYWx7TX0oQikiXSxbMCwxLCJCIl0sWzAsMiwiXFxtYXRoY2Fse1Z9IiwxXSxbMSwzLCJcXG1hdGhjYWx7Vn0iLDFdXQ==
+\[\begin{tikzcd}
+	{\operatorname{Hom}(V, W)} && {\operatorname{Hom}(V, W)} \\
+	\\
+	{\mathbb{C}^{m n}} && {\mathbb{C}^{m n}}
+	\arrow["{\mathcal{M}(B)}", from=3-1, to=3-3]
+	\arrow["B", from=1-1, to=1-3]
+	\arrow["{\mathcal{V}}"{description}, from=1-1, to=3-1]
+	\arrow["{\mathcal{V}}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+
+\textbf{Computing the index}. 

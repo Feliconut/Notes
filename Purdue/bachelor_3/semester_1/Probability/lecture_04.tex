@@ -1,0 +1,109 @@
+\lecture{4}{Fri 22 Sep 2023 10:58}{Uniform Integrability of Martingale}
+
+Motivation. Can every martingale be written as conditional expectations of a single r.v. with respect to a filtration? Answer: true for $L^p$ martingales, and more generally, for uniformly integrable martingales.
+
+Recall: $L^p \implies \text{(Jensen)} L^1 \implies\text{(Chebyshev)} P \implies \text{weak}$.
+
+\begin{theorem}
+	Let $X_n$ be any set of r.v.s in $L^2$. Then $X_n \to X$ iff $X_n \to X$ in probability, and $\{X_n\} $ is uniformly integrable.
+\end{theorem}
+
+\begin{theorem}
+	For a submartingale $\{M_n\} $ the following are equivalent:
+	\begin{enumerate}
+		\item It is uniformly integrable.
+		\item It converges a.s. and in  $L^1$.
+		\item It converges in $L^1$.
+		\item (For martingales) There exists a r.v. $X \in (\Omega, \mathcal{F}, P)$ such that
+			\[
+				M_n = E(X | \mathcal{F}_n)
+			.\] 
+	\end{enumerate}
+\end{theorem}
+\begin{definition}
+	A collection of r.v.s $\mathcal{L}$ is called uniformly integrable if given $s > 0, \mathcal{F}, M$ such that for all $X \in \mathcal{L}$, $E(|X|; |X| > M) < \varepsilon$.
+\end{definition}
+
+\begin{example}
+	Take $\mathcal{L} = \{X\} , X \in L^1$. Chebyshev's inequality gives $P(|X| > \lambda) \le  \frac{1}{\lambda} E|X| \to  0$ as $\lambda \to \infty $.
+	
+
+	In general, for $f \in L^1(\mu)$, this means given $\varepsilon>0$, there exists $\lambda>0$ such that
+	\[
+		\int _A |f| d \mu < \varepsilon \impliedby \mu(A) < \lambda
+	.\] 
+	which is absolute continuity of measure.
+
+	Set $A = \{|X| > M\} $.
+\end{example}
+\begin{example}
+	(Durett 4.6.1)
+	Suppos $X \in \mathcal{F}$ and $L^1$. 
+
+	Take $\mathcal{L} = \{E(X | \mathcal{F}) : \mathcal{F_0} \subset \mathcal{F}\} $, then this collection is uniformly integrable.
+\end{example}
+\begin{proof}
+	By using Jensen's Inequality we can have a uniform bound for $E\left(|E(X|\mathcal{F})| ; |E(X|\mathcal{F})| > M\right)$
+
+	\[
+		E\left(|E(X|\mathcal{F})| ; |E(X|\mathcal{F})| > M\right)
+		\le E\left(E(|X||\mathcal{F}) ; |E(X|\mathcal{F})| > M\right)
+		\le E\left(|X| ; |E(X|\mathcal{F})| > M\right)
+	.\] 
+	Next we provide a uniform bound on the event where expectation is taken. Using Chebyshev inequality (and tower property),
+	\[
+		P(|E(X|\mathcal{F})| > M)
+		\le \frac{1}{M} E|X|
+	.\] 
+	Now as $M \to \infty $, for any $\mathcal{F}$, $P(|E(X|\mathcal{F})| > M) \to 0 $ and the convergence is uniform in $\mathcal{F}$. Hence $E\left(|X| ; |E(X|\mathcal{F})| > M\right) \to 0$ uniformly in $\mathcal{F}$, since $X$ is $L^1$, by DCT. This gives us uniform integrability.
+\end{proof}
+
+
+\begin{proposition}
+Suppose $\mathcal{L}$ is uniformly integrable, then it is $L^1$ bounded.
+\end{proposition}
+\begin{proof}
+	
+
+Let $\varepsilon = 1$, then 
+\[
+	E|X| = E(|X|; |X| > M) + E(|X|; |X|<M)
+.\] 
+Then there exists a $M$ such that
+\[
+	E(|X|; |X| > M) \le 1; E(|X|; |X| < M) \le M
+.\] 
+Thus $E|X| \le  1 + M$ for all $X \in \mathcal{L}$.
+\end{proof}
+
+$L^1$ bounded does \textbf{not} imply uniform integrability.
+\begin{example}
+	Take $A_n = (0, \frac{1}{n})$ and $X_n = n 1_{A_n}$. Then $EX_n = 1$, but not converge to $0$ for any truncation $M$.
+\end{example}
+
+\begin{proposition}(Couple of sufficient conditions)
+	\begin{enumerate}
+		\item $1 < p < \infty $, $\mathcal{L} = L^p(P)$, $\|X\|_p \le  k < \infty $ for all $X \in L^p$, then $\mathcal{L}$ is uniformly integrable.
+	\end{enumerate}
+\end{proposition}
+Simple application of Holder Inequality.
+
+\begin{proposition}
+	(Sufficient condition for uniform integrability)
+	Let $\varphi\ge 0$ be any function such that $\varphi(x) / x \to \infty $ as $x \to  \infty $. If $E \varphi(|X_i|) \le C$ for all $i \in I$, then $\{X_i:  i \in I\} $ is uniformly integrable.
+\end{proposition}
+\begin{proof}
+	\[
+		E\left( \frac{|X_i|}{\varphi(|X_i|)} \varphi(|X_i|) ; |X_i| > M \right) 
+	.\] 
+	As $x \to  \infty $, $\frac{x}{\varphi(x)} \to 0$. So we can apply a supremum bound on it:
+	\[
+		E\left( \frac{|X_i|}{\varphi(|X_i|)} \varphi(|X_i|) ; |X_i| > M \right) 
+		\le \sup \{\frac{x}{\varphi(x)}: x > M\} E\left( \varphi(|X_i| ; |X_i| > M \right)  
+		\le \varepsilon_M C
+	.\] 
+	Since $\varepsilon_M \to  0$ as $M \to \infty $, and the convergence is uniform in $i$, so we have the claim.
+\end{proof}
+
+
+

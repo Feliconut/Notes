@@ -1,0 +1,75 @@
+\lecture{12}{Wed 01 Nov 2023 10:37}{}
+
+Good-$\lambda$ inequality principle was invented by Burholder and Gundy in the 80's, to compare norms of certain stochastic integrals.
+
+Given a $L^2$ martingale $X_t$, we have $X_t^2 - \left\langle X \right\rangle _t$ is a martingale. We are comparing $\sup |X_t| = X^* $ and $\left\langle X \right\rangle $. For Brownian motions, to compare them we only need to compare at all stopping times.
+
+\begin{theorem}
+	\label{thm:BDGprev}
+	Let $B_t$ be standard Brownian Motion. Let $T$ be a stopping time. Then for all $\beta > 1$, $S>0$ and $\lambda>0$,
+	\begin{enumerate}
+		\item
+			\[
+				P\left( B_T^* > \beta \lambda, T^{\frac{1}{2}} \le  \delta \lambda \right) \le c \exp\left( - \frac{(\beta - 1)^2}{2 \delta^2} \right) P(B_T^* > \lambda)
+			\]
+			, where $B_T^* = \sup _{0 \le t \le \infty } |B_{T \wedge t}| = \sup _{0 \le  t \le  T} |B_t|$
+		\item 
+			\[
+				P(T^{\frac{1}{2}} > \beta \lambda, B_T^* < \delta \lambda) \le \exp\left( - \frac{\pi^2}{8} \frac{(\beta^2 - 1)}{\delta^2}  \right) P(T^{\frac{1}{2}} > \lambda)
+			.\] 
+	\end{enumerate}
+\end{theorem}
+We can take $c = 2$.
+
+Thus the \logseq{Burkholder-Davis-Gundy Inequality}
+\begin{enumerate}
+	\item $\|B_T^*\|_p \le  c_p \|T^{\frac{1}{2}}\|_p, 0 < p < \infty $
+	\item $\|T^{\frac{1}{2}}\|_p \le  c_p \|B_T^*\|_p, 0 < p < \infty $
+\end{enumerate}
+This is equivalent to:
+\begin{claim}
+	One can find a martingale on the Brownian filtration $X_t$,  $\|X^*\|_{p} \sim \|\left\langle X \right\rangle ^{\frac{1}{2}} \|_p$
+\end{claim}
+\logseq{ASK} Why this connection?
+
+\begin{proof}[Proof of Theorem~\ref{thm:BDGprev}]
+	Let $\rho = \inf \{t : |B_{t \wedge T} | > \lambda\} $. Then $\{\rho < \infty \} = \{B_T^* \ge \lambda\} $. By continuity of paths,
+	\[
+		|B_\rho| = \lambda
+	.\]
+	Thus
+	\begin{align*}
+		P\left(B^*_T > \beta \lambda, T^{\frac{1}{2}} \le \delta \lambda\right)
+		&= P\left(\rho < \infty , T \le  (\delta \lambda)^2, \sup _{\rho < t < T} |B_t| > \beta \lambda\right) \\
+	.\end{align*}
+	Now use the observation that on the event $\{B_T^* > \beta \lambda\} $, 
+	\[
+		\beta \lambda <  |B_t| \le |B_t - B_\rho| + |B_\rho| = |B_t - B_\rho| + \lambda
+	.\] 
+	\[
+		\sup _{\rho \le  t < T} |B_t - B_\rho| > \lambda(\beta - 1)
+	.\] 
+	Hence
+	\begin{align*}
+		P\left(B^*_T > \beta \lambda, T^{\frac{1}{2}} \le \delta \lambda\right)
+		&\leq P\left( \rho <  \infty , T < (\delta \lambda)^2 , \sup _{\rho \le t < \rho + T} |B_T - B_\rho| \ge  \lambda(\beta - 1) \right)  \\
+		&\leq P\left(\rho < \infty ,\sup _{\rho \le  t \le  \rho + (\delta \lambda)^2} |B_t - B_\rho| \ge  \lambda (\beta - 1)\right) \\
+		\intertext{Using strong Markov property,}
+		&= P(\rho < \infty ) P\left( \sup _{0 \le  t \le  (\delta \lambda)^2} |B_t | \ge  \lambda(\beta - 1) \right)  \\
+	.\end{align*}
+	Now
+	\begin{align*}
+		P\left( B^*_{(\delta\lambda)^2} > \lambda(\beta - 1) \right) 
+		&= P\left( \delta \lambda B_1^* \ge  \lambda(\beta - 1) \right)  \\
+		&= P\left( B_1^* \ge  \frac{\beta -1}{\delta} \right)  
+	.\end{align*}
+	Use
+	\[
+		P\left( \sup _{0 \le  t \le  1}B_t > \frac{\beta - 1}{\delta} \right) 
+		= P\left( \sup _{0 \le t \le 1} e^{B_t} > e^{-\frac{\beta - 1}{\delta}} \right) 
+		\le e^{-\frac{(\beta - 1)^2}{\delta^2}} 
+	.\] 
+	\logseq{ASK} The last bound for $\exp(B^*_1)$ I cannot verify.
+\end{proof}
+
+

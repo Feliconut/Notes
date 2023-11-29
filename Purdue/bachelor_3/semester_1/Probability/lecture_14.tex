@@ -1,0 +1,117 @@
+\lecture{14}{Mon 06 Nov 2023 10:36}{}
+
+\begin{remark}
+	For $\alpha \in [1,2]$, we have to construct, and proof is harder than the case $\alpha \in (0,1)$. The case $\alpha = 2$ corresponds to Brownian Motion and is already done..
+\end{remark}
+
+Recall: If $\varphi_X(\xi)$ satisfies $\int _{\mathbb{R}} |\varphi_X(\xi)| d \xi$ is $L^1$, then $X$ has density, and is given by inverse Fourier transform:
+\[
+	\frac{1}{2 \pi} \int _\mathbb{R} e^{ i x \cdot \xi} \varphi_X(\xi) d \xi
+.\] 
+
+Let's check it's finite:
+\begin{align*}
+	\int _\mathbb{R} e^{- |\xi|^\alpha} d \xi
+	&= 2 \int _0^\infty e^{- r^\alpha} d r \\
+	&= \frac{2}{\alpha} \int _0^\infty e^{-s} s^{\frac{1}{\alpha}-1}ds \\
+	&= \frac{2}{\alpha}\Gamma(\frac{1}{\alpha}) 
+.\end{align*}	
+where, when $\alpha = 2$, $\Gamma(\frac{1}{2}) = \sqrt{\pi} $.
+
+Thus $X^\alpha$ has density:
+\[
+	P_1^\alpha (x) = \frac{1}{2 \pi} \int _{\mathbb{R}} e^{ - i x \cdot \xi} e^{- |\xi|^\alpha} d \xi
+.\] 
+Define
+\[
+	P_t^\alpha (x) = \frac{1}{t^{1 / \alpha}} P_1(x / t^{1 / \alpha})
+.\] 
+Now $P_t^\alpha$ is a distribution!
+\begin{align*}
+	P_t^\alpha(x) &= \frac{1}{t^{1 /\alpha}} \int _{\mathbb{R}} e^{- |\xi|^\alpha} e^{- i x \cdot \left( \frac{\xi}{t^{1 / 2}} \right) }d \xi\\
+	\intertext{Let $\theta = \frac{\xi}{t^{1 / \alpha}}$,}
+	&= \int _\mathbb{R} e^{- |t^{1 / \alpha} \theta|} e^{- i x \cdot \theta} d \theta \\
+	&= \int _\mathbb{R} e^{- t| \theta|^{2}} e^{- i x \cdot \theta} d \theta \\
+.\end{align*}
+
+Let $\psi$ be any nonnegative function in $\mathbb{R}^d$ with $\int _{\mathbb{R}^d} \varphi(x) dx = 1$, then $\psi_\varepsilon(x) = \frac{1}{\varepsilon^d} \varphi(x / \varepsilon)$ when we change variable $u = x / \varepsilon$.
+
+Take $\varepsilon = t^{1 / \alpha}$, we get
+\[
+	\frac{1}{t^{1 / \alpha}} P_1^\alpha \left(\frac{x}{1 / \alpha}\right) = P_t^\alpha(x)
+.\] 
+gives a probability density, while r.v. $X_t^\alpha$ has ch.f. 
+\[
+	e^{- t |\xi|^\alpha}
+.\] 
+when $\alpha = 2$, $P_t^\alpha$ is the density of BM running twice standard time, $B_{2 t}$.
+
+\textbf{Can we compute explicitly all distributions? No.} We can compute the density function only when $\alpha = 1$ and $\alpha = 2$. The case $\alpha = 1$ is the \textit{Cauchy process}.
+\[
+	P_t^1 (x) = \frac{t}{\pi (|x|^2 + t^2)}
+.\] 
+\[
+	P_t^2 (x) \frac{1}{\sqrt{4 \pi t} } e^{- \frac{|x|^2}{ 4 t}}
+.\] 
+
+Let's see what scaling does to the r.v.
+Let $X_t^\alpha \sim P_t^\alpha(x)$. Then
+\begin{align*}
+	P\left( X_t^\alpha \le a \right) 
+	&= \int_a^\infty P_t^\alpha(x) dx \\
+	&= \int _a^\infty \frac{1}{t^{1 / \alpha}} P_1^\alpha \left( x / t^{1 / \alpha} \right)  \\
+	&= \int _{\frac{a}{t^{1 / \alpha}}}^\infty P_1^\alpha (x) dx \\
+	&= P(X_1^\alpha \le  \frac{a}{t^{1 / \alpha}})
+.\end{align*}
+i.e. $X_t^\alpha \sim t^{1 / \alpha} X_1^\alpha$. It does everything Brownian motion does except it does not have continuous path. 
+
+Intimately connected to Laplacian, in that Laplacian generates the process.
+\begin{itemize}
+	\item Brownian Motion ``goes with'' the Laplace operator $\frac{1}{2} \Delta$
+	\item $X_t^\alpha$ ``goes with'' the \textit{fractional Laplacian} $- \Delta^{\alpha / 2}$
+\end{itemize}
+
+We can also show that those satisfy the \textbf{Chapman-Kolmogorov Equation}
+\[
+	\int _{\mathbb{R}}^\alpha P_t^\alpha(x - y) P_{s}^\alpha(y) dx
+	= P_{t + s}^{\alpha} (x)
+.\] 
+To prove, recall:
+\[
+	\int _{\mathbb{R}} f(x - y) g(y) dy = f * g(x)
+.\] 
+\[
+	\widehat{ (f * g)}(\xi) = \hat{f} (\xi) \hat{g} (\xi)
+.\] 
+\[
+	\text{LHS} = e^{- t |\xi|^\alpha} e^{- s |x_i|^\alpha} = e^{- (t + s) |\xi|^\alpha} = \text{transform of r.h.s.}
+.\] 
+
+
+Let $\{X_t\} $ be a stochastic process. For $t_1, t_2, \ldots, t_n \in [0,\infty )$, let $\mu_{t_1, \ldots, t_n}$ be the distribution of the random vector $\{X_{t_1}, \ldots, X_{t_n}\} $ (called \textit{finite-dimensional distribution}). That is, $A_i \in \mathcal{B}(\mathbb{R})$, we have
+\[
+	\mu_{t_1, \ldots, t_n}(A_1 \times \ldots\times A_n)
+	= P(X_{t_1} \in A_1, \ldots, X_{t_n} \in A_n)
+.\]
+
+They satisfy the following (consistency) properties:
+
+\begin{itemize}
+	\item 
+(Exchangeability) Let $\sigma$ be any permutation of $(1, \ldots, n)$, then $\mu_{t_1, \ldots, t_n}(A_1, \ldots, A_n) = \mu_{\sigma(t_1), \ldots, \sigma(t_n)}\left( A_{\sigma(t_1)} \times  \ldots A_{\sigma(t_n)} \right) $.
+\item $\mu_{t_1, \ldots, t_n}\left( A_1 \times \ldots\times A_{j-1}, \mathbb{R}, A_{j+1}, \ldots, A_{n} \right) = \mu_{t_1, \ldots, t_{j_1}, t_{j+1}, \ldots, t_j}\left( A_1, \ldots, A_{j-1}, A_{j+1}, \ldots, A_n \right)  $.
+\end{itemize}
+
+Then the Kolmogorov theorem says that there exists a random process having those finite dimensional distributions.
+
+
+\begin{theorem}[Kolmogorov Extension Theorem]
+	Suppose you have a family of probability measures  $\mu_{t_1, \ldots, t_n}$ such that consistency properties are satisfied, then there exists a probability space $(\Omega, \mathcal{F}, P)$ and a stochastic process $X_t$ with the given distribution of measures as its finite dimensional distributions.
+\end{theorem}
+
+Using this theorem, we only need to prove
+\[
+	\mu_{t_1, \ldots, t_n}\left( A_1 \times \ldots\times A_n \right) 
+	= \int _{A_1} \ldots \int _{A_n} \prod_{j}^{n} P_{t_j - t_{j-1}}(x_j - x_{j-1}) dx_1 \ldots d x_n 
+.\] 
+is consistent. We use the C-K equation. Construction gives us independent increment and stationarity. But continuity is not guaranteed. But they are \textit{cadlag}.

@@ -1,0 +1,114 @@
+\homework{6}{Tue 07 Nov 2023 21:27}{}
+
+\begin{problem}
+	An angular-momentum eigenstate $|j, m=+j\rangle$ is rotated by an infinitesimal angle $\varepsilon$ about the $y$-axis. Without using an explicit form of the $d_{m^{\prime} m}^{(j)}$ function, obtain an expression for the probability for the new rotated state to be found in the original state up to terms of order $\varepsilon^2$.
+\end{problem}
+\begin{proof}[Solution]
+	The infinitesimal rotation operator, to the second order, is
+	\[
+		\exp\left( \frac{- i J_y \varepsilon}{\hbar} \right) \approx 1 - \frac{i}{\hbar} J_y \varepsilon - \frac{J_y^2 \varepsilon^2}{2\hbar^2}
+	.\] 
+	Apply this operator to the state  $\left| j,j \right\rangle $, using the identity $J_y = \frac{J_+ + J_-}{2 i}$, we observe that
+	\begin{itemize}
+		\item $\left\langle j,j \right| J_y \left| j,j \right\rangle = 0$, since $J_+ \left| j,j \right\rangle = 0$ and $J_- \left| j,j \right\rangle $ changes the quantum number $j,j$ to $j,j-1$.
+		\item $\left\langle j,j \right| J_+ J_- \left| j,j \right\rangle $ is the only term that survives.
+	\end{itemize}
+	Therefore,
+	\begin{align*}
+		\left\langle j,j \right| \exp\left( \frac{- i J_y \varepsilon}{\hbar} \right) \left| j,j \right\rangle 
+		&\approx 1 - \frac{\varepsilon^2}{2\hbar^2} \left\langle j,j \right| \left( \frac{J_+}{ 2i}  \right) \left( \frac{J_-}{2i} \right) \left| j,j \right\rangle  \\
+		&= 1 - \frac{\varepsilon^2}{8} \sqrt{\left( j - (j- 1) \right) \left( j + (j - 1) + 1\right)} \sqrt{(j + j) (j - j + 1)}   \\
+		&= 1 - \frac{\varepsilon^2}{4} j
+	.\end{align*}
+	Take square and get the probability.
+\end{proof}
+
+
+
+\begin{problem}
+	Using definition of the angular-momentum operator $\boldsymbol{L}=\boldsymbol{X} \times \boldsymbol{P}$, and the action of an infinitesimal rotation about the z-axis, which is,
+\[
+\begin{gathered}
+\left\langle x, y, z\left|\left(1-\frac{i}{\hbar} \varepsilon L_z\right)\right| \psi\right\rangle=\langle x+y \varepsilon, y-x \varepsilon, z \mid \psi\rangle=\psi(x+y \varepsilon, y-x \varepsilon, z) \\
+\approx \psi(x, y, z)+\varepsilon\left(y \frac{\partial}{\partial x}-x \frac{\partial}{\partial y}\right) \psi(x, y, z)
+\end{gathered}
+\]
+use the chain rule of partial derivatives to show that
+\[
+\left\langle x\left|L_z\right| \psi\right\rangle=-i \hbar \frac{\partial}{\partial \phi} \psi(x)
+\]
+\end{problem}
+\begin{proof}[Solution]
+	Start from the polar coordinate transform:
+	\[
+		\begin{cases}
+			x = r \cos \phi \sin \theta \\
+			y = r \sin \phi \sin \theta \\
+			z = r \cos \theta
+		\end{cases}
+	.\] 
+	Doing partial differentiation to the function $\psi(r,\theta, \phi) = \psi(x,y,z)$, we have
+	\begin{align*}
+		\frac{\partial }{\partial \phi} \psi(x,y,z)
+		&= \frac{\partial \psi}{\partial x} \frac{\partial x}{\partial \phi} + \frac{\partial \psi}{\partial y} \frac{\partial y}{\partial \phi}  + \frac{\partial \psi}{\partial z} \frac{\partial z}{\partial \phi} \\
+		&= - r \sin \phi \sin \theta \frac{\partial \psi}{\partial x}  + r \cos \phi \sin \theta \frac{\partial \psi}{\partial y} \\
+		&= - y \frac{\partial \psi}{\partial x}  + x \frac{\partial \psi}{\partial y} 
+	.\end{align*} 
+	Thus,
+	\[
+		1 - \frac{i}{\hbar} \left\langle \mathbf{x} \right| \varepsilon L_z \left| \psi \right\rangle 
+		\approx \psi(x,y,z) - \varepsilon \frac{\partial }{\partial \phi} \psi(x,y,z)
+	.\] 
+	Therefore
+	\[
+		\left\langle \mathbf{x} \right| L_z \left| \psi \right\rangle 
+		= - i \hbar \frac{\partial }{\partial \phi} \psi(\mathbf{x})
+	.\] 
+\end{proof}
+
+
+\begin{problem}
+	The spherical harmonic function, $Y_2^2(\theta, \phi)$ which is the representation of the $|2,2\rangle$ state in the position representation, has the expression,
+\[
+Y_2^2(\theta, \phi)=\langle\theta, \phi \mid 2,2\rangle=\frac{1}{4} \sqrt{\frac{15}{2 \pi}} \sin ^2 \theta e^{2 i \phi}
+\]
+
+Find expressions for $Y_2^1(\theta, \phi), Y_2^0(\theta, \phi), Y_2^{-1}(\theta, \phi)$ and $Y_2^{-2}(\theta, \phi)$ by successive applications of the ladder operator $L_{-}=L_x-i L_y$ to the $|2,2\rangle$ state in the position representation.
+\end{problem}
+\begin{proof}
+	We need to use the following results from the textbook:
+	\begin{enumerate}
+		\item eqn. (3.222), the effect of ladder operator $L_{\pm}$ on the wave function is
+			\[
+				\left\langle \mathbf{x}' \right| L_{\pm} \left| \alpha \right\rangle 
+				= - i \hbar e^{ \pm i \phi} \left(  \pm  i \frac{\partial }{\partial \theta} - \cot \theta \frac{\partial }{\partial \phi}  \right) 
+				\left\langle \mathbf{x}' \middle| \alpha \right\rangle 
+			.\] 
+	\end{enumerate}
+\item eqn. (3.245), using the previous result, we have that teh angular wave function between two states $\left| l, m - 1 \right\rangle $ and $\left| l, m \right\rangle $ are related by
+	\[
+		\left\langle \hat{\mathbf{n}}  \middle| l, m - 1\right\rangle
+		= \frac{1}{\sqrt{(l + m) (l - m + 1)} } e^{- i \phi} \left( - \frac{\partial }{\partial \theta} + i \cot \theta \frac{\partial }{\partial \phi}  \right) \left\langle \hat{\mathbf{n}}  \middle| l,m \right\rangle 
+	.\] 
+	Repeatedly apply this result, we get
+	\begin{align*}
+		\left\langle \theta, \phi \middle| 2,1 \right\rangle 
+		&= -\frac{1}{4} \, {\left(\frac{\sqrt{\frac{15}{2}} \cot\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)^{2}}{\sqrt{\pi}} + \frac{\sqrt{\frac{15}{2}} \cos\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)}{\sqrt{\pi}}\right)} e^{\left(-i \, {\phi}\right)}\\
+		&= -\frac{\sqrt{15} \sqrt{2} \cos\left({\theta}\right) e^{\left(i \, {\phi}\right)} \sin\left({\theta}\right)}{4 \, \sqrt{\pi}}
+	.\end{align*}
+	\begin{align*}
+		\left\langle \theta, \phi \middle| 2,0 \right\rangle 
+		&= -\frac{1}{24} \, \sqrt{6} {\left(i \, {\left(-i \, {\left(\frac{\sqrt{\frac{15}{2}} \cot\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)^{2}}{\sqrt{\pi}} + \frac{\sqrt{\frac{15}{2}} \cos\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)}{\sqrt{\pi}}\right)} e^{\left(-i \, {\phi}\right)} - 2 \, {\left(-\frac{i \, \sqrt{\frac{15}{2}} \cot\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)^{2}}{\sqrt{\pi}} - \frac{i \, \sqrt{\frac{15}{2}} \cos\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)}{\sqrt{\pi}}\right)} e^{\left(-i \, {\phi}\right)}\right)} \cot\left({\theta}\right) - {\left(\frac{2 \, \sqrt{\frac{15}{2}} \cos\left({\theta}\right) \cot\left({\theta}\right) e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)}{\sqrt{\pi}} - \frac{\sqrt{\frac{15}{2}} {\left(\cot\left({\theta}\right)^{2} + 1\right)} e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)^{2}}{\sqrt{\pi}} + \frac{\sqrt{\frac{15}{2}} \cos\left({\theta}\right)^{2} e^{\left(2 i \, {\phi}\right)}}{\sqrt{\pi}} - \frac{\sqrt{\frac{15}{2}} e^{\left(2 i \, {\phi}\right)} \sin\left({\theta}\right)^{2}}{\sqrt{\pi}}\right)} e^{\left(-i \, {\phi}\right)}\right)} e^{\left(-i \, {\phi}\right)}\\
+		&=  -\frac{\sqrt{2} {\left(3 \, \sqrt{15} \sqrt{6} \sin\left({\theta}\right)^{2} - 2 \, \sqrt{15} \sqrt{6}\right)}}{24 \, \sqrt{\pi}} 
+	.\end{align*}
+	The latex display is out of bound, but it's fine. The final two answers are
+
+	\begin{align*}
+		\left\langle \theta, \phi \middle| 2,-1 \right\rangle 
+		&=
+		\frac{\sqrt{15} \sqrt{2} \cos\left({\theta}\right) e^{\left(-i \, {\phi}\right)} \sin\left({\theta}\right)}{4 \, \sqrt{\pi}}\\
+		\left\langle \theta, \phi \middle| 2,-2 \right\rangle 
+		&=  \frac{\sqrt{15} \sqrt{2} e^{\left(-2 i \, {\phi}\right)} \sin\left({\theta}\right)^{2}}{8 \, \sqrt{\pi}}
+	.\end{align*}
+\end{proof}
+

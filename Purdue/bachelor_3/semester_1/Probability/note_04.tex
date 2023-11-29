@@ -1,0 +1,556 @@
+\note{4}{Sat 28 Oct 2023 23:58}{Brownian Motion}
+
+\section{Note on Brownian Motion}
+
+\subsection{Basic Properties}
+
+\begin{definition}[Stochastic Process]
+	Let $(\Omega, \mathcal{F}, P)$ be a probability space. Let $\mathcal{B}$ be Borel $\sigma$-algebra on $[0,\infty )$. A \textit{stochastic process} $X_t (\omega) = X(t, \omega)$, is a map $X: [0,\infty ) \times \Omega \to \mathbb{R}$ that is measurable on $\mathcal{B} \times \mathcal{F}$. 
+
+	For fixed $\omega \in \Omega$, $t \mapsto X_t(\omega)$ is a curve, called the \textit{trajectories} of the stochastic process.
+
+	We can samely define a stochastic process on $\mathbb{R}^d$.
+\end{definition}
+
+\begin{definition}[Brownian Moton]
+	A standard (one-dimensional) Wiener process (Brownian motion) is a stochastic process $\{W_t\} _{t \ge 0}$ with the following properties:
+	\begin{enumerate}
+		\item $W_0 = 0$ a.s.
+		\item $t \mapsto W_t$ continuous a.s.
+		\item Stationary and independent increments:
+			\begin{itemize}
+				\item (Stationary) $W_t - W_s \sim W_{t - s}$ for $0 \le s \le t$
+				\item (Independence) For any $0 = t_0 < t_1 < \ldots < t_n$, \\$\{W_{t_k} - W_{t_{k-1}}\}_{k = 1}^n $ are independent.
+			\end{itemize}
+		\item (Gaussian) For each $t > 0$, $W_t \sim N(0,t)$, i.e. for any $B \in \mathcal{B}(\mathbb{R})$, $P(W_t \in B) = \frac{1}{\sqrt{2 \pi t} }\int _B e^{- \frac{y^2}{ 2 t}}d y$, i.e. $\varphi_{W_t}(u) = e^{- \frac{u^2}{2}t}$.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Processes that are cadlag and has stationary independent increments are called \textit{L\'evy} processes. Brownian motion is a L\'evy process.
+\end{remark}
+
+\begin{proposition}(Symmetries of Brownian Motion)
+	Suppose $\{W_t\} _{t \ge 0}$ is a Brownian Motion, then the following are all Brownian Motions:
+	\begin{itemize}
+		\item $\{- W_t\} _{t \ge 0}$
+		\item $\{B_{t + s} - B_s\} _{t \ge 0}$ for fixed $s$
+		\item  $\{\frac{1}{a} B_{a^2 t}\} _{t \ge 0}$ \logseq{Brownian Scaling}
+		\item $\{t B _{\frac{1}{t}}\} _{t \ge 0}$ 
+	\end{itemize}
+\end{proposition}
+
+
+\subsection{Construction of Brownian Motion}
+
+The entire section is devoted to the following theorem:
+
+\begin{theorem}(N. Wiener) 
+	Standard Brownian Motion exists.
+\end{theorem}
+
+It suffices to construct BM on $[0,1]$. Assume the theorem holds for $[0,1]$, we can take a sequence $\{W_t^{(n)}\}$ of Brownian motions on $[0,1]$ which are independent. Then, for $t \le 1$,
+ \[
+	B_t = W_t^{(1)}
+.\] 
+For $1 < t \le 2$, define
+\[
+	B_t = B_1 + W_{t - 1}^{2}
+.\] 
+We may verify that $B_t \sim N(0,t)$ : $\varphi_{B_t}(u) = \varphi_{W_1^{(1)}}(u) \varphi_{W_{t - 1}^{(2)}}(u) = e^{- \frac{u^2}{2}} e^{- \frac{u^2}{2}(t - 1)} = e^{- \frac{u^2}{2}t}$.
+
+Continue in this way and we have BM on $[0,\infty )$.
+
+\textbf{Multi-dimensional Brownian Motion.}
+On $\mathbb{R}^d$, we construct Brownian Motion by taking
+\[
+	B_t = \left( B_t^1, B_t^2, \ldots, B_t^d \right) 
+,\] 
+where $B_t^i$ are 1-dimensional independent Brownian motions. It is straightforward to check that for all $B \in \mathcal{B}(\mathbb{R}^d)$,
+\[
+	P(B_t \in B) = 
+	\frac{1}{\left( 2 \pi t \right) ^{d / 2}}
+	\int _B e^{- \frac{|y|^2}{2}d y}
+.\] 
+To prove this, first show it for rectangles, then use those to span the Borel sets.
+
+
+\subsubsection{Hilbert space, complete orthonormal systems}
+
+\begin{example}
+	Look at $H = L^2 [0,1]$. The trigonometric characters $\{e^{2 \pi i k t}\}_{k \in \mathbb{Z}} $ form a complete orthonormal system. They each satisfy $\left\langle \varphi_k, \varphi_k \right\rangle  = \int _{0}^1 \overline{\varphi_k} \varphi_k d t = 1$, and every function in $L^2[0,1]$ can be written uniquely as a Fourier series
+	\[
+		f(t) = \sum_{k=- \infty }^{\infty} c_k e^{2 \pi i k t} \qquad c_k = \left\langle f, \varphi_k \right\rangle 
+	.\] 
+\end{example}
+
+\begin{definition}[Orthonormal System]
+	$\{\varphi_1, \varphi_2, \ldots\} $ form an \textit{orthonormal system} on a Hilbert space $H$ if 
+	\[
+		\left\langle \varphi_k, \varphi_j \right\rangle = \delta_{kj}
+	.\] 
+	The system is \textit{complete} if it satisfies one of the equivalent conditions:
+	\begin{itemize}
+		\item 
+	for all $f \in H$,
+	\[
+		f_n := \sum_{k = 1}^n \left\langle f, \varphi_k \right\rangle \varphi_k \to  f 
+		\quad \text{in $H$-norm}
+	.\] 
+\item  $\bigcup_{k = 1} ^\infty \text{span}(\varphi_1, \ldots, \varphi_k) = H$.
+\item $\left\langle f, \varphi_k \right\rangle = 0, \forall k \implies f = 0$.
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}[Parseval's theorem]
+	The Fourier transform is unitary. That is, for all $f \in L^2[0,1]$,
+	\[
+	\|f\|_2^2 = \sum_{k=1}^{\infty} \left| \left\langle f, \varphi_k \right\rangle  \right| ^2
+	\]
+\end{theorem}
+From this, we can derive:
+\[
+	\left\langle f, g \right\rangle 
+	= \sum_{k=1}^{\infty} \left\langle f, \varphi_k \right\rangle \left\langle g, \varphi_k \right\rangle 
+.\] 
+
+\subsubsection{Series construction of Brownian Motion}
+
+Take $\{\varphi_k\} $ to be a complete orthonormal system for $H = L^2[0,1]$. Let $Y_k \sim N(0,1)$ on some probability space $(\Omega, \mathcal{F}, P)$ for $n = 1,2,\ldots$.
+
+Define
+\[
+	W_t^{(n)}
+	= \sum_{k=1}^{n} Y_k \int _0^t \varphi_k(s) ds
+.\] 
+Define $I_t(s) = 1(s < t)$, we have
+\begin{equation}
+	\label{eqn:BMConstruction}
+	W_t^{(n)} = \sum_{k=1}^{n} Y_k \left\langle I_t, \varphi_k \right\rangle 
+.\end{equation} 
+
+\textbf{Convergence and statistical properties}
+\begin{lemma}
+	\label{lem:BMConstructConverge}
+	Let $\varphi_n$ be any complete orthonormal system for $H = L^2[0,1]$.
+	For any $0 \le t \le 1$, 
+	\[
+	W_t^{(n)} = \sum_{k=1}^{n} Y_k \left\langle I_t, \varphi_k \right\rangle 
+.\] 
+is a Cauchy sequence in  $L^2(P)$. It converges in $L^2$ to a r.v. $W_t$ satisfying
+	\begin{enumerate}
+		\item $E\left( W_t W_s \right)  = t \wedge s$
+		\item $E\left| W_t \right| ^2 = t$ 
+		\item $W_t \sim N(0,t)$
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	First note that, since $\varphi_n$ form a complete orthonormal system, we have
+	\begin{itemize}
+		\item $I_t = \sum_{k=1}^{\infty} \left\langle I_t, \varphi_k \right\rangle \varphi_k$
+		\item $t = \|I_t\|_2^2 = \sum_{k=1}^{\infty} \left| \left\langle I_k, \varphi_t \right\rangle  \right| ^2$
+	\end{itemize}
+	Also note that
+	\begin{itemize}
+		\item  $E(Y_k Y_j) = \delta_{kj}$ by independence of the $Y_k$'s.
+	\end{itemize}
+	Now we compute the $L^2$ norm of tail difference:
+	\begin{align*}
+		E\left( W_t^{(n)} - W_t^{(m)} \right) ^2
+		&= E\left( \sum_{k=m+1}^{n} Y_k \left\langle I_t, \varphi_k \right\rangle  \right) ^2 \\
+		&= \sum_{k=m+1}^{n} E|Y_k|^2 \left| \left\langle I_k, \varphi_k \right\rangle  \right| ^2 \\
+		&= \sum_{k=m+1}^{n} \left| \left\langle I_k, \varphi_k \right\rangle  \right| ^2 \\
+		& \to 0 \quad \text{as } n, m \to \infty
+	.\end{align*}
+	Hence $W_t^{(n)}$ is a Cauchy sequence in $L^2(P)$. $L^2(P)$ is complete, so $W_t^{(n)} \to  W_t$. We have
+	\begin{itemize}
+		\item $\|W_t^{(n)}\|_2^2 \to  \|W_t\|_2^2$
+		\item $E W_t = \lim E W_t^{(n)} = 0$ 
+		\item $\operatorname{Var} (W_t^{(n)}) \to \operatorname{Var} (W_t)$
+	\end{itemize}
+	Next, compute $E(W_t W_s)$ :
+	\begin{align*}
+		E\left( W_t W_s\right) 
+		&= \lim_{n \to \infty} E\left( W_t^{(n)}W_s^{(n)} \right)  \\
+		&= \lim_{n \to \infty} \sum_{k=1}^{n} \left\langle I_t, \varphi_k \right\rangle \left\langle I_s, \varphi_k \right\rangle  \\
+		&= \left\langle I_t, I_s \right\rangle  \\
+		&= t \wedge s 
+	.\end{align*}
+	Finally, we verify that $W_t \sim N(0,t)$.
+	We write $\sigma_k(t) = \left\langle I_t, \varphi_k \right\rangle $, thus $W_t^{(n)} = \sum_{k=1}^{n} Y_k \sigma_k(t)$. Compute the characteristic function:
+	\begin{align*}
+		\varphi_{W_t^{(n)}}(u)
+		&= \prod_{k=1}^{n} \varphi_{\sigma_k(t) Y_k} (u)  \\
+		&= \prod_{k=1}^{n} e^{- \frac{u^2}{2}\sigma_k^2(t)}  \\
+		&= \exp\left( - \frac{u^2}{2} \sum_{k=1}^{n} \sigma_k^2(t) \right) \\
+		&\to e^{- \frac{u^2}{2}t}
+	.\end{align*}
+	Since $W_t^{(n)}\to W_t$ in $L^2$, it also converges weakly. By continuity theorem for ch.f. (Durett, Theorem 3.3.17), we have $\varphi_{W_t^{(n)}} \to \varphi_{W_t}$ pointwise. Hence $\varphi_{W_t}(u) = e^{- \frac{u^2}{2}t}$.
+\end{proof}
+
+\textbf{Independent Increments.} 
+
+\begin{lemma}
+	\label{lem:independentChf}
+	The r.v.s $X_1, \ldots, X_n$ are independent iff their joint ch.f. splits as a product. That is, iff
+	\[
+		\varphi_X(\theta) = E\left( e^{i \left\langle \theta, X \right\rangle } \right) = \prod_{k = 1}^{n} \varphi_k(\theta_k) 
+	.\] 
+	for all $\theta = \left( \theta_1, \ldots, \theta_n \right)  \in \mathbb{R}^n$, $X = \left( X_1, \ldots, X_n \right) $.
+\end{lemma}
+
+\begin{corollary}
+	Let $X_k \sim N(0,\sigma_k^2), k = 1,\ldots, n$. Then $X_1, \ldots, X_n$ are independent iff
+	\[
+		S = \sum_{k=1}^{n} \theta_k X_k \sim N\left(0,\sum_{k=1}^{n} \theta_k^2 \sigma_k^2\right)
+	.\] 
+\end{corollary}
+\begin{proof}[Proof of Corollary]
+	If $X_k$'s are independent then $S\sim 
+	N\left(0,\sum_{k=1}^{n} \theta_k^2 \sigma_k^2\right)$ trivially. 
+
+	Now suppose $S \sim  N\left( \sum_{k=1}^{n} \theta_k^2 \sigma_k^2 \right) $. Then we can write out the ch.f. of $S$ :
+	\[
+		\varphi_S(u) \equiv E\left( e^{i u S} \right) = \exp\left( - \frac{u^2}{2} \sum_{k=1}^{n} \theta_k^2 \sigma_k^2 \right) 
+		= \prod_{k = 1}^{n} \varphi_{X_k} (u \theta_k) 
+	.\] 
+	But we also have $\varphi_X(\theta) = E\left( e^{i \left\langle \theta, X \right\rangle } \right) \equiv E\left( e^{i S} \right) = \varphi_S(1)$. Thus
+	\[
+		\varphi_X(\theta) = \prod_{k=1}^{n} \varphi_{X_k}(\theta) 
+	.\] 
+	Now apply the lemma to get independence.
+\end{proof}
+
+\begin{lemma}
+	$W_t$ has independent increments. That is, for any $0 = t_0 < \ldots < t_n \le 1$, and $X_k := W_{t_k} - W_{t_{k-1}}$, those $X_1,\ldots,X_n$ are independent.
+\end{lemma}
+\begin{proof}
+	We have already shown in Lemma~\ref{lem:BMConstructConverge} that each $X_k\sim N(0, \sigma_k^2)$, where $\sigma_k^2 = t_k - t_{k-1}$. In view of the previous lemma, we only need to check that for any $\theta \in \mathbb{R}^n$, 
+	\[
+		S = \sum_{k=1}^{n} \theta_k X_k \sim N\left( 0, \sum_{k=1}^{n} \theta_k^2 \sigma_k^2 \right) 
+	.\] 
+
+	Now, we can write $X_k = \sum_{j=1}^{\infty} Y_j \int _{t_{k-1}}^{t_k} \varphi_j(r) dr$. Hence
+	\begin{align*}
+		S = \sum_{k=1}^{n} \theta_k X_k
+		&= \sum_{k=1}^{n}  \theta_k \sum_{j=1}^{\infty} Y_j \int _{t_{k-1}}^{t_k} \varphi_j(r) dr \\
+		&= \sum_{j=1}^{\infty} Y_j \sum_{k=1}^{n}  \theta_k  \int _{t_{k-1}}^{t_k} \varphi_j(r) dr
+	.\end{align*}
+	Since $Y_j \sim N(0,1)$ are iid,
+	\begin{align*}
+		\varphi_S(u) 
+		&= E \exp\left( i u \sum_{j=1}^{\infty} Y_j \sum_{k=1}^{n}  \theta_k  \int _{t_{k-1}}^{t_k} \varphi_j(r) dr \right)  \\
+		&= \prod_{j = 1}^{\infty} E \exp\left( i u Y_j \sum_{k=1}^{n}  \theta_k  \int _{t_{k-1}}^{t_k} \varphi_j(r) dr \right)   \\
+		&= \prod_{j = 1}^{\infty} \exp\left( - \frac{u^2}{2} \left(\sum_{k=1}^{n}  \theta_k  \int _{t_{k-1}}^{t_k} \varphi_j(r) dr \right)^2 \right)   \\
+		&= \exp\left( - \frac{u^2}{2} \sum_{j=1}^{\infty} \left(\sum_{k=1}^{n}  \theta_k  \int _{t_{k-1}}^{t_k} \varphi_j(r) dr \right)^2 \right)  
+	.\end{align*}
+	Now look at the exponential,
+	\begin{align*}
+		\sum_{j=1}^{\infty} \left(\sum_{k=1}^{n}  \theta_k  \int _{t_{k-1}}^{t_k} \varphi_j(r) dr \right)^2 
+		&= \sum_{j=1}^{\infty} \sum_{l,k=1}^{n} \theta_k \theta_l \int _{t_{k-1}}^{t_k} \varphi(r) dr \int _{t_{l - 1}}^{t_l} \varphi(r) dr \\
+		&= \sum_{j=1}^{\infty} \sum_{l,k=1}^{n} \theta_k \theta_l \left\langle I_{[t_{k-1}, t_k]}, \varphi_j \right\rangle \left\langle I_{[t_{l-1},  t_l]}, \varphi_j \right\rangle  \\
+		&= \sum_{l,k=1}^{n} \sum_{j=1}^{\infty} \theta_k \theta_l \left\langle I_{[t_{k-1}, t_k]}, \varphi_j \right\rangle \left\langle I_{[t_{l-1},  t_l]}, \varphi_j \right\rangle  \\
+		&= \sum_{l,k=1}^{n} \theta_k \theta_l \left\langle I_{[t_{k-1}, t_k]},  I_{[t_{l-1},  t_l]} \right\rangle  \\
+		&= \sum_{l,k=1}^{n} \theta_k \theta_l \delta_{kl} \left( t_k - t_{k-1} \right)   \\
+		&= \sum_{k=1}^{n} \theta_k ^2 \left( t_k - t_{k-1} \right)   \\
+		&= \sum_{k=1}^{n} \theta_k ^2 \sigma_k^2 
+	.\end{align*}
+	Substitute into $\varphi_S(u)$, we have
+	\[
+		\varphi_S(u) = \exp\left( - \frac{u^2}{2} \sum_{k=1}^{n} \theta_k^2 \sigma_k^2 \right) 
+	.\] 
+	That is, $S \sim N(0,\sum_{k=1}^{n} \theta_k^2 \sigma_k^2)$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:independentChf}]
+	Assuming independence, the form of Chf is already known. Now assuming that Chf splits, we want to prove that for any finite collection of intervals (bounded or not)  $I_1, \ldots, I_n$, we have
+	\[
+		P\left( X_1 \in I_1, \ldots, X_n \in I_n \right) 
+		= P(X_1 \in I_1) \ldots P(X_n \in I_n)
+	.\] 
+	This is equivalent to saying that for any indicator function $g_k = 1_{I_k}$, 
+	\[
+		E\left( \prod_{k=1}^{n} g_k(X_k)   \right) 
+		= \prod_{k=1}^{n} E\left( g_k(X_k) \right)  
+	.\] 
+	By approximation, we only need to prove this for $g_k$ that are continuous with compact support. Now by Fourier Inversion,
+	\[
+		g_k(x_k) = \frac{1}{2 \pi} \int _{\mathbb{R}} e^{- i x_k \theta_k} \hat{g} _k (\theta_k) d \theta_k
+	.\] 
+	\[
+		\prod_{k=1}^{n}  g_k(x_k) = 
+		\frac{1}{\left( 2 \pi \right)^n } \int _{\mathbb{R}^n} e^{- i \left\langle x, \theta \right\rangle } \prod_{k=1}^{n}   \hat{g} _k (\theta_k) d \theta_1 \ldots d \theta_k
+	.\]
+	Under the assumption that chf splits:
+\begin{align}
+	E\left( \prod_{k=1}^{n} g_k(X_k)   \right)
+	&=  \frac{1}{\left( 2 \pi \right)^n } 
+	\int _{\mathbb{R}^n} \prod_{k=1}^{n} \varphi_k(\theta_k)  \hat{g} _k (\theta_k) d \theta_1 \ldots d \theta_k \\
+	&= \prod_{k=1}^{n}\left( \frac{1}{2 \pi} \int _{\mathbb{R}} \varphi_k(\theta_k) \hat{g} _k(\theta_k) d \theta_k\right)  &\text{by Fubini's Theorem}\\
+	&= \prod_{k = 1}^{n} E\left( g_k (X_k) \right)  
+.\end{align}
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\subsection{Path properties}
+
+\subsubsection{The Haar System}
+
+We introduce a particular system under which we show continuity. We set
+\[
+	h_{0,0}(t) = 1
+.\] 
+And for $n = 1,2,\ldots$, $j = 1,2,\ldots, 2^{n-1}$,
+\[
+	h_{n,j}(t) = \begin{cases}
+		2^{\frac{n - 1}{2}} & t \in \left[ \frac{2 j - 2}{2^n}, \frac{2 j - 1}{2^n} \right)\\
+		-2^{\frac{n - 1}{2}} & t \in \left[ \frac{2 j - 1}{2^n}, \frac{2 j}{2^n} \right]
+	\end{cases}
+.\] 
+Observe that:
+\begin{proposition}
+	The Haar system is orthonormal.
+\begin{enumerate}
+	\item $\int _0^1 h_{n_j}(t) dt = 0$,
+	\item (Normal) $\int _0^1 \left| h_{n j}(t) \right| ^2 dt = 1$.
+	\item (Orthogonal) $\int _0^1 h_{n,i} h_{m,j} dt = \delta_{nm}\delta_{ij}$.
+\end{enumerate}
+\end{proposition}
+ To prove the last claim, use the dyadic structure of $\text{supp}h_{n,j}$. For $n < m$, we have either $\text{supp}h_{m, i} \subset \text{supp}h_{n,j}$, or the two disjoint. In the first case, $\text{supp}h_{m,i}$ must be either in the first half, or the second half of $\text{supp} h_{n,j}$. 
+
+
+\begin{proposition}
+	The Haar system is complete.
+\end{proposition}
+\begin{proof}
+	We would like to show that for any $f \in L^2 [0,1]$, $\int _0^1 f h_{n,j} = 0$ for all $n, j$ will imply that $f = 0$. Take such an $f$ and assume this. 
+
+	Then for any dyadic interval $I $ in $[0,1]$, we have $\int _I f(t) dt = 0$. That is,
+	\[
+		\int _{\frac{K}{2^n}}^{\frac{K+1}{2^n}} f = 0, \qquad \forall k = 0, \ldots, 2^n - 1
+	.\] 
+	Now we apply the Lebesgue differentiation theorem: for all $x \in [0,1]$, whenever $I_{n, k}$ is a decreasing dyadic sequence converging to $x$,
+	\[
+		\frac{1}{|I_{n, k}|} \int _{I_{n,k}} f \to f(x)
+	.\] 
+	This gives $f(x) = 0$.
+\end{proof}
+
+Now, integrating to one of the basis in Haar system gives us a triangular function. We have
+\[
+	\max_t \int_0^t h_{n, j} dt = 2^{\frac{- n - 1}{2}}
+.\] 
+This gives us control on $\left\langle I_t, \varphi_k \right\rangle $ in the construction \eqref{eqn:BMConstruction}.  
+
+Moreover, the integral $\left\langle I_t, h_{n, j} \right\rangle $ has same support as $h_{n,j}$. Hence, for fixed $n$ and different $j$, the functions $t \mapsto \left\langle I_t, h_{n, j} \right\rangle $ have disjoint support.
+
+ \subsubsection{Continuity}
+
+\begin{theorem}
+	Using the Haar system,
+	$W_t^{(N)} = \sum_{n=0}^{N} Y_n \left\langle I_t, \varphi_n \right\rangle $ converges uniformly.
+\end{theorem}
+\begin{proof}
+	We rewrite the sum as
+	\[
+		W_t^{(N)} = \sum_{n=0}^{N} Y_n(t)
+	.\] 
+	where
+	\[
+		Y_n(t) = \sum_{j=1}^{2^{n-1}} Y_{n, j} \left\langle I_t, h_{n, j} \right\rangle 
+	.\] 
+	Now consider the events
+	\[
+		A_n = \left\{|Y_n(t)| > \frac{1}{n^2} \text{ for some } t \in [0,1]\right\} , n\ge 1
+	.\] 
+	\begin{claim}
+	$\sum_{n=1}^{\infty} P(A_n) < \infty $.
+	\end{claim}
+	If the claim is true, Borel-Cantelli lemma says
+	\[
+		|Y_n| \le  \frac{1}{n^2} \text{ eventually a.s.}
+	.\] 
+	This gives uniform convergence by Weierstrass M-test.
+
+	Now we prove the claim. 
+	\begin{align*}
+		P\left( \exists t, |Y_n(t)| > \frac{1}{n^2} \right) 
+		&\leq P\left( \exists t, \exists j \le 2^{n-1},|Y_{n j}| \left\langle I_t, h_{n,j} \right\rangle > \frac{1}{n^2} \right)  \\
+		&\leq P\left( \exists j,  \left| Y_{n, j} \right| 2^{\frac{- n - 1}{2}}> \frac{1}{n^2} \right)  \\
+		&= P\left( \bigcup_{j = 1} ^{2^{n-1}} \left\{|Y_{n,j}| > \frac{2^{\frac{n +1}{2}}}{n^2}\right\}  \right)  \\
+		&\leq \sum_{j = 1} ^{2^{n-1}} P\left( |Y_{n,j}| > \frac{2^{\frac{n +1}{2}}}{n^2}  \right)  \\
+		&= 2^{n-1} P\left( |Z| >\frac{2^{\frac{n +1}{2}}}{n^2}  \right)  \\
+		\intertext{Apply the bound $P(|Z| > \lambda) \le \lambda^{-4} E|Z|^4$,}
+		&\leq c 2^{n-1} \left( \frac{n^2}{2^{\frac{n+1}{2}}} \right)^4  \\
+		&= c \frac{n^8}{2^{n+3}} \text{ , which sums}
+	.\end{align*}
+\end{proof}
+
+\subsubsection{Non-differentiability}
+
+\begin{theorem}
+	Let $B_t$ be the Brownian Motion. For all $\omega$ outside a set of probability zero, the function $t \mapsto B_t(\omega)$ is nowhere differentiable.
+\end{theorem}
+\begin{proof}
+	Define the Dini derivatives:
+	\[
+		D_t^+(\omega) = \limsup_{h \to 0+} \frac{B_{t + h}(\omega) - B_t(\omega)}{h}
+	,\]
+	\[
+		D_t^-(\omega) = \liminf_{h \to 0+} \frac{B_{t + h}(\omega) - B_t(\omega)}{h}
+	.\] 
+	Let 
+	 \[
+		E = 
+		\{\omega \in \Omega: \exists t,  D_t^+, D_t^- \text{ are finite}  \} 
+	.\] 
+	We need to show $P(E) = 0$.
+
+	\begin{claim}
+		$E \subset \liminf \{Y_n \le  n 2^{-n}\} $, where
+		\[
+			Y_n = \min_{k \le n 2^n} Y_{n, k}
+		.\] 
+		\[
+			Y_{n, k} = \max \left\{\left| B_{\frac{k+1}{2^n}}- B_{\frac{k}{2^n}} \right|,  \left| B_{\frac{k+2}{2^n}}- B_{\frac{k+1}{2^n}} \right|, \left| B_{\frac{k+3}{2^n}}- B_{\frac{k+2}{2^n}} \right| \right\} 
+		.\] 
+	\end{claim}
+	Note that
+	\begin{itemize}
+		\item $B_{\frac{k+1}{2^n}}- B_{\frac{k}{2^n}} \sim B_{2^{-n}}\sim 2^{-\frac{n}{2}}B_1$,
+		\item $P\left( Y_{n, k} < \lambda \right) = P\left( |B_1| \le \lambda 2^{n / 2} \right) ^3 \le  c \lambda ^3 2^{\frac{3}{2} n}$
+		\item $P\left( |Z| < \lambda \right) \le \frac{2 \lambda}{\sqrt{2 \pi} }$
+	\end{itemize}
+	Then
+	\begin{align*}
+		P\left( Y_n \le \lambda \right) 
+		&= P\left( Y_{n, k}< \lambda \text{ for some } k \le n 2^n\right)  \\
+		&\leq \sum_{k=1}^{n 2^n} P\left( Y_{n, k} < \lambda \right)  \\
+		&\leq c n 2^n \left( \lambda^3 2^{\frac{3}{2} n} \right)  
+	.\end{align*}
+	Take $\lambda = n 2^{-n}$, then
+	\[
+		P\left( Y_{n} \le  n 2 ^{-n} \right) 
+		\le c n^4 2^{- n / 2} \to  0
+	.\] 
+	
+	Therefore, we only need to establish the claim.
+	\begin{proof}[Proof of Claim]
+		Let $\omega \in E$. Suppose $K < \infty $ such that
+		\[
+			- K < D_t^- \le D_t^+ < K
+		.\] 
+		Then $\exists  \delta = \delta(\omega, t, K)$ such that 
+		\[
+			t \le  s \le  t+  \delta
+			\implies
+			B_s(\omega) - B_t(\omega) \le  K|t - s|
+		.\] 
+		Take $n_0 = n(\delta, t, K)$ such that
+		\begin{enumerate}
+			\item $4 \times 2^{-n} < \delta$
+			\item $8 K < n$
+			\item  $n > t$
+		\end{enumerate}
+		Given $t$, take $k $ to be the largest integer such that $\frac{K - 1}{2^n} \le t$. Then 
+		\[
+			\left| B_{\frac{k}{2^n}} - B_{\frac{k+1}{2^n}} \right| 
+			\le \left| B_{\frac{k}{2^n}} - B_t \right| + \left| B_t - B_{\frac{k+1}{2^n}} \right| 
+			< 2 K (4 \times 2^{-n}) < n 2 ^{-n}
+		.\] 
+
+		Repeat the same argument for the other intervals, then
+		\[
+			Y_{n, k}(\omega) <  n 2^{-n}
+		.\] 
+		so that
+		\[
+			Y_n(\omega) = \min Y_{n, k} \le  n 2^{-n}
+		.\] 
+	\end{proof}
+
+
+\end{proof}
+
+\subsubsection{Holder Continuity}
+
+\begin{theorem}[Kolmogorov-Chentsov Theorem]
+	Let $X$ be a random field indexed by a set $T \subset D \subset  \mathbb{R}^d$, $D$ open set. That is, for each element $t \in T$, $X_t$ is a r.v. Suppose $X_t$ has the property that
+	\[
+		E\left| X_t - X_s \right| ^\alpha
+		\le  c \left| t - s \right| ^{d + \beta} 
+		\qquad \forall s, t \in T
+	.\] 
+	Then $\{X_t\} _{t \in T}$ has an extension to $\{\tilde X_t\} _{t \in \overline{D} }$ such that
+	\begin{itemize}
+		\item $t \mapsto \tilde X_t$ is continuous a.s.
+		\item  $X_t$ and $\tilde X_t$ agree on $T$ a.s.
+		\item If $\gamma < \beta / \alpha$, then for every compact set $K \subset \overline{D} $, 
+			\[
+				\sup _{s \neq t \in K} \frac{\left| \tilde X_t - \tilde X_s \right| }{|t - s|^\gamma} < \infty  \text{ a.s}
+			.\] 
+			That is, the extension is Holder continuous of order $\gamma$.
+	\end{itemize}
+\end{theorem}
+\begin{corollary}
+	The standard BM, $B_t$ , is Holder continuous of order $\gamma < \frac{1}{2}$.
+\end{corollary}
+\begin{proof}
+	For any integer $m$, we have
+	\[
+		E\left| B_t - B_s \right| ^{2 m}
+		= \left( E|Z|^{2m} \right) |t - s|^m
+		= c_m |t - s| ^{1 + m - 1}
+	.\] 
+	The theorem tells us that $B_t$ is Holder continuous of order $\gamma < \frac{m - 1}{2 m} = \frac{1}{2} - \frac{1}{2m}$. $m$ is arbitrary, so $\gamma < \frac{1}{2}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem]
+	We prove the Theorem in the following simple case: $T = [0,1] \subset \mathbb{R}$. We use the following lemma:
+	\begin{lemma} Suppose $f(t) $ is a real valued function defined on $D$, where $D = $ dyadic rationals in $[0,1]$, i.e. $D = \bigcup_{n = 1} ^\infty L_n$, $L_n = \{K / 2^n, K = 0, \ldots, 2^n\} $. Suppose $\left| f(t) - f(s) \right| \le  C|t - s|^\gamma$ for all $s, t \in D$ that are ``neighboring pairs'' in a same $L_n$. 
+		
+		Then $f$ has an extension $\tilde f$ to $[0,1]$ such that
+		\[
+			\left| \tilde f(t) - \tilde f(s) \right| 
+			\le  c |t - s|^\gamma
+		.\] 
+	\end{lemma}
+	The proof of this lemma uses a ``chaining argument'' and the fact that $\left( l^\gamma + (l / 2)^\gamma + \ldots\right) \le  c' (2 l)^\gamma  $ whenever $\gamma > 0$.
+
+	To prove the theorem, first observe that for each $n$, there are $2^n$ pairs of $s,t \in L_n$ that are neighboring points, and $\left| s - t \right| = \frac{1}{2^n}$.
+
+	By Chebyshev,
+	\[
+		P\left( |X_t - X_s| > |t - s|^\gamma \right) 
+		\le \frac{E|X_{t - s}|^\alpha}{|t - s|^{\alpha \gamma}}
+		\le c \frac{|t - s|^{1 + \beta}}{|t - s|^{\alpha \gamma}}
+		= c 2^{-n (1 + \beta - \alpha \gamma)}
+	.\] 
+	Let
+	\[
+		B_n = \left\{|X_t - X_s| \ge |t - s|^\gamma \text{ for any neighboring pairs } s, t \in L_n\right\} 
+	.\] 
+	Then $P(B_n) \le  2^n c 2^{-n (1 + \beta - \alpha \gamma)} = c 2^{- n\left( \beta - \alpha \gamma \right) } $ .
+	Since $\gamma < \beta / \alpha$, we have $0 < \beta - \alpha \gamma$, so $P(B_n)$ sums. By Borel-Cantelli, $|X_t - X_s| \le  \xi |t - s|^\gamma$ for all large $n$, for neighboring points $s, t \in L_n$.
+
+	Since there are only finite number of neighboring points in $\bigcup_{k = 1} ^{n_0} L_k$, we have $|X_t - X_s| \le  \tilde \xi |t - s|^\gamma$, $\tilde \xi < \infty $ a.s., for all such neighboring points too. So,
+	\[
+		|X_t - X_s| \le \overline{\xi} |t - s|^\gamma, \qquad \overline{\xi} \text{ r.v. finite a.s.} 
+	.\] 
+	Apply the lemma to the function $X_t(\omega)$, a.e. $\omega$.
+\end{proof}
+
+
+
+
+
+

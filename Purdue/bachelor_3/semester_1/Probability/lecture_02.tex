@@ -1,0 +1,88 @@
+\lecture{2}{Fri 15 Sep 2023 10:50}{}
+
+\begin{theorem}
+	Let $X_1, X_2, \ldots$ be a martingale with bounded increment, so $|X_{n+1}-X_n| \le m < \infty $. Let
+	\begin{align}
+		C &= \{\lim X_n \text{ exists and finite}\} \\
+		D &= \{\lim\sup  X_n = + \infty \wedge \liminf X_n = - \infty \} 
+	.\end{align} 
+	Then $P(C \cup D) = 1$.
+\end{theorem}
+
+\begin{theorem}[Doob Decomposition]
+	Suppose $X_n$ is a submartingale, then $X_n = M_n + A_n$, where $M_n$ is a adapted martingale and $A_n$ is increasing, $A_0 = 0$. Such decomposition is unique.
+\end{theorem}
+\begin{proof}
+We find a formula in terms of $X_n$ for $A_n$:
+
+\[
+	A_n = \sum_{k = 1}^n \left[ E(X_k | \mathcal{F}_{k-1}) - X_{k-1} \right] \in \mathcal{F}_{n-1}
+.\] 
+
+\[
+	E(M_n | \mathcal{F}_{n-1}) = E(X_n | \mathcal{F}_{n-1 }) - A_n = X_{n-1} + A_n - A_{n-1} - A_n = X_{n-1} + A_{n-1}
+.\] 
+\end{proof}
+
+\begin{example}
+	Suppose $X_n$ is a martingale, then $X_n^2$ is a submartingale. Apply Doob decomposition: $X_n^2 = M_n + A_n$. Then
+	 \[
+		A_n = \sum_{k = 1}^n E\left( X_k^2 - X_{k-1}^2 | \mathcal{F}_{k-1} \right) 
+	.\] 
+	Now
+	\begin{align*}
+		E\left( \left( X_k - X_{k-1 } \right) ^2 | F_{k-1} \right) 
+		&= E\left( X_k^2 - 2 X_k X_{k-1 } + X_{k-1 }^2 | \mathcal{F}_{k-1} \right)  \\
+		&= E\left( X_k^2 - X_{k-1 }^2 | \mathcal{F}_{k-1}\right)
+	.\end{align*}
+	We usually write $S^2(X)_k := E\left( X_k^2 - X_{k-1}^2 | \mathcal{F}_{k-1} \right) $, and call it the \textit{quadratic variation} of $X_n$.
+	Where
+	\[
+		S(X)_n = \left( \sum_{k =1}^n D(d_k | \mathcal{F}_{k-1}) \right) ^{\frac{1}{2}}
+	.\] 
+\end{example}
+\begin{theorem}[Burkholder-Davis-Gundy Inequality]
+	For $p \in [1, \infty )$, we have
+	\[
+		X^*(\infty ) := \sup_{n} |X_n| \in L^p
+		\iff  s(X) \in L^p
+	.\] 
+	And the $L^p$ norms for $X^*$ and $s(X)$ are comparable.
+\end{theorem}
+
+Martingale version of \textit{Littlewood-Paley Theory}.
+
+\begin{example}
+	Suppose $B_n \in \mathcal{F}_n$, $X_n = \sum_{k = 1}^n 1_{B_k}$. Then $X_n$ is a martingale, and
+	\[
+		E\left( X_n | \mathcal{F}_{n-1 } \right) = \sum_{k - 1}^{n - 1 }1_{B_k } + P(B_k) \ge X_{n-1}
+	.\] 
+	Now we do the Doob decomposition:
+	\[
+		A_n = \sum_{k = 1}^n E\left( 1_{B_k} | \mathcal{F}_{k-1} \right) 
+	.\] 
+	\[
+		M_n = \sum_{k = 1}^n 1_{B_k} - E\left( 1_{B_k} | \mathcal{F}_{k-1} \right) 
+	.\] 
+
+\begin{theorem}[Second Borel-Cantelli Theorem]
+	\[
+		\{B_n \text{ i.o.}\} 
+		=
+		\left\{\sum_{k = 1}^\infty  E(1_{B_k} | \mathcal{F}_{k-1}) = \infty \right\} 
+	.\] 
+\end{theorem}
+We can interpret it as
+\[
+	\{X_\infty = \infty \} = \{A_\infty  = \infty \}  
+.\] 
+
+\end{example}
+
+Now apply corollary to $|M_n - M_{n-1}|\le 1$. Let $\omega \in \left\{\sum_{k = 1}^\infty 1_{B_k} = \infty  \right\} $. Then if $\omega \in C$, then $\omega \in \left\{ \sum_{k = 1}^n E(1_{B_k} | \mathcal{F}_{k-1}) = \infty  \right\} $.
+
+Hence on $C$, these two converge or diverge together.
+
+On $D$, $\sum 1_{B_k} = \infty $ and $\sum E(1_{B_k}|\mathcal{F}_{k-1}) = \infty $. 
+
+Next time: Doob Lp inequality.

@@ -1,0 +1,98 @@
+\lecture{10}{Wed 25 Oct 2023 10:41}{}
+
+For standard Brownian motion,
+\begin{enumerate}
+	\item $\mathcal{F}_t = \sigma\left( B_\gamma: \gamma \le t \right) = \mathcal{F}_t^0$
+	\item $\mathcal{F}_t^+ = \bigcap_{h > t} \mathcal{F}_h$
+	\item $\mathcal{F}_t^+$ is right continuous: $\mathcal{F}_t^+ = \lim_{\varepsilon \to  0+} \mathcal{F}_{t + \varepsilon}$
+\end{enumerate}
+\begin{theorem}
+	Standard BM is a $\mathcal{F}_t^+$-BM.
+\end{theorem}
+\begin{proof}
+	Let $h >0$, $0<\varepsilon<h$, $t = s + h$.
+	\[
+		E\left( \exp\left( i \theta B_{s + h} + \frac{\theta^2}{2}(s + h) \right) | \mathcal{F}_{s + \varepsilon} \right) 
+		= \exp\left(  i \theta B_{s + \varepsilon} + \frac{\theta^2}{2}(s + \varepsilon) \right) 
+	.\] 
+	Hence
+	\[
+		E\left( \exp\left( i \theta B_{s + h} \right) |\mathcal{F}_{s + \varepsilon} \right)  = \exp\left( i \theta B_{s + \varepsilon} - \frac{\theta^2}{2} (h - \varepsilon)\right)  
+	.\] 
+	Condition both sides on $\mathcal{F}_s^+$,
+	\[
+		E\left( \exp\left( i \theta B_{s + h} \right) |\mathcal{F}_s^+ \right) 
+		= E\left( \exp\left( i \theta B_{s + \varepsilon} - \frac{\theta^2}{2}(h - \varepsilon) \right) |\mathcal{F}_s^+ \right) 
+	.\] 
+	Now we can apply DCT: as $\varepsilon \to 0+$,
+\[
+		E\left( \exp\left( i \theta B_{s + h} \right)| \mathcal{F}_s^+ \right) 
+		= E\left( \exp\left( i \theta B_{s } - \frac{\theta^2}{2}h\right) |\mathcal{F}_s^+ \right) 
+		=  \exp\left( i \theta B_{s } - \frac{\theta^2}{2}h\right)	
+	.\]
+	Thus
+	\[
+		E\left( \exp\left( i \theta \left( B_{s + h} - B_s \right)  \right) | \mathcal{F}_s^+ \right)  = e^{- \frac{\theta^2}{2}h}
+	.\] 
+\end{proof}
+
+\begin{remark}
+	Note that $E\left( \exp\left( i \theta (B_{s + h} - B_s) \right) | \mathcal{F}_s^+ \right) = e^{- \frac{\theta^2}{2}h} = E\left( \exp\left( i \theta \left( B_{s + h} - B_s \right)  \right) | \mathcal{F}_s \right)$
+
+
+	Same argument as before gives that the $\{\mathcal{F}_t^+\} $-BM is a Markov process, i.e. for all bounded continuous $f$, 
+	 \[
+		E\left( f(B_{t + s}) |\mathcal{F}_s^+ \right) 
+		= E_{B_s}\left( f(B_t) \right) 
+		= E\left( f(B_{t + s}) | \mathcal{F}_s \right) 
+	.\] 
+\end{remark}
+
+\begin{corollary}
+	The $\mathcal{F}_t^+$-BM is a strong Markov process, i.e. for any stopping time $T$, $W_t = B_{T + t} - B_T$ is a $\{\mathcal{F}_t^+\} $ Brownian motion, independent of $\mathcal{F}_T^+$, any a.s. finite stopping time $T$.
+\end{corollary}
+
+\textbf{Strong Markov Property.} $E\left( f(B_{T + t}) | \mathcal{F}_T^+ \right) = E_{B_T}f(B_t)$
+
+Now, in place of $f$, we can put $\prod_{k=1}^{m} f_k\left( B_{t_k} \right)  $.
+
+\begin{theorem}(Equal expectations)
+	For any bounded r.v. $Y$ and all $t \ge 0$,
+	\[
+		E\left( Y | \mathcal{F}_t^+ \right) 
+		= E\left( Y | \mathcal{F}_t \right) 
+	.\] 
+\end{theorem}
+\begin{proof}
+	This follows from Markov property.
+
+	Let $Y = \prod_{k = 1}^{m} f_k (B_{t_k}) $, $f$ bounded continuous, $t_k$ any sequence of time. WLOG, $t_1 \le  t_2 \le \ldots \le t_m$. Also WLOG, we can assume $t < t_1$. If $t > t_m$, we have nothing to do; suppose $t_j \le  t < t_{j+1}$, then $Y = \prod_{k=1}^{j} f_k(B_{t_k}) \prod_{k=j+1}^{m} f_k(B_{t_k}) =: XZ$, $X \in \mathcal{F}_t \subset \mathcal{F}_t^+$. 
+
+	Now
+	\begin{align*}
+		E\left( \prod_{k=1}^{m} f_k(B_{t_k}) | \mathcal{F}_t^+  \right) 
+		&= E_{B_t}\left(  \prod_{k=1}^{m} f_k(B_{t_k - t}) \right) 
+		& \text{Markov wrt }\mathcal{F}_t^+ \\
+		&= E\left( \prod_{k=1}^{m} f_k(B_{t_k}) | \mathcal{F}_t  \right) 
+		& \text{Markov wrt} \mathcal{F}_t
+	.\end{align*}
+\end{proof}
+
+\begin{corollary}
+	Let $A \in \mathcal{F}_t^+$, then a.s.
+	\[
+		1_A
+		= E\left( 1_A | \mathcal{F}_t^+ \right) 
+		= E\left( 1_A | \mathcal{F}_t \right)  \in \mathcal{F}_t
+	.\] 
+	Hence $A$ differs from some event in $\mathcal{F}_t$ by measure zero.
+\end{corollary}
+
+\begin{corollary}[Blumenthal's 0-1 Law]
+	Let $A \in \mathcal{F}_0^+$, then $1_A = E\left( 1_A | \mathcal{F}_0 \right)  = P(A)$. Thus $P(A) \in \{0,1\} $.
+\end{corollary}
+
+\begin{theorem}[Reflection Principle] 
+	(For Brownian motion)
+	
+\end{theorem}

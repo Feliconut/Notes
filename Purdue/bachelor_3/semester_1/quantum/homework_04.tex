@@ -1,0 +1,53 @@
+\homework{4}{Tue 26 Sep 2023 21:25}{}
+
+\begin{problem}
+	Let $\left|a^{\prime}\right\rangle$ and $\left|a^{\prime \prime}\right\rangle$ be eigenstates of a Hermetian operator $A$ with eigenvalues $a^{\prime}$ and $a^{\prime \prime}$, respectively $\left(a^{\prime} \neq a^{\prime \prime}\right)$. The Hamiltonian operator is given by
+\[
+H=\left|a^{\prime}\right\rangle \delta\left\langle a^{\prime \prime}|+| a^{\prime \prime}\right\rangle \delta\left\langle a^{\prime}\right|
+\]
+where $\delta$ is just a real number.\\
+(a) Clearly, $\left|a^{\prime}\right\rangle$ and $\left|a^{\prime \prime}\right\rangle$ are not eigenstates of the Hamiltonian. Write down the eigenstates of the Hamiltonian. What are their energy eigenvalues?\\
+(b) Suppose the system is known to be in a state $\left|a^{\prime}\right\rangle$ at $t=0$. Write down the state vector in the Schrodinger picture for $t>0$.\\
+(c) What is the probability for finding the system in the state $\left|a^{\prime \prime}\right\rangle$ for $t>0$ if the system is known to be in the state $\left|a^{\prime}\right\rangle$ at time $t=0$ ?\\
+(d) Can you think of a physical situation corresponding to this problem?
+\end{problem}
+\begin{proof}[Solution]
+	\begin{enumerate}
+		\item [(a)] 
+			\[
+				H\left( \left| a' \right\rangle +\left| a'' \right\rangle  \right)  =\delta \left( \left| a'' \right\rangle  + \left| a' \right\rangle  \right) 
+			.\] 
+			\[
+				H\left( \left| a' \right\rangle  - \left| a'' \right\rangle  \right)  = \delta \left( \left| a'' \right\rangle  - \left| a' \right\rangle  \right) = - \delta\left( \left| a' \right\rangle  - \left| a'' \right\rangle  \right) 
+			.\] 
+			Thus we have two eigenvalues $\delta$ and $-\delta$.
+		\item This hamiltonian is time-independent. We decompose the state to sum of eigenstates $\left| \delta \right\rangle := \left| a' \right\rangle  + \left| a'' \right\rangle  $ and $\left| -\delta \right\rangle := \left| a' \right\rangle  - \left| a'' \right\rangle $.
+
+		Now $\left| a' \right\rangle  = \frac{1}{2} \left( \left| \delta \right\rangle  + \left| -\delta \right\rangle  \right) $. So the time evolution is
+		\begin{align*}
+			\left| a' ; t \right\rangle 
+			&= \exp\left( \frac{i H t}{\hbar} \right) \frac{1}{2} \left( \left| \delta \right\rangle  + \left| -\delta \right\rangle  \right)  \\
+			&= \frac{1}{2}\exp\left( \frac{i \delta t}{\hbar} \right) \left| \delta \right\rangle 
+			+ \frac{1}{2} \exp\left(\frac{ i (-\delta) t}{\hbar} \right)\left| -\delta \right\rangle 
+		.\end{align*}
+	\item 
+		We have
+		\begin{align*}
+			\left\langle a'' \middle| a' ; t \right\rangle  
+			&= \left( \frac{1}{2}\left( \left| \delta \right\rangle  - \left| -\delta \right\rangle  \right)  \right) ^\dag \left( \frac{1}{2}\exp\left( \frac{i \delta t}{\hbar} \right) \left| \delta \right\rangle 
+			+ \frac{1}{2} \exp\left(\frac{ i (-\delta) t}{\hbar} \right)\left| -\delta \right\rangle \right)  \\
+			&= \frac{1}{4} \left( \exp\left( \frac{i \delta t}{\hbar} \right) - \exp\left( \frac{i (-\delta) t}{\hbar} \right)  \right) 
+		.\end{align*} 
+		The probability is the square of the inner product:
+
+		\[
+			\frac{1}{16}\left( \exp\left( \frac{2 i \delta t}{\hbar} \right) + \exp\left( \frac{- 2 i \delta t}{\hbar} \right) - 2   \right) 
+		.\] 
+
+		\item
+			An example is from quantum computation, where a NOT gate is applied to a possibly superposed qubit, and some additional phase $\delta$ is added.
+
+			Or, it could be a two-state spin system, where some external interaction is constantly flipping the spins.
+	\end{enumerate}
+\end{proof}
+

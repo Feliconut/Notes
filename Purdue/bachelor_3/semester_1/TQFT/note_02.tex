@@ -1,0 +1,120 @@
+\note{2}{Wed 27 Sep 2023 17:49}{Conceptual Summary}
+
+\section{Topological Quantum Computing}
+\subsection{Summary of important concepts}
+\subsubsection{What is TQC}
+
+Topological Quantum Computing performs quantum computation using the topological properties of anyons. 
+
+Three main steps of TQC:
+\begin{itemize}
+	\item \textbf{State Preparation}. We do \textbf{pair production} and \textbf{fusion} to make several anyons in the system.
+	\item \textbf{Braiding.} We swap the anyons around to edit the topological state.
+	\item \textbf{Fusion}. We may fuse some anyons together and detect the emission. 
+\end{itemize}
+
+\subsubsection{Formalization}
+
+Types of anyons and their interactions are described by the \textbf{Quantum Double}, a quasi-triangular Hopf algebra $DG$ over some group $G$. Specifically, the \textit{irreducible representations} of DG correspond to the types of anyons. 
+
+Braiding of anyons, or the ``worldlines'' of anyons (they are actually ``ribbons'' instead of ``lines''), are described by the \textbf{Modular Tensor Category}. A worldline that starts with anyons $a$ and $b$ and ends with anyons $c$ and $d$ is an element in $\operatorname{Hom}(a \otimes b, c \otimes d)$. We regard ``no particle'' as one anyon type called the \textit{vacuum}, denoted $\mathbbm{1}$. Objects in MTC are finite linear superpositions of such worldlines.
+The MTC gives us a theory describing what observation we get for arbitrary braiding and fusing of anyons.
+
+\subsubsection{Operations to worldlines}
+
+We can physically manipulate the system in multiple ways:
+\begin{itemize}
+	\item We can perform \textbf{Braiding} on the anyons, by swapping them around using some (technologies still under development). By doing this we alter the quantum state encoded as some object of the MTC.
+	\item By forming \textbf{Fusing} on the anyons, we let two anyons react to produce other anyons.
+	Fusing of anyons are given by the decomposition of product of irreps:
+\[
+	a \otimes b = \sum_{\gamma} N_{a b}^\gamma \gamma
+.\] 
+
+	It is possible to \textbf{pair produce} an anyon $a$ and its dual (antiparticle) $\overline{a} $ from the vacuum. In the MTC, we are composing arrows.
+
+	\item As a special case of Fusing, we can \textbf{taking trace} of some object in the category, i.e. make a worldline that closes onto itself (some endomorphism in the MTC), the anyons will vanish and produce observable emissions. This allows us to extract data from the ``computer''.
+	\item \textbf{Measurements} are in principle possible through inteferometer. This can collapse a superposition state to a ground state.
+\end{itemize}
+
+\subsubsection{Effect of braiding}
+
+Braidings alter the phase and amplitude of topological states. The idea is to analyze a small set of operations that generate the whole MTC. Swap and Twist introduce a phase to the quantum state; Link gives an emission; Slide allow us to ``slide the worldlines around''. 
+
+\begin{itemize}
+	\item \textbf{Swap.} 
+	\item \textbf{Twist.}
+	\item \textbf{Link.}
+	\item \textbf{Change basis (Slide).}
+\end{itemize}
+All those four operations can be explicitly calculated for a given MTC.
+
+To perform computation, we need to do two things:
+\begin{itemize}
+	\item Construct a basic \textbf{computational object} from available anyons. This is usually a space $\operatorname{Hom} (a, b_1, \ldots, b_k)$. Those $b$ 's need not be distinct. The dimension of the hom space represents number of distinct ways (up to global phase) to start from a single anyon $a$ and produce the ordered collection of particles $b_1 \ldots b_k$. When $\operatorname{dim}  = 2$ this is a \textit{qubit}, when $\operatorname{dim}  = 3$ this is a \textit{qutrit}, etc. 
+	\item \textbf{Quantum gates} are given by braidings on single or multiple qubits. A quantum gate is \textit{entangling} if it is not the tensor product of multiple single-qubit gates. When we put multiple qubits together, their total $\operatorname{Hom} $ space can be strictly larger than the logical space, tensor product of the qubits. We need our gate to be \textbf{leakage-free} in the sense that it preserves the logical space. To make it a strong quantum computer, we want to find a \textbf{universal set} of gates. The existence of leakage-free and universal set of gates depend on specific TQFTs, and is solved only for a handful of cases.
+\end{itemize}
+
+\subsection{Quantum Double}
+
+\subsubsection{Construction}
+
+\[
+	DG = \mathbb{C}[G]^{*, \text{cop}} \otimes \mathbb{C}[G]
+.\] 
+
+
+\subsubsection{Representations of DG}
+
+A homomorphism $\phi$ between representations $(\chi, V)$ and $(\chi', W)$ must satisfy the commutative diagram for all $x \in G$ :
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJWIl0sWzMsMCwiViJdLFswLDIsIlciXSxbMywyLCJXIl0sWzAsMiwiXFxwaGkiXSxbMSwzLCJcXHBoaSJdLFswLDEsIlxcY2hpKHgpIiwxXSxbMiwzLCJcXGNoaScoeCkiLDFdXQ==
+\[\begin{tikzcd}
+	V &&& V \\
+	\\
+	W &&& W
+	\arrow["\phi", from=1-1, to=3-1]
+	\arrow["\phi", from=1-4, to=3-4]
+	\arrow["{\chi(x)}"{description}, from=1-1, to=1-4]
+	\arrow["{\chi'(x)}"{description}, from=3-1, to=3-4]
+\end{tikzcd}\]
+
+The comultiplication $\Delta$ allows us to multiply two representations:
+\[
+	(\chi \otimes  \chi') (x) := (\chi \otimes \chi')(\Delta(x))
+.\] 
+
+$\text{Rep}(DG)$ forms a monoidal category under the tensor product $\otimes $.
+
+Each representation is a unique direct sum of irreps; in other words, $\text{Rep}(DG)$ is a semisimple category.
+
+\subsubsection{Characterization of irreps}
+
+Each irrep of $DG$ is characterized by a pair $(C, \chi)$ where $C$ is a conjugate class of $G$, and $\chi$ is an irrep of $Z(r)$ for some $r \in C$. (choice of $r$ is irrelevant)
+
+Specific definition of $\rho_{(C, \chi)}$ :
+\begin{align*}
+	V_\rho &= \mathbb{C}^{\otimes C} \otimes V_\chi \\
+	B_h . \left| c \right\rangle \otimes \left| v \right\rangle 
+	&= \delta_{h,c} \left| c \right\rangle \otimes \left| v \right\rangle  \\
+	A_g . \left| c \right\rangle  \otimes \left| v \right\rangle 
+	&= \left| g c \overline{g}  \right\rangle \otimes \chi\left( \overline{q} _{g c \overline{g} } g q_c \right) \left| v \right\rangle  
+.\end{align*}
+where $q_c$ is chosen such that $q_c r q_c = c$.
+
+
+\subsubsection{Correspondence between anyon type and irrep}
+
+
+
+\subsection{Modular Tensor Category}
+
+
+\subsection{Quantum bits and Quantum Gates}
+
+
+
+
+
+
+

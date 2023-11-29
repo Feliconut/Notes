@@ -1,0 +1,112 @@
+\homework{3}{Fri 22 Sep 2023 23:18}{}
+
+\begin{problem}
+	Consider the initial value problem
+\[
+u_t=\sin u_x ; \quad u(x, 0)=\frac{\pi}{4} x .
+\]
+Verify that the assumptions of the Cauchy-Kovalevskaya theorem are satisfied and obtain the Taylor series of the solution about the origin.
+\end{problem}
+\begin{proof}
+	Differentiate, we have
+	\[
+		u_{tt} = \cos (u_x) u_{x t}
+	.\] 
+	Now $\cos$ is an analytic function, so the assumptions are satisfied. To compute derivatives at $(0,0)$, 
+	\[
+		u_x(x,0) = \frac{\pi}{4}	.\] 
+	Now
+	\[
+		u_{t x} = \cos(u_x) u_{x x} = 0
+	.\] 
+	This implies $u_{t t} (0,0) = 0$.
+	So
+\[
+D^{(\alpha_1, \alpha_2)} u (0,0) = 0 \text{ for }\alpha_1 > 1 \text{ or } \alpha_2 > 1
+.\] 
+Hence the taylor series of the solution about the origin is
+\[
+	u(x,t) = \frac{\pi}{4} x + \frac{1}{\sqrt{2} } t
+.\] 
+
+\end{proof}
+
+
+
+\begin{problem}
+	Consider the Cauchy problem for $u(x, y)$
+\[
+\begin{aligned}
+& u_y=a(x, y, u) u_x+b(x, y, u) \\
+& u(x, 0)=0
+\end{aligned}
+\]
+Let $a$ and $b$ be analytic functions of their arguments. Assume that $D^\alpha a(0,0,0) \geq 0$ and $D^\alpha b(0,0,0) \geq 0$ for all $\alpha$. (Remember by definition, if $\alpha=0$ then $D^\alpha f=f$.)\\
+(a) Show that $D^\beta u(0,0) \geq 0$ for all $|\beta| \leq 2$.\\
+(b) Prove that $D^\beta u(0,0) \geq 0$ for all $\beta=\left(\beta_1, \beta_2\right)$. (Hint. Argue as in the proof of the Cauchy-Kovalevskaya theorem; i.e., use induction in $\beta_2$ )
+\end{problem}
+\begin{proof}
+	$u(0,0) = 0$ is given. We have $u_x = u_{x x} = 0$ at $(0,0)$. To compute $u_{yx }$ and $u_{yy }$, differentiate the PDE:
+	\begin{align*}
+		u_{yx }(0,0) &= D_x a \, u_x + D_u a \, u_x^2 + a u_{x x} + D_x b + D_u b \, u_x\\
+		&= D_x b \ge  0
+	.\end{align*}
+	\begin{align*}
+		u_{yy }(0,0) &= D_y a u_y + D_u a \, u_x u_y + a u_{x y} + D_y b + D_u b \, u_y \\
+		&= D_y a \, b + D_x b + D_y b + D_u b \, b 
+		\ge 0
+	.\end{align*}
+
+	No we prove the second part. For $\beta_2 = 0$, we have $D^\beta u(0,0) = \frac{\partial ^{\beta_1}}{\partial x^{\beta_1}} u = 0$. This proves the base case. Now assume inductively that $D^\beta u(0,0) \ge 0$ for all $\beta$ such that $\beta_2 \le  k$. Now set $\beta_2 = k$ and we have
+	\begin{align*}
+		D^{(\beta_1, k_1)} u 
+		&= D^{\beta} u_y \\
+		&= \sum_{\gamma \le \beta} \binom{\beta}{\gamma} D^\gamma a D^{\beta - \gamma} u_x + D^\beta b\\
+		&= \sum_{\gamma \le \beta} \binom{\beta}{\gamma} D^\gamma a D^{\beta - \gamma + (1,0)}u + D^\beta b
+	.\end{align*}
+	Now $D^\gamma a$ and $D^\beta b \ge 0$  by assumption, and $D^{\beta - \gamma + (1,)}$ has no more than $k$ derivatives on $y$, so the induction hypothesis gives  $D^{\beta - \gamma + (1,0)}u\ge 0$. The induction is complete and the claim is proved.
+\end{proof}
+\newpage
+
+\begin{problem}
+	(Kovalevskaya's example) Show that the line $\{t=0\}$ is characteristic for the heat equation $u_t=u_{x x}$. Show there does not exist an analytic solution $u$ of the heat equation in $\mathbb{R} \times \mathbb{R}$, with $u=\frac{1}{1+x^2}$ on $\{t=0\}$. (Hint: Assume there is an analytic solution, compute its coefficients, and show that the resulting power series diverges in any neighborhood of $(0,0)$.)
+\end{problem}
+\begin{proof}
+	First compute the derivatives of $\frac{1}{1+x^2}$:
+	\[
+		\frac{d ^n}{d x^n} \frac{1}{1+x^2}
+		= \frac{n!}{(x^2 + 1)^{n+1}} 
+		\sum_{k=0}^{\left\lfloor n / 2 \right\rfloor}  \binom{n+1}{2k+1} x^{n - 2 k - 1}(-1)^{n+k}
+	.\] 
+
+	Now observe that
+	\[
+		D^{(\beta_1, \beta_2)} u = D^{(\beta_1, \beta_2 - 1)} u_t =D^{(\beta_1, \beta_2 - 1)} u_{x x} = D^{(\beta_1+2, \beta_2-1)} u
+	.\] 
+	In particular
+	\[
+		D^{(0,\beta_2)} u = D^{(2 \beta_2, 0)} u
+	.\] 
+	Now assume $u$ is analytic at $(0,0)$ so that we have the power series expansion
+	\[
+		u(x, t) = \sum_{|\beta|=0}^{\infty} D^{\beta} u \frac{1}{\beta!}x^{\beta_1} t^{\beta_2}
+	.\] 
+	We restrict ourselves to the line $x = 0$. So
+	\[
+		u(0,t) = \sum_{n = 0}^{\infty } \frac{1}{n!} D^{(2 n, 0)}u(0,0)t^n
+	.\] 
+	Where
+	\[
+		D^{(2n, 0)}u(0,0) = (2n)!
+	.\] 
+	Compute the radius of convergence:
+	\[
+		\frac{1}{R} = \limsup_{n \to \infty } \left( \frac{(2n)!}{n!} \right) ^{\frac{1}{n}} \ge \limsup_{n \to \infty } n = \infty 
+	.\] 
+	Hence $R = 0$, i.e. this power series is divergent in any neighborhood of $(0,0)$.
+
+
+\end{proof}
+
+
+

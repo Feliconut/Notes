@@ -1,0 +1,70 @@
+\homework{2}{Mon 11 Sep 2023 17:02}{}
+
+\begin{problem}
+	
+1. Consider two ket states $|\alpha\rangle$ and $|\beta\rangle$. Suppose that $\left\{\left|a^{(k)}\right\rangle\right\}$ is a complete set of base kets and that the inner products $\left\langle a^{(k)} \mid \alpha\right\rangle$ and $\left\langle a^{(k)} \mid \beta\right\rangle$ are all known.\\
+(a) Find the matrix representation of the operator $|\alpha\rangle\langle\beta|$ in that basis.\\
+(b) Consider a spin $1 / 2$ system and let $|\alpha\rangle=\left|s_z=\hbar / 2\right\rangle$ and $|\beta\rangle=\left|s_x=\hbar / 2\right\rangle$. Write down explicitly the square matrix that corresponds to $|\alpha\rangle\langle\beta|$ in the usual $s_z$ diagonal basis. Show explicitly that $|\alpha\rangle\langle\beta \mid \beta\rangle=|\alpha\rangle$ in this representation.
+\end{problem}
+\begin{proof}[Solution]
+	\[
+		\left| \alpha \right\rangle \left\langle \beta \right|  = \left| a^i \right\rangle \left\langle a^i \right| \left| \alpha \right\rangle \left\langle \beta \right| \left| a^j \right\rangle \left\langle a^j \right| 
+		= \left\langle a^i \middle| \alpha \right\rangle \left\langle a^j \middle| \beta \right\rangle ^\dagger \left| a^i \right\rangle \left\langle a^j \right| 
+	.\] 
+
+
+\end{proof}
+\newpage
+
+\begin{problem}
+	
+2. Consider a three-dimensional ket space that is spanned by a set of orthonormal kets which we label $\{|1\rangle,|2\rangle,|3\rangle\}$. Suppose that two operators, $A$ and $B$ are represented in this basis by
+\[
+A \doteq\left(\begin{array}{ccc}
+a & 0 & 0 \\
+0 & -a & 0 \\
+0 & 0 & -a
+\end{array}\right) \text { and } B \doteq\left(\begin{array}{ccc}
+b & 0 & 0 \\
+0 & 0 & -i b \\
+0 & i b & 0
+\end{array}\right)
+\]
+where $a, b \in \mathbb{R}$.\\
+(a) Obviously, $A$ has a degenerate spectrum of eigenvalues. Does $B$ also exhibit a degenerate spectrum?|\\
+(b) Show that $A$ and $B$ commute.\\
+(c) Find a new set of orthonormal kets which are simultaneous eigenkets of both $A$ and $B$. Demonstrate that the operators $A$ and $B$ have diagonal representations in this new basis. Specify the eigenvalues of $A$ and $B$ for each of the three eigenkets. Does your specification of eigenvalues completely characterize each eigenket?
+\end{problem}
+\begin{proof}[Solution]
+	a) Yes. $B$ has eigenvalue $b$ associated to eigenvectors both $\left| 1 \right\rangle $ and $ \left| 2 \right\rangle + i \left| 3 \right\rangle $.
+ 
+	b) Both $A$ and $B$ are block diagonal with a $1\times 1$ block and a $2\times 2$ block. The $1\times 1$ blocks trivially commute; the $2\times 2$ blocks also commute, as we can verify:
+	\[
+		\begin{bmatrix}
+			-a & 0 \\
+			0 & -a \\
+		\end{bmatrix}
+		\begin{bmatrix}
+			0 & -ib  \\
+			ib  & 0 \\
+		\end{bmatrix}
+		\begin{bmatrix}
+			-\frac{1}{a} & 0 \\
+			0 & -\frac{1}{a} \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			0 & -ib  \\
+			ib  & 0 \\
+		\end{bmatrix}
+	.\] 
+	c) 
+	Under the basis $\left( \left| 1 \right\rangle , \left| 2 \right\rangle  + i \left| 3 \right\rangle , \left| 2 \right\rangle  - i \left| 3 \right\rangle  \right) $, we have representations
+	\[
+		A = \text{diag}(a, -a, -a) \qquad 
+		B = \text{diag}(b, b, -b)
+	.\] 
+	Yes, by considering both $A$ and $B$, we can completely characterize each eigenket.
+	
+\end{proof}
+

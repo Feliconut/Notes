@@ -12,6 +12,8 @@
 \usepackage{dcolumn}
 \newcolumntype{2}{D{.}{}{2.0}}
 \usepackage{xcolor}
+\usepackage{bbm}
+\usepackage{showlabels}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -335,16 +337,6 @@
 ]}{\end{tcolorbox}}
 
 % Noot is note in Dutch. Same as 'verbetering' but color of box is different
-\newenvironment{note}[1]{\begin{tcolorbox}[
-    arc=0mm,
-    colback=white,
-    colframe=white!60!black,
-    title=#1,
-    fonttitle=\sffamily,
-    breakable
-]}{\end{tcolorbox}}
-
-
 
 
 % Figure support as explained in my blog post.
@@ -379,3 +371,4 @@
 }
 
 \newcommand{\EDIT}[1]{{\color{cyan}\textsf{ \logseq{EDIT} #1}}}
+\newcommand{\tags}[1]{{\color{cyan} tags: #1}}

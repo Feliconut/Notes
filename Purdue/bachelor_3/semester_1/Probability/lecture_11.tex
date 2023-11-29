@@ -1,0 +1,139 @@
+\lecture{11}{Mon 30 Oct 2023 10:43}{}
+
+Last time, we proved \textbf{Blunenthal 0-1 Law}: $A \in \mathcal{F}_0^+ \implies P(A) \in \{0,1\} $.
+
+We have
+\[
+	\limsup_{h \to 0+} \frac{|B_{t + h} - B_t|}{\sqrt{2 h \log h \frac{1}{h}} } \in \mathcal{F}_0^+
+.\] 
+
+Let $\tau = \inf \{t >0 : B_t > 0\} $, $\sigma = \inf \{t = 0: B_t = 0\} $.
+
+\begin{theorem}
+	$P(\tau = 0) = P(\sigma = 0) = 1$
+\end{theorem}
+\begin{proof}
+	\[
+		\{\tau = 0\}  = \bigcap_{n = 0} ^{\infty } 
+		\{\exists \varepsilon>0: 0 < \varepsilon < \frac{1}{n}, B_\varepsilon > 0\} \in \mathcal{F}_0^+
+	.\] 
+	\[
+		\frac{1}{2} = P(B_t > 0) \le  P(\tau < t)
+	.\]
+	(?) Let $t \to  0$, we have
+	\[
+		P(\tau =0) \ge  \frac{1}{2} \implies P(\tau = 0) = 1
+	.\] 
+	By intermediate value theorem, $P(\sigma = 0) = 1$. (?)
+\end{proof}
+
+Recall that if $B_t$ is standard BM, then $t B_{\frac{1}{t}}$ is also.
+
+\begin{theorem}[Kolmogorov 0-1 Law]
+	Let $\mathcal{G}_t = \sigma\left( B_s: s \ge t \right) $.
+	Let $\mathcal{T}_B = \bigcap_{t\ge 0} \mathcal{G}_t$.
+	Then, $A \in \mathcal{T}_B \implies P(A) \in \{0,1\} $; $\mathcal{T}_B = \mathcal{F}_0^+(\omega)$.
+\end{theorem}
+
+\subsubsection{Reflection Principle of BM}
+
+Let $M_t = \sup_{0\le s\le t} B_s$ be the running maximum. 
+
+\begin{theorem}[Reflection Principle]
+	For all $a > 0$,
+	\[
+		P(M_t > a) = 2 P(B_t > a) 
+	.\] 
+\end{theorem}
+We actually have
+\[
+		P(M_t > a) = 2 P(B_t > a) = P(\tau_a< t)= P(|B_t| > a)
+	.\]
+\begin{remark}
+	
+	If $\tau_a = \inf \{t: B_t = a\} $, then
+	\[
+		P(\tau_a < t) = P(M_t > a)
+	.\] 
+	Moreover, the sets are equal:
+	\[
+		\{\tau_a < t\}  = \{M_t > a\} 
+	.\] 
+
+
+From the reflection principle,
+\begin{align*}
+	P(\tau_a < t) &= 2 P(B_t > a)\\
+	&= 2 P(\sqrt{t} B_1 > a) \\
+	&= 2 P\left( B_a > \frac{a}{\sqrt{t} } \right)  \\
+	&= 2\left( 1 - P\left( B_a < \frac{a}{\sqrt{t} } \right)  \right)  \\
+	&= 2\left( 1 - \Phi\left( \frac{a}{\sqrt{t} } \right)  \right)  
+.\end{align*}
+Therefore
+\[
+	P\left( \tau_a \in dt  \right) 
+	= 2 \Phi'\left( \frac{a}{\sqrt{t} } \right) a t^{- 3 / 2}
+	= \frac{a}{\sqrt{2 \pi t^3} } e^{- \frac{a^2}{2t}}
+.\] 
+Which is a \textit{stable distribution.}
+
+
+\end{remark}
+
+\begin{remark}
+	Recall, using exponential martingale, gives
+	\[
+		E\left( e^{- \lambda \tau_a} \right) 
+		= e^{- a \sqrt{2 \lambda} }
+	.\] 
+\end{remark}
+
+\begin{intuition}
+	Why is this called ``reflection principle''? 
+	Let $T$ be finite a.s. stopping time. Let $B_t$ be standard BM. Then 
+	\[
+		B_t^r := \begin{cases}
+			B_t & t \le T \\
+			2 B_T - B_j & t > T
+		\end{cases}
+	.\] 
+	is standard BM.
+	
+	This is proved using martingales.
+	Same argument as the proof that $B_{T + t} - B_T$ is BM.
+	
+\end{intuition}
+
+\begin{proof}[Proof of Reflection Principle]
+	Observe that $W_t = B_{T + t} - B_T$ is BM. Therefore, so is $- (W_t) = B_T - B_{T + t}$.
+	
+	We have a ``silly representation'' of BM:
+	\[
+		B_t = \begin{cases}
+			B_t & t \le T\\
+			B_T + W_{t - T} & t > T
+		\end{cases}
+	.\] 
+	Now, what if we put $- W_t$ instead of $W_t$?
+	\[
+		B_t^r = \begin{cases}
+			B_t & t \le T\\
+			B_T - W_{t - T} & t > T
+		\end{cases}
+	.\]
+	$B_t^r$ follows $B_t$ until $T$, and then reflects about  $B_T$.
+
+	Now begin the proof:
+	\[
+		\{M_t > a\}  = \{M_t > a, B_t > a\}  + \{M_t > a, B_t < a\}  
+	.\] 
+	If $B_t > a$ then $M_t > a$.
+	\[
+		P(M_t > a) = P(B_t > a) + P(M_t > a, B_t < a)
+	.\] 
+	But $\{M_t > a, B_t < a\} = \{M_t > a, B_t^r > a\} $. So
+	\[
+		P(M_t > a) = P(B_t > a) + P(B_t^r > a)
+		= 2(B_t > a)
+	.\] 
+\end{proof}

@@ -1,4 +1,4 @@
-\studynote{10}{Wed 30 Aug 2023 23:37}{Verify BLP sum convergence}
+\studynote{10}{Mon 17 Oct 2023 23:37}{Verify BLP sum convergence}
 
 In this note we verify the last centered equation in Lemma~3.4 on pg.~13 of (\cite{kosyginaFunctionalLimitLaws2016}).
 
@@ -22,7 +22,44 @@ Here we omit the specific BLPs and drift constants.
 We now prove
 \begin{lemma}
 	Consider BLP $U$ ( one of the 4 types). Then we have
-	\[
-		
-	.\] 
+	\begin{align*}
+\lim _{n \rightarrow \infty} P\left(2 \sum_{i=0}^{\sigma_{\varepsilon \sqrt{n}}^U} U_i \leq n \mid U_0=\lfloor\sqrt{K n}\rfloor\right) \\
+=P\left(2 \int_0^{\sigma_{\frac{\varepsilon}{\sqrt{K} }}^Y} Y(s) d s \leq \frac{1}{K} \mid Y(0)=1\right)
+\end{align*}
 \end{lemma}
+\begin{proof}
+	Recall the linear scaling property of BESQ process: if $Y$ and  $\tilde Y$ are two identical BESQ processes, then
+	\[
+		Y(s) =_d \sqrt{K} \tilde Y(\frac{s}{\sqrt{K} })
+	.\] 
+	First rewrite the LHS of the claim to
+	\[
+		P\left( 2 \sum_{i = 0}^{\sigma^U _{\varepsilon n}} U_i \le n^2 \middle| U_0 = \sqrt{K} n \right) 
+	.\] 
+	Now, by rearranging, this is same as
+	\[
+		P\left( 2 \frac{1}{n} 
+		\sum_{i = 0}^{\sigma^{U / n}_\varepsilon} Y^{\varepsilon, n}\left(\frac{i}{n}\right) \le 1  
+		\middle|
+		Y^{\varepsilon, n}(0) = \sqrt{K} \right) 
+	.\] 
+	The upper index $\sigma_\varepsilon ^{U / n} = n \sigma _\varepsilon ^{Y^{\varepsilon,n}}$, so the sum is a Riemann sum. Assuming convergence, this is equal to
+	\[
+		P\left( 2 \int _0^{\sigma_\varepsilon^Y} Y d s \le 1 \middle| Y(0) = \sqrt{K}   \right) 
+	.\] 
+	Finally, we do a change of variable from $Y$ to $\tilde Y$. Then $\tilde Y (t) = Y(\sqrt{K} t) / \sqrt{K}  $, so $\tilde Y(0) = 1$. The integral becomes
+	\begin{align*}
+		\int _0^{\sigma^Y_\varepsilon} Y(s) ds
+		&= \int _0^{\sigma^Y_\varepsilon} \sqrt{K} \tilde Y \left( \frac{s}{\sqrt{K} } \right)  ds \\
+		&= \int _0 ^{\sigma_\varepsilon^Y / \sqrt{K} } K \tilde Y (t) dt \\
+		&= K \int _0^{\sigma_{\frac{\varepsilon}{\sqrt{K} }}^{\tilde Y}} \tilde Y(t) dt
+	.\end{align*}
+	To justify the last step, note that
+	\[
+		\tilde Y \left( \sigma^Y_{\varepsilon }/\sqrt{K}  \right) = 
+		\frac{1}{\sqrt{K} } 
+		Y\left( \sigma^Y_\varepsilon \right) 
+		= \frac{\varepsilon}{\sqrt{K} }
+	.\] 
+\end{proof}
+

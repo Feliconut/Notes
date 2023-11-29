@@ -1,0 +1,121 @@
+\lecture{21}{Wed 29 Nov 2023 10:40}{}
+
+\begin{proposition}
+	Let $M_t$ be a continuous $L^2$-martingale. Then it has bounded variation only when it is constant.
+\end{proposition}
+\begin{proof}
+If $M _t$ is bounded variation on $[0,t]$, then $\left\langle M \right\rangle _t = 0$. To verify, note that
+\[
+	\sum_{k = 0}^{n - 1} \left| M_{t_{k+1}} - M_{t_k} \right| ^2
+	\le \sup _{0\le k\le n-1} \left| M_{t_{k+1}} - M_{t_k} \right| \sum_{k=0}^{n-1} \left| M_{t_{k+1}} - M_{t_k} \right|
+.\] 
+Where the $\sup $ goes to zero by continuity and the second term goes to the total variation which is bounded.
+
+Therefore, $M_t^2$ is a martingale. We also know that $M_t$ is a martingale. Then
+\[
+	E\left( \left( M_t - M_s \right) ^2 | \mathcal{F}_s\right)	
+	= E\left( M_t^2 - M_s^2 | \mathcal{F}_s \right) 
+	= 0
+.\] 
+Take expectation again,
+\[
+	E | M_t - M_s| ^2 = 0 \implies M_t \text{ is constant}
+.\] 
+This can be shown from Chebyshev: $P\left( M_t - M_s > \varepsilon \right) \le \frac{E\left( M_t - M_s \right) ^2}{\varepsilon^2} = 0$.
+\end{proof}
+
+Let $L_M^2$ be space of progressively measurable processes $u_ t$ wrt $\mathcal{F}_t$ such that
+\[
+	E\left( \int _0^t u_s^2 d\left\langle M \right\rangle _s \right) < \infty 
+.\] 
+Note: this is just a Riemann-Stieltjes integral. Let $u \in \mathcal{E}$ be elementary, taking value $F_k $ on $[t_k, t_{k+1})$, then define
+\[
+	I_M(u) = \int _0^T u_s d M_s = \sum_{k = 0}^{n - 1} F_k \left( M_{t_{k+1}} - M_{t_k} \right) 
+.\] 
+
+Proceed in the same way as previous theorem about Brownian motion, we have
+
+\begin{theorem}
+	There exists a unique linear map $I_M: L^2_M \to  L^2_M$ such that
+	\begin{enumerate}
+		\item $I_M(u) = \sum_{k = 0}^{n - 1} F_k \left( M_{t_{k+1}} - M_{t_k} \right) , u \in \mathcal{E}$ (Ito integral for elementary functions)
+		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) , u \in \mathcal{E}$ (Ito isometry for elementary functions)
+		\item $\mathcal{E}$ is dense in $L^2_M$
+		\item  $I_M(u) =_{L^2} \lim_{m \to \infty} I_M(e^m), e^m \in \mathcal{E}$ (Continuity of $I_M$)
+		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) $ (Extend Ito isometry to whole space $L^2_M$ )
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	\[
+		\left\langle \int _0^\cdot u_s d M_s \right\rangle _t = \int _0^t u_s^2 d \left\langle M \right\rangle _s
+	.\] 
+\end{remark}
+
+\begin{example}
+	As for BM,  $\int _0^t u_s d B_s$ is a martingale, and in fact it is continuous.
+\end{example}
+\begin{example}
+	When $M_t  = \int _0^t H_s d B_s$. Then
+	\[
+		\left\langle M \right\rangle _t = \int _0^t |H_s|^2 ds
+	.\] 
+	We have $d \left\langle M \right\rangle _t = |H_t|^2 dt$. Thus we have
+	\[
+		u \in L_M^2 \iff  
+		E\left( \int _0^t |u_s|^2 d \left\langle M \right\rangle _s \right)  = E \left( \int _0^t |H_s|^2 u_s^2 ds \right)  < \infty 
+	.\] 
+	apply Ito isometry to both sides, \logseq{ASK}
+	\[
+		E\left( \int _0^t u_s d M_s \right) ^2 =  E\left( \int _0^t u_s H_s d B_s \right) ^2
+	.\] 
+	Same proof works regardless of range of integration. Thus the two integrals are the same in $L^2(P)$ :
+	\[
+		\int _0^t u_s d M_s = \int _0^t u_s H_s \cdot d B_s
+	.\] 
+\end{example}
+
+\begin{remark}
+	\begin{enumerate}
+		\item In order to define stochastic integral, we only need local integrability on the martingale in time, i.e. $E M_t^2 < \infty $ for all $t$.
+
+\begin{definition}
+	A stochastic process $M_t$ adapted to $\mathcal{F}_t$ is called a \textit{local martingale} if there exists stopping times $T_n$ going to infinity, such that $M_{t \wedge T_n}$ is a martingale.
+\end{definition}
+
+\item A \textit{semimartingale} is a process of the form
+	\[
+		X_t = A_t + M_t
+	.\] 
+	where $M_t$ is a local martingale, and $A_t$ is a process of bounded variation. We can define
+	\[
+		\int _0^t H_s d X_s = \int _0^t H_s d A_s + \int _0^t H_s d M_s
+	.\] 
+	where the first integral is just R-S, and the second is defined for local martingales.
+	\end{enumerate}
+\end{remark}
+
+\begin{lemma}
+	Let $X_t = X_0 + A_t + M_t$ be a continuous semimartingale. Let $\left| \Delta_n(t) \right|  \to  0$ as $n \to \infty $, then
+	\[
+		\lim \sum_{n=0}^{n-1} \left| X_{t_{n+1}} - X_{t_n} \right| ^2 = \left\langle M \right\rangle _t
+	.\] 
+	i.e., $\left\langle X \right\rangle _t = \left\langle M \right\rangle _t$
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		\left| X_{t_{k+1}} - X_{t_k} \right| ^2
+		&= \left| (A_{t_{k+1}} - A_{t_k})+(M_{t_{k+1}} - M_{t_k}) \right|^2  \\
+		&= \left| A_{t_{k+1}} - A_{t_k}\right|^2
+		+ 2(A_{t_{k+1}} - A_{t_k}) (M_{t_{k+1}} - M_{t_k})
+		+ \left| M_{t_{k+1}} - M_{t_k}\right|^2  
+	.\end{align*}
+	The first two terms go to zero when we take sum and let $\Delta_k \to 0 $, using the fact that $A$ is bounded variation and $M$ is continuous.
+\end{proof}
+\begin{remark}
+	We have same argument for $\left\langle X, Y \right\rangle _t = \left\langle M_t, N_t \right\rangle $ where $X_t = A_t + M_t$, $Y_t = C_t + N_t$.
+\end{remark}
+
+\subsection{Ito Formula}
+
+Motivation comes from integration by parts. If we know $I(X)$ and $I(Y)$, we can know $I(f(X,Y))$ where $f$ is polynomial.

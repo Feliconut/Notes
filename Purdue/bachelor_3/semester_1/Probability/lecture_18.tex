@@ -1,0 +1,183 @@
+\lecture{18}{Wed 15 Nov 2023 10:33}{}
+
+\begin{remark}
+	With our example we have so called \textit{Itô isometry}:
+	\[
+		E\left( \int _0^t B_s d B_s \right) ^2 
+		= E \int _0^t |B_s|^2 d s
+	.\] 
+	To check, RHS is $\int _0^t E B_s^2 ds = \int _0^t s ds = \frac{t^2}{2}$. LHS is $E\left( \frac{1}{4} \left( B_t^4 - 2 B_t^2 t + t_{62} \right)  \right) = \frac{1}{4}\left( E B_t^4 - 2 E B_t^2 t + t^2 \right) = \frac{1}{4} \left( 3 t^2 - 2 t^2 + t^2 \right) = \frac{1}{2} t^2$.
+\end{remark}
+
+\begin{remark}
+	Look at $\{B_{t_k}\} _k$, it is a martingale on $\{\mathcal{F}_{t_k}\} $. Now $R_n = \sum_{k=0}^{n-1} B_{t_k} \left( B_{t_{k+1}} - B_{t_k} \right) $ is a martingale transform. 
+
+	\textbf{Martingales are discrete Ito integrals; Ito integrals are limits of martingale transforms.}
+\end{remark}
+
+Now we move on to general stochastic integral.
+
+\begin{definition}
+	A stochastic process $X_t$ on a filtered probability space $\left(\Omega, \mathcal{F}, P, \{\mathcal{F}_t\}\right) $ is called \textit{progressively measurable} if
+	\begin{enumerate}
+		\item $(t, \omega) \mapsto X_t(\omega) = X(t, \omega)$ is $\mathcal{B} \times \mathcal{F}$-measurable, $\mathcal{B}$ Borel $\sigma$-algebra on $\mathbb{R}$.
+		\item $X_t$ adapted to $\mathcal{F}_t$.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	A continuous stochastic process is progressively measurable, i.e. $t \mapsto X_t$ continuous, and adapted to $\mathcal{F}_t$. Further,
+	\begin{enumerate}
+		\item Progressive measurability is preserved under $L^2$ limits and in-probability limits.
+		\item Any modification of a progressively measurable process is progressively measurable.
+	\end{enumerate}
+\end{proposition}
+
+\begin{definition}
+	Let $(\Omega, \mathcal{F}, \mathcal{F}_t, P)$ be the space where Brownian motion lives, i.e. Wiener space. Assume $\mathcal{F}$ contains all sets of probability zero. Fix $0 \le  T < \infty $. Let $\mathbb{H}$ be space of all $u_t : [0,\infty ) \times \Omega \to  \mathbb{R}$ that are progressive measurable, and for which
+	\[
+		E \left( \int _0^T |u_s(\omega)|^2 ds  \right) < \infty 
+	.\] 
+\end{definition}
+
+The set of all $e \in \mathbb{H}$ of the form $e_t = \sum_{k=0}^{n-1} e_k(\omega) 1_{[t_k, t_{k+1})}(t)$, $e_k \in \mathcal{F}_{t_k}$, is called elementary set, denoted by $\mathcal{E}$.
+
+$e \in \mathbb{H}$ is called an \textit{elementary function}.
+
+\begin{definition}[Itô Integral](for Elementary Functions)
+	For $e \in \mathcal{E}$, define
+	\[
+		\int _0^T e_s(\omega) d B_s(\omega)
+		= \sum_{k=0}^{n-1} e_k(\omega) \left( B_{t_{k+1}} - B_{t_k} \right) 
+	\] 
+	and $E e_k^2 < \infty $.
+\end{definition}
+
+\begin{lemma}
+	(Itô isometry for $\mathcal{E}$ )
+	For $e \in \mathcal{E}$, we have
+	\[
+		E\left( \int _0^T e_s dB_s \right) ^2 = E\left( \int _0^T e_s^2 d s \right) 
+	.\] 
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		E\left( e_k e_j \left( B_{t_{k+1} - B_{t_k}} \right) \left( B_{t_{j+1}} - B_{t_j} \right)  \right) 
+		&= \delta_{jk } E\left( e_k^2 \left( t_{k+1} - t_k \right)  \right) 
+	.\end{align*}
+	Hence
+	\begin{align*}
+		E\left( \int _0^T e_s d B_s \right) ^2
+		&= \sum_{k=0}^{n-1} E(e_k^2) \left( t_{k+1} - t_k \right)  \\
+		&= E \int _0^T e_s^2 ds
+	.\end{align*}
+\end{proof}
+
+Next we want to show $\mathcal{E}$ is dense in $\mathbb{H}$.
+\begin{enumerate}
+	\item For each $f \in \mathbb{H}$, there exists $g^m \in \mathbb{H}$ bounded, such that $g^m \to  f$ in $\mathbb{H}$-norm.
+	\item For each $g \in \mathbb{H}$ bounded, there exists $h^m \in \mathbb{H}$ bounded and continuous in $t$, such that $h^m \to  g$ in $\mathbb{H}$-norm.
+	\item For each $h \in \mathbb{H}$ bounded and continuous in $t$, there exists $e^m \in \mathcal{E}$ such that $e^m \to  h$ in $\mathbb{H}$-norm.
+\end{enumerate}
+\begin{proof}
+	\begin{enumerate}
+		\item Suppose $h \in \mathbb{H}$, truncate by defining
+			\[
+				g^m(t, \omega) = h(t, \omega)_{\{-m \le  h(t, \omega) \le  m\} } 1(t, \omega)
+			.\] 
+			Then DCT implies (tail integral of  $L^2$ function vanishes)
+			\[
+				E\left( \int _0^T \left| g^m(t, \omega) - h(t, \omega) \right|^2 dt  \right) \to  0
+			.\] 
+		\item Let $g \in \mathbb{H}$ be bounded, i.e. $g(t, \omega) \le  M$ for all $t, \omega \in [0,\infty  ) \times \Omega$.
+
+			Define 
+			\[
+				h^m(t, \omega) = \frac{1}{m} \int _{t - m}^t g(s, \omega) ds \qquad \frac{1}{m} \le  t \le T
+			.\] 
+			Note that $h^m $ is adapted, and bounded continuous by definition. Then Lebesgue differentiation theorem implies $h^m(t, \omega) \to g(t, \omega)$  for a.e. $t$. DCT implies
+			\[
+				E\left( \int _0^T \left| h^m(t, \omega) - g(t, \omega) \right|^2 dt  \right)  \to 0
+			.\] 
+		\item Let $h \in \mathbb{H}$  be bounded continuous. Let $t_k = \frac{k T}{2^n}$ and
+			\[
+				e^m(t, \omega) = 
+				\sum_{k=0}^{2^m - 1} h(t_k, \omega) 1_{[t_k, t_{k+1})} (t)
+			.\] 
+			Note $e^m \in \mathcal{E}$. We have  $e^m(t, \omega) \to h(t, \omega)$ as $m \to  \infty $. DCT gives convergence in $\mathbb{H}$-norm.
+
+	\end{enumerate}
+\end{proof}
+
+\textbf{}
+Now, let $u \in \mathbb{H}$, take a sequence of elementary functions $e^m$  such that as $m \to \infty $,
+\[
+	E\left( \int _0^T \left| u_t(\omega) - e^m(t, \omega) \right| ^2 dt  \right) \to 0
+.\] 
+We have
+\[
+	\|e^m - e^n\|_{\mathbb{H}} \le  \|e^m - u\|_{\mathbb{H}} + \|e^n - u\|_{\mathbb{H}}
+.\] 
+So $\{e^m\}$ is Cauchy sequence in $\mathbb{H}$. By Itô isometry for elementary functions
+\[
+	\left( E\left( \int _0^T \left| e^n_t - e^m_t \right| ^2 dt  \right)  \right) ^{\frac{1}{2}} 
+	= \left( E\left( \int _0^T \left( e_t^n - e_t^m \right) d B_t  \right) ^2 \right) ^{\frac{1}{2}}
+.\] 
+So $\left\{ \int _0^T e^n_t dB_t \right\} $ is also a Cauchy sequence in $L^2(P)$. We define its limit to be $\int _0^T u_t dB_t$.
+
+\begin{definition}[Itô Integral]
+	\[
+		\mathcal{I}(u)_t = \int _0^T u(t, \omega) d B_t
+		=_{L^2} \lim_{n \to \infty} \int _0^T e^m(t, \omega) d B_t
+	.\] 
+	whenever $e^m \to  u$ in $L^2(P)$.
+		This definition is independent of approximation $e^m$ in $L^2(P)$, as shown above.
+\end{definition}
+\begin{corollary}[Itô Isometry]
+	For all $u \in \mathbb{H}$,
+	\[
+		E\left( \int _0^T u_t(\omega) d B_t(\omega) \right) ^2
+	= E\left( \int _0^T |u_t|^2 d t \right) 
+	.\] 
+\end{corollary}
+
+\begin{corollary}
+	If $u \in \mathbb{H}$, $u^n \to  u \in \mathbb{H}$, i.e.
+	\[
+		E \left( \int _0^T \left| u^n(t, \omega) - u(t, \omega) \right| ^2 d t \right)  \to  0
+	.\] 
+	Then we have the following convergence in $L^2(P)$:
+	 \[
+		\int _0^T u^n(t, \omega) dB_t \to \int _0^T u(t, \omega) d B_t
+	.\] 
+\end{corollary}
+
+\begin{remark}
+	See Øskendal Definition 3.3.2 for extension to a wider class than $\mathbb{H}$.
+\end{remark}
+
+\begin{remark}
+	One defines $\int _0^\infty  u_t(\omega) d B_t (\omega)$ in the usual way, then
+	\[
+		\int _0^t u_s(\omega) dB_s(\omega)
+		= \int _0^\infty 1_{[0, t]}(s) u_s d B_s
+	.\] 
+\end{remark}
+
+Define $\int _a^b u_t dB_t$ in the usual way. Then the following hold:
+\begin{proposition}
+	\begin{enumerate}
+		\item $\int _a^b = \int _a^c + \int _c^b$
+		\item Linearity of integrand
+		\item 
+		\item 
+		\item \[
+			E\left( \int _0^T u_t dB_t \right) \left( \int _0^T V_t dB_t \right) 
+			= E\left( \int _0^T u_t v_t dt \right) 
+		.\] 
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	To prove (v), apply Ito isometry, use identity  $2 ab = (a + b)^2 - a^2 - b^2$.
+\end{proof}
+

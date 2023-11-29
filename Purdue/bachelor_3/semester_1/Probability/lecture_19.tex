@@ -1,0 +1,111 @@
+\lecture{19}{Mon 20 Nov 2023 10:33}{}
+
+\begin{lemma}
+	($L^2$ convergence preserves martingales) If $\{M_t^n\} $ is a sequence of martingales, and if $M_t^n \to M_t$ in $L^2(P)$, then $M_t$ is a martingale.
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		\|M_s - E\left( M_t | \mathcal{F}_s \right) \|
+		&\leq \|M_s - M_s^n\| + \|M_s^n - E\left( M_t | \mathcal{F}_s \right) \| \\
+		&= \|M_s - M_s^n\| + \|E\left( M_t^n | \mathcal{F}_s \right)  - E\left( M_t | \mathcal{F}_s \right) \| \\
+		&= \|M_s - M_s^n\| + \|E\left( M_t^n - M_t | \mathcal{F}_s \right) \| \\
+		&= 2\|M_s - M_s^n\| \to 0
+	.\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let $u \in \mathbb{H}$, $I_t(u) = \int _0^t u_r d B_r$. Then the following hold:
+	\begin{enumerate}
+		\item $\{I_t(u)\} $ is a martingale.
+		\item $\{I_t(u)\} $ has a continuous modification, i.e. $J_t$ continuous and $P(J_t = I_t, t \in [0,T]) = 1$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Let $e^m \in \mathcal{E}$ such that $e^m \to  u$. We claim
+	\begin{enumerate}
+		\item $I_t(e^m)$ is continuous. (HW)
+		\item $I_t(e^m)$ is a martingale.
+	\end{enumerate}
+	To prove (ii), let $s < t$. Then
+	\begin{align*}
+		E(I_t(e^m) | \mathcal{F}_s)
+		&= E\left(\int _0^s e^m_r d B_r  | \mathcal{F}_s\right) + E\left(\int _s^t e_r d B_r | \mathcal{F}_s\right)  \\
+		&= \int _0^s e^m_r d B_r + E\left(\sum_{s \le t_k^m \le  t_{k+1}^m \le t} e_r \left( B_{t_{k+1}^m - B_{t_k^m}} \right)  | \mathcal{F}_s\right)  \\
+		&= \int _0^s e^m_r d B_r + \sum_{s \le t_k^m \le  t_{k+1}^m \le t} E \left(e_k \left( B_{t_{k+1}^m - B_{t_k^m}} \right)  | \mathcal{F}_s\right)  \\
+		&= \int _0^s e^m_r d B_r + \sum_{s \le t_k^m \le  t_{k+1}^m \le t} E \left(E \left(e_k \left( B_{t_{k+1}^m - B_{t_k^m}} \right)  | \mathcal{F}_s\right) | \mathcal{F}_k \right)  \\
+		&= \int _0^s e^m_r d B_r + \sum_{s \le t_k^m \le  t_{k+1}^m \le t} E \left(e_k E \left(  B_{t_{k+1}^m - B_{t_k^m}}   | \mathcal{F}_k\right) | \mathcal{F}_s \right)  \\
+		\intertext{note that $ E \left(  B_{t_{k+1}^m - B_{t_k^m}}   | \mathcal{F}_k\right)  = 0$, so}
+		&= \int _0^s e^m_r d B_r = I_s(e^m)
+	.\end{align*}
+
+	Now recall that sums of martingales are martingales, so
+	\[
+		\{I_s(e^n) - I_t(e^m)\} _{t \in [0,T]} \qquad \text{ is a martingale}
+	.\] 
+	Therefore, by Doob's maximal inequality,
+	\[
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^m) - I_t(e^m) \right| \ge \varepsilon \right) 
+		\le \frac{1}{\varepsilon^2} E \left| I_T(e^n) - I_T(e^m) \right| ^2
+	.\] 
+	(If an operator takes from L2 to L2, then it takes from weak L2 to L2. This is Chebyshev.)
+
+	We have $E \left| I_T(e^n) - I_T(e^m) \right| ^2 \to 0$ as $n , m \to  \infty $. Given $k$, there exists $N_k$ such that $n, m \ge n_k$, $E \left| I_T(e^n) - I_T(e^m) \right| ^2 \le  \frac{1}{2^{3k}}$. Now
+\[
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^{n_k + 1}) - I_t(e^{n_k}) \right| \ge \frac{1}{2^k} \right) 
+		\le \frac{2^{2k}}{2^{3k}} \to  0 
+	.\]
+	Borel-Cantelli says 
+	\[
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^{n_k + 1}) - I_t(e^{n_k}) \right| \le \frac{1}{2^k} \text{ eventually}\right)  = 1
+	.\] 
+	In this event, convergence is uniform, so the limit is continuous.
+\end{proof}
+
+\subsubsection{Some extensions of Itô integral}
+
+First, some simple extensions:
+\begin{enumerate}
+	\item Since $L^2 $ convergence implies convergence in probability, we have
+		\[
+			I_t(e^n) \to  \int _0^t u_r d B_r \quad \text{i.p.}
+		.\] 
+		If we consider $u_r$ such that $\int _0^t u_r^2 dr < \infty $ a.s. for all $t$, then one can define $\int _0^t u_r d B_r$ as convergence in probability for elementary functions.
+	\item Extension to several dimensions. Let $B_t = \left( B_t^1, \ldots, B_t^d \right) $ be BM in $\mathbb{R}^d$. Let $H_r = \left( H_r^1, \ldots, H_r^d \right) $ be progressively measurable, with $E\left( \int _0^t \left| H_r \right| ^2 dr  \right) < \infty $. Then we can define
+		\[
+			I_t(H) = \int _0^t H_s \cdot d B_s
+		.\] 
+	\item Further, we can let $A_r = \left[ H_r^{ij } \right] $ be an $m \times d$ matrix, with progressively measurable entries, and $E \int _0^t \left| A_s \right| ^2 ds < \infty $. Then define
+		\[
+			I_t(A) = \int _0^t A_s d B_s
+		.\] 
+\end{enumerate}
+
+Now we want to make sense of
+\[
+	\int _0^t f(M_t) d M_t
+\] 
+and
+\[
+	\int _0^t \left| f(M_t) \right|^2 d \left\langle M \right\rangle _t 
+.\] 
+
+Now we consider square integrable, continuous martingales.
+
+\begin{theorem}
+	Let $\{M_t\} _{t \ge 0}$ be an $L^2$-martingale with continuous paths, and suppose $M_0 = 0$. Then there exists a unique stochastic process $\{\left\langle M \right\rangle _t\} _{t \ge 0}$ such that
+	\begin{enumerate}
+		\item  $t \mapsto \left\langle M \right\rangle _t$ is continuous,
+		\item $\left\langle M \right\rangle _t$ is increasing,
+		\item $\left\langle M \right\rangle _0 = 0$,
+		\item $M_t^2 - \left\langle M \right\rangle _t$ is martingale.
+	\end{enumerate}
+\end{theorem}
+
+Quadratic variation comes in two places: 1) Doob decomposition, 2) Direct construction.
+
+Note: There is also square bracket $[M_t]$ for process that has jumps.
+
+Note: 
+
+
+

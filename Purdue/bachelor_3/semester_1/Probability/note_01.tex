@@ -1,0 +1,82 @@
+\note{1}{Wed 11 Oct 2023 10:38}{Concentration Inequalities}
+
+The measure the deviation of a r.v. from its mean. We want to find exponential decay of the probability of deviations, or superexponential.
+
+	Let $\{f_n\} $ be a martingale. Let $S(f)_n = \sqrt{\sum_{k=1}^{n} |f_n - f_{n-1}|^2} $ be the \textit{square function} of the martingale. 
+
+\begin{proposition}[Azuma's Inequality]
+	Let $\{f_n\} $ be a martingale with the property that $\|S^2(f)_n\|_\infty <\infty $. Then
+	\[
+		P(|f - E f| \ge \lambda) \le 
+		2 \exp\left( - \frac{\lambda^2}{2 \|S^2(f)\|_\infty } \right) 
+	.\] 
+	where $f$ is a.s. limit of $f_n$.
+\end{proposition}
+
+\begin{example}
+	Let $\Omega = [0,1]$, equipped with the dyadic filtration. 
+	$f \in L^1[0,1]$, $E(f | \mathcal{F}_n)(x) = \frac{1}{|I_{k,n}|} \int _{I_{k,n}} f(y) dy$. 
+	If $S(f) \in L^\infty $, then the Azuma inequality applies.
+
+	Strong connection to harmonic functions and data compression. 
+\end{example}
+
+\begin{example}
+	(Data Compression). We have $m$ data points on  $\mathbb{R}^n$. Question: How to compress the data and keep information of interest?
+
+	\begin{theorem}[Johnson-Linderstrauss Theorem]
+		(1984). There exists a universal constant $D < \infty $, independent of $n$, such that the following holds: For given points $X_1, \ldots, X_m \in \mathbb{R}^n$, and $\varepsilon>0$, and  $K \ge \frac{D \ln(n)}{\varepsilon^2}$, and a $k$-dimensional projection $F: \mathbb{R}^n \to \mathbb{R}^k$, that does not distort their distance by more than $(1 + \varepsilon)$, i.e. $\frac{1}{1 + \varepsilon}|X_i - X_j| \le |F(X_i) - F(X_j)| \le (1 + \varepsilon) |X_i - X_j|$.
+	\end{theorem}
+	One beautiful proof of this theorem comes from Azuma's inequality.
+\end{example}
+
+Before giving the nonlinear concentration theorem,
+
+\begin{corollary}
+	Among all distributions on $[0,1]$ with mean $0 < p < 1$, the Bernoulli distribution maximizes $E(\varphi(X))$ for any convex function $\varphi$.
+\end{corollary}
+\begin{proof}
+	$E(\varphi(X)) \le p \varphi(1) + (1 - p) \varphi(0)$. Let $x \in [0,1]$, $x = (1 - x) \cdot 0 + x \cdot 1$, so $\lambda = x$, In $\varphi\left( (1 - \lambda) a + \lambda b \right)  \le  (1 - \lambda) \varphi(a) + \lambda(b)$.
+\end{proof}
+
+\begin{corollary}
+	Let $\varphi: [-a,b] \to \mathbb{R}$ be convex, $a,b > 0$. Let $X$ be a r.v. with values in $[-a, b], -a \le X(\omega) \le b$ and $E X = 0$. 
+
+	Then $E(\varphi(X)) \le  \frac{b}{b+a}\varphi(-a) + \frac{1}{b + a}\varphi(b)$.
+
+	That is, among all such distributions, the expectation of $\varphi(X)$ is maximized by the two-point distribution on $-a $ and $b$, with mean $0$.
+\end{corollary}
+\begin{proof}
+	Set $x = (1 - \lambda) (-a) + \lambda b$. Then $\lambda = \frac{x + a}{b + a}$. Then $1 - \lambda = \frac{a - x}{b + a}$.
+\end{proof}
+
+Need two theorem:
+\begin{itemize}
+	\item Nonlinear concentration
+	\item Concentration for uniform measure on the sphere
+\end{itemize}
+
+\begin{theorem}[McDiarimid's Inequality]
+	Let $X_1 \ldots X_n$ be independent r.v.s, with $X_k: \Omega \to \mathcal{B}_k \subset \mathcal{B}(\mathbb{R})$. Suppose $f: \mathcal{B}_1 \times \ldots \times \mathcal{B}_n \to  \mathbb{R}$ is $k$-Lipchitz. That is, if $x, y$ are such that they only differ in the $k$-th coordinate, then $|f(x) - f(y)| \le  \alpha_k$. Let $Y = f(X_1, \ldots, X_n)$, then
+	\[
+		P(|Y - EY| \ge \lambda)
+		\le  2 \exp\left( - \frac{\lambda^2}{2 \sum_{k=1}^{n} \alpha^2_n} \right) 
+		\qquad \forall \lambda>0
+	.\] 
+\end{theorem}
+\begin{proof}
+	(Need a martingale). $Y_n = E(Y | \mathcal{F}_n) = E(Y | \sigma(X_1, \ldots, X_n))$. We claim this is a martingale. Let $Y' = f(X')$ where $X' = \left( X_1, \ldots, X_{k-1 }, X_k', X_{k+1}, \ldots, X_n \right) $, where $X_k'$ is an independent copy of $X_k$. Therefore
+	\[
+		|Y - Y'| = |f(X) - f(X')| \le \alpha_k
+	.\] 
+	But $F(Y'| \mathcal{F}_k) = E(Y | \mathcal{F}_{k - 1}) = Y_{k - 1}$. $E|Y_k - Y_{k-1}| = |E(Y | \mathcal{F}_n) - E(Y' | \mathcal{F}_n)| \le  E\left( |Y - Y'| \middle| \mathcal{F}_n \right) \le  \alpha_n$.
+\end{proof}
+
+\begin{remark}
+	There are also Hoeffding's inequality and others. 
+\end{remark}
+
+
+
+
+

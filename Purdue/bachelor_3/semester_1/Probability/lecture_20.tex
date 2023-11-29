@@ -1,0 +1,95 @@
+\lecture{20}{Mon 27 Nov 2023 10:39}{}
+
+\begin{claim}
+	If $M_t = \int _0^t u_s d B_s$, then $\left\langle M \right\rangle _t = \int _0^t u_s^2 d s$.
+\end{claim}
+\begin{proof}
+	We need to show
+	\[
+		E\left( M_t^2 - \left\langle M \right\rangle _t | \mathcal{F}_s \right)  = M_s^2 - \left\langle M \right\rangle _s
+	.\] 
+	Have
+	\begin{align*}
+		E\left( M_t^2 | \mathcal{F}_s \right) 
+		&= E\left(\left( \int _0^s u_s d B_s + \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right) \\
+		&= E\left( \left(\int _0^s u_s d B_s \right)^2 + 2\left( \int _0^s u_s d B_s \right) \left( \int _s^t u_s d B_s \right)  + \left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
+		\intertext{using independence from $\mathcal{F}_s$,}
+		&= \left(\int _0^s u_s d B_s \right)^2 + 2 \left( \int _0^s u_s d B_s \right) E\left( \int _s^t u_s d B_s | \mathcal{F}_s\right)  + E\left(\left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_s d B_s \right)^2 + 2 \left( \int _0^s u_s d B_s \right) E\left( \int _s^t u_s d B_s \right)  + E\left(\left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_s d B_s \right)^2 + E\left(\left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_s d B_s \right)^2 + E\left( \int _s^t u_r^2 d r\right)  \\
+		&= \left( \int _0^s u_r d B_r \right) ^2 + E\left( \int _0^t u_r^2 d  r | \mathcal{F}_s \right)  - E\left( \int _0^s u_r^2 d r \right) 
+	.\end{align*}
+
+\end{proof}
+
+\begin{corollary}
+	Suppose $M_t$ and $N_t$ are two continuous $L^2$-martingales, $M_0 = 0 = N_0$. There exists a unique process $\left\langle M, N \right\rangle _t$ such that
+	\begin{enumerate}
+		\item $M_t N_t - \left\langle M, N \right\rangle _t$ is martingale,
+		\item $\left\langle M, N \right\rangle _t$ is increasing,
+		\item $\left\langle M, N \right\rangle _0 = 0$,
+		\item $t \mapsto \left\langle M, N \right\rangle _t$ is continuous a.s.
+	\end{enumerate}
+	We call $\left\langle M, N \right\rangle _t$ the \textit{covariation process.}
+\end{corollary}
+\begin{proof}
+	\[
+		M_t N_t = \frac{1}{4} \left( (M + N)^2_t - (M - N)^2 _t \right) 
+	.\] 
+	Apply two previous theorem to both sides.
+\end{proof}
+
+\textbf{Fact.} $\left\langle B_t, \tilde B_t \right\rangle = 0$, if $B, \tilde B$ are two independent BMs. As a consequence,
+
+\begin{corollary}
+	If $B_t$ is BM in $\mathbb{R}^d$, then 
+	\[
+		\left\langle B_t^i B_t^j \right\rangle = \delta_{i j} t
+	.\] 
+\end{corollary}
+
+To prove this, we verify
+\begin{claim}
+	\[
+		X_t = \frac{1}{\sqrt{2} } \left( B_t + \tilde B_t \right)  \qquad \text{ is a BM}
+	.\] 
+	And so is $Y_t = \frac{1}{\sqrt{2} } (B_t- \tilde B_t)$.
+\end{claim}
+\begin{proof}
+	
+
+This follows from direct observation that $B_t, \tilde B_t \sim N\left( 0,t \right) $ and they are independent. So $X_t \sim N(0,t)$. Also $X_t - X_s \sim N(0,t -s )$.
+
+We will verify that
+\[
+	B_t \tilde B_t = \int_0^t B_s d \tilde B_s + \int_0^t \tilde B_s d B_s
+.\] 
+\logseq{ASK}
+\end{proof}
+Recall that $2 \int _0^t B_s d B_s = B_t^2 - t$. This is a special case of Ito formula.
+
+Examine a more general question: What is 
+\[
+	\int _0^t M_s d M_s \text{ ?}
+\] 
+\begin{proof}
+	Let $R_t$ be Riemann sum wrt a partition $t_k$. Then
+\[
+	2 R_t = 2 \sum_{k = 0}^{n - 1} M_{t_k} \left( M_{t_k+1} - M_{t_k} \right) 
+.\] 
+Apply the identity to the right hand side:
+\[
+	2 M_s (M_t - M_s) = M_t^2 - (M_t - M_s)^2
+.\] 
+We have
+\[
+	2 R_t = M_t^2 - \sum_{k = 0}^{n - 1} \left( M_{t_{k+1}} - M_{t_k} \right)^2  
+	\to  M_t^2 - \left\langle M \right\rangle _t
+.\] 
+So
+\[
+	2 \int _0^t M_s d M_s = M_t^2 - \left\langle M \right\rangle _t
+.\] 
+\end{proof}
+

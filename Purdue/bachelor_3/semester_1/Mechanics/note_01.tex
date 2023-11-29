@@ -16,17 +16,22 @@ In this note we present the computational rules in $\mathbb{G}^3$, the three-dim
 	\end{itemize}
 	The inner product $\cdot$ and outer product $\wedge$ follow the following rules:
 	\begin{enumerate}
-		\item Linear.
+		\item Bilinear.
 		\item $\cdot$ is commutative;  $\wedge$ is anti-commutative.
 		\item We have $e_i \cdot e_j = \delta_{ij}$ and $e_i \wedge e_i = 0$.
 	\end{enumerate}
 	The geometric product is defined by $v_1 v_2 = v_1 \cdot v_2 + v_1 \wedge v_2
 	.$ 
-
-	For orthogonal vectors we have $v_1 v_2 = -v_2 v_1$; for parallel vectors we have $v_1 v_2 = v_2 v_1$. The dot and wedge products can be regarded as the \textit{symmetric} and \textit{antisymmetric} parts of the geometric product, respectively.
-
-	In particular, $e_1 e_2 = e_1 \wedge e_2$, $e_1 e_1 = 1$.
 \end{definition}
+	In particular, $e_1 e_2 = e_1 \wedge e_2$, $e_1 e_1 = 1$.
+
+	The pseudoscalar satisfies $I^2 = -1$ in three dimensions. 
+\begin{remark}
+	For orthogonal vectors we have $v_1 v_2 = -v_2 v_1$; for parallel vectors we have $v_1 v_2 = v_2 v_1$. The dot and wedge products can be regarded as the \textit{symmetric} and \textit{antisymmetric} parts of the geometric product, respectively.
+\end{remark}
+
+The \textit{geometric dual} is defined as $A^* := -IA$. 
+
 
 \subsection{Canonical Basis}
 
@@ -103,4 +108,364 @@ Take $y z x y$ for another example. Now we see two $y$ 's but they are not align
 
 Note that this is just an effective heuristic to memorize the formula. If you really want some explanation, then adding the signs correspond to the fact that $\wedge$ is antisymmetric.
 \end{remark}
+
+\begin{remark}
+	(Compare with cross product formulation) In the traditional approach, bivector are replaced by axial vectors. We have the following correspondence:
+\begin{align*}
+	&\text{Bivector} &\to  &\text{Axial Vector}\\
+	&\hat{x} \hat{y}  &\to  &\hat{z} \\
+	&\hat{x} \hat{z}  &\to &-\hat{y} \\
+	&\hat{y}  \hat{z}  &\to  &\hat{x} 
+.\end{align*}
+	
+\end{remark}
+
+\subsubsection{Principal Axis}
+
+The matrix $\mathcal{I}$ is real symmetric positive-definite, so always admits a diagonalization in an orthornormal eigenbasis. Let our eigenbasis be $\{\mathsf{f}_k\}$, we have
+\[
+	\mathcal{I}(\Omega) = \sum_k i_k \omega_k I \mathsf{f}_k
+.\] 
+where $\Omega = \sum_k \omega_k I \mathsf{f}_k$.
+
+
+
+\subsection{Angular Momentum and Rotational Kinetic Energy}
+
+The \logseq{Angular Momentum} when rotating with angular velocity bivector $\Omega_B$ is given by $L(\Omega_B) = \mathcal{I}(\Omega_B)$.
+
+The \logseq{Rotational Kinetic Energy} when rotating with angular velocity bivector $\Omega_B$, is obtained by $T = \Omega_B^\dagger \mathcal{I}(\Omega_B)$.
+To justify, note that $T = \Omega_B : L(\Omega_B)$ (inner product in the canonical bivector basis). When written as an inner product, due to antisymmetry of $\wedge$ , this becomes $T = - \Omega_B \cdot L(\Omega_B)$. Using antisymmetry again, we may reverse the first bivector to get a positive-definite product: $T = \Omega_B^\dag \cdot L(\Omega_B)$. Then the dot product can be replaced by geometric product since the outer component will vanish.
+
+\begin{remark}
+More mathematically speaking, $T$ is the \textbf{quadratic form} defined on $\mathcal{I}$. Linear algebra tells us that, among all unit bivectors $\Omega_B$, the minimizer of $T$ corresponds to the eigen-bivector of $\mathcal{I}$ with respect to the smallest eigenvalue. From this we see that the eigenbivector with smallest eigenvalue of $\mathcal{I}$ tells us the direction of minimal rotational inertia.
+\end{remark}
+
+\subsubsection{Rotational Invariance of $\mathcal{I}$}
+
+Now we supplement some motivation for the definition of $\mathcal{I}$. We assume some background in the next section about rotating frames. Let $x$ be position in a uniformly rotating frame and $y = R x R^\dag + x_0$ is corresponding position in fixed frame.
+
+Assume the rotating frame is always located at the center of mass of the rotating body, and the rotation is about the center of mass. Then we have
+
+\[
+	\int d^3 x \rho = M \qquad \int d^3 x \rho x = 0 \qquad \dot x = x \cdot \Omega_B
+.\] 
+
+Let $v = \dot y$. The momentum is 
+\begin{align*}
+	P &= \int d^3 x \rho  v \\
+	&= \int d^3 x \rho \left( R x \cdot \Omega_B R^\dag + v_0 \right)  \\
+	&= M v_0
+.\end{align*}
+
+The angular momentum is
+\begin{align*}
+	L &= \int d^3 x \rho(y - x_0) \wedge v \\
+	&= \int d^3 x \rho \left( R x R^\dag) \wedge \left( R x \cdot \Omega_B R^\dag + v_0 \right)  \right)  \\
+	&= R \left( \int d^3 x \rho x \wedge x \cdot \Omega_B \right)R^\dag
+.\end{align*}
+
+The equation inside brackets is defined to be $\mathcal{I}(\Omega_B)$, since it provides a \textbf{rotation invariant} of the body.
+
+\subsection{Rotating Frames}
+
+\subsubsection{Rotor}
+
+\subsubsection{Rotor Equation}
+
+Let $\mathsf{e}_k$ be a fixed frame and $\mathsf{f}_k$ be a rotated frame, related to $\mathsf{e}_k$ by 
+\begin{equation}
+	\label{0}
+	\mathsf{f}_k = R(t) \mathsf{e}_k R(t)^\dag.
+\end{equation}
+Now the angular velocity bivector is defined as
+\[
+	\dot{\mathsf{f}}_k = \mathsf{f}_k \cdot \Omega
+.\] 
+To see how $\Omega$ relates to $R$, we differentiate \eqref{0}:
+\begin{align*}
+	\dot{\mathsf{f}}_k &= \dot{R}(t) \mathsf{e}_k R(t)^\dag + R(t) \mathsf{e}_k \dot{R}(t)^\dag\\
+	&= \dot{R}(t) R^{\dag} (t) \mathsf{f}_k + \mathsf{f}_k R(t) \dot{R}^{\dag} (t)
+.\end{align*} 
+Differentiate the equation $R R^{\dag}  = 1$, we have $R \dot{R}^\dag = - \dot{R} R^{\dag} $. Thus
+\[
+	\dot{\mathsf{f}}_k = \dot{R}(t) R^{\dag} (t) \mathsf{f}_k - \mathsf{f}_k \dot{R}(t) R^{\dag} (t)
+	= - 2 \mathsf{f}_k \cdot \dot{R}(t) R^{\dag} (t) 
+.\] 
+Comparing with definition of $\Omega$, we have
+\[
+	\Omega = - 2\dot{R} R^{\dag} 
+.\] 
+That is
+\begin{equation}
+	\label{4}
+	\dot R = - \frac{1}{2} \Omega R \qquad \dot R^\dag = \frac{1}{2} R^\dag \Omega
+.\end{equation} 
+
+\subsubsection{The Commutor Product}
+
+\begin{definition}[Commutor Product]
+	For any two multivectors $A, B$, define
+	\[
+		A \times B = \frac{1}{2}(AB - BA)
+	.\] 
+\end{definition}
+
+\begin{proposition}[Properties of Commutor Product]
+	\begin{enumerate}
+
+
+		\item $\times $ is bilinear and anti-commutative. 
+		\item $\times $ is alternating: $A \times A = 0$.
+		\item In $\mathbb{G}_3$, commutor product is a closed operation for bivectors. Moreover, the bivectors form a \textbf{Lie algebra} under the commutor product, which means it also satisfies the \textit{Jacobi Identity} 
+\[
+	A \times (B \times C) + B \times (C \times A) + C \times (A \times B) = 0
+.\] 
+		\item $\times $ satisfies Leibniz rule: for any multivectors $A$ and $B$, 
+			\[
+				\frac{d}{dt} (A \times B)
+				= \dot A \times B + A \times \dot B
+			.\] 
+		\item For $a$ a vector and $B$ a bivector, we have $a \times B = a \cdot B$.
+	\end{enumerate}
+	
+\end{proposition}
+
+
+Also, there is a correspondence between the traditional cross product. 
+
+\begin{proposition}
+	The groups $\left(\left\langle \mathbb{G}_3 \right\rangle _2, \times \right)$ and $\left( \left\langle \mathbb{G}_3 \right\rangle _1, \times  \right) $ are isomorphic, and the isomorphism $\left\langle \mathbb{G}_3 \right\rangle _1 \to \left\langle \mathbb{G}_3 \right\rangle _2$ is given by the dual $*: a \mapsto -Ia$.
+\end{proposition}
+\begin{proof}
+	Let $a,b$ be vectors, then 
+	\begin{align*}
+		a^* \times b^*
+		&= \frac{1}{2}\left( (-Ia)(-Ib) - (-Ib) (-Ia) \right)  \\
+		&= - \frac{1}{2} (ab - ba) \\
+		&= - a \wedge b \\
+		&= (a \times b)^*
+	.\end{align*}
+
+	Note, that in $\mathbb{G}_3$, $*$ is anti-involution: $a^{* *} = - a$. Thus on the other side we have for bivectors $A, B$,
+	\[
+		A^* \times B^* = (B \times A)^*
+	.\] 
+\end{proof}
+
+
+\subsubsection{Differentiation under rotor}
+\begin{align*}
+	\frac{d}{dt }(RXR^\dag)
+	&= R\dot X R^\dag + \dot R XR^\dag + RX \dot R^\dag \\
+	&= R\dot X R^\dag - \frac{1}{2} \Omega R X R^\dag + \frac{1}{2} R X R^\dag \Omega \\
+	&= R\dot X R^\dag + RXR^\dag \times \Omega
+.\end{align*}
+
+
+
+\subsection{Equation of Motion}
+
+Let $x$ be position in body frame $\mathsf{e}$ and $y$ be corresponding position in fixed frame $\mathsf{f}$. We can write $\mathsf{f} = R \mathsf{e} R^{\dag} $.
+
+\subsubsection{Inertial Frame}
+
+The equation of motion relates change in total angular momentum and net torque:
+\[
+	\frac{d}{dt } L = N
+.\] 
+where $L = R \mathcal{I}(\Omega_B) R^{\dag} $ and $N = \sum_i r_i \wedge F_i$.
+
+\subsubsection{Rotating Frame}
+
+To evaluate $\dot{L}$, we differentiate any rotated variable:
+\begin{align}
+	\label{9}
+	\dot{L} = \frac{d}{dt }(R\mathcal{I}(\Omega_B)R^\dag)
+	&= R \mathcal{I}(\Omega_B) R^{\dag} + L \times \Omega
+.\end{align}
+
+\begin{remark}
+	This is the dual version of the traditional vector-valued equation
+	\[
+		\frac{d\vec{L} }{dt}|_{\text{fixed}}
+		= \frac{d\vec{L} }{dt}|_{rotating} + \vec{\Omega} \times \vec{L} 
+	.\] 
+\end{remark}
+
+\subsubsection{Frame Forces}
+
+But now we place ourselves in the frame $\mathsf{f}$ and work as if it is fixed. Hence we write $x = R y R^\dag$, where $\mathsf{e}_i = R \mathsf{f}_i R^{\dag} $. Now we want some equation of motion in the frame $\mathsf{f}$. To obtain this, we write  $y = R^\dag x R$ and differentiate twice:
+\begin{align*}
+	\dot y &= R^{\dag} \left( \dot{x} + \Omega \times x \right) R \\
+	\ddot{y} &= R^{\dag} \left( \frac{d }{d t} \left( \dot{x} + \Omega \times x \right) + \Omega \times \left( \dot{x} + \Omega \times x \right)  \right) R \\
+	&= R^{\dag} \left( \ddot{x} + 2 \Omega \cdot \dot{x} + \dot{\Omega} \cdot x + \Omega \cdot \left( \Omega \cdot x \right)  \right) R
+.\end{align*}
+Hence we have the kinematic equation
+\[
+	R \ddot{y} R^{\dag} = \ddot{x} + 2 \Omega \cdot \dot{x} + \dot{\Omega} \cdot x + \Omega \cdot \left( \Omega\cdot x \right) 
+.\] 
+or
+\[
+	\ddot{x} = R \ddot{y} R^{\dag} - 2 \Omega \cdot \dot{x} - \dot{\Omega} \cdot x - \Omega \cdot (\Omega \cdot x)
+.\] 
+
+If we multiply the mass $M$ on both sides, we obtain a dynamic equation. We interpret the terms as forces:
+\begin{itemize}
+	\item $F_{ext} = M R \ddot{y} R^{\dag}  $ is the total external force on the body.
+	\item $F_{cor } = -2 M \Omega \cdot \dot{x}$ is the \logseq{Coriolis Force}. 
+	\item $F_{eul} = - M\dot{\Omega} \cdot x$ is the \logseq{Euler Force}.
+	\item $F_{cf} = - M \Omega \cdot  \left( \Omega \cdot  x \right) $ is the \logseq{Centrifugal Force}.
+\end{itemize}
+Now we have the dynamic equation in the $\mathsf{e}$ frame:
+\[
+	M \ddot{x} = F_{ext } + F_{cor } + F_{eul } + F_{cf}
+.\] 
+Note that the three forces $F_{cor }, F_{eul }$ and $F_{cf }$ are all ``fictitious'' in that they exist only to compensate for the fact that we are treating the non-inertial frame $\mathsf{e}$ like an inertial one.
+
+
+\subsubsection{Euler Equation}
+
+The Euler equation is just \eqref{9} written in components, where the body frame $\mathsf{e}$ must be taken to be principal.
+\begin{align*}
+	\dot{L} = 
+\frac{d}{dt }(R\mathcal{I}(\Omega_B)R^\dag)
+	&= R\left( \mathcal{I}(\dot \Omega_B) + \mathcal{I}(\Omega_B) \times \Omega_B \right) R^\dag\\
+	&= R\left( \sum_{k} i_k \dot \omega_k I\mathsf{e}_k
+	+ \sum_{j, k} i_j \omega_j \omega_k I\mathsf{e}_j \times I e_k \right) R^\dag \\
+	&= \sum_k i_k \dot \omega_k I \mathsf{f}_k -
+	\sum_{j, k, l} \epsilon_{jkl} i_j \omega_j \omega_k I \mathsf{f}_l
+.\end{align*}
+
+Where $\varepsilon_{jkl}$ is the sign of the permutation $(jkl)$. 
+
+Also write the total torque in the components
+\[
+	N = \sum_k N_k I\mathsf{f}_k
+.\] 
+Collecting each components, we see that for $\varepsilon_{jkl} = 1$, we have
+\[
+	i_j \dot\omega_j - (i_k - i_l) \omega_k \omega_l = N_j
+.\] 
+
+Those are the \textbf{Euler equations} for rotational motion of rigid bodies.
+
+\subsection{Computational Examples}
+
+\subsubsection{Foucault's Pendulum}
+
+Let $\mathsf{f}$ be the fixed frame where earth is rotating in the $I\mathsf{f}_3$ direction. Let $\mathsf{e}$ be the frame for the pendulum, $\mathsf{e}_3$ pointing orthogonal to the ground at latitude $\lambda$, and lined up such that $\mathsf{e}_1 \mathsf{e}_3 = \mathsf{f}_1 \mathsf{f}_3$.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{foucault-pendulum}
+    \caption{Foucault Pendulum}
+    \label{fig:foucault-pendulum}
+\end{figure}
+
+Now work in the frame $\mathsf{e}$. It is a rotating frame, so we need to consider the frame forces. Actually only the Coriolis force is significant. The equation of motion is then
+
+\[
+	F_g + F_{\text{cor}} + F_T = m \ddot{r} 
+.\] 
+\[
+	- m g \mathsf{e}_3 - 2 m (\Omega I \mathsf{f}_3 \cdot \dot{r}) - \frac{T}{l} r = m \ddot{r} 
+.\] 
+Then we try to solve for this equation in the $\mathsf{e}$ frame. Use $\mathsf{f}_3 = \sin \lambda \mathsf{e}_3 + \cos \lambda \mathsf{e}_1$.
+
+The result is
+\[
+	\ddot{q}+2 i \omega_z \dot{q}+\omega_0^2 q=0
+.\] 
+where $q = x + i y$ in the $\mathsf{e}$ frame; $\omega_0^2 = \frac{T}{m l }\approx \frac{g}{l}$, $\omega_z$ is precession in the $\mathsf{e}_3$ direction.
+
+There is a simple relation between precession frequency and earth's frequency:
+
+\[
+	T_p=T_E / \sin \lambda
+\]
+
+\subsubsection{Rotating top under gravity}
+Let the rotor $R(t)$ represent the rotating frame of the top, and assume the top is rotating with constant angular velocity in this frame.
+
+We use the relation
+\[
+	N = \frac{d}{dt }L = R\mathcal{I}(\Omega_B) R^\dag + L \times \Omega
+.\] 
+We have $\dot L = 0$, so
+ \[
+	r \wedge F_g = R \mathcal{I}(\Omega_B)R^\dag \times \Omega
+.\] 
+\[
+	-r \mathsf{e}_3 \wedge -mg \mathsf{f}_3 = \left( i_3 \omega_3 I \mathsf{e}_3 + |\Omega| I \mathsf{f}_3 \right) \times |\Omega| I \mathsf{f}_3
+.\] 
+
+
+We know that $\Omega$ is entirely in the $I \mathsf{f}_3$ direction, $F$ is entirely in the $\mathsf{f}_3$ direction, and $\mathsf{e}_1 \mathsf{e}_3 = \mathsf{e}_1 \mathsf{f}_3 \sin \theta = \mathsf{e}_3 \mathsf{f}_3 \sin \theta$ (they are coplanar). 
+Convert all to $\mathsf{e}_1 \mathsf{e}_3$ and
+write in scalar form:
+\[
+	r m g \sin \theta = i_3 \omega_3 \sin \theta | \Omega |
+.\] 
+Thus
+\[
+	\Omega = \frac{m g r}{i_3 \omega_3} I \mathsf{f}_3
+.\] 
+
+\subsubsection{Freely rotating body}
+
+
+Let $\mathsf{e}_1, \mathsf{e}_2, \mathsf{e}_3$ be the body frame and suppose the body has symmetry, so $i_1 = i_2 \neq i_3$. Assume the object is freely rotating, and let $\mathsf{f}_3$ be the direction of $L^*$. We can write
+\begin{align}
+	\mathcal{I}(\Omega_B)
+	\nonumber
+	&= i_1 \omega_1 \mathsf{e}_2\mathsf{e}_3 + i_1\omega_2 \mathsf{e}_3 \mathsf{e}_1 + i_3 \omega_3 \mathsf{e}_1 \mathsf{e}_2 \\
+	\label{1}
+	&= i_1 \Omega_B + (i_3 - i_1) \omega_3 I \mathsf{e}_3
+.\end{align} 
+Hence $i_1 \Omega_B = \mathcal{I}(\Omega_B) - (i_3 - i_1) \omega_3 I \mathsf{e}_3$. Turn this into an expression for $\Omega$ :
+\[
+	\Omega = R \Omega_B R^\dag = \frac{L}{i_1} - \frac{i_3 - i_1}{i_1} \omega_3 R I \mathsf{e}_3 R^\dag
+.\] 
+Plug into the rotor equation \eqref{4} and simplify, we have
+the following kinematic equation:
+\[
+	\dot R = -\frac{1}{2} (\Omega_l R + R \Omega_r)
+.\] 
+where
+\[
+	\Omega_l = \frac{L}{i_1} \qquad \Omega_r = \frac{i_3 - i_1}{i_1}\omega_3 I \mathsf{e}_3
+.\] 
+That is
+\[
+	R(t) = \exp\left( -\frac{1}{2} \Omega_l t \right) R_0 
+	\exp\left( -\frac{1}{2} \Omega_r t \right) 
+.\] 
+
+\begin{intuition}
+	$\Omega_r$ characterizes the rotation in the body's symmetry plane $\mathsf{e}_1 \mathsf{e}_2$. $\Omega_l$ is the rate of precession of the body axis $\mathsf{e}_3$ around $\mathsf{f}_3$. $R_0$ is an initial orientation which can be set to $1$.
+\end{intuition}
+
+From \eqref{1} we have the following relation
+\begin{equation}
+	\label{2}
+	\frac{L}{i} = \Omega + R \Omega_r R^\dag
+.\end{equation} 
+
+To understand the motion, we split into two cases:
+\begin{enumerate}
+	\item $i_3 < i_1$. Then the body is said to be \logseq{prolate}. In this case $\Omega_r$ is spinning along the minor principal bivector, i.e. the one with least moment of inertia. In this case $\Omega_r$ and $\Omega$ have opposite signs in $I \mathsf{e}_3$ component. Thus $\Omega_r = - |\Omega_r| I \mathsf{e}_3$. $\Omega_r$ and $L$ always have different handedness, i.e. the rotation of the body along $\mathsf{e}_3$ axis and the precession around $\mathsf{f}_3$ are to opposite directions. 
+
+		More qualitatively, the three axial vectors $\mathsf{e}_3, \Omega^*$ and $\mathsf{f}_3$ are always coplanar, and $\Omega^*$ always lie in between of $\mathsf{e}_3$ and $\mathsf{f}_3$.
+	
+
+	\item $i_3 > i_1$. Then the body is said to be \logseq{oblate}. In this case $\Omega_r$ is along the major principal bivector. In this case $\Omega_r$ and $L$ always have same handedness, but $\Omega_r$ and $\Omega$ always have different handedness.
+\end{enumerate}
+
+
+
+
+
+
+
 

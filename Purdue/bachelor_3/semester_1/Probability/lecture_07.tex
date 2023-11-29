@@ -1,0 +1,68 @@
+\lecture{7}{Mon 02 Oct 2023 10:54}{}
+
+\begin{theorem}[Wald's 1st identity]
+		Let $\zeta_k$ be i.i.d, $E\zeta = \mu$. Let $N$ be a bounded stopping time, $EN < \infty $, then
+	\[
+		E(S_N) = \mu E(N)
+	.\] 
+\end{theorem}
+
+\begin{theorem}[Wald's 2nd identity]
+	Let $\zeta_k$ be i.i.d, $E\zeta^2 = \sigma^2$. Let $N$ be a bounded stopping time, $EN < \infty $, then
+	\[
+		E(S_N^2) = \sigma^2 E(N)
+	.\] 
+\end{theorem}
+\begin{proof}
+	Let $M_n = S^2_n -n \sigma^2$, this is a martingale. Then
+	$E(M_{n \wedge N}) = 0$, or
+	\[
+		E(S^2_{n \wedge N}) = \sigma^2 E(n \wedge N)
+	.\] 
+	The RHS converges to $\sigma^2 E(N)$ by the MCT. By Fatou's Lemma,
+	\[
+		E(S^2_N) \le \liminf E(S^2_{n \wedge N}) \le \sigma^2 E(N)
+	.\] 
+	Now we need to show $E(S^2_N) = \sigma^2 E(N)$.
+
+	We have $S_{n \wedge N}$ is a $L^2$ bounded martingale, i.e. $\sup _n E(S^2_{n \wedge N}) = \sigma^2 E(N)$. From Doob's inequality, $S_{n \wedge N} \to  S_N$ a.s. and in $L^2$.
+\end{proof}
+
+\begin{theorem}[Wald's 3rd identity]
+	Let $\zeta_k$ be i.i.d, $E(\exp(\theta \zeta_1)) = \exp(\varphi(\theta))$. Let $N$ be a bounded stopping time, then
+	\[
+		E\left( \exp\left( \theta S_N - N \varphi(\theta) \right)  \right) = 1
+	.\] 
+\end{theorem}
+\begin{proof}
+	Let $X_k = \frac{\exp(\theta \zeta_k)}{\exp(\phi(\theta)}\ge 0$ and $EX_k = 1$. Let
+	\[
+		M_n = \prod_{k=1}^{n} X_k = \exp\left( \theta S_n - n \varphi(\theta) \right)  
+	.\] 
+	Then $M_n$ is a martingale and $E(M_n) = 1$.
+\end{proof}
+
+
+\begin{theorem}[Simple Symmetric Random Walk]
+	Let $P(\zeta_k = \pm 1) = \frac{1}{2}$. Let $a < 0 < b$. Then $P\left(S_n \text{ hits $a$ before $b$} \right) = \frac{b}{b-a}$.
+
+	Let $\tau = \inf\{n: S_n \not\in (a,b)\} $. Then the probability above is $P(S_\tau = a)$. We also claim that $E(\tau) = - ab$.
+\end{theorem}
+\begin{proof}
+	Consider $S^2 _n -  n \sigma^2 = S_n^2 - n$. Hence $E(S^2_{N \wedge n}) = E(\tau \wedge n)$. Note that $|S_{n \wedge N}| \le b - a$. By DCT, $E(S^2_\tau) < \infty $. Apply MCT to $E(n \wedge \tau)$, we have $E(S^2_\tau) = E(\tau)$.
+
+	Now $E(S_\tau) = \mu E(\tau) = E(S_0) = 0$
+	We have
+	\[
+		0 = a P(S_\tau = a) + b P(S_\tau = b)
+		\qquad
+		1 = P(S_\tau = a) + P(S_\tau = b)
+	.\] 
+	From these we can solve for the two probabilities.
+
+	Now $E(\tau) = E(S^2_\tau) = a^2 (\frac{b}{b-a}) + b^2 \frac{-a}{b-a} = - ab$.
+\end{proof}
+
+\begin{remark}
+	There exists random walk that is finite a.s. but has infinite expectation. This is related to the fact that Doob's inequality does not hold for $p = 1$.
+\end{remark}

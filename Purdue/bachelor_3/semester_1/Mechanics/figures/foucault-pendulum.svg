@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="240mm" height="120mm" viewBox="0 0 240 120" version="1.1" id="svg8" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="foucault-pendulum.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs id="defs2">
+    <inkscape:path-effect effect="spiro" id="path-effect2038" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect2004" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect450" is_visible="true" lpeversion="1" />
+    <inkscape:path-effect effect="spiro" id="path-effect409" is_visible="true" lpeversion="1" />
+    <marker id="Arrow2" orient="auto-start-reverse" refY="0" refX="0" markerHeight="3" markerWidth="2">
+      <g transform="scale(0.96333333)" id="g419">
+        <path d="M 3,-3 0,0 3,3" style="fill:none;stroke:context-stroke;stroke-linecap:butt" transform="rotate(180,0.125,0)" id="path417" />
+      </g>
+    </marker>
+    <marker id="Arrow2-2" orient="auto-start-reverse" refY="0" refX="0" markerHeight="3" markerWidth="2">
+      <g transform="scale(0.96333333333333)" id="g1026">
+        <path d="M 3,-3 0,0 3,3" style="fill:none;stroke:context-stroke;stroke-linecap:butt" transform="rotate(180,0.125,0)" id="path1024" />
+      </g>
+    </marker>
+    <marker id="Arrow2-1" orient="auto-start-reverse" refY="0" refX="0" markerHeight="3" markerWidth="2">
+      <g transform="scale(0.96333333333333)" id="g2172">
+        <path d="M 3,-3 0,0 3,3" style="fill:none;stroke:context-stroke;stroke-linecap:butt" transform="rotate(180,0.125,0)" id="path2170" />
+      </g>
+    </marker>
+    <marker id="Arrow2-0" orient="auto-start-reverse" refY="0" refX="0" markerHeight="3" markerWidth="2">
+      <g transform="scale(0.96333333)" id="g419-6">
+        <path d="M 3,-3 0,0 3,3" style="fill:none;stroke:context-stroke;stroke-linecap:butt" transform="rotate(180,0.125,0)" id="path417-2" />
+      </g>
+    </marker>
+    <inkscape:path-effect effect="spiro" id="path-effect409-2" is_visible="true" lpeversion="1" />
+    <marker id="marker2230" orient="auto-start-reverse" refY="0" refX="0" markerHeight="3" markerWidth="2">
+      <g transform="scale(0.96333333)" id="g2228">
+        <path d="M 3,-3 0,0 3,3" style="fill:none;stroke:context-stroke;stroke-linecap:butt" transform="rotate(180,0.125,0)" id="path2226" />
+      </g>
+    </marker>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="4.0185722" inkscape:cx="601.08414" inkscape:cy="140.34836" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" showborder="true" width="200mm" showguides="true" inkscape:guide-bbox="true" inkscape:window-width="1800" inkscape:window-height="1126" inkscape:window-x="0" inkscape:window-y="43" inkscape:window-maximized="0" inkscape:showpageshadow="0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid type="xygrid" id="grid815" units="mm" spacingx="10" spacingy="10" empspacing="4" dotted="false" />
+  </sodipodi:namedview>
+  <metadata id="metadata5">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-177)">
+    <circle style="stroke-width:0.52916667;-inkscape-stroke:none;stop-color:#000000;fill:none;stroke:black;marker-end:none;fill-opacity:1;stroke-dasharray:none;marker-start:none;stroke-opacity:1" id="path235" cx="116.48492" cy="237" r="46.952713" />
+    <path style="fill:none;fill-opacity:1;stroke:#008000;stroke-width:0.52916667;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:url(#Arrow2);stop-color:#000000" d="M 116.48491,190.04729 V 179.9557" id="path407" inkscape:path-effect="#path-effect409" inkscape:original-d="m 116.48491,190.04729 c 2.7e-4,-3.3636 2.7e-4,-6.72746 0,-10.09159" />
+    <path style="fill:#008000;fill-opacity:1;stroke:#008000;stroke-width:0.497954;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:url(#Arrow2);stop-color:#000000" d="m 116.48491,190.04729 h 11.59961" id="path448" />
+    <path style="fill:none;fill-opacity:1;stroke:#008000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2-0);stop-color:#000000" d="m 157.28362,213.7616 8.4727,-5.48211" id="path407-5" inkscape:path-effect="#path-effect409-2" inkscape:original-d="m 157.28362,213.7616 c 2.82416,-1.827 5.64839,-3.65437 8.4727,-5.48211" />
+    <path style="fill:#008000;fill-opacity:1;stroke:#008000;stroke-width:0.497954;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2-0);stop-color:#000000" d="m 157.28362,213.7616 6.30132,9.73881" id="path448-2" />
+    <text xml:space="preserve" style="font-size:3.175px;fill:none;fill-opacity:1;stroke:#008000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:url(#Arrow2);stop-color:#000000" x="131.91774" y="188.4386" id="text1109"><tspan sodipodi:role="line" id="tspan1107" style="stroke-width:0.529167" x="131.91774" y="188.4386">$\mathsf{f}_1$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:none;fill-opacity:1;stroke:#008000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:url(#Arrow2);stop-color:#000000" x="120" y="181.6669" id="text1163"><tspan sodipodi:role="line" id="tspan1161" style="stroke-width:0.529167" x="120" y="181.6669">$\mathsf{f}_3$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:none;fill-opacity:1;stroke:#008000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:url(#Arrow2);stop-color:#000000" x="163.43866" y="205.28708" id="text1163-2"><tspan sodipodi:role="line" id="tspan1161-7" style="stroke-width:0.529167" x="163.43866" y="205.28708">$\mathsf{e}_3$</tspan></text>
+    <text xml:space="preserve" style="font-size:3.175px;fill:none;fill-opacity:1;stroke:#008000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:url(#Arrow2);stop-color:#000000" x="165.60347" y="224.71761" id="text1163-2-9"><tspan sodipodi:role="line" id="tspan1161-7-5" style="stroke-width:0.529167" x="165.60347" y="224.71761">$\mathsf{e}_1$</tspan></text>
+    <path style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.52916667;stroke-dasharray:0.52916667,0.52916667;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:none;stop-color:#000000" d="m 116.48491,237 40.37653,-22.82035" id="path2002" inkscape:path-effect="#path-effect2004" inkscape:original-d="m 116.48491,237 c 13.45911,-7.60652 26.91795,-15.21331 40.37653,-22.82035" />
+    <path style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.52916667;stroke-dasharray:0.52916667,0.52916667;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:none;stop-color:#000000" d="m 116.48491,237 h 46.95272" id="path2036" inkscape:path-effect="#path-effect2038" inkscape:original-d="m 116.48491,237 c 15.65117,2.6e-4 31.30208,2.6e-4 46.95272,0" />
+    <text xml:space="preserve" style="font-size:3.175px;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;-inkscape-stroke:none;marker-start:none;marker-end:none;stop-color:#000000" x="130.64389" y="232.78955" id="text2118"><tspan sodipodi:role="line" id="tspan2116" style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;marker-start:none;marker-end:none" x="130.64389" y="232.78955">$\lambda$</tspan></text>
+  </g>
+</svg>

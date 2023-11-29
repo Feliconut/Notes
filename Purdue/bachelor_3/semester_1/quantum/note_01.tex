@@ -1,0 +1,155 @@
+\note{1}{Mon 11 Sep 2023 22:43}{States and Operators}
+
+\subsection{Continuous Spectra}
+
+The position spectra is the set of all distributions on $\mathbb{R}$, i.e., all linear functionals $C_c^{\infty }(\mathbb{R}) \to \mathbb{C}$. The eigen-kets are the singular distributions given by kronecker delta:
+\[
+	x \left| \delta_{x'} \right\rangle  = x' \left| \delta_{x'} \right\rangle 
+.\] 
+Or, it can be regarded as the completion of space of $L^2$ functions on $\mathbb{R}$.
+
+We have, for each Borel set $E$ in $\mathbb{R}$,
+\[
+	\operatorname{Pr} _{\phi}(X_{obs} \in E) = \left\langle \phi \middle| P_E \phi \right\rangle 
+	= \int _E |\phi(x)|^2 dx
+.\] 
+
+It satisfies the following properties:
+\begin{enumerate}
+	\item All eigenkets are orthogonal: $\left\langle x \middle| x' \right\rangle  = \delta_{x x'}$ 
+	\item Completeness: we have $\sum_i P_{E_i} = \text{Id}$ as long as $E_i$ form a partition of $\mathbb{R}$. More informally, we have $\int dx \left| x \right\rangle \left\langle x \right|  = I$.
+	\item Total probability $1$ : $\sum_i \operatorname{Pr} _{\phi} \left( X_{obs } \in E_i \right)  = 1$ for any Borel partition of $\mathbb{R}$. More informally, $\int dx \left|\left\langle x \middle| \phi \right\rangle\right|^2 = 1$.
+\end{enumerate}
+
+\subsection{General Observable}
+
+In general, an observable is a  \logseq{projection valued measure}. It is a map from a measurable space $(\Omega, \mathcal{F})$ to the set of projections in a Hilbert space $\mathcal{H}$, $P(\mathcal{H})$.
+
+The projection valued measure $\mu : \mathcal{F} \to P(\mathcal{H})$ has the following properties:
+\begin{enumerate}
+	\item $\mu(\emptyset ) = 0, \mu(\Omega) = \text{Id}$.
+	\item For each $E \in \mathcal{F}$, $\mu(E)$ is an orthogonal projection.
+	\item $\mu$ is countably additive. Convergence of sum in $P(\mathcal{H})$ is wrt the norm topology in $\mathcal{H}$.
+	\item Intersection property: $\mu(E_1 \cap E_2) = \mu(E_1) \mu(E_2)$
+\end{enumerate}
+
+For any projection valued measure $\mu$ and $\phi \in \mathcal{H}$, we can form a real-valued measure $\mu_{\phi}$ by
+\[
+	\mu_{\phi}(E) := \left\langle \phi \middle| \mu(E) \phi \right\rangle 
+.\] 
+
+To define integration wrt the projection valued measure, for every bounded, measurable, complex valued function $f$ on $\Omega$ we define $\int _X f d \mu$ to be the unique projection such that
+\[
+	\left\langle \phi \middle| \left( \int _X f d \mu \right) \phi \right\rangle  = \int _X f d \mu_{\phi}
+.\] 
+for all $\phi \in \mathcal{H}$. The integral $f \mapsto \int _X f d \mu$ is linear and multiplicative.
+
+For more reference, see \cite{hallQuantumTheory2013}, Proposition 7.11, p.139.
+
+\subsection{Compatibility, Completeness set of observables}
+
+A hermitian operator has real eigenvalues and orthogonal eigenspaces.
+
+Two observables $A, B$ are said to be \textit{compatible} if they commute, i.e. $[A,B] = 0$. 
+
+Compatible observables share the same eigenspaces.
+
+A set of compatible observables  $A_k$ is said to be  \textit{complete} if each one-dimensional eigenspace is completely distinct from others via the eigenvalues assigned by each $A_k$. This is to say that
+\[
+	\forall \lambda, \dim \cap_k E(A_k;\lambda) \le 1
+.\] 
+
+\subsubsection{Uncertainty Principle}
+
+Given an observable (Hermitian operator) $A$, we define the deviation operator
+\[
+	\Delta A \equiv A - \left\langle A \right\rangle 
+.\] 
+Now the dispersion / variance of $A$ is defined as
+\[
+	\left\langle (\Delta A)^2 \right\rangle  = \left\langle A^2 \right\rangle  - \left\langle A \right\rangle ^2
+.\] 
+
+\begin{theorem}[Uncertainty Principle]
+	For any Hermitian operators $A, B$, we have
+	\[
+		\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle 
+		\ge \frac{1}{4} \left| \left\langle [A,B] \right\rangle  \right| ^2
+	.\] 
+\end{theorem}
+\begin{proof}
+	Schwartz Inequality gives
+	\[
+		\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle \ge 
+		\left| \left\langle \Delta A \Delta B \right\rangle ^2 \right| 
+	.\] 
+	Now notice that 
+	\[
+		\Delta A \Delta B = \frac{1}{2} [\Delta A, \Delta B] + \frac{1}{2} \left\{ \Delta A, \Delta B \right\} 
+	.\] 
+	The commutator is anti-Hermitian while the anticommutator is Hermitian. So $\left\langle [\Delta A,\Delta B] \right\rangle $ is purely imaginary while $\{\Delta A,\Delta B\} $ is purely real. Also $[\Delta A, \Delta B] = [A, B]$ Hence
+	\[
+		\left| \left\langle \Delta A \Delta B \right\rangle  \right| ^2 = \frac{1}{4} \left( \left| \left\langle [A,B] \right\rangle  \right| ^2 + 
+		\left| \left\langle \left\{ A,B \right\}  \right\rangle \right|  ^2\right) 
+	.\] 
+\end{proof}
+
+
+
+
+
+\subsection{Time Evolution}
+
+\subsubsection{Definition and Properties}
+
+
+
+To describe time evolution, we consider an extended space $\{\mathcal{H}_t\} _{t \ge 0}$ and a time evolution operator $\mathcal{U}_{s}: \mathcal{H}_t \to \mathcal{H}_{t + s}$ with $s \ge 0$. Those two form a topological semigroup structure. That is, the following holds:
+\begin{enumerate}
+	\item (Identity) $\mathcal{U}_0 \left| \alpha, t \right\rangle  = \left| \alpha, t \right\rangle $
+	\item (Associativity) $\mathcal{U}_r \mathcal{U}_s = \mathcal{U}_{r + s}$
+	\item (Continuity) $\lim_{s \to 0} \mathcal{U}_s = \mathcal{U}_0$
+	\item Also, $U_s$ is unitary, so it conserves probability.
+\end{enumerate}
+
+The above definition works for the case where state evolution rule is time-independent. When this is no longer true, we lose the semigroup property. In the more general case, we need to define the time evolution operator $\mathcal{U}(t, t_0)$ for each pair $t_0 \le  t$. This forms the order category on $[0,\infty )$, i.e. we can compose time evolution operators $\mathcal{U}(t_2, t_1) \mathcal{U}(t_1, t_0) = \mathcal{U}(t_2, t_0)$.
+
+\subsubsection{The explicit form}
+
+The specific time evolution operator used in Schr\"odinger equation is
+\[
+	\mathcal{U}(t_0 + dt, t_0) = 1 - \frac{i H(t_0) dt }{\hbar}
+.\] 
+
+The \logseq{Schrodinger equation} is a direct consequence:
+\[
+	i \hbar \frac{\partial }{\partial t} \mathcal{U}(t, t_0)
+	= H(t) \mathcal{U}(t, t_0)
+.\] 
+
+We want formal solution of $\mathcal{U}$. There are several cases:
+\begin{itemize}
+	\item (Time independent Hamiltonian) We have
+		\[
+			\mathcal{U}_s = \mathcal{U}(t+s, t) 
+			= \exp \left[ \frac{- i H s}{\hbar} \right] 
+		.\] 
+	\item (Time dependent but commutative Hamiltonian) We have
+		\[
+			\mathcal{U}(t, t_0) = \exp \left[ - \left( \frac{i}{\hbar}  \right) \int _{t_0}^t dt' H(t') \right] 
+		.\] 
+	\item (Time dependent and noncommutative) In this case the best we can do is taking limit of the \logseq{Dyson series}.
+\end{itemize}
+
+\subsubsection{Solving SE for Time Independent Hamiltonian}
+
+If there exists a complete set of mutually compatible observables $A_k$ that also commute with $H$, then $\mathcal{U}$ has a spectral decomposition:
+\[
+	\mathcal{U}_{t} = \exp\left( \frac{- i H t}{\hbar} \right) 
+	= \sum_{K'} \exp\left( \frac{- i E_{K'} t}{\hbar} \right) \left| K' \right\rangle \left\langle K' \right| 
+.\] 
+Where $\left| K' \right\rangle$ means some eigenstate labelled by its eigenvalues assigned by each $A_k$, and $E_{K'}$ is the eigenvalue assigned by $H$ to $\left| K' \right\rangle $.
+This guarantee that $\mathcal{U}$ is a unique linear combination of $A_k$.
+
+To solve the equation, we only need to decompose the initial state according to the eigenbasis, and apply the time evolution operator to each component.
+

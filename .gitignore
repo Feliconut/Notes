@@ -286,3 +286,5 @@ current_semester
 **/*.pdf_tex
 **/master.pdf
 **/master.tex
+tags
+.vscode/settings.json

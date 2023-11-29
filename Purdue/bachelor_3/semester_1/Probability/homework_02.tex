@@ -1,0 +1,350 @@
+\homework{2}{Mon 30 Oct 2023 21:59}{Brownian Motion}
+
+\begin{problem}
+	Consider two nonnegative functions $f$ and $g$ integrable functions defined on some measure $(\Omega, \mathcal{F}, \mu)$ space with the property that for all $\lambda>0$ and $\varepsilon>0$, it holds that
+\[
+\mu\{f>\beta \lambda, g \leq \varepsilon \lambda\} \leq 2 e^{-\frac{(\beta-1)^2}{2 \varepsilon^2}} \mu\{f>\lambda\}
+\]
+for any $\beta>1$. Prove that there exists a universal constant $C$ (independent of $p$ ) such that
+\[
+\|f\|_p \leq C \sqrt{p}\|g\|_p
+\]
+for $1<p<\infty$.
+Hint: To avoid trivialities you may assume that both $f$ and $g$ have finite $p$ norms. Start by writing the p-moment of $f$ in terms of the distribution!
+\end{problem}
+\begin{proof}
+	First follow the hint to write p-moment of $f$ in terms of the distribution:
+	 \begin{align*}
+		\int _\Omega f^p d \mu
+		&= \int _0^\infty p \lambda^{p - 1} \mu \{f > \lambda\}  d \lambda \\
+		\intertext{change variable and split into two cases,}
+		&= \int _0^\infty p \beta^p \lambda^{p - 1} \mu \{f > \beta \lambda\}  d \lambda \\
+		&= \int _0^\infty p \beta^p \lambda^{p - 1} \mu \{f > \beta \lambda, g \le  \varepsilon \lambda\}  d \lambda 
+		+ \int _0^\infty p \beta^p \lambda^{p - 1} \mu \{f > \beta \lambda, g >  \varepsilon \lambda\}  d \lambda \\
+		\intertext{apply assumption to one part and trivial bound to the other part,}
+		&\le  \int _0^\infty p \beta^p \lambda^{p-1} \cdot 2 e^{-\frac{(\beta-1)^2}{2 \varepsilon^2}} \mu\{f>\lambda\}
+		+ \int _0^\infty p \beta^p \lambda^{p - 1} \mu \{g >  \varepsilon \lambda\}  d \lambda
+	.\end{align*}
+	From this we obtain
+	\[
+		\left( 1 - 2 \beta^p \exp\left( \frac{- (\beta - 1)^2}{2 \varepsilon^2} \right)  \right) 
+		\|f\|_p^p
+		\le  \left( \frac{\beta}{\varepsilon} \right) ^p \|g\|_p^p
+	.\] 
+	Hence, for any $\varepsilon>0, \beta>1$, we have 
+	\[
+		\|f\|_p \le c_{\beta, \varepsilon, p} \|g\|_p
+	.\] 
+	where
+	\[
+		c_{\beta, \varepsilon,p} =
+		\beta \varepsilon^{-1}\left( 1 - 2 \beta^p \exp\left( \frac{- (\beta - 1)^2}{2 \varepsilon^2} \right)  \right) ^{-1 / p}
+	.\] 
+	We need to show that the bound is universal and does not depend on $p$. To make notation simpler, we write $\gamma = \frac{\beta - 1}{\varepsilon}$. Now the bound becomes
+	\[
+		c_{\gamma, \varepsilon} = \left( \gamma + 1 / \varepsilon \right) \left( 1 - \left( \gamma \varepsilon + 1 \right) ^p 2 \exp(- \gamma^2) \right) ^{- \frac{1}{p}}
+		\qquad \gamma>0, \varepsilon>0
+	.\] 
+	Take $\gamma^2 > \ln 3$, now $2 \exp(- \gamma^2) < \frac{2}{3}$. Take $\varepsilon < \frac{2^{- \frac{1}{p}} - 1}{ \gamma}$, so that $\left( \gamma \varepsilon + 1 \right) ^p < \frac{1}{2}$ . Finally, take $\varepsilon$ such that $\gamma + \frac{1}{\varepsilon} \le  2^{- \frac{1}{p} - 1}$. Combining those we have
+	\[
+		\inf_{\gamma, \varepsilon} c_{\gamma, \varepsilon, p} \le 2^{- \frac{1}{p}} \left( \frac{2}{3} \right) ^{-\frac{1}{p}} - \left( \frac{2}{3} \right) ^{-\frac{1}{p}} < C \sqrt{p} 
+	.\] 
+
+\end{proof}
+
+\begin{problem}
+	(a) Let $B_t$ be Brownian motion starting at 0 . Let $\tau$ be a bounded stopping time. That is, $\|\tau\|_{\infty}<\infty$. Prove that for all $\lambda>0$,
+\[
+\mathbb{P}\left\{\left|B_\tau\right|>\lambda\right\} \leq 2 e^{-\frac{\lambda^2}{2\|\tau\|_{\infty}}} .
+\]
+(b) Let $B_t$ bs standard Brownian motion. Prove that for $t>0, \theta, \lambda>0$,
+\[
+\mathbb{P}\left\{\sup _{0 \leq s \leq t}\left(B_s-t \frac{\theta}{2}\right)>\lambda\right\} \leq e^{-\theta \lambda}
+\]
+
+Hint: "Find the martingale!"
+\end{problem}
+\begin{proof}
+	%For a deterministic time $t$, we have the following concentration bound
+	%\[
+	%	P\left( \left| B_t \right| > \lambda \right) 
+	%	\le  2 \exp\left( - \frac{\lambda^2}{ 2 t} \right) 
+	%.\] 
+	%Now by the reflection principle,
+	%\begin{align*}
+%		P\left( |B_\tau| > \lambda \right) 
+%		&\leq 2 P\left( M_K > \lambda \right)  \\
+%		&\leq 4 P\left( B_K > \lambda \right)  \\
+%		&= 4 e^{- \frac{\lambda^2}{2 K}}
+%	.\end{align*}
+%	where $K$ is taken to be the bound for $\tau$.
+
+	Let $K$ be the deterministic bound for $\tau$, $\|\tau\|_ \infty < K < \infty $. Write $B^*_t = \sup _{0 \le s \le t } |B_s|$.
+	Now we have
+	\begin{align*}
+		P\left(|B_\tau| > \lambda\right)
+		&\le P\left( B^*_K > \lambda \right)  \\
+		&= P\left( B^*_1 > \frac{\lambda}{\sqrt{K} } \right)  \\
+		&= 2 P\left( \sup _{0 \le t \le 1} B_t > \frac{\lambda}{\sqrt{K} } \right)  \\
+		&= 2 P\left( \sup _{0 \le t \le 1} \exp(B_t) > \exp\left(\frac{\lambda}{\sqrt{K} }\right) \right)  \\
+		&\leq 2 \exp\left( - \frac{\lambda^2}{K} \right) 
+	.\end{align*}
+	Take $K = 2 \|\tau\|_\infty $ and we obtain the claim.
+
+	For part (b), note that $M_n := \exp\left( \theta B_s - \frac{\theta^2 t}{2} \right) $ is a martingale. Using Doob's inequality, 
+	 \[
+		e^{\theta \lambda} P\left( \sup _{0 \leq s \leq t} M_s > e^{\theta \lambda} \right)
+		\le E\left( M_t^+  \right) = E(M_0) = 1 
+	.\] 
+	Therefore
+	\[
+	P\left\{\sup _{0 \leq s \leq t}\left(B_s-t \frac{\theta}{2}\right)>\lambda\right\} 
+	= P\left( \sup _{0 \leq s \leq t} M_s > e^{\theta \lambda}\right) 
+	\le  e^{- \theta \lambda}
+	.\] 
+\end{proof}
+
+\begin{problem}
+	Let $B_t$ be standard Brownian motion. Prove that
+\[
+\mathbb{P}\left\{\sup _{s, t \in[0,1]} \frac{\left|B_t-B_s\right|}{\sqrt{|t-s|}}=+\infty\right\}=1
+\]
+
+Hint: Start by dividing the interval $[0,1]$ into subintervals of the form $[k / n,(k+1) / n]$.
+\end{problem}
+\begin{proof}
+	Define the set $A := \left\{\sup _{s, t \in[0,1]} \frac{\left|B_t-B_s\right|}{\sqrt{|t-s|}}=+\infty\right\}$. On $A^c$, at each point $x \in [0,1]$ there exists a neighbor such that for all $s, t$ near $x$, $\frac{\left|B_t-B_s\right|}{\sqrt{|t-s|}} < K(x, \omega)$. By compactness, we can choose some $K(\omega)$ such that
+	\[
+		\frac{\left|B_t-B_s\right|}{\sqrt{|t-s|}} < K(\omega)
+	.\] 
+	Now, this implies that
+	\[
+		|B_{\frac{1}{2}}| < K \left( \frac{1}{2} \right) ^{\frac{1}{2}}, \qquad |B_{\frac{3}{4}} - B_{\frac{1}{2}}| < K \left( \frac{1}{4} \right) ^{\frac{1}{2}}, \ldots
+	.\] 
+	Using stationary independent increment and scaling property, this is equivalent to saying that
+	\[
+		|B_1^1| < K, |B_1^2| < K, \ldots
+	.\] 
+	Where $B^n$ are independent standard BM. Now $P(|B_1^1|< K) < 1$, so this happens with zero probability. Therefore $P(A^c) = 0$.
+
+	\textbf{To be more precise}, for each $n$, split the interval into $n$ equal parts. Then
+	\begin{align*}
+		&P\left( \exists K < \infty , \forall n, \forall k < n, |B_{k / n} - B_{(k + 1) / n}|< \frac{K}{\sqrt{n} } \right) \\
+		&\leq \sum_{K=1}^{\infty} \limsup_{n} \prod_{k=1}^{n-1} P\left( |B_1| < K \right)  \\
+		&= 0
+	.\end{align*}
+	Hence such $K$ is infinite a.s., hence $P(A) = 1$.
+\end{proof}
+
+\begin{problem}
+	Let $B_t$ be Brownian motion on $\mathbb{R}$ starting at $x$. For any $t_1<t_2<\cdots<t_n$ and any Borel sets $A_1, A_2, \ldots, A_n$, the quantity
+\[
+\mathbb{P}_x\left\{B_{t_1} \in A_1, B_{t_2} \in A_2, \ldots, B_{t_n} \in A_n\right\}
+\]
+is called the "finite dimensional distributions" of $B_t$. Prove that the finite dimensional distributions are given by multiple convolutions with the density of the normal distribution. That is,
+\[
+\begin{aligned}
+& P_x\left\{B_{t_1} \in A_1, B_{t_2} \in A_2, \ldots, B_{t_n} \in A_n\right\} \\
+= & \int_{A_n} \cdots \int_{A_2} \int_{A_1} \prod_{k=1}^n p_{t_k-t_{k-1}}\left(x_k-x_{k-1}\right) d x_1 d x_2 \ldots d x_n
+\end{aligned}
+\]
+where $x_0=x, t_0=0$ and $p_t(x)=\frac{1}{\sqrt{2 \pi t}} e^{-\frac{|x|^2}{2 t}}$ is the normal density.
+
+Hint: Do the case $n=2$ first.
+\end{problem}
+\begin{proof}
+	We proceed by induction. Let $\hat{p}_{t}^{(n-1)} (y) = \hat{p}_{t}\left(y; t_1, \ldots, t_{n-1}; A_1, \ldots, A_{n-1}\right)$, $t \ge  t_{n-1}$ be the density function of the Brownian motion restricted to the event $\{B_{t_1} \in A_1, \ldots, B_{t_{n-1}} \in A_{n-1}\} $. Note that $p^{(n)}_{t_n}$ is supported on $A_n$.
+
+	The distribution of BM conditioned on $\{B_{t_1} \in A_1, \ldots, B_{t_{n}} \in A_{n}\} $ can be expressed as
+	\begin{align*}
+		P_x\left( t_1 \in A_1, \ldots, B_{t_n} \in A_n \right) 
+		&= E \left(\int _{A_{n-1}} \hat{p}_{t_{k-1}}^{(n-1)}(x_{n-1}) 1\left( B_{t_n} \in A_n \right) d x_{n-1}\right)\\
+		&= \int _{A_{n-1}} \hat{p}^{(n-1)}_{t_{k-1}} (x_{n-1}) \int_{A_n} p_{t_n - t_{n-1}}(x_n - x_{n-1}) d x_n d x_{n-1}\\
+		&= \int _{A_n} \int _{A_{n-1}} \hat{p}^{(n-1)}(x_{n-1}) p_{t_n - t_{n-1}}(x_n - x_{n-1}) dx_{n-1} dx_n
+	.\end{align*} 
+	That is, the distribution function $\hat{p}_t ^{(n)}(x)$ is
+	\[
+		\hat{p} ^{(n)}_{t_n} = ((\hat{p} ^{(n-1)}_{t_{n-1}} * p_{t_{n} - t_{n-1}}) 1_{A_n}) * p_{t - t_{n_k}}
+	.\] 
+	By induction hypothesis, we get that
+	\[
+		\hat{p} _{t_{n-1}}^{(n-1)} = \left( \hat{p} _{t_{n-2}^{(n-2)}} * p_{t_{n-1} - t_{n-2}}\right) 1_{A_{n-1}}
+	.\] 
+	and so on. Put everything together,
+	\[
+		\hat{p} _{t_n}^{(n)}= \left(\ldots\left(\left( p_{t_1} 1_{A_{1}} \right) * p_{t_2 - t_1}\right)1_{A_2}\ldots * p_{t_{n} - t_{n-1}}\right)1_{A_n}
+	.\] 
+	Write out the integral and we obtain the desired form.
+\end{proof}
+
+\begin{problem}
+	Let $B_t$ be standard Brownian motion. Let $a, b \in \mathbb{R}$ be fixed constants. Show that
+\[
+G_t=e^{a t+b B_t}
+\]
+is a Markov process (as defined in class-relative to the of $\mathrm{BM}$ ).
+\end{problem}
+\begin{proof}
+	For $t > s$, we have
+	\begin{align*}
+		E\left( \exp\left( a t + b B_t \right) | \mathcal{F}_s \right) 
+		&= e^{at } E\left( \exp\left( b B_{t - s} \right) \exp\left( b B_s \right) | \mathcal{F}_s \right)  \\
+		&= e^{at } e^{b B_s} E\left( e^{b B_{t - s}} \right)  \\
+		&= E_{B_s} \exp\left( a t + b B_{t - s} \right) 
+	.\end{align*}
+	This verifies Markovian property.
+\end{proof}
+
+\begin{problem}
+Let $\left\{B_t\right\}$ be $d$-dimensional Brownian motion and let $f: \mathbb{R}^d \rightarrow \mathbb{R}$ be a bounded function which is $C^2$ and its derivatives are also bounded. Prove that
+\[
+X_t=f\left(B_t\right)-\frac{1}{2} \int_0^t \Delta f\left(B_r\right) d r
+\]
+is a martingale. Thus, if $f$ is a harmonic function, i.e., $\Delta f(x)=0$, then $f\left(B_t\right)$ is a martingale. Recall: $\Delta$ is the Laplacian operator defined by $\Delta f(x)=\sum_{j=1}^d \frac{\partial^2 f}{\partial x_j^2}$.
+\end{problem}
+\begin{proof}
+	First compute
+	\begin{align*}
+		\frac{\partial }{\partial t} E f(B_t)
+		&= \int \frac{\partial }{\partial t} (p_t(x,y) f(y)) dy \\
+		&= \int \left( \frac{\partial }{\partial t} p_t(x,y) \right) f(y) dy \\
+		\intertext{Use the fact that transition kernel $p_t$ satisfies heat equation,}
+		&= \int \left( \frac{1}{2} \Delta_y p_t(x,y) \right) f(y) dy \\
+		\intertext{Integration by parts,}
+		&= \int \frac{1}{2} p_r (x,y) \Delta f(y) dy \\
+		&= \frac{1}{2} E \Delta f(B_t) 
+	.\end{align*} 
+	From this, we have
+	\begin{align*}
+		E\left( \frac{1}{2} \int _0^t \Delta f(B_r) dr \right) 
+		&= \int _0^t \left( \frac{1}{2 } E \Delta f (B_r)  \right) dr \\
+		&= \int _0^t \frac{\partial }{\partial t} Ef(B_t) \\
+		&= E f(B_t)
+	.\end{align*}
+	Therefore
+	\[
+		E(X_t) = 0 = X_0
+	.\] 
+	We can verify the martingale property in the same way:
+	\begin{align*}
+		E(X_{t + s} | \mathcal{F}_s)
+		&= E_{B_s} f(B_t) - \frac{1}{2} E \left(\int _0^{s} \Delta f(B_r) dr \middle| \mathcal{F}_s\right)- E\left(\frac{1}{2} \int _s^{t + s} \Delta f(B_r) dr \middle| \mathcal{F}_s \right)\\
+		&= E_{B_s} f(B_t) - \frac{1}{2} \int _0^{s} \Delta f(B_r) dr - \left( E_{B_s} f(B_{t}) - E (f(B_s)| \mathcal{F}_s) \right) \\
+		&= f(B_s) -  \frac{1}{2} \int _0^{s} \Delta f(B_r) dr \\
+		&= X_{s}
+	.\end{align*}
+\end{proof}
+
+\begin{problem}
+	Let $B_t$ be standard Brownian motion and let $f:[0, \infty) \times \mathbb{R} \rightarrow \mathbb{R}$ be $C^{1,2}$ (differentiable once in $t$ and twice in $x$ ). Suppose for all $t>0$ there exists constants $C_1$ and $C_2$ such that
+\[
+\sup _{0 \leq s \leq t}|f(s, x)| \leq C_1 e^{C_2|x|},
+\]
+for all $x \in \mathbb{R}$. Suppose in addition that $f$ satisfies
+\[
+\frac{\partial f}{\partial t}+\frac{1}{2} \frac{\partial^2 f}{\partial x^2}=0
+\]
+
+Prove that $f\left(t, B_t\right)$ is a martingale.
+\end{problem}
+\begin{proof}
+	Calculate
+	\begin{align*}
+		\frac{\partial }{\partial t} E_x f(t, B_t)
+		&= \int \frac{\partial }{\partial t} \left( p_t(x,y) f(t,y) \right) dy \\
+		&= \int \frac{1}{2} \frac{\partial ^2}{\partial y^2} p(x,y) f(t,y) - \frac{1}{2} p_t(x,y) \frac{\partial ^2}{\partial y^2} f(t,y) dy \\
+		&= 0
+	.\end{align*}
+	using integration of parts. To justify the integration by parts,
+	\begin{align*}
+		\int \frac{1}{2}\frac{\partial ^2}{\partial y^2} p(x,y) f(t,y) dy
+		&= \frac{1}{2} \frac{\partial }{\partial y} p(x,y) f(t,y) |_{- \infty }^{\infty } - \frac{1}{2} p(x,y) \frac{\partial }{\partial y} f(t,y) |_{- \infty }^\infty + \int \frac{1}{2} p(x,y) \frac{\partial ^2}{\partial y^2} f(t,y) dy
+	.\end{align*}
+	Using the control of $f(s,x)$, the two boundary terms vanish.
+
+	Therefore $E_x f(t, B_t)$ is constant in $t$. To show martingale property, note that $v(r, x) = f(s + r, x)$ satisfies $\frac{\partial v}{\partial r} = \frac{1}{2} \frac{\partial ^2v}{\partial x^2} $, so using the Markov property and constancy of  $E_x v(r, B_r)$, 
+	\[
+		E\left( f(t , B_{t })|\mathcal{F}_s \right) 
+		= E_{B(s)} v\left( t-s, B_{t-s} \right) 
+		= E_{B(s)}v(0, B_0) = v(0, B_s) = f( s, B_s)
+	.\] 
+\end{proof}
+
+\begin{problem}
+	Let $B_t$ be standard Brownian motion.
+1. Show that $M_t=B_t^4-6 t B_t^2+3 t^2$ is a martingale.
+2. Let $T$ be a stopping time with $E\left[T^2\right]<\infty$. Show that
+\[
+\left\|B_T\right\|_4 \leq \sqrt{3+\sqrt{6}}\left\|T^{1 / 2}\right\|_4
+\]
+
+Hint. Be careful. First truncate or prove it first for bounded stoping times.
+
+Remark: You may find it interesting in verifying (i.e., looking up) the fact that $\sqrt{3+\sqrt{6}}$ is the largest zero of the Hermit polynomial of degree 4 . This is no coincidence as the inequality is a special case of a deep result of Burgess Davis, until a few years ago faculty member in the Departments of Statistics and Mathematics.
+\end{problem}
+\begin{proof}
+	Direct computation.
+	\begin{align*}
+		E(M_{t + s} | \mathcal{F}_s)
+		&= E\left( (B_t + B_s)^4 - 6 (t + s)(B_t + B_s)^2 + 3(t + s)^2 | \mathcal{F}_s \right)  \\
+		&= E_0 B_t^4 + E_0 B_t^2 \left( 6 B_s^2 -6 (t + s) \right) + B_s^4 - 6(t + s) B_s^2 + 3(t + s)^2 \\
+		&= M_s + 3 t^2 + t(6 B_s^2 - 6(t + s)) - 6 t B_s^2 + 6 t s + 3 t^2 \\
+		&= M_s
+	.\end{align*}
+	Now using Optional Stopping Theorem under the assumption that $T$ is bounded,
+	\[
+		E(M_T) = \|B_T\|_4^4 - 6 E(T B_T^2) + 3 \|T^{\frac{1}{2}}\|_4^4 = 0
+	.\] 
+	Using Cauchy-Schwartz inequality,
+\[
+		\|B_T\|_4^4 - 6 \sqrt{\|B_T\|_4^4 \|T^{\frac{1}{2}}\|_4^4}  + 3 \|T^{\frac{1}{2}}\|_4^4 \le  0
+	.\]
+	After substitution, we have an algebraic equation:
+	 \[
+		x^4 - 6 x^2 y^2 + 3 y^4 = 0
+	.\] 
+	It solves to
+	\[
+		\frac{x}{y} \le \sqrt{3 + \sqrt{6} } 
+	.\] 
+	Therefore,
+	\[
+		\left\|B_T\right\|_4 \leq \sqrt{3+\sqrt{6}}\left\|T^{1 / 2}\right\|_4
+	.\] 
+	For general $T$, we have
+\[
+		\left\|B_{T \wedge n}\right\|_4 \leq \sqrt{3+\sqrt{6}}\left\|\left( T \wedge n \right) ^{1 / 2}\right\|_4
+	.\]
+	But since it is assumed that $T$ is $L^2$, the right hand side converges to $ \sqrt{3+\sqrt{6}}\left\|T^{1 / 2}\right\|_4$ when we take $n \to \infty $. Now use DCT and take $n \to \infty $ on the left hand side, and we get the desired claim.
+\end{proof}
+
+\begin{problem}
+	(Durett 7.2.2) Let $T_0 = \inf \{s > 0: B_s = 0\} $ and let $L = \sup \{t \le 1: B_t = 0\} $. Use the Markov property at time  $0 < t < 1$ to conclude
+	\[
+		P_0 (L \le t) = \int p_t (0,y) P_y (T_0 > 1 - t) dy
+	.\] 
+\end{problem}
+\begin{proof}
+	Apply the Markov property 
+	\[
+		E_x\left( Y \circ \theta_s | \mathcal{F}_s^+ \right) = E_{B_s} Y
+	.\] 
+	We take $x = 0, f = 1(T_0 > 1 - t)$, get
+	 \[
+		E_0\left( f \circ \theta_t | \mathcal{F}_t^+ \right) = P_{B_t} (T_0 > 1 - t)
+	.\] 
+	But note that $f \circ \theta_t \in \mathcal{F}_t^+$, since the path before $t$ is sufficient to determine if $T_0 > 1 -t$, without looking forward. Thus
+	\[
+		1\left( L \le t \right) = E_0(f \circ \theta_t | \mathcal{F}_t^+) = P_{B_t} (T_0 > 1 - t)
+	.\] 
+	Take expectation on both sides,
+	\[
+		P_0(L \le  t) = E_0\left( P_{B_t} (T_0 > 1 - t) \right)  = \int p_t (0,y) P_y (T_0 > 1 - t) dy
+	.\] 
+\end{proof}
+
+
+
+
+
+
