@@ -1,0 +1,40 @@
+\note{1}{Fri 23 Feb 2024 14:42}{Complex Analysis Review}
+\tags{Winding Number}
+
+\subsection{Cauchy's Theorem}
+
+\subsection{The Winding Number}
+
+We consider the following integral:
+\[
+	\oint_{S^1} \frac{dz }{z} = 2 \pi i
+.\] 
+
+\begin{intuition}
+	As the path traverses through $S^1$, $dz $ and $z$ are orthogonal, so $dz = i z dx$ for some (hyper-)real number $dx$. Hence, $\frac{dz}{z} = i dx$. What is this real number $dx$? From geometry we can interpret it as the angle swiped by arc length $dz$. Thus,
+	\[
+		\oint_{S^1} \frac{dz }{z} = \int _{0}^{2 \pi} i d \theta = 2 \pi i
+	.\] 
+\end{intuition}
+\begin{proof}
+	Parametrize with the exponential, which is an analytic function. We have
+	\[
+		\int _{S^1} \frac{dz }{z}
+		= \int _0^{2 \pi} \frac{d(e^{i t})}{e^{i t}}
+		= \int _0^{2 \pi} \frac{i e^{i t}}{e^{i t}} = 2 \pi i
+	.\] 
+\end{proof}
+
+\subsection{Cauchy Integral Formula}
+
+Two key ingredients:
+\begin{itemize}
+	\item As a direct consequence, all holomorphic functions (locally differentiable) are analytic (infinitely differentiable and has series expansion).
+	\item If $D \subset \mathbb{C}$ is a simple closed region with trivial topology then the value of $f$ in $\text{int} D$ is determined by its value on $\partial D$. In particular, if $f$ is not analytic at some point in $D$ but has an analytic continuation, the formula prescribes that continuation.
+\end{itemize}
+
+
+
+
+
+

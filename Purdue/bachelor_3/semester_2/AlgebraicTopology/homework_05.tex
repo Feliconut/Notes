@@ -1,0 +1,317 @@
+\homework{5}{Sat 30 Mar 2024 1:06}{}
+
+\begin{problem}
+	Compute homology of two copies of $D^2$ glued to $S^1$ by attaching maps of degree $p$ and $q$.
+\end{problem}
+\begin{proof}
+	We compute using cellular homology. We have
+	\[
+		X_0 = \{*\} , \quad X_1 = X_0 \sqcup_{\varphi_1} D^1 = S^1
+	.\]
+	\[
+		X_2 = X_1 \sqcup_{\varphi_{2}^{p, q}}\left( D^2 \sqcup D^2 \right) 
+	.\] 
+
+	$X = X_2$ is path-connected, so $H_0(X) = \mathbb{Z}$. Also, by [Hatcher, Lemma 2.34(a)], $H_2(X_2, X_1) = \mathbb{Z}^2$, $H_1(X_1, X_0) = \mathbb{Z}$, $H_0(X_0, X_{-1}) = \mathbb{Z}$.
+
+	Now, let's work out the maps between them using the Cellular Boundary Formula, in Hatcher section 2.2:
+	\begin{lemma}[Cellular Boundary Formula]
+		(Hatcher p.140)
+		Cellular Boundary Formula. $d_n\left(e_\alpha^n\right)=\sum_\beta d_{\alpha \beta} e_\beta^{n-1}$ where $d_{\alpha \beta}$ is the degree of the map $S_\alpha^{n-1} \rightarrow X^{n-1} \rightarrow S_\beta^{n-1}$ that is the composition of the attaching map of $e_\alpha^n$ with the quotient map collapsing $X^{n-1}-e_\beta^{n-1}$ to a point.
+	\end{lemma}
+% https://quiver.local:8080/#q=WzAsOSxbMCwwLCJIXzIoWF8yLCBYXzEpID0gXFxsYW5nbGUgZV4yXzEsIGVeMl8yXFxyYW5nbGUiXSxbMiwwLCJIXzEoWF8xLCBYXzApPVxcbGFuZ2xlIGVeMV8xXFxyYW5nbGUiXSxbNCwwLCJIXzAoWF8wLCBYX3stMX0pPSBcXGxhbmdsZSBlXjBfMVxccmFuZ2xlIl0sWzAsMSwiZV8xXjIiXSxbMiwxLCJwIGVfMV4xIl0sWzAsMiwiZV4yXzIiXSxbMiwyLCJxIGVeMV8xIl0sWzIsMywiZV8xXjEiXSxbNCwzLCIwIl0sWzAsMSwiZCJdLFsxLDIsImQiXSxbMyw0LCIiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9LCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzUsNiwiIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFs3LDgsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XV0=
+\[\begin{tikzcd}[cramped]
+	{H_2(X_2, X_1) = \langle e^2_1, e^2_2\rangle} && {H_1(X_1, X_0)=\langle e^1_1\rangle} && {H_0(X_0, X_{-1})= \langle e^0_1\rangle} \\
+	{e_1^2} && {p e_1^1} \\
+	{e^2_2} && {q e^1_1} \\
+	&& {e_1^1} && 0
+	\arrow["d", from=1-1, to=1-3]
+	\arrow["d", from=1-3, to=1-5]
+	\arrow[shorten <=20pt, shorten >=20pt, maps to, from=2-1, to=2-3]
+	\arrow[shorten <=20pt, shorten >=20pt, maps to, from=3-1, to=3-3]
+	\arrow[shorten <=19pt, shorten >=19pt, maps to, from=4-3, to=4-5]
+\end{tikzcd}\]	
+
+The map $d: H_2(X_2, X_1) \to H_1(X_1, X_0)$ is from assumption. The map $d: H_1(X_1, X_0) \to H_0(X_0, X_{-1})$ has degree $0$, since the map $S^{0} \to X^{0} \to S^{0}$ cannot be surjective ($S^0$ has two points whereas $X^0$ has only a single point!). 
+
+Now, after simplifying the notation, our problem becomes computing the homology of the following chain complex:
+\[
+	0 \to \mathbb{Z}^2 \xrightarrow{d_2} \mathbb{Z} \xrightarrow{0} \mathbb{Z} \to 0
+\] 
+where, $d_2(a, b) = p a + q b$.
+
+Recall two elementary facts from number theory:
+
+\begin{lemma}
+	1. If $\text{gcd}(p, q) = 1$, then $p \mathbb{Z} \oplus  q \mathbb{Z} = \mathbb{Z}$, by Bezout's identity.
+	2. As a corollary, if $\text{gcd}(p, q) = 1$, then whenever $p a + q b = 0$, we must have $(a, b) = k (-q, p)$ for some $k \in \mathbb{Z}$.
+\end{lemma}
+
+Write $r = \text{gcd}(p, q)$.
+Compute the second homology:
+\begin{multline*}
+`	H_2(X)
+	= \operatorname{ker} d_2
+	= \{(a, b) \in \mathbb{Z}^2: p a + q b = 0\} \\
+	= \{(a, b) \in \mathbb{Z}^2: \frac{p}{r} a + \frac{q}{r} b = 0\} 
+	= \left\langle (-\frac{q}{r}, \frac{p}{r}) \right\rangle 
+	\cong \mathbb{Z}
+.\end{multline*} 
+The angular bracket means a principal ideal in the ring $\mathbb{Z}^2$.
+\[
+	\operatorname{Im} d_2
+	= \{p a + q b: (a, b) \in \mathbb{Z}^2\} 
+	= r \{\frac{p}{r} a + \frac{q}{r} b: (a, b) \in \mathbb{Z}^2\} 
+	= r \mathbb{Z}
+.\] 
+\[
+	H_1(X)
+	= \mathbb{Z} / \operatorname{Im} d_2
+	= \mathbb{Z} / r \mathbb{Z}
+.\] 
+
+To sum up,
+\[
+	H_n(X) = 
+	\begin{cases}
+		0 & n < 0, n > 2\\
+		\mathbb{Z} / \text{gcd}(p, q) \mathbb{Z} & n = 1 \\
+		\mathbb{Z}  & n = 2
+	\end{cases}
+.\] 
+\end{proof}
+
+\begin{problem}
+	Let $\mathbb{Z}_m$ be the cyclic group of order $m$ and $N$ be an arbitrary Abelian group. Prove that
+\[
+\mathbb{Z}_m \otimes_{\mathbb{Z}} N \cong N / m N,
+\]
+where $m N$ is the subgroup of $N$ containing elements of form $m x, x \in N$. Use the above result to show $\mathbb{Z}_m \otimes_{\mathbb{Z}} \mathbb{Z}_n \cong \mathbb{Z}_r$, where $r=\operatorname{gcd}(m, n)$ is the GCD of $m$ and $n$.
+\end{problem}
+\begin{proof}
+	Start from the short exact sequence
+	\[
+		0 \to \mathbb{Z} \xrightarrow{m} \mathbb{Z} \to \mathbb{Z}_m \to 0
+	.\] 
+	Tensor with $N$ and we get
+	\[
+		0 \to N \xrightarrow{m} N \to \mathbb{Z}_m \otimes_{\mathbb{Z}} N \to 0
+	.\] 
+	On the other hand, the s.e.s.
+	\[
+		0 \to  N \xrightarrow{m}  N \to  N / m N \to  0
+	\] 
+	is exact. From this we directly obtain the isomorphism $\mathbb{Z}_m \otimes_{\mathbb{Z}} N \cong N / m N$.
+
+	For the second part, we want to compute  $\mathbb{Z}_n / m \mathbb{Z}_n$. Since $\mathbb{Z}_n$ is cyclic, any quotient of it must be cyclic. Therefore, it suffices to work out the order of $\mathbb{Z}_n / m \mathbb{Z}_n$. 
+
+	Well, we know $m / r$ and $n$ are coprime. Thus, $\frac{m}{r} \mathbb{Z}_n = \mathbb{Z}_n$. This means
+	\[
+		\mathbb{Z}_n / m \mathbb{Z}_n = \mathbb{Z}_n / r \mathbb{Z}_n
+	.\] 
+	Now, what is $r \mathbb{Z}_n$? Well, it consists elements represented by $0, r, \ldots, (\frac{n}{r}-1) r$, so the size is $\frac{n}{r}$.
+
+	We have
+	\[
+		\left| \mathbb{Z}_n / r \mathbb{Z}_n \right| 
+		= n / \left( n / r \right)  = r
+	.\] 
+	Thus, $\mathbb{Z}_n / m \mathbb{Z}_n = \mathbb{Z}_r$.
+\end{proof}
+
+\begin{problem}
+	3. a). Compute the torsion groups $\operatorname{Tor}_k^{\mathbb{Z}}\left(\mathbb{Z}_m, \mathbb{Z}_n\right)$ for $m, n>1, k>0$. Express the groups abstractly, i.e., present them as a cyclic group or direct sum of cyclic groups.\\
+b). Let $r=\operatorname{gcd}(m, n)$ be the GCD of $m$ and $n$. Show there is an exact sequence of the form,
+\[
+0 \rightarrow \mathbb{Z}_r \rightarrow \mathbb{Z}_m \rightarrow \mathbb{Z}_m \rightarrow \mathbb{Z}_r \rightarrow 0 .
+\]
+
+You can either show it directly by constructing the maps required in the sequence, or conclude it by using long exact sequences from the torsion groups.
+\end{problem}
+\begin{proof}
+	We first assume $m = p^r$ and $n = q^s$, where $p, q$ are primes, and $r, s > 0$ are integers.  
+	
+	We consider the following free resolution of $\mathbb{Z}_n$ :
+	\[
+		(\mathbb{Z}_n)_*: \quad 0 \to \mathbb{Z} \xrightarrow{\times n} \mathbb{Z} \to 0
+	.\] 
+	Tensor it with $\mathbb{Z}_m$, we get the following chain complex:
+	\[
+		0 \to \mathbb{Z}_m \xrightarrow{\times n}\mathbb{Z}_m \to 0
+	.\] 
+	Now, if $p, q$ are distinct, then $q^s$ and $p^r$ are coprime, so $\times q^s$ permutes $\mathbb{Z}_{p^r}$, that is, the middle map is an isomorphism. This means we get an exact sequence, so the homology is zero everywhere.
+
+	If $p = q$, then $\times p^r$ is the zero map on $\mathbb{Z}_{p^s}$ whenever $r \ge  s$, and by symmetry of $\text{Tor}$ we may assume $r \ge s$. Hence the zeroth and first homology are $\mathbb{Z}_m$ itself. Therefore,
+	\[
+		\text{Tor}_k^{\mathbb{Z}}\left( \mathbb{Z}_{p^r}, \mathbb{Z}_{q^s} \right) =
+		\begin{cases}
+			\mathbb{Z}_{q^s} &k \in \{0, 1\} \wedge p = q, r \ge s\\
+			0 & \text{otherwise}
+		\end{cases}
+	.\] 
+
+	Now we consider general $m$ and $n$.
+	Apply cyclic decomposition to $m$ and $n$:
+	\[
+		\mathbb{Z}_m = \bigoplus_{i \in I_m} \mathbb{Z}_{p_i^{r_i}} ,
+		\quad
+		\mathbb{Z}_n = \bigoplus_{j \in I_n} \mathbb{Z}_{q_j^{s_j}}
+	,\] 
+	where
+	\[
+		m = \prod_{i \in I_m} p_i ^{r_i}  , \quad
+		n = \prod_{j \in I_n} q_j ^{r_j}
+	.\] 
+	We use the fact that $\text{Tor}$ respects direct sum, therefore
+	\[
+		\text{Tor}_k^{\mathbb{Z}}\left( \mathbb{Z}_m, \mathbb{Z}_n \right) =
+		\bigoplus_{i \in I_m, j \in I_n}
+		\text{Tor}_k^{\mathbb{Z}}\left( \mathbb{Z}_{p_i^{r_i}}, \mathbb{Z}_{q_j^{s_j}} \right)
+	.\] 
+	Evaluating this direct sum gives
+	\[
+		\text{Tor}_k^{\mathbb{Z}}(\mathbb{Z}_m, \mathbb{Z}_n) = \bigoplus_{j \in I_{\text{gcd}(m, n)}} \mathbb{Z}_{q_j^{s_j}}
+		= 
+		\begin{cases}
+			\mathbb{Z}_{\text{gcd}(m, n)} & k = 1, 2 \\
+			0 & \text{otherwise}
+		\end{cases}
+	.\] 
+
+	Now for part (b), we start from the exact sequence
+	\[
+		0 \to \mathbb{Z} \xrightarrow{n} \mathbb{Z} \to \mathbb{Z}_n \to 0
+	.\] 
+	Write out the long exact sequence generated by $\text{Tor}_k^{\mathbb{Z}}(\mathbb{Z}_m, \cdot )$ :
+% https://quiver.local:8080/#q=WzAsNixbMiwwLCJcXHRleHR7VG9yfV8xXlxcWihcXFpfbSwgXFxaKSJdLFs0LDAsIlxcdGV4dHtUb3J9XzFeXFxaKFxcWl9tLCBcXFpfbikiXSxbMCwxLCJcXHRleHR7VG9yfV8wXlxcWihcXFpfbSwgXFxaKSJdLFsyLDEsIlxcdGV4dHtUb3J9XzBeXFxaKFxcWl9tLCBcXFopIl0sWzQsMSwiXFx0ZXh0e1Rvcn1fMF5cXFooXFxaX20sIFxcWl9uKSJdLFswLDIsIjAiXSxbMCwxXSxbMSwyXSxbMyw0XSxbMiwzXSxbNCw1XV0=
+\[\begin{tikzcd}[cramped]
+	&& {\text{Tor}_1^\Z(\Z_m, \Z)} && {\text{Tor}_1^\Z(\Z_m, \Z_n)} \\
+	{\text{Tor}_0^\Z(\Z_m, \Z)} && {\text{Tor}_0^\Z(\Z_m, \Z)} && {\text{Tor}_0^\Z(\Z_m, \Z_n)} \\
+	0
+	\arrow[from=1-3, to=1-5]
+	\arrow[from=1-5, to=2-1]
+	\arrow[from=2-3, to=2-5]
+	\arrow[from=2-1, to=2-3]
+	\arrow[from=2-5, to=3-1]
+\end{tikzcd}\]
+Now, from basic properties of $\text{Tor}$ we get
+\[
+	\text{Tor}_1^{\mathbb{Z}}(\mathbb{Z}_m, \mathbb{Z}) = 0, \qquad
+	\text{Tor}_0^{\mathbb{Z}}(\mathbb{Z}_m, \mathbb{Z}) = \mathbb{Z}_m
+.\] 
+Combined with the previous result
+\[
+	\text{Tor}_k^{\mathbb{Z}}(\mathbb{Z}_m, \mathbb{Z}_n) = \mathbb{Z}_r \quad k = 0, 1
+.\] 
+We get the desired exact sequence
+\[
+	0 \to \mathbb{Z}_r \to \mathbb{Z}_m \to \mathbb{Z}_m \to \mathbb{Z}_r \to 0
+.\] 
+\end{proof}
+
+\begin{problem}
+	(Fundamental theorem of homological algebra.) Let $M, M^{\prime}$ be two $R$-modules and $\epsilon$ : $X_* \rightarrow M, \epsilon^{\prime}: X_*^{\prime} \rightarrow M^{\prime}$ be projective resolutions. For any $R$-module morphism $f:$ $M \rightarrow M^{\prime}$, there exists a chain map, unique up to chain homotopy, $f: X_* \rightarrow X_*^{\prime}$ such that the following diagram commutes,
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJYXyoiXSxbMCwxLCJYXyonIl0sWzEsMCwiTSJdLFsxLDEsIk0nIl0sWzIsMywiZiJdLFswLDEsImYiXSxbMCwyLCJcXGVwc2lsb24iXSxbMSwzLCJcXGVwc2lsb24nIl1d
+\[\begin{tikzcd}[cramped]
+	{X_*} & M \\
+	{X_*'} & {M'}
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["f", from=1-1, to=2-1]
+	\arrow["\epsilon", from=1-1, to=1-2]
+	\arrow["{\epsilon'}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+The existence of such a lifting $f$ was shown in class. Prove the uniqueness.
+\end{problem}
+\begin{proof}
+	Assume $f, g$ are two chain maps $X_* \to X_*'$, we want to construct a chain homotopy $\phi: X_{n} \to X_{n + 1}'$, defined such that $d \phi + \phi d = g - f$.
+
+% https://quiver.local:8080/#q=WzAsMTYsWzUsMSwiWF8wIl0sWzcsMCwiTSJdLFs1LDIsIlgnXzAiXSxbNywzLCJNJyJdLFs0LDEsIlhfMSJdLFs2LDEsIjAiXSxbNiwyLCIwIl0sWzQsMiwiWF8xJyJdLFszLDEsIlxcY2RvdHMiXSxbMywyLCJcXGNkb3RzIl0sWzIsMSwiWF97biAtIDF9Il0sWzIsMiwiWF97biAtIDF9JyJdLFsxLDEsIlhfbiJdLFsxLDIsIlhfbiciXSxbMCwyLCJYX3tuICsgMX0nIl0sWzAsMSwiWF97biArIDF9Il0sWzAsMV0sWzIsM10sWzEsMywiZiwgZyIsMV0sWzAsNV0sWzIsNl0sWzQsMF0sWzcsMl0sWzAsMl0sWzQsN10sWzgsNF0sWzksN10sWzEwLDhdLFsxMSw5XSxbMTIsMTBdLFsxMywxMV0sWzE1LDEyXSxbMTQsMTNdLFsxMCwxMV0sWzEyLDEzXSxbNSwyLCIwIiwxXSxbMCw3LCJcXHBoaV8wIiwxLHsiY29sb3VyIjpbMzAsNjAsNjBdfSxbMzAsNjAsNjAsMV1dLFsxMCwxMywiXFxwaGlfe24gLTF9IiwxXSxbMTIsMTQsIlxccGhpX24iLDEseyJjb2xvdXIiOlszMCw2MCw2MF19LFszMCw2MCw2MCwxXV1d
+\[\begin{tikzcd}[cramped]
+	&&&&&&& M \\
+	{X_{n + 1}} & {X_n} & {X_{n - 1}} & \cdots & {X_1} & {X_0} & 0 \\
+	{X_{n + 1}'} & {X_n'} & {X_{n - 1}'} & \cdots & {X_1'} & {X'_0} & 0 \\
+	&&&&&&& {M'}
+	\arrow[from=2-6, to=1-8]
+	\arrow[from=3-6, to=4-8]
+	\arrow["{f, g}"{description}, from=1-8, to=4-8]
+	\arrow[from=2-6, to=2-7]
+	\arrow[from=3-6, to=3-7]
+	\arrow[from=2-5, to=2-6]
+	\arrow[from=3-5, to=3-6]
+	\arrow[from=2-6, to=3-6]
+	\arrow[from=2-5, to=3-5]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow["0"{description}, from=2-7, to=3-6]
+	\arrow["{\phi_0}"{description}, color={rgb,255:red,214;green,153;blue,92}, from=2-6, to=3-5]
+	\arrow["{\phi_{n -1}}"{description}, from=2-3, to=3-2]
+	\arrow["{\phi_n}"{description}, color={rgb,255:red,214;green,153;blue,92}, from=2-2, to=3-1]
+\end{tikzcd}\]
+
+	We proceed by induction. First we try to construct $\phi_0: X_0 \to X_1'$. The definition of chain homotopy at $X_0$ reads
+	\[
+		d \phi_0 + 0 = g - f
+	.\] 
+	We pick $g - f: X_0 \to X_0'$. Since both $g$ and $f$ are lifting of $f: M \to M'$, we have $\varepsilon'(g - f) = (f - f) \varepsilon = 0$. Therefore $\operatorname{Im} \left( g - f: X_0 \to X_0' \right) \subset \operatorname{ker} \varepsilon' = \operatorname{Im} \left( d: X_1' \to X_0' \right) $. Now we can use the universal property of projective module $X_0$ to obtain $\phi_0: X_0 \to X_1'$ such that $d \phi_0 = g - f$.
+
+	Now we assume that $\phi_{n - 1} $ is defined properly so that $d \phi + \phi d = g - f$ at $X_{n - 1}$. Consider the map $g - f - \phi d : X_n  \to X_n'$. If we can show that $d: X_n' \to X_{n - 1}'$ surjects to $\operatorname{Im} (g - f - \phi d)$, we can apply universal property of projective module $X_n$ to obtain
+	\[
+		\phi_n: X_n \to X'_{n + 1} \text{ such that }
+		d \phi_n = g - f - \phi_{n - 1} d
+	.\] 
+
+	Let's verify. We have
+	\[
+		d(g - f - \phi d) = gd - fd - d \phi d
+		= (g - f - d \phi) d = \phi d d = 0
+	.\] 
+	By exactness at  $X'_n$, $\operatorname{Im} (g - f - \phi d) \subset \operatorname{ker} (d: X_{n}' \to X_{n - 1}')  = \operatorname{Im}(d: X_{n+1}' \to X_{n }') $.
+\end{proof}
+
+\begin{problem}
+	(Homology with coefficient in a finite field.) Let $X$ be a topological space such that $H_n(X)$ and $H_{n-1}(\mathrm{X})$ are finitely generated for some fixed $n$. Let $p$ be a prime number and $\mathbb{F}_p=\mathbb{Z}_p$ be the field of $p$ elements. So $H_n\left(X ; \mathbb{F}_p\right)$ is an $\mathbb{F}_p$ vector space. Prove that the dimension of $H_n\left(X ; \mathbb{F}_p\right)$ is $a+b+c$, where,\\
+- $a$ is the number of $\mathbb{Z}$ summands in $H_n(X)$, i.e., the rank of $H_n(X)$;\\
+- $b$ is the number of summands in $H_n(X)$ of the form $\mathbb{Z}_{p^k}, k \geq 1$;\\
+- $c$ is the number of summands in $H_{n-1}(X)$ of the form $\mathbb{Z}_{p^k}, k \geq 1$.
+\end{problem}
+\begin{proof}
+	Recall $H_n\left( X; \mathbb{F}_p \right) := H_n\left( S_*(X) \otimes \mathbb{F}_p \right) $.
+	The Universal Coefficient Theorem reads
+	\[
+		H_n(X; \mathbb{F}_p) \cong H_n(X) \otimes \mathbb{F}_p \oplus \text{Tor}_1^{\mathbb{Z}}\left( H_{n - 1}(X_{n - 1}),  F_p \right) 
+	.\] 
+	We first compute the $\text{Tor}$ part. First assume $H_{n - 1}(X)$ is of the form $\mathbb{Z}_{p^k}$, $p$ prime. Following a procedure similar to Problem 3, $Tor_1^{\mathbb{Z}}(H_{n - 1}, F_p) $ is first homology of the following chain complex:
+	\[
+		0 \to H_{n - 1}(X) \xrightarrow{\times p} H_{n - 1}(X) \to 0
+	.\] 
+	Now, the kernel of  $(\times p): \mathbb{Z}_{p^k} \to \mathbb{Z}_{p^k}$ is $\{0, p^{k - 1}, 2 p^{k - 1}, (p - 1) p^{k - 1}\} $, which itself is isomorphic to $\mathbb{F}_p$. Thus $\text{Tor}_1^{\mathbb{Z}}(\mathbb{Z}_{p^k}, \mathbb{F}_p) = \mathbb{F}_p$.
+
+	On the other hand, if $H_{n - 1}(X)$ is of the form $\mathbb{Z}_q^r$, $q \neq p$, $q$ prime, then $(\times p)$ becomes an isomorphism. This implies $\text{Tor}_1^{\mathbb{Z}}(\mathbb{Z}_{q^r}, \mathbb{F}_p) = 0$.
+	
+	Also, from basic property of $\text{Tor}$, $\text{Tor}_1^{\mathbb{Z}}(\mathbb{Z}, \mathbb{F}_p) = 0$. 
+
+	Now consider the cyclic decomposition of the abelian group $H_{n - 1}(X)$, and use the direct sum property of $\text{Tor}_1^{\mathbb{Z}}(\cdot , \mathbb{F}_p)$. We see that we obtain a direct sum component $\mathbb{F}_p$ for each component $\mathbb{Z}_{p^k}$ in $H_{n - 1}(X)$. This proves the part of the statement about $c$.
+
+
+	Now let's consider the term $H_n(X) \otimes \mathbb{F}_p$. We have
+	\[
+		\mathbb{Z} \otimes \mathbb{F}_p = \mathbb{F}_p
+	\] 
+	\[
+		\mathbb{Z}_{p^k} \otimes \mathbb{F}_p = \mathbb{F}_p
+	\] 
+	\[
+		\mathbb{Z}_{q^r} \otimes \mathbb{F}_p = 0, \quad q, p \text{ coprime}
+	.\] 
+	This establishes the rest of the claim.
+\end{proof}
+

@@ -14,6 +14,7 @@
 \end{proof}
 
 \begin{theorem}
+	\label{thm:ito-martingale-continuous}
 	Let $u \in \mathbb{H}$, $I_t(u) = \int _0^t u_r d B_r$. Then the following hold:
 	\begin{enumerate}
 		\item $\{I_t(u)\} $ is a martingale.
@@ -40,14 +41,14 @@
 
 	Now recall that sums of martingales are martingales, so
 	\[
-		\{I_s(e^n) - I_t(e^m)\} _{t \in [0,T]} \qquad \text{ is a martingale}
+		\{I_t(e^n) - I_t(e^m)\} _{t \in [0,T]} \qquad \text{ is a martingale}
 	.\] 
 	Therefore, by Doob's maximal inequality,
 	\[
-		P\left( \sup _{0 \le t\le T} \left| I_t(e^m) - I_t(e^m) \right| \ge \varepsilon \right) 
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^n) - I_t(e^m) \right| \ge \varepsilon \right) 
 		\le \frac{1}{\varepsilon^2} E \left| I_T(e^n) - I_T(e^m) \right| ^2
 	.\] 
-	(If an operator takes from L2 to L2, then it takes from weak L2 to L2. This is Chebyshev.)
+	(If an operator takes from L2 to L2, then it takes from weak L2 to L2. This is Chebyshev.) \ask{what does this mean?}
 
 	We have $E \left| I_T(e^n) - I_T(e^m) \right| ^2 \to 0$ as $n , m \to  \infty $. Given $k$, there exists $N_k$ such that $n, m \ge n_k$, $E \left| I_T(e^n) - I_T(e^m) \right| ^2 \le  \frac{1}{2^{3k}}$. Now
 \[
@@ -80,6 +81,10 @@ First, some simple extensions:
 		.\] 
 \end{enumerate}
 
+\subsubsection{Integral wrt Martingales}
+
+
+
 Now we want to make sense of
 \[
 	\int _0^t f(M_t) d M_t
@@ -89,9 +94,10 @@ and
 	\int _0^t \left| f(M_t) \right|^2 d \left\langle M \right\rangle _t 
 .\] 
 
-Now we consider square integrable, continuous martingales.
+Now we consider square integrable, continuous martingales. 
+Recall, that a martingale $M_t$ in $(\Omega, \{\mathcal{F}_t\} _{t \ge 0}, \mathcal{F}, P)$ is an $L^2  $-martingale if $E|M_t|^2 < \infty $ for all $t$.
 
-\begin{theorem}
+\begin{theorem}[Quadratic Variation]
 	Let $\{M_t\} _{t \ge 0}$ be an $L^2$-martingale with continuous paths, and suppose $M_0 = 0$. Then there exists a unique stochastic process $\{\left\langle M \right\rangle _t\} _{t \ge 0}$ such that
 	\begin{enumerate}
 		\item  $t \mapsto \left\langle M \right\rangle _t$ is continuous,
@@ -101,11 +107,22 @@ Now we consider square integrable, continuous martingales.
 	\end{enumerate}
 \end{theorem}
 
+\begin{remark}
 Quadratic variation comes in two places: 1) Doob decomposition, 2) Direct construction.
 
-Note: There is also square bracket $[M_t]$ for process that has jumps.
+Note: There is also square bracket $[M_t]$ for process that has jumps. In general, for a $L^2$ semimartingale, there exists a unique right-continuous and increasing process $\left[ M_t \right] $ starting at zero such that $M - [M]$ is a local martingale.
 
-Note: 
+For continuous locally $L^2$ martingales, Doob decomposition gives the process $\left\langle M \right\rangle _t$, which coincides with $[M_t]$.
+\end{remark}
+
+\begin{fact}
+	If $\Delta_n(t) \to 0$, then
+	\[
+		\sum_{k = 0}^{n - 1} \left| M_{t_{k+1}} - M_{t_k} \right| ^2 \to \left\langle M \right\rangle _t
+	\] 
+	in $L^2$.
+\end{fact}
+
 
 
 

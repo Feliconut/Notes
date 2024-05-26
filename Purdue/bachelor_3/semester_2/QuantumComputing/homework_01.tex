@@ -1,0 +1,134 @@
+\homework{1}{Fri 12 Jan 2024 16:06}{homework}
+
+\begin{problem}
+	Get even more comfortable with bra-ket notation by doing the following two exercises.
+(a) Let $\mathcal{H}$ be a finite dimensional Hilbert space. We define the dual Hilbert space $\mathcal{H}^*$ to be the set of all linear transformations $\rho: \mathcal{H} \rightarrow \mathbb{C}$, that is:
+\[
+\mathcal{H}^*:=\{\rho: \mathcal{H} \rightarrow \mathbb{C} \mid \rho \text { is a linear function }\}
+\]
+
+Recall that if $|\psi\rangle \in \mathcal{H}$, then $\langle\psi|$ is the linear transformtation
+\[
+\begin{aligned}
+\langle\psi|: \mathcal{H} & \rightarrow \mathbb{C} \\
+|\phi\rangle & \mapsto\langle\psi \mid \phi\rangle
+\end{aligned}
+\]
+where $\langle\psi \mid \phi\rangle$ is the inner product.\\
+i. Show that $\mathcal{H}^*$ is a vector space with the same dimension as $\mathcal{H}$.\\
+ii. Show that the function
+\[
+\begin{aligned}
+F: \mathcal{H} & \rightarrow \mathcal{H}^* \\
+|\psi\rangle & \rightarrow\langle\psi|
+\end{aligned}
+\]
+is a bijection. Warning: it is NOT linear (it is anti-linear or conjugate-linear), so you moreor-less need to show injectivity and surjectivity directly. For surjectivity, use the previous problem part (in particular, the fact that $\mathcal{H}$ is finite dimensional).
+In fact, we won't do this, but it's even possible to define an inner product structure on $\mathcal{H}^*$, and the map $|\psi\rangle \mapsto\langle\psi|$ becomes an anti-linear isometry. The moral of the story is that Hilbert spaces are ALMOST isometrically isomorphic to their dual spaces - the only finnicky thing is that the "isomorphism" is not linear, it's anti-linear! This is called the Riesz representation theorem. It's true more generally, i.e. for infinite dimensional Hilbert spaces too.
+
+(b) Let $\mathcal{B}(\mathcal{H})$ be the set of all linear transformations $A: \mathcal{H} \rightarrow \mathcal{H}$.\\
+i. Show that $\mathcal{B}(\mathcal{H})$ is a vector space. What is its dimension?\\
+ii. Show that the map
+\[
+\begin{aligned}
+\mathcal{H} \otimes \mathcal{H}^* & \rightarrow \mathcal{B}(H) \\
+|\phi\rangle \otimes\langle\psi| & \mapsto|\phi\rangle\langle\psi|
+\end{aligned}
+\]
+is a vector space isomorphism.
+\end{problem}
+\begin{proof}
+	A linear operator is completely characterized by how it acts on basis vectors. Let $\left| \psi_n \right\rangle , 0 \le n \le d - 1$ be a basis of $\mathscr{H}$. Each bra $\left\langle \psi_n \right| $ satisfies $\left\langle \psi_n \middle| \psi_m \right\rangle  = \delta_{m n}$. Hence those bras form a basis of  $\mathscr{H}^*$. There are as many base bras as the base kets, so $\mathscr{H}^*$ and $\mathscr{H}^*$ have the same dimension.
+
+To prove injectivity, consider two distinct $\left| \psi \right\rangle , \left| \phi \right\rangle  \in \mathscr{H}$. Then for some arbitrarily chosen basis, there is a basis vector $\left| x \right\rangle $ such that $\left\langle x \middle| \psi \right\rangle \neq \left\langle x \middle| \phi \right\rangle $. But this implies $\left\langle \psi \middle| x \right\rangle \neq \left\langle \phi \middle| x \right\rangle $, so $\left\langle \psi \right| \neq \left\langle \phi \right| $.
+
+	To prove surjectivity, consider any linear $\phi: \mathscr{H} \to  \mathbb{C}$. By Riesz representation theorem, there exists $\left| x \right\rangle  \in \mathscr{H}$, $\phi \left| y \right\rangle = \left\langle x \middle| y \right\rangle $ for all  $\left| y \right\rangle  \in \mathscr{H}$. Thus $F \left| x \right\rangle = \left\langle x \right|  = \phi$.
+
+
+	To check $\mathcal{B}(\mathscr{H})$ is a vector space, we need to verify the additive abelian group structure, and free $\mathbb{C}$-module structure. Take $A, B \in \mathcal{B}(\mathscr{H})$, and $\lambda, \alpha, \beta \in \mathbb{C}, v \in \mathscr{H}$.
+	\begin{itemize}
+		\item Additive closure. $(A + B)(\alpha v_1 + \beta v_2) = A(\alpha v_1 + \beta v_2) + B(\alpha v_1 + \beta v_2) = \alpha A v_1 + \beta A v_2 + \alpha B v_1 + \beta B v_2 = \alpha (A + B) v_1 + \beta (A + B) v_2$.
+		\item Additive commutativity. $(A + B)(\alpha v_1 + \beta v_2) = A(\alpha v_1 + \beta v_2) + B(\alpha v_1 + \beta v_2) = \alpha A v_1 + \beta A v_2 + \alpha B v_1 + \beta B v_2 = \alpha B v_1 + \beta B v_2 + \alpha A v_1 + \beta A v_2  = \alpha (B + A) v_1 + \beta (B + A) v_2$.
+		\item Additive inverse. $(A + 0)(\alpha v_1 + \beta v_2) = A (\alpha v_1 + \beta v_2) + 0(\alpha v_1 + \beta v_2) = A(\alpha v_1 + \beta v_2)$
+		\item Multiplicative closure. $(\lambda A) (\alpha v_1 + \beta v_2) = \lambda A (\alpha v_1) + \lambda A (\beta v_2) = \lambda (\alpha A v_1 + \beta A v_2) = \alpha (\lambda A) v_1 + \beta (\lambda A) v_2$.
+		\item Multiplicative closure. $(1 A) (\alpha v_1 + \beta v_2) = 1 A (\alpha v_1) + 1 A (\beta v_2) = A (\alpha v_1) + A (\beta v_2) = A\left( \alpha v_1 + \beta v_2 \right) $.
+		\item Distributivity is checked similarly.
+	\end{itemize}
+
+	We exhibit a basis of $\mathcal{B}(\mathscr{H})$ : Consider a basis $\left| 0 \right\rangle , \ldots, \left| d- 1 \right\rangle $. Let $B$ be a set consisting of all ket-bras formed by basis: $\left| i \right\rangle \left\langle j \right| $. It is not hard to see they are spanning; we verify they are linearly independent. Suppose
+	\[
+		\left| i \right\rangle \left\langle j \right|  = \sum_{m, n} c_{m, n} \left| m \right\rangle  \left\langle n \right| 
+	.\] 
+	If we left multiply by $\left\langle p \right| $ and right multiply by $\left| q \right\rangle $, we get
+	\[
+		\delta_{i p} \delta_{j q} = \sum_{m, n} c_{m, n} \delta_{m p} \delta_{n q} = c_{p q}
+	.\] 
+	Hence $c_{m n} = 1$ when $m = i, n = j$ and $c_{m, n} = 0 $ otherwise. This shows $B$ is linearly independent.
+
+
+	The map is an isomorphism because it bijectively maps the basis of both vector spaces. 
+\end{proof}
+
+\begin{problem}
+3. In this set of exercises, we dig into the spectral theorem/diagonalization in more detail.\\
+(a) Prove the corollaries of the spectral theorem (Theorem 2.1 in Nielsen and Chuang) that I stated on Tuesday by doing exercises 2.17 and 2.18 . [Hint: being "corollaries" of course means that you should use the spectral theorem in your proof.]\\
+(b) Differing slightly from the book (see page 70), in this problem let us define an orthogonal projector to be a linear operator $P: \mathcal{H} \rightarrow \mathcal{H}$ such that $P^2=P$ and $P^*=P$. Show that $P$ is an orthogonal projector if and only if $P$ is unitarily diagonalizable, with all eigenvalues equal to either 0 or 1 .\\
+(c) Do exercises 2.29-2.32. [Hint: you can use the previous parts of this exercise, or, closely related, Exercise 2.28 (which you need not prove for this problem).]\\
+\end{problem}
+\begin{proof}
+Exercise 2.17: Show that a normal matrix is Hermitian if and only if it has real eigenvalues.	
+
+Exercise 2.18: Show that all eigenvalues of a unitary matrix have modulus 1 , that is, can be written in the form $e^{i \theta}$ for some real $\theta$.
+
+(a)
+From the Spectral Theorem we know that a normal operator is unitarily diagonalizable. On some orthonormal eigenbasis, the operator $A$ has matrix representation $\text{diag}(\lambda_1, \ldots, \lambda_d)$. Now, $A$ is Hermitian iff $A^* = A$, iff $\text{diag}(\lambda_1^*, \ldots, \lambda_d^*) = \text{diag}(\lambda_1, \ldots, \lambda_d)$, iff $\lambda_i \in \mathbb{R}$ for all $i$. Similarly, $A$ is unitary iff $A^* = A^{-1}$, iff $\lambda_i^* = \lambda_i^{-1}$ for all $i$, iff $\lambda_i$ all have magnitude $1$.
+
+
+(b) 
+$P$ Hermitian, so we diagonalize it with real diagonal entries. Now $P^2 = P$ implies $\lambda_i = 1$ or $0$. The converse is trivial.
+\end{proof}
+
+\begin{problem}
+	Exercise 2.29: Show that the tensor product of two unitary operators is unitary.\\
+Exercise 2.30: Show that the tensor product of two Hermitian operators is Hermitian.\\
+Exercise 2.31: Show that the tensor product of two positive operators is positive.\\
+Exercise 2.32: Show that the tensor product of two projectors is a projector.
+\end{problem}
+\begin{proof}
+	Unpack the definitions:
+	\begin{itemize}
+		\item Unitary operators: $\left( A \otimes B \right)^*\left( A \otimes B \right) = (A^* A) \otimes (B^* B) = I \otimes I $
+		\item Hermitian operators: $(A \otimes B)^* = A^* \otimes B^* = A \otimes B$
+		\item Positive operators: $\left\langle (A \otimes B) (v \otimes w), v \otimes w \right\rangle = \left\langle Av, v \right\rangle \left\langle B w, w \right\rangle \ge 0 $ whenever $v, w \neq 0$
+		\item Projectors: $\left( A \otimes B \right) ^2 = A^2 \otimes B^2 = A \otimes B$.
+	\end{itemize}
+\end{proof}
+
+\begin{problem}
+	Get familiar with commutators by doing exercises 2.42,2.44,2.45,2.46 and 2.47 .
+
+	Exercise 2.42: Verify that
+\[
+A B=\frac{[A, B]+\{A, B\}}{2}
+\]
+
+Exercise 2.44: Suppose $[A, B]=0,\{A, B\}=0$, and $A$ is invertible. Show that $B$ must be 0 .
+
+Exercise 2.45: Show that $[A, B]^{\dagger}=\left[B^{\dagger}, A^{\dagger}\right]$.
+
+Exercise 2.46: Show that $[A, B]=-[B, A]$.
+
+Exercise 2.47: Suppose $A$ and $B$ are Hermitian. Show that $i[A, B]$ is Hermitian.
+\end{problem}
+\begin{proof}
+	(2.42) $[A, B] + \{A, B\}  = (AB - BA) + (AB + BA) = 2AB$.
+	
+	(2.44) From definition of commutator and anti-commutator, we can solve and get  $AB = 0$. Since $A$ invertible, multiply on the left by $A^{-1}$ gives $B = 0$.
+
+	(2.45) $[A, B]^\dag = (AB - BA)^\dag = B^\dag A^\dag - A^\dag B^\dag = [B^\dag, A^\dag]$.
+
+	(2.46) $[A, B] + [B, A] = AB - BA + BA - AB = 0$
+
+	(2.47)  $\left( i[A, B] \right) ^* = \left( i AB - iBA \right) ^* = -i (AB)^* + i (BA)^* = -i [B^*, A^*] = i [A^*, B^*] = i[A, B]$.
+\end{proof}
+

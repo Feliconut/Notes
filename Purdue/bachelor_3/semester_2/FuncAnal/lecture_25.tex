@@ -1,0 +1,628 @@
+\lecture{25}{Tue 16 Apr 2024 13:53}{Spectral Measure}
+
+\section{Spectral Theory}
+\subsection{Spectral Measure}
+
+\begin{proposition}
+	\label{prop:SubspaceProjection}
+	Let $H$ be a Hilbert space. There is an one-to-one correspondence between
+	\begin{enumerate}
+		\item Closed subspaces $L$ of $H$,
+		\item Orthogonal projections in $H$, $\text{Proj}(H) = \{P \in B(H): P = P^* = P^2\} $.
+	\end{enumerate}
+\end{proposition}
+Obviously, for $P \in \text{Proj}(H)$, the corresponding subspace is $PH \subset H$.
+
+\begin{remark}
+	Some basic properties:
+	\begin{enumerate}
+		\item (Perpendicularity) $P_{L_1} P_{L_2} = 0 \iff L_1 \perp L_2$, and $P_{L^\perp} = 1 - P_L$.
+		\item (Addition) $P_{L_1} + P_{L_2} = P_{L_1 \oplus L_2}$, when $L_1 \perp L_2$.
+		\item (Multiplication) $P_{L_1} P_{L_2} = P_{L_1 \cap L_2}$, when $P_{L_1} P_{L_2} = P_{L_2} = P_{L_1}$. \todo{Prove this.}
+		\item (Countable Additivity) If $L_{n}$ are mutually orthogonal closed subspaces of $H$, and $L = \bigoplus_{n \in \mathbb{N}} L_n$, then $P_L x = \sum_{n=1}^{\infty} P_{L_n}x $ for all $x \in H$.
+	\end{enumerate}
+\end{remark}
+
+\begin{definition}[Spectral Measure]
+	\label{defn:SpectralMeasure}
+	A \textbf{spectral measure} on a compact Hausdorff space $K$ is a map $E: \text{Borel}(K) \to B(H)$ that satisfies the following properties:
+	\begin{enumerate}
+		\item $E(\emptyset ) = 0, E(K) = \text{Id}_H$
+		\item (Orthogonal projection) $E(\omega) = E(\omega)^2 = E(\omega)^*$.
+		\item $E\left( \omega \cap \omega' \right)  = E(\omega) E(\omega')$
+		\item $E\left( \omega \cup \omega' \right) = E(\omega) + E(\omega')$ if $\omega \cap \omega '= \emptyset $
+		\item (Countable additivity) If  $\omega_n \in \text{Borel}(K)$ are disjoint, then for all $x \in H$,
+			\[
+				E\left( \cup _{n = 1}^\infty  \omega_n \right)  x = \sum_{n = 1}^\infty E(\omega_n) x
+			.\] 
+	\end{enumerate}
+\end{definition}
+
+\textbf{Induced Partition.}
+By condition (5) above, a partition $\omega = \cup_{n = 1}^\infty  \omega_n$ induces a direct sum decomposition
+\[
+	E(\omega) H = \bigoplus_{n = 1} ^\infty  E(\omega_n) H
+.\] 
+
+\textbf{Induced Borel Measure.} 
+Every $x \in H$ induces a Borel measure
+\[
+	\omega \mapsto \left\langle E(\omega) x, x \right\rangle 
+	= \|E(\omega) x\|^2 =: \mu_{x, x}(\omega) \in [0,\infty )
+.\] 
+The additivity of this measure follows from Parseval's identity:
+\[
+	\|E(\omega) x\|^2 = \sum_{n=1}^{\infty} \|E(\omega_n) x\|^2
+.\] 
+
+Moreover,
+\[
+	\omega \mapsto \left\langle E(\omega) x, y \right\rangle 
+	=: \mu_{x, y}(\omega) \in \mathbb{C}
+\] 
+is a complex measure.
+
+\subsection{Spectral Measure for Normal Operators}
+
+Recall Theorem~\ref{thm:BoundedFunctionalCalculus}, we may define a spectral measure on $K$ by the formula
+\[
+	E(\omega) = \Phi(\chi_\omega), \quad \forall \omega \in \text{Borel}(K)
+.\] 
+
+\begin{proposition}
+	\label{prop:SpectralMeasureFunctional}
+	$\omega \mapsto \Phi(\chi_\omega) =:E(\omega)$ defines a spectral measure.
+\end{proposition}
+\begin{proof}
+	$\chi_\omega$ satisfies $\chi_\omega = \chi_\omega^2 = \overline{\chi_\omega} $, so by *-homomorphism property of $\Omega$, $E(\omega)$ is an orthogonal projection.
+
+	All other properties are obvious except perhaps (5). Let $\omega = \bigcup_{n = 1} ^\infty  \omega_n$ be a partition. We want to show $E\left( \omega \right) x = \sum_{n = 1}^\infty  E(\omega_n) x$. 
+
+	Let $f = \chi_\omega, f_n = \chi_{\omega_1} + \ldots + \chi_{\omega_n}$. Since $f_n \to f$ pointwise in $K$, we have $\|\Phi(f_n) x  - \Phi(f) x\| \to 0$ by strong operator continuity. Thus,
+	\[
+		E(\omega) x = \sum_{n=1}^{\infty} E(\omega_n) x, \quad \forall  x \in H
+	.\] 
+\end{proof}
+
+\begin{remark}
+	At this step we do not know if the spectral measure $E$ associated to the bounded functional calculus is unique; since we don't know anything about uniqueness of the extension $\Phi$.
+
+	Both $E$ and $\Phi$ will be shown to be unique using the tool of spectral integration, in Theorem~\ref{thm:SpectMeasUnique}.
+\end{remark}
+
+\subsection{Spectral Integration}
+
+Now, for every function $f \in \mathcal{B}_\infty (K)$, we try to define
+\[
+	\int _K f d E \in B(H)
+.\] 
+As it will turn out, this construction coincides with $\Phi$, thus establishing the uniqueness of $\Phi$.
+
+\textbf{Step 1. Integral of simple functions.} We consider the $*$-algebra of simple Borel functions $\mathcal{S}(K)$. Each element $f \in \mathcal{S}(K)$ has the form $f = \sum_{i = 1}^n \lambda_i \chi_{\omega_i}$, were $\omega_i$ form a finite Borel partition of $K$, and $\lambda_i \in \mathbb{C}$.
+
+For such a function, define the integral to be
+\[
+	\int_K f d E \equiv \Psi_E(f) = \sum_{i = 1}^n \lambda_i E(\omega_i)
+.\] 
+Note, that the integral is a $*$-homomorphism of $C^*$-algebras $\mathcal{S}(K) \to B(H)$.
+
+\textbf{Step 2. Approximating Borel functions by simple functions.} We may claim that $\mathcal{S}(K)$ is dense in $\mathcal{B}_\infty (K)$ in the sup norm. Indeed, pick any $g \in \mathcal{B}_\infty (K)$, and since $g$ is a bounded function, we can form a Borel partition $\omega_1, \ldots, \omega_n$ of its image, where each $\omega_i$ has diameter less than $\varepsilon$. Pick $\lambda_i \in \omega_i$. Now let $f$ be the function taking value $\lambda_i$ on $g^{-1}(\omega_i)$. Now $\|g - f\|_\infty  < \varepsilon$.
+
+\textbf{Step 3. Integral is a contraction.} We check that $\|\Psi_E(f)\| \le \|f\|_\infty$. Indeed, $\|\sum_{i = 1}^n \lambda_i E(\omega_i)\|\le \sup |\lambda_i| \|E(K)\| = \sup |\lambda_i| = \|f\|_\infty $.
+
+\textbf{Step 4. Unique Extension.} Thus, $\Psi$ uniquely extends to a unital $*$-homomorphism of $C^*$-algebras
+\[
+	\Psi_E: \mathcal{B}_\infty (K) \to B(H)
+.\] 
+Denoted
+\[
+	\Psi_E(f) = \int _K f d E
+.\] 
+
+This concludes the construction of spectral integration. Let us take some time to verify that spectral integration agrees with the bounded functional calculus.
+
+\begin{proposition}
+	\label{prop:SpectralAndCalculus}
+	Let $E$ be a spectral measure defined from a bounded functional calculus $\Phi$, in Proposition~\ref{prop:SpectralMeasureFunctional}. Then for every $f \in \mathcal{B}_{\infty }(K)$, and $x, y \in H$
+	\[
+		\left\langle \Phi(f) x, y \right\rangle 
+		= \int _K f d\left\langle E(\cdot ) x, y \right\rangle 
+	.\] 
+
+	This implies
+	\[
+		\Phi(f) = \int _K f d E
+	.\] 
+\end{proposition}
+\begin{proof}
+	From definition of $E$, the two functionals $f\mapsto \left\langle \Phi x, y\right\rangle $ and $f\mapsto \int _K f d\left\langle E(\cdot )x, y \right\rangle $ agree on $\mathcal{S}(K)$. Indeed, for $ f\in \mathcal{S}(K)$, 
+	\[
+		\int _K f d\left\langle E(\cdot )x, y \right\rangle 
+	= \sum_{i = 1}^n \left\langle E(\omega_i)x, y \right\rangle 
+= \sum_{i = 1}^n \left\langle \Phi(\chi_{\omega_i})x, y \right\rangle 
+= \left\langle \Phi(f) x, y \right\rangle 
+.\]
+Thus, they agree since $\mathcal{S}(K)$ is dense in  $\mathcal{B}_\infty \left(K \right) $.
+\end{proof}
+
+\begin{remark}
+	Recall that the spectral measure $E$ induces a (complex) Borel measure $\mu_{x, y}$ for some $x, y \in H$. Now we can also consider integral over the induced measure.
+	 \[
+		\left\langle \left( \int_K f d E \right) x, y \right\rangle = \int _K f d \left\langle E(\cdot )x, y \right\rangle 
+		= \int _K f d \mu_{x, y}
+	.\] 
+\end{remark}
+
+\begin{example}
+	Let $\mu$ be Borel measure on $K$, $\mu(K) = 1$. Then
+	\begin{align*}
+		E: \text{Borel}(K) &\longrightarrow \text{Proj}(L^2(K, \mu)) \\
+		\omega &\longmapsto E(\omega) = M_{\chi_\omega}
+	\end{align*}
+	is a spectral measure.
+
+	One verifies that
+	\[
+		\int _K f d E = M_f \in B(L^2(K, \mu))
+	.\] 
+	Moreover, if $h, k \in L^2(K, \mu)$, then
+	\[
+		\left\langle \left(\int _K f dE\right)h, k \right\rangle = \int _K f d\mu_{h, k}, \quad d \mu_{h, k} = h \overline{k} d \mu
+	.\] 
+	Thus, $\int _K f d E$ encapsulates at once all integrals $\int _K f d \nu$ where $\nu \ll \mu$.
+
+\end{example}
+
+\begin{lemma}[Polarization Identity]
+	\label{lem:Polarization}
+	Let $V$ be an inner product space over $\mathbb{C}$, with $\left\langle \cdot , \cdot  \right\rangle : V \times V \to \mathbb{C}$ sesquilinear. Then for all $x, y \in V$,
+	\[
+		\left\langle x, y \right\rangle 
+		= \frac{1}{4} \sum_{k = 1}^4 i^k \left\langle x + i^k y, x + i^k y \right\rangle 
+		= \frac{1}{4} \sum_{k = 1}^4 i^k \|x + i^k y\|^2
+	.\] 
+\end{lemma}
+\begin{proof}
+	Write
+	\[
+		i^k \left\langle x + i^k y, x + i^k y \right\rangle 
+		= i^k \left\langle x, x \right\rangle 
+		+ \left\langle x, y \right\rangle 
+		+ (-1)^k \left\langle y, x \right\rangle 
+		+ i^k \left\langle y, y \right\rangle 
+	.\] 
+	Then do some algebra.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:Polarization}
+	Let $S, T: H \to H$ be linear maps on a Hilbert space $H$. If $\left\langle Sx, x \right\rangle  = \left\langle T x, x \right\rangle $ for all $x \in H$, then $S = T$.
+\end{corollary}
+\begin{proof}
+	Suppose $\left\langle Tu, u \right\rangle = 0$ for all $u \in H$. From the last lemma, after some more annoying algebra, we have the identity
+	\[
+		\langle T u, w\rangle=\frac{\langle T(u+w), u+w\rangle-\langle T(u-w), u-w\rangle}{4}+\frac{\langle T(u+i w), u+i w\rangle-\langle T(u-i w), u-i w\rangle}{4} i
+	.\]
+	Thus, $\left\langle Tu, w \right\rangle = 0$ for all $u, w \in H$. In particular this implies $\left\langle Tu, Tu \right\rangle  = 0$. Hence $T = 0$.
+
+\end{proof}
+
+\begin{theorem}[Uniqueness of Spectral Measure]
+	\label{thm:SpectMeasUnique}
+	For any unital $*$-representation $\varphi: C(K) \to B(H)$ there is a unique spectral measure $E: \text{Borel}(K) \to \text{Proj}(H)$ such that
+	\[
+		\left\langle \varphi(f)x, x \right\rangle 
+		= \int _K f d\left\langle E(\cdot )x, x \right\rangle 
+		, \quad \forall f \in C(K), \forall x \in H
+	.\] 
+	Moreover, $\varphi$ extends \textit{uniquely} to a unital  $*$-representation $\Phi: \mathcal{B}_{\infty }\left( K \right) \to B(H)$. 
+
+\end{theorem}
+\begin{proof}
+	Existence is proved in Proposition~\ref{prop:SpectralMeasureFunctional}. Now suppose there are two spectral measures $E, E'$ satisfying the assumption, then for every $f \in C(K)$ and $x \in H$,
+	\[
+		\left\langle \varphi(f) x, x \right\rangle 
+		= \int _K f d \left\langle E(\cdot )x, x \right\rangle 
+		= \int _K f d\left\langle E'(\cdot )x, x \right\rangle 
+	.\] 
+	By the Riesz-Markov-Kakutani representation theorem (Theorem~\ref{thm:RieszMarkovKakutaniRepresentatithm}), the two Borel measures $d\left\langle E(\cdot )x, x \right\rangle $ and $d\left\langle E'(\cdot )x, x \right\rangle $ are the same.
+
+	Hence $\left\langle E(\omega) x, x \right\rangle  = \left\langle E'(\omega) x, x \right\rangle $ for all $x \in H$, $\omega \in \text{Borel}(K)$. Corollary~\ref{cor:Polarization} implies $E(\omega) = E(\omega')$.
+
+	Now, suppose a continuous functional calculus $\varphi: C(K) \to B(H)$ has a unique spectral measure associated to it, as we just proved. But this spectral measure characterizes any extension $\Phi: \mathcal{B}_\infty (K) \to B(H)$, as in Proposition~\ref{prop:SpectralAndCalculus}. Thus the extension $\Phi$ is unique.
+\end{proof}
+
+	The properties proved for $\Phi$ in Theorem~\ref{thm:BoundedFunctionalCalculus}, by Proposition~\ref{prop:SpectralAndCalculus}, are true for $E$.
+\begin{corollary}
+	\label{cor:ContSpecIntegral}
+	(1) Whenever $f_n \to f$ pointwise, we have
+	\[
+		\left(\int _K f_n dE \right)x \to 
+		\left( \int _K f dE \right) x, \quad \forall x \in H
+	.\] 
+	
+	(2) If $\varphi$ is injective, then $E(\omega)\neq 0$ for all open nonempty subsets $\omega$ of $K$.
+\end{corollary}
+
+\subsection{Spectral Theory for Normal Operators}
+
+Spectral integration gives us a way to \textbf{diagonalize} normal operators. Set $f = z$ in  Proposition~\ref{prop:SpectralAndCalculus} we get
+\[
+	T = \int _K \lambda d E(\lambda)
+.\] 
+
+Moreover, spectral integration gives us a way to compute norms, just like in the bounded functional calculus:
+\[
+	\|f(T)x\|^2 = \int _K |f(\lambda)|^2 d \|E(\lambda)x\|^2
+.\] 
+\begin{proof}
+	\[
+		\|f(T) x\|^2
+		= \left\langle f(T) x, f(T) x \right\rangle 
+		= \left\langle f(T^* T) x, x \right\rangle 
+		= \left\langle f(|T|^2)x, x \right\rangle 
+		= \int _K |f(\lambda)|^2 d \|E(\lambda) x\|^2
+	.\] 
+\end{proof}
+
+The spectral integral lets us understand spectral properties of normal operators very, very well.
+
+Recall, that an element of the spectrum $\lambda \in \sigma(T)$ is an \textit{eigenvalue} if it admits some eigenvector, i.e. $\operatorname{dim} \operatorname{ker} (T - \lambda) > 0$, i.e. $T - \lambda$ is not injective. The collection of eigenvalues are referred to as the \textit{point spectrum}.
+
+\begin{lemma}
+	\label{lem:KerfT}
+	Let $T \in B(H)$ be normal. If $f \in C(K)$, then $\operatorname{ker} f(T) = E\left( f^{-1}(0) \right) H$.
+\end{lemma}
+\begin{proof}
+	$x \in \operatorname{ker} f(T)$ iff
+	\[
+		\|f(T) x\|^2 = \int _K |f(\lambda)|^2 d \|E(\lambda)x\|^2 = 0
+	.\] 
+	This implies $\|E\left( \{\lambda: f(\lambda) \neq 0\}  \right) x\|^2 = 0$, iff $x \in E\left( \{\lambda: f(\lambda) = 0\}  \right) H$.
+\end{proof}
+
+
+\begin{proposition}[Spectrum of Normal Operator]
+	\label{prop:SpectrumNormalOperator}
+	Let $T \in B(H)$ be normal. Then
+	\begin{enumerate}
+		\item $\lambda_0 \in \sigma(T)$ is an eigenvalue of $T$, if and only if $E(\lambda_0) \neq 0$.
+		\item $\lambda_0 \in \sigma(T)$ is an eigenvalue of $T$ if $\lambda_0$ is isolated.
+		\item (Diagonalization) If $\sigma(T)$ is countable, then
+			\[
+				T x = \sum_{n \ge 1} \lambda_n E(\lambda_n) x, \quad  \forall x \in H
+			.\] 
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item Apply Lemma~\ref{lem:KerfT} taking $f(\lambda) = \lambda - \lambda_0$, we see $\operatorname{ker} (T - \lambda_0) = E(\lambda_0) H$, whose dimension nonzero iff $E(\lambda_0)\neq 0$.
+		\item $\{\lambda_0\} $ is a nonempty open subset of $\sigma(T)$, so $E(\lambda_0) \neq 0$ by Corollary~\ref{cor:ContSpecIntegral}.
+		\item The sequence of functions $f_n = \sum_{i = 1}^n \lambda_i \chi_{\lambda_i}$ in $\mathcal{B}_{\infty }(\sigma(T))$ converges pointwise to $f(\lambda) = \lambda$. Corollary~\ref{cor:ContSpecIntegral} says the respective integral converges in strong operator topology.
+	\end{enumerate}
+\end{proof}
+
+\subsubsection{Approximate Eigenvalue}
+
+\begin{definition}[Approximate Eigenvalue]
+	\label{defn:ApproximateEigenvalue}
+	
+	Consider a Banach space $X$, and $T \in B(X)$. A scalar $\lambda \in \mathbb{C}$ is said to be an \textit{approximate eigenvalue} for $T$ if there exists a sequence of unit vectors $x_n \in X$ such that $T(x_n) - \lambda x_n \to 0$.
+\end{definition}
+
+\begin{example}
+	(An approximate eigenvalue that is not an eigenvalue.) 
+	Let $e_n$ be an orthonormal sequence in a Hilbert space $H$. Let $\lambda_n \to \lambda$ and $\lambda_n \neq \lambda$. Define 
+	\[
+		T x = \sum_{n = 1}^\infty  \lambda_n \left\langle x, e_n \right\rangle e_n
+	.\] 
+	Then, every $\lambda_n$ is an eigenvalue of $T$, but $\lambda$ is not, since $H = \oplus E(\lambda_n)$, non of which contain a $\lambda$-eigenvector.
+
+	On the other hand,
+	\[
+		\|T e_n - \lambda e_n\|= \|\lambda_n e_n - \lambda e_n\| = |\lambda_n - \lambda| \to 0
+	.\] 
+	Thus $\lambda$ is an approximate eigenvalue of $T$.
+\end{example}
+
+\begin{proposition} (A problem from Conway)
+	\label{prop:ApproxEigen}
+	Let $T \in B(X)$ where $X$ is a Banach space.
+	\begin{itemize}
+		\item Every eigenvalue for $T$ is an approximate eigenvalue for $T$.
+		\item Every approximate eigenvalue $T$ lies in $\sigma(T)$.
+		\item If $X$ is a Hilbert space, then $\lambda \in \sigma(T)$ iff either $\lambda$ is an approximate eigenvalue for $T$ or $\overline{\lambda} $ is an eigenvalue for $T^*$.
+	\end{itemize}
+\end{proposition}
+\todo{Do this problem.}
+
+\begin{lemma}
+	\label{lem:Eepsilon}
+	Let $T \in B(H)$ be normal.
+	For any $\varepsilon>0$, let $\omega = \{\sigma(T) \cap U(\lambda_0, \varepsilon)\}$, we have
+			\[
+				\|(T - \lambda_0) E\left( \omega  \right) \| \le  \varepsilon
+			.\] 
+\end{lemma}
+\begin{proof}
+	Let $f(\lambda) = (\lambda - \lambda_0)\chi_\omega$. Then
+	\[
+		\|(T - \lambda_0) E(\omega)\|
+		= \|\int f d E\|
+		= \|\Phi(f)\|
+		\le \|f\|
+		\le \varepsilon
+	.\] 
+\end{proof}
+
+
+\begin{proposition}
+	\label{prop:ApproxEigenNormal}
+	Let $T \in B(H)$ be normal operator in Hilbert space $H$. Then
+	\begin{enumerate}
+		\item Every $\lambda_0 \in \sigma(T)$ is an approximate eigenvalue.
+		\item If $\lambda_0$ is a cluster point of $\sigma(T)$, we can choose $(x_n)$ to be an orthonormal sequence contained in $\operatorname{ker} (T - \lambda_0)^\perp$, and such that $(T - \lambda_0) x_n \to 0$.
+
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	(1) For each $\varepsilon_n = \frac{1}{n}$, we may choose unit vector $x_n \in E(\omega_n) H$ where $\omega_n = \sigma(T) \cap U(\lambda_0, \varepsilon_n)$. Then $\|(T - \lambda_0) x_n\| = \|(T - \lambda_0) E(\omega_n) x_n\| \le \frac{1}{n} \|x_n\| = \frac{1}{n}$.
+	
+	(2) If $\lambda_0$ is cluster point in $\sigma(T)$, we may find a sequence of distinct points $\lambda_n$ in $\sigma(T)$ such that $\lambda_n \to \lambda_0$. Let $\varepsilon_n >0$ be converging to $0$ such that $\lambda_0 \not\in U(\lambda_n, \varepsilon_n)$. Then, we may choose $x_n \in E(\omega_n) H$. From construction, $x_n \not\in E(\lambda_0)$ thus $x \in \operatorname{ker} \left( T - \lambda_0 \right) ^\perp $ (see Lemma~\ref{lem:KerfT}), and
+	\[
+		\|(T - \lambda_0) x_n\| \le \|(T - \lambda_n) x_n\| + \|(\lambda_n - \lambda_0) x_n\| \le  \varepsilon_n + |\lambda_n - \lambda_0| \to 0
+	.\] 
+\end{proof}
+
+\begin{corollary}
+	\label{cor:NormalNorm}
+	If $T \in B(H)$ is normal, then
+	\[
+		\|T\| = \sup _{\|x\| \le 1} \left| \left\langle Tx, x \right\rangle  \right| 
+	.\]
+\end{corollary}
+\begin{proof}
+	Since $r(T) = \|T\|$, we may pick $\lambda_0 \in \sigma(T)$ such that $|\lambda_0| = \|T\|$. By part (1) of the previous proposition, there is a sequence $(x_n)$ of unit vectors in $H$ such that $\left\langle T x_n, x_n \right\rangle  \to \lambda_0$, and hence $\left| \left\langle T x_n, x_n \right\rangle  \right|  \to  |\lambda_0| = \|T\|$. Thus
+	\[
+		\|T\| \le \sup _{\|x\| \le 1} \left| \left\langle Tx, x \right\rangle  \right| 
+	.\] 
+	The opposite inequality is immediate:
+	\[
+		\left| \left\langle Tx, x \right\rangle  \right| 
+		\le \|Tx\| \|x\|
+		\le \|T\| \|x\|^2 \le \|T\|
+	.\] 
+\end{proof}
+
+\begin{corollary}
+	\label{cor:NormalIsolatedZero}
+	Let $T \in B(H)$ be normal. Then the following are equivalent:
+	\begin{enumerate}
+		\item There is  $C > 0$ such that $\|T x\| \ge C \text{dist}(x, \operatorname{ker} T)$ for all $x \in H$.
+		\item The range of $T$ is closed.
+		\item $0$ is an isolated point of $\{0\} \cup \sigma(T)$.
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	(1) $\iff $ (2) is proved in Lemma~\ref{lem:RangeClosedBoundedBelow}. 
+
+	We show $(1) \iff (3)$.
+
+	Assume $0$ is an isolated point. If $0 \not\in \sigma(T)$, (1) follows from open mapping theorem. Now assume $0 \in \sigma(T)$. There exists some $\varepsilon>0$, such that $\sigma(T) \cap U(0,\varepsilon) = \{0\} $. Let $\omega = \sigma(T) \setminus U(0,\varepsilon)$. Then, since $T E(0) = 0$,
+	\[
+		\|T x\|^2
+		= \|T E (\omega) x\|^2
+		= \int _\omega |\lambda|^2 d \|E(\lambda)x\|^2
+		\ge \int _\omega C^2 d \|E(\lambda) x\|^2
+		= C^2 \|E(\omega) x\|^2
+	.\] 
+	But $\|E(\omega) x\| = \text{dist}(x, \operatorname{ker} T)$.
+
+	For the other side, suppose $0 \in \sigma(T)$ is not isolated.
+	Then we may choose a sequence of unit vectors $(x_n)$ as in (2) of Proposition~\ref{prop:ApproxEigenNormal}, 
+	and $x_n \perp \operatorname{ker} T$, 
+	thus $\text{dist}(x_n, \operatorname{ker} T) = \|x_n\| = 1$, but $\|T x_n\|\to 0$, this contradicts (1).
+\end{proof}
+
+
+
+The approximate eigenvalues are closely related to the continuous spectrum:
+\begin{proposition}
+	\label{prop:ApproxEigenDense}
+	Let $H$ be a Hilbert space and $T \in B(H)$. Then $\lambda$ is an approximate eigenvalue of $T$ if and only if $\operatorname{Im} (T - \lambda)$ is dense in $H$.
+\end{proposition}
+
+
+
+
+
+
+
+
+
+\begin{lemma}
+	\label{lem:BoundedBelowNormal}
+	Let $H$ be a Hilbert space. Then a normal operator $T \in B(H)$ is invertible iff it is bounded below, i.e. there exists some constant $c>0$ such that $\|T x\| \ge c \|x\|$ for all $x \in X$.
+\end{lemma}
+\begin{proof}
+	In view of the previous lemma, we only need to show that a normal operator bounded below has dense range. Well,
+	\[
+		\|T^* x\|^2 = \left\langle T^* x, T^*x \right\rangle 
+		= \left\langle Tx, Tx \right\rangle 
+		= \|T x\|^2
+	.\] 
+	Thus
+	\[
+		\left( \operatorname{Im} T \right) ^\perp
+		= \operatorname{ker} T^*
+		= \operatorname{ker} T
+		= \{0\} 
+	.\] 
+	The first equality is standard result for bounded operators in Hilbert space. The second equality we just proved. The third equality is because $T$ is bounded below.
+\end{proof}
+
+
+\begin{lemma}
+	\label{lem:BoundedBelowSequence}
+	A map $u: X \to Y$ between Banach spaces is not bounded below if and only if there is a sequence of unit vectors $(x_n)$ in $X$ such that $\|u(x_n)\|\to 0$.
+\end{lemma}
+\begin{proof}
+	If $\|u(x_n)\|\to 0$ then certainly it cannot be the case that $\|u(x_n)\| \ge c \|x_n\| = c$.
+
+	Conversely, if  $u$ is not bounded from below then we can choose $x_n$ such that $\|u (x_n)\| \le \frac{1}{n} \|x_n\|$, and the sequence $\left( x_n / \|x_n\| \right) $ will suffice.
+\end{proof}
+
+
+\subsubsection{Positive Operator}
+
+\begin{definition}[Positive Operator]
+	\label{defn:PositiveOperator}
+	Let $H$ be a Hilbert space and $T \in B(H)$. $T$ is said to be \textit{positive semidefinite} if $\left\langle Tx, x \right\rangle \ge 0$ for all $x \in H$. We write $T \ge 0$.
+\end{definition}
+
+\begin{proposition}
+	\label{prop:PositiveSA}
+	Let $H$ be a Hilbert space and $T \in B(H)$. $T \ge 0$ implies $T = T^*$.
+\end{proposition}
+\begin{proof}
+	We have
+	\[
+		0 \le \left\langle Tx, x \right\rangle  = \overline{\left\langle Tx,x \right\rangle }  = \left\langle x, T x \right\rangle 
+	.\] 
+	Thus
+	\[
+		\left\langle x, T^* x \right\rangle  = \left\langle Tx, x \right\rangle  = \left\langle x, T x \right\rangle 
+	.\] 
+	Therefore $T = T^*$, by Polarization identity.
+\end{proof}
+
+
+
+\begin{remark}
+	In particular, it means for any positive operator $T \in B(H)$, we have $\sigma(T) \subset [0,\infty )$, so $T^{\frac{1}{2}}$ is uniquely defined as a positive operator. 
+
+	To see this, $T = T^*$ implies $\sigma(T) \subset \mathbb{R}$ by spectral mapping theorem. One can show $\left\langle T x, x \right\rangle \ge 0$ implies $\sigma(T) \subset [0,\infty )$ by using approximate eigenvectors: $\left\langle T x_n, x_n \right\rangle  \to \left\langle \lambda x_n , x_n \right\rangle= \lambda \ge 0 $.
+	%\ask{Are we using here the characterization of positive elements in Cstar algebra? Or the properties follow from spectral integration?}
+\end{remark}
+
+\subsubsection{Polar Decomposition}
+
+\begin{definition}[Partial Isometry]
+	\label{defn:PartialIsometry}
+	$u \in A$ in a $C^*$ algebra is called a partial isometry if $e^* e$ is an orthogonal projection.
+\end{definition}
+
+We call $(\operatorname{ker} V)^\perp =:H_0$ the \textit{initial subspace} of $V$ and  $\operatorname{Im} V = V(H_0)$ the \textit{final subspace} of $V$.
+
+$V$ is almost an isometry in the sense that for $P = V^* V \in \text{Proj}(H)$,
+\[
+	\|V x\|^2 = \left\langle V x, V x \right\rangle 
+	= \left\langle P x, x \right\rangle 
+	= \|P x\|^2
+.\] 
+
+\begin{lemma}
+	\label{lem:PartialIsometry}
+	$u$ is a partial isometry iff $u^*$ is a partial isometry.
+\end{lemma}
+\begin{proof}
+	We know that $u^* u = (u^* u)^2$.
+	We want to show $u u^*$ is idempotent.
+\[
+\begin{aligned}
+\left\|u u^*-\left(u u^*\right)^2\right\|^2 & =\left\|\left(u u^*-\left(u u^*\right)^2\right)^2\right\|=\left\|\left(u u^*\right)^2-2\left(u u^*\right)^3+\left(u u^*\right)^4\right\| \\
+& =\left\|u u^*-2 u e u^*+u e u^{* *}\right\|=0.
+\end{aligned}
+\]
+\end{proof}
+
+
+
+
+\begin{theorem}[Polar Decomposition]
+	\label{thm:PolarDecomposition}
+	Every $T \in B(H)$ can be decomposed as
+	\[
+		T = V |T|, \quad |T| := \sqrt{T^* T} 
+	\] 
+	such that
+	\begin{itemize}
+		\item $V$ is a partial isometry.
+		\item $\operatorname{Ker} V = \operatorname{Ker} T$.
+	\end{itemize}
+	The decomposition is unique, in the sense that whenever we have
+	\[
+		T = W P
+	\] 
+	where $W$ is partial isometry, $P$ is positive, $\operatorname{ker} W = \operatorname{ker} P$, we have $W = V$ and $P = |T|$.
+\end{theorem}
+\begin{proof}
+	We first construct such a decomposition. $|T|$ is a positive operator, and satisfies
+	\[
+		\|T x\|^2 = \| |T| x\|^2, \quad \forall  x \in H
+	.\] 
+	Thus, $\operatorname{ker} T = \operatorname{ker} |T|$. We define
+	\begin{align*}
+		V: \operatorname{Im} (|T|) &\longrightarrow \operatorname{Im} T \\
+		|T|x &\longmapsto V(|T|x) = Tx
+	.\end{align*}
+	We see that $V$ is an isometry. We extend $V$ to an isometry on $\overline{\operatorname{Im} (|T|)} $. 
+
+	Now $H = \overline{\operatorname{Im} (|T|)} \oplus \left( \overline{\operatorname{Im} (|T|)}  \right) ^\perp$. Extend $V$ to a partial isometry on $H$ by setting it zero on $\left( \overline{\operatorname{Im} (|T|)}  \right) ^\perp$. We see that $T = V |T|$ by construction, and $\operatorname{ker} V = \operatorname{ker} |T| = \operatorname{ker} T$.
+
+	Now let's prove uniqueness. Assume that
+	\[
+		T = W P
+	\] 
+	for some partial isometry $V$ and positive $P$. Then
+	\[
+		|T|^2 = P W^* W P = P |W|^2 P
+	.\] 
+	Since $\operatorname{ker} |W|^2 = \operatorname{ker} V = \operatorname{ker} P$ by assumption, we have
+	\[
+		|T|^2 = P^2
+	.\] 
+	Each side is a positive operator. By the uniqueness of square root, $|T| = P$. Hence
+	\[
+		T = V |T| = W |T|
+	.\] 
+	But $\operatorname{ker} V = \operatorname{ker} |T| = \operatorname{ker} W$. Thus $V  = W$.
+\end{proof}
+
+\begin{remark}
+	Let $T \in B(H)$ as in the theorem. Then
+	\begin{itemize}
+		\item 
+	If $T$ is invertible, then $V$ is an isometry.
+
+	\item
+	$T$ has closed range iff $|T|$ has closed range. To see this, observe that $V^* V |T| = |T|, VV^* T = T \implies |T| = V^* T$.
+	\end{itemize}
+\end{remark}
+
+\begin{proposition}
+	\label{prop:MatrixPartialIsometry}
+	Let $H$ be a Hilbert space with orthonormal basis $(x_n)$. $T \in B(H)$ is a partial isometry if and only if there exists another orthonormal basis $ (y_n)$ such that
+	\[
+		T = \sum_{n \ge 1} \left\langle \cdot , x_n \right\rangle y_n
+	.\] 
+\end{proposition}
+\begin{proof}
+	\todo{omitted for now.}
+\end{proof}
+
+
+\begin{theorem}[Singular Value Decomposition]
+	\label{thm:SingularValueDecomposition}
+	Let $T \in B(H)$. Then there exists two partial isometries $W, V$ and a positive operator $D \ge 0$ such that
+	\[
+		T = W D V^*
+	.\] 
+	The eigenvalues of $D$ are called the \textit{singular values} of $T$.
+\end{theorem}
+\todo{prove this.}
+
+
+
+
+

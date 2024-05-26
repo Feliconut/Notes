@@ -1,0 +1,76 @@
+\lecture{18}{Tue 20 Feb 2024 17:06}{Spectrum and Functional Calculus}
+
+\subsubsection{Spectral Radius Formula}
+
+\begin{definition}[Spectral Radius]
+	\label{defn:SpectralRadius}
+	If $a \in A$, define its \textit{spectral radius} by $r_A(a) = \sup \{|\lambda| : \lambda \in \sigma_A(a)\} $.
+\end{definition}
+
+\begin{lemma}
+	\label{lem:ProductInv}
+	Let $x, y \in A$ and $x y = y x$. Then we have
+	\[
+		x y \in \text{GL}(A) \implies x \in \text{GL}(A)
+	.\] 
+	It follows that, $\lambda \in \sigma_A(a) \implies \lambda^n \in  \sigma_A(a^n)$, since
+	\[
+		\lambda^n - a^n = (\lambda - a) \left( \lambda^{n - 1} + \lambda^{n - 2} a + \ldots + a^{n - 1} \right) 
+	.\] 
+\end{lemma}
+\begin{proof}
+	We have $(xy) (xy)^{-1} = 1$, and $(xy)^{-1} (xy) = (xy)^{-1} y x =  1$. Also, $x y y = y x y \implies y (xy)^{-1} = (xy)^{-1} y$. Hence $x^{-1} = (xy)^{-1} y$.
+\end{proof}
+\begin{remark}
+	The fact that $\sigma_A(a)^n \subset \sigma_A(a^n)$ is intuitive, and it may even provide a ``proof'' that $x - y$ divides $x^n - y^n$.
+\end{remark}
+
+\todo{Find an example where $\lambda^2 \in \sigma_A(a^2)$ but $\lambda \not\in \sigma_A(a)$.}
+
+\begin{theorem}[Gelfand's Formula]
+	Also known as \logseq{Spectral Radius Formula}.
+	\label{thm:GelfandFormula}
+
+	In a unital Banach algebra, we have
+	\[
+		r_A(a) = \lim \|a^n\|^{1 / n}
+	.\] 
+\end{theorem}
+	Intuitively this says that the spectral radius, or largest eigenvalue, can be obtained by iterating $a$ until all other subspaces become negligible.
+\begin{proof}
+	First, by remark above $\lambda \in \sigma_A(a) \implies\lambda^n \in \sigma_A(a^n)$, and by Proposition~\ref{prop:SpectrumClosed} (iii), $|\lambda|^n \le \|a^n\|$, thus $|\lambda| \le \|a^n\|^{1 / n}$. Take limit over all elements in the spectrum, we have
+	\[
+		r_A(a) \le \liminf \|a^n\|^{1 / n}
+	.\] 
+
+	Now we want to show $r_A(a) \ge  \limsup \|a^n\|^{1 / n}$. To do this, we fix $r > r_A(a)$ and want to show $r \ge  \limsup \|a^n\|^{1 / n}$.
+	Now, the function $f: \mathbb{C} \to A$ defined by $\lambda \mapsto (\lambda - a)^{- 1}$ is analytic in a neighborhood of $\{|\lambda| > r\} $. Moreover, $\lim_{\lambda \to \infty } f(\lambda) = 0$, so $f$ is analytic at $ \infty$, thus $\tilde f(z)= f(\frac{1}{z} )$ is analytic in a neighborhood of $\{|\lambda| < \frac{1}{r}\} $. By maximum modulus principle, $\tilde f( z) < m$ for $|z| = \frac{1}{r}$.
+
+	We can write $f$ as a Laurant series:
+	\begin{align*}
+		f(\lambda) &= (\lambda - a)^{-1}\\
+		&= \frac{1}{\lambda} (1 - \frac{a}{\lambda})^{-1} \\
+		&= \sum_{k=0}^{\infty} a^k \lambda^{ - k - 1}
+	\end{align*}
+	for $|\lambda| > \|a\|$. Thus $\tilde f$ has a Taylor series 
+	\[
+		\tilde f(z) = f(\frac{1}{z}) = \sum_{k = 0}^{\infty } a^k z^{k + 1}
+	\] 
+	for $|z| < \frac{1}{\|a\|}$. But we know $\tilde f$ is analytic for $|z| < \frac{1}{r}$, so this series converges in the slightly bigger region $|z| < \frac{1}{r}$.
+
+	Now we want to obtain estimate of $a^k$ from this series. To do this, we post-compose $\tilde f$ with $\alpha \in A^*$ to turn it into a function $\alpha \circ \tilde f : \mathbb{C} \to \mathbb{C}$, with series expansion
+\[
+\alpha \circ \tilde f(z) = \sum_{k = 0}^{\infty } \alpha(a^k) z^{k + 1} \qquad |z| < \frac{1}{r}
+.\] 
+	Now apply Cauchy integral formula:
+	\begin{align*}
+		|\alpha(a^n)| &= \left| \frac{1}{2 \pi i} \int _{|z| = \frac{1}{r}} g(z) z^{- n - 2} dz\right|  \\
+		&\leq m \|\alpha\| \cdot (\frac{1}{r})^{- n - 2} \cdot \frac{1}{r} \\
+		&= m \|\alpha\| r^{n + 1}
+	.\end{align*}
+
+	Since this inequality holds for all $\alpha \in A^*$, by Hahn-Banach Theorem we conclude that $\|a^n\| \le m r^{n + 1}$. Take limit and we obtain
+	\[
+		\limsup \|a^n\|^{1 / n} \le \lim_{n \to \infty } (m r^{n + 1})^{1 / n} = r
+	.\] 
+\end{proof}

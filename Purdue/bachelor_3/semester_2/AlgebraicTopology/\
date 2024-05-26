@@ -1,0 +1,228 @@
+\homework{1}{Tue 23 Jan 2024 21:59}{homework}
+Recall some notations from class. If $A$ is a subspace of an Euclidean space and $\sigma: \Delta_n \to A$ is an affine linear map, then $\sigma$ is uniquely determined by its action on the vertices of the standard $n$-simplex $\Delta_n$. Denote the vertices of $\Delta_n$ by $0,1,\cdots, n$, and let $v_i = \sigma(i)$. Then we also denote the map $\sigma$ by $[v_0 \cdots v_n]$. If $f: A \to X$ is map from $A$ to a topological space $X$, then we also denote $f \sigma = f [v_0 \cdots v_n] = f|_{[v_0 \cdots v_n]}$. In a sense, $f \sigma$ is the restriction of $f$ on the image of $\sigma$. For $i = 0, \cdots, n$, we have also defined the affine map $d^i: \Delta_{n-1} \to \Delta_{n}$ which in the above notation is given by $d^i = [0 \cdots \hat{i} \cdots n]$, where $\hat{i}$ means the index $i$ is not present.
+
+
+\begin{problem}
+	
+ Given a topological space $X$, denote by $S_n(X)$ the group of singular $n$-chains of $X$, and the boundary map $d: S_n(X) \to S_{n-1}(X)$ is given by, for a singular $n$-simplex $\sigma: \Delta_n \to X$,
+    \begin{align*}
+        d(\sigma) = \sum_{i=0}^n (-1)^i \sigma d^i =  \sum_{i=0}^n (-1)^i \sigma [0 \cdots \hat{i} \cdots n] = \sum_{i=0}^n (-1)^i \sigma|_{[0 \cdots \hat{i} \cdots n]}.
+    \end{align*}
+    Show that $d \circ d: S_n(X) \to S_{n-2}(X)$ is zero, and hence $S_*(X)$ is indeed a chain complex.
+\end{problem}
+\begin{proof}
+	Take $\sigma \in \text{Sin}_n(X)$. Now
+	\begin{align*}
+		d^{n - 1}d^n (\sigma) &= d^{n - 1} \sum_{i = 0}^{n} (-1)^i \sigma|_{[0 \ldots \hat{i}  \ldots n]}\\
+				      &= \sum_{i = 0}^n \sum_{j < i} (-1)^{j} \sigma_{[0 \ldots \hat{j}  \ldots \hat{i}  \ldots n] }
+				      + \sum_{j > i} (-1)^{j - 1} \sigma|_{[0 \ldots \hat{i}  \ldots \hat{j}  ... n]}\\
+	.\end{align*}
+	But note that
+	\[
+		\sum_{i = 0}^n (-1)^i \sum_{j < i} (-1)^{j} \sigma_{[0 \ldots \hat{j}  \ldots \hat{i}  \ldots n] }
+		=
+		\sum_{i, j: j < i} (-1)^{i +j} \sigma_{[0 \ldots \hat{j}  \ldots \hat{i}  \ldots n] }
+	.\] 
+	and
+	\[
+		\sum_{i = 0}^n (-1)^i \sum_{j > i} (-1)^{j - 1} \sigma|_{[0 \ldots \hat{i}  \ldots \hat{j}  \ldots n]}
+		=\sum_{i, j:j > i} (-1)^{i + j - 1} \sigma|_{[0 \ldots \hat{i}  \ldots \hat{j}  \ldots n]}
+	.\] 
+	Exchange the role of $i$ and $j$ in the second part, we see that they sum to $0$.
+
+	Now that we have shown $d^2 = 0$ for all elements in $\text{Sin}_n(X)$, so this automatically holds for $S_n(X)$, by linearity.
+\end{proof}
+
+
+\begin{problem}
+     For any non-empty topological space $X$, there is a unique map $f : X \to \{pt\}$ where $\{pt\}$ is the one-point space. Recall that $S_*(\{pt\})$ has chain group $\mathbb{Z}$ for $n \geq 0$ and $0$ otherwise. Then $f$ induces a chain map from $S_*(X)$ to $S_*(\{pt\})$,
+     \begin{equation*}
+        \begin{tikzcd}
+            \cdots \arrow[r, red,""] &  S_n(X) \arrow[r,red, "d"]\arrow[d, "f_*"] &  S_{n-1}(X) \arrow[r,red, "d"]\arrow[d, "f_*"] &  \cdots \arrow[r,red, "d"] & S_0(X) \arrow[r, ""]\arrow[d,red, "f_*"] & 0 \arrow[r, ""] & \cdots\\
+            \cdots \arrow[r, ""] &  \mathbb{Z} \arrow[r, ""] &  \mathbb{Z} \arrow[r, ""]&  \cdots \arrow[r, ""] & \mathbb{Z} \arrow[r,red, ""] & 0 \arrow[r,red, ""] & \cdots\\
+        \end{tikzcd}
+    \end{equation*}
+    \begin{itemize}
+
+	
+	    \item Denote the $f_*$ in red by $\epsilon$. Write down the expressions of $\epsilon$ explicitly. Then you should realize that the arrows in red together with involved groups form the augmented chain complex $\tilde{S}_*(X)$ with $\tilde{S}_n(X) = S_{n}(X), n \neq -1$, and $\tilde{S}_{-1}(X) = \mathbb{Z}$.
+        \item Let $f_*: H_0(X) \to H_0(\{pt\}) = \mathbb{Z}$ be the induced map. Show that $f_*$ is onto, and $\ker f_* = \tilde{H}_0(X)$ is the augmented $0$-th homology. As a result, $H_0(X)/\tilde{H}_0(X) \cong \mathbb{Z}$. In fact, $H_0(X) \cong \tilde{H}_0(X) \oplus  \mathbb{Z}$ though the isomorphism is not canonical.
+    \end{itemize}
+
+\end{problem}
+\begin{proof}
+	The map $\varepsilon$ is given by
+	\begin{align*}
+		\varepsilon: S_0(X) &\longrightarrow \mathbb{Z} \\
+		\sum n_\sigma \sigma &\longmapsto \sum n_\sigma
+	.\end{align*}
+
+	To show $f_* : H_0(X) \to H_0(*)$ is onto, it suffices to show that $f_*: Z_0(X) \to Z_0(*)$ is onto. But $Z_0(*) = S_0(*) = \mathbb{Z} \{*\} $, and $f$ maps onto $\{*\}$, thus $f_*: Z_0(X) \to  Z_0(*)$ has to be onto.
+
+	Now, to show $\operatorname{ker} f_* = H_0(X)$, we construct
+	\begin{align*}
+		\psi: \operatorname{ker} f_* &\longrightarrow \tilde H_0(X) \\
+		\sum n_{\sigma} \sigma + B_0  &\longmapsto \sum n_\sigma \sigma + B_0
+	.\end{align*}
+	We explain and justify this construction.
+\begin{enumerate}
+	\item Since $f_* : H_0(X) \to  H_0(*)$, each element in $\operatorname{ker} f_*$ is in the form $\sum n_\sigma \sigma + B_0$, where $\sum n_\sigma \sigma \in \operatorname{ker} \varepsilon$. Also, $\tilde H_0(X) := \tilde Z_0 / B_0$ where $\tilde Z_0 = \ker \varepsilon$, so the RHS is indeed an element of $\tilde H_0(X)$.
+
+	\item We check $\psi$ is well-defined. If $\sum_{n_\sigma} \sigma $ and $\sum n'_\sigma \sigma$ are the same $\mod B_0$, then the map sends them to the same coset in $\tilde H_0(X)$.
+
+	\item We check injectivity. What is $\operatorname{ker} \psi$? It only contains the coset $B_0$, which is the zero element in $\operatorname{ker} f_*$.
+
+	\item Finally check surjectivity. Take some $\left( \sum n_\sigma \sigma \right) + B_0 \in \tilde H_0(X)$. Then by definition of $\tilde H_0(X)$ we have $\sum n_\sigma \sigma \in \operatorname{ker} \varepsilon = \tilde Z_0$, implying that $\sum n_\sigma \sigma + B_0 \in \operatorname{ker} f_*$.
+\end{enumerate}
+Thus, by homomorphism theorem, 
+ \[
+	\frac{H_0(X)}{\operatorname{ker} f_*} \cong H_0(*)
+.\] 
+This reads
+\[
+	H_0(X) / \tilde H_0(X) \cong \mathbb{Z}
+.\] 
+\end{proof}
+
+\begin{problem}
+	
+     For disjoint topological spaces $X$ and $Y$, show that for any $n$, $H_n(X \sqcup Y) \cong H_n(X) \oplus H_n(Y)$.
+\end{problem}
+\begin{proof}
+We proceed in four steps.
+\begin{enumerate}
+	\item $\text{Sin}_n(X \sqcup Y) = \text{Sin}_n(X) \sqcup \text{Sin}_n(Y)$, since each singular simplex is a continuous map $\Delta_n \to X \sqcup Y$, but $X, Y$ are disjoint, in particular not connected.
+	\item For disjoint sets $A$ and $B$, we have $\mathbb{Z}\left( A \sqcup B \right) \cong \mathbb{Z} A \oplus \mathbb{Z}B$. Hence, $S_n(X \sqcup Y) \cong S_n(X) \oplus S_n(Y)$.
+	\item Now, the boundary map maps $S_*(X)$ to $S_*(X)$ and $S_*(Y)$ to $S_*(Y)$, that is, $d_* = d_*^X \oplus d_*^Y$. Hence we have
+		\[
+			\operatorname{ker} d_n = \operatorname{ker} d_n^X \oplus \operatorname{ker} d_n^Y \qquad \operatorname{Im} d_n = \operatorname{Im} d_n^X \oplus \operatorname{Im} d_n^Y
+		.\] 
+	\item From this, we get
+		\[
+			H_n = \frac{\operatorname{ker} d_n}{\operatorname{Im} d_{n + 1}}
+			= \frac{\operatorname{ker} d_n^X \oplus \operatorname{ker} d_n^Y}{\operatorname{Im} d_{n+1}^X \oplus \operatorname{Im} d_{n+1}^Y}
+			\cong \frac{\operatorname{ker} d_n^X}{\operatorname{Im} d_{n+1}^X} \oplus \frac{\operatorname{ker} d_n^Y}{\operatorname{Im} d_{n+1}^Y} = H_n^X \oplus H_n^Y
+		.\] 
+	Note that the isomorphism $\cong$ in the last equation is canonical.
+\end{enumerate}
+\end{proof}
+
+
+\begin{problem}
+	
+     \item Two chain complexes $C_*, D_*$ are \emph{chain-homotopy-equivalent} if there are chain maps $f: C_* \to D_*, \ g: D_* \to C_* $ such that their compositions $fg$ and $gf$ are chain homotopic to the Identity chain map on the respective chain complex.  A chain complex is called {\it acyclic} if its homologies are all trivial, and is {\it contractible} if it is chain-homotopy-equivalent to the trivial chain complex, where the {\it trivial} chain complex consists of only the trivial Abelian group.  Let $C = \{C_n\}_{n \in \mathbb{Z}}$ be a chain complex.
+    \begin{itemize}
+        \item Prove that $C$ is contractible if and only if it is acyclic and for every $n$ the inclusion $Z_n(C) \to C_n$ is a split monomorphism of Abelian groups.
+        \item  Give an example of an acyclic chain complex that is not contractible.
+    \end{itemize}
+\end{problem}
+\begin{proof}
+	Assume $C_*$ is contractible. Then there exists $f: C_* \to 0_*$ and $g: 0_* \to C_*$ such that $gf \cong \text{Id}_{C_*}$ as chain homotopy. However, this implies $(gf)_* = (Id_{C_*})_*: H_*(C) \to H_*(C)$. But $gf = 0$. This implies $H_*(C) = 0$.
+
+	Since $C_*$ is contractible, there exists $\phi_n: C_n \to C_{n+1}$ such that
+	\[
+		d_{n + 1} \phi_n + \phi_{n - 1} d_n = \text{Id}_{C_n}
+	.\] 
+	Restrict this map to $Z_n$:
+	\[
+		d_{n + 1}\phi_n|_{Z_n} = \text{Id}_{Z_n}
+	.\] 
+	Therefore, the following diagram commutes:
+% https://quiver.local:8080/#q=WzAsMyxbMCwwLCJaX24oQykiXSxbMiwwLCJDX24iXSxbNCwwLCJaX24oQykiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsxLDIsImRfe24gKyAxfSBcXHBoaV9uIl0sWzAsMiwiXFx0ZXh0e0lkfSIsMCx7ImN1cnZlIjotM31dXQ==
+\[\begin{tikzcd}
+	{Z_n(C)} && {C_n} && {Z_n(C)}
+	\arrow[hook, from=1-1, to=1-3]
+	\arrow["{d_{n + 1} \phi_n}", from=1-3, to=1-5]
+	\arrow["{\text{Id}}", curve={height=-18pt}, from=1-1, to=1-5]
+\end{tikzcd}\]
+
+Now suppose $C_*$ is cyclic and $Z_n(C) \to C_n$ is split mono. Since all homologies are trivial, we have $B_n = Z_n$ for all $n$. Consider the following commutative diagram:
+% https://quiver.local:8080/#q=WzAsMTUsWzAsMCwiMCJdLFsyLDAsIlpfe24rMX0oQykiXSxbNCwwLCJDX3tuICsgMX0iXSxbNiwwLCJCX3tufShDKSJdLFs4LDAsIjAiXSxbMiwyLCJaX24oQykiXSxbNCwyLCJDX24iXSxbNiwyLCJCX3tuIC0gMX0oQykiXSxbOCwyLCIwIl0sWzAsMiwiMCJdLFswLDQsIjAiXSxbMiw0LCJaX3tuIC0gMX0oQykiXSxbNCw0LCJDX3tuIC0gMX0iXSxbNiw0LCJCX3tuIC0gMn0oQykiXSxbOCw0LCIwIl0sWzAsMV0sWzEsMiwiXFxpb3RhIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwzLCJkIl0sWzMsNF0sWzIsMSwial97biArIDF9IiwwLHsib2Zmc2V0IjotMiwiY3VydmUiOi0yfV0sWzMsMiwic197bn0iLDIseyJvZmZzZXQiOjIsImN1cnZlIjoyfV0sWzMsNSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZG90dGVkIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbOSw1XSxbNSw2LCJcXGlvdGEiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs2LDcsImQiXSxbNyw4XSxbMTAsMTFdLFsxMSwxMiwiXFxpb3RhIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMTIsMTMsImQiXSxbMTMsMTRdLFs2LDUsImpfbiIsMCx7ImN1cnZlIjotMn1dLFsxMiwxMSwial97biAtIDF9IiwwLHsiY3VydmUiOi0yfV0sWzcsNiwic197bi0xfSIsMix7Im9mZnNldCI6MiwiY3VydmUiOjJ9XSxbMTMsMTIsInNfe24gLSAyfSIsMix7Im9mZnNldCI6MiwiY3VydmUiOjJ9XSxbNywxMSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZG90dGVkIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiwyLCJcXHBoaV9uIiwyLHsiY29sb3VyIjpbMCw2MCw2MF0sInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX0sWzAsNjAsNjAsMV1dLFsxMiw2LCJcXHBoaV97biAtIDF9IiwyLHsiY29sb3VyIjpbMCw2MCw2MF0sInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX0sWzAsNjAsNjAsMV1dXQ==
+\[\begin{tikzcd}
+	0 && {Z_{n+1}(C)} && {C_{n + 1}} && {B_{n}(C)} && 0 \\
+	\\
+	0 && {Z_n(C)} && {C_n} && {B_{n - 1}(C)} && 0 \\
+	\\
+	0 && {Z_{n - 1}(C)} && {C_{n - 1}} && {B_{n - 2}(C)} && 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["\iota", hook, from=1-3, to=1-5]
+	\arrow["d", from=1-5, to=1-7]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{j_{n + 1}}", shift left=2, curve={height=-12pt}, from=1-5, to=1-3]
+	\arrow["{s_{n}}"', shift right=2, curve={height=12pt}, from=1-7, to=1-5]
+	\arrow[dotted, no head, from=1-7, to=3-3]
+	\arrow[from=3-1, to=3-3]
+	\arrow["\iota", hook, from=3-3, to=3-5]
+	\arrow["d", from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+	\arrow[from=5-1, to=5-3]
+	\arrow["\iota", hook, from=5-3, to=5-5]
+	\arrow["d", from=5-5, to=5-7]
+	\arrow[from=5-7, to=5-9]
+	\arrow["{j_n}", curve={height=-12pt}, from=3-5, to=3-3]
+	\arrow["{j_{n - 1}}", curve={height=-12pt}, from=5-5, to=5-3]
+	\arrow["{s_{n-1}}"', shift right=2, curve={height=12pt}, from=3-7, to=3-5]
+	\arrow["{s_{n - 2}}"', shift right=2, curve={height=12pt}, from=5-7, to=5-5]
+	\arrow[dotted, no head, from=3-7, to=5-3]
+	\arrow["{\phi_n}"', color={rgb,255:red,214;green,92;blue,92}, dashed, from=3-5, to=1-5]
+	\arrow["{\phi_{n - 1}}"', color={rgb,255:red,214;green,92;blue,92}, dashed, from=5-5, to=3-5]
+\end{tikzcd}\]
+Each line is a short exact sequence; and since  $\iota$ splits by $j$ from assumption, we must have $d$ splits by some $s$, such that $d \circ s_n = \text{Id}_{B_n(C)}$. Now define
+\[
+	\phi_n := s_n \circ j_n : C_n \to  C_{n + 1}
+.\] 
+We calculate
+\begin{align*}
+	\phi_{n-1} d_n 
+	&= s_{n - 1} \circ j_{n - 1} \circ d_n : C_n \to C_n\\
+		       &= s_{n - 1} \circ d_n & \text{since $j_{n - 1} \iota = \text{Id}_{Z_n(C)}$}
+.\end{align*}
+\begin{align*}
+	d_{n + 1}\phi_n &= \left( d_{n + 1} \circ s_n \right) \circ j_n : C_n \to C_n \\
+			&=  j_n & \text{since $d_{n + 1} s_n = \text{Id}_{B_n(C)}$} 
+.\end{align*}
+
+Now we claim that
+\[
+	\phi_{n - 1} d_n + d_{n + 1} \phi_n = s_{n - 1} d_n + \iota j_n = \text{Id}_{C_n}
+.\] 
+This is true since by the splitting lemma,
+\[
+	C_n \cong \operatorname{Im} \iota \oplus \operatorname{Im} s_{n-1}
+.\] 
+\end{proof}
+
+
+\begin{problem}
+	
+     Show that homotopic maps between topological spaces induce equal map on the augmented homology groups. So the only non-trivial part to show is in degree zero. You can either construct a chain homotopy on the involved augmented chain complexes or use results from Problem 2 above. You do not need to repeat results and details covered in class. Of course, you are free to develop any method you like. 
+
+\end{problem}
+\begin{proof}
+	We only need to check that $f_0$ and $f_1$ are identical in $(f_0)_* = (f_1)_* : \tilde H_0(X) \to \tilde H_0(Y)$.
+
+	We repeat the construction in the proof of homotopy invariance. Identify $\Delta_0 \times I$ with $\Delta_1$, write it as $[0\, 0']$. Now, construct
+	\begin{align*}
+		\phi_n: S_n(X) &\longrightarrow S_{n + 1}(Y) \\
+		\sigma &\longmapsto f \circ (\sigma , \text{id}) (c_n)
+	.\end{align*}
+	where $c_n$ is defined same as in the lecture. We only need to observe that $c_0 = [0\, 0'] =  \Delta_1$. Now we want to verify
+	\[
+		d_Y \phi_n + \phi_{n - 1} d_X = (f_1)_* - (f_0)_*
+	.\] 
+	\begin{align*}
+		(d_Y \phi_0) (c_0^x) 
+		&= d_Y f \circ \left( c_0^x \circ \text{id} \right) \\
+		&= f \circ \left( c_0^x \circ \text{id} \right) |_{[\hat{0}  \, 0']} 
+		- f \circ \left( c_0^x \circ \text{id} \right) |_{[0 \, \hat{0} ']} \\
+		&= f_1 \circ c_0^x - f_0 \circ c_0^x
+	.\end{align*}
+	On the other hand, $\phi_{-1}: \mathbb{Z} \to S_0$ can be taken to be the zero map. Thus $\phi_{-1} d_X (c_0^x) = 0$. 
+
+	Thus, we have $(f_0)_* = (f_1)_* : \tilde S_n(X) \to \tilde S_n(Y)$. This implies $(f_0)_* = (f_1)_* : \tilde H_n(X) \to \tilde H_n(Y)$.
+\end{proof}
+
+
+
+
+

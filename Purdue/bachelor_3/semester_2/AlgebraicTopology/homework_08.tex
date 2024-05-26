@@ -1,0 +1,200 @@
+\homework{8}{Thu 02 May 2024 21:02}{Final Exam}
+
+\begin{problem}
+	For an Abelian group $A$, denote by torsion $(A)$ the torsion subgroup of $A$, and by Free $(A)$ the quotient $A /$ torsion $(A)$. Let $M$ be a closed oriented manifold of dimension $n$. For any $0 \leq k \leq n$, show that
+$\operatorname{Free}\left(H_{n-k}(M)\right) \cong \operatorname{Free}\left(H_k(M)\right), \quad \operatorname{torsion}\left(H_{n-k}(M)\right) \cong \operatorname{torsion}\left(H_{k-1}(M)\right)$.
+\end{problem}
+\begin{proof}
+	For any abelian group $A$, we have $\text{Free}\left( \text{Free}(A) \right)  = \text{Free}(A)$, $\text{torsion}\left( \text{torsion}(A) \right)  = \text{torsion}(A)$, and $\text{Free}\left( \text{torsion}(A) \right)  = \text{torsion}\left( \text{Free}(A) \right)  = 0$.
+
+	By Hatcher Corollary 3.3 of UCT, there is an isomorphism
+	\[
+		H^k(M) = \text{Free}(H_k(M)) \oplus \text{torsion}(H_{k - 1}(M))
+	.\] 
+	By Poincare duality,
+	\[
+		H^k(M) = H_{n - k}(M)
+	.\] 
+	Thus
+	\[
+		H_{n - k}(M) = \text{Free}(H_k(M)) \oplus \text{torsion}(H_{k - 1}(M))
+	.\] 
+	Apply $\text{Free}(\cdot )$ and $\text{torsion}(\cdot )$ to each sides, one at a time, we get
+	\[
+		\text{Free}(H_{n-k}(M)) = \text{Free}(H_k(M)),
+		\quad
+		\text{torsion}(H_{n - k}(M)) = \text{torsion}(H_{k - 1}(M))
+	.\] 
+\end{proof}
+
+\begin{problem}
+	This problem concerns the cohomology ring of $\mathbb{R} \mathbb{P}^n$ with $\mathbb{Z}_2$ coefficient.\\
+a). Use Universal Coefficient Theorem to conclude that $H^k\left(\mathbb{RP}^n ; \mathbb{Z}_2\right)=\mathbb{Z}_2$ for $0 \leq k \leq$ $n$, and trivial otherwise.\\
+b). Let $i: \mathbb{RP}^{n-1} \rightarrow \mathbb{RP}^n$ be the standard embedding where $\mathbb{RP}^{n-1}$ corresponds to the $(n-1)$-skeleton of $\mathbb{RP}^n$. Show that $i^*: H^k\left(\mathbb{R}{\mathbb{P}^n} ; \mathbb{Z}_2\right) \rightarrow H^k\left(\mathbb{R} \mathbb{P}^{n-1} ; \mathbb{Z}_2\right)$ is an isomorphism for $0 \leq k \leq n-1$.\\
+c). For any $0 \leq k \leq n$, let $\alpha \in H^k\left(\mathbb{R}\mathbb{P}^n ; \mathbb{Z}_2\right), \beta \in H^{n-k}\left(\mathbb{RP}^n ; \mathbb{Z}_2\right)$ be the non-zero elements. Show that $\alpha \cup \beta \neq 0$.\\
+d). Prove that $H^*\left(\mathbb{RP}^n ; \mathbb{Z}_2\right) \cong \mathbb{Z}_2[x] /\left\langle x^{n+1}\right\rangle$, where $x$ is the nonzero element in degree 1.
+\end{problem}
+\begin{proof}
+	(a) Use known result about homology of $\mathbb{R}\mathbb{P}^{n - 1}$,
+\begin{align}
+H_p\left(\mathbb{P}^n(\mathbb{R})\right)=\left\{\begin{aligned}
+\mathbb{Z}, & p=0 \\
+\mathbb{Z}, & p=n\text{ odd} \\
+\mathbb{Z} / 2 \mathbb{Z}, & p \text { odd, } 0<p<n \\
+0, & \text { otherwise }
+\end{aligned}\right.
+\end{align}
+	Apply the UCT, we get a splitting s.e.s.
+	\[
+		0 \to \text{Ext}^1_{\mathbb{Z}}(H_{k - 1}(\mathbb{RP}^n ), \mathbb{Z}_2	) \to H^k(\mathbb{RP}^n; \mathbb{Z}_2) \to \text{Hom}_{\mathbb{Z}}\left( H_k\left( \mathbb{RP}^n \right), \mathbb{Z}_2  \right) \to 0
+	.\] 
+	Compute:
+	\begin{itemize}
+		\item $\text{Ext}^1_{\mathbb{Z}}(\mathbb{Z}, \mathbb{Z}_2) = 0$
+		\item $\text{Ext}^1_{\mathbb{Z}}(\mathbb{Z}_2, \mathbb{Z}_2) = \mathbb{Z}_2$
+		\item $\text{Hom}_{\mathbb{Z}}\left( \mathbb{Z}, \mathbb{Z}_2 \right) = \mathbb{Z}_2$
+		\item $\text{Hom}_{\mathbb{Z}}\left( \mathbb{Z}_2, \mathbb{Z}_2 \right) = \mathbb{Z}_2$
+	\end{itemize}
+	We conclude that $H^k\left(\mathbb{R}^n ; \mathbb{Z}_2\right)=\mathbb{Z}_2$ for $0 \leq k \leq$ $n$, and trivial otherwise.
+
+	(b) We use the fact that $\mathbb{RP}^n$ has a CW complex structure where each skeleton only has one disk attached, so
+	\[
+		H_k\left( \mathbb{RP}^n, \mathbb{RP}^{n - 1}; \mathbb{Z}_2 \right)  = H_k\left( S^n; \mathbb{Z}_2 \right)  =
+		\begin{cases}
+			\mathbb{Z}_2 & k = n\\
+			0 & \text{otherwise}
+		\end{cases}
+	.\] 
+	The long exact sequence associated to the pair $\left( \mathbb{RP}^n, \mathbb{RP}^{n - 1}\right)$ is
+% https://quiver.local:8080/#q=WzAsNyxbNCwwLCJIXntrICsgMX0oU15uOyBcXFpfMikiXSxbMCwxLCJIXmsoXFxtYXRoYmJ7UlB9XntuIC0gMX07IFxcWl8yKSJdLFsyLDEsIkheayhcXG1hdGhiYntSUH1ee259OyBcXFpfMikiXSxbNCwxLCJIXmsoU15uOyBcXFpfMikiXSxbMCwyLCJIXntrIC0gMX0oXFxtYXRoYmJ7UlB9XntuIC0gMX07IFxcWl8yKSJdLFsyLDIsIlxcY2RvdHMiXSxbMiwwLCJcXGNkb3RzIl0sWzUsNF0sWzQsM10sWzMsMl0sWzIsMV0sWzEsMF0sWzAsNl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\&\& \cdots \&\& {H^{k + 1}(S^n; \Z_2)} \\
+	{H^k(\mathbb{RP}^{n - 1}; \Z_2)} \&\& {H^k(\mathbb{RP}^{n}; \Z_2)} \&\& {H^k(S^n; \Z_2)} \\
+	{H^{k - 1}(\mathbb{RP}^{n - 1}; \Z_2)} \&\& \cdots
+	\arrow[from=3-3, to=3-1]
+	\arrow[from=3-1, to=2-5]
+	\arrow[from=2-5, to=2-3]
+	\arrow[from=2-3, to=2-1]
+	\arrow[from=2-1, to=1-5]
+	\arrow[from=1-5, to=1-3]
+\end{tikzcd}\]
+From the cohomologies of $S^n$ implies that for all $k < n - 1$,  $H^k\left( \mathbb{RP}^n; \mathbb{Z}_2 \right) \xrightarrow{i^*} H^k\left( \mathbb{RP}^{n - 1}; \mathbb{Z}_2 \right)$ is an isomorphism.
+
+For the case $k = n - 1$, we have the exact sequence
+% https://quiver.local:8080/#q=WzAsNixbMCwwLCIwIl0sWzIsMCwiSF5uKFxcbWF0aGJie1JQfV57bn07IFxcWl8yKSJdLFs0LDAsIkhebihTXm47IFxcWl8yKSJdLFswLDEsIkhee24gLSAxfShcXG1hdGhiYntSUH1ee24gLSAxfTsgXFxaXzIpIl0sWzIsMSwiSF57biAtIDF9KFxcbWF0aGJie1JQfV57bn07IFxcWl8yKSJdLFs0LDEsIjAiXSxbMSwwXSxbMiwxLCJqXioiLDJdLFszLDIsIlxccGFydGlhbCJdLFs1LDRdLFs0LDMsImleKiJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& {H^n(\mathbb{RP}^{n}; \Z_2)} \&\& {H^n(S^n; \Z_2)} \\
+	{H^{n - 1}(\mathbb{RP}^{n - 1}; \Z_2)} \&\& {H^{n - 1}(\mathbb{RP}^{n}; \Z_2)} \&\& 0
+	\arrow[from=1-3, to=1-1]
+	\arrow["{j^*}"', from=1-5, to=1-3]
+	\arrow["\partial", from=2-1, to=1-5]
+	\arrow[from=2-5, to=2-3]
+	\arrow["{i^*}", from=2-3, to=2-1]
+\end{tikzcd}\]
+Where, the map $i^*$ is injective, as one can read from the exact sequence. But it's a map from  $\mathbb{Z}_2$ to $\mathbb{Z}_2$, so it's an isomorphism.
+
+(c)
+We use the following result from Miller,
+\begin{theorem}
+	Theorem 30.2. Let $M$ be a compact manifold of dimension $n$. There exists a unique class $[M] \in$ $H_n(M)$, called the fundamental class, such that for every $p, q$ with $p+q=n$ the pairing
+\[
+H^p(M) \otimes H^q(M) \xrightarrow{\cup } H^n(M) \xrightarrow{\langle-,[M]\rangle} \mathbb{F}_2
+\]
+is perfect.
+\end{theorem}
+Write $M = \mathbb{RP}^n$ and all cohomologies are in $\mathbb{Z}_2$ coefficient from now on. By definition of perfect pairing, the map $H^{k}\left( M \right)  \to \text{Hom}_{\mathbb{Z}}\left( H^{n - k}(M), \mathbb{Z} \right) $ is an isomorphism. Since $\alpha \neq 0$, the map
+\[
+	- \mapsto \left\langle \alpha \cup -, [M] \right\rangle 
+.\] 
+is nonzero. It is clear that $\left\langle \alpha \cup 0, [M] \right\rangle = \left\langle 0, [M] \right\rangle  = 0$, so it must be the case that
+\[
+	\left\langle \alpha \cup \beta, [M] \right\rangle \neq 0
+.\] 
+Hence $\alpha \cup \beta \neq 0$.
+
+(d) This is Hatcher Theorem 3.12.
+\begin{theorem}
+	Theorem 3.12. $H^*\left(\mathbb{R}^{\mathbb{P}^n} ; \mathbb{Z}_2\right) \approx \mathbb{Z}_2[\alpha] /\left(\alpha^{n+1}\right)$ and $H^*\left(\mathbb{R}^{\infty} ; \mathbb{Z}_2\right) \approx \mathbb{Z}_2[\alpha]$, where $|\alpha|=1$. In the complex case, $H^*\left(\mathbb{C P}^n ; \mathbb{Z}\right) \approx \mathbb{Z}[\alpha] /\left(\alpha^{n+1}\right)$ and $H^*\left(\mathbb{C P}^{\infty} ; \mathbb{Z}\right) \approx \mathbb{Z}[\alpha]$ where $|\alpha|=2$
+\end{theorem}
+For the sake of completeness and for the sake of final exam let's provide a proof.
+
+For the sake of brevity we shall omit the proof, and the interested reader is referred to [Hatcher, Theorem 3.12] for details.
+
+\end{proof}
+
+\begin{problem}
+Let $M_1, M_2$ and $M$ be connected closed oriented manifolds of dimension $n \geq 2$. By an open ball $D^n$ in a manifold, we always mean an open set in the manifold which is homeomorphic to an open ball in $\mathbb{R}^n$. The connected sum $M_1 \# M_2$ of $M_1$ and $M_2$ is defined as follows. Cut out a small open ball $D_i^n$ in $M_i$ so that $M_i-D_i^n$ is a manifold with boundary $S_i^{n-1}:=\partial D_i^n$ homeomorphic the $(n-1)$ sphere. $M_1 \# M_2$ is obtained from $\sqcup_{i=1}^2\left(M_i-D_i^n\right)$ by identifying $S_1^{n-1}$ and $S_2^{n-1}$ with a homeomorphism.\\
+a). Let $D^n$ be an open ball in $M$. Show that for $0 \leq k<n-1$, the embedding $M-D^n \rightarrow M$ induces isomorphism $H_k\left(M-D^n\right) \cong H_k(M)$.\\
+b). In fact, the above isomorphism also holds for $k=n-1$ (You don't need to prove it). Here orientability is crucial. Find a counterexample (a connected closed nonorientable manifold) to the isomorphism for $k=n-1$.	\\
+c). Use the above results to prove that for $0<k<n, H_k\left(M_1 \# M_2\right) \cong H_k\left(M_1\right)$ $H_k\left(M_2\right)$.
+\end{problem}
+\begin{proof}
+	We see that $M - D^n$ and $D^n$ form an open cover of $M$ which satisfies conditions of Mayer-Vietoris sequence. Write it out:
+% https://quiver.local:8080/#q=WzAsOCxbMiwwLCJIX3tufShNIC0gRF5uKVxcb3BsdXMgSF9uKERebikiXSxbNCwwLCJIX24oTSkiXSxbMCwxLCJIX3tuIC0gMX0oU157biAtIDF9KSJdLFsyLDEsIkhfe24tMX0oTSAtIERebilcXG9wbHVzIEhfe24tMX0oRF5uKSJdLFs0LDEsIkhfe24tMX0oTSkiXSxbMCwyLCJIX3tuIC0gMn0oU157biAtIDF9KSJdLFsyLDIsIkhfe24tMn0oTSAtIERebilcXG9wbHVzIEhfe24tMn0oRF5uKSJdLFs0LDIsIkhfe24tMn0oTSkiXSxbMCwxXSxbMSwyXSxbMiwzXSxbMyw0XSxbNCw1XSxbNiw3XSxbNSw2XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\&\& {H_{n}(M - D^n)\oplus H_n(D^n)} \&\& {H_n(M)} \\
+	{H_{n - 1}(S^{n - 1})} \&\& {H_{n-1}(M - D^n)\oplus H_{n-1}(D^n)} \&\& {H_{n-1}(M)} \\
+	{H_{n - 2}(S^{n - 1})} \&\& {H_{n-2}(M - D^n)\oplus H_{n-2}(D^n)} \&\& {H_{n-2}(M)}
+	\arrow[from=1-3, to=1-5]
+	\arrow[from=1-5, to=2-1]
+	\arrow[from=2-1, to=2-3]
+	\arrow[from=2-3, to=2-5]
+	\arrow[from=2-5, to=3-1]
+	\arrow[from=3-3, to=3-5]
+	\arrow[from=3-1, to=3-3]
+\end{tikzcd}\]
+Some known terms:
+\begin{itemize}
+	\item $H_n(M) = \mathbb{Z}$ since $M$ is closed path-connected manifold.
+	\item $H_{k}(D^n) = 0$ for all $0 < k < n$
+	\item $H_k(S^{n - 1}) = 0$ for all $0 < k < n - 1$
+\end{itemize}
+From those we see that $H_{k}(M - D^n) = H_{k}(M)$ for all $0 < k < n - 1$.
+
+For the case $k = 0$, $H_k(M - D^n) = H_k(M) = \mathbb{Z}$ since they are both path connected.
+
+(b) Consider the Klein bottle $K$. We have $H_1(K - D^2) = \mathbb{Z}^2$ whereas $H_1(K) = \mathbb{Z} \oplus \mathbb{Z}/2\mathbb{Z}$.
+
+(c) Apply Mayer-Vietoris, use $M_1 - D^n_1$ and $M_2 - D^n_2$ as open cover of $M_1 \# M_2$. Write the l.e.s. out:
+% https://quiver.local:8080/#q=WzAsOCxbMSwxLCJIX3tuLTF9KE1fMSAtIERebl8xKVxcb3BsdXMgSF97bi0xfShNXzIgLSBEXm5fMikiXSxbMiwxLCJIX3tuLTF9KE1fMSBcXCMgTV8yKSJdLFswLDIsIkhfe24tMn0oU157biAtIDF9KSJdLFswLDEsIkhfe24tMX0oU157biAtIDF9KSJdLFsxLDIsIkhfe24tMn0oTV8xIC0gRF5uXzEpXFxvcGx1cyBIX3tuLTJ9KE1fMiAtIERebl8yKSJdLFsyLDIsIkhfe24tMn0oTV8xIFxcIyBNXzIpIl0sWzIsMCwiSF97bn0oTV8xIFxcIyBNXzIpIl0sWzEsMCwiSF97bn0oTV8xIC0gRF5uXzEpXFxvcGx1cyBIX3tufShNXzIgLSBEXm5fMikiXSxbMCwxXSxbMywwLCJcXGFscGhhX3tuIC0gMX0iLDJdLFsxLDJdLFs0LDVdLFs2LDMsIlxccGFydGlhbF9uIl0sWzcsNiwiXFxiZXRhX24iXSxbMiw0XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\& {H_{n}(M_1 - D^n_1)\oplus H_{n}(M_2 - D^n_2)} \& {H_{n}(M_1 \# M_2)} \\
+	{H_{n-1}(S^{n - 1})} \& {H_{n-1}(M_1 - D^n_1)\oplus H_{n-1}(M_2 - D^n_2)} \& {H_{n-1}(M_1 \# M_2)} \\
+	{H_{n-2}(S^{n - 1})} \& {H_{n-2}(M_1 - D^n_1)\oplus H_{n-2}(M_2 - D^n_2)} \& {H_{n-2}(M_1 \# M_2)}
+	\arrow[from=2-2, to=2-3]
+	\arrow["{\alpha_{n - 1}}"', from=2-1, to=2-2]
+	\arrow[from=2-3, to=3-1]
+	\arrow[from=3-2, to=3-3]
+	\arrow["{\partial_n}", from=1-3, to=2-1]
+	\arrow["{\beta_n}", from=1-2, to=1-3]
+	\arrow[from=3-1, to=3-2]
+\end{tikzcd}\]
+For all $k < n-1$, the claim $H_{k}(M_1 - D^n_1)\oplus H_{k}(M_2 - D^n_2) = H_k(M_1 \# M-2)$ follows from the fact that $H_k(S^{n - 1}) = 0$. The case $k = n - 1$ is a bit more delicate.
+
+In the case $k = n - 1$, we need to observe that $\alpha_{n - 1}$ is a zero map. The reasoning I shall give is not quite rigorous, and I shall attach it to the end of the exam.
+\end{proof}
+\newpage
+
+\begin{problem}
+	You can utilize the following fact. For $n \geq 1$, let $\pi: S^n \rightarrow \mathbb{R}^n$ be the quotient map identifying antipodal points on $S^n$. Let $\gamma: I \rightarrow S^n$ be any path connecting a pair of antipodal points. Then $\pi \circ \gamma$ viewed a 1-cycle in $\mathbb{R} \mathbb{P}^n$ represents the non-zero element of $H_1\left(\mathbb{R}^n ; \mathbb{Z}_2\right)$\\
+a). For $n \geq 2$, let $f: S^n \rightarrow S^{n-1}$ be any antipode-preserving continuous map, i.e., $f(-x)=-f(x), x \in S^n$. Then, $f$ induces a map $\tilde{f}: \mathbb{R}^n \rightarrow \mathbb{R}^{n-1}$. Show that $\tilde{f}_*: H_1\left(\mathbb{R}^n ; \mathbb{Z}_2\right) \rightarrow H_1\left(\mathbb{R}^{n-1} ; \mathbb{Z}_2\right)$ is an isomorphism, and as a result, also show $\tilde{f}^*: H^1\left(\mathbb{R} \mathbb{P}^{n-1} ; \mathbb{Z}_2\right) \rightarrow H^1\left(\mathbb{R}^n ; \mathbb{Z}_2\right)$ is an isomorphism.\\
+b). Use the ring structure of $H^*\left(\mathbb{R} \mathbb{P}^n ; \mathbb{Z}_2\right)$ in Problem 3 to show that $\tilde{f}^*$ cannot be an isomorphism on $H^1$, and hence obtain a contradiction.\\
+As a result, for $n \geq 1$, there is NO antipode-preserving continuous map $S^n \rightarrow S^{n-1}$. (The case for $n=1$ is not covered above but this is trivial.)\\
+c). Consequently, show any continuous map $S^n \rightarrow \mathbb{R}^n$ must have a pair of antipode points with the same image.
+\end{problem}
+\begin{proof}
+	(a) Consider $f(\gamma)$. Since $f$ is continuous antipode-preserving, we know that $f(\gamma) \in S^{n - 1}$ is also a continuous curve connecting antipodes, thus projects to a nontrivial element in $H_1(\mathbb{RP}^{n - 1})$. Thus, $f_*: \mathbb{H}_1(\mathbb{RP}^{n}; \mathbb{Z}_2) \to H_1(\mathbb{RP}^{n -1}; \mathbb{Z}_2)$ maps $1$ to $1$, thus it is an isomorphism.
+
+	The respective result for $H^n$ follows directly from the naturality of universal coefficient theorem, and the five lemma.
+
+	(b) We use the fact that a continuous map $\tilde f: \mathbb{RP}^n \to \mathbb{RP}^{n - 1}$ induces a ring homomorphism $H^*(\mathbb{RP}^{n - 1}; \mathbb{Z}_2) \to H^*(\mathbb{RP}^{n}; \mathbb{Z}_2)$. By slight abuse of notation we still call the homomorphism $f$. But if we take $\alpha \in H^1\left( \mathbb{RP}^{n - 1} \right) $ then consider the structure of both rings, we have
+	\[
+		0 = f(\alpha)^{n+1} = f(\alpha^{n+1}) = f(\alpha) \neq 0
+	.\] 
+	The first equality is because $H^*(\mathbb{RP}^n;\mathbb{Z}_2) = \mathbb{Z}_2[\alpha] / \alpha^{n+1}$, the second equality is ring homomorphism, the third equality is because $H^*(\mathbb{RP}^{n-1};\mathbb{Z}_2) = \mathbb{Z}_2[\alpha] / \alpha^{n}$.
+
+	(c) Suppose for contradiction that the map  $h: S^n \to \mathbb{R}^n$ never maps antipodes to the same image. Then we may draw a line through the two images of a pair of antipodes, and identify it with a line through origin by translation. Thus, we have formed a continuous map  $\tilde h: \mathbb{RP}^n \to \text{Gr}(1, \mathbb{R}^n) = \mathbb{RP}^{n - 1}$. However, no such map can exist. Therefore $h$ must map some antipode to the same image.
+
+
+\end{proof}
+

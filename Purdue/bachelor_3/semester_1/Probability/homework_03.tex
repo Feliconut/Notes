@@ -1,0 +1,436 @@
+\homework{3}{Thu 14 Dec 2023 22:10}{Final Homework}
+
+\begin{problem}
+	Use Itô's formula to show that if $g: \mathbb{R} \rightarrow \mathbb{R}$ is continuously differentiable and $B_t$ is standard Brownian motion, then
+\[
+\int_0^t g(s) d B_s=g(t) B_t-\int_0^t g^{\prime}(s) B_s d s .
+\]
+
+If $g(1)=0$ we get the Paley-Wiener-Zygmund integral as discussed in class. That is,
+\[
+\int_0^1 g(s) d B_s=-\int_0^1 g^{\prime}(s) B_s d s
+\]
+\end{problem}
+\begin{proof}
+	Take $u(B_t, t) = g(t) B_t$, so $u(x, t) = xg(t)$. Itô's formula gives us
+	\[
+		d u(B_t, t) = g(t) d B_t + B_t g'(t) d t
+	.\]
+	Write in integral form and we are done.
+\end{proof}
+
+\begin{problem}
+	(i) (10 pts) Let $X_t=e^{B_t}, B_0=a$. Show that $X_t$ solves the stochastic differential equation (SDE)
+\[
+\left\{\begin{array}{l}
+d X=\frac{1}{2} X d t+X d B \\
+X_0=e^a
+\end{array}\right.
+\]
+
+That is,
+\[
+X_t=e^a+\int_0^t X_s d B_s+\frac{1}{2} \int_0^t X_s d s
+\]
+(ii) (10 pts) Let $X_t=\frac{B_t}{1+t}, B_0=a$. Show that $X_t$ solves the SDE
+\[
+\left\{\begin{array}{l}
+d X_t=-\frac{X_t}{1+t} d t+\frac{1}{1+t} d B_t \\
+X_0=a
+\end{array}\right.
+\]
+\end{problem}
+\begin{proof}
+	In Ito's formula, take
+	\[
+		u(x, t) = e^x
+	.\] 
+	Thus if $X_t = e^{B_t}$, $X_t = u(B_t)$ is
+	\[
+		e^{B_t} = e^{B_0} + \int _0^t e^{B_s} d B_s + \frac{1}{2} \int _0^t e^{B_s} ds
+	.\] 
+	For $X_t = \frac{B_t}{ 1 + t}$, take $u(x,t ) = \frac{x}{1 + t}$, so
+	\begin{multline}
+		X_t 
+		= B_t + \int _0^t \frac{1}{1 + s} d B_s + \int _0^t -\frac{B_s}{(1 + s)^2} ds
+	\\ = B_t + \int _0^t \frac{1}{1 + s} d B_s + \int _0^t -\frac{X_s}{(1 + s)} ds
+	.\end{multline} 
+	
+\end{proof}
+
+\begin{problem}
+	(i) (10 pts) Prove that $Y_t=e^{\lambda B_t-\frac{\lambda^2 t}{2}}\left(B_0=0\right)$ solves the SDE
+\[
+\left\{\begin{array}{l}
+d Y_t=\lambda Y_t d B_t \\
+Y_0=1
+\end{array}\right.
+\]
+
+That is,
+\[
+Y_t=1+\lambda \int_0^t\left(e^{\lambda B_s-\frac{\lambda^2 s}{2}}\right) d B_s
+\]
+and hence (as we already know) $Y_t$ is a martingale and so is $M_t=Y_t-1$ with $M_0=0$.
+(ii) (10 pts) Show that $\mathbb{E}\left|M_t\right|^2<\infty$ for all $t$. What is $\langle M\rangle_t$ ?
+	
+\end{problem}
+\begin{proof}
+	Take $u(x, t) = e^{\lambda x - \frac{\lambda^2 t}{2}}$. Then $u_x = \lambda u, u_t = - \frac{\lambda^2}{2} u, u_{xx} =  \lambda^2 u$.
+	\begin{align*}
+		u(B_t, t) &= 1 + \int _0^t \lambda Y_s d B_s + \int _0^t -\frac{\lambda^2}{2} Y ds + \int _0^t \frac{1}{2} \lambda^2 Y ds \\
+		&= \int _0^t \lambda Y d B_s
+	.\end{align*}
+	
+	 \begin{align*}
+		 E M_t^2  &= \lambda^2 E \int _0^t Y^2 ds\\
+			  &\leq \lambda^2 \int _0^t E \exp\left( 2 \lambda B_t - \lambda^2 t \right) ds \\
+			  &= \lambda^2 \int _0^t E \exp\left( 2 \lambda B_t - 2\lambda^2 t \right) ds \exp(\lambda^2 t)  \\
+			  &= \lambda^2 \exp(\lambda^2 t)  < \infty 
+	.\end{align*}
+	\begin{align*}
+		\left\langle M_t \right\rangle  = \lambda^2 \int _0^t Y^2 ds
+	.\end{align*}
+\end{proof}
+\begin{problem}
+	More general than previous problem. Let $f:[0, \infty) \rightarrow \mathbb{R}$ continuous. (All that we really need is be locally square integrable, i.e., square integrability on any finite interval.) Define
+\[
+Y_t=e^{\int_0^t f(s) d B_s-\frac{1}{2} \int_0^t f^2(s) d s}
+\]
+(i) (10 pts) Prove that $Y$ solves the SDE
+\[
+\left\{\begin{array}{l}
+d Y=f Y d B \\
+Y_0=1
+\end{array}\right.
+\]
+
+That is,
+\[
+Y_t=1+\int_0^t f(s)\left(e^{\int_0^s f(r) d B_r-\frac{1}{2} \int_0^s f^2(r) d r}\right) d B_s
+\]
+(ii) (10 pts) Prove that $Y_t$ is a square integrable martingale, i.e., $\mathbb{E}\left[\left|Y_t\right|^2\right]<\infty$ for all $t$ and $Y_t$ is a martingale. What is the quadratic variation of $M_t=Y_t-1$ ?
+\end{problem}
+\begin{proof}
+	Take $X_t$ to be the martingale $\int _0^t f(s) d B_s$, then $\left\langle X_t \right\rangle  = \int _0^t f^2 (s) ds$, and $dX_t = f(t) d B_t$. We have
+	\[
+		Y_t = \exp\left( X_t - \frac{1}{2} \left\langle X \right\rangle _t \right) 
+	.\] 
+	which is a martingale. Now take $u(x, t) = \exp\left( x - \frac{1}{2}\int _0^t f^2 (s) ds \right) $, we have $u_x(x, t) = u_{x x}(x, t) = u(x, t)$,$u_t(x, t) = - f(t) u(x,t)$. The Ito formula gives
+	\begin{align*}
+		dY_t &= \exp\left( X_t - \frac{1}{2} \left\langle X \right\rangle _t \right) d X_t + \int _0^t u(X_t, t) \left( \frac{1}{2} f^2(t) - \frac{1}{2} f^2(t) \right) dt\\
+		&=  \exp\left( X_t - \frac{1}{2} \left\langle X \right\rangle _t \right) d X_t\\
+		&=  Y_t f(t) d B_t
+	.\end{align*} 
+	For the second part,
+	\[
+		EY_t^2 = E \exp\left( 2 X_t - 2 \left\langle X \right\rangle _t + \left\langle X_t \right\rangle  \right) 
+		= \exp \left\langle X \right\rangle _t < \infty 
+	.\] 
+	 \begin{align*}
+		\left\langle Y_t -1  \right\rangle 
+		&= \left\langle \int _0^t f(s) Y_s d B_s \right\rangle  \\
+		&= \int _0^t f_s^2 Y_s^2 ds
+	.\end{align*}
+\end{proof}
+
+\begin{problem}
+	Let $Q(t)$ the the price of a stock at time $t$. Its evolution in time is usually modeled by assuming the relative change, $\frac{d Q}{Q}$ obeys the $\mathrm{SDE}$
+\[
+\frac{d Q}{Q}=\mu d t+\sigma d B
+\]
+where $\mu>0$ is the drift and $\sigma$ the volatility of the stock. Thus,
+\[
+Q(t)=q_0+\int_0^t \mu Q(s) d s+\int_0^t \sigma Q(s) d B_s
+\]
+where $q_0$ is the initial investment.
+(i) (10 pts) Show that
+\[
+d(\log (Q))=\frac{d Q}{Q}-\frac{1}{2} \frac{\sigma^2 Q^2 d t}{Q^2}=\left(\mu-\frac{\sigma^2}{2}\right) d t+\sigma d B
+\]
+and conclude that
+\[
+Q(t)=q_0 e^{\sigma B_t+\left(\mu-\frac{\sigma^2}{2}\right) t}
+\]
+(ii) (10 pts) Show that $E(Q(t))=q_0 e^{\mu t}$. Thus the expected value of the stock agrees with the deterministic solution given by $\sigma=0$. (The "riskless asset bond $P$ with price at time $t$ given by $\left.P(t)=q_0 e^{t \mu} . "\right)$
+\end{problem}
+\begin{proof}
+	Take $u(Q) = \log(Q)$, we have
+	\begin{multline}
+		\log(Q) = \log(Q_0) + \int _0^t \frac{1}{Q_s} (\sigma Q_s) d B_s
+		+ \int _0^t \frac{1}{Q_s} \mu Q_s d s + \frac{1}{2} \int _0^t -\frac{1}{Q_s^2} \sigma^2 Q_s^2 d s
+		\\= \log Q_0 + \sigma B_t + (\mu - \frac{1}{2} \sigma^2) t
+	.\end{multline} 
+	Therefore we can take exponential on both sides to get the desired conclusion.
+
+	\begin{align*}
+		E(Q(t))
+		&= E\left( q_0 \exp\left( \sigma B_t + \left( \mu - \frac{\sigma^2}{2} \right) t \right)  \right)  \\
+		&= q_0 E\left( \exp\left( \sigma B_t - \frac{\sigma^2}{2}t \right)  \right) \exp(\mu t) \\
+		&= q_0 e^{\mu t} 
+	.\end{align*}
+\end{proof}
+\begin{problem}
+	Let $M_t$ be a continous martingale. Fix $T>0$ and let $M_T^*=\sup _{0 \leq t \leq T}\left|M_t\right|$. Suppose $\left\|\langle M\rangle_T\right\|_{\infty}=a<\infty$. Prove that
+\[
+\mathbb{P}\left\{M_T^*>\lambda\right\} \leq 2 e^{-\frac{\lambda^2}{2 a}}, \quad \lambda>0 .
+\]
+
+Hint: Doob's inequality, exponential martingale, .... That is, "same" as Brownian motion.
+\end{problem}
+\begin{proof}
+	The continuous martingale $M_t$ is a time changed Brownian motion $B_{\sigma(t)}$ for some family of stopping times $\sigma(t)$. We have
+	\[
+		\left\langle M_t \right\rangle_t = \left\langle B_{\sigma(t)} \right\rangle _t = \sigma(t)
+	.\] 
+	Thus
+	\[
+		\|\sigma(T)\|_\infty  = \|\left\langle M \right\rangle _T\|_\infty = a < \infty 
+	.\] 
+	Apply the known result for Brownian motion:
+	\[
+		P(M_T^* > \lambda) = P\left( B_{\sigma(t)}^* > \lambda \right) 
+		\le 2 e^{- \frac{\lambda^2}{2 a}}
+	.\] 
+\end{proof}
+
+\begin{problem}
+	Suppose $u: \mathbb{R}^d \rightarrow \mathbb{R}$ is harmonic. That is, $\Delta u(x)=0$ for all $x \in \mathbb{R}^d$. Use Itô to show that
+(i) $(10 \mathrm{pts})$
+\[
+M_t=u\left(B_t\right)=u\left(B_0\right)+\int_0^t \nabla u\left(B_s\right) \cdot d B_s
+\]
+is a martingale and conclude that:
+1. Its quadratic variation $\langle M\rangle_t$ is given by
+\[
+\langle M\rangle_t=\int_0^t\left|\nabla u\left(B_s\right)\right|^2 d s
+\]
+2. For any bounded stopping time $\tau$,
+\[
+\mathbb{E}_x\left|u\left(B_\tau\right)-u(x)\right|^2=\mathbb{E}_x\left(\int_0^\tau\left|\nabla u\left(B_s\right)\right|^2 d s\right)
+\]
+3.
+\[
+\mathbb{E}_x\left(u\left(B_\tau\right)\right)=u(x)
+\]
+Remark By truncating (localizing) at $\tau \wedge t$ and taking limits this holds for a wide collection of stopping times $\tau$. In particular, if $D$ is a bounded open connected set in $\mathbb{R}^d$ (a bounded domain) and the Brownian motion starts at $x \in D$, we let $\tau_D=\inf \{t>$ $\left.0: B_t \in D^c\right\}$, where $D^c$ is the complement of $D$. This is called the first exit time of the Brownian motion from $D$. Then the above formulas continue holds for this $\tau$.
+(ii) (10 pts) Assuming the Remark show that if $u: \mathbb{R}^d \rightarrow \mathbb{R}$ is such that
+\[
+\left\{\begin{array}{l}
+\frac{1}{2} \Delta u(x)=0, \quad x \in D \\
+u(\xi)=f(\xi), \quad \xi \in \partial D
+\end{array}\right.
+\]
+where $\partial D$ is the boundary of $D$, then $u$ is given by
+\[
+u(x)=\mathbb{E}_x\left(f\left(B_{\tau_D}\right)\right)
+\]
+
+Note that by the continuity of the Brownian paths, $B_{\tau_D} \in \partial D$.
+Remark: This says that the solution to the classical Dirichlet boundary value problem is given by running the Brownian motion starting at the point $x \in D$, stopping it at the time it exist $D$, evaluating the function $f$ at the exit position, and taking expectation with respect to the measure $\mathbb{P}_x$ corresponding to the starting point.
+
+In particular, for $A \subset \partial D$, a subset of the boundary of $D$, the function
+\[
+\mu_x(A)=\mathbb{P}_x\left\{B_{\tau_D} \in A\right\}
+\]
+defines a probability measure on $\partial D$ which, as a function of the variable $x$, is harmonic. This measure $\mu_x$, called the "harmonic measure" of $D$, has been (still is) extensively studied in the literature.
+\end{problem}
+\begin{proof}
+	When $u$ is harmonic, $\Delta u = 0$, so the Ito formula directly reads
+	\[
+u\left(B_t\right)=u\left(B_0\right)+\int_0^t \nabla u\left(B_s\right) \cdot d B_s
+	.\] 
+	This is a martingale because
+	\[
+		E(M_t - M_s | F_s) = E\left( \int _s^t \nabla u (B_s) \cdot  d B_s \middle| \mathcal{F}_s \right)  = 0
+	.\] 
+	We already have the result for one dimension:
+	\[
+		\left\langle \int _0^t f_s d B_s \right\rangle  = \int _0^t f_s^2 ds
+	.\] 
+	Now, the coordinates of $\nabla u (B_s)$ are independent. Therefore there is no covariance terms, and we have
+	\[
+		\left\langle \int _0^t \nabla u (B_s) \cdot d B_s \right\rangle 
+		= \sum_{i= 1}^n \left\langle \int _0^t \frac{\partial u}{\partial x_i} (B_s) d B_s^{(i)} \right\rangle
+		= \sum_{i= 1}^n  \int _0^t \left(\frac{\partial u}{\partial x_i} (B_s)\right)^2 d s 
+		= \int _0^t \left| \nabla u (B_s) \right| ^2 ds
+	.\] 
+	
+	\[
+		E_x \left| u(B_\tau) - u(x) \right| ^2
+		= E_x \left( \int _0^\tau \nabla u (B_s) \cdot  d B_s \right) ^2
+		= E_x \int _0^t \left( \nabla  (B_s) \right) ^2 ds
+	.\] 
+	
+	\[
+		E_x\left( u(B_\tau) \right) = u(x) + E_x\left( \int _0^\tau \nabla u (B_s) d B_s \right) = u(x)
+	.\] 
+	For part 2:
+	Whenever $\Delta u =0$, $E_x(u(B_\tau)) = u(x)$ holds whenever $B_t \in D$ for all $t < \tau$. 
+	Thus
+	\[
+		E_x(u(B_{\tau_D})) = u(x)
+	.\] 
+	Since $B_{\tau_D} \in \partial D$, 
+	\[
+		E_x(f(B_{\tau_D})) = u(x)
+	.\] 
+\end{proof}
+
+\begin{problem}
+	More generally, suppose $f$ and $D$ are as above. Let $q: \bar{D} \rightarrow \mathbb{R}(\bar{D}$ the closure of $D)$ be continuous with
+\[
+\mathbb{E}_x\left[e^{\int_0^\tau D} q^{+}(s) d s\right]<\infty
+\]
+for every $x \in D$ and $q^{+}$denotes the positive part of $q$. Suppose $u$ is twice continuously
+differentiable in $D$ satisfying
+\[
+\left\{\begin{array}{l}
+\frac{1}{2} \Delta u(x)+q(x) u(x)=0, \quad x \in D \\
+u(\xi)=f(\xi), \quad \xi \in \partial D
+\end{array}\right.
+\]
+
+Prove that
+\[
+u(x)=\mathbb{E}_x\left[f\left(B_{\tau_D}\right) e^{\int_0^\tau D} q(s) d s\right]
+\]
+
+Hint: set $Y_t=\int_0^{t \wedge \tau_D} q\left(B_s\right) d s$ and apply Itô and/or product formula.
+\end{problem}
+\begin{proof}
+	Take $\tilde u(x, t) = x \int _0^t q(s) ds$, the Ito formula gives
+	\[
+		d \tilde u(B_t, t) = \exp\left( \int _0^t q(B_s) ds  \right) \left( \left( \nabla u + \int _0^t \nabla q ds \right)   \cdot d B_t
+		+ q(B_t) u(B_t) dt + \frac{1}{2} \Delta u(B_t) dt
+\right)
+	.\] 
+	When $\frac{1}{2} \Delta u(x) + q(x) u(x) \equiv 0$, we have 
+	\[
+		d \tilde u (B_t, t) = \exp\left( \int _0^t q(B_s) ds  \right)  \left( \nabla u + \int _0^t \nabla q ds \right)   \cdot d B_t
+	.\] 
+	Therefore, $\tilde u\left(B_{t \wedge \tau_D}, t \wedge  \tau_D\right)$ is a martingale. We have
+	\[
+		u(x) = \tilde u(x, 0) = E_x\left( \tilde u\left( B_{\tau_D}, \tau_D \right)  \right) = E_x \left(  \exp\left( \int _0^{\tau_D} q(B_s) ds  \right)  u\left(B_{\tau_D}\right)   \right) 
+	.\] 
+	Hence
+\[
+		u(x) =E_x \left(  \exp\left( \int _0^{\tau_D} q(B_s) ds  \right)  f\left(B_{\tau_D}\right)   \right) 
+	.\]
+
+\end{proof}
+
+
+
+
+\begin{problem}
+	(i) (10 pts) Let $u: \mathbb{R}^d \rightarrow \mathbb{R}$ be twice continuously differentiable. Let $\lambda>0$. Use Itô's formula to show that
+\[
+M_t=e^{-\lambda t} u\left(B_t\right)-\int_0^t e^{-\lambda s}\left(\frac{1}{2} \Delta u\left(B_s\right)-\lambda u\left(B_s\right)\right) d s
+\]
+is a martingale and identify it.
+(ii) (10 pts) A boundary value problem for the Laplacian in a domain $D \subset \mathbb{R}^d$ : Suppose $u: \mathbb{R}^d \rightarrow \mathbb{R}$ solves the boundary value problem
+\[
+\left\{\begin{array}{l}
+\frac{1}{2} \Delta u(x)=\lambda u(x), \quad x \in D \\
+u(\xi)=f(\xi), \quad \xi \in \partial D
+\end{array}\right.
+\]
+where $f: \partial D \rightarrow \mathbb{R}$ is bounded and by $u(\xi)=f(\xi), \xi \in \partial D$, we mean that $\lim _{x \rightarrow \xi} f(x)=$ $f(\xi)$, whenever $x \in D$ converge to $\xi \in \partial D$. Prove that the solution is given by
+\[
+u(x)=\mathbb{E}_x\left(f\left(B_{\tau_D}\right) e^{-\lambda \tau_D}\right), \quad x \in D
+\]
+\end{problem}
+\begin{proof}
+	Take $\tilde u (x, t) = e^{- \lambda t} u(x)$. Then
+	\[
+		d\left( e^{- \lambda t} u(B_t) \right) 
+		= e^{- \lambda t} \nabla u (B_t) \cdot  dB_t - \lambda e^{- \lambda t} u(B_t) + \frac{1}{2} e^{- \lambda t} \Delta u(B_s) d t
+	.\] 
+	By definition of $M_t$, 
+	\[
+		M_t = \int _0^t e^{- \lambda t} \nabla u(B_t) \cdot d B_t
+	\] 
+	, which is a martingale.
+
+	Now, 
+	\[
+		E_x \left(  e^{- \lambda \tau_D} f(B_{\tau_D})  \right)  
+		= E_x \left(  e^{- \lambda \tau_D} u(B_{\tau_D})  \right)  
+		= E_x M_{\tau_D}
+		= M_0
+		= u(x)
+	.\] 
+\end{proof}
+
+
+
+\begin{problem}
+	(i) (10 pts) A Complex Brownian motion motion is defined as $Z_t=X_t+i Y_t$, where $X_t$ and $Y_t$ are independent one dimensional Brownian motions. Suppose $F: \mathbb{C} \rightarrow \mathbb{C}$ is an analytic (not constant) function. Prove (with $F^{\prime}\left(Z_s\right) d Z_s$ as multiplication of complex numbers) that
+\[
+F\left(Z_t\right)=F(0)+\int_0^t F^{\prime}\left(Z_s\right) d Z_s
+\]
+(ii) $(10 \mathrm{pts})$ let
+\[
+\sigma_t=\int_0^t\left|f^{\prime}\left(z_s\right)\right|^2 d s
+\]
+
+conclude (with details) that there exists an independent complex brownian motion $\beta_t$ such that
+\[
+f\left(z_t\right)=f(0)+\beta_{\sigma_t}
+\]
+
+hint: this is nothing more than itô's formula (properly applied). in case you have not taken a course in complex analysis, here is all you need to know (besides knowledge of basic arithmetic of complex numbers) to do the exercise. with $z=x+i y$
+\[
+\begin{aligned}
+& f(z)=u(x, y)+i v(x, y) \quad(\mathrm{u} \text { and } \mathrm{v} \text { harmonic }), \\
+& \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y} \quad \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y} \quad(\text { cauchy-riemann equations }), \\
+& f^{\prime}(z)=\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}=\frac{\partial v}{\partial y}-i \frac{\partial u}{\partial y}
+\end{aligned}
+\]
+
+remark: this result says that if $z_t$ is complex brownian motion so is $f\left(z_t\right)$ although moving variable speed given by the new clock $\sigma_t$. this fact, due to paul lévy, is often called the "conformal invariance property of $b m^{\prime \prime}$ ). it has been a powerful tool in applications of probability to many problems, particularly problems in complex analysis. burgess davis, among many others, used this to solve several difficult conjectures in complex analysis. there are several books on this topic with far reaching applications in many different fields, for example g. lawler's "conformally invariant processes in the plan" with applications to the evolution (sle) process and to related problems on percolation and statistical mechanics.
+	
+\end{problem}
+\begin{proof}
+	Write $F(x + i y) = u(x, y) + i v(x,y)$, $u, v: \mathbb{R}^2 \to  \mathbb{R}$ are harmonic. Now treat $Z_s$ as a two-dimensional real Brownian motion, and apply Ito formula to both $u$ and $v$ :
+	\[
+		u(Z_t) = u(0) + \int _0^t \left( \frac{\partial u}{\partial x}(Z_s), \frac{\partial u}{\partial y} (Z_s)  \right) \cdot (d X_s, d Y_s)
+	.\]
+	\[
+		v(Z_t) = v(0) + \int _0^t \left( \frac{\partial v}{\partial x}(Z_s), \frac{\partial v}{\partial y} (Z_s)  \right) \cdot (d X_s, d Y_s)
+	.\] 
+	Combining them, we have
+	\begin{align*}
+		F(Z_t) &= u(Z_t) + i v(Z_t) \\
+		&= F(Z_0) + \int _0^t \left( u_x d X_s + u_y d Y_s + i v_x d X_s + i v_y d Y_s \right)  \\
+		&= F(Z_0) + \int _0^t \left( u_x + i v_x \right) \left( d X_s + i d Y_s \right)  \\
+		&= F(Z_0) + \int _0^t F'(Z_s) d Z_s
+	.\end{align*}
+	Now, calculate quadratic variation of $u(Z_t)$. We have
+	\[
+		u(Z_t) = u(0) + \int _0^t u'(Z_s) d X_s - \int _0^t v'(Z_s) d Y_s
+	.\] 
+	Since $X, Y$ independent, 
+	\[
+		\left\langle u(Z_t) \right\rangle _t
+		= \left\langle \int _0^t u'(Z_s) d X_s \right\rangle +
+	 \left\langle \int _0^t v'(Z_s) d Y_s \right\rangle
+	 = \int _0^t \left((u')^2(Z_s) d s + (v')^2(Z_s) ds\right)
+	 = \int _0^t |F'(Z_s)|^2 ds
+	.\] 
+	$\left\langle v(Z_t) \right\rangle _t$ is exactly the same. Therefore, 
+	\[
+		u(Z_t) = u(0) + B_{\sigma_t}
+	.\] 
+	and
+	\[
+		v(Z_t) = v(0) + \tilde B_{\sigma_t}
+	,\] 
+	where  $B$ and $\tilde B$ are two independent Brownian motions.
+	Take $\beta = B + i \tilde B$, we have
+	\[
+		F(Z_t) = u + i v = F(0) + \beta_{\sigma_t}
+	.\] 
+\end{proof}
+

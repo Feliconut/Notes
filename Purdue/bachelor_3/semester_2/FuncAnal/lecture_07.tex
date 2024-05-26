@@ -1,0 +1,96 @@
+\lecture{7}{Wed 24 Jan 2024 13:30}{}
+
+Let $(X, \|\cdot \|)$ be a normed space. By Hahn-Banach, for all $x \in X$, there exists $f \in X^*$ such that $\|f\| = 1$, such that $f(x) = \|x\|$. 
+
+Note: We have a natural pairing
+
+\begin{align*}
+	 X \times X^* &\longrightarrow \mathbb{C} \\
+	 (x, f) &\longmapsto \left\langle x, f \right\rangle  = f(x)
+.\end{align*}
+And in this language, $j(x) = \left\langle x, * \right\rangle $.
+
+\begin{proposition}
+	\label{prop:DoubleDualEmbedding}
+	
+	$j: X \to X^{* *}$ is a linear isometric embedding.
+\end{proposition}
+\begin{proof}
+	Linearity is clear. We want to verify $\|j(x)\| = \|x\|$. Unwrap the definitions,
+	\begin{align*}
+		\|j(x)\| &= \sup \{|j(x) f|: f \in X^*, \|f\| \le  1\} \\
+		&= \sup_{\|f\| \le  1} \{\|f\| \|x\|\} \le \|x\|
+	.\end{align*} 
+	By corollary Corollary~\ref{cor:NormFromDual}, there exists $\|f\| \le 1$ such that $|f(x)| = \|x\|$. Thus $|j(x)| = \|x\|$.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:NormedSpaceBanachCompletion}
+	
+	Every normed space $(X, \|\cdot \|)$ has a Banach space completion.
+\end{corollary}
+\begin{proof}
+	Consider $X \to j(X) \rightarrow \overline{j(X)}  \rightarrow X^{**}$. Now $\overline{j(X)}$ is Banach, and $X$ embeds densely into $\overline{j(X)} $.
+\end{proof}
+
+\begin{example}
+	$j$ is not surjective in general. Consider the spaces
+	\[
+		X = C_0(\mathbb{N}) \quad X^* \cong \ell^1(\mathbb{N}) \quad X^{* *} \cong \ell^{\infty }(\mathbb{N})
+	.\] 
+\end{example}
+
+\begin{definition}[Reflexive Space]
+	\label{defn:ReflexiveSpace}
+	If $j$ is surjective, i.e.
+	\[
+		X \cong X^{* *}
+	,\] 
+	we call $X$ \textit{reflexive}.
+\end{definition}
+We know finite-dimensional linear spaces are reflexive, from linear algebra.
+\todo{ Work through specific examples of non-reflexive spaces.}
+
+
+\begin{theorem}[Lp spaces are reflexive]
+	\label{thm:LpSpacesAreReflexive}
+	 $\ell^p(\mathbb{N})$ is reflexive, for  $1 < p < \infty $.
+\end{theorem}
+Todo.
+\todo{Study the proof and write it here.}
+
+\begin{lemma}[Minkowski's Lemma]
+	\label{lem:Minkowski}
+	Let $(X, \|\cdot \|)$ be a normed space, let $V \subset X$ be open convex such that $0 \in V$. 
+
+	Define $q = q_V: X \to  [0,\infty )$, by $q(x) = \inf \{t > 0: x \in  tV\} $. Then
+	\begin{enumerate}
+		\item $V = \{x \in X: q(x) < 1\} $.
+		\item $q$ is a sublinear function.
+	\end{enumerate}
+	
+\end{lemma}
+\begin{remark}
+	If $V = U_X(0,1)$, then $q(x) = \|x\|$.
+\end{remark}
+\begin{proof}
+	First prove $V \subset  \{x \in X: q(x) < 1\} $. If $x \in V$, then there exists $\delta > 0$ such that $( 1 + \delta) x \in V$. Then $x \in \frac{1}{1 + \delta}V$. It follows that $q(x) \le \frac{1}{1 + \delta} < 1$.
+
+	On the other side, if $q(x) < 1$, then there exists $t$, $q(x) \le t < 1$, such that $x \in t V$. But $t V \subset V$ since $V$ is convex: we have $x / t \in V$, so
+	\[
+		x = (1 - t) \cdot 0 + t \left( x \cdot t \right)  \in V
+	.\] 
+
+	Now prove that $q$ is sublinear. 
+	Easily we can see that $q(\lambda x) = \lambda q(x)$.
+
+	Set $s = q(x) + \varepsilon$, $t = q(y) + \varepsilon$. Then $\frac{x}{s} \in V, \frac{y}{t} \in V$, since $q(x / s) = q(x) / s = q(x) / (q(x) + \varepsilon) < 1$. Now by convexity,
+
+	\[
+		\frac{x + y}{ s + t} = \frac{s}{s + t} \frac{x}{s} + \frac{t}{s + t} \frac{y}{t} \in V
+	.\] 
+
+	Thus, $q(x + y) \le  s + t = q(x) + q(y) + 2 \varepsilon$.
+
+\end{proof}
+

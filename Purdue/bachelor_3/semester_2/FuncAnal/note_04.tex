@@ -1,0 +1,446 @@
+\note{4}{Sat 25 May 2024 18:22}{Spectral Theory of Compact Operators}
+
+This note will supplement more material on spectral theory. We will
+\begin{itemize}
+	\item Classify the spectrum and see how they interact with other operations
+	\item Give concrete example to all concepts.
+	\item Develop spectral theory for compact operators
+\end{itemize}
+
+\subsection{Spectral Theory}
+
+\subsubsection{Classification}
+
+\begin{definition}[Point spectrum, continuous spectrum, residual spectrum]
+	\label{defn:PointSpectrumCont}
+	Let $T: E \to E$ be an operator in Banach space. Let $\lambda \in \mathbb{C}$.
+	\begin{enumerate}
+		\item If $\operatorname{ker} (T - \lambda)$ contains a nonzero element, then $\lambda$ is an \textit{eigenvalue} of $T$, and we say $\lambda$ is in the \textit{point spectrum} of $T$, $\sigma_p(T)$.
+		\item If $\operatorname{ker} (T - \lambda) = 0$ but $(T - \lambda)$ fails to be surjective, we say
+			\begin{enumerate}
+				\item $\lambda$ is in the \textit{continuous spectrum} of $T$, denoted $\sigma_c(T)$, if $\operatorname{Im} (T - \lambda)$ is dense.
+				\item otherwise, we say $\lambda$ is in the \textit{residual spectrum} of $T$, denoted $\sigma_r(T)$.
+			\end{enumerate}
+	\end{enumerate}
+	
+\end{definition}
+
+\begin{definition}[Essential Spectrum]
+	\label{defn:EssentialSpectrum}
+	A point $\lambda \in \mathbb{C}$ is in the \textit{essential spectrum} of $T$, $\sigma_{e}(T)$, if $T - \lambda$ fails to be Fredholm.
+\end{definition}
+
+\begin{proposition}
+	\label{prop:TopEquivSpectrum}
+	Topologically equivalent operators have the same $\sigma_p, \sigma_c, \sigma_r, \sigma_e$.
+\end{proposition}
+
+\begin{proposition}
+	\label{prop:EssSpecCalkin}
+	Let $H$ be a Hilbert space and $T \in B(H)$. Then the essential spectrum of $T$ is precisely the spectrum of the coset $T + \mathcal{K}(H)$ in the Calkin algebra.
+\end{proposition}
+\todo{proof omitted.}
+
+\begin{proposition}
+	\label{prop:ContEss}
+	$\sigma_c(T) \subset \sigma_e(T)$
+\end{proposition}
+\begin{proof}
+	Take $\lambda \in \sigma_c(T)$, then $\operatorname{Im} (T - \lambda)$ is dense in $E$ and $\operatorname{ker} (T - \lambda) = 0$. If $T - \lambda$ is Fredholm (i.e. $\lambda \not\in \sigma_e(T)$), then $\operatorname{Im} (T - \lambda)$ is closed, thus $T - \lambda$ surjective, hence a topological isomorphism. But this implies $\lambda \not\in \sigma(T)$, a contradiction.
+\end{proof}
+
+
+\begin{proposition}
+	\label{prop:TopInjResidual}
+	If there is $c>0$ such that $\|(T - \lambda) x\| > c \|x\|$ for all $x \in E$, that is, $T - \lambda$ is topologically injective, then $\lambda \in \sigma_r(T)$.
+\end{proposition}
+\todo{proof omitted.}
+
+\subsubsection{Spectrum and Banach Dual}
+
+
+
+\begin{proposition}[Spectrum of Banach Dual]
+	\label{prop:SpectrumBanachDual}
+	In $\mathbf{Ban}$, the spectrum of $T: E \to E$ coincides with the spectrum of the adjoint $T^*: E^* \to E^*$, and in addition,
+	\begin{enumerate}
+		\item If $\lambda \in \sigma_r(T)$, then $\lambda \in \sigma_p(T^*)$ ;
+		\item If $\lambda \in \sigma_p(T)$, then $\sigma \in \sigma_p(T^*)$ or $\lambda \in \sigma_r(T)$ ;
+		\item If $\lambda \in \sigma_c(T)$, then either $\lambda \in \sigma_c(T^*)$, or $\lambda \in \sigma_r(T^*)$. If $E$ reflexive, then $\lambda \in \sigma_c(T^*)$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	We first show $\sigma(T) = \sigma(T^*)$. Since the adjoint functor preserves isomorphism, we have $T - \lambda$ invertible $\implies T^* - \lambda$ invertible $\implies T^{* *} - \lambda$ invertible. By considering the canonical embedding $E \hookrightarrow E^{* *}$ we have $T^{* *} - \lambda$ invertible $\implies T -  \lambda$ invertible. (A side note: $(T - \lambda)^* = T^* - \lambda$ since we are considering the Banach adjoint, not the Hilbert one.)
+
+	(1). Take $\lambda \in \sigma_r(T)$, then $\operatorname{Im} (T - \lambda)$ is not dense. Take $x \not\in \overline{\operatorname{Im} (T - \lambda)} $, and let $f \in E^*$ be such that $f(x) \neq 0$ and $f|_{\operatorname{Im} (T - \lambda)} = 0$. Now $(T - \lambda)^* f = f \circ (T - \lambda) = 0$, thus $\operatorname{ker} (T - \lambda)^* \neq 0$, i.e. $\lambda \in \sigma_p(T^*)$.
+
+	(2) Take $x \in \operatorname{ker} (T - \lambda)$, $x \neq 0$. We show $\lambda \not\in \sigma_c(T^*)$. For all $f \in E^*$ we have $ ((T - \lambda)^* f)x = f\left( (T - \lambda) x \right)  =0$. Thus for $g \in E^*, g(x) \neq 0$ we have $g \not\in \overline{\operatorname{Im} (T^* - \lambda)} $.
+
+	(3) Take any $f \in \operatorname{ker} (T - \lambda)^*$. Then $(T^* - \lambda) f = f\circ (T - \lambda) = 0$. But $\operatorname{Im} (T - \lambda)$ is dense, so $f = 0$, i.e. $\lambda \not\in \sigma_p(T^*)$. If $E$ is reflexive, then $\lambda \in \sigma_r(T^*) \implies \lambda \in \sigma_p(T^{* *}) = \sigma_p(T)$ which is a contradiction.
+\end{proof}
+
+
+\subsubsection{Spectrum and Hilbert Space Dual}
+
+\begin{proposition}[Spectrum of Hilbert Dual]
+	\label{prop:SpectrumHilbertDual}
+	Consider $T: H \to H$ in $\mathbf{Hilb}$. We have $\sigma(T^*) = \{\overline{\lambda} : \lambda \in \sigma(T)\} $, and
+	\begin{enumerate}
+		\item If $\lambda \in \sigma_r(T)$, then $\overline{\lambda}  \in \sigma_p(T^*)$;
+		\item If $\lambda \in \sigma_p(T)$, then $\overline{\lambda}  \in \sigma_p(T^*) \cup \sigma_r(T^*)$;
+		\item $\sigma_c(T^*) = \{\overline{\lambda} : \lambda \in \sigma_c(T)\} $ ;
+		\item $\sigma_e(T^*) = \{\overline{\lambda} : \lambda \in \sigma_e(T)\} $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	The results follow from Proposition~\ref{prop:SpectrumBanachDual} and the fact that Hilbert space is reflexive. Use the commutative diagram relating Hilbert adjoint to Banach adjoint.
+
+	The proof can also be made directly by repeating the argument in Banach adjoint.
+\end{proof}
+
+
+\begin{proposition}
+	\label{prop:NormalResidualSpectrum}
+	Normal operators have no residual spectrum.
+\end{proposition}
+
+
+\subsubsection{Spectral Theorem for Compact Operator}
+
+
+\begin{theorem}[Riesz]
+	\label{thm:RieszCompact}
+	Let $T: E \to E$ be a compact operator acting in an infinite dimensional space. Then 
+	\begin{itemize}
+		\item $0 \in \sigma(T)$, 
+\item $\sigma_e(T) = \{0\} $.
+\item For each $\lambda \in \sigma(T) \setminus \{0\} $, $\operatorname{dim} \operatorname{ker} (T - \lambda) < \infty $.
+\item $\sigma(T)$ at most countable, and $0$ is the only possible limit point.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Since $T$ is compact, $T$ is not Fredholm (Proposition~\ref{prop:CompactNotFred}), so $0 \in \sigma_e(T)$. By the Fredholm Alternative, for each $\lambda \in \sigma(T), \lambda\neq 0$, $T - \lambda$ is Fredholm and $\operatorname{dim} \operatorname{ker} (T - \lambda) < \infty $. Thus $\sigma_e(T) = \{0\} $.
+
+	Now we show $\sigma(T)$ is at most countable, and $0$ is its only possible limit point. If either were false, then there exists a sequence $\lambda_n$ of points in the spectrum that tends to some $\theta\neq 0$. Without loss of generality we may assume $|\lambda_n| > \frac{|\theta|}{2}$, and all $\lambda_n$ are distinct. We know all the $\lambda_n$ are eigenvalues. Then we may take a unit vector in each eigenspace, $x_n \in \operatorname{ker} (T - \lambda_n)$. From linear algebra, each $x_n$ are linearly independent. Set $E_n = \operatorname{span } \{x_1, \ldots, x_n\} $.
+
+	Now use Riesz lemma of perpendicularity (Lemma~\ref{lem:Riesz}), we choose for every $n > 1$, $y_n \in E_n$ such that $\|y \| = 1$ and $\text{dist}(y_n, E_{n - 1}) > \frac{1}{2}$. Write $y_n = \mu_n x_n + z_n$ where $\mu_n \in \mathbb{C}, z_n \in E_{n - 1}$. Then for $n > m$, we have $\|T y_n - T y_m\| =\|T (\mu_n x_n + z_{n - 1}) - T y_m\| = \|\lambda (\mu_n x_n) - T(y_m - z_{n - 1})\| > |\lambda| \text{dist}(y_n, E_{n - 1}) > \frac{|\lambda|}{2} > \frac{|\theta|}{4}$. This contradicts compactness of $T$.
+\end{proof}
+
+\begin{corollary}[Compact Operator in Hilbert Space]
+	\label{cor:CompactHilbert}
+
+	Let $H$ be a Hilbert space and let $T \in \mathcal{K}(H)$. Then $|T| \in \mathcal{K}(H)$. If the spectrum of $|T|$ is listed as $\lambda_1 \ge \lambda_2 \ge  \ldots$ where each eigenvalue is repeated according to its multiplicity, then there are orthonormal families $(x_n), (y_n)$ consisting of vectors in $H$ such that
+	\[
+		T = \sum_{k\ge 1} \lambda_k \left\langle \cdot , x_k \right\rangle y_k
+	\] 
+	where the series is convergent in the norm of $B(H)$.
+\end{corollary}
+\begin{proof}
+	We show $|T|$ is compact. Of course $|T|^2 = T T^*$ is compact. Now both of them are positive and are diagonalizable; the claim follows from Proposition~\ref{prop:DiagonalOperatorCompact}. \ask{check.}
+	By the above theorem, $\sigma(|T|)$ is countable. Use the spectral theorem for normal operators (Proposition~\ref{prop:SpectrumNormalOperator}) to write $|T|$ as
+	\[
+		T 
+		= \sum_{n\ge 1} \lambda_n E(\lambda_n)
+		= \sum_{k\ge 1} \lambda_k \left\langle \cdot , x_k \right\rangle x_k
+	.\] 
+	Now $\sigma(|T|) \subset [0,\infty )$ and $0$ is the only possible accumulation point; thus we can write $\lambda_k$ in descending order.
+
+	Now apply the polar decomposition (Theorem~\ref{thm:PolarDecomposition}) to $T$ and have $T = V |T|$ ; the partial isometry $V$ has the form (Proposition~\ref{prop:MatrixPartialIsometry}) $V = \sum_{n \geq 1}\left\langle\cdot, x_n\right\rangle y_n$. Thus $T=\sum_{k \geq 1} \lambda_k\left\langle\cdot, x_k\right\rangle y_k$.
+\end{proof}
+
+There are several other results of the same type, where one is interested in decomposing a compact operator in a Hilbert space. Those results will be immediate corollaries since we have now in hand the spectral theory of normal operators in Hilbert space; but they can also be developed without spectral theory as done in Khelemskii 2006. Here we will omit most of the proofs.
+
+\begin{theorem}[Schmidt]
+	\label{thm:Schmidt}
+	Let $H$ and $K$ be Hilbert spaces and $T: H \to K$ be a compact operator. Then there exist
+	\begin{enumerate}
+		\item an orthonormal system $(e_i')$ in $H$ of finite or countable cardinality;
+		\item  an orthonormal system $(e_i'')$ in $K$ of the same cardinality and
+		\item a (finite or infinite) sequence $s_1 \ge s_2 \ge \ldots$ of positive numbers with the index set of same cardinality, tending to zero if it is infinite,
+	\end{enumerate}
+	such that $T$ can be represented in the form
+	\[
+		T = \sum_n s_n \left\langle \cdot , e'_n \right\rangle e''_n
+	.\] 
+\end{theorem}
+
+\begin{theorem}[Hilbert-Schmidt]
+	\label{thm:HilbertSchmidt}
+	Let $T: H \to H$ be compact self-adjoint operator on a Hilbert space. Then there exist
+	\begin{enumerate}
+		\item an orthonormal system $(e_i')$ in $H$ of finite or countable cardinality, and
+		\item a (finite or infinite) sequence $\lambda_1 , \lambda_2 , \ldots$ of nonzero real numbers with the index set of same cardinality, tending to zero if it is infinite,
+	\end{enumerate}
+	such that $T$ can be represented in the form
+	\[
+		T = \sum_n \lambda_n \left\langle \cdot , e_n \right\rangle e_n
+	.\] 
+\end{theorem}
+
+The following is an equivalent formulation of the Hilbert-Schmidt theorem.
+
+\begin{proposition}
+	\label{prop:HilbertSchmidtEquiv}
+	Let $T: H \to H$ be compact self-adjoint operator on a Hilbert space. Then there exist a finite or infinite sequence $\lambda = (\lambda_1, \lambda_2, \ldots)$ of real numbers, tending to zero if it is infinite, and a Hilbert space $H_0$ such that $T$ is unitarily equivalent to the operator $R: l_2^m \oplus H_0 \to  l_2^m \oplus H_0$, $m$ being cardinality of $\lambda$, that acts on $l_2^m$ as the diagonal operator $T_\lambda$ and take $H_0$ to zero. In short,
+	\[
+		T = T_\lambda \oplus 0
+	.\] 
+\end{proposition}
+
+For separable Hilbert space the Hilbert-Schmidt theorem can be simplified to
+
+\begin{proposition}
+	\label{prop:HilbertSchmidtSep}
+	Let $T: H \to H$ be compact self-adjoint operator in a separable Hilbert space. Then
+	\begin{enumerate}
+		\item there is an orthonormal basis in $H$ consisting of eigenvectors of $T$. The corresponding sequence of eigenvalues is real and tends to zero;
+		\item $T$ is unitarily equivalent to the diagonal operator $T_\lambda: l_2^m \to l_2^m$, where $m$ is Hilbert dimension of $H$, and $\lambda$ is the sequence of eigenvalues as in (1).
+	\end{enumerate}
+\end{proposition}
+
+
+\subsubsection{Examples in Lp and lp}
+
+Now we compute the spectrum of a number of concrete operators.
+
+\begin{proposition}
+	Let $T_\mu; \mu = (\mu_1, \mu_2, \ldots)$ be the diagonal operator on $l_p; 1 \le p \le \infty $. Then
+	\begin{itemize}
+		\item $\sigma(T) = \overline{\{\mu_n\} } $,
+		\item $\sigma_p(T) = \{\mu_n\} $,
+		\item $\sigma(T) \setminus \sigma_p(T) = \sigma_c(T)$ if $p < \infty $,
+		\item $\sigma(T) \setminus \sigma_p(T) = \sigma_r(T)$ if $p = \infty $,
+		\item $\sigma_e(T)$ is set of limit points of $\mu$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	
+	The statement about $\sigma(T)$ and $\sigma_p(T)$ are clear.
+	We prove the statements regarding $\sigma_c(T)$ and $\sigma_r(T)$. Take $S = T - \lambda, \lambda \in \sigma(T) \setminus \sigma_p(T)$. When $p < \infty$, $S$ is nonzero coordinate-wise, and for any element $x \in l_p$ there exists a finite-dimensional truncation $x'$ close to $x$, where $x' \in \operatorname{Im} S$.  Thus $\operatorname{Im} S$ is dense in $l_p$. For $p = \infty $, for any $x \in l_\infty $, $S x$ gets close to $0$ i.o., thus $\text{dist}(\xi, \operatorname{Im} S) \ge 1$ where $\xi= (1,1, \ldots)$. Thus  $\operatorname{Im} S$ not dense in $l_\infty $.
+\end{proof}
+
+
+\begin{proposition}
+	Let $T_f: L_p(X, \mu) \to L_p(X, \mu); f \in L_\infty (X, \mu)$ be multiplication operator by $f$. Then
+	\begin{itemize}
+		\item $\sigma(T_f) = f(X) _{\text{ess}}$ essential values of $f$ (numbers $\lambda$ such that for every $\varepsilon>0$, $\mu \{|f(t) - \lambda| < \varepsilon\}  > 0$);
+		\item $\sigma_p(T_f) = \{\lambda: \mu \{f(t) = \lambda\} > 0\} = \{\lambda: \mu(Z_\lambda) > 0\} $;
+		\item $\sigma(T_f) \setminus \sigma_p(T_f) = \sigma_c(T_f)$ if $p < \infty $;
+		\item $\sigma(T_f) \setminus \sigma_p(T_f) = \sigma_r(T_f)$ if $p = \infty $ ;
+		\item If $(X, \mu)$ is an interval $[a,b]$ with Lebesgue measure, $\sigma_e(T_f) = \sigma(T_f)$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	
+	Recall the bounded multiplication operators are exactly those $T_f$ where $f \in L_\infty (X, \mu)$. If $\lambda \in f(X)_{\text{ess}}$ then $f^{-1}$ DNE or unbounded, thus $\lambda \in \sigma(T_f)$. On the other hand, if $\lambda \not\in f(X)_{\text{ess}}$ then $T_{f^{-1}}$ is bounded and $\lambda \not\in \sigma(T_f)$.
+
+	$T_f - \lambda$ is injective iff $\mu(Z_\lambda) = 0$. Thus $\sigma_p(T_f) = \{\lambda: \mu(Z_\lambda) > 0\} $.
+
+	Take $\lambda \in \sigma(T_f) \setminus \sigma_p(T_f)$. Suppose $p < \infty $, then $T_f - \lambda$ is injective, and  every $g$ with support on $\{|f - \lambda| \ge \varepsilon\} $ is mapped onto. Thus $\operatorname{Im} (T_f - \lambda)$ is dense, whence $\lambda \in \sigma_c(T_f)$. When $p = \infty $, we have $\|(T_f - \lambda) \xi - 1_X\| \ge 1$, where $1_X$ is constant function $1$ on $X$ and $\xi \in L_\infty(X, \mu)$. Thus $1_X$ is separated from $\operatorname{Im} (T_f - \lambda)$, whence $\lambda \in \sigma_r(T_f)$.
+
+	Since $(T_f - \lambda) x = T_{f - \lambda}x$, $\sigma_e(T_f) = \sigma(T_f)$ follows from Proposition~\ref{prop:LpMultFredholm}.
+\end{proof}
+
+
+\begin{proposition}
+	Let $T_l, T_r: l_p \to l_p; 1 \le p \le \infty $ be the left and right shift operators. We have
+	\begin{itemize}
+		\item $\sigma_p(T_l) = \begin{cases}
+				\mathbb{D}^0 & p < \infty \\
+				\mathbb{D} & p = \infty 
+		\end{cases}$ 
+		\item $\sigma_p(T_r) = \emptyset $
+		\item $\sigma_r(T_r) = \begin{cases}
+				\mathbb{D}^0 & 1 < p < \infty \\
+				\mathbb{D} & p = 1 \\
+				\text{contains } \mathbb{D}^0 & p = \infty 
+		\end{cases}$ 
+	\end{itemize}
+	Note: when $p = \infty $ we have $\sigma_r(T_r) = \mathbb{D}$, we will show this after the next lemma.
+
+\end{proposition}
+\begin{proof}
+	
+	Let's first compute $\sigma_p(T_l)$. $T_\lambda \xi = \lambda \xi$ iff $\xi = c\left( 1, \lambda, \lambda^2, \ldots \right) $, which is in $l_p$ iff $\lambda \in \mathbb{D}^0$  when $p < \infty $, and iff $\lambda \in \mathbb{D}$ when $p = \infty $.
+
+	$\operatorname{Im} T_r$ has a nontrivial kernel, which consists of all functions with 0 in the first coordinate.
+
+	Finally, use Proposition~\ref{prop:SpectrumBanachDual} and the fact that $(l_p)^* = l_q$ where $\frac{1}{p} + \frac{1}{q} = 1$, to arrive at result about $T_r = T_l^*$.
+\end{proof}
+
+
+
+
+\begin{lemma}
+	\label{lem:ShiftTopEquiv}
+	Let $T$ be any of the shift operators on $l_p, l_p(\mathbb{Z}),$ or in $L_p(\mathbb{R})$ (in this case $T = T_a, a \neq 0$ ), assuming that  $1 \le p \le \infty $. Then for each $\lambda \in \mathbb{T}$, the operators $T - 1$ and $T - \lambda$ are weakly topologically equivalent. As a corollary, each of the sets $\sigma(T), \sigma_p(T), \sigma_c(T), \sigma_r(T)$, and $\sigma_e(T)$ either contains the entire $\mathbb{T}$ or is disjoint from $\mathbb{T}$.
+\end{lemma}
+\begin{proof}
+	In the case $l_p$, take $T_l$ to be the left shift operator, and let $\alpha = (1, \lambda, \lambda^2, \ldots)$ and $\beta = (\lambda, \lambda^2, \lambda^3, \ldots)$. Let $T_\alpha, T_\beta$ be diagonal operators corresponding to $\alpha, \beta$. The following diagram
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJcXGVsbF9wIl0sWzIsMCwiXFxlbGxfcCJdLFsyLDIsIlxcZWxsX3AiXSxbMCwyLCJcXGVsbF9wIl0sWzAsMSwiVF9sIC0gMSJdLFszLDIsIlRfbCAtIFxcbGFtYmRhIl0sWzAsMywiVF9cXGFscGhhIiwxXSxbMSwyLCJUX1xcYmV0YSIsMV1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\ell_p} \&\& {\ell_p} \\
+	\\
+	{\ell_p} \&\& {\ell_p}
+	\arrow["{T_l - 1}", from=1-1, to=1-3]
+	\arrow["{T_l - \lambda}", from=3-1, to=3-3]
+	\arrow["{T_\alpha}"{description}, from=1-1, to=3-1]
+	\arrow["{T_\beta}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+commutes.
+Similar construction holds for all shift operators in $l_p$ and $ l_p(\mathbb{Z})$. For  $L_p(\mathbb{R})$, we are inspired by the $l_p$ case to postulate that the diagram
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJMX3AoXFxSKSJdLFsyLDAsIkxfcChcXFIpIl0sWzAsMiwiTF9wKFxcUikiXSxbMiwyLCJMX3AoXFxSKSJdLFswLDEsIlRfYSAtIDEiXSxbMiwzLCJUX2EgLVxcbGFtYmRhIl0sWzAsMiwiZV57aSBjXzEgdH0iLDFdLFsxLDMsImVee2kgY18yIHQgKyBpIFxcdGhldGF9IiwxXV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{L_p(\R)} \&\& {L_p(\R)} \\
+	\\
+	{L_p(\R)} \&\& {L_p(\R)}
+	\arrow["{T_a - 1}", from=1-1, to=1-3]
+	\arrow["{T_a -\lambda}", from=3-1, to=3-3]
+	\arrow["{e^{i c_1 t}}"{description}, from=1-1, to=3-1]
+	\arrow["{e^{i c_2 t + i \theta}}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+commutes. Taking $f(t) \in L_p(\mathbb{R})$ and doing some algebra yields a unique solution $\theta = \text{arg} \lambda, c_1 = c_2 = \frac{\theta}{a}$.
+\end{proof}
+
+
+
+\begin{proposition}
+	\begin{itemize}
+		\item In $l_\infty $ we have $\sigma_r(T_r) = \mathbb{D}$.
+	\end{itemize}
+
+\end{proposition}
+\begin{proof}
+	
+	We already know $\sigma_r(T_r) \supset \mathbb{D}^0$. We only need to show $\sigma_r(T_r) \supset \mathbb{T}$. In view of Lemma~\ref{lem:ShiftTopEquiv}, we only need to show $T_r - 1$ has no dense image (it's injective since $\sigma_p(T_r) = \emptyset $ ). Take any $\eta = (T_r - 1) x \in \operatorname{Im} (T_r - 1)$, and we have $\lim_{n \to \infty} \frac{1}{n} \sum_{k=1}^{n} \eta_k = 0$. This implies $\|\eta - (1, 1, \ldots)\|_\infty \ge 1$, that is, $\operatorname{Im} (T_r - 1)$ is not dense.
+\end{proof}
+
+\begin{proposition}
+	\label{prop:SpectShift}
+	The spectrum of left or right shift operators on $l_p; 1 \le p \le \infty $ is $\mathbb{D}$, and\\
+	(i) in the case of $l_p ; 1<p<\infty$ and $c_0$ we have $\sigma_p\left(T_l\right)=\sigma_r\left(T_r\right)=\mathbb{D}^0$, $\sigma_c\left(T_l\right)=\sigma_c\left(T_r\right)=\mathbb{T}$, and $\sigma_r\left(T_l\right)=\sigma_r\left(T_r\right)=\varnothing$;\\
+(ii) in the case of $l_1$ we have $\sigma_p\left(T_l\right)=\mathbb{D}^0, \sigma_c\left(T_l\right)=\mathbb{T}, \sigma_r\left(T_r\right)=\mathbb{D}$, and $\sigma_r\left(T_l\right)=\sigma_p\left(T_r\right)=\sigma_c\left(T_r\right)=\varnothing ;$\\
+(iii) in the case of $l_{\infty}$ we have $\sigma_p\left(T_l\right)=\sigma_r\left(T_r\right)=\mathbb{D}$, and $\sigma_c\left(T_l\right)=$ $\sigma_c\left(T_r\right)=\sigma_r\left(T_l\right)=\sigma_p\left(T_r\right)=\varnothing$.
+\end{proposition}
+\begin{proof}
+	By Proposition~\ref{prop:SpectrumClosed}, $r(T) \le \|T\| = 1$, and the spectrum is closed containing $\mathbb{D}^0$, hence equals to $\mathbb{D}$. Now, in the case $1 \le p < \infty $, points in $\mathbb{T}$ are eigenvalue of $T_l$ or $T_r$, so by Proposition~\ref{prop:SpectrumHilbertDual} it cannot be in the residual spectrum, i.e. it must be in the continuous spectrum.
+\end{proof}
+
+
+
+
+
+\begin{claim}
+	Let $T_b$ be bilateral shift in $l_p(\mathbb{Z})$ or $L_p(\mathbb{R})$.
+	\begin{itemize}
+		\item When $p = 1, \sigma_r(T_b) \supset \mathbb{T}$,
+		\item When $p = \infty , \sigma_p(T_b) \supset \mathbb{T}$.
+	\end{itemize}
+\end{claim}
+\begin{proof}
+	
+	Using duality of $l_p$ and $L_p$ spaces, the statement about $p = 1$ implies the statement about $p = \infty $. Consider $l_1(\mathbb{Z})$. The composition of the following to maps is zero:
+	\[
+		l_1 \xrightarrow{T - 1} l_1 \xrightarrow{f} \mathbb{C}
+	\] 
+	where $f: \eta \mapsto \sum \eta_n$. Thus $\operatorname{Im} (T - 1) \subset \operatorname{ker} f$ which is not dense in $l_1(\mathbb{Z})$.
+
+	For $L_1(\mathbb{R})$, use $f: \xi \mapsto \int_{\mathbb{Z}} \xi(t) d t$.
+\end{proof}
+
+\begin{claim}
+	The point spectrum of the shift operator by $a \in \mathbb{T}$ in $L_p(\mathbb{T})$ contains all numbers $a^n; n \in \mathbb{Z}$.
+\end{claim}
+\begin{proof}
+	Embed $\mathbb{T} \subset \mathbb{C}$ and identify $T_a$ as $a \in \mathbb{T}$ acting by complex multiplication. Then on the function $f(z) = z^n$ in $ L_p(\mathbb{T})$, we have $T_a f (z) = f(a z)= a^n f(z)$.
+\end{proof}
+
+
+
+\begin{proposition}
+	\label{prop:SpectBiShift}
+	For all $l_p; 1 \le p \le \infty $, the spectrum of bilateral shift $l_p:(\mathbb{Z}) \to l_p(\mathbb{Z})$ and $T_a:L_p(\mathbb{R}) \to L_p(\mathbb{R}); a \neq 0$ is $\mathbb{T}$. Furthermore,
+	\begin{itemize}
+		\item when $1 < p < \infty $, $\sigma(T_b) = \sigma_c(T_b) = \mathbb{T}$
+		\item when $p=1 $, $\sigma(T_b) = \sigma_r(T_b) = \mathbb{T}$
+		\item when $p=\infty  $, $\sigma(T_b) = \sigma_p(T_b) = \mathbb{T}$
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The cases $p = 1, p = \infty $ have already been established.
+
+	Consider the case $1 < p < \infty $. We can explicitly check that for $|\lambda|\neq 1$, $T - \lambda$ is invertible. By Lemma~\ref{lem:ShiftTopEquiv} and that $\sigma(T_b)$ is nonempty, $\sigma(T_b) = \mathbb{T}$. Now $1$ is eigenvalue of our operator iff $p = \infty $. Thus $\sigma_p(T_b) = \emptyset $ for all $p \in (1, \infty )$. But by duality property, $\sigma_r(T_b) = \emptyset $ for $p \in (1, \infty )$. Thus $\sigma(T_b) = \sigma_c(T_b) = \mathbb{T}$. 
+\end{proof}
+
+\begin{proposition}
+	\label{prop:SpectTShift}
+	Spectrum of shift operator by an element $a \in \mathbb{T}$ in $L_p(\mathbb{T})$ is as follows:
+	\begin{itemize}
+		\item if $a = e^{2 \pi i \frac{m}{n}}$ where $m, n$ coprime, then $\sigma(T_a) = \sigma_p(T_a) = \{e^{2 \pi i \frac{k}{n}}; k = 0, 1, \ldots, n - 1\} $.
+		\item in the other cases $\sigma(T_a) = \mathbb{T}$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	In the first case, we have $(T_a)^n = 1$, so the Spectral Mapping Theorem implies $\sigma(T_a)$ must be the $n$-th roots of unity. But we have just shown that $\sigma_p(T_a)$ consists of $\{a^n; n \in \mathbb{Z}\} $, i.e. all the $n$-th roots of unity.
+
+	In the second case, $\{a^n; n \in \mathbb{Z}\} $ is dense in $\mathbb{T}$, so the result follows from the fact that $\sigma(T_a)$ is closed.
+\end{proof}
+
+\begin{remark}
+	(Khelemskii page 318) In the ``Hilbert'' case $p = 2$, every bilateral shift operator in $l_2(\mathbb{Z}), L_2(\mathbb{R}), L_2(\mathbb{T})$ is unitarily equivalent to some operator of multiplication by a function, established by the Fourier operators. We will give the examples later.
+\end{remark}
+
+\subsubsection{Topologically nilpotent operators}
+
+\begin{definition}[Quasinilpotent Operators]
+	\label{defn:QuasinilpotentOperators}
+	We say an element $a$ of a Banach algebra is \textit{topologically nilpotent} or \textit{quasinilpotent} if $\lim_{n \to \infty} \|a^n\|^{\frac{1}{n}} = 0$.
+
+\end{definition}
+
+By the spectral radius formula, quasinilpotent elements in a Banach algebra are precisely those for which the spectrum consists of zero only.
+
+\begin{proposition}[Volterra Operator]
+	\label{prop:SpectVolterroperator}
+	Let $T$ be operator of indefinite integration in $L_1[0,1], L_2[0,1]$ or $C[0,1]$. This is a topologically nilpotent operator, so $\sigma(T) = \{0\} $.
+
+	The same is true for the Volterra operator in $L_2[a,b]$ with essentially bounded kernel $K(s,t)$. As a corollary, the integral equation
+	\[
+		\int _a^t K(s, \tau) x(\tau) d \tau - \lambda x(s) = y(s)
+	\] 
+	has a unique solution in $L_2[a,b] $ for each $\lambda \in \mathbb{C} \setminus \{0\} $ and for every right-hand side $y \in L_2[a,b]$.
+\end{proposition}
+\begin{proof}
+	We show $\|T^n\|^{1 / n} \to 0$. In each space, if we take $f$ inside the unit ball, we would have $T f(x) \le \|f\| \le 1$. Apply $T$ to both sides, we have $T^{n+1} f(x) \le \frac{t^n}{n!}; t \in [0,1]$. Thus $\|T^n\| \le \frac{1}{n!}$.
+\end{proof}
+
+
+
+\begin{proposition}
+	\label{prop:NormIndefInt}
+	The norm of the operator of indefinite integration on $L_2[0,1]$ is $\frac{2}{\pi}$.
+\end{proposition}
+\begin{proof}
+	We write $T = U S$, where
+	\[
+		S x(s) = \int _0^{1 - s} x(t) d t , \qquad
+		U x(s) = x(1 - s)
+	.\] 
+	Since $U$ is unitary, $\|T\| = \|S\|$. We know $S$ is self-adjoint, so $\|S\| = r(S)$. To find eigenvalues of $S$ we search for non-zero solutions to the equation
+	\[
+		S x = \lambda x
+	.\] 
+	The solution to this equation is exactly solution to the ODE
+	\[
+		x(1 - t) + \lambda x'(t) = 0, \quad x(1) = 0
+	.\] 
+	Differentiate again and substitute back the first-order equation, we see that it suffices to find solutions to
+	\[
+		x(t) + \lambda^2 x''(t) = 0
+	.\] 
+	We understand this ODE very well; it has solution $x(t) = \cos \left( \left( \frac{\pi}{2} + k \pi \right) t \right)$, when $\lambda = \left( \frac{\pi}{2} + k \pi \right) ^{-1}$, for each $k \in \mathbb{Z}$.
+	
+	Thus $|\lambda| \le \frac{2}{\pi}$, and this maximum is attained since $S x = \frac{2}{\pi} x$ for $x(t) = \cos \left( \frac{\pi}{2} t \right) $.
+
+\end{proof}
+

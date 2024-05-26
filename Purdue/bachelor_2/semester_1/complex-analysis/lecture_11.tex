@@ -83,7 +83,15 @@ Hence \[
 \end{lemma}
 Note: we do not assume $g$ is analytic, or $\Gamma$ is closed.
 \begin{proof}
-	Not given here. The proof is from definition of derivative, and mean estimation.
+	\begin{align*}
+		G'(z)
+		&= \lim_{h \to 0} \frac{G(z + h) - G(z)}{h} \\
+		&= \lim_{h \to 0} \frac{1}{h} \int _\gamma \frac{g(\xi)}{(\xi - z - h)^n} - \frac{g(\xi)}{(\xi - z)^n} d \xi \\
+		&= \lim_{h \to 0} \int _\gamma \frac{g(\xi) \left( (\xi - z)^n - (\xi - z - h)^n \right) }{(\xi - z - h)^n (\xi - z)^n} \\
+		&= \lim_{h \to 0} \int _\gamma \frac{g(\xi) \left( (\xi - z) - (\xi - z - h) \right)\left( (\xi - z)^{n - 1} + \ldots + (\xi - z- h)^{n - 1} \right)  }{(\xi - z - h)^n (\xi - z)^n} \\
+		&= \int _\gamma \frac{g(\xi) n (\xi - z)^{n - 1}}{(\xi - z)^{2 n}} \\
+		&= n \int _\gamma \frac{g(\xi)}{(\xi - z)^{n + 1}}
+	.\end{align*}
 \end{proof}
 
 
@@ -95,11 +103,7 @@ Note: we do not assume $g$ is analytic, or $\Gamma$ is closed.
 for all $z$ in the interior of $\mathcal{D}$.
 \end{corollary}  
 \begin{proof}
-	Write
-\[
-	f(z) = \frac{1}{2 \pi i}\int _{\partial \mathcal{D}}\frac{f(\zeta)}{\zeta - z} d \zeta, \quad z \in \mathcal{D}
-.\]	
-Apply the previous lemma, and the formula comes easily via induction.
+	Induct on $n$. The base case $n = 0$ is given by \logseq{Cauchy Integral Formula}. The induction step is given by the previous lemma.
 \end{proof}
 
 \begin{theorem}[Morera's Theorem]

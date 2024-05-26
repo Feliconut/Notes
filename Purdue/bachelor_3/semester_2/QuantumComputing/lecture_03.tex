@@ -1,0 +1,264 @@
+\lecture{3}{Tue 16 Jan 2024 10:30}{Last day linear algebra!}
+
+
+
+\subsection{Technicalities on bra-ket notation}
+
+\subsubsection{Kets and Bras}
+
+
+
+The \textbf{bra-ket} notation represents inner product: $\left\langle x \middle| y \right\rangle $. The  \textbf{kets} are just notations for vectors in $\mathscr{H}$.
+For example, if $A: \mathscr{H} \to  \mathscr{H}$ is a Hermitian operator with an eigenvalue $\lambda$, we write $\left| \lambda \right\rangle $ for an eigenvector of $A$ with eigenvalue $\lambda$. Thus,  $A \left| \lambda \right\rangle  = \lambda \left| \lambda \right\rangle $.
+
+The bra-ket notation can also be understood as $\left\langle x \middle| y \right\rangle := \left\langle \left| x \right\rangle , \left| y \right\rangle  \right\rangle $.
+
+The \textbf{bras} are elements in the dual space: $\mathscr{H}^*$, identifiable with $\mathscr{H}$. If $\mathscr{H}$ is a Hilbert space, then the \textit{dual Hilbert space} $\mathscr{H}^*$ is defined as
+\[
+	\mathscr{H}^* = \{\rho: \mathscr{H} \to  \mathbb{C} | \rho \text{ linear and bounded}\} 
+.\] 
+\begin{remark}
+	For infinite-dimensional Hilbert spaces $\mathscr{H}$ the property of $\rho$ being a \textit{bounded} linear functional becomes important.
+\end{remark}
+
+It is easy to check that $\mathscr{H}^*$ is a vector space. To make it a Hilbert space, we need to introduce an inner product on $\mathscr{H}^*$. 
+
+Given $\rho \in \mathscr{H}^*$, let us define the \textit{length} (or \textit{operator norm}) of $\rho$ to be
+\[
+	\|\rho\| := \inf \{\|\rho \left| \psi \right\rangle \| / \|\left| \psi \right\rangle \|: \left| \psi \right\rangle \neq 0, \left| \psi  \right\rangle \in \mathscr{H}\} 
+.\] 
+\begin{remark}
+	This norm endows $\mathscr{H}^*$ with the structure of a \textit{Banach space}. Banach spaces are similar to Hilbert spaces in that we have a good notion of length in both of them; but Banach spaces does not have a proper notion of angle.
+\end{remark}
+
+
+In fact, $\|\cdot \|_{\mathscr{H}^*}$ satisfies the \textit{polarization identity} which makes it unique.
+
+\subsubsection{Canonical identification with the dual}
+
+There is a \textit{canonical map} between $\mathscr{H}$ and $\mathscr{H}^*$ :
+\begin{align*}
+	\Phi: \mathscr{H} &\longrightarrow \mathscr{H}^* \\
+	\left| \psi \right\rangle  &\longmapsto \Phi(\left| \psi \right\rangle ) = \left\langle \psi \right| 
+\end{align*}
+where
+\begin{align*}
+	\left| \psi \right\rangle : \mathscr{H} &\longrightarrow \mathbb{C} \\
+	\left| \phi \right\rangle  &\longmapsto \left\langle \psi \middle| \phi \right\rangle 
+.\end{align*}
+
+On HW1, we have proved that  $\Phi$ is a bijection. Note that $\Phi$ is \textbf{not} linear; it is actually \textbf{conjugate linear}: 
+\[
+	\Phi (c \left| \psi \right\rangle ) \left| \phi \right\rangle = c^* \left\langle \psi \middle| \phi \right\rangle 
+.\] 
+
+\begin{remark}
+	\textit{Projective symmetries} matters in quantum mechanics, this is tightly connected with the fact that $\mathscr{H} \cong \mathscr{H}^*$. More on that in future.
+\end{remark}
+
+\subsubsection{Operators in Bra-Ket Notation}
+
+The bra-ket notation is especially useful because we can combine bras and kets in the ``wrong order'' and get something helpful. In the ``correct order'' we get the \textit{inner product}
+\[
+	\mathscr{H}^* \otimes \mathscr{H} \to  \mathbb{C}
+\] 
+\[
+	\left( \left\langle \phi \right| , \left| \psi \right\rangle  \right)  \mapsto \left\langle \phi \middle| \psi \right\rangle 
+.\] 
+
+In the ``wrong order'' we get the \textit{outer product}
+\begin{align*}
+	\mathscr{H} \otimes  \mathscr{H}^* &\longrightarrow \mathcal{B}(\mathscr{H}) \\
+	\left( \left| \psi \right\rangle , \left\langle \phi \right|   \right)  &\longmapsto \left| \psi \right\rangle \left\langle \phi \right| 
+.\end{align*}
+\begin{align*}
+	\left| \psi \right\rangle \left\langle \phi \right| : \mathscr{H} &\longrightarrow \mathscr{H} \\
+	\left| x \right\rangle  &\longmapsto \left| \psi \right\rangle \left\langle \phi \middle| x \right\rangle 
+.\end{align*}
+
+In homework, we show that the outer product is an isomorphism.
+
+\begin{example}
+		On the space $\mathbb{C}^2 = \text{span}_{\mathbb{C}} \{\left| 0 \right\rangle , \left| 1 \right\rangle \} $, we have
+			\[
+				\left| 0 \right\rangle \left\langle 0 \right| \doteq 
+					\begin{bmatrix}
+						1 & 0 \\
+						0 & 0 \\
+					\end{bmatrix}
+			.\] 
+			\[
+				\left| 1 \right\rangle \left\langle 0 \right| \doteq
+					\begin{bmatrix}
+						0 & 0 \\
+						1 & 0 \\
+					\end{bmatrix}
+			.\] 
+			Similar for $\left| 0 \right\rangle \left\langle 1 \right| $ and $\left| 1 \right\rangle \left\langle 1 \right| $.
+			Thus, we have
+			\[
+				\begin{bmatrix}
+					a & b \\
+					c & d \\
+				\end{bmatrix}
+				= a \left| 0 \right\rangle \left\langle 0 \right| + b \left| 0 \right\rangle \left\langle 1 \right|  + c \left| 1 \right\rangle  \left\langle 0 \right|  + d \left| 1 \right\rangle \left\langle 1 \right| 
+			.\] 
+\end{example}
+
+More generally, if
+				\[
+					A: \mathbb{C}^d \to \mathbb{C}^d
+				\] 
+				with $A = \left( a_{i j} \right) $, we have
+				\[
+					A = \sum a_{i j} \left| i \right\rangle  \left\langle j \right| 
+				.\] 
+
+\begin{example}
+	$I: \mathbb{C}^d \to \mathbb{C}^d$ can be written as
+	\[
+		I = \sum_{i = 0}^{ d - 1} \left| i \right\rangle  \left\langle i \right| 
+	.\] 
+\end{example}
+
+\begin{example}
+	If $D = \operatorname{diag} \left( \lambda_0, \ldots, \lambda_{d - 1} \right) : \mathbb{C}^d \to \mathbb{C}^d$, then
+	\[
+		D = \sum_{i = 0}^{d - 1} \lambda_i \left| i \right\rangle  \left\langle i \right| 
+	.\] 
+\end{example}
+
+
+\subsection{Tensor Products}
+
+\subsubsection{Tensor product of vector spaces}
+
+
+I will define tensor product $\otimes $ using basis, in which case it is also known as \textit{Kronecker product}. 
+
+Let $V$ be a Hilbert space with orthonormal basis $\mathcal{B}_1 = \{v_1, \ldots, v_m\} $, and $W$ be another Hilbert space with $\mathcal{B}_2 = \{w_1, \ldots, w_n\} $.
+
+Then the \textit{tensor product} is defined to be the Hilbert space $V \otimes W$ with orthonormal basis given by
+\[
+	\{\left| v_i \right\rangle  \otimes \left| w_j \right\rangle : 1 \le  i \le m, i \le j \le  n\} 
+\] 
+satisfying the following rules:
+\begin{enumerate}
+	\item For all $z \in \mathbb{C}$, 
+		\[
+			z\left( \left| v_i \right\rangle  \otimes  \left| w_j \right\rangle  \right)  = \left( z \left| v_i \right\rangle  \right) \otimes  \left| w_j \right\rangle  = \left| v_i \right\rangle  \otimes  \left( z \left| w_j \right\rangle  \right) 
+		.\] 
+	\item For all $1 \le i \le m$, $1 \le  j \le m$, $1 \le  k \le  n$, 
+		\[
+			\left( \left| v_i \right\rangle  + \left| v_j \right\rangle  \right)  \otimes  \left| w_k \right\rangle  = 
+			\left| v_i \right\rangle  \otimes  \left| w_k \right\rangle  + \left| v_j \right\rangle  \otimes  \left| w_k \right\rangle 
+		.\] 
+		Similarly, for all $1 \le  i \le m$, $1 \le  j, k \le n$,
+		\[
+			\left| v_i \right\rangle  \otimes  \left( \left| w_j \right\rangle  + \left| w_k \right\rangle  \right) 
+			= \left| v_i \right\rangle  \otimes  \left| w_j \right\rangle  + \left| v_k \right\rangle  \otimes  \left| w_k \right\rangle 
+		.\] 
+\end{enumerate}
+We can check, that $\{v_i \otimes  w_k: i, k\} $ really is a basis. The inner product on $V \otimes W$ is defined so that this is a orthonormal basis.
+
+Sometimes we might write $\left| v_i w_k \right\rangle $ for $\left| v_i \right\rangle  \otimes \left| w_k \right\rangle $.
+
+
+
+The \textbf{curse of dimensionality}. Observe that $\operatorname{dim} V \otimes W = \left( \operatorname{dim} V \right)  \left( \operatorname{dim} W \right) .$ 
+For example, for a $n$-qubit quantum memory, $\operatorname{dim} \left( \mathbb{C}^2 \right) ^{\otimes  n} = 2^n .$ This is the reason why simulating quantum systems with classical computers is in general very, very difficult.
+
+\textbf{Binary Representation of Qubit States.}
+Introduce a conventional ordering for the base states in binary order:
+\[
+	\left| x \right\rangle  = \sum_{i_1 = 0}^1 \ldots \sum_{i _n = 0}^1 z_{i_1, \ldots, i_n} \left| i_1 \right\rangle  \otimes  \ldots \otimes  \left| i_n \right\rangle 
+	\equiv \sum z_{i_1, \ldots, i_n} \left| i_1 \ldots i_n \right\rangle 
+.\] 
+We can think of this as
+\[
+	\left| x \right\rangle = \sum_{N = 0}^{2^n - 1} z_N \left| N \right\rangle 
+.\] 
+
+\begin{example}
+	Let $\left| x \right\rangle = \left| 0 \right\rangle  + \left| 1 \right\rangle  \in \mathbb{C}^2$,  $\left| y \right\rangle  = \left| 0 \right\rangle  - \left| 1 \right\rangle  \in \mathbb{C}^2$, then
+	\begin{align*}
+		\left| x \right\rangle \otimes \left| y \right\rangle &= \left( \left| 0 \right\rangle  + \left| 1 \right\rangle  \right) \otimes \left( \left| 0 \right\rangle  - \left| 1 \right\rangle  \right)  \\
+		&= \left| 00 \right\rangle - \left| 01 \right\rangle  + \left| 10 \right\rangle  - \left| 11 \right\rangle  
+	.\end{align*}
+\end{example}
+
+\subsubsection{Tensor product of operators}
+
+For two operators $A: V_1 \to W_1, B: V_2 \to W_2$, we can define $A \otimes B: V_1 \otimes V_2 \to W_1 \otimes W_2$ such that
+\[
+	(A \otimes B) (v_1 \otimes v_2) = (A v_1) \otimes (B v_2)
+.\] 
+We can define $A \otimes B$ using a block matrix:
+\[
+	A \otimes B = 
+	\begin{bmatrix}
+		A_{1 1}B & A_{1 2} B & \ldots & A_{1 m}B \\
+		A_{2 1}B & A_{2 2}B & \ldots & A_{2 m}B \\
+		\vdots & \vdots & \vdots & \vdots \\
+		A_{m 1}B & A_{m 2}B & \ldots & A_{m n}B \\
+	\end{bmatrix}
+.\] 
+
+\begin{example}
+	\[
+		Z \otimes X = 
+		\begin{bmatrix}
+			1 & 0 \\
+			0 & -1 \\
+		\end{bmatrix}
+		\otimes 
+		\begin{bmatrix}
+			0 & 1 \\
+			1 & 0 \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			0 & 1 & 0 & 0 \\
+			1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 \\
+		\end{bmatrix}
+		\neq X \otimes Z
+	.\] 
+\end{example}
+
+\subsubsection{Simultaneous Diagonalization}
+
+
+
+	Given $A, B: \mathscr{H} \to \mathscr{H}$, their \textit{commutator} is $[A, B] = AB - BA$. We say $A, B$ are \textit{simultaneously diagonalizable} if there exists an orthonormal basis of $\mathscr{H}$, with respect to which both $A$ and $B$ are diagonal.
+
+\begin{theorem}[Simultaneous Diagonalization]
+	\label{thm:SimultaneousDiagonalization}
+	Let $A, B$ be two normal operators. $A, B$ are simultaneously diagonalizable iff they commute.
+\end{theorem}
+\begin{proof}
+	The $\implies$ direction is trivial. Now assume that $AB = BA$. Consider eigenspace decomposition of $A$:
+	\[
+		A = \sum \lambda_i \left| \lambda_i \right\rangle \left\langle \lambda_i \right| 
+	.\] 
+	We have
+	\[
+		A B \left| \lambda_i \right\rangle 
+	= B A \left| \lambda_i \right\rangle 
+	= B \lambda_i \left| \lambda_i \right\rangle 
+	= \lambda_i B \left| \lambda_i \right\rangle 
+	.\] 
+	Thus, $B \lambda_i$ is an eigenvector of $A$ with eigenvalue $\lambda_i$. Since $A$ has a spectral decomposition, its eigenspaces have dimension 1. Thus, $B \left| \lambda_i \right\rangle  = b_i \left| \lambda_i \right\rangle $. Combining those we have
+	\[
+		BA = \sum \lambda_i B \left| \lambda_i \right\rangle  \left\langle \lambda_i \right| 
+			= \sum \lambda_i b_i \left| \lambda_i \right\rangle \left\langle \lambda_i \right| 
+	.\] 
+	We conclude that
+	\[
+		B = \sum b_i \left| \lambda_i \right\rangle  \left\langle \lambda_i \right| 
+	.\] 
+	That is, $B$ simultaneously diagonalizes with $A$.
+\end{proof}
+
+

@@ -1,0 +1,72 @@
+\lecture{9}{Mon 29 Jan 2024 14:34}{}
+
+\todo{Put in lecture notes about topology}
+
+\subsection{Operator Topologies}
+
+
+
+
+\begin{remark}
+	An open set in product topology is a product $\prod_J X_j$ where all but finitely many $X_j = X$.
+
+	The product topology is the topology of pointwise convergence of maps at finitely many points.
+\end{remark}
+
+\begin{theorem}[Tikhonov]
+	\label{thm:Tikhonov}
+	Product space of compact topological spaces are compact in the product topology.
+\end{theorem}
+
+\begin{remark}
+	We can turn any metric space into a metric space that is topologically equivalent but also bounded. Take
+	\[
+		d'(x, y) = \frac{d(x, y)}{ 1 + d(x,y)}
+	.\] 
+	If $(X_n , d_n)$ is a sequence of metric spaces, then the product topology is metrizable with metric
+	\[
+		d(x, y) = \sum_{n=1}^{\infty} 2^{- n} \frac{d_n(x, y)}{1 + d_n(x, y)}
+	.\] 
+\end{remark}
+
+Let $\text{Map}(X, Y)$ be set-theoretic maps from $X$ to $Y$, then product topology corresponds to pointwise convergence of maps.
+
+\begin{definition}[Weak*-topology]
+	\label{defn:WeakStarTopology}
+	Let $X$ be a normed space, the weak*-topology on $X^*$, denoted $w(X^*, X)$ is defined as the restriction of product topology of $\text{Map}(X, \mathbb{C})$ to its subspace $X^* \subset \text{Map}(X, \mathbb{C})$.
+
+	The convergence is pointwise convergence of functions: $f_\alpha \xrightarrow{w^*} f \iff  f_\alpha(x) \to f(x)$ for all $x \in X$.
+\end{definition}
+
+\begin{definition}[Weak Topology]
+	\label{defn:WeakTopology}
+	$w(X, X^*)$ is defined as the restriction of weak*-topology  $w(X^{**}, X^*)$ of $X^{* *}$ to $X = j(X) \subset X^{* *}$.
+
+	The convergence is pointwise convergence if each $x \in X$ is viewed as function on $X^*$. $x_\alpha \to x \iff  f(x_\alpha) \to f(x) $ for all $f \in X^*$.
+\end{definition}
+
+\begin{remark}
+	This corresponds to convergence on each coordinate.
+\end{remark}
+
+Also consult the following definition:
+
+\textbf{Definition.} The weak topology on $\boldsymbol{X}$ is the weak topology on $X$ with respect to the canonical pairing $\left\langle X, X^*\right\rangle$. That is, it is the weakest topology on $X$ making all maps $x^{\prime}=\left\langle\cdot, x^{\prime}\right\rangle: X \rightarrow \mathbb{K}$ continuous, as $x^{\prime}$ ranges over $X^* .^{[1]}$
+
+\textbf{Definition.} The weak topology on $X^*$ is the weak topology on $X^*$ with respect to the canonical pairing $\left\langle X, X^*\right\rangle$. That is, it is the weakest topology on $X^*$ making all maps $\langle x, \cdot\rangle: X^* \rightarrow \mathbb{K}$ continuous, as $x$ ranges over $X^{[1]}$ This topology is also called the weak $^*$ topology.
+
+\textbf{More on weak topology}. An element in $x$ is some $\prod_{f \in X^*} \mathbb{C}$, since $X \subset X^{* *}$. That is, $x \to \left( f(x) \right) _{ f \in X^*}$.
+
+Fix $f_1, f_2, \ldots, f_n \in X^*$. Now fix $R_1 = \{x \in X: |f_1(x)| < \varepsilon_1\} $ and etc. Geometrically, $R_1$ is all planes between two hyper-planes, defined by the $f_1$-coordinate between $- \varepsilon_1$ and $\varepsilon_1$. Geometrically, $R_1, \cap R_2 \cap \ldots \cap R_{n}$ is a prism in $n$-dimension.
+
+In infinite dimension, 
+\[
+	R_1 \cap \ldots \cap R_n \supset \operatorname{Ker} f_1 \cap \ldots \cap \operatorname{Ker} f_n
+.\] 
+In infinite dimension, the prisms are unbounded!
+
+\begin{remark}
+	A joke. There are infinitely many things that describes how a professor does his jobs, together they form a metric $\prod_{n = 0}^\infty (X_n, d_n)$. The university can only measure finitely many of them. It is kind of a ``weak metric'', right?
+\end{remark}
+
+

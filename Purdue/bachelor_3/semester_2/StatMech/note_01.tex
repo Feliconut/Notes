@@ -1,0 +1,139 @@
+\note{1}{Thu 28 Dec 2023 21:53}{Brydges Exercise Lecture 1}
+
+\begin{problem}
+	Problem 1.1. An $n \times n$ matrix $A$ is said to be positive-definite if for all non-zero $\lambda=$ $\left(\lambda_1, \ldots, \lambda_n\right)$ in $\mathbb{C}^n$
+\[
+\sum_{1 \leq i, j \leq n} \lambda_i A_{i j} \bar{\lambda}_j>0
+\]
+
+If the inequality is not strict then the matrix is said to be positive-semidefinite. A continuous function $f: \mathbb{R} \rightarrow \mathbb{R}$ is said to be positive-definite if for every $x \in \mathbb{R}^n$, the matrix ( $f\left(x_i-\right.$ $\left.\left.x_j\right)\right)_{1 \leq i, j \leq n}$ is positive-semidefinite. Prove that:
+(1) If $f$ is positive-definite, then $V$ given by a the two-body potential $v(x, y)=f(x-y)$ as in Example 1.2 satisfies the stability bound (1.5).
+(2) If $f$ is continuous and integrable so that the Fourier transform $\hat{f}(k)=\int f(x) e^{-i k x} d x$ exists, if $\hat{f} \geq 0$, then $f$ is positive-definite. (This is the "easy" half of Bochner's theorem.) Concentrate on the case where $\hat{f}$ is also integrable, and then see exercise 8.4.30 in [Fol99] to remove this assumption.
+
+This extends to $\mathbb{R}^d$. Conjecture: Every two-body potential $v(x, y)=f(x-y)$ such that $V$ satisfies (1.5) has the form $f=$ non-negative function + positive-definite function.
+\end{problem}
+\begin{proof}
+	1) Consider  $1$-dimensional matrix, we have $f(0) \ge 0$. Now consider $2$-dimensional matrix, set $\lambda_1 = \lambda_2 = 1$, we have  $2 f(0) + f(x_1 - x_2) + f(x_2 - x_1) \ge 0$. Since the matrix $f(x_i - x_j)$ is positive semi-definite, it is Hermitian, so in particular symmetric. Hence $f(0) + f(x_1 - x_2) \ge 0$. $x$ is arbitrary, so $f \ge  - f\left( 0 \right) $.
+
+	2) Assume $\hat{f} $ is integrable, then we can write $f(x_i - x_j)$ using inverse fourier transform:
+	\[
+		\sum_{i j} \lambda_i f(x_i - x_j) \overline{\lambda} _j = \int \hat{f} (k) \sum_{i,j} \lambda_i e^{i k (x_i - x_j)} \overline{\lambda} _j dk
+	.\] 
+	Now, note that for all $k$, $x \mapsto e^{i k x}$ is positive semidefinite, since
+	\[
+		\sum_{i j} \lambda_i e^{i k (x_i - x_j)} \overline{\lambda} _j
+		= \sum_i \lambda_i e^{i k x_i} \sum_j \overline{\lambda} _j e^{- i k x_j}
+		= \left| \sum_{i} \lambda_i e^{i k x_i} \right| ^2 \ge 0
+	.\] 
+	By assumption $\hat{f} (k) \ge 0$. Thus $f$ is positive semidefinite.
+
+	If we strengthen the assumption to $\hat{f} > 0$ locally, then $f$ is indeed positive definite.
+\end{proof}
+
+\begin{definition}[Gibbs Measure]
+	Definition 1.3. Let $\Lambda \subset \mathbb{R}^d,|\Lambda|<\infty$. Let $z \geq 0$. For $E \subset \Lambda^*$
+\[
+\mathbb{P}(E)=\frac{1}{Z} \sum_{n \geq 0} \frac{z^n}{n !} \int_{E \cap \Lambda^n} e^{-V} d x_1 \cdots d x_n
+\]
+is called the Grand Canonical Ensemble Gibbs measure, or simply the Gibbs measure, where
+\[
+Z=\sum_{n \geq 0} \frac{z^n}{n !} \int_{\Lambda^n} e^{-V} d x_1 \cdots d x_n
+\]
+is the normalization factor such that $\mathbb{P}\left(\Lambda^*\right)=1$.
+\end{definition}
+
+This can be understood as
+\[
+	d P(x) = \frac{1}{Z} \frac{z^n}{n!} e^{-V(x)} d x \qquad n = N(x)
+.\] 
+
+To take expectations, for $F: \Lambda^* \to \mathbb{R}$,
+\[
+	E F = \int _{\Lambda^*} F d P = \frac{1}{Z} \sum_{n \ge 0} \frac{z^n}{n!} \int_{\Lambda^n} e^{-V} F dx
+.\] 
+
+\begin{claim}
+	If $V(x) = - \sum_{i = 1}^{N(x)} \phi(x_i)$, then
+	\[
+		Z = \exp\left( z \int  _\Lambda e^{\phi} dx \right) 
+	.\] 
+\end{claim}
+\begin{proof}
+	\begin{align*}
+		Z&=\sum_{n \geq 0} \frac{z^n}{n !} \int_{\Lambda^n} \exp\left( \sum_{i = 1}^{n} \phi(x_i) \right)  d x_1 \cdots d x_n\\
+		&=\sum_{n \geq 0} \frac{z^n}{n !}\left( \int_{\Lambda} \exp\left(\phi(x) \right)  d x\right)^n\\
+		&= \exp\left(z \int _{\Lambda} e^{\phi} dx\right)
+	.\end{align*}
+\end{proof}
+
+
+
+
+
+\begin{Lemma}[Ideal Gas]
+	Let $V=0$. Let $X_1, \ldots, X_n \subset \Lambda$, where $|\Lambda|<\infty$. Then
+a) $N\left(X_i\right) \sim \operatorname{Poisson}\left(z\left|X_i\right|\right)$;
+b) if $\left|X_i \cap X_j\right|=0$ for $i \neq j$, then $N\left(X_1\right), \ldots, N\left(X_n\right)$ are independent.
+\end{Lemma}
+\begin{proof}
+	We show that the generating function of $N(X_i)$ matches the generating function of the respecting Poisson distribution. The generating function of $Y \sim \text{Poisson}(r)$ is:
+	\[
+		E e^{t Y} 
+		= \sum_{n \ge 0} \frac{r^n}{n!}e^{-r} e^{tn}
+		= \sum_{n \ge 0} \frac{(re^t)^n}{n!}e^{-r}
+		= e^{-r} e^{r e^{t} } 
+	.\] 
+
+	Now, the number of particles in path $x$ hitting region $X \subset \Lambda$ is
+	\[
+		N(X, x) = \sum_{i = 1}^{N(x)} \mathbf{1}(x_i \in X)
+	.\] 
+	The mgf is
+	\[
+		E(\exp\left(tN(X, \cdot ) \right) ) = \frac{1}{Z} \sum_{n \ge 0} \frac{z^n}{n!} \int _{\Lambda^n} \exp\left(t \sum_{i = 1}^n \mathbf{1}(x_i \in X)  \right) xdx = Z(\phi) / Z, \qquad \phi(x_i) = t \mathbf{1}(x_i \in X)
+	.\] 
+	By the preceding claim,
+	\[
+		E\left( \exp\left(t N(X) \right)  \right) 
+		= \exp\left(z \int _{\Lambda} e^{\phi} dx \right) / \exp\left( z |\Lambda| \right) 
+		= 
+		\exp\left(z \int _{\Lambda} e^{\phi}  - 1 \right) 
+		= \exp\left( z |X|(e^t - 1) \right) 
+	.\] 
+	This implies $ N(X) \sim \text{Poisson}(z |X|)$.
+
+	For independence, we also use the fact that $X_1, \ldots, X_m$ independent iff their joint mgf splits.
+	Note that
+	\[
+		E\left( \exp\left(t_1 N(X_1) + \ldots + t_m N(X_m) \right)  \right) 
+		= Z(\phi) / Z
+	\] 
+	where $\phi(x_j) = \sum_{i = 1}^m t_i \mathbf{1}\left( x_j \in X_i \right) $.
+	Hence, this is equal to
+	\[
+		\exp\left(z \int _{\Lambda} e^{\phi}  - 1 \right) 
+	.\] 
+	\todo{THe normalization is still not right.}
+	
+\end{proof}
+
+\begin{problem}
+	Find $\left\langle N(\Lambda) \right\rangle  / |\Lambda|$.
+\end{problem}
+\begin{proof}
+	\begin{align*}
+		\left\langle N(\Lambda) \right\rangle 
+		&= \frac{1}{Z} \sum_{n \ge 0} \frac{z^n}{n!}\int _{\Lambda^n} n dx \\
+		&= \frac{1}{Z} z |\Lambda| \exp\left(z |\Lambda| \right) 
+	.\end{align*}
+	But $Z = \exp\left(z \left| \Lambda \right|  \right) $. Hence
+	\[
+		\left\langle N(\Lambda) \right\rangle / \left| \Lambda \right|  = z
+	.\] 
+\end{proof}
+
+Connection between Ising model and mean field theory with two states: Subcritical Ising gives same long-term behavior, as it locks into a universal state.
+
+Connection between De Finetti Theorem: Distribution of infinite exchangeable sequence, conditioned on the exchangeable field, are iid Bernoulli, the parameter given by some distribution.
+In mean field theory, the blocks are exchangeable since there's no local interactions and the potential is spatially symmetric. Hence, the state of each block (have particle or not) is a Bernoulli event, with parameter given by the two-value distribution $\rho$, consistent with our model.
+

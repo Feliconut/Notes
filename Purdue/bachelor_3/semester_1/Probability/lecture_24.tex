@@ -1,0 +1,149 @@
+\lecture{24}{Fri 08 Dec 2023 10:39}{Stochastic Differential Equations}
+
+\subsection{Stochastic Differential Equations}
+
+
+\[
+	u(X_t) = 
+	u(X_0) + \int _0^t \sigma^T \nabla u(X)s) \cdot  d B_s + \int _0^t \left(\sum_{i=1}^{d} b_i \frac{\partial u}{\partial x_i} + \frac{1}{2} \sum_{i , j} a_{i,j}(x) \frac{\partial u}{\partial x_i x_j} (x) \right)  ds
+.\] 
+
+\subsubsection{First application: Dirichlet Problem}
+
+
+
+
+Define the second-order differential operator,
+\[
+	L u(x) = \sum_{i=1}^{d} b_i(x) \frac{\partial u}{\partial x_i} + \frac{1}{2} \sum_{i , j} a_{i,j}(x) \frac{\partial u}{\partial x_i x_j} (x)
+.\] 
+
+Then
+\[
+	u(X_t) = u(X_0) + M_t + \int _0^t L u(X_t) ds
+.\] 
+From a SDE, we obtain a PDE.
+
+If $u$ is such that $L u = 0$, then $u(X_t) = u(X_0) + M_t$.
+
+Take expectation wrt $X_0 = x$. 
+\begin{align*}
+	E_x\left( u(X_t) \right) 
+	&= E_x\left( u(X_0) \right) + E_x(M_t) \\
+	u(x) &= E(u(X_t)) 
+.\end{align*}
+
+
+Now, suppose we have an open connected region $D$ in $\mathbb{R}^d$. Start $x \in D$ and run an SDE, stop when it hits $\partial D$ :
+\[
+	\tau_D = \inf \{t: X_t \not\in D\}\} 
+.\] 
+By continuity, $X_{\tau_D} \in \partial D$.
+
+We look at
+\[
+	u(B_{t \wedge \tau_D}) = u(X_0) + M_{t \wedge \tau_D}
+.\] 
+Let $u$ be a solution to $L$, with  $u|_{\partial D} = f$, in other worlds, we have the Dirichlet problem
+\[
+	\begin{cases}
+		L u = 0 & \text{ in }D \\
+		u = f & \text{ on }\partial D
+	\end{cases}
+.\] 
+Take expectation on both sides,
+\[
+	E_x(u(X_{\tau_D \wedge t})) = u(x)
+.\] 
+Let $t \to  \infty $, 
+\[
+	E_x(u(X_{t_D})) = u(x)
+.\] 
+The solution is
+\[
+	u(x) = E_x\left( f(X_{\tau_D}) \right) 
+.\] 
+
+Take $L = \frac{1}{2} \Delta$, $X_t = B_t$. 
+Take $D$ to be ball; we get mean value property of harmonic functions.
+
+If $X_{\tau_D}$ has a density, we have some kernel function $K(x, y)$ such that
+\[
+	u(x) = \int _{\partial D} K(x,y) f(y)
+.\] 
+
+\subsubsection{Second application: Heat equation}
+
+Let $u : \mathbb{R}^d \times [0,T]$, fix some $T$, $u \in C^{2, 1}$. Then (Ito formula applied to $\mathbb{R}^{d + 1}$),
+
+\[
+	u(X_t, T- t) = u(X_0, T) + \int _0^t \sigma^T(X_s) \nabla_x u(X_s, T - s) d B_s
+	+ \int _0^t \left( - \frac{\partial u}{\partial t} (X_s, T - s) + L u(X_s, T - s) \right)  d s
+.\] 
+
+Then
+\[
+	u(X_t, T - t) = u(X_0, T) 
+	+ M_t + \int _0^t \left( \frac{\partial u}{\partial t} (X_s, T - s) + L u(X_s, T + s) \right)  d s
+.\] 
+If $u$ satisfies
+\[
+	- \frac{\partial u}{\partial t} + L u = 0
+.\] 
+Then $u(X_t, T - t) = u(X_0, T) + M_t$. Thus
+\[
+	E_x(X_t, T - t) = u(X_0, T)
+.\] 
+
+Let $t \in  [0,T)$ and $t \to T$. Take expectations wrt $E_x$, we have
+\[
+	u(x, T) = E_x(u(X_T, 0))
+.\] 
+Thus, if $u$ satisfies the initial boundary value problem
+\[
+	\begin{cases}
+		\frac{\partial u}{\partial t}  = L u  & \text{ in }\mathbb{R}^d \times [0,\infty )\\
+		u(x, 0) = f(x)
+	\end{cases}
+.\] 
+Then, the solution is 
+\[
+	u(x, t) = E_x(f(X_t))
+.\] 
+
+If $(a_{i j}) = I$, we know $X_t = B_t$. In case of BM, we have a density.
+
+\textbf{Question: when is there a density? Or, when is there a heat kernel for this PDE?}
+
+If we assume \textit{ellipticity}, i.e. 
+\[
+	\sum_{i, j} a_{i, j}(x) \xi_i \xi_j \ge C |\xi|^2
+,\] 
+then there exists a kernel $P_t(x, y)$ such that
+\[
+	u(x, t) = \int _{\mathbb{R}^d} P_t(x, y) f(y) dy
+.\] 
+
+For self-adjoint operators, $\int L u \cdot  v = \int  u Lv$ holds, and the process is reversible.
+
+\begin{definition}
+	Brownian motion $B_t$ in $\mathbb{R}^d$ is
+	\begin{enumerate}
+		\item Transient if $\lim_{t \to \infty} |B_t| = \infty $
+		\item Point recurrent if for $\forall  x \in \mathbb{R}^d$, $\exists  t_k$ increasing such that $B_{t_k} = x$ for all $k$ a.s., that is, 
+			\[
+				P\left( B_{t_k} = x \text{ i.o.} \right) = 1
+			.\] 
+		\item Neighborhood recurrent if for all all $x \in \mathbb{R}^d$ and $\varepsilon>0$, there exists $t_k $ increasing such that $B_{t_k} \in B(x, \varepsilon)$ for all $k$ a.s., that is,
+			\[
+				P\left( B_{t_k} \in  B(x, \varepsilon) \text{ i.o.} \right) = 1
+			.\] 
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	In $d = 1$, $B_t$ is point recurrent. In  $d = 2$, $B_t$ is neighborhood recurrent. In  $d \ge 3$, $B_t$ is transient.
+\end{theorem}
+In 1d: consider intervals.
+In 2d: consider annuli.
+In 3d: apply Ito formula to the fundamental solution to the Cauchy problem. 

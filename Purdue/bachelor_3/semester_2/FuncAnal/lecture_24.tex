@@ -1,0 +1,333 @@
+\lecture{24}{Mon 25 Mar 2024 15:04}{Spectral Decomposition}
+
+We have developed the theory of Continuous Functional Calculus, which provides us a way to generate spectral decompositions of normal operators with discrete spectrum. 
+
+\begin{example}
+	Consider finite dimensional complex linear space $V$, and normal operator $M$ has $n$ eigenvalues $\lambda_1, \ldots, \lambda_n \in \mathbb{C}$. Then
+	\[
+		\chi_{\lambda_i}: \sigma(M) \to \mathbb{C}
+	\] 
+	is a continuous function on the spectrum. Thus, from
+	\[
+		z = \lambda_1\chi_{\lambda_1} + \ldots + \lambda_n\chi_{\lambda_n} \in C(\sigma(M))
+	,\] 
+	we may apply continuous functional calculus $\varphi: C(\sigma(M)) \to C^* \{1, M\} $, to obtain
+	\[
+		M = \lambda_1\varphi\left( \chi_{\lambda_1} \right)  + \ldots + \lambda_n\varphi\left( \chi_{\lambda_n} \right) 
+	.\] 
+	We may verify that each $\varphi\left( \chi_{\lambda_i} \right) $ is an orthogonal projection onto the (mutually orthogonal) eigenspace associated to eigenvalue $\lambda_i$, i.e. $M$ admits an eigenspace decomposition. This follows directly from algebraic properties of those characteristic functions:
+	\[
+		\chi_{\lambda_i} \chi_{\lambda_j} = 0 \text{ for } i \neq j, \quad
+		\chi_{\lambda_i}^2 = \chi_{\lambda_i} = \chi_{\lambda_i}^*
+	.\] 
+	Moreover, $\varphi(\chi_{\lambda_i})$ coincides with the notion of eigenspace in linear algebra. To see this, we verify $\varphi(\chi_{\lambda_i})V \subset E(\lambda_i; M)$:
+	\begin{align*}
+		M \varphi\left( \chi_{\lambda_i} \right) v
+		&= \left( \lambda_1 \varphi(\chi_{\lambda_1}) + \ldots + \lambda_n \varphi(\chi_{\lambda_n}) \right) \phi\left( \chi_{\lambda_i} \right) v  \\
+		&= \left( \lambda_1 \varphi(\chi_{\lambda_1} \chi_{\lambda_i}) + \ldots + \lambda_n \varphi(\chi_{\lambda_n} \chi_{\lambda_i}) \right)  v  \\
+		&= \lambda_i \varphi\left( \chi_{\lambda_i} \right)   v  \\
+		&= \lambda_i \varphi\left( \chi_i  \right) 
+	.\end{align*}
+	Since each $\varphi(\chi_{\lambda_i})V$ is a linear subspace, and they are mutually orthogonal and together spans the whole space, we have to conclude that $\varphi(\chi_{\lambda_I}) V = E(\lambda_i; M)$. In particular, this implies all properties of $E(\lambda; M)$.
+
+	This means
+	\[
+		V = \bigoplus_{i = 1,\ldots,n} \varphi(\chi_{\lambda_i}) V = \bigoplus_{i = 1, \ldots, n}  E(\lambda_i; M)
+	.\] 
+\end{example}
+
+But this approach is insufficient whenever we have a more complex spectral structure, for example, those operators with \textbf{accumulation points}, or those with \textbf{continuous spectra}. 
+
+The idea is to extend the continuous functional calculus to all bounded Borel functions, i.e. the closure of $C(K)$ in the space of Borel measurable functions $\mathcal{B}(K)$.
+
+\begin{notation}
+	Let $K$ be a compact Hausdorff space. Let $\text{Borel}(K)$ be the Borel $\sigma$-algebra on $K$. 
+Let $\mathcal{B}_\infty (K)$ denote bounded Borel functions $f: K \to \mathbb{C}$. 
+\end{notation}
+We have the inclusion
+\[
+	C(K) \subset B_{\infty }(K) \subset \ell^\infty (K)
+.\] 
+$\mathcal{B}_\infty (K)$, when endowed uniform norm, becomes a $C^*$-algebra, because it is closed in the $C^*$-algebra $\ell^\infty (K)$ (since pointwise limit of Borel measurable functions is Borel measurable).
+
+By \logseq{Lusin's Theorem}, $C(K)$ is dense in $L^p(K, \mu)$ for $p  \in [1, \infty )$, so in particular  $C(K)$ is dense in $\mathcal{B}_\infty (K)$. Thus, $B_{\infty }(K)$ is closure of $C(K)$ in uniform topology of $C(K)$ under Borel measure.
+
+\begin{remark}
+	This justifies decomposing $\sigma(a)$ into \textit{Borel} sets, not any other notion of measurability. This is the best we can do by naturally extending the continuous functional calculus.
+\end{remark}
+
+
+To extend $\varphi$ we have to extend its codomain as well. This is achieved by embedding $C^*\{1, a\} $ into a larger Hilbert space.
+
+\subsection{Bounded Functional Calculus}
+
+
+
+\begin{definition}[Representation of Cstar Algebra]
+	\label{defn:RepresentaticstarAlgebra}
+	Let $A$ be a $C^*$ algebra, $H$ a Hilbert space. A unital $*$-homomorphism $\pi: A \to B(H)$ is called a \textit{representation} of $A$.
+\end{definition}
+
+
+
+\begin{theorem}[Bounded Functional Calculus]
+	\label{thm:BoundedFunctionalCalculus}
+	For any unital representation $\varphi: C(K) \to B(H)$ there is a unital representation $\Phi: \mathcal{B}_\infty (K) \to B(H)$ which extends $\varphi$:
+% https://quiver.local:8080/#q=WzAsMyxbMCwwLCJDKEspIl0sWzIsMCwiQihIKSJdLFswLDIsIlxcbWF0aGNhbHtCfV9cXGluZnR5KEspIl0sWzAsMSwiXFx2YXJwaGkiXSxbMCwyLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFsyLDEsIlxcUGhpIiwyXV0=
+\[\begin{tikzcd}[cramped]
+	{C(K)} && {B(H)} \\
+	\\
+	{\mathcal{B}_\infty(K)}
+	\arrow["\varphi", from=1-1, to=1-3]
+	\arrow[hook', from=1-1, to=3-1]
+	\arrow["\Phi"', from=3-1, to=1-3]
+\end{tikzcd}\]
+\begin{itemize}
+	\item $\Phi$ is continuous wrt the topology of pointwise convergence on $\mathcal{B}_\infty (K)$, and the strong operator topology on $B(H)$. That is, whenever $f_n \to f$ pointwise, we have $\|\Phi(f_n) x - \Phi(f) x\| \to 0, \forall  x \in H$.
+	\item Assume $\omega$ injective. For each nonempty Borel $\omega \subset K$, $\Phi(\chi_{\omega})$ is a nonzero projection. In particular, $\|\Phi(\chi_{\omega})\| = 1$.
+	\item $\|\Phi\| = 1$.
+\end{itemize}
+\end{theorem}
+
+\textbf{Note.} The \logseq{Strong Operator Topology} is the coarsest topology on $B(H)$ such that, for each $x \in H$, $T \mapsto \|T x\|$ is continuous.
+
+\begin{remark}
+	This theorem applied to Continuous Functional Calculus gives our desired extension. Note also, that since the continuous functional calculus is an isometry, it extends to an isometry. \ask{Check this}
+\end{remark}
+
+Before giving the proof of the theorem, we discuss several topics that are pertinent to its proof.
+
+\subsubsection{Cyclic Representation}
+
+\begin{definition}[Cyclic Representation]
+	\label{defn:CyclicRepresentation}
+	A representation $\pi: A \to B(H)$ of $C^*$-algebra $A$ is \textit{cyclic} if there exists a vector $x$ in $H$ such that $\pi(A) x$ is dense in $H$. We say $x$ is a \textit{cyclic vector} wrt the representation $\pi$.
+\end{definition}
+Recall from linear algebra, a \textit{cyclic vector}  $v$ wrt linear operator $T: V \to V$ is one such that $v, Tv, T^2 v, \ldots$ spans $V$; equivalently, all vectors of the form $p(T) v$, $p$ polynomial, is dense in $V$.
+
+In the case of $A = C^* \{1, a\} $, $\pi(A) = C^* \{1, \pi(a)\}\subset B(H)$, we see that the two definitions coincide.
+
+\begin{definition}[Unitarily Equivalent]
+	\label{defn:UnitarilyEquivalentCstarRep}
+	Let $\pi_1: A \to B(H_1)$, $\pi_2: A \to B(H_2)$ be two representations of the $C^*$-algebra $A$. We say $\pi_1$, $\pi_2$ are \textit{unitarily equivalent} if there exists a unitary $U: H_1 \to H_2$ such that
+	\[
+		U \pi_1(a) U^{-1} = \pi_2(a), \forall a \in A
+	.\] 
+\end{definition}
+
+\begin{theorem}[Cyclic Decomposition]
+	\label{thm:CyclicDecompositionCStarRep}
+	If $\pi$ is a representaton of a $C^*$-algebra, then there is a family of cyclic representations $\pi_i: A \to B(H_i)$ such that $\pi$ and $\bigoplus_{i} \pi_i$ are equivalent.
+\end{theorem}
+\begin{proof}
+	See (Conway 19, Theorem VIII.5.9). The proof uses Zorn's Lemma to construct a maximal family of mutually orthogonal cyclic representations.
+
+	Pick any $x \in H$, whether cyclic or not. The subspace $H_x = \overline{\pi(A)} x$ is a \textit{reducing subspace} for $\pi$, meaning that
+	\begin{itemize}
+		\item $\pi(a)H_x \subset H_x$ 
+		\item $\pi(a) H_x^\perp \subset H_x^\perp$
+	\end{itemize}
+	This means each $\pi(a)$ naturally decomposes to an element in $B(H_x) \oplus B(H_x^\perp)$.
+	Thus, $\pi$ admits an orthogonal decomposition into $\pi_x: A \to H_x$ and $\pi_x^\perp: A \to H_x^\perp$,and $\pi = \pi_x \oplus \pi_x^\perp$.
+
+	Now, $x$ is a cyclic vector wrt the representation $\pi_x$. We proceed to find a cyclic sub-representation of $\pi_x^\perp$. To do this, it suffices to verify that if $y \in H_x^\perp$ then $H_y \subset H_x^\perp$. Indeed,
+	\[
+		\left\langle \pi(a) y, \pi(b) x \right\rangle 
+		= \left\langle y, \pi(a^* b) x \right\rangle 
+		= 0
+	.\] 
+	We can use Zorn's Lemma to continue this process infinitely and decompose $\pi$ into a direct sum of (mutually orthogonal) cyclic representations $\pi_i$, with cyclic vectors $x_i \in H$. They should satisfy
+	\begin{itemize}
+		\item $H = \bigoplus_{i \in  I} H_{x_i}, \quad H_{x_i} = \overline{\pi\left( A \right) x_i} $, $\|x_i\| = 1$.
+		\item $H_{x_i} \perp H_{x_j}$ if $x \neq j$.
+		\item $\pi_i: A \to B(H_i)$ unitary representations.
+		\item $I$ is countable.
+	\end{itemize}
+\end{proof}
+
+\subsubsection{States and GNS Construction}
+
+\begin{definition}[State]
+	\label{defn:StateCstar}
+	A \textit{state} on a $C^*$-algebra $A$ is a positive linear functional $f$ of norm $1$. If $A$ has a multiplicative unit element this condition is equivalent to $f(1) = 1$.
+\end{definition}
+
+\begin{remark}
+	This is a generalization of the notion of \textit{mixed state} in quantum mechanics, usually represented by \textit{density matrices}. The \textit{state vectors} represent \textit{pure states}, which are extremal points of the state space of $A$.
+
+	To see the correspondence clearly, consider a state vector $\left| \phi \right\rangle $ and some operator $P \in A$, representing some observable. The expected value $\left\langle \cdot  \right\rangle_\phi : P\mapsto \left\langle \phi \right| P \left| \phi \right\rangle $ is a positive linear functional on $A$, i.e. a state.
+\end{remark}
+
+The next result is important but not used in proof of Theorem~\ref{thm:BoundedFunctionalCalculus}.
+
+\begin{theorem}[Gelfand-Naimark-Segal Construction]
+	\label{thm:GelfandNaimarkSegalConstruction}
+	Let $A$ be a $C^*$ algebra.
+	There is a one-one correspondence between:
+	\begin{enumerate}
+		\item States on $A$, i.e. positive linear functionals on $A$
+		\item Cyclic representations of $A$, modulo unitary equivalence.
+	\end{enumerate}
+	$\rho: A \to \mathbb{C}$ corresponds with $\pi: A \to B(H)$ with cyclic vector $\phi$, if and only if
+	\[
+		\rho(a) = \left\langle \pi(a) \phi, \phi \right\rangle 
+	.\] 
+\end{theorem}
+
+\subsubsection{Riesz-Markov-Kakutani Representation Theorem}
+
+\begin{theorem}[Riesz-Markov-Kakutani Representation Theorem]
+	\label{thm:RieszMarkovKakutaniRepresentatithm}
+	Let $X$ be a locally compact Hausdorff space, and $\psi$ a positive linear functional on $C_c(X)$. Then there exists a unique positive Borel measure $\mu$ on $X$ such that
+	\[
+		\psi(f) = \int _X f(x) d \mu(x), \quad \forall  f \in C_c(X)
+	.\] 
+\end{theorem}
+
+
+
+\subsubsection{Proof of bounded functional calculus}
+
+\begin{proof}[Proof of Theorem~\ref{thm:BoundedFunctionalCalculus}]
+	\textbf{Step 1.}
+	First, we consider the simpler case where there is a unit cyclic vector $x$ of $H$, wrt the representation $\varphi$. This gives us a dense mapping $C(K) \to H$, by sending $f \mapsto \varphi(f) x$. We want to introduce an appropriate inner product structure to $C(K)$ so that the map $\varphi(\cdot ) x$ becomes a dense isometry. 
+
+	Define $V_0 = \varphi(\cdot )x: C(K) \to H$. Now
+	\begin{align*}
+		\left\langle V_0 f, V_0 g \right\rangle 
+		&= \left\langle \varphi(f) x, \varphi(g) x \right\rangle  \\
+		&= \left\langle \varphi(\overline{g}  f) x, x \right\rangle 
+	.\end{align*} 
+	The functional $\eta: a \mapsto \left\langle \varphi(a) x, x \right\rangle $ is exactly the positive linear functional associated with the cyclic representation $\varphi$ from the GNS construction. By Riesz's representation theorem, there is a unique Borel probability measure $\mu$ on $K$ such that
+	\[
+		\eta(f) = \int _K f d \mu
+	.\] 
+	The space $L^2(K, \mu)$ is a Hilbert space. By Luzin's theorem, $C(K)$ is dense in $L^2(K, \mu)$. Moreover, 
+	\[
+		\left\langle \varphi\left( \overline{g}  f \right)  x, x \right\rangle 
+		= \eta(\overline{g}  f) = \int _K \overline{g}  f d \mu
+		= \left\langle f, g \right\rangle_{L^2(K, \mu)}
+	.\] 
+	Thus, in this sense $V_0$ is a dense isometry $C(K) \to H$. Therefore, it can be naturally extended to a bijective isometry $V: L^2(K, \mu) \to H$.
+
+% https://quiver.local:8080/#q=WzAsNixbMCwxLCJDKEspIl0sWzIsMSwiSCJdLFswLDIsIkxeMihLLCBcXG11KSJdLFswLDAsIlxcbGFuZ2xlIGYsIGdcXHJhbmdsZSJdLFsyLDAsIlxcbGFuZ2xlIFxcdmFycGhpKGYpIHgsIFxcdmFycGhpKGcpIHhcXHJhbmdsZSJdLFsyLDIsIlxcYmZ7SGlsYn0iXSxbMCwxLCJcXHZhcnBoaShcXGNkb3QpeCJdLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiViIsMl0sWzMsNCwiXFx0ZXh0e2lzb21ldHJ5fSIsMix7InNob3J0ZW4iOnsic291cmNlIjoxMCwidGFyZ2V0IjoxMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9LCJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}[cramped]
+	{\langle f, g\rangle} && {\langle \varphi(f) x, \varphi(g) x\rangle} \\
+	{C(K)} && H \\
+	{L^2(K, \mu)} && {\bf{Hilb}}
+	\arrow["{\varphi(\cdot)x}", from=2-1, to=2-3]
+	\arrow[hook, from=2-1, to=3-1]
+	\arrow["V"', from=3-1, to=2-3]
+	\arrow["{\text{isometry}}"', shorten <=5pt, shorten >=5pt, dashed, tail reversed, from=1-1, to=1-3]
+\end{tikzcd}\]
+
+	\textbf{Step 2.} Since $H$ and $L^2(K, \mu)$ are isomorphic Hilbert spaces, bounded operators on them can be identified. In particular, due to the way we constructed $V$, there is an explicit correspondence between them. This is expressed in the following commutative diagram:
+
+% https://quiver.local:8080/#q=WzAsNixbMCwwLCJMXjIoSywgXFxtdSkiXSxbMiwwLCJMXjIoSywgXFxtdSkiXSxbMCwyLCJIIl0sWzIsMiwiSCJdLFs0LDEsIlxcYmZ7SGlsYn0iXSxbNCwwLCJmIFxcaW4gXFxtYXRoY2Fse0J9X1xcaW5mdHkoSykiXSxbMCwxLCJNX2YiXSxbMCwyLCJWIiwyXSxbMSwzLCJWIiwyXSxbMiwzLCJcXHZhcnBoaShmKSJdXQ==
+\[\begin{tikzcd}[cramped]
+	{L^2(K, \mu)} && {L^2(K, \mu)} && {f \in C(K)} \\
+	&&&& {\bf{Hilb}} \\
+	H && H
+	\arrow["{M_f}", from=1-1, to=1-3]
+	\arrow["V"', from=1-1, to=3-1]
+	\arrow["V"', from=1-3, to=3-3]
+	\arrow["{\varphi(f)}", from=3-1, to=3-3]
+\end{tikzcd}\]
+
+To verify, take $f, h \in C(K)$. Now $V M_f h = V (f h) = \varphi(f h) x$. On the other hand, $\varphi(f) V h = \varphi(f) \varphi(h) x = \varphi(f h) x$. This then extends to $f \in C (K)$ and $h \in L^2(K, \mu)$.
+
+	\ask{$B(L^2(K, \mu)) = L^{\infty }(K, \mu) = \mathcal{B}_\infty (\mu)$? How to pass from a bounded operator to a function? Maybe this map is not surjective?}
+
+	
+\begin{remark}
+	\color{gray}
+ We note here that $C(K)$ is a $C^*$ algebra only when endowed with $\ell^\infty $ norm. On the other hand, $\mathcal{B}_\infty (K)$ endowed with $L^\infty $ norm, i.e. essential supremum, is a $C^*$ algebra. 
+
+	We cannot extend $\varphi$ to the whole $L^2(K, \mu)$ because $L^2(K, \mu)$ is not a $C^*$ algebra, in particular not closed under pointwise multiplication. Nevertheless, we can extended $\varphi$ from $C(K)$ to $\mathcal{B}_{\infty }(K)$ which is a $C^*$ algebra.
+
+
+ When we ignore the norms, the spaces have the following inclusion condition:
+
+	\[
+		C(K) \subset \mathcal{B}_{\infty }(K) \subset L^2(K, \mu)
+	.\] 
+	Moreover, $C(K)$ is both dense in $\mathcal{B}_{\infty }(K)$ wrt topology of pointwise a.e. convergence, and dense in $L^2(K, \mu)$ with respect to $L^2$ norm.
+
+\end{remark}
+
+	Now, for $f \in \mathcal{B}_\infty (K)$, $\varphi(f)$ is not in general defined, but $M_f$ is still a bounded operator on $L^2(K, \mu)$. By going around the commutative diagram, we obtain a bounded operator on $H$. We have defined
+	\[
+		\Phi(f): H \to  H , \quad \Phi(f) = V M_f V^*
+	.\] 
+
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJDKEspIl0sWzIsMCwiQihIKSJdLFswLDEsIlxcbWF0aGNhbHtCfV9cXGluZnR5KEspIl0sWzMsMSwiXFxiZntDXipBbGd9Il0sWzAsMSwiXFx2YXJwaGkiXSxbMCwyLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDEsIlxcUGhpIl1d
+\[\begin{tikzcd}[cramped]
+	{C(K)} && {B(H)} \\
+	{\mathcal{B}_\infty(K)} &&& {\bf{C^*Alg}}
+	\arrow["\varphi", from=1-1, to=1-3]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["\Phi", from=2-1, to=1-3]
+\end{tikzcd}\]
+
+This is consistent with $\varphi$ on $C(K)$. To see this, pick $f \in C(K)$ and $y \in H$. Since $V$ is a unitary, $y = V g$ for $g \in L^2 (K, \mu)$. Now
+\begin{align*}
+	\Phi(f) y
+	&= V M_f V^* V g \\
+	&= V M_f g \\
+	&= V (f g)\\
+	&= (V f) (V g) \\
+	&= (V_0 f) y \\
+	&= \varphi(f) y 
+.\end{align*}
+
+From this we conclude that $\Phi|_{C(K)} = \varphi$.
+
+\textbf{Step 3.} Having finished the construction, let's check the desired properties. 
+\begin{itemize}
+	\item 
+For the continuity condition, 
+pick bounded sequence  $f_n \in \mathcal{B}_\infty $  which converges pointwise to $f \in \mathcal{B}_\infty $. Then there exists $M>0$, such that $|f_n(t)| \le  M$ for all $t \in K, n \ge 1$. Let $y \in H$. Since $V$ is a unitary, $y = V g$ for $g \in L^2(K, \mu)$. Now
+\begin{align*}
+	\Phi(f_n - f) y
+	&= V M_{f_n - f} V^* V g \\
+	&= V M_{f_n - f} g \\
+	&= V \left( (f_n - f) g \right)  
+.\end{align*}
+Thus
+\begin{align*}
+	\|\Phi(f_n - f) y\|^2
+	&= \|V\left( f_n - f \right) g\|_H^2\\
+	&= \|\left( f_n - f \right) g\|_{L^2}^2\\
+	&= \int _K \left| f_n(t) - f(t) \right| ^2 |g(t)|^2 d \mu(t)\\
+	&\leq \int _K 2 M |g(t)|^2 < \infty 
+.\end{align*} 
+Thus, by Lebesgue dominated convergence theorem, $\|\Phi(f_n - f) y\|^2 \to 0$.
+
+\item
+For the second condition, we note that for each $\omega \in \text{Borel}(K)$, $\Phi(\chi_\omega)$ is a self-adjoint projection since $\chi_\omega^2 = \chi_\omega = \chi_\omega^*$. We can take $f \in C(K)$ with compact support in $\omega$. Then $f  \chi_\omega = f$.	Now
+\[
+	\varphi(f) = \Phi(f) = \Phi(f \chi_\omega) = \Phi(f) \Phi(\chi_\omega)
+.\] 
+If $\varphi$ injective, $\varphi(f)\neq 0$, so $\Phi(\chi_\omega)\neq 0$. Since it is a projection $\|\Phi(\chi_\omega)\| = 1$.
+
+\item 
+Also, by definition of $\Phi$ we directly see that $\|\Phi(f)\| \le \|M_f\| = \|f\|_\infty $, for $f \in \mathcal{B}_\infty (K)$. Thus $\|\Phi\| = 1$.
+
+\end{itemize}
+
+	\textbf{Step 4.}
+	Finally let's remove the assumption that the representation $\varphi$ is cyclic.
+	By Theorem~\ref{thm:CyclicDecompositionCStarRep}, we can decompose $\varphi = \oplus_{i \in I} \varphi_i$, where each $\varphi_i$ is a cyclic representation $C(K) \to B(H_{x_i})$ with cyclic vector $x_i$. Suppose we have extended each $\varphi_i$ to $\Phi_i: \mathcal{B}_{\infty }(K) \to B(H_{x_i})$ satisfying the theorem. Then we may define
+	\[
+		\Phi = \bigoplus_{i \in I} \Phi_i
+	.\] 
+
+	Let $f_n \to f$ pointwise in $\mathcal{B}_\infty $. By assumption, for each $y \in H_{x_i}$, 
+	\[
+		\|\Phi(f_n) y - \Phi(f) y\| =
+		\|\Phi_i(f_n) y - \Phi_i(f) y\| \to 0
+	.\] 
+	Now, since the sequence $f_n$ is bounded, and $\|\Phi(f_n)\| \le \|f_n\|$, we know $\Phi(f_n)$ are uniformly continuous. Moreover, those $y \in H_{x_i}$ span a dense subspace of $H = \bigoplus_{i \in  I} H_{x_i}$. Thus, this convergence holds for all $x \in H$. 
+
+\end{proof}
+

@@ -1,0 +1,77 @@
+\lecture{10}{Thu 08 Feb 2024 13:41}{Subdivision}
+
+\begin{definition}[Affine Map]
+	\label{defn:AffineMap}
+	An affine simpliex in $Y$ is an affine map if $\sigma: \Delta_n \to  Y$ satisfies $\sigma\left( \sum_{i = 0}^n t_i e_i \right)  = \sum_{i = 0}^n t_i \sigma(e_i)$ for any $\sum t_i = 1$.
+\end{definition}
+
+Now, let $\text{Sin}^{\text{aff}}_n$ denote the set of affine $n$-simplices in $Y$. We may define $\text{S}^{\text{aff}}_n$. Now observe that  $d$ maps from $\text{Sin}^{\text{aff}}_n \to \text{Sin}^{\text{aff}}_{n - 1}$, so we have the  \textit{affine chain-complex} $\text{Sin}^{\text{aff}}_*(Y) $. 
+
+
+ \begin{definition}[Barycenter]
+	\label{defn:Barycenter}
+	For $\sigma: \Delta_n \to Y$, say $\sigma = [v_0, \ldots, v_n]$. The \textit{barycenter} of $\sigma$ is average of its vertices:
+	\[
+		b_\sigma := \frac{1}{n + 1} \sum_{i = 0}^n v_i
+	.\] 
+\end{definition}
+
+\begin{definition}[Cone Construction]
+	\label{defn:ConeConstruction}
+	$Y \subset \mathbb{R}^k$ is a convex subspace, $b \in Y$. We define
+	\begin{align*}
+		b^*: \text{Sin}^{\text{aff}}_{n - 1}(Y) &\longrightarrow \text{Sin}^{\text{aff}}_n(Y) \\
+	\sigma = [v_0, \ldots, v_{n - 1}] &\longmapsto b^*\sigma = [b, v_0, \ldots, v_{n - 1}]
+.\end{align*}
+
+Extend linearly to  $S^{\text{aff}}_{n - 1} \to S^{\text{aff}}_{n }$.
+\end{definition}
+
+\begin{definition}[Subdivision]
+	\label{defn:Subdivision}
+	We define the subdivision operator $S':S^{\text{aff}}_{n } \to S^{\text{aff}}_{n }$ such that $S' = \text{Id}$ for $n \le 0$, and for $n > 0$,
+	\[
+		S'(\sigma) = b_\sigma * S'(d \sigma)
+	.\] 
+\end{definition}
+
+\begin{example}
+	For $n = 1$, $\sigma = [v_0 v_1]$, $b_\sigma = \frac{1}{2}(v_0 + v_1)$. Now
+	\[
+		S'(\sigma) = b_\sigma * S'([v_1] - [v_0]) = b_\sigma* ([v_1] - [v_0]) = [b_\sigma v_1] - [b_\sigma v_0]
+	.\] 
+\end{example}
+
+
+\begin{remark}
+	For each sequence $f_0 \supset f_1\supset\ldots\supset f_n$, where $f_0 = \sigma$, $f_{i + 1}$ is a face of $f_i$, $f_n$ is a vertex of $\sigma$. 
+
+	Let $b_i$ be barycenter of $f_i$. Then $[b_0, b_1, \ldots, b_n] \in  S'(\sigma)$. From this argument we see that the number of $n$-simplices in $S'(\sigma)$ is $(n + 1)!$.
+\end{remark}
+
+
+\begin{lemma}
+	\label{lem:SubdivisionChainMap}
+	$S'$ is a chain map, i.e. the following diagram commutes.
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJTXntcXHRleHR7YWZmfX1fe24gfSAiXSxbMiwwLCJTXntcXHRleHR7YWZmfX1fe24gfSAiXSxbMCwyLCJTXntcXHRleHR7YWZmfX1fe24gLSAxfSAiXSxbMiwyLCJTXntcXHRleHR7YWZmfX1fe24gLSAxfSAiXSxbMCwyLCJkIl0sWzEsMywiZCJdLFswLDEsIlxcJCIsMV0sWzIsMywiXFwkIiwxXV0=
+\[\begin{tikzcd}
+	{S^{\text{aff}}_{n } } && {S^{\text{aff}}_{n } } \\
+	\\
+	{S^{\text{aff}}_{n - 1} } && {S^{\text{aff}}_{n - 1} }
+	\arrow["d", from=1-1, to=3-1]
+	\arrow["d", from=1-3, to=3-3]
+	\arrow["{\$}"{description}, from=1-1, to=1-3]
+	\arrow["{\$}"{description}, from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{lemma}
+\begin{proof}
+	Use induction. For $n = 0$, they are all identity operators. Now assume $d \$ = \$ d$ for $n = k - 1, k \ge 1$. Now for $n = k$, $\sigma$ be an affine $n$-simplex.
+	\begin{align*}
+		d \$ (\sigma) &= d(b_\sigma * \$ d \sigma) \\
+		&= \$ d \sigma - b_\sigma * d(\$ d \sigma) \\
+		&= \$ d \sigma
+	.\end{align*}
+	For last equality, note that IH gives $d \$ (d \sigma) = \$ d (d \sigma) = \$ (d d) \sigma = 0$.
+
+\end{proof}
+

@@ -1,0 +1,189 @@
+\lecture{1}{Tue 09 Jan 2024 10:34}{Linear Algebra in Hilbert Spaces}
+
+Reading: all front matter in chapter 1, asap. This is for motivation and quick intro to background of QC. The mathematical content is in Chap. 2.1.
+
+\textbf{Why QC?}
+
+\subsubsection{For Computer Scientists}
+
+
+\begin{itemize}
+	\item For CS: QC threatens the validity of the \textit{extended Church-Turing thesis}.
+		The CTT says that anything that is computable can be computed by a Turing machine.
+		The Extended CTT says that everything that is \textbf{efficiently} computable is \textbf{efficiently} computable using a Turing machine. \textit{Efficient} means the time complexity is polynomial.
+	
+		QC threatens this from various angles. Most famously, via the \textit{Shor's algorithm}.
+
+		There is an efficient probabilistic algorithm in the 90's for determining primality; two years later we got an efficient deterministic algorithm. It is suspected that BQP = P, so every probabilistic argument can be determinized. 
+
+	The Shor's algorithm says: For any integer $N$ expressed in binary (so input of $\left\lceil \log\left( N \right)  \right\rceil $ , there is a polynomial time algorithm to factor $N$ on a quantum computer.
+
+	Currently the argument is probabilistic; and 
+
+	BQP are not expected to overlap NP-complete, but some NP problems are contained in BQP. Proving the extended CTT false would require some breakthrough in computational complexity theory.
+
+	Another CS reason to care about QC is cryptography.
+
+
+\end{itemize}
+
+\subsubsection{For Physicists}
+
+\begin{itemize}
+	\item A computational perspective on quantum mechanics is very fruitful, in condensed matter physics, HEP, quantum gravity.
+\end{itemize}
+
+\subsubsection{For Mathematicians}
+\begin{itemize}
+	\item See CS answer
+\end{itemize}
+
+\subsubsection{For Engineers}
+\begin{itemize}
+	\item A physical perspective on computation is fruitful. 
+\end{itemize}
+
+I will try to justify all these. Moreover, I want to give a sense of \textbf{what QC cannot do}.
+
+\subsection{A nugget of perspective}
+
+There is a philosophy in mathematics called \textit{quantum mathematics}: Quantum Mechanics is a set of rules that should be understood as a rigorous mathematical theory of ``quantum probability''. 
+
+There exist many types of QM systems in nature, but they have some common nature that is captured by the \textbf{axioms of quantum mechanics.}
+
+(This is established in 1920s). 
+
+Why are these axioms? Take a physics QM class. They will explain the experiments that show nature is inconsistent with classical mechanics.
+
+\subsubsection{Analogy between classical probability and QM}
+\begin{itemize}
+	\item Sample space $\Omega$ $\leftrightarrow$ state space (finite dimensional Hilbert space) $\mathscr{H}$ 
+	\item probability $0 \le  p \le  1$ $\leftrightarrow$ amplitude $z \in \mathbb{C}, |z| < 1$
+	\item distribution on $\Omega$ $\leftrightarrow$ A non-zero vector in $\mathscr{H}$.
+	\item random variable $X: \Omega \to S$ $\leftrightarrow$ \textit{observable} (Hermitian linear operator $A: \mathscr{H} \to \mathscr{H}$ )
+	\item outcome of a random variable: $s \in S$ $\leftrightarrow$ outcome of observation: eigenvalue of $A$
+	\item symmetry of  $\Omega$ is a bijection $\leftrightarrow$ symmetry of $\mathscr{H}$ is a \textit{unitary transformation}
+	\item Two-part system $\Omega_1 \cup \Omega_2$ $\leftrightarrow$ $\mathscr{H}_1 \otimes \mathscr{H}_2$
+\end{itemize}
+
+\section{Linear Algebra Review}
+
+The most important mathematical structure in QM is a \textit{Hilbert Space}.
+
+Let's recall
+
+\begin{definition}
+A vector space $\mathscr{H}$ over $\mathbb{C}$ is a set $\mathscr{H}$ with two additional structure:
+\begin{itemize}
+	\item  $+: \mathscr{H} \times \mathscr{H} \to  \mathscr{H}$
+	\item $\cdot : \mathbb{C} \times  \mathscr{H} \to  \mathscr{H}$
+\end{itemize}
+Additional properties:
+\begin{itemize}
+	\item (A1) $+$ is associative
+	\item (A2) exists (unique)  $0 \in  \mathscr{H}$ that is additive identity (Monoid)
+	\item (A3) there exists additive inverses. (Group)
+	\item (A4) $+$ is commutative (Abelian Group)
+	\item (V1) there is a multiplicative identity $1 \in \mathbb{C}$.
+	\item (V2) $\cdot$ is associative.
+	\item (V3) scalar addition distribute over multiplication
+	\item (V4) vector addition distribute over multiplication
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+	If $\mathscr{H}$ is a $\mathbb{C}$-vector space, then an inner product is a function
+	\[
+		\left\langle -, - \right\rangle : \mathscr{H} \times \mathscr{H} \to \mathbb{C}
+	\] 
+	that satisfies
+	\begin{enumerate}
+		\item linear in second variable: $\left\langle a, z_1 b + z_2 c \right\rangle = z_1 \left\langle a, b \right\rangle  + z_2 \left\langle a, c \right\rangle $
+		\item conjugate symmetry: $\left\langle b, a \right\rangle  = \left\langle a, b \right\rangle^{*}$
+		\item positive definite: $\left\langle a, a \right\rangle \ge 0$. Also, $\left\langle a, a \right\rangle =0 \iff  a =0$.
+	\end{enumerate}
+\end{definition}
+The first two properties give us algebraic properties; the third property allows us to do analysis. 
+
+We define the \textit{length }of a vector $a \in \mathscr{H}$ is
+\[
+	\|a\| = \sqrt{\left\langle a, a \right\rangle } 
+.\] 
+The \textit{distance} between $a$ and $b$ is $\|b - a\|$.
+
+\begin{theorem}[Cauchy-Schwatz Inequality]
+	\label{lem:CauchySchwatzInequality}
+	\[
+		\left| \left\langle a, b \right\rangle  \right| ^2 \le 
+		\|a\|^2 \|b\|^2
+	.\] 
+\end{theorem}
+
+\begin{corollary}[Triangle Inequality]
+	\[
+		\|a + b\| \le  \|a\| + \|b\|
+	.\] 
+	Thus, \textit{every Hilbert space is a metric space.}
+\end{corollary}
+
+\begin{definition}[Hilbert space]
+	\label{defn:HilbertSpace}
+	
+	A \textit{Hilbert} space is a complex inner product space such that the metric is complete.
+\end{definition}
+
+\begin{fact}
+	All finite dimensional complex inner product spaces are automatically complete, and hence Hilbert.
+\end{fact}
+
+\begin{definition}[Adjoint]
+	\label{defn:adjoint}
+Let $A: \mathscr{H} \to \mathscr{H}$ be a linear transformation. Define the \textit{adjoint} of $A$ is the (unique! see H) linear transformation $A^*: \mathscr{H} \to  \mathscr{H}$ defined by the property
+\[
+	\left\langle A^* a, b \right\rangle  = \left\langle a, Ab \right\rangle 
+.\] 
+\end{definition}
+
+\begin{lemma}
+	$A^*$ is well-defined and $(AB)^* = B^* A^*$
+\end{lemma}
+
+\begin{definition}
+	We say $A$ is 
+	\begin{enumerate}
+		\item \textit{Hermitian} (or self-adjoint) if $A^* = A$
+		\item \textit{Unitary} if $A^*  = A^{-1}$
+		\item \textit{Normal} if $A A^* = A^* A$
+	\end{enumerate}
+\end{definition}
+(Check) Hermitian or Unitary implies Normal.
+
+\todo{Need to play with those types of operators and gain intuition.}
+
+\begin{lemma}
+	\label{lem:UnitaryCondition}
+	$U: \mathscr{H} \to  \mathscr{H}$ is unitary iff
+	\[
+		\left\langle Ux, Uy \right\rangle  = \left\langle x, y \right\rangle  
+		\qquad \forall x, y \in \mathscr{H}
+	.\] 
+\end{lemma}
+
+\begin{definition}[Unitarily Diagonalizable]
+	\label{defn:UnitarilyDiagonalizable}
+	We say $A: \mathscr{H} \to  \mathscr{H}$ is \textit{unitarily diagonalizable} if there exists an orthonormal basis, such that the matrix of $A$ is diagonal in that basis.
+\end{definition}
+
+\begin{theorem}[Spectral Theorem in Finite Dimensions]
+	\label{thm:SpectralThmFiniteDim}
+	Let $\mathscr{H}$ be a finite dimensional Hilbert space. Then an operator $A: \mathscr{H} \to  \mathscr{H}$ is normal iff $A$ is unitarily diagonalizable.
+\end{theorem}
+
+\begin{corollary}
+	\begin{enumerate}
+		\item Hermitian iff unitarily diagonalizable with real eigenvalues
+		\item Unitary if unitarily diagonalizable with all eigenvalues unitary (length $1$ )
+	\end{enumerate}
+\end{corollary}
+
+Next lecture: we talk about tensor products.

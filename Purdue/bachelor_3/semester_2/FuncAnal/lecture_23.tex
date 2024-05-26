@@ -1,0 +1,292 @@
+\lecture{23}{Mon 18 Mar 2024 14:27}{C* algebra}
+
+\subsection{C* Algebra and Continuous Functional Calculus}
+
+
+\begin{definition}[C* Algebra]
+	\label{defn:CAlgebra}
+	A $C^*$-algebra is a Banach algebra endowed with a involution $*: A \to A$ which satisfies the following conditions:
+	\begin{enumerate}
+		\item (Involutive) $a^{* *} = a$
+		\item (*-Linear) $(a + \lambda b)^* = a^* + \overline{\lambda} b^*$
+		\item (sock-and-shoe) $(ab)^* = b^* a^*$
+		\item (Normal?) $\|a^* a\| = \|a\|^2$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	\label{defn:NormalUnitarySA}
+	$a \in A$ is \textit{normal} if $a^* a = a a^*$.
+
+	A normal element is \textit{self-adjoint} if $a^* = a$.
+
+	A normal element is \textit{unitary} if $a a^* = a^* a =  1$.
+\end{definition}
+As we made explicit in the definition, self-adjoint and unitary elements are special cases of normal elements. As it will turn out later, those elements are precisely characterized by their spectrum (more precisely, spectral measure).
+
+Now let's verify three basic facts about C* algebra. First, $*$ is continuous, and furthermore an isometry: $\|a\|^2 = \|a a^*\|\le \|a\| \|a^*\|$, so $\|a\| \le \|a^*\|$, by symmetry $\|a\| = \|a^*\|$.
+
+Second is that involution is compatible with inverse: $(a^{-1})^* = \left( a^* \right) ^{-1}$. This is seen from $a^*(a^{-1})^* = (a^{-1} a)^* = 1^* = 1$. So, in particular, $*$ preserves invertability.
+
+The third is that involution and inverse map the spectrum naturally: 
+\begin{itemize}
+	\item 
+$\sigma_A(a^*) = \overline{\sigma_A(a)} $. This is simply seen: $(\lambda - a)$ invertible iff $(\lambda - a)^* = \overline{\lambda}  - a^*$ invertible. 
+
+	\item $\sigma_A(a^{-1}) = \{\frac{1}{\lambda}: \lambda \in \sigma_A(a)\} $. This is seen by writing $(\lambda^{-1} - a^{-1}) = -\lambda^{-1} a^{-1} (\lambda - a)$.
+\end{itemize}
+
+This is an important special case for the more general \textit{spectral mapping theorem for continuous functional calculus.}
+
+
+
+
+\begin{remark}
+	For any element $a$, $a^* a$ is self-adjoint.
+\end{remark}
+
+First, let's see what normality says about an element's spectral radius.
+
+\begin{proposition}
+	\label{prop:NormalSpectralRadius}
+	If $a \in A$ is normal, then $r_A(a) = \|a\|$.
+\end{proposition}
+\begin{proof}
+	Assume first that $a$ is self-adjoint. Then $\|a^2\| = \|a^* a\| = \|a\|^2$. Iterating this gives $\|a^n\|^{1 / n} \to r_A(a) = \|a\|$.
+
+	Now assume $a$ is normal. Then $a^* a$ is self-adjoint. By the previous argument, for $n = 2^r$,
+	\[
+		\|a^n\|^2 = \|a^n (a^n)^*\| = \|(a^* a)^n\| = \|a^* a\|^n = \|a\|^{2 n}
+	.\] 
+	Hence $\|a^n\| = \|a\|^n$. This gives $r_A(a) = \|a\|$.
+\end{proof}
+
+\begin{proposition}
+	\label{prop:UnitSASpec}
+	Let $A$ be a unital $C^*$-algebra.
+	
+	1. If $u$ is unitary then $\sigma_A(u) \subset \mathbb{T}$.
+	
+	2. If $u$ is self-adjoint, $\sigma_A(a) \subset \mathbb{R}$.
+\end{proposition}
+\begin{proof}
+	(1) If $u$ is unitary, $u^* = u^{-1}$ is unitary as well. Now $\|u\|^2 = \|u^* u\| = 1 = r_A(u)$, and we also have $r_A(u^{-1}) = 1$ similarly. Now, for any $\lambda \in \sigma_A(a)$ we would have $|\lambda| \le 1$ and $|\frac{1}{\lambda}| \le 1$, so $|\lambda| = 1$.
+
+	(2) If $a$ is self-adjoint, we define $u = e^{i a}$ using holomorphic functional calculus, and verify that $u$ is unitary. Then by the spectral mapping theorem for holomorphic functional calculus, for any $\lambda \in \sigma_A(a)$, we have $e^{i \lambda} \in \sigma_A(u) \subset \mathbb{T}$, so that $|e^{i \lambda}| = 1$, i.e. $\lambda $ is real.
+
+	Take entire functions $f(z) = e^{i z}, g(z) = e^{- i z}$. By holomorphic functional calculus, $f(a) g(a) = g(a) f(a) = 1$. Thus $e^{- i a} = g(a) = f(a)^{-1} = (e^{i a})^{-1}$. We have
+	\[
+		(e^{i a})^* = \left( \sum_{k = 0}^\infty \frac{(i a)^k}{k!} \right) ^* = \sum \frac{(- i a)^k}{k!} = e^{- i a} = (e^{i a})^{-1}
+	.\] 
+	Note that we have used continuity of $*$. Thus, $u = e^{ia}$ is unitary.
+\end{proof}
+
+\begin{remark}
+\textit{Positive Operators} are those elements $a \in A$ such that there exists $u \in A$ where $a = u^* u =: |u|^2$.
+
+It can be shown that $a$ is positive if and only if $\sigma(a) \subset [0,\infty )$, and that positive elements have uniquely defined positive square roots.
+
+We will omit the proofs for now, since square roots will be available to us once we have the powerful tool of spectral integration.
+\end{remark}
+
+Next, let's show that in unital $C^*$ algebra, the spectrum of an element does not depend on the ambient space.
+
+\begin{lemma}
+	\label{lem:InverseContinuous}
+	Let $A$ be a unital Banach algebra. Then $a \mapsto a^{-1}$ defined on $\text{GL}(A)$ is a continuous operator.
+\end{lemma}
+\begin{proof}
+	Let $a_n \to a$ in norm.
+	Write
+	\[
+		\|a_n^{-1} - a^{-1}\|
+		= \|a_n^{-1} a^{-1} \left( a - a_n \right) \|
+		\le \|a_n^{-1}\| \|a^{-1}\| \|a - a_n\|
+	.\] 
+	Thus, it suffices to show $a_n^{-1}$ is norm-bounded as $a_n \to a$. Fix $r \in (0,1)$. For $\|a_n - a\| < \frac{r}{\|a^{-1}\|}$,
+	\begin{align*}
+		\|a_n^{-1}\| &= \|\sum_{k=0}^{\infty} (a^{-1} (a - a_n))^k a^{-1}\| \\
+		&\leq \sum \|a^{-1} (a - a_n)\|^k \|a^{-1}\| \\
+		&< \sum r^k \|a^{-1}\| \\
+		&= \frac{\|a^{-1}\|}{1 - r} 
+	.\end{align*}
+\end{proof}
+
+
+\begin{proposition}
+	\label{prop:SpectrumIndependent}
+	Let $B$ be a unital $C^*$ algebra, $A \subset B$ a norm-closed sub-algebra that contains $1_B$. Then $\sigma_A(a) = \sigma_B(a)$.
+\end{proposition}
+\begin{proof}
+	If $a$ is invertible in $A$ then it is trivially invertible in $B$, so that $\sigma_B(a) \subset \sigma_A(a)$.
+
+	Now we want to prove $\sigma_A(a) \subset \sigma_B(a)$. We have $a \in \text{GL}(A) \iff a^* a \in \text{GL}(A)$. Thus, it suffices to prove the statement for self-adjoint $a$. But then $\sigma_A(a), \sigma_B(a) \subset \mathbb{R}$.
+	Take $\lambda \in \mathbb{R} \setminus  \sigma_B(a)$, so that $(\lambda - a)^{-1} \in B$. Now for each $n$, define $\lambda_n = \lambda + i \frac{1}{n}$. Since  $\lambda_n \not\in \sigma_A(a)$, $(\lambda_n - a)^{-1} \in A$. But $(\lambda_n - a)^{-1} \to (\lambda - a)^{-1}$ in norm, and $A$ is norm-closed, so $(\lambda - a)^{-1} \in A$. That is, $\lambda \not\in \sigma_A(a)$.
+\end{proof}
+
+\begin{proof}
+	We give another direct proof which may provide more intuition. We reduce to the case of $a^* a$ and want to prove $\sigma_A(a^* a) \subset \sigma_B(a^* a)$. 
+
+	By Proposition~\ref{prop:CstarCharacter}, $\omega(a^* a) = \overline{\omega(a)}  \omega(a) = |\omega(a)|^2 \ge 0$.
+
+	By Proposition~\ref{prop:NormalSpectralRadius}, 
+	\[
+		\sigma_B(a^* a) \subset \sigma_A(a^* a) \subset [0,\|a^*a\|]
+	.\] 
+	Assume $a^* a \in \text{GL}(B)$. Then $0 \not\in \sigma_B(a^* a)$, thus
+	\[
+		\sigma_B(a^* a) \subset [\delta, \|a^* a\|]
+	.\] 
+	By holomorphic spectral mapping theorem,
+	\[
+		\sigma_B(\|a^* a\| - a^* a) = \|a^* a\| - \sigma_B(a^* a) \subset [0, \|a^* a\| - \delta]
+	.\] 
+	Now, $\|a^* a\| - a^* a$ is clearly self-adjoint, so
+	\[
+		\| \|a^* a\| - a^* a\| = r_B(\|a^* a\| - a^* a) \le  \|a^* a\| - \delta < \|a^* a\|
+	.\] 
+
+	Consider any $\omega \in \Omega(A)$. Since $\|\omega\| = 1$ (Proposition~\ref{prop:CharacterTopology}), 
+	\[
+		\omega\left( \|a^* a\| - a^* a \right) < \|a^* a\|
+	.\] 
+	But this implies $\omega(a^* a) > 0$, so $0 \not\in \sigma_A(a^* a)$, i.e. $a^* a \in \text{GL}(A)$.
+\end{proof}
+The main idea of this proof is that, although spectral information is not yet compatible between $A$ and $B$, they however share the same norm, so the inequality can be proved in $B$ using spectral information there, and then passed to $A$.
+
+The theory for character spaces (Definition~\ref{defn:CharacterSpace}) and Galfand transform (Definition~\ref{defn:Gelftransform}) automatically holds for $C^*$ algebras, and further enjoy better properties:
+
+\begin{proposition}
+	\label{prop:CstarCharacter}
+	Let $A$ be a unital commutative $C^*$-algebra. Then each element of $\Omega(A)$ is also a unital $*$-homomorphism.
+\end{proposition}
+\begin{proof}
+	The unital homomorphism part is inherited. We prove that any $\omega \in \Omega(A)$ respects involution.
+
+	Let $a \in $, write $a = x + i y$, where
+	\[
+		x = \frac{a + a^*}{2}, \quad y = \frac{a - a^*}{2 i}, \quad x, y \in A_{sa}
+	.\] 
+	Then for any $\omega \in \Omega(A)$ we have $\omega(x) \in \sigma_A(x) \subset \mathbb{R}$ and also $\omega(y) \in \mathbb{R}$, hence
+	\[
+		\omega(a^*) = \omega((x + i y)^*) = \omega(x - i y) = \omega(x) - i \omega(y) = \overline{\omega(x) + i \omega(y)}  = \overline{\omega(a)} 
+	.\] 
+\end{proof}
+
+Now we have the following result that justifies focusing on $C^*$-algebras:
+
+\begin{theorem}
+	\label{thm:GelfandIsomorphism}
+	Let $A $ be a unital and commutative $C^*$-algebra. Then the Gelfand transform $\Gamma: A \to C(\Omega(A))$ is an isometric $*$-isomorphism of $C^*$-algebras.
+\end{theorem}
+\begin{proof}
+	Theorem~\ref{thm:GelfandProp} tells us $\|\Gamma(a)\| = r_A(a)$. Since $A$ is commutative, $a$ is normal, hence $r_A(a) = \|a\|$ (Proposition~\ref{prop:NormalSpectralRadius}), hence $\|\Gamma(a)\| = \|a\|$.
+
+	Proposition~\ref{prop:CstarCharacter} tells us $\Gamma(a^*) = \overline{\Gamma(a)} $. Therefore, $\Gamma$ is an isometric $*$-homomorphism.
+
+	Finally we need to show $\Gamma$ is an isomorphism, but since it is isometric, we only need to show $\Gamma$ is surjective. To do so, we apply the Stone-Weierstrass Theorem to $\Gamma(A) \subset C(\Omega(A))$.
+	\begin{enumerate}
+		\item $\Gamma(1) = 1 \in C(\Omega(A))$.
+		\item Pick $\omega_1 \neq \omega_2 \in \Omega(A)$. Then $\omega_1(a) \neq \omega_2(a)$ for $a \in A$. But then $\Gamma(a)$ separates $\omega_1$ and $\omega_2$.
+		\item For every $\Gamma(a) \in \Gamma(A)$, $\overline{\Gamma(a)}  = \Gamma(a^*) \in \Gamma(A)$.
+	\end{enumerate}
+	Hence, $\Gamma(A)$ is dense in $C(\Omega(A))$. Since $A$ is complete and $\Gamma$ is isometric, $\Gamma(A)$ is complete, thus $\Gamma(A) = C(\Omega(A))$.
+\end{proof}
+
+If $A$ is a unital $C^*$-algebra and $a \in A$ is a normal element, we can consider the $C^*$-algebra generated by $1$ and $a$. It has the following form:
+\[
+	C^* \{1, a\}  = \overline{span}\left( a^m a^{* n}, m, n \ge 0 \right)  
+.\] 
+Note that we are taking norm closure of linear span. Moreover, $C^* \{1, a\} $ is a unital commutative $C^*$-algebra.
+
+In view of Proposition~\ref{prop:SpectrumIndependent}, we may consider the subalgebra $C^* \{1, a\} $ for any normal element $a$ in some unital $C^*$-algebra. This approach turns out to be extremely helpful:
+
+\begin{theorem}
+	\label{thm:CharacterSpectrumHomeo}
+	Let $A = C^* \{1, a\} $ where $a$ is a normal element. Then
+	\[
+		\Omega(A) \ni \omega \mapsto \omega(a) \in \sigma(a)
+	\] 
+	is a homeomorphism.
+\end{theorem}
+\begin{proof}
+	Denote the map by $h$.
+	If $\omega_\alpha \to \omega$ in weak-* topology, then for each $a \in A$, $\omega_\alpha(a) \to \omega(a)$ in norm. Thus $h$ is continuous.
+
+	Since $\sigma(a) = \{\omega(a): \omega \in \Omega(A)\} $ (Proposition~\ref{prop:CharacterSpectrum}), $h$ is surjective.
+
+	Now we verify $h$ is injective. Take $\omega_1, \omega_2 \in \Omega(A)$, $\omega_1(a) = \omega_2(a)$. Then $\omega_1(a^*) = \omega_2(a^*)$. Thus, $\omega_1, \omega_2$ agree on $*$-algebra$\{1, a\} $. By continuity, they agree on $C^*\{1, a\}  = A$.
+\end{proof}
+
+Using this homeomorphism $h: \Omega(A) \to \sigma(a)$, we can induce a $*$-isomorphism $h^*: C(\sigma(a)) \to C(\Omega(A))$. Combine this with the Gelfand transform, we obtain the 
+
+\begin{theorem}[Continuous Functional Calculus]
+	\label{thm:ContinuousFunctionalCalculus}
+	Let $B$ be a unital $C^*$-algebra and let $a \in B$ be a normal element. Then there is a unital $*$-isomorphism
+	\[
+		\varphi: C(\sigma(a)) \to C^*\{1,a\} = A 
+	\] 
+	such that $\varphi(z) = a$.
+\end{theorem}
+\begin{proof}
+	The desired $*$-isomorphism is built directly by
+	\[
+		C(\sigma(a)) \xrightarrow{h^*} C(\Omega(A))
+		\xleftarrow{\Gamma} C^*\{1, a\}  = A
+	.\] 
+	By Theorem~\ref{thm:GelfandIsomorphism} and Theorem~\ref{thm:CharacterSpectrumHomeo}, we indeed have an isometric $*$-isomorphism.
+
+	Now, we want to verify $\varphi(z) = a$. We have $\Gamma(\varphi(z)) = h^*(z)$, $z(\lambda) = \lambda$. Evaluate both sides on $\omega \in \Omega(A)$ :
+	\[
+		h^*(z)(\omega) = (z \circ h)(\omega) = h(\omega) = \omega(a)
+	.\] 
+	On the other hand,
+	\[
+		\Gamma(\varphi(z))(\omega) = \omega(\varphi(z))
+	.\] 
+	Therefore $\omega(a) = \omega(\varphi(z))$. This is true for all $\omega \in \Omega(A)$, so $\varphi(z) = a$.
+\end{proof}
+\ask{Justify the last step more carefully. Why $\Omega(A)$ separates? Gelfand-Naimark theorem?}
+
+
+Let's discuss some properties of the continuous functional calculus.
+
+\begin{corollary}(Functional Mapping Theorem)
+
+	\label{cor:ContSpectralMapping}
+	$\sigma(f(a)) = f(\sigma(a))$.
+\end{corollary}
+
+The continuous functional calculus is functorial:
+\begin{proposition}
+	\label{prop:ContFunctorial}
+	 Let  $\pi:A \to B$ be a unital $*$-homomorphism, let $a \in A$ be a normal element. Then
+	\begin{enumerate}
+		\item $f(\pi(a)) = \pi(f(a))$.
+		\item If $f \in C(\sigma(a)), g \in C(f(\sigma(a)))$, then $g(f(a)) = (g \circ f) (a)$.
+	\end{enumerate}
+\end{proposition}
+Moreover, $\varphi$ is an isometry, as implied by the next proposition:
+\begin{proposition}
+	\label{prop:StarHomoIsometry}
+	Let $\pi: A \to B$ be a unital $*$-homomorphism. Then
+	\begin{enumerate}
+		\item $\|\pi(a)\| \le  \|a\|$ for all $a \in A$,
+		\item $\pi$ injective iff $\|\pi(a)\| = \|a\|$ for all $a \in A$.
+	\end{enumerate}
+\end{proposition}
+
+
+
+The next topic of study is \textbf{diagonalization.}
+
+
+
+
+
+
+
+
+
+
+

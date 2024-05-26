@@ -1,0 +1,271 @@
+\homework{6}{Tue 16 Apr 2024 23:56}{}
+
+\begin{enumerate}
+\item This problem aims to prove the following result. Let $R$ be a unital commutative ring, and $M$ be an $R$-module. Given a short exact sequence of $R$-modules,
+ \begin{equation*}
+        \begin{tikzcd}
+            0 \arrow[r] & N' \arrow[r, "f"] &  N \arrow[r, "g"] & N'' \arrow[r] & 0
+        \end{tikzcd}
+\end{equation*}
+There exists of a long exact sequence, 
+ \begin{equation*}
+        \begin{tikzcd}
+            \cdots \arrow[r] & \text{Tor}_n^R(M, N') \arrow[r] &  \text{Tor}_n^R(M, N) \arrow[r] & \text{Tor}_n^R(M, N'') \arrow[r]& \text{Tor}_{n-1}^R(M, N') \arrow[r] &\cdots
+        \end{tikzcd}
+\end{equation*}
+To do so, we choose projective resolutions $\epsilon': F_{*}' \to N', \ \epsilon'': F_{*}'' \to N''$. The goal is to construct a projective resolution $\epsilon: F_{*} \to N$ which fits into a splitting short exact sequence 
+ \begin{equation*}
+        \begin{tikzcd}
+            0 \arrow[r] & F_{*}' \arrow[r, "i"] &  F_{*} \arrow[r, "\pi"] & F_{*}'' \arrow[r] & 0
+        \end{tikzcd}
+\end{equation*}
+and for which the following diagram commutes,
+\begin{equation*}
+        \begin{tikzcd}
+                    & \vdots \arrow[d]  &  \vdots \arrow[d] & \vdots \arrow[d]&  \\
+        0 \arrow[r] & F_0' \arrow[r, "i"]\arrow[d, "\epsilon'"]     &  F_0 \arrow[r, "\pi"]\arrow[d, "\epsilon"] & F_0'' \arrow[r]\arrow[d, "\epsilon''"] & 0 \\
+        0 \arrow[r] & N' \arrow[r, "f"]\arrow[d]  &  N \arrow[r, "g"]\arrow[d]  & N'' \arrow[r]\arrow[d]  & 0\\
+                    & 0                 &  0                & 0             &  \\
+        \end{tikzcd}
+\end{equation*}
+You should convince yourself that this would imply the long exact sequence. So in the following, we will focus on the construction of $\epsilon$.
+
+\begin{itemize}
+\item Consider the diagram below which is exact both vertically and horizontally,
+\begin{equation*}
+        \begin{tikzcd}
+        & F_0' \arrow[d, "\epsilon'"]     &  & F_0'' \arrow[d, "\epsilon''"] &  \\
+        0 \arrow[r] & N' \arrow[r, "f"]\arrow[d]  &  N \arrow[r, "g"]  & N'' \arrow[r]\arrow[d]  & 0\\
+                    & 0                 &                 & 0             &  \\
+        \end{tikzcd}
+\end{equation*}
+Let $F_0:= F_0' \oplus F_0''$. Denote by $i: F_0' \to F_0$ the canonical embedding and by $ \pi: F_0 \to F_0''$ the canonical projection. Show that there exists a morphism $\epsilon: F_0 \to N$ such that, the above diagram extends to the following commutative diagram,
+\begin{equation}\label{eqn:diagram1}
+        \begin{tikzcd}
+        0 \arrow[r] & F_0' \arrow[r, "i"]\arrow[d, "\epsilon'"]     &  F_0 \arrow[r, "\pi"]\arrow[d, "\epsilon"] & F_0'' \arrow[r]\arrow[d, "\epsilon''"] & 0 \\
+        0 \arrow[r] & N' \arrow[r, "f"]\arrow[d]  &  N \arrow[r, "g"]\arrow[d]  & N'' \arrow[r]\arrow[d]  & 0\\
+                    & 0                 &  0                & 0             &  \\
+        \end{tikzcd}
+\end{equation}
+This completes the construction of the projective resolution of $N$ at level 0.
+
+\begin{proof}
+	 Use the fact that $F_0''$ is a projective module, and $g$ is surjective. We have a map $h: F_0'' \to  N$ such that $g h = \varepsilon''$.
+
+	 Now, define $\varepsilon: F_0' \oplus F_0'' \to N$ by $\varepsilon\left( x', x'' \right)  = f \varepsilon' x' + h x''$.
+
+	 By the way we define $\varepsilon$, it commutes the diagram.
+
+	 We need to verify that $\varepsilon$ is surjective.
+
+	 Take $n \in N$. First, assume $n \in \operatorname{ker} g = \operatorname{Im} f$. Since $f$ is injective, there exists a unique $n' \in N'$ such that $n = f n'$ ; since $\varepsilon'$ is surjective, there exists $x' \in F_0'$ such that $\varepsilon' x_0' = n'$, that is, $n = f \varepsilon' x_0' = \varepsilon \left( x',0 \right) $.
+
+	 Now consider general  $n \in N$. Let $n'' = g n$.  By surjectivity of $\varepsilon''$, there exists $x'' \in F_0''$ such that $\varepsilon'' x'' = g n$. That is, $g n = g h x''$. Then $n = h x'' + \left( - h x'' + n \right) $, where $(- h x'' + n) \in \operatorname{ker} g$. Let $x_0'$ be such that $\varepsilon(x', 0) = - h x'' + n$. We now have
+	 \[
+	 	n = \varepsilon(0, x'') + \varepsilon(x', 0) = \varepsilon(x', x'')
+	 .\] 
+	 Thus $\varepsilon$ is surjective.
+ \end{proof}
+
+
+\item Given the diagram in Eqn. \ref{eqn:diagram1}, show that the first row of the diagram restricts to a short exact sequence,
+\begin{equation*}
+        \begin{tikzcd}
+            0 \arrow[r] & \ker \epsilon' \arrow[r, "i"] &  \ker \epsilon \arrow[r, "\pi"] & \ker \epsilon'' \arrow[r] & 0
+        \end{tikzcd}
+\end{equation*}
+\begin{proof}
+	First we verify that $i(\operatorname{ker} \varepsilon') \subset \operatorname{ker} \varepsilon$. Let $x' \in F_0'$ be such that $\varepsilon' x' = 0$, now we have
+	\[
+		\varepsilon i(x') = \varepsilon(x', 0) = f \varepsilon' x' = f 0 = 0
+	.\] 
+	Now $i$ is injective obviously, so the sequence is exact at $\operatorname{ker} \varepsilon'$.
+
+	Next we show $\operatorname{Im} i = \operatorname{ker} \pi$. First, take $x' \in \operatorname{ker} \varepsilon'$. We have $\pi i x' \in \pi i(F_0') = 0$.
+
+	Now take $x \in \operatorname{ker} \varepsilon$ such that $\pi x = 0$. We note that the short exact sequence $0 \to F_0' \to F_0 \to F_0'' \to  0$ splits by construction, so there exists a retraction $r: F_0 \to  F_0'$. We have $x = (rx, \pi x)$. Since $\pi x = 0$, we have $i(r x) = (rx, 0) = x$. Finally, $f \varepsilon' (rx) = \varepsilon i (r x) = \varepsilon x = 0$, and $f$ injective, implies $\varepsilon' (rx) = 0$, so that $r x \in \operatorname{ker} \varepsilon'$.
+
+	Finally, we show $\pi$ is surjective. We first note $\pi$ maps into $\operatorname{ker} \varepsilon''$. Now, pick $x'' \in \operatorname{ker} \varepsilon''$. We want to find  $x' \in F_0'$ such that $(x', x'') \in \operatorname{ker} \varepsilon$. Well,  $\varepsilon(x', x'') = f \varepsilon' x' + h x''$. 
+
+	But from the last part, we know we can construct $x'$ such that $f \varepsilon' x' = - h x'' \in \operatorname{ker} g$. Thus,
+	\[
+		\varepsilon(x', x'') = f \varepsilon' x' + h x'' = - h x'' + h x'' = 0
+	.\] 
+\end{proof}
+
+\item (No work needed here.) Repeat the procedure in Step 1 for the following exact diagram, and it then completes the construction of the required projective resolution of $N$ at level 1. Inductively, the same procedure works at any level.
+\begin{equation*}
+        \begin{tikzcd}
+        & F_1' \arrow[d]     &  & F_1'' \arrow[d] &  \\
+        0 \arrow[r] & \ker \epsilon'\arrow[d]  \arrow[r, "i"] &  \ker \epsilon \arrow[r, "\pi"] & \ker \epsilon''\arrow[d]  \arrow[r] & 0\\
+                    & 0                 &                 & 0             &  \\
+        \end{tikzcd}
+\end{equation*}
+\end{itemize}
+
+
+\item Let $R$ be a PID, $M$ be an $R$-module, and $C_{*}$ be chain complex of free $R$-modules. Then the Universal Coefficient Theorem we proved in class provides the following short exact sequence,
+\begin{align*}
+    0 \to \text{Ext}_R^1 (H_{n-1}(C_*),M) \to H^n(C_*; M) \overset{\tilde{\beta}}{\to} \text{Hom}_R(H_n(C_*), M) \to 0.
+\end{align*}
+Prove that the short exact sequence splits by following the steps below (or using your own method). We use short-hand notations $B_n, Z_n, C_n, H_n$ for the chain complex $C_*$, and $B^n, Z^n, C^n,  H^n$ for the cochain complex $\text{Hom}_R(C_*, M)$.
+
+The idea is to construct a section of $\tilde{\beta}$, that is, a morphism $\eta: \text{Hom}_R(H_n, M) \to H^n$ such that $\tilde{\beta}\eta = Id$.
+\begin{itemize}
+    \item Consider the inclusion $j: Z_n \to C_n$.  Show that there exists a morphism $q: C_n \to Z_n$ such that $q j = Id$.
+    \item Let $\pi: Z_n \to H_n$ be the quotient map. Given a $\psi \in \text{Hom}_R(H_n, M)$, then $\tilde{\psi}:=\psi \pi q \in \text{Hom}_R(C_n, M)$. Show that $\tilde{\psi} \in Z^n$.
+    \item Define $\eta(\psi):= [\tilde{\psi}]$. Show that $\eta$ is the required section.
+\end{itemize}
+\begin{proof}
+	Consider the short exact sequence
+	\[
+		0 \to Z_n \xrightarrow{j} \to C_n \xrightarrow{\partial} B_{n - 1} \to 0
+	.\] 
+	$B_{n - 1}$ is a free $R$-module as a sub-module of the free $R$-module $C_n$. Hence the s.e.s. splits, hence the retraction $q: C_n \to Z_n$ exists.
+
+	Now, for $\psi \in \text{Hom}(H_n, M)$, define $\tilde \psi = \psi \pi q$:
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJDX24iXSxbMSwwLCJaX24iXSxbMiwwLCJIX24iXSxbMiwxLCJNIl0sWzAsMSwicSJdLFsxLDIsIlxccGkiXSxbMiwzLCJcXHBzaSJdLFswLDMsIlxcdGlsZGUgXFxwc2kiLDJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{C_n} \& {Z_n} \& {H_n} \\
+	\&\& M
+	\arrow["q", from=1-1, to=1-2]
+	\arrow["\pi", from=1-2, to=1-3]
+	\arrow["\psi", from=1-3, to=2-3]
+	\arrow["{\tilde \psi}"', from=1-1, to=2-3]
+\end{tikzcd}\]
+
+We verify $\tilde \psi \iff  \delta \tilde \psi = 0 \iff  \tilde \psi \partial = 0 \iff  \psi \pi q \partial = 0$. But $q \partial = 0$ since $\partial$ maps to $B_{n - 1}$ whereas $q$ is nonzero on $\mathbb{Z}_n$, which are orthogonal in $C_n$ since the above s.e.s. splits.
+
+Finally, we observe that the map $\tilde \beta$ is defined as
+\[
+	\tilde \beta \left( [f] \right) ([x]) = f(x), \quad [f] \in H^n, [x] \in H_n
+.\] 
+Thus
+\[
+	(\tilde \beta \eta (\psi)) ([x]) = \tilde\beta([\tilde \psi])([x]) = \tilde \psi (x) = \psi([x])
+.\] 
+\end{proof}
+
+
+\item Use the Universal Coefficient Theorem (UCT) to compute the cohomology groups of $\mathbb{RP}^n$ with integer coefficients and with $\mathbb{Z}_2$ coefficients. You can utilize some facts about homology groups without proof. Also compute the cohomology of $\mathbb{CP}^n$ with integer coefficients.
+\begin{proof}
+	First compute cohomology group of $\mathbb{R}P^n$ with $\mathbb{Z}$ coefficient. 
+
+	We use the fact that
+\begin{align}
+H_p\left(\mathbb{P}^n(\mathbb{R})\right)=\left\{\begin{aligned}
+\mathbb{Z}, & p=0 \\
+\mathbb{Z}, & p=n\text{ odd} \\
+\mathbb{Z} / 2 \mathbb{Z}, & p \text { odd, } 0<p<n \\
+0, & \text { otherwise }
+\end{aligned}\right.
+\end{align}
+
+UCT gives us the following s.e.s that splits:
+\[
+	0 \to \text{Ext}^1_{\mathbb{Z}}(H_{i - 1}(\mathbb{R} P^n), \mathbb{Z}) \to H^i(\mathbb{R} P^n) \to \text{Hom}_{\mathbb{Z}} (H_i(\mathbb{R}P^n), \mathbb{Z}) \to 0
+.\] 
+
+Thus $H^i(\mathbb{R} P^n) = \text{Ext}^1_{\mathbb{Z}}(H_{i - 1}(\mathbb{R} P^n), \mathbb{Z}) \oplus \text{Hom}_{\mathbb{Z}} (H_i(\mathbb{R}P^n), \mathbb{Z})$.
+
+Compute
+\begin{itemize}
+	\item $\text{Ext}^1_{\mathbb{Z}}(\mathbb{Z}, \mathbb{Z}) = 0$ since $\mathbb{Z}$ is free, thus injective.
+	\item  $\text{Ext}^1_{\mathbb{Z}}(\mathbb{Z}_2, \mathbb{Z}) = \mathbb{Z}_2$, which can be seen from the projective resolution $0 \to \mathbb{Z} \xrightarrow{2} \mathbb{Z} \to 0$ of $\mathbb{Z}_2$.
+	\item $\text{Ext}^1_{\mathbb{Z}}(0,\mathbb{Z}) = 0$.
+\end{itemize}
+And
+\begin{itemize}
+	\item $\text{Hom}_{\mathbb{Z}}(0, \mathbb{Z}) = 0$
+	\item $\text{Hom}_{\mathbb{Z}}(\mathbb{Z}, \mathbb{Z}) = \mathbb{Z}$.
+	\item $\text{Hom}_{\mathbb{Z}}(\mathbb{Z}_2, \mathbb{Z}) = 0$.
+\end{itemize}
+
+Putting things together,
+\begin{align}
+H^p\left(\mathbb{R} P^n ; \mathbb{Z}\right)=\left\{\begin{aligned}
+\mathbb{Z}, & p=0 \\
+\mathbb{Z}, & p=n \text{ odd} \\
+\mathbb{Z} / 2 \mathbb{Z}, & p=n \text{ even} \\
+\mathbb{Z} / 2 \mathbb{Z}, & p \text { even, } 0<p<n \\
+0, & \text { otherwise }
+\end{aligned}\right.
+\end{align}
+
+\textbf{Now consider $\mathbb{Z}_2$ coefficient.} 
+
+We use the result
+\[
+	H_p\left( \mathbb{R}P^n; \mathbb{Z}_2 \right) = 
+	\begin{cases}
+		\mathbb{Z}_2 & 0 \le p \le n \\
+		0 & \text{ otherwise}
+	\end{cases}
+.\] 
+
+The UCT gives us
+\[
+	0 \to \text{Ext}^1_{\mathbb{Z}}(H_{i - 1}(\mathbb{R} P^n), \mathbb{Z}_2) \to H^i(\mathbb{R} P^n; \mathbb{Z}_2) \to \text{Hom}_{\mathbb{Z}} (H_i(\mathbb{R}P^n), \mathbb{Z}_2) \to 0
+.\]
+
+We compute
+\begin{itemize}
+	\item $\text{Ext}_\mathbb{Z}^1(\mathbb{Z}_2, \mathbb{Z}_2) = \mathbb{Z}_2$
+	\item $\text{Hom}_{\mathbb{Z}}(\mathbb{Z}, \mathbb{Z}_2) = \mathbb{Z}_2$
+	\item $\text{Hom}_{\mathbb{Z}}(\mathbb{Z}_2, \mathbb{Z}_2) = \mathbb{Z}_2$
+\end{itemize}
+
+Put things together we get
+\[
+	H^p\left( \mathbb{R}P^n; \mathbb{Z}_2 \right) = 
+	\begin{cases}
+		\mathbb{Z}_2 & 0 \le p \le n \\
+		0 & \text{ otherwise}
+	\end{cases}
+.\]
+
+\textbf{Now compute cohomology of $\mathbb{C}P^n$}.
+
+Use the fact
+\begin{align}
+H_p\left(\mathbb{C} P^n ; \mathbb{Z}\right)= \begin{cases}\mathbb{Z}, & p \text { even, } 0 \leq p \leq 2 n \\ 0, & \text { otherwise }\end{cases}
+\end{align}
+The UCT gives us
+
+\[
+	0 \to \text{Ext}^1_{\mathbb{Z}}(H_{p - 1}(\mathbb{C}P^n), \mathbb{Z}) \to H^p(\mathbb{C} P^n) \to \text{Hom}_{\mathbb{Z}}(H_p(\mathbb{C} P^n), \mathbb{Z}) \to 0
+.\] 
+Compute
+\begin{itemize}
+	\item $\text{Ext}^1_{\mathbb{Z}}(\mathbb{Z}, \mathbb{Z}) = 0$
+	\item $\text{Hom}_{\mathbb{Z}}(\mathbb{Z}, \mathbb{Z}) = \mathbb{Z}$
+\end{itemize}
+Thus
+\begin{align}
+H^p\left(\mathbb{C} P^n ; \mathbb{Z}\right)=\left\{\begin{aligned}
+\mathbb{Z}, & p \text { even, } 0 \leq p \leq 2 n \\
+0, & \text { otherwise }
+\end{aligned}\right.
+\end{align}
+
+\end{proof}
+
+\item This problem is about injective modules. A useful tool to check the injectivity of a module is the Baer's Criterion. Let $R$ be a unital commutative ring, and $E$ be an $R$-module.
+
+\vspace{0.2cm}
+\noindent\textbf{Baer's Criterion.} $E$ is injective if and only if for any ideal $I \subset R$ and any $R$-module morphism $f: I \to E$, there exists an $R$-module morphism $\tilde{f}: R \to E$ such that $\tilde{f}|_I = f$.
+
+\vspace{0.2cm}
+\noindent You can find a proof of the above in many standard textbooks or lecture notes on ring theory. Here is a reference from the internet (\url{https://stacks.math.columbia.edu/tag/05NU}).  Use the Baer's Criterion to prove that any field of characteristic 0 as a $\mathbb{Z}$-module is injective.
+\end{enumerate}
+\begin{proof}
+	Consider an ideal $I \subset \mathbb{Z}$. Since $\mathbb{Z}$ is a PID, there is $n \in \mathbb{Z}$ such that $I = (n)$. Now, let $F $ be the field with characteristic $0$. Let $f: I \to F$ be a  $\mathbb{Z}$-module homomorphism. If we define $\overline{f} : \mathbb{Z} \to F$ by $\overline{f} (1) = f(n) / n$ (note that $n^{-1}$ exists since $F$ has characteristic $0$ ), then
+	\[
+		\overline{f} (n a) = n a \overline{f} (1)
+		=  n a \frac{f(n)}{n} = a f(n) = f(n a)
+	.\] 
+	Thus  $\overline{f} $ extends $f$ to $\mathbb{Z}$. By Baer's Criterion, $F$ is injective $\mathbb{Z}$-module.
+\end{proof}
+
+
+

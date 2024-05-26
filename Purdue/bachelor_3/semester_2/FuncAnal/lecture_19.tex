@@ -1,0 +1,89 @@
+\lecture{19}{Wed 21 Feb 2024 13:35}{}
+
+\subsubsection{Riesz-Dunford functional calculus}
+
+
+We start with some review in complex analysis.
+
+First, note this pedagogical example about Taylor series.
+\begin{example}
+	\[
+		\frac{1}{1 - x^2} = 1 + x^2 + x^4 + \ldots  \quad x \in (-1, 1)
+	,\] 
+	but
+	\[
+		\frac{1}{1 + x^2} = 1 - x^2 + x^4 - \ldots \quad x \in (-1, 1)
+	.\] 
+	Why? Because it has a singularity at $x = i$. Convergence of real-valued series is controlled by their behavior in the complex plane.
+\end{example}
+
+Next, review Cauchy formula.
+Recall, if $U \subset \mathbb{C}$ is open, let $\text{Hol}(U)$ be space of holomorphic functions on $U$. Suppose that $f(\lambda) \in \text{Hol}(U)$. If $\gamma$ is a finite union of oriented piecewise smooth curves in $U$, the \textit{winding number} of $\gamma$ around a point $\omega \in \mathbb{C} \setminus \gamma$ is given by
+\[
+	\text{ind}_\gamma(\omega) = \frac{1}{2 \pi i} \int _\gamma \frac{d \lambda}{\lambda - \omega}
+.\] 
+This is always an integer. 
+
+Suppose that $\text{ind}_\gamma(\omega) = 0$ for $\omega \not\in  U$. Then Cauchy's Theorem states that for $\omega \in U \setminus \gamma$, 
+\[
+	\frac{1}{2 \pi i} \int _\gamma \frac{f(\lambda)}{\lambda - \omega} d \lambda = f(\omega) \text{ind}_\gamma (\omega)
+.\] 
+
+\textbf{We use this fact to provide a definition of} $f(a)$ for $a \in A$ if $f$ is analytic on a neighborhood of $\sigma_A(a)$. This map should be a homomorphism \textbf{extending the rational functional calculus}.
+
+Suppose that $\sigma_A(a) \subset U$ is open. A finite union of piecewise smooth closed curves, $\gamma$, in $U \setminus \sigma_A(a)$ is called \textit{compatible} with $\sigma_A(a)$ if
+\[
+	\text{ind}_\gamma(\omega) = \begin{cases}
+		1 & \omega \in \sigma_A(a) \\
+		0 & \omega \not\in U
+	\end{cases}
+.\] 
+For such a curve, we define
+\[
+	\varphi(f) = \frac{1}{2 \pi i} \int _\gamma f(\lambda) (\lambda - a)^{- 1} d \lambda
+.\] 
+
+We will verify that this integral does not depend on the choice of curve $\gamma$. Then this definition gives us a \textbf{unital homomorphism of algebras}
+\[
+	\varphi: \text{Hol}(U) \to A
+\] 
+such that $\varphi(p) = p(a)$ for all polynomial $p$ in $\text{Hol}(U)$.
+
+\begin{theorem}
+	\label{thm:UnitalHomCalculus}
+	$\varphi: \text{Hol}(U) \to A$ is a unital homomorphism, $\varphi(1) = 1$, and for all polynomial $p$, $\varphi(p) = p(a)$.
+
+	In view of this theorem, we may write $f(a) = \varphi(f)$.
+\end{theorem}
+\begin{proof}
+	$\varphi$ is obviously linear. We have $(\lambda - a)^{- 1} = \frac{1}{\lambda} \left( 1 + \frac{a}{\lambda} +\frac{a^2}{\lambda^2} + \ldots \right) $, if $|\lambda| > \|a\|$. 
+
+\begin{align*}
+	\varphi(\lambda^n) = \frac{1}{2 \pi i} \int _{|\lambda| = 2 \|a\| + 1} \lambda^n (\lambda - a)^{- 1} d \lambda 
+	= \sum_{k \ge 0} \frac{1}{2 \pi i}\int _\gamma a^k \lambda^{n - (k + 1)} d \lambda = a^n
+.\end{align*}
+We have used the fact that $\frac{1}{2 \pi i}\int _\gamma \frac{1}{\lambda} d \lambda = 1$.
+
+Now, show that $\varphi(f g) = \varphi(f) \varphi(g) $.
+\begin{align*}
+	\varphi(f)\varphi(g)
+	&= \left( \frac{1}{2 \pi i} \int _{\gamma_1} f(\lambda) (\lambda - a)^{-1} d \lambda \right)\left( \frac{1}{2 \pi i} \int _{\gamma_2} g(\lambda) (\lambda - a)^{-1} d \lambda \right)  \\
+	&= (\frac{1}{2 \pi i})^2 \int _{\gamma_2} \int _{\gamma_1} f(\lambda) g(\mu) (\lambda - a)^{-1} (\mu - a)^{-1} d \lambda d \mu \\
+	&= (\frac{1}{2 \pi i})^2 \int _{\gamma_1} \int _{\gamma_2} f(\lambda) g(\mu) \frac{(\lambda - a)^{-1} - (\mu - a)^{-1}}{\mu - \lambda} d \lambda d \mu \\
+	&= \frac{1}{2 \pi i} \int _{\gamma_1} f(\lambda) (\lambda - a)^{-1} \left( \frac{1}{2 \pi i} \int _{\gamma_2} \frac{g(\mu)}{\mu - \lambda} d \mu \right) d \lambda
+	+ \frac{1}{ 2 \pi i} \int _{\gamma_2} g (\mu) (\mu - a)^{-1} \left( \frac{1}{2 \pi i} \int _{\gamma_1} \frac{f(\lambda)}{ \lambda - \mu}d \lambda \right)  d \mu\\
+	&= \frac{1}{2 \pi i} \int _{\gamma_2} f(\lambda) g(\lambda) (\lambda - a)^{-1} d \lambda
+	+ \frac{1}{ 2 \pi i} \int _{\gamma_1} g(\mu) f(\mu) \text{ind}_{\gamma_1} \mu d \mu\\
+	&= \frac{1}{2 \pi i} \int _{\gamma_2} f(\lambda) g(\lambda) (\lambda - a)^{-1} d \lambda
+.\end{align*}
+\end{proof}
+\begin{remark}
+	Note the asymmetry in the two winding numbers.
+\end{remark}
+
+
+
+
+
+
+

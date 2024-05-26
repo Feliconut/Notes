@@ -1,0 +1,113 @@
+\homework{8}{Mon 20 Nov 2023 20:35}{}
+
+\begin{problem}
+	Let $U \subset \mathbb{R}^n$ be bounded and $u \in C^2\left(U_T\right) \cap C\left(\bar{U}_T\right)$ a subsolution of the heat equation
+\[
+\Delta u-u_t \geq 0 \quad \text { in } U_T .
+\]
+
+Use the following steps to give a direct proof of the maximum principle
+\[
+\max _{\bar{U}_T} u=\max _{\Gamma_T} u
+\]
+(Here $\left.U_T=U \times(0, T], \Gamma_T=\bar{U}_T \backslash U_T\right)$.\\
+(a) Assume first that $u$ is a strict subsolution, i.e., $\Delta u-u_t>0$ in $U_T$ and $\left(x_0, t_0\right) \in \bar{U}_T$ be such that
+\[
+u\left(x_0, t_0\right)=\max _{\bar{U}_T} u
+\]
+
+Show that $\left(x_0, t_0\right) \notin U_T$ and consequently maximum principle holds for $u$.
+[Hint: Show that if $\left(x_0, t_0\right) \in U_T$, then $u_{x_i x_i}\left(x_0, t_0\right) \leq 0, i=1, \ldots, n$ and $u_t\left(x_0, t_0\right) \geq 0$ ]\\
+(b) Apply (a) to $u_\epsilon(x, t)=u(x, t)-\epsilon t$ for a small $\epsilon>0$ and let $\epsilon \rightarrow 0$ to obtain the maximum principle for all (non necessarily strict) subsolutions $u$.
+\end{problem}
+\begin{proof}
+	Assume $u$ is strict subsolution.
+	Let $(x_0, t_0) \in U_T$. Let $\mathbb{e}$ be any unit vector lying in $\mathbb{R}^n$, and consider the set $I := (x_0 - \delta \mathbb{e}, x_0 + \delta \mathbb{e}) \times \{t_0\} $, $\delta>0$ small enough so that $I \subset U_T$. Assume $u$ is strict subsolution, and assume $u$ attains maximum at $(x_0, t_0)$. We can apply second derivative test to $u|_I$ and conclude that $D_{\mathbb{e}}^2 u (x_0, t_0) \le 0$. Hence $u_{x_i x_i }(x_0, t_0) \le 0$.
+
+	Now take $\delta>0$ such that $[t_0 - \delta, t_0] \subset [0,T)$. Restrict $u$ to $J = \{x_0\} \times [t_0-\delta, t_0]$. If $u_t(x_0, t_0) < 0$, there must exist some $(x_0, t') \in J$ such that $u(x_0, t') > u(x_0, t_0)$, a contradiction. Hence $u_t(x_0, t_0) \ge 0$. 
+
+	Combining these two results, we have a contradiction to the assumption $\Delta u - u_t \ge 0$. Hence  $(x_0, t_0) \in \partial_p U_T$.
+
+	Now, assume instead that $u$ is subsolution, not necessarily strictly. Then $u - \varepsilon t$ is a strict subsolution. For each $\varepsilon>0$ we have
+	\[
+		\max_{\Gamma} u - \varepsilon t = \max_{\overline{U_T} } u - \varepsilon t
+	.\] 
+	This implies
+	\[
+		\max_{\overline{U_T} } u 
+		\ge  \max_{\Gamma} u \ge \max_{\overline{U_T} } u - \varepsilon T
+	.\] 
+	Take $\varepsilon > 0$, we get
+	\[
+		\max_{\Gamma} u = \max_{\overline{U_T} } u 
+	.\] 
+\end{proof}
+
+\begin{problem}
+	Let $u \in C^2\left(\mathbb{R}^n \times(0, T]\right) \cap C\left(\mathbb{R}^n \times[0, T]\right), T>0$ be such that
+\[
+\Delta u-u_t \leq 0 \quad \text { in } \mathbb{R}^n \times(0, T], \quad u(\cdot, 0) \geq 0 \quad \text { on } \mathbb{R}^n
+\]
+and
+\[
+\liminf _{|x| \rightarrow \infty} u(x, t) \geq 0 \quad \text { uniformly in } t \in[0, T] .
+\]
+
+Prove that $u(x, t) \geq 0$ in $\mathbb{R}^n \times[0, T]$.
+\end{problem}
+\begin{proof}
+	By assumption, there exists a ball $B_R \subset \mathbb{R}^n$ centered at origin with radius $R$, such that
+	\[
+		u(x, t) \ge 0, \qquad |x| > R, t \in [0,T]
+	.\] 
+	Denote $U_T = B_{R+1} \times [0,T)$.
+	Now since  $u$ is supercaloric, we have minimum principle
+	\[
+		\min_{\overline{U_T} } u = \min_{\partial_p U_T} u
+	.\] 
+	But under assumption that $u(\cdot , 0) \ge 0$ and $u(x,t) \ge 0$ for $|x| > R$, we have
+	\[
+		\min_{\partial_p U_T} u \ge 0
+	.\] 
+	Therefore $u \ge 0$ in $B_{R+1} \times [0,T]$. Take $R\to \infty $ and we are done.
+\end{proof}
+
+\newpage
+\begin{problem}
+	(Tikhonov's example) Let
+\[
+g(t):= \begin{cases}\exp \left(-t^{-2}\right), & t>0 \\ 0, & t \leq 0\end{cases}
+\]
+
+Then $g \in C^{\infty}(\mathbb{R})$ and we define
+\[
+u(x, t):=\sum_{k=0}^{\infty} \frac{g^{(k)}(t)}{(2 k) !} x^{2 k} .
+\]
+(a) Given that the derivatives of $g$ satisfy [you don't have to prove it]
+\[
+\left|g^{(k)}(t)\right| \leq \frac{k !}{(\theta t)^k} \exp \left(-\frac{1}{2} t^{-2}\right), \quad t>0, k=0,1, \ldots,
+\]
+for some $\theta>0$, show that the series for $u$ converges locally uniformly in $\mathbb{R}^2$.\\
+(b) Show that you can differentiate $u(x, t)$ by differentiating its series term-by-term both in $x$ and $t$ variables, for arbitrary number of times; particularly, $u \in C^{\infty}\left(\mathbb{R}^2\right)$. Show, however, that $u$ is not real analytic.\\
+(c) Show that $u(x, t)$ solves the heat equation in $\mathbb{R} \times(0, \infty)$ with the initial condition $u(x, 0)=$ $0, x \in \mathbb{R}$. Why doesn't this contradict the uniqueness theorem for the initial value problem?
+\end{problem}
+\begin{proof}
+	(a) Note that $t^{- k} \exp\left( - \frac{1}{2}t^{-2} \right) $ is bounded in $t$ for any $k$.
+	In any bounded open subset $U \subset \mathbb{R}^2$, we have
+	\[
+		u(x, t) \le \sum_{k=0}^{\infty} \frac{\|g^{(k)}(t)\|_{L^\infty (U)}}{(2k)!} \|x\|_{L^\infty (U)}^{2k}
+		\le \sum_{k=0}^{\infty} \frac{k! M_1}{\theta^k (2 k)!} M_2^{2k} < \infty 
+	.\] 
+
+	(b) To justify termwise differentiation, we need to show that the derivative of partial sums converge uniformly. Denote partial sums by $u_n$. Differentiate in $x$, we get
+	\begin{align*}
+		D_x u_n(x,t) 
+		&= \sum_{k=1}^{n} \frac{g^{(k)}(t)}{(2k-1)!}x^{2k-1} \\
+		&= \sum_{k=1}^{n} \frac{k!}{(\theta t)^k(2k-1)!}\exp\left( - \frac{1}{2} t^{-2} \right)  x^{2k-1} \\
+		&= \sum_{n=0}^{n-1} \frac{(k+1)!}{(\theta t)^{k+1} (2 k + 1)!} \exp\left( - \frac{1}{2} t^{-2} \right) x^{2 k + 1} \\
+		&\leq x \sum_{n=0}^{n-1} \frac{1}{(\theta t)^{k+1} } \exp\left( - \frac{1}{2} t^{-2} \right) \frac{x^{2k}}{k!} \\
+		&\leq C x e^{x^2} < \infty 
+	.\end{align*} 
+\end{proof}
+
+

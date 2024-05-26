@@ -1,0 +1,149 @@
+\homework{3}{Tue 27 Feb 2024 16:09}{}
+
+\begin{problem}
+	Let $\left\{X_\alpha\right\}_{\alpha \in \Lambda}$ be a collection of mutually disjoint path-connected topological spaces indexed by a set $\Lambda$, and $p_\alpha \in X_\alpha$ is a point such that $\left(X_\alpha, p_\alpha\right)$ is a good pair. Define the wedge,
+\[
+\bigvee_\alpha X_\alpha:=\left(\bigsqcup_\alpha X_\alpha\right) /\left\{p_\alpha \mid \alpha \in \Lambda\right\}
+\]
+
+Intuitively, in $\bigvee_\alpha X_\alpha$, the spaces $X_\alpha$ are joined by a single point. For example, the figure eight is the wedge of two circles. The wedge of $n$ circles looks like a rose with $n$ petals. Prove,
+\[
+\bigoplus_\alpha H_n\left(X_\alpha\right) \cong H_n\left(\bigvee_\alpha X_\alpha\right), \quad n \geq 1
+\]
+\end{problem}
+\begin{proof}
+	Use long exact sequence of a pair, we have
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJIX24oXFx7XFxhbHBoYSB8IFxcYWxwaGEgXFxpbiBcXExhbWJkYVxcfSkiXSxbMSwwLCJIX25cXGxlZnQoXFxiaWdzcWN1cF9cXGFscGhhIFhfXFxhbHBoYVxccmlnaHQpIl0sWzIsMCwiSF9uXFxsZWZ0KFxcYmlndmVlX1xcYWxwaGEgWF9cXGFscGhhXFxyaWdodCkiXSxbMywwLCJIX3tuIC0gMX0oXFx7XFxhbHBoYSB8IFxcYWxwaGEgXFxpbiBcXExhbWJkYVxcfSkiXSxbMCwxXSxbMSwyXSxbMiwzXV0=
+\[\begin{tikzcd}[cramped]
+	{H_n(\{\alpha | \alpha \in \Lambda\})} & {H_n\left(\bigsqcup_\alpha X_\alpha\right)} & {H_n\left(\bigvee_\alpha X_\alpha\right)} & {H_{n - 1}(\{\alpha | \alpha \in \Lambda\})}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}\]
+For $n = 0$, we have
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJcXFpeXFxMYW1iZGEiXSxbMiwwLCJcXFpeXFxMYW1iZGEiXSxbNCwwLCJIXzBcXGxlZnQoXFxiaWd2ZWVfXFxhbHBoYSBYX1xcYWxwaGFcXHJpZ2h0KSJdLFs2LDAsIjAiXSxbMCwxLCJpIl0sWzEsMiwiaiJdLFsyLDMsImQiXV0=
+\[\begin{tikzcd}[cramped]
+	{\Z^\Lambda} && {\Z^\Lambda} && {H_0\left(\bigvee_\alpha X_\alpha\right)} && 0
+	\arrow["i", from=1-1, to=1-3]
+	\arrow["j", from=1-3, to=1-5]
+	\arrow["d", from=1-5, to=1-7]
+\end{tikzcd}\]
+The map $i$ is a bijection since each $X_\alpha$ is path-connected. Therefore $j$ is the zero map. Hence $H_0(\bigvee_\alpha X_\alpha) = 0$.
+
+For $n = 1$, we have
+
+% https://quiver.local:8080/#q=WzAsMTIsWzAsMCwiSF8xKFxce1xcYWxwaGEgfCBcXGFscGhhIFxcaW4gXFxMYW1iZGFcXH0pIl0sWzEsMCwiSF8xXFxsZWZ0KFxcYmlnc3FjdXBfXFxhbHBoYSBYX1xcYWxwaGFcXHJpZ2h0KSJdLFsyLDAsIkhfMVxcbGVmdChcXGJpZ3ZlZV9cXGFscGhhIFhfXFxhbHBoYVxccmlnaHQpIl0sWzMsMCwiSF97MH0oXFx7XFxhbHBoYSB8IFxcYWxwaGEgXFxpbiBcXExhbWJkYVxcfSkiXSxbNCwwLCJIXzBcXGxlZnQoXFxiaWdzcWN1cF9cXGFscGhhIFhfXFxhbHBoYVxccmlnaHQpIl0sWzAsMSwiMCJdLFsxLDEsIkhfMVxcbGVmdChcXGJpZ3NxY3VwX1xcYWxwaGEgWF9cXGFscGhhXFxyaWdodCkiXSxbMiwxLCJIXzFcXGxlZnQoXFxiaWd2ZWVfXFxhbHBoYSBYX1xcYWxwaGFcXHJpZ2h0KSJdLFszLDEsIlxcWl5cXExhbWJkYSJdLFs1LDAsIkhfMFxcbGVmdChcXGJpZ3ZlZV9cXGFscGhhIFhfXFxhbHBoYVxccmlnaHQpIl0sWzQsMSwiXFxaXlxcTGFtYmRhIl0sWzUsMSwiMCJdLFswLDFdLFsxLDIsIlxcYmV0YV8xIl0sWzIsMywiXFxwYXJ0aWFsXzEiXSxbMyw0LCJcXGFscGhhXzAiXSxbNSw2XSxbNiw3XSxbNyw4XSxbNCw5XSxbOCwxMF0sWzEwLDExXV0=
+\[\begin{tikzcd}[cramped]
+	{H_1(\{\alpha | \alpha \in \Lambda\})} & {H_1\left(\bigsqcup_\alpha X_\alpha\right)} & {H_1\left(\bigvee_\alpha X_\alpha\right)} & {H_{0}(\{\alpha | \alpha \in \Lambda\})} & {H_0\left(\bigsqcup_\alpha X_\alpha\right)} & {H_0\left(\bigvee_\alpha X_\alpha\right)} \\
+	0 & {H_1\left(\bigsqcup_\alpha X_\alpha\right)} & {H_1\left(\bigvee_\alpha X_\alpha\right)} & {\Z^\Lambda} & {\Z^\Lambda} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\beta_1}", from=1-2, to=1-3]
+	\arrow["{\partial_1}", from=1-3, to=1-4]
+	\arrow["{\alpha_0}", from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd}\]
+From this exact sequence we see $\alpha_0$ is surjective, so it must be an isomorphism. This means  $\partial_1$ is zero. Therefore $\beta_1$ is an isomorphism.
+
+For all higher $n$, we have $H_n(\{\alpha | \alpha \in \Lambda\}) = 0 $ and $H_{n - 1}(\{\alpha | \alpha \in \Lambda\}) = 0 $, which directly implies $\beta_n$ is an isomorphism.
+
+Combining this with the fact that
+\[
+	\bigoplus_{\alpha}  H_n(X_\alpha) \cong H_n\left( \bigsqcup_\alpha X_\alpha \right) 
+,\] 
+we obtain the claim.
+\end{proof}
+
+\begin{problem}
+	This problem complements the fact that $H_1$ is the abelianization of $\pi_1$. Let $X$ be a topological space. A loop in $X$ is a continuous map $\gamma: S^1 \rightarrow X$. For convenience, let us just take $S^1$ as the unit circle in $\mathbb{C}$. Fix a surjection $s: \Delta_1=\left[e_0 e_1\right] \rightarrow S^1$ such that $s\left(e_0\right)=s\left(e_1\right)=1$. Then $\gamma \circ s$ is a 1-cycle. We will often simply say $\gamma$ is a 1-cycle, and denote by $[\gamma]$ the homology class represented by $\gamma$. Prove that if $\gamma_1, \gamma_2: S^1 \rightarrow X$ are homotopic as maps $S^1 \rightarrow X$, then $\left[\gamma_1\right]=\left[\gamma_2\right] \in H_1(X)$. Note that the homotopy between $\gamma_1$ and $\gamma_2$ does not fix the base point because this isn't a base point chosen for the loop. In a sense, the 1-homology class does not 'see' the base point.
+\end{problem}
+\begin{proof}
+	Consider the homotopy
+	\begin{align*}
+		F: I \times S^1 &\longrightarrow X \\
+		(0, y) &\longmapsto \gamma_1(y) 
+		(1, y) &\longmapsto \gamma_2(y) 
+	.\end{align*}
+	Pre-compose with $s: \Delta^1 \to S^1 $ gives us the map
+	\begin{align*}
+		\tilde F: I \times \Delta^1 &\longrightarrow X \\
+		(t, z) &\longmapsto \tilde F(t, s(z))
+	.\end{align*}
+	Now, since $s(e_0) = s(e_1) = 1 \in S^1 \hookrightarrow\mathbb{C}$, we have
+	\[
+		\tilde F (\cdot , s(e_1)) = \tilde F(\cdot , s(e_2))
+	.\] 
+	This makes $\tilde F$ a jointly continuous map. This gives a homotopy between two 1-simplices, implying that they are homologous.
+\end{proof}
+
+
+\begin{problem}
+	This problem walks you through the calculation of homology groups of closed oriented surfaces. We take a genus-2 surface as an example. Take an 8-gon as shown below. The edges are labelled by $a_1, b_1, a_1, b_1, a_2, b_2, a_2, b_2$. We identify edges with the same label according to the arrow indicated in each edge. The resulting space, denoted by $\Sigma_2$, is a compact surface of genus 2 without boundary. Choose a point $p \in \Sigma_2$ away from the edges. Let $A$ be a small open neighborhood of $p$ homeomorphic to a disk and also away from the edges. Let $B=\Sigma_2-\{p\}$. You should convince yourself that $B$ deformation retracts to the union of the edges which in $\Sigma_2$ is a wedge of four circles, and so you know the homology of $B$ by Problem 1. Use Mayer-Vietoris sequence to compute $H_*\left(\Sigma_2\right)$.
+
+\end{problem}
+\begin{figure}
+    \centering
+    \incfig{2torus}
+    \caption{2torus for problem 3}
+    \label{fig:2torus}
+\end{figure}
+\begin{proof}
+	Since $\Sigma_2$ is path-connected, we have $H_0 (\Sigma_2) = \mathbb{Z}$.
+
+	To compute $H_1$, we use the reduced Mayer-Vietoris sequence:
+% https://quiver.local:8080/#q=WzAsOCxbMCwwLCJcXHRpbGRlIEhfMShTXzEpIl0sWzEsMCwiXFx0aWxkZSBIXzEoKikgXFxvcGx1cyBcXHRpbGRlIEhfMShcXGJpZ3ZlZV40U14xKSAiXSxbMiwwLCJcXHRpbGRlIEhfMShcXFNpZ21hXzIpIl0sWzMsMCwiXFx0aWxkZSBIXzAoU14xKSJdLFszLDEsIjAiXSxbMCwxLCJcXFoiXSxbMSwxLCIwIFxcb3BsdXMgXFxaXjQiXSxbMiwxLCJcXHRpbGRlIEhfMShcXFNpZ21hXzIpIl0sWzAsMSwiXFxhbHBoYV8xIl0sWzEsMiwiXFxiZXRhXzEiXSxbMiwzXSxbNyw0XSxbNiw3XSxbNSw2XV0=
+\[\begin{tikzcd}[cramped]
+	{\tilde H_1(S_1)} & {\tilde H_1(*) \oplus \tilde H_1(\bigvee^4S^1) } & {\tilde H_1(\Sigma_2)} & {\tilde H_0(S^1)} \\
+	\Z & {0 \oplus \Z^4} & {\tilde H_1(\Sigma_2)} & 0
+	\arrow["{\alpha_1}", from=1-1, to=1-2]
+	\arrow["{\beta_1}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\]
+Now, $\alpha_1$ maps the only generator of $H_1(S^1)$ to $a_1^{-1} b_1^{-1} a_2 b_2 a_2^{-1} b_2^{-1} a_1 b_1$, which is zero inside the homology group. Thus, $\alpha_1 = 0$, so $\tilde H_1(\Sigma_2) \cong \tilde H_1 (\bigvee^4 S^1) = \mathbb{Z}^4 $. Therefore, $H_1(\Sigma_2) = \mathbb{Z}^4$.
+
+Next, we calculate $H_2(\Sigma_1)$. We note that $H_2(\bigvee^4 S^1) = 0$, and $\alpha_1 =0$. Therefore, $H_2(\Sigma_2) \cong H_1(S^1) = \mathbb{Z}$.
+
+All higher homologies are zero because $H_n(\Sigma_2)$ is surrounded by zeroes in the l.e.s.
+\end{proof}
+
+
+\begin{problem}
+	Compute the homology groups $H_*(K)$, where $K$ is the Klein bottle obtained by identifying edges with the same label as shown below. You can, but you don't have to, use methods similar to the previous problem. However, at this stage please don't yet use cellular homology or simplicial homology.
+\end{problem}
+\begin{proof}
+	The Klein bottle is path connected, so $H_0(K) = \mathbb{Z}$. 
+
+	\begin{figure}[H]
+    \centering
+    \incfig{kleinsingular}
+    \caption{KleinSingular}
+    \label{fig:kleinsingular}
+\end{figure}
+
+All vertices in the graph are identified. The only two $2$-dimensional components have boundaries $a + b - c$ and $c + a - b$, whose span does not include zero. Thus $H_2\left(K \right)  = 0$. All higher homologies are also zero. Now let's compute $H_1(K)$. We see that $a, b, c$ are all one-cycles and they are independent from each other. Thus $Z_1 = \left\langle a, b, c \right\rangle $. Moreover,  $B_1 = \left\langle a + b - c, c + a - b \right\rangle $. Thus, 
+
+\[
+	H_1(K) = \frac{\left\langle a, b, c \right\rangle }{\left\langle a + b - c, c + a - b \right\rangle } = \frac{\left\langle a, b, a + b + d \right\rangle }{\left\langle d, 2 a \right\rangle } 
+= \frac{\left\langle a, b, d \right\rangle }{\left\langle d, 2 a \right\rangle } = \left\langle a, b \right\rangle / \left\langle 2 a \right\rangle  = \mathbb{Z}_2 \oplus \mathbb{Z}
+.\] 
+\end{proof}
+
+
+\begin{problem}
+	Compute the homology groups $H_*\left(\mathbb{R} P^2\right)$. Recall that $\mathbb{R} P^2$ is the quotient space of $S^2$ by identifying antipodal points. Another model for $\mathbb{R} P^2$ is the quotient space of the 2-disk by identifying antipodal points only on the boundary circle. See below.
+\end{problem}
+\begin{proof}
+	Rip out a disk $D^2$ in the middle, call it $B$. The remaining thing, call it $A$, deformation retracts to $S^1$. Apply reduced Mayer-Vietoris. Note that $H_2(A)$ and  $H_2(B)$ are both zero. Also, $H_1(A)$ and $H_1(A \cap B)$ are both isomorphic to $H_1(S^1) = \mathbb{Z}$, but $H_1(A \cap B) \to H_1(A)$ by multiplication of $2$. This can be seen from the picture; as we wind around the outer "circle" once, we actually wind twice in $\mathbb{R}P^2$ due to the identifications. Therefore, $H_2(\mathbb{R}P^2) \to H_1(A \cap B)$ is zero map, so $H_2(\mathbb{R} P^2) = 0$. Also, we have the short exact sequence
+	\[
+		\xrightarrow{0} \mathbb{Z} \xrightarrow{\times 2} \mathbb{Z}\to H_1(\mathbb{R} P^2) \to 0
+	.\] 
+	So $H_1(\mathbb{R} P^2) = \mathbb{Z}_2$
+\end{proof}
+

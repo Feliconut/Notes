@@ -1,0 +1,91 @@
+\lecture{26}{Wed 17 Apr 2024 15:26}{Projections}
+
+\subsection{Projections}
+
+\begin{lemma}
+	\label{lem:FiniteDimSubspaceProj}
+	Let $X$ be a normed space, and $Y \subset X$ a finite dimensional subspace. Then there exists a continuous projection $p: X \to X$ such that $Y = p X$. 
+
+	Moreover, if we let $P = 1 - p$, then we obtain a direct sum decomposition $X = pX \oplus PX$.
+\end{lemma}
+
+\begin{lemma}
+	\label{lem:FiniteCodimSubspaceProj}
+	Let $Y_0 \subset Y$ be a closed subspace of $Y$ of finite codimension. Then there is a continuous projection $q \in B(Y)$ such that $q(Y) = Y_0$.
+\end{lemma}
+\begin{proof}
+	\ask{Verify if the fact about split exact sequence applies here.}
+	Since $Y_0$ closed, we can form the quotient $Y / Y_0$, whose dimension we know to be finite. Consider the short exact sequence
+	\[
+		0 \to Y_0 \to Y \xrightarrow{\pi} Y / Y_0 \to 0
+	.\] 
+	Since $Y / Y_0$ has finite dimension, we can define a section $s: Y / Y_0 \to Y$. 
+	Thus the short exact sequence splits, i.e. there exists a retraction $r: Y \to Y_0$. Let $Q = i r$. Then $Q$ is a projection: $Q^2 = irir = i(ri)r = ir = Q$. Obviously, we also have $Q Y = Y_0$.
+
+	As a side remark, since $Y = r Y \oplus \pi Y$, we can let $q = s \pi$, now $1 = Q + q$, so that $Q = 1 - q$.
+\end{proof}
+\begin{proof}
+	Since $Y_0$ has finite codimension, we can pick its linear complement $Y_1$ which is closed. $Y_0$ is closed by assumption, so they are both Banach. Now form the Banach direct sum $Y_0 \oplus Y_1$ and we have a topological isomorphism $Y_0 \oplus Y_1 \to Y$. Restrict to either $Y_0$ or $Y_1$ to obtain the desired projection.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:ImageClosed}
+	In $\mathbf{Ban}$, if $S: E \to F$ has finite codimension, then $\operatorname{Im} S$ is closed.
+\end{lemma}
+\begin{proof}
+	Since $S$ is continuous, $\operatorname{ker} S$ is closed (hence Banach). We can form the quotient and get injective $\tilde S: E / \operatorname{ker} S \to F$ between Banach spaces. Since $F$ has finite codimension, we can choose a linear complement $F_0$ of $\operatorname{Im} S$, and have $F = \operatorname{Im} S \oplus F_0$.
+
+	Now the map $R: E / \operatorname{ker} S \oplus F_0 \to F$ is a bounded bijective map between Banach spaces. By Banach theorem (open mapping theorem), it is a topological isomorphism. Hence $R( E / \operatorname{ker} S) = \operatorname{Im} S$ is closed.
+\end{proof}
+
+\begin{example}
+	If $F_0$ is a subspace of $F$ with finite codimension, $F_0$ is not necessarily closed. 
+
+	Take a dense, proper subspace and pick a basis $\left(v_i\right)$ of that subspace. Now we can adjoin $\left(w_j\right)$ such that $\left(v_i\right) \cup\left(w_j\right)$ is a basis of the whole space. Now the span of all $v_i, w_j$ but finitly many $w_j$ is a dense subspace of finite codimension. So it can not be closed.
+
+	For specific example, the space $l^2(N)$ has a dense subspace spanned by the basis $(\delta_n)$, of all elements with finite support. By Zorn's Lemma there is an algebraic base $(\delta_n) \cup (w_\alpha)$ that is uncountable.
+\end{example}
+
+\begin{theorem}[Atkinson Theorem]
+	\label{thm:Atkinsthm}
+	An operator $T \in B(X,Y)$ is Fredholm if and only if there is $S \in B(Y, X)$ such that $1 - S T \in \mathcal{K}(X)$ and $1 - T S\in \mathcal{K}(Y)$.
+\end{theorem}
+\begin{proof}
+	($\implies$ )
+	By the two previous lemmas, we can find projections $p \in B(X)$ and  $q \in B(Y)$ such that $p(X) = \operatorname{ker} T$ and $(1-q)X = \operatorname{Im} T$. Now consider the operator
+	\[
+		\hat{T}  = (1 - q) T (1 -p) : (1 - p) X \to (1 - q)Y
+	.\] 
+	This is bijective by construction, and by Open Mapping Theorem, is invertible. 
+
+	Now, $X = (1 - p) X \oplus p X$ and $Y = (1 - q) Y \oplus q Y$. We can define $S: Y \to X$ by $S = 0_{qY} \oplus \hat{T} ^{-1}$. We claim that $S$ satisfies the desired properties.
+
+	Indeed, $T S = 0_{q Y} \oplus 1_{(1 - q)Y} = 1 - q$, $S T = 0_{p X} \oplus 1_{(1 - p)X} = 1 - p$.
+
+
+	($\impliedby$ )
+	For the other direction, we recall the earlier result that if $K$ is compact, then $1 + K$ is Fredholm. In particular, both $ST$ and $TS$ are Fredholm.
+
+	Since $\operatorname{ker} T \subset \operatorname{ker} ST$, we have $\operatorname{dim} \operatorname{ker} T < \infty $. 
+
+	Since $\operatorname{Im} TS \subset \operatorname{Im} T$, the map $\operatorname{coker} (TS) \to \operatorname{coker} T$ is surjective, hence $\operatorname{dim} (\operatorname{coker} T) \le \operatorname{dim} \left( \operatorname{coker} (TS) \right) < \infty $.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:FinDimComplement}
+	Let $X $ be a normed space, and $N \subset X$ a finite dimensional subspace of $X$. Then there is a closed subspace $Y \subset X$, such that $X = Y \oplus N$.
+\end{lemma}
+\begin{proof}
+	Assume $N \neq 0$. We fix a basis $\{x_1, \ldots, x_n\} $ for $N$. Define $f_i \in N^*$ such that $f_i(x_j) = \delta_{i j}$. By Hahn-Banach we can extend each $f_i$ to $X^*$. Now we can define the projection $P: X \to N$ by $P(x) = \sum _{i = 1}^n f_i(x) x_i$.
+
+	$P$ is a continuous linear map satisfying $P^2 = P, P(X) = N$, $P(x_i) = x_i$. Thus it is a projection onto $N$. Now define
+	\[
+		Y = \operatorname{ker} P = \cap _{i = 1}^n \operatorname{ker} f_i
+	.\] 
+	Thus $Y$ is a closed subspace, and $1 - P$ is a projection onto $Y$. It is straightforward to check that $N \cap Y = 0$ and $X = Y \oplus N$.
+
+	To check $X = Y + N$, observe for each $x \in X$, $x = (x - P x) + Px \in Y + N$. To check $N \cap Y = 0$, take $x \in N \cap Y$ such that $x = \lambda_1 x_1 + \ldots + \lambda_n x_n$. Since $x \in Y$, $f_i(x) = \lambda_i = 0$, thus $x = 0$.
+\end{proof}
+
+
+

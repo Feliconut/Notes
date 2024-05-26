@@ -1,0 +1,51 @@
+\homework{4}{Wed 14 Feb 2024 10:16}{}
+
+\begin{problem}
+	
+1. Show that a linear functional $f: X \rightarrow \mathbb{C}$ on a normed space is continuous if and only if
+\[
+\text { ker } f=\{x \in X: f(x)=0\}
+\]
+is a closed subspace of $X$.
+\end{problem}
+\begin{proof}
+	$f$ continuous directly implies $\operatorname{ker} f$ is closed. Now assume $\operatorname{ker} f$ is closed. Then $X / \operatorname{ker} f$ is a Banach space. Since $f$ is linear, we have either $f(X) = \mathbb{C}$ or $f(X) = 0$. Thus $f(X)$ is a Banach space. Then $f_*: X / \operatorname{ker} f \to f(X)$ is a Banach space isomorphism, thus continuous (by open mapping theorem). In the case $f(X) = 0$ we have $f$ trivially continuous; in the case $f(X) = \mathbb{C}$ we have $\operatorname{ker} f = 0$, so $f_*$ continuous implies $f$ continuous.
+\end{proof}
+
+\begin{problem}
+	
+2. Let $X, Y$ be Banach spaces and let $0 \neq T \in B(X, Y)$. Show that the range of $T,\{T x: x \in X\}$ is a closed subspace of $Y$ if and only if there is $c>0$ such that $\|T x\| \geq c \operatorname{dist}(x, \operatorname{ker} T)$ for all $x \in X$.
+\end{problem}
+\begin{proof}
+	If $TX$ is closed then it is Banach; also since $T$ is bounded, its kernel is closed. Combining those we have a Banach space isomorphism $T_*: X / \operatorname{ker} T \to  TX$. In particular $T_*$ is invertible and $T_*^{-1}$ is bounded. Hence for all $T x \in TX$,
+	\[
+		\frac{\|x + \operatorname{ker} T\|}{T x} 
+		= \frac{\|T_*^{-1}(T x)\|}{\|T x\|} \le \|T_*^{-1}\| < \infty 
+	.\] 
+
+	Now assume the inequality and we want to show $TX$ closed in $Y$. For any Cauchy sequence  $(T x_n)_{n \in \mathbb{N}}$ in $TX$, for $\varepsilon>0$ we have for large $n, m$ that $\|T x_n - T x_m\| < \varepsilon$. The inequality implies
+	\[
+		c \text{dist}(x_n - x_m, \operatorname{ker} T) \le \|T(x_n - x_m)\| < \varepsilon
+	.\] 
+	Thus
+	$\|x_n - x_m + \operatorname{ker} T\| < \frac{\varepsilon}{c}$. Since $X / \operatorname{ker} T$ is Banach, we have the convergence $\lim (x_n + \operatorname{ker} T) = x + \operatorname{ker} T$, for some $x \in X$. But then we have $T(x_n + \operatorname{ker} T) \to T(x + \operatorname{ker} T)$ by continuity of $T$, that is, $T x_n \to  T x \in TX$.
+\end{proof}
+
+\begin{problem}
+	
+3. Let $X$ be the normed space of all analytical functions from $\mathbb{C}$ to $\mathbb{C}$, with norm
+\[
+\|f\|=\sup _{|z|=1}|f(z)| .
+\]
+
+Let $T: X \rightarrow X$ be defined by $T(f)(z)=f(z / 2)$. Show that $T$ is a linear continuous bijection but $T^{-1}$ is not bounded.
+\end{problem}
+\begin{proof}
+	$T$ is clearly a bijection. Now
+	by the maximum modulus principle, $\|f\| = \sup _{|z|\le 1}|f(z)|$. Therefore $\|f\| = \sup _{|z|\le 1}|f(z)| \ge \sup _{|z| = \frac{1}{2}}|f(z)| = \| T f\|$. This shows $T$ is continuous. 
+
+	On the other hand, the function $f: z \mapsto z^n$ satisfies $\|f\| = 1$ yet $\|T^{-1}f\| = \sup _{|z| = 2} |f(z)| = 2^n$, whereas $n$ can be arbitrarily large. Therefore $T^{-1}$ is unbounded.
+
+	
+\end{proof}
+

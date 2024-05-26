@@ -1,0 +1,58 @@
+\note{5}{Mon 04 Dec 2023 13:13}{Conceptual summary for Time change and conformal invariance}
+
+\subsection{Time Change and Conformal Invariance of Continuous Martingales}
+
+(From Prof. Banuelo's office hour)
+
+\subsubsection{Time change}
+
+
+\begin{fact}
+	Continuous martingales are completely characterized by their quadratic variation, i.e. the rate at which they accumulates variation.
+\end{fact}
+For $M_t$ continuous martingale, let $\sigma_t  = \left\langle M \right\rangle _t$, define
+\[
+	\gamma_t = \inf \{s > 0: \left\langle M \right\rangle _s > t\} 
+.\] 
+We have $\gamma_t = \sigma_t^{-1}$. Then, we have
+\[
+	\left\langle M_{\gamma_t} \right\rangle 
+	= t
+.\] 
+This implies $M_{\gamma_t}$ is a Brownian motion. Hence,
+\[
+	M_t = B_{\sigma_t}
+.\] 
+That is, $M_t$ is a time-changed Brownian motion.
+
+\subsubsection{Conformal invariance}
+
+Take complex-analytic function $F$ and let $B_t$ be complex Brownian motion. We can straight-forwardly generalize Itô formula:
+\[
+	F(B_t) = F(B_0) + \int _0^t F'(B_s) d B_s
+.\] 
+Note that the second term vanishes because the real and imaginary parts of $F$ are harmonic.
+
+\[
+	\sigma_t := \left\langle F(B_\cdot ) \right\rangle _t = \int _0^t \left| F'(s)^2 \right| d s
+.\] 
+We have
+\[
+	F(B_t) = B_{\sigma_t}
+.\] 
+
+\subsubsection{Inequalities for continuous martingales}
+
+Using time-change result, we can transfer inequality results for Brownian motion to any continuous martingale. For example
+\begin{itemize}
+	\item Doob's maximal inequality
+	\item Doob's Lp inequality
+	\item Blackholder-David-Gundy inequality
+	\item Good-lambda inequality
+	\item etc.
+\end{itemize}
+
+\subsubsection{Final comments}
+
+Continuous martingales play dominant role in diffusion theory. For Levy processes, however, there is jump terms and we no longer have continuous martingales, so the results above can no longer be used. We will need to work with a more general notion of covariation denoted as $[X,Y]$.
+

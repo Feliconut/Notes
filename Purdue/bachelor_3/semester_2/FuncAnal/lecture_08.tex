@@ -1,0 +1,94 @@
+\lecture{8}{Mon 29 Jan 2024 13:56}{}
+
+\subsubsection{Functionals as Coordinates}
+
+Let $(X, \|\cdot \|)$ be a normed space, and consider some $f \in X^*$ such that $f(x_0) = 1$. Then we can define two projections
+\[
+	p(x) = f(x) x_0 \qquad P(x) = x - f(x)
+.\] 
+Now, we can check that
+\begin{itemize}
+	\item $p, P \in B(X)$
+	\item $p^2 = p, P^2 = P$
+	\item $p P = P p = 0$ 
+	\item $p(x) = \mathbb{C} x_0 \qquad P(X) = \operatorname{ker} f$
+\end{itemize}
+This gives a direct sum decomposition of $X$ :
+\[
+	X = P(X) \oplus p(X)
+.\] 
+In this picture, $f(x)$ is the coordinate of $x$ in the direction of $x_0$, $p\left( x \right)  = f(x) x_0$.
+
+Also note that, for any $x_0 \in X$ we can evoke Hahn-Banach to obtain a (bounded linear) functional $f$ such that $f(x_0)= 1$.
+
+\begin{lemma}[Separation Lemma]
+	\label{lem:Separation}
+
+	Let $X$ be a normed space over $\mathbb{R}$. Let $V$ be an open convex subset of $X$ that contains $0$. For any $x_0 \in X$, $x_0 \not\in V$, there exists $f \in X^*$ such that $f(V) \subset (\to \infty , 1)$ and $f(x_0) = 1$.
+	
+\end{lemma}
+\begin{proof}
+	By Minkowski (Lemma~\ref{lem:Minkowski}), we have sublinear functional $q = q_V$ such that $V = \{x \in X: q(x) < 1\} $. 
+	Define $f(t x_0) = t$ on $\mathbb{R}x_0$. Then $f(t x_0) \le q(t x_0)$ for $t \in \mathbb{R}$ since
+	\[
+		q(t x_0) = t q(x_0) > t = f(t x_0), \quad t \ge 0
+	,\] 
+	and
+	\[
+		f(t x_0) = t < 0 \le q(t x_0), \quad t < 0
+	.\] 
+	
+	Now by Hahn-Banach (Theorem~\ref{thm:HahnBanachThm}), we extend $f$ to some $f \in \operatorname{Hom} (X, \mathbb{R})$ controlled by $q$. We want to show that $f \in B(X, \mathbb{R}) = X^*$. To this end, pick $r>0$ small such that $U(0, r) \subset V$. If $x \in U(0,r)$, then $\pm x \in V$, so $f(x) \le q(x) < 1$, $f(-x) \le q(-x) < 1$. This implies $-1 < f(x) < 1$. Hence $f$ is a bounded functional, $f \in X^*$.
+
+	Finally, we see that for $x \in V$,
+	\[
+		f(x) \le  q(x) < 1 \implies f(V) \subset (\to \infty , 1)
+	.\] 
+\end{proof}
+\begin{remark}
+	We have separated $V$ and $x_0$ by a hyperplane
+	\[
+		H = x_0 + \operatorname{ker} f = \{x \in X: f(x) = 1\} 
+	.\] 
+\end{remark}
+
+\begin{remark}
+	If $f: X \to \mathbb{R}$ on a normed space, then $f \neq 0 \implies f $ is open map.
+\end{remark}
+
+\begin{theorem}[Separation Theorem]
+	\label{thm:Separation}
+	
+	Let $X$ be normed space over $\mathbb{R}$, $A, B \subset X$ be nonempty disjoint convex subsets of $X$. Then
+	\begin{itemize}
+		\item If $A$ is open, then $\exists  f \in X^*, f(a) < \inf  f(B), \forall a \in A$. Thus, setting $\beta = \inf f(B),$
+			\[
+				A \subset \{x: f(x) < \beta\} \qquad B \subset \{x: f(x) \ge \beta\} 
+			.\] 
+		\item If $A$ compact and $B$ closed, $\exists \alpha < \beta$ in $\mathbb{R}$ and $f \in X^*$ such that  $f(a) < \alpha < ;b < f(b)$ for all $a \in A, b \in B$. That is, $\sup f(A) < \inf f(B)$ and
+			\[
+				A \subset \{x: f(x) < \alpha\}  \qquad B \subset \{x: f(x) > \beta\} 
+			.\] 
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Fix some $a_0 \in A, b_0 \in B$, set $x_0 = b_0 - a_0$. Then the set
+	\[
+		V = A - B + x_0
+	\] 
+	is an open convex subset of $X$ containing $0$. Apply separation lemma to $V$ and $x_0$ (note that $x_0 \not\in V$, $x_0 \in A - B + x_0 \iff 0 \in A - B$, which is not true). Thus, there exists $f \in X^*$, $f(V) \subset (- \infty , 1)$, $f(x_0) = 1$.
+
+	Now for all $a \in A, b \in B$,
+	\[
+		f(a - b + x_0) < 1 \implies f(a) < f(b)
+	.\] 
+	and since $f \in X^*$, $A$ open convex, we have $f(A)$ open convex. Thus $f(A) = (\alpha ,\beta)$ an open interval, possibly $\alpha = - \infty $. Thus $f(a) < \beta \le f(b)$ for all $a \in A, b \in B$.
+
+	Now prove the second part. Since $B$ is closed, $X \setminus B$ is open. By compactness of $A$, we can find $U$ open ball such that $A + U \subset X \setminus B$. Now we can apply (i) to $A + U$ and $B$to get $f \in X^*$ and $\beta$ such that $f(a) < \beta \le f(b)$, for all $a \in A, b \in B$.
+	
+	Since $A$ compact, $f(A)$ compact and $f(A) \subset f(A + U) \subset (- \infty , \beta)$, thus $\sup f(A) < \beta \le \inf  f(B)$.
+	 
+\end{proof}
+
+
+

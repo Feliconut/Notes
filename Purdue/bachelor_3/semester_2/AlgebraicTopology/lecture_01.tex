@@ -1,0 +1,136 @@
+\lecture{1}{Tue 09 Jan 2024 13:29}{lecture}
+
+\textbf{A high level description.} How to tell if two topological spaces are the same? Different notions of ``sameness'' (homotopic, homeomorphic, diffeomorphic, etc.) We can define \textit{invariants}. Same space has same quantity. Therefore different invariant quantities implies spaces are different. However, same quantity do not necessarily imply the spaces are the same.
+
+\begin{example}
+	For topological space $X$, we can define the fundamental group $\pi_1(X)$.
+
+	In general $\pi_1$ is nonabelian group. In general this is extremely hard to determine if two nonabelian groups are isomorphic.
+
+	On the other hand, for abelian groups, we have a classification theorem, can tell if two $\pi_1 $ groups are isomorphic.
+\end{example}
+
+The \textit{homology group} is a bit like the abelian version of fundamental groups. Homology is an ablian group that you can associate to each topological space. There are also many techniques to compute Homology for topological spaces.
+
+Traditionally, to define homology, we can do it in different ways: (simplicial, cellular, singular). They are equivalent and have different notions. We can start from simplicial (which is combinatorial and hands-on), then go to singular (which is more powerful). However the disadvantage of singular homology: easy to prove theorems since the definition is very simple and elegant, but hard to do calculations.
+
+In this course we are going to dive into singular homology directly. We get to the important theorems sooner, and use these theorems to compute homologies.
+
+\section{Topological Spaces}
+
+\begin{itemize}
+	\item $\mathbb{R}^n$, $n$-dimensional Euclidean space.
+	\item $S^n$, $n$-sphere
+	\item $\mathbb{R}P^n = S^n / (x \sim - x) = (\mathbb{R}^{n + 1} - 0) / (x \sim  t x, t \neq 0)$, real projective space
+	\item orthonormal $k$-frames, set of $k$-tuples of orthonormal vectors in $\mathbb{R}^n$, the \textit{Stiefel manifold}. For example, $V_1(\mathbb{R}^n) = S^{n-1}$
+	\item Grassmannian $\text{Gr}_k(\mathbb{R}^n)$, set of $k$-dim subspaces of $\mathbb{R}^n$. We can obtain a surjection $V_k \to \text{Gr}_k$ by taking span. For example $\text{Gr}_k(\mathbb{R}^n) = \mathbb{R} P ^{n - 1}$.
+\end{itemize}
+
+\begin{definition}[Standard n-Simplex]
+	\label{defn:Simplex}
+	The standard $n$-simplex $\Delta_n$ is the \textit{convex hull} of the points $\{e_0, \ldots, e_n\} $ in $\mathbb{R}^{n + 1}$.
+\end{definition}
+
+\begin{remark}
+	The vertices of $\Delta_n$ are naturally ordered by $e_0 < e_1 < \ldots < e_n$.
+\end{remark}
+
+Given a simplex, there is interior and boundary. The boundaries of a $n$-simplex are $n+1$ $(n-1)$-simplexes. We can, for example, identify $(01)$ with the face $(01)$ of the $2$-simplex $(012)$. 
+
+Define $d^2$ to be the map $\Delta_1 \to  \Delta_2$ such that $d^2$ is affine ($d^2(t_0 e_0 + t_1 e_1) = t_0 d^2 (e_0) + t_1 d^2 (e_1)$.
+
+Similarly, we can define $d^0: \Delta_1 \to  \Delta_2$, and $d^1$.
+
+Those $d^i$ are \textit{face inclusions}. In general, for $\Delta_n$, define
+\[
+	d^i: \Delta_{n - 1} \to  \Delta_n
+\] 
+such that 
+\begin{itemize}
+	\item $d^i$ is affine
+	\item $d^i$ maps vertices of $\Delta_{n-1}$ to vertices of $\Delta_{n}$ without $e^i$.
+	\item $d^i$ preserves ordering of vertices.
+\end{itemize}
+
+\begin{definition}[Singular n-Simplex]
+	\label{defn:SingularNSimplex}
+	For $X$ a topological space, a \textit{singular $n$-simplex} is a continuous map $\sigma: \Delta_n \to  X$.
+
+	Denote the set of all singular $n$-simplices $\text{Sin}_n(X)$.
+\end{definition}
+
+\begin{definition}[Singular n-Chains]
+	\label{defn:SingularNChains}
+	Define
+	\[
+		S_n(X) = \mathbb{Z} \text{Sin}_n(X)
+	.\] 
+	For $n < 0$, define $S_n(X) = 0$.
+\end{definition}
+
+An element of $S_n(X)$ looks like $\sum_{\sigma \in  S \subset \text{Sin}_n(X), S \text{ finite}} n_\sigma \sigma$
+
+By precomposing $d^i$ to $\sigma$, we can define the boundary of a singular $n$-simplex:
+
+% https://127.0.0.2:8080/#q=WzAsMyxbMCwwLCJcXERlbHRhX24iXSxbMiwwLCJYIl0sWzAsMiwiXFxEZWx0YV97bi0xfSJdLFswLDEsIlxcc2lnbWEiXSxbMiwwLCJkXmkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFsyLDEsImRfaSBcXHNpZ21hIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsNSwiIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\[\begin{tikzcd}
+	{\Delta_n} && X \\
+	\\
+	{\Delta_{n-1}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "\sigma", from=1-1, to=1-3]
+	\arrow["{d^i}", hook', from=3-1, to=1-1]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{d_i \sigma}"', dashed, from=3-1, to=1-3]
+	\arrow[shorten <=4pt, shorten >=4pt, Rightarrow, from=0, to=1]
+\end{tikzcd}\]
+
+Then we can extend $d_i$ to $S_n(X)$ by additivity. 
+
+Then define the boundary operator
+\begin{align*}
+	d: S_n(X) &\longrightarrow S_{n - 1}(X) \\
+	\sigma &\longmapsto d(\sigma) = \sum_{i = 0}^n ( - 1)^i d_i(\sigma)
+.\end{align*}
+
+We can also write $d_i(\sigma) = \sigma|_{[0,\ldots, \hat{i} , \ldots, n-1]}$
+
+\begin{remark}
+	Taking alternating sums is justified by considering \textit{orientation} of the simplicies. We are not going to pursue that at the moment and take the definition for now.
+\end{remark}
+
+\begin{example}
+	For $\sigma \in S_2(X)$, $d(\sigma) = \sigma|_{[1 2]} - \sigma | _{[0 2]} + \sigma | _{[1 2]}$.
+
+	For $\tau \in S_1(X)$, $d(\tau) = \sigma|_{[1]} - \sigma| _{[0]}$.
+
+	When is $d(\tau) = 0$ : this is true only when $\sigma|_{[1]} = \sigma|_{[0]}$, i.e. $\tau(1) = \tau(0)$.
+\end{example}
+
+\begin{lemma}
+	\label{lem:Boundaryboundary}
+	Boundaries do not have boundary.
+	 \[
+		d^2 = 0
+	.\] 
+\end{lemma}
+
+\begin{definition}[Chain Complex]
+	\label{defn:ChainComplex}
+	A \textit{chain complex} $C_{*}$ is a collection of abelian groups $\{C_n\} _{n \in \mathbb{Z}}$ with $d: C_n \to C_{n - 1}$, such that $C_n \xrightarrow{d} C_n \xrightarrow{d} C_{n - 1}$ is $0$.
+\end{definition}
+
+This means that $\operatorname{Im} (C_{n + 1} \xrightarrow{d} C_n) \subset \operatorname{ker} (C_n \xrightarrow{d} C_{n - 1})$.
+
+\begin{definition}[Homology]
+	\label{defn:Homology}
+	The $n$-th homology of $C_*$ is defined by
+	\[
+		H_n = \frac{\operatorname{ker} \left( C_n \xrightarrow{d} C_{n - 1} \right) }{\operatorname{Im} \left( C_{n + 1} \xrightarrow{d} C_n \right) }
+	.\] 
+\end{definition}
+
+
+
+
+
+
+

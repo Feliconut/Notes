@@ -1,0 +1,81 @@
+\lecture{4}{Thu 18 Jan 2024 10:50}{Axioms of Quantum Mechanics}
+
+\begin{enumerate}
+	\item Associated to any isolated physical system is a complex vector space with inner product (that is, a Hilbert space) known as the state space of the system. The system is completely described by its state vector, which is a unit vector in the system’s state space.
+	\item Time evolution of the sate of a closed quantum system is described by the Sch\"odinger equation.
+	\item Quantum Measurement.
+	\item Given two disjoint quantum systems with state spaces $\mathscr{H}_1$, and $\mathscr{H}_2$, the state space of the combined system is $\mathscr{H}_1 \otimes  \mathscr{H}_2$.
+		
+\end{enumerate}
+
+\begin{example}
+	An electron entrapped in one of two orbital configurations: a subspace of $\mathscr{H} = L^2(\mathbb{R}^3)$ that is isomorphic to $\mathbb{C}^2$.
+\end{example}
+
+Note: [NC] requires all states to have length $1$. This is not important, as will be seen from the axiom of measurement. 
+
+\begin{definition}[Quantum Superposition]
+	\label{defn:QuantumSuperposition}
+	If $\left| \psi_1 \right\rangle , \ldots, \left| \psi_n \right\rangle  \in \mathscr{H}$ are non-zero vectors (states), and 
+	\[
+		\left| \psi \right\rangle  = \sum z_i \left| \psi_i \right\rangle \neq 0
+	,\] 
+	then we say $\left| \psi \right\rangle $ is in a \textit{quantum superposition}, and $z_i$ is said to be the \textit{(un-normalized) amplitude} of $\left| \psi_i \right\rangle $. The \textit{normalized amplitudes} are $\frac{z_i}{\left\langle \psi \middle| \psi \right\rangle ^{1 / 2}}$
+\end{definition}
+
+We call the ordered basis
+\[
+	\left| 0 \ldots 0 \right\rangle , \left| 0 \ldots 0 1 \right\rangle , \ldots \left| 1 \ldots 1 \right\rangle
+\] 
+the \textit{computational basis}.
+
+\textbf{Postulate 2}(Global Version). Given a closed quantum system with state space $\mathscr{H}$ and two moments in time $t_1 < t_2$, there exists a unitary operator $U$ such that $\left| \psi; t_2 \right\rangle  = U \left| \psi; t_1 \right\rangle $. To put simply, time evolution is unitary.
+
+\begin{example}
+	\begin{itemize}
+		\item The identity on $\mathscr{H}$ is unitary.
+		\item Define $H: \mathbb{C}^2 \to \mathbb{C}^2$, the \textit{Hadamard gate}, by
+			\[
+				H = \frac{1}{\sqrt{2} } 
+				\begin{bmatrix}
+					1 & 1 \\
+					1 & -1 \\
+				\end{bmatrix}
+			.\] 
+		Let $\left| + \right\rangle := H \left| 0 \right\rangle $, $\left| - \right\rangle := H \left| 1 \right\rangle $.
+
+		Note that $H^2 = I$. Eigenvalues are $+1$ and $-1$. The eigenvectors are $\left| 0 \right\rangle  + \left| + \right\rangle $, and $\left| 0 \right\rangle - \left| + \right\rangle $, respectively. 
+
+	\item $H^{\otimes n} \left| 0 \ldots 0 \right\rangle = \left( \frac{1}{\sqrt{2} } \right) ^n \sum_{N = 0}^{2^n - 1} \left| N \right\rangle $
+		We call this an \textit{equal superposition of all computational vectors.}
+\end{itemize}
+\end{example}
+
+\textbf{Postulate 2}(Infinitesimal Version). Given a closed quantum system, with state space $\mathscr{H}$, there exists a Hermitian operator $H: \mathscr{H} \to  \mathscr{H}$ called the \textit{quantum Hamiltonian}, such that 
+\[
+	i \hbar \frac{d}{dt } \left| \psi \right\rangle = H \left| \psi \right\rangle 
+.\] 
+This is the \textit{Sch\"odinger equation}.
+
+\begin{remark}
+	There was a specific $H$ that describes the energy of the system, in the context of electron orbiting a Hydrogen nucleus. The equation presented here has greater generality, in that specific form of $H$ is not determined.
+\end{remark}
+
+We may take $\hbar = 1$ since it is always possible to absorb it into $H$.
+
+\textbf{Interpretation.} This is a quantum formulation of the conservation of energy. If we consider an energy eigenstate, then that state is only changing by a global phase.
+
+Going from infinitesimal to global representation is a computationally interesting problem called \textit{Hamiltonian simulation}. In general we would like to use a quantum computer to approximate solve it.
+
+\textbf{Postulate 3}(Projective Measurement, Born Rule). 
+Given a quantum system with state space , the \textit{observables} are precisely the Hermitian operators $M: \mathscr{H} \to \mathscr{H}$. 
+The set of \textit{outcomes} associated to the measurement of observable $M$ is exactly the set of eigenvalues of $M$, without multiplicity.
+Moreover, if the system is in state $\left| \psi \right\rangle$ before $M$ is measured, then we get outcome $\lambda$ with probability 
+\[
+	P(\lambda | \left| \psi \right\rangle ) = \frac{\left\langle \psi \right| P_\lambda \left| \psi \right\rangle }{\left| \left\langle \psi \middle| \psi \right\rangle  \right| }
+\] 
+where $P_\lambda: \mathscr{H} \to  \mathscr{H}$ is orthogonal projection onto the $\lambda$ eigenspace of $M$.
+If we observe outcome $\lambda$, the system will change to be in the state, up to normalization.
+\[
+	P_\lambda \left| \psi \right\rangle 
+.\] 

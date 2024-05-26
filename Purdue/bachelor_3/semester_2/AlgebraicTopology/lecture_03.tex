@@ -1,0 +1,41 @@
+\lecture{3}{Tue 16 Jan 2024 13:27}{Category Theory, and Augmented Homology}
+
+\subsubsection{Augmented Homology}
+
+Recall: for $X$ a topological space, we can construct a chain complex 
+ \[
+	S_*(X) = \left( \ldots \to S_1(X) \to S_0(X) \to  \ldots \right) 
+.\] 
+We can also obtain homologies from this chain complex.
+
+Define a new chain complex $\tilde S_*(X)$. Let
+\[
+	\tilde S_n(X) = \begin{cases}
+		S_n(X) & n \neq -1 \\
+		\mathbb{Z} & n = -1
+	\end{cases}
+.\] 
+So $\tilde S_*(X)$ looks like
+\[
+	\tilde S_*(X) = \left( \ldots \to  S_1(X) \to S_0(X) \to \mathbb{Z} \to 0 \to \ldots \right) 
+.\] 
+The boundary map $\epsilon: S_0(X) \to \mathbb{Z}$ is defined by 
+\begin{align*}
+	\epsilon: S_0(X) &\longrightarrow \mathbb{Z} \\
+	c_x^0 &\longmapsto \epsilon(c_x^0) = 1
+.\end{align*}
+Extend by linearity.
+
+We also want to check that $\epsilon \circ d_1: S_1(X) \to  S_0(X) \to \mathbb{Z}$ is zero: for a 1-simplex $\sigma$,
+\begin{align*}
+	\varepsilon \circ d(\sigma)
+	&= \varepsilon(\sigma|_{[1]} - \sigma|_{[0]}) \\
+	&= \varepsilon\left(c^0_{\sigma(1)} - c^0_{\sigma(0)}\right) \\
+	&= 0
+.\end{align*}
+The augmented homology of $X$ is
+\[
+	\tilde H_n(X) = H_n(\tilde S_*(X))
+.\] 
+For $n \ge 1$, $\tilde H_n(X) = H_n(X)$.
+Exercise: $H_0(X) \cong \tilde H_0(X) \oplus \mathbb{Z}$.

@@ -1,0 +1,218 @@
+\lecture{12}{Fri 09 Feb 2024 13:39}{}
+
+\begin{proposition}[QuotientSpace]
+	\label{prop:Quotientspace}
+	If $X$ is a Banach space, $N$ is a closed subspace, then $X / N$ is a Banach space.
+\end{proposition}
+\begin{proof}
+	We have verified above that $X / N$ is a normed linear space. Now we show it is complete.
+
+	Take a series $\sum \|\overline{x}_n \| < \infty $. Take $y_n \in N$ such that $\|x_n + y_n\|< \|\overline{x} \| + \frac{1}{2^n}$. Now $\sum \|x_n + y_n\|$ is finite, so $x_n + y_n \to x$ for some $ \in X$. By continuity of the quotient map, $x_n + N \to  x + N$.
+
+	
+\end{proof}
+
+
+
+\begin{corollary}
+	\label{cor:QuotientIsomorphism}
+	If $T \in B(X, Y)$ is surjective, then $\overline{T} : X / N \to  Y$ is an isomorphism.
+\end{corollary}
+\begin{proof}
+	$\overline{T} $ is by definition a linear bijection.
+	Since $T$ continuous, $\operatorname{ker} T$ is closed subspace of $X$. Thus $X / \operatorname{ker} T $ is a Banach space. By Proposition~\ref{prop:QuotientMapContinuous}, $\overline{T} $ is continuous. Now invoke the Open Mapping Theorem.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:RangeClosedBoundedBelow}
+	Let $f \in B(X, Y)$. Then the following are equivalent:
+	\begin{enumerate}
+		\item There is $C >0$ such that $\|T x\| \ge C \text{dist}(x, \operatorname{ker} T)$ for all $x \in H$
+		\item $\operatorname{Im} f$ is closed.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	$\operatorname{Im} f = \operatorname{Im} \overline{f} $ where $\overline{f} : X / \operatorname{ker}  \to  Y$. Also $\overline{f} $ is injective by construction. Then (1)  $\iff $ $\overline{f} $ bounded below $\iff $ $\overline{f} $ has closed image $\iff $ $f$ has closed image.
+\end{proof}
+
+\section{Banach Algebra and Functional Calculus}
+
+
+\subsection{Banach Algebra}
+
+
+\begin{definition}[Banach Algebra]
+	\label{defn:BanachAlgebra}
+	A \textit{Banach Algebra} $A$ is a Banach space with a multiplication $A \times A \to A$ that is associative, continuous ($\|a b\|\le \|a\|\|b\|$ ) and bilinear. A \textit{unital Banach Algebra} has unit $1 \in A, \|1\| = 1$.
+\end{definition}
+\begin{proof}
+One may check that $\|a b\| \le \|a\|\|b\|$ indeed implies multiplication is continuous. As $x_n \to x$, $y_n \to y$,
+\begin{align*}
+	\|x_n y_n - x y\| &= \|x_n y_n - x_n y + x_n y - x y\|\\
+	&\leq \|x_n\| \|y_n - y\| + \|y\| \|x_n - x\| \to 0
+.\end{align*}
+\end{proof}
+
+From now on we work with unital Banach algebras.
+
+\begin{example}
+	\begin{enumerate}
+		\item $B(X)$, $X$ Banach, with composition. We have
+			\[
+				\|S T\| = \sup _{\|x\|\le 1} \|ST x\| \le \sup _{\|x\|\le 1} \|S\| \|T x\| = \|S\| \|T\|
+			.\] 
+		\item $T$ compact Hausdorff, $C(T) = \{f: T \to \mathbb{C} \text{ continuous}\} $ with supremum norm.
+			\[
+				\|f g\|_\infty  \le  \|f\|_\infty \|g\|_\infty 
+			.\] 
+		\item $T$ any set, $\ell^\infty (T)$ with multiplication.
+		\item $(\ell^1(\mathbb{Z}), *)$ where $*$ is convolution. We have $\|f * g\|_1 \le  \|f\|_1 \|g\|_1$. $1 = $ dirac delta at $1$. 
+		\item $\Gamma$ any discrete group, $(\ell^1(\Gamma),*)$ where $*$ is convolution. $1 = \text{id}_\Gamma$.
+	\end{enumerate}
+\end{example}
+
+\begin{remark}
+	Group algebras let us study geometry of groups. For example, take the fundamental group of some manifold, then this allows us to understand the geometry of that manifold.
+\end{remark}
+
+\begin{lemma}(Invertible Element Banach Algebra)
+	\label{lem:InvertibleElementBanachAlgebra}
+	If $x \in A$, $\|x\| < 1$, then $1 - x$ is invertible.
+\end{lemma}
+\begin{proof}
+	Use Neumann series.
+	\[
+		(1 - x)^{-1} = \sum_{k = 0}^{\infty } x^k
+	.\] 
+
+	The norm can be estimated:
+	\[
+		\|( 1 - x)^{-1}\| \le  \sum_{k = 0}^\infty \|x\|^k = \frac{1}{1 - \|x\|}
+	.\] 
+\end{proof}
+
+\begin{notation}
+	$\text{GL}(A) = \{a \in A: a \text{ invertible}\} $.
+
+	This is a group.
+\end{notation}
+
+\begin{corollary}
+	\label{cor:InvertibleElementsBanachAlgebra}
+	If $a \in A$, $\|1 - a\|< 1$, then $a \in \text{GL}(A)$, and $\|a^{-1}\|\le \frac{1}{1 - \|1 - a\|}$.
+\end{corollary}
+\begin{proof}
+	Take $1 - x = a$ in Lemma~\ref{lem:InvertibleElementBanachAlgebra}.
+\end{proof}
+
+\begin{proposition}
+	\label{prop:GLOpen}
+	$\text{GL}(A)$ is open in $A$. Moreover, if $a_0 \in \text{GL}(A)$, then $U(a_0, \frac{1}{\|a_0^{-1}\|}) \subset \text{GL}(A)$.
+\end{proposition}
+\begin{proof}
+	If $\|a - a_0\| < \frac{1}{\|a_0^{-1}\|}$, we claim $a$ is invertible. First, $\|1 - a_0^{-1} a\| = \|a_0^{-1} (a_0 - a)\|\le \|a_0^{-1}\| \|a_0 - a\|< 1 $.
+	Now $a_0^{-1} a$ is invertible, so $a \in a_0 \text{GL}(A) = \text{GL}(A)$ .
+\end{proof}
+
+	The following identity will be useful when we deal with power series:
+\begin{corollary}[InverseFormula]
+	\label{cor:InverseFormula}
+	
+	If $a_0 \in \text{GL}(A)$ and $a \in U(a_0, \frac{1}{\|a_0^{-1}\|}) \subset \text{GL}(A)$, then
+\[
+		a^{-1} = \sum_{k = 0}^\infty \left( a_0^{-1} (a_0 - 1) \right) ^k a_0^{-1}
+	.\]
+\end{corollary}
+\begin{proof}
+	\[
+		a^{-1}a_0 = (a_0^{-1} a)^{-1} = \sum (1 - a_0^{-1} a)^k = \sum \left( a_0^{-1}  (a_0 - a) \right) ^k
+	.\] 
+\end{proof}
+
+\begin{notation}
+	Since $\iota: \mathbb{C} \to A$ defined by $\lambda \mapsto \lambda 1_A$ is an isometric embedding of algebras, we may identify $\lambda$ with $\lambda 1_A$. In particular, we may write $\lambda - a$ for $\lambda 1_A - a$.
+\end{notation}
+\begin{definition}[Spectrum]
+	\label{defn:Spectrum}
+	Let $a \in A$. Define the \textit{resolvent} of $A$ to be
+	\[
+		S_A(a) = \{\lambda \in \mathbb{C}: \lambda 1 - a \in \text{GL}(A)\} 
+	,\] 
+
+	and the \textit{spectrum} is its complement:
+	\[
+		\sigma_A(a) = \{\lambda \in \mathbb{C}: \lambda 1 - a \not\in \text{GL}(A)\}
+	.\]
+\end{definition}
+
+\begin{proposition}
+	\label{prop:SpectrumClosed}
+	\begin{enumerate}
+		\item The resolvent set $S_A(a)$ is open
+		\item The spectrum $\sigma_A(a)$ is closed.
+		\item Spectrum bounded inside a closed ball: $\sigma_A \subset B(0_\mathbb{C}, \|a\|)$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item Observe that $\mathbb{C} \ni \lambda \mapsto \lambda - a \in A$ is continuous, and $S_A(a)$ is its preimage of $\text{GL}(a)$.
+		\item Trivial.
+		\item If $\lambda \neq 0$, we have
+			\[
+				\lambda - a = \lambda( 1- \frac{a}{\lambda}) \in \text{GL}(A)
+			\] 
+			if $\|\frac{a}{\lambda}\|< 1$, that is, $\|\lambda\| > \|a\|$.
+	\end{enumerate}
+\end{proof}
+\begin{example}
+	 For $A = B(\mathbb{C}^2) = M_2(\mathbb{C}^2)$, consider
+	 \[
+	 	a_n = 
+		\begin{bmatrix}
+			0 & n \\
+			0 & 0 \\
+		\end{bmatrix}
+	 .\] 
+	 So that $\|a_n\| = n$, $\sigma_A(a_n) = \{0\} $.
+
+	 In contrast, take
+	 \[
+	 	b_n = 
+		\begin{bmatrix}
+			n & 0 \\
+			0 & 0 \\
+		\end{bmatrix}
+	 .\] 
+	 Then $\sigma_A(b) = \{0, b_n\} $.
+\end{example}
+
+
+The proof that $\sigma_A(a)$ is nonempty involves analytic functions.
+
+\begin{proposition}
+	\label{prop:DistanceFromSpectrumA}
+	
+	Let $A$ be a unital Banach algebra. If $\lambda \in S(a)$, then
+	\[
+		\frac{1}{\|(\lambda - a)^{-1}\|} \le \text{dist}(\lambda, \sigma(a))
+	.\] 
+\end{proposition}
+\begin{proof}
+	Take $\lambda_0 \in \sigma(a)$, then $\lambda_0 - a \not\in \text{GL}(A)$, thus
+	\[
+		\lambda_0 - a \not\in U(\lambda - a, \frac{1}{\|(\lambda - a)^{-1}\|})
+	.\] 
+	Hence
+	\[
+		\|\lambda - \lambda_0\| = \|(\lambda - a) - (\lambda_0 - a)\| \ge  \frac{1}{\|(\lambda - a)^{-1}\|}
+	.\] 
+\end{proof}
+
+\begin{definition}[Vector Valued Analytic Function]
+	\label{defn:VectvaluedAnalyticFunction}
+	Let $X$ be a Banach space and $U \subset \mathbb{C}$ be nonempty. A function $f: U\to X$ is \textit{analytic} if for any $\lambda_0 \in U$, there is an open ball $U(\lambda_0, r_0) \subset U$ and a sequence $a_k \in X$ such that for all $\lambda \in U(\lambda_0, r_0)$, we have
+	\[
+		f(\lambda) = \sum_{k=1}^{\infty} a_k (\lambda - \lambda_0)^k
+	.\] 
+\end{definition}
+

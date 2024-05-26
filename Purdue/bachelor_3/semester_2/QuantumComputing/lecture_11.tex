@@ -1,0 +1,43 @@
+\lecture{11}{Tue 13 Feb 2024 10:30}{}
+
+\begin{claim}
+	Over some universal gate set, circuits with oracle access to $U_F$ can simulate $R_F$ and vice versa.
+\end{claim}
+\begin{proof} 
+	To simulate $R_F$ using $U_F$,
+	\todo{fill in}.
+
+\end{proof}
+
+\begin{remark}
+	The book (chp.6) is a little too optimistic about Grover's algorithm.
+\end{remark}
+
+\subsection{Unstructured Search}
+
+Given oracle access to
+\[
+	F: \{0,1\} ^n \to  \{0,1\} 
+.\] 
+For example, $F: \{\text{possible passwords}\}  \to  \{0,1\} $. Usually $\# f^{-1} (1) = 1$, i.e. only one correct password. 
+
+\textbf{Question:} How many calls to $F$ must we make to guarantee that we find $x$? 
+\begin{itemize}
+	\item Classically deterministically, need $2^n$ queries in the worst case. Probabilisticly, should be the same. 
+	\item Quantumly, Grover's algorithm shows that we need $\sqrt{2^n} $ calls.
+\end{itemize}
+
+\begin{example}
+	$F$ could come from a boolean circuit, and we know that CSAT is NP-complete. There is \logseq{Strong Exponential Time Hypothesis} saying that any NP-complete problem  \textit{requires} running time $2^n$, where $n$ is length of input. This implies $P \neq NP$.
+	The SETH is remarkable because it essentially says that \textbf{solving NP-complete problems is not easier than unstructured search}.
+
+	Grover's algorithm ``violates'' the SETH, except that it has quantum oracle access. Quantum oracles and classical oracles are different.
+\end{example}
+
+
+
+
+
+
+
+

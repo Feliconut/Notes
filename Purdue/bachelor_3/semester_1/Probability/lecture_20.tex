@@ -11,19 +11,21 @@
 	Have
 	\begin{align*}
 		E\left( M_t^2 | \mathcal{F}_s \right) 
-		&= E\left(\left( \int _0^s u_s d B_s + \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right) \\
-		&= E\left( \left(\int _0^s u_s d B_s \right)^2 + 2\left( \int _0^s u_s d B_s \right) \left( \int _s^t u_s d B_s \right)  + \left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
+		&= E\left(\left( \int _0^s u_r d B_r + \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right) \\
+		&= E\left( \left(\int _0^s u_r d B_r \right)^2 + 2\left( \int _0^s u_r d B_r \right) \left( \int _s^t u_r d B_r \right)  + \left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
 		\intertext{using independence from $\mathcal{F}_s$,}
-		&= \left(\int _0^s u_s d B_s \right)^2 + 2 \left( \int _0^s u_s d B_s \right) E\left( \int _s^t u_s d B_s | \mathcal{F}_s\right)  + E\left(\left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
-		&= \left(\int _0^s u_s d B_s \right)^2 + 2 \left( \int _0^s u_s d B_s \right) E\left( \int _s^t u_s d B_s \right)  + E\left(\left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
-		&= \left(\int _0^s u_s d B_s \right)^2 + E\left(\left( \int _s^t u_s d B_s \right) ^2 | \mathcal{F}_s\right)  \\
-		&= \left(\int _0^s u_s d B_s \right)^2 + E\left( \int _s^t u_r^2 d r\right)  \\
-		&= \left( \int _0^s u_r d B_r \right) ^2 + E\left( \int _0^t u_r^2 d  r | \mathcal{F}_s \right)  - E\left( \int _0^s u_r^2 d r \right) 
+		&= \left(\int _0^s u_r d B_r \right)^2 + 2 \left( \int _0^s u_r d B_r \right) E\left( \int _s^t u_r d B_r | \mathcal{F}_s\right)  + E\left(\left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_r d B_r \right)^2 + 2 \left( \int _0^s u_r d B_r \right) E\left( \int _s^t u_r d B_r \right)  + E\left(\left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_r d B_r \right)^2 + E\left(\left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		\intertext{Apply Ito isometry,}
+		&= \left(\int _0^s u_r d B_r \right)^2 + E\left( \int _s^t u_r^2 d r | \mathcal{F}_s\right)  \\
+		&= \left( \int _0^s u_r d B_r \right) ^2 + E\left( \int _0^t u_r^2 d  r | \mathcal{F}_s \right)  - \int _0^s u_r^2 d r \\
+		&= M_s^2 + E\left( \left\langle M \right\rangle _t | \mathcal{F}_s \right)  - \left\langle M \right\rangle _s
 	.\end{align*}
 
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}[Covariation]
 	Suppose $M_t$ and $N_t$ are two continuous $L^2$-martingales, $M_0 = 0 = N_0$. There exists a unique process $\left\langle M, N \right\rangle _t$ such that
 	\begin{enumerate}
 		\item $M_t N_t - \left\langle M, N \right\rangle _t$ is martingale,
@@ -40,47 +42,54 @@
 	Apply two previous theorem to both sides.
 \end{proof}
 
-\textbf{Fact.} $\left\langle B_t, \tilde B_t \right\rangle = 0$, if $B, \tilde B$ are two independent BMs. As a consequence,
-
+\begin{example}
+$\left\langle B_t, \tilde B_t \right\rangle = 0$, if $B, \tilde B$ are two independent BMs. 
+\end{example}
+As a consequence,
 \begin{corollary}
 	If $B_t$ is BM in $\mathbb{R}^d$, then 
 	\[
 		\left\langle B_t^i B_t^j \right\rangle = \delta_{i j} t
 	.\] 
 \end{corollary}
-
-To prove this, we verify
+\begin{proof}
+	We begin with
 \begin{claim}
 	\[
 		X_t = \frac{1}{\sqrt{2} } \left( B_t + \tilde B_t \right)  \qquad \text{ is a BM}
 	.\] 
 	And so is $Y_t = \frac{1}{\sqrt{2} } (B_t- \tilde B_t)$.
 \end{claim}
-\begin{proof}
-	
+This follows from direct observation that $B_t, \tilde B_t \sim N\left( 0,t \right) $ and they are independent. So $X_t \sim N(0,t)$. In fact $X_t - X_s \sim N(0,t -s )$ and increments are independent. Hence $X_t$ is BM. Similar for $Y_t$.
 
-This follows from direct observation that $B_t, \tilde B_t \sim N\left( 0,t \right) $ and they are independent. So $X_t \sim N(0,t)$. Also $X_t - X_s \sim N(0,t -s )$.
+Now the proof of previous corollary gives $\left\langle B_t \tilde B_t \right\rangle = 0$.
+\end{proof}
 
-We will verify that
+In fact,
 \[
 	B_t \tilde B_t = \int_0^t B_s d \tilde B_s + \int_0^t \tilde B_s d B_s
 .\] 
-\logseq{ASK}
-\end{proof}
-Recall that $2 \int _0^t B_s d B_s = B_t^2 - t$. This is a special case of Ito formula.
+This is the \textit{integration by parts}, a special case of \textit{Ito formula} that we will develop later. 
+
+Not to be confused with $2 \int _0^t B_s d B_s = B_t^2 - t$, another special case of Ito formula.
 
 Examine a more general question: What is 
 \[
 	\int _0^t M_s d M_s \text{ ?}
 \] 
+\begin{claim}
+	\[
+	2 \int _0^t M_s d M_s = M_t^2 - \left\langle M \right\rangle _t
+.\]
+\end{claim}
 \begin{proof}
 	Let $R_t$ be Riemann sum wrt a partition $t_k$. Then
 \[
 	2 R_t = 2 \sum_{k = 0}^{n - 1} M_{t_k} \left( M_{t_k+1} - M_{t_k} \right) 
 .\] 
-Apply the identity to the right hand side:
+Apply the following identity to the right hand side:
 \[
-	2 M_s (M_t - M_s) = M_t^2 - (M_t - M_s)^2
+	2 M_s (M_t - M_s) = M_t^2 - M_s^2 - (M_t - M_s)^2
 .\] 
 We have
 \[

@@ -1,0 +1,164 @@
+\homework{9}{Thu 02 May 2024 15:44}{Final Exam}
+
+\begin{problem}
+	1) Let $H$ be a separable Hilbert space with scalar product $\langle\cdot, \cdot\rangle$ and let $A, B \in B(H)$ have the property that $0 \leq\langle A x, x\rangle \leq\langle B x, x\rangle$ for all $x \in H$. Show that if $B$ is a compact operator then $A$ is compact.
+\end{problem}
+\begin{proof}
+	From the assumption we know that both $A$ and $B$ are positive, so that $B^* B = B^2 > 0$ and the same holds for $A$. Moreover, the inequality remains true for $A$ and $B$ replaced by $A^2$ and $B^2$. To see this, we have $\|A^2\| = r(A^2) \le r(B^2) = \|B^2\|$. 
+	
+	Take arbitrary sequence $(x_n)$ in $B(0,1) \subset H$. By compactness of $B$, there is a subsequence $(x_{n_k})$ such that $B x_{n_k} \to B x \in H$, for some  $x \in H$. This is equivalent to
+	\[
+		\left\langle B\left( x_{n_k} - x \right) , B\left( x_{n_k} - x \right)  \right\rangle  \to 0
+	.\] 
+	Use the assumption, we have
+\[
+		\left\langle A\left( x_{n_k} - x \right) , A\left( x_{n_k} - x \right)  \right\rangle  \to 0
+	.\]
+	This implies $A\left( x_{n_k} \right) \to A x$. Thus $A\left( U(0,1) \right) $ is relatively compact. Therefore $A$ is a compact operator.
+\end{proof}
+
+
+\begin{problem}
+	2) Let $S: \ell^2(\mathbb{N}) \rightarrow \ell^2(\mathbb{N})$ be the unilateral shift defined by
+\[
+S \delta_n=\delta_{n+1}, \quad \forall n \in \mathbb{N}=\{0,1,2, \ldots\}
+\]
+
+Let $\left(a_n\right)_{n \geq 0}$, and $\left(b_n\right)_{n \geq 0}$ be two elements of $\ell^1(\mathbb{N})$ with $b_0=0$. Set
+\[
+T=\sum_{n=0}^{\infty} a_n S^n \quad \text { and } \quad R=\sum_{n=0}^{\infty} b_n S^n
+\]
+
+Show that if $T-R^*$ is a compact operator, then $a_n=b_n=0$ for all $n \in \mathbb{N}$.
+\end{problem}
+\begin{proof}
+	From now on, by $T$ we mean the operator $T - R^*$ in the question. 
+	Write $[S,T] = ST - TS$ for the commutator. We claim
+	\[
+		[S, T] \delta_n \to 0 \quad \text{ in }L^2 \text{ as } n \to \infty  
+	.\] 
+Compute:
+\begin{align*}
+		& (ST - TS) \delta_n \\
+		&= \sum_{k = 0}^\infty [S, a_k S^k + b_k S^{* k}] \delta_n \\
+		&= \sum_{k=0}^{\infty} b_k [S, S^{*k}] \delta_n \\
+		&= b_n [S, S^{*(n + 1)}] \delta_n \\
+		&= b_n \delta_0  \xrightarrow{L^2} 0
+.\end{align*}
+Now we strengthen this claim to
+\[
+	[S^l, T] \delta_n \xrightarrow{L^2} 0, \text{ as $n \to \infty $} \quad \forall l \in \mathbb{N}
+.\] 
+Compute:
+\begin{align*}
+	&\sum_{k=0}^{\infty} [S^l, a_k S^k + b_k S^{* k}] \delta_n\\
+	&= \sum_{k=n+1}^{n+l} b_k [S^l, S^{* k}] \delta_n \\
+	&= \sum_{k=n+1}^{n+l} b_k (- S^{* k} \delta_{n + l})\\
+	&= \sum_{k=n+1}^{n+l} - b_k \delta_{n + l - k} \xrightarrow{L^2} 0
+.\end{align*}
+Moreover, the convergence is uniform in $l$, since $b_k$ is $L^2$ summable.
+
+\textbf{Claim. } For all $k \in \mathbb{N}$, there exists $N_k$ such that for all $l > N_k$, we have $\|T \delta_k - T \delta_{k + l}\| \ge \|T \delta_k\| - \varepsilon$, where $\varepsilon>0$ is arbitrary.
+
+This claim immediately implies that $\left( T \delta_k \right) _{k \in \mathbb{N}}$ does not have a convergent subsequence if $\|T \delta_k\| > 0$. Thus $T$ is not a compact operator whenever $a_n, b_n$ are not all zero.
+
+To prove this claim, we write
+\[
+	\|T \delta_k - T \delta_{k + l}\|
+	\ge 
+	\|T \delta_k - S^l T \delta_k\| - \|[S^l, T] \delta_k\|
+.\] 
+The term $\|[S^l, T] \delta_k\|$ uniformly goes to $0$ as $k \to \infty $, so we don't worry about it - it is smaller than $\varepsilon$ for big $k$. 
+
+Now consider the term $\|T \delta_k - S^l T \delta_k\|$. Now, since $T \delta_k \in \ell^2(\mathbb{N})$, it has almost finite support. To be more precise, for any  $\varepsilon>0$, there is $M_\varepsilon = M(k, \varepsilon) \in \mathbb{N}$ such that $\|T \delta_k -  \chi_{[0,M_\varepsilon]} T \delta_k\| < \varepsilon$. 
+
+Now take $l > M_\varepsilon$, and see that
+\begin{align*}
+	&\|T \delta_k - S^l T \delta_k\|\\
+	&\geq \|\chi_{M_\varepsilon} T\delta_k - S^l \chi_{M_\varepsilon} T \delta_k\| - 2 \varepsilon \\
+	&= 2 \|\chi_{M_\varepsilon} T \delta_k\| - 2 \varepsilon \\
+	&= 2 \|T \delta_k\| - 4 \varepsilon
+.\end{align*}
+
+Combining everything, we have
+\[
+	\|T \delta_k - T \delta_{k + l}\| \ge 2 \|T \delta_k\| - 5 \varepsilon, \quad l > M(k, \varepsilon)
+.\] 
+Thus completing the proof.
+\end{proof}
+
+
+\begin{problem}
+	Let $\left(H_n\right)_{n=1}^{\infty}$ be a family of infinite dimensional separable Hilbert spaces and let $H=\bigoplus_{n=1}^{\infty} H_n$ be the Hilbert space which is the direct sum of the family $\left(H_n\right)_{n=1}^{\infty}$. If $T_n \in B\left(H_n\right)$ and $\sup _{n \geq 1}\left\|T_n\right\|<\infty$, define $T \in B(H)$ by $T\left(x_1, x_2, \ldots, x_n, \ldots\right)=\left(T_1 x_1, T_2 x_2, \ldots, T_n x_n, \ldots\right)$.\\
+3) Find (with proof) a meaningful necessary and sufficient condition involving the sequence $\left(T_n\right)_{n=1}^{\infty}$ such that $T$ is a compact operator.
+\end{problem}
+\begin{proof}
+	\textbf{Claim: $T$ is compact iff each $T_n$ is compact, and $\lim_{n \to \infty }\|T_n\| =  0$.} 
+	First assume $T$ is compact. Pick any sequence $x^{(i)}_n \in U_i(0,1) \subset H_i$ inside the unit ball of $H_i$. Let $\overline{x} ^{(i)}_n \in H$ be such that the  $i$-th coordinate is $x^{(i)}_n$ and $0$ otherwise. Then $(T\overline{x} ^{(i)}_n)$ has a convergent subsequence, since $T$ is a compact operator. But this is to say that $(T_i x^{(i)}_n)$ has a convergent subsequence is $H_i$, so $T_i$ is a compact operator.
+
+	Next, we pick $x_i \in H_i$ with $\|x_i\| = 1$. By compactness of $T$, we see that the sequence $\left( T \overline{x_i}  \right)_{i \in \mathbb{N}}$ has a convergent subsequence. But the subsequential limit must be $0$, since $T \overline{x_i} $ is pointwise eventually zero. By the same argument, every subsequence of $(T \overline{x_i} )$ has a further subsequence that converges to $0$. This is to say that $T \overline{x_i}  \to 0$, i.e., $\|T \overline{x_i} \| \to 0$. But $\|T_i x_i\| = \|T \overline{x} _i\| \to 0$. Finally, we note that $x_i \in H$ is arbitrary as long as $\|x_i\| = 1$, so we can choose $x_i$ such that $\|T_i x_i\| = \|T_i\|$. Therefore $\|T_i\| \to 0$.
+
+	Now we assume instead each  $T_i$ is compact and $\|T_i\| \to 0$. We show $T$ is compact. Fix $\varepsilon>0$. Let $n_0$ be such that $\|T_n\| < \varepsilon$ for $n > n_{0}$. We use the fact that compact operators are limits of finite rank operators. Let $S_i \in \mathcal{F}(H_i)$ be such  that  $\|S_i - T_i\| < \varepsilon$, for each $i \le n_0$. Set $S_i = 0$ for $i > n_0$. Then  $\oplus S_i \in \mathcal{F}(H)$ and $\|\oplus S_i - T\| = \sup \{\|S_i - T_i\|, i \le n_0\}\cup \{\|T_i\|, i > n_0\}  \le  \varepsilon$. Thus  $T \in \overline{\mathcal{F}(H)} $, hence $T$ is compact.
+\end{proof}
+
+\begin{problem}
+	4) Find (with proof) a meaningful necessary and sufficient condition involving the sequence $\left(T_n\right)_{n=1}^{\infty}$ such that $T$ is a Fredholm operator.
+\end{problem}
+\begin{proof}
+	\textbf{Claim: $T$ is Fredholm iff each $T_n$ is Fredholm and all except for finitely many of $T_n$ are isomorphisms.}
+
+	\textbf{Notation. }For each $T_n \in B(H_n)$ let $\overline{T_n}  \in B(H)$ be the operator defined by  $\overline{T_n}\pi_k  = \text{Id}_{H_k}$ for $k \neq n$ and $\overline{T_n}\pi_n  = T_n$, where $\pi_n$ is the projection $H \to H_n$. Similarly, for each $x_k \in H_k$, define $\overline{x_k} \in H$ be such that $\pi_n \overline{x_n}  = x_n$ and $\pi_k \overline{x_n}  = 0$ for $k \neq n$. 
+
+	We verify that
+	\[
+		\operatorname{ker} T = \oplus \operatorname{ker} \overline{T_n}
+	.\] 
+	For $x \in \operatorname{ker} \overline{T} _n$, we have $T_n x_n = 0$ and  $\text{Id}_k x_k = 0$ whenever $k \neq n$, so $x_k = 0$ for $k \neq n$. That is, $T x = 0$.
+	If $T x = 0$, then $T_k x_k = 0$ for all $k$. Thus $\overline{T} _k \overline{x} _k = 0$, and $x = \oplus \overline{x_k} $, so that $x \in \oplus \operatorname{ker} \overline{T_n} $.
+
+
+	Now, we have
+	\[
+		\operatorname{dim} \operatorname{ker} T = \sum \operatorname{dim} \operatorname{ker} \overline{T} _n = \sum \operatorname{dim} \operatorname{ker} T_n
+	.\] 
+	We see that $\operatorname{dim} \operatorname{ker} T< \infty $if and only if $\operatorname{dim} \operatorname{ker} T_n < \infty $ for each $n$, and that $\operatorname{dim} \operatorname{ker} T_n$ is eventually $0$.
+
+	Similarly, there is a relation
+	\[
+		\operatorname{coker} T = \oplus \operatorname{coker} \overline{T_n} 
+	.\] 
+	And we can conclude that $\operatorname{dim} \operatorname{coker} T < \infty $ if and only if $\operatorname{dim} \operatorname{coker} T_n < \infty $ for every $n$ and that $\operatorname{dim} \operatorname{coker} T_n$ is eventually all $0$.
+	
+\end{proof}
+
+\begin{problem}
+	5) Let $T \in B(H)$ be a normal operator. Suppose that there $x \in H$ such that span $\left\{x, T x, T^2 x, \ldots\right\}$ is dense in $H$. Prove that span $\left\{x, T^* x, T^{* 2} x, \ldots\right\}$ is dense in $H$.\\
+Hint: If $N$ is normal, then $\|N y\|=\left\|N^* y\right\|$ for all $y \in H$.
+\end{problem}
+\begin{proof}
+	Fix any $n \in \mathbb{N}$, and since $\text{span}\{T^{m} x | m \in \mathbb{N}\} $ is dense, we have 
+	\[
+		T^{* n}x = \sum_{m = 0}^\infty a_m T^m x, \quad a_m \in \mathbb{C}
+	.\] 
+	Apply $T$ to both sides and use $TT^* = T^* T$ to get
+	\[
+		T^{* n} Tx = \sum_{m = 0}^\infty a_m T^m T x
+	.\] 
+	This process may be continued to show that $T^{* n}$ and $\sum_{m \in \mathbb{N}} a_m T^m$ agree on the set $\{T^m x | m \in \mathbb{N}\} $, which is dense in $H$. Hence $T^{* n} = \sum_{m \in \mathbb{N}}a_m T^m$.
+
+	Now, consider the continuous functional calculus on $C^*\{T, T^*\} $. The function $z \mapsto \overline{z} $ on $\sigma(T)$ induces an isometry $\mathcal{A}:T \mapsto T^*$ on $C^*\{T, T^*\} $. Applying $\mathcal{A}$ to both sides of the last result gives us
+	\[
+		\mathcal{A} (T^{* n}) = \mathcal{A} \left( \sum_{m \in \mathbb{N}} a_m T^m \right) 
+	.\] 
+	That is,
+	\[
+		T^n = \sum_{m \in \mathbb{N}} \overline{a_m}  T^{* m} \in \overline{\text{span}\{T^{* m}| m \in \mathbb{N}\} } 
+	.\] 
+	Thus
+	\[
+		H = \overline{\text{span}\{T^n | n \in \mathbb{N}\} } 
+		\subset 
+		\overline{\text{span}\{T^{* n} | n \in \mathbb{N}\} } .\] 
+		Therefore $\text{span}\{x, T^*x, \ldots\} $ is dense in $H$.
+	\end{proof}
+

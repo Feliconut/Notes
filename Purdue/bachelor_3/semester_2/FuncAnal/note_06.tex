@@ -1,0 +1,17 @@
+\note{6}{Mon 27 May 2024 02:05}{Quantum Mechanics}
+
+\section{Quantum Mechanics}
+
+
+This note is dedicated to aspects of functional analysis that has important connection to quantum mechanics.
+
+\begin{proposition}
+	\label{prop:NoBoundedCommutation}
+	No unital Banach algebra has a pair of elements $a, b$ such that for some $\lambda \in \mathbb{C}, \lambda\neq 0$, we have $ab - ba = \lambda \mathbf{1}$.
+
+	As a corollary, the operators satisfying the \textit{canonical commutation relation} $ST - TS = i \hbar \mathbf{1}$ must be \textit{unbounded}.
+\end{proposition}
+\begin{proof}
+	If $a$ is invertible, then $\sigma(ab) = \sigma(ba)$ (elementary fact about unital Banach algebra). Then $\sigma(a b) = \sigma(b a ) + \lambda$. But $\sigma(a b)$ is nonempty. So $\sigma(a b)$ is unbounded, so $ab$ is not bounded, a contradiction.
+\end{proof}
+

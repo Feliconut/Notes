@@ -1,0 +1,120 @@
+\homework{1}{Fri 12 Jan 2024 13:01}{homework}
+
+\begin{problem}
+	Prove that every open set in $\mathbb{R}$ can be written as a countable union of disjoint open intervals.
+
+Note It is also true that every open set in $\mathbb{R}^n, n \geq 1$, can be written as countable union of non-overlapping (disjoint interiors) closed cubes. We will use this fact often in this course. Both results (case $n=1$ and $n>1$ ) are proved in Wheeden-Zygmund (pages 7-8). You may consult this reference but always make sure you write your solution in your own words and fully understand the proof, not just copy.
+\end{problem}
+\begin{proof}
+	Consider the dyadic intervals (this can be generalized to dyadic cubes in $\mathbb{R}^d$). For $n \in \mathbb{N}$, let $\mathcal{I}_n$ be the set of all closed intervals formed by two consecutive points in $2^{-n} \mathbb{Z}$. We have the following properties (nested tree property):
+	\begin{itemize}
+		\item Intervals in $\mathcal{I}_n$ are almost disjoint.
+		\item For each $A_n \in \mathcal{I}_n$, $n > 0$, there exists a unique $A_{n-1} \in \mathcal{I}_{n-1}$ such that $A_n \subset A_{n-1}$. We write $A_{n - 1} = p(A_n)$.
+		\item For all $A_n \in \mathcal{I}_n$, $A_m \in \mathcal{I}_m$, $n \le m$, either $A_m \subset A_n$ or $A_m \cap A_n = \emptyset $ (in the sense of almost).
+	\end{itemize}
+
+	Now, pick any point $ x \in E$, where $E$ is an open set in $\mathbb{R}$. Pick a small open neighbor $N$ of $x$ that is contained in $E$, and fix a dyadic interval $A_n \in \mathcal{I}_n$ such that $ x \in A_n \subset N \subset E$. Now, define
+	$I_x$ to be the only interval  $A_n \in \mathcal{I}_n$ such that $x \in A_n \subset E$ and either $n = 0$ or $p(A_n) \not \subset E$.
+
+	Let $\mathcal{B} = \{I_x: x \in E\} $. By definition it is countable, and its union is exactly equal to $E$. We check that the intervals in $\mathcal{B}$ are disjoint. For $I_x, I_y \in \mathcal{B}$, if $I_x$ and $I_y$ are not almost disjoint, they they must contain one another. Assume $I_x \subset I_y$, then by definition of $I_x$, we have $I_x \supset I_y$, so in fact $I_x = I_y$.
+\end{proof}
+
+\begin{problem}
+	Let $A_1, A_2, \ldots$ be a sequence of subsets of $X$. Prove that there exist sets $B_k$ which are pairwise disjoint with $B_k \subset A_k$ for every $k$ and $\cup_{k=1}^{\infty} A_k=\cup_{k=1}^{\infty} B_k$.
+\end{problem}
+\begin{proof}
+	Define
+	\[
+		B_k = A_k \setminus \cup _{n = 1}^{k - 1} A_n
+	.\] 
+	$B_k \subset A_k$ by construction. For $m < k$, $B_m \subset A_m$, so $B_m \cap B_k = \emptyset $. 
+
+	Now apply induction to $k$. The induction step goes
+	\begin{align*}
+		\bigcup_{n = 1} ^k B_n 
+		&= \bigcup_{n = 1} ^{k - 1} B_n \cup \left( A_k \setminus \bigcup_{m = 1} ^{k - 1}A_m \right) \\
+		&= \bigcup_{n = 1} ^{k - 1} A_n \cup \left( A_k \setminus \bigcup_{m = 1} ^{k - 1}A_m \right) \\
+		&= \bigcup_{n = 1} ^{k - 1} A_n \cup  A_k  \\
+		&= \bigcup_{n = 1} ^{k } A_n 
+	.\end{align*} 
+	For the base step we trivially have $A_1 = B_1$. The induction is complete and we are done.
+\end{proof}
+
+\begin{problem}
+	Let $\mathcal{F}$ be a collection of subsets of a set $X$ with the following properties: (1) $X \in \mathcal{F}$ and (2) if $A, B \in \mathcal{F}$ then $A \backslash B \in \mathcal{F}$. Show that $\mathcal{F}$ is an algebra.
+\end{problem}
+\begin{proof}
+	By induction we only need to show that all pairwise Boolean operations are closed in $\mathcal{F}$. If $A, B \in \mathcal{F}$,
+	\begin{itemize}
+		\item Complement: $A^c = X \setminus  A \in \mathcal{F}$.
+		\item Intersection: $A \cap B = A \setminus  B^c \in \mathcal{F}$.
+		\item Union: $A \cup B = (A^c \cap B^c)^c \in \mathcal{F}$.
+	\end{itemize}
+\end{proof}
+
+\begin{problem}
+	Let $X$ be an arbitrary infinite set. The subset $E$ of $X$ is said to be co-finite if its complement, denote by $E^c$, is a finite. Let $\mathcal{F}$ consists of all the finite and the co-finite subsets of $X$.\\
+(i) Show that $\mathcal{F}$ is an algebra.\\
+(ii) Show that $\mathcal{F}$ is a $\sigma$-algebra if and only if $X$ is a finite set.
+\end{problem}
+\begin{proof}
+	By construction, $\mathcal{F}$ is closed under complement. For $A, B \in \mathcal{F}$, if $A$ finite, then $A \cap B$ is finite, so $A \cap B \in \mathcal{F}$. If $A, B$ both cofinite, then $A^c, B^c$ are finite, so $A^c \cup B^c$ is finite. Hence $(A \cap B)^c  = (A^c \cup B^c)^c \in \mathcal{F}$ .
+
+	We have shown that complement and intersection are closed in $\mathcal{F}$. This implies $\mathcal{F}$ is an algebra since
+	\begin{itemize}
+		\item $A \cup B = (A^c \cap B^c)^c$
+		\item $A \setminus B = A \cap B^c$
+	\end{itemize}
+
+	If $X$ is infinite, we can take a sequence of distinct elements $x_n \in X$. Take $y_n = x_{2 n}$. Now each singleton set $\{y_n\} $ is finite, but their union $\{y_n: n \in \mathbb{N}\} $ is infinite. Nor is it cofinite, since its complement contains $\{x_{2 n - 1}: n \in \mathbb{N}\} $ that is infinite. Thus $\mathcal{F}$ is not a sigma algebra.
+
+	If $X$ is finite, then any infinite union is a finite one; and there is nothing to prove.
+\end{proof}
+
+
+\begin{problem}
+	Let $\left\{A_n\right\}$ and $\left\{B_n\right\}$ be two sequences of sets. Prove that\\
+(i)
+\[
+\varlimsup\left(A_n \cap B_n\right) \subseteq\left(\varlimsup A_n\right) \cap\left(\varlimsup  B_n\right)
+\]
+(ii)
+\[
+\varlimsup\left(A_n \cup B_n\right)=\left(\overline{\lim } A_n\right) \cup\left(\overline{\lim } B_n\right)
+\]
+\end{problem}
+\begin{proof}
+	(i) If $x \in \varlimsup (A_n \cap B_n)$, then $x \in A_n \cap B_n$ infinitely often. Hence $x \in A_n$ and $x \in B_n$ infinitely often.
+
+	(ii) If $x \in \varlimsup (A_n \cup B_n)$, then $x \in A_n \cup B_n$ infinitely often. Then either $x \in A_n$ i.o., or $x \in B_n $ i.o.; otherwise $x \not\in A_n$ and $x \not\in B_n$ for $n > N$, and so $x \not\in A_n \cup B_n$ for $n > N$, a contradiction.
+
+	If $x \in A_n$ i.o., then it trivially follows that $x \in A_n \cup B_n$ i.o.
+\end{proof}
+
+
+\begin{problem}
+	Let $\mathcal{F}_1, \mathcal{F}_2, \ldots$ be classes of subsets in a common space $X$.
+(i) (4 pts) If the $\mathcal{F}_n^{\prime} s$ are $\sigma$-algebras, prove that $\cap_{n=1}^{\infty} \mathcal{F}_n$ is a $\sigma$-algebras.\\
+(ii) (3 pts) If the $\mathcal{F}_n^{\prime} s$ are algebras satisfying $\mathcal{F}_n \subset \mathcal{F}_{n+1}$, prove that $\cup_{n=1}^{\infty} \mathcal{F}_n$ is an algebra.\\
+(iii) (3 pts) If the $\mathcal{F}_n^{\prime} s$ are $\sigma$-algebras, is it true that $\cup_{n=1}^{\infty} \mathcal{F}_n$ is a $\sigma$-algebra?
+\end{problem}
+\begin{proof}
+	Let $\cap \mathcal{F}$ denote the intersection and $\cup \mathcal{F}$ the union.
+
+	(i) We verify the definitions
+	\begin{enumerate}
+		\item $\emptyset  \in \mathcal{F}_n$ for each $n$, so $\emptyset  \in \cap \mathcal{F}$.
+		\item If $A \in \cap \mathcal{F}$, then $A \in \mathcal{F}_n$ for each $n$, then $A^c \in \mathcal{F}_n$ for each $n$, so $F^c \in \cap \mathcal{F}$.
+		\item If $A_m \in \cap \mathcal{F}$ for each $m$, then $A_m \in \mathcal{F}_n$ for each $m, n$. Hence $\cup_m A_m \in \mathcal{F}_n$ for each $n$. Therefore $\cup _m A_m \in \cap \mathcal{F}$.
+	\end{enumerate}
+
+	(ii) We verify the definitions
+	\begin{enumerate}
+		\item $\emptyset \in \mathcal{F}_1$, so $\emptyset \in \cup \mathcal{F}$.
+		\item If  $A \in \cup \mathcal{F}$, then $A \in \mathcal{F}_n$ for some $n$, thus $A^c \in \mathcal{F}_n$, so $A^c \in \cup \mathcal{F}$.
+		\item If $A, B \in \cup \mathcal{F}$, then $A \in \mathcal{F}_n$ and $B \in \mathcal{F}_m$. Then $A, B \in \mathcal{F}_{n \vee m}$. Hence $A \cup B \in \mathcal{F}_{n \vee m}$. Therefore $A \cup B \in \cup \mathcal{F}$.
+	\end{enumerate}
+
+	(iii) Not true. Example: let $\mathbb{\mathbb{R}}$ be the entire space, and $\mathcal{F}_n = \sigma(\{0\} , \{1\}, \ldots, \{n\})$. Then it is clear that $\{m\}  \in \mathcal{F}_n \iff  m \le n$. The sequence of sets $\{0\} , \{ 1\} , \ldots$ is inside $\cup \mathcal{F}_n$. In order for $\cup \mathcal{F}_n$ to be a $\sigma$-algebra, we must have $\mathbb{N} \in \cup \mathcal{F}_n$, but this is not true since $\mathbb{N} \not\in \mathcal{F}_n$ for each $n$.
+\end{proof}
+

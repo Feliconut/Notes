@@ -1,0 +1,88 @@
+\lecture{1}{Mon 08 Jan 2024 13:27}{Metric Space}
+
+\section{Banach Spaces}
+
+
+
+\subsection{Metric Spaces and Banach Spaces}
+
+
+\begin{definition}
+	A \textit{metric space} is a space $X $ equipped with a metric $d: X \times  X \to [0, \infty )$ such that $d$ is symmetric, satisfies triangle inequality, and $d(x, y) = 0 \iff x = y$.
+
+	If we assume (weaker) instead that $d(x, x) = 0$, then $d$ is a \textit{psudo-metric}.
+\end{definition}
+
+\begin{example}
+	$\mathbb{R}^d$ with $L^1$ metric is a metric space.
+\end{example}
+
+\begin{example}(Discrete Metric)
+	For $X \neq \emptyset $, let $d(x, y) = 1(x = y)$.
+\end{example}
+
+\begin{definition}(Balls)
+	$U(x_0, r)$ is open ball of radius $r$ centered at $x_0$. $B(x_0, r)$ denotes the closed ball.
+\end{definition}
+
+\begin{lemma}
+	$d$ is continuous.
+\end{lemma}
+\begin{proof}
+	Use triangle inequality.
+	\[
+		\left| d (x, y) - d(x', y') \right| 
+		\le  d(x, x') + d (y, y')
+	.\] 
+\end{proof}
+
+\begin{definition}
+	$(X, d)$ is complete if every Cauchy sequence converges to some limit.
+\end{definition}
+
+Completeness is due to the metric, not the topology.
+\begin{example}
+	\[
+		d(x,y) = \left| \arctan x - \arctan  y \right| 
+\] 
+induces the same topology as the $L^1 $ metric on $\mathbb{R}$, but the metric space is \textit{not} complete.
+\end{example}
+
+\begin{theorem}(Fundamental Result in Analysis)
+	\label{thm:FundamentalResult}
+	Consider metric spaces $X \subset Y$, $Z$ such that $d_Y|_X = d_X$ and $\overline{X}  = Y$, and $Z$ complete. For any uniformly continuous function $f: X \to Z$ there is a unique continuous $F: Y \to Z$ such that $F|_X = f$. Moreover, $F$ is uniformly continuous.
+
+	If $f$ is $\lambda$-Lipschitz, then $F$ is also $\lambda$-Lipschitz.
+% https://quiver.local:8080/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWiJdLFswLDIsIlkiXSxbMCwxLCJmIl0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwxLCJcXGV4aXN0ICEgRiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	X && Z \\
+	\\
+	Y
+	\arrow["f", from=1-1, to=1-3]
+	\arrow[hook, from=1-1, to=3-1]
+	\arrow["{\exists ! F}"', dashed, from=3-1, to=1-3]
+\end{tikzcd}\]
+\end{theorem}
+
+\begin{remark}
+	In functional analysis we often work with Lipschitz functions, so this theorem applies to this case.
+\end{remark}
+
+\begin{remark}
+	We can use this result to define integrals on Banach spaces. We define for simple functions, and then we check that the integral is Lipschitz.
+\end{remark}
+
+\begin{definition}[Normed linear space]
+	\label{defn:NormedLinearSpace}
+	A \textit{norm} on a linear space $X$ over $\mathbb{R}$ or $\mathbb{C}$ is a map $\|\cdot \| \to  [0,\infty )$ such that
+	\begin{itemize}
+		\item $\|x + y \|\le  \|x \| + \|y\|$
+		\item $\|\lambda x\| = |\lambda| \|x\|$
+		\item $\|x\| = 0 \iff  x = 0$
+	\end{itemize}
+	If we drop the third condition, this is called a \textit{semi-norm}.
+\end{definition}
+
+We can induce a metric using the norm.
+
+For $L^p$ spaces, for $p < 1$ we do not have a norm.

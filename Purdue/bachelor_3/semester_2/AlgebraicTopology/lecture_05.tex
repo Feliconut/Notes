@@ -1,0 +1,107 @@
+\lecture{5}{Tue 23 Jan 2024 13:33}{Cross Product}
+
+\begin{theorem}[Chain Level Cross Product]
+	\label{thm:ChainLevelCrossProduct}
+	
+	There exists a map $\tilde \times : S_p(X) \times S_q(Y) \to S_{p + q}(X \times Y)$ such that
+	\begin{enumerate}
+		\item Naturality. The following diagram commutes for all $f: X \to X'$, $g: Y \to  Y'$ :
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJTX3AoWCkgXFx0aW1lcyBTX3EoWSkiXSxbMiwwLCJTX3twICsgcX0oWCBcXHRpbWVzIFkpIl0sWzIsMiwiU197cCArIHF9KFgnIFxcdGltZXMgWScpIl0sWzAsMiwiU19wKFgnKSBcXHRpbWVzIFNfcShZJykiXSxbMCwxLCJcXHRpbGRlXFx0aW1lcyJdLFszLDIsIlxcdGlsZGUgXFx0aW1lcyJdLFswLDMsIihmXyosIGdfKikiLDFdLFsxLDIsIihmLCBnKV8qIiwxXV0=
+\[\begin{tikzcd}
+	{S_p(X) \times S_q(Y)} && {S_{p + q}(X \times Y)} \\
+	\\
+	{S_p(X') \times S_q(Y')} && {S_{p + q}(X' \times Y')}
+	\arrow["\tilde\times", from=1-1, to=1-3]
+	\arrow["{\tilde \times}", from=3-1, to=3-3]
+	\arrow["{(f_*, g_*)}"{description}, from=1-1, to=3-1]
+	\arrow["{(f, g)_*}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+\item Bi-linearity.
+	\[
+		(\sigma_1 + \sigma_2) \tilde \times \tau = \sigma_1 \tilde \times \tau + \sigma_2 \tilde \times  \tau
+	.\] 
+	\[
+		\sigma \tilde \times (\tau_1 + \tau_2) = \ldots
+	.\] 
+\item Normalization.
+	Fix $x_0 \in X$, $y_0 \in Y$. Fix
+	\begin{align*}
+		i_{y_0}: X &\longrightarrow X \times Y \\
+		x &\longmapsto i_{y_0}(x) = (x, y_0)
+	\end{align*}
+	and
+	\begin{align*}
+		j_{x_0}: Y &\longrightarrow X \times Y \\
+		y &\longmapsto j_{x_0}(y) = (x_0, y)
+	.\end{align*}
+	Then 
+	\[
+		\left( i_{y_0} \right) _* (\sigma) = \sigma \tilde \times  c_{y_0}^0, \quad
+		\left( j_{x_0} \right) _*(\tau) = c_{x_0}^0 \tilde \times \tau
+	.\] 
+\item Leibniz rule. If $\sigma \in S_p(X)$, then
+	\[
+		d\left( \sigma \tilde \times  \tau \right)  = 
+		d \sigma \tilde \times  \tau + (-1)^p \sigma \tilde \times d \tau
+	.\] 
+	\end{enumerate}
+\end{theorem}
+
+\begin{claim}
+	This operation $\tilde \times $ induces a map $x : H_p(X) \times H_q(Y) \to H_{p + q}(X \times Y)$.
+\end{claim}
+\begin{proof}
+	We need to check that if $\sigma \in Z_p(X), \tau \in Z_q(Y)$, then $\sigma \tilde \times \tau = Z_{p + q}(X \times Y)$. This follows from Leibniz Rule.
+
+	Then we need to check that if $\sigma \in Z_p(X), \tau = d \tau'  \in B_q(Y)$, then $\sigma \times d \tau' \in B_{p + q}(X \times Y)$, and a symmetric case where $\sigma$ is boundary and $\tau $ is cycle. Let's check the first case where $\sigma$ is cycle and $\tau$ is boundary. But we can just consider $d(\sigma \times \tau')$.
+
+	Now, if $[z] \in H_p(X), [w] \in H_q(X), [z] \times [w] := [z \tilde \times w]$ is well-defined. Thus, we have
+\end{proof}
+
+\begin{theorem}[Homology Cross Product]
+	\label{thm:HomologyCrossProduct}
+	$\times $ is natural, bi-linear, and normalized.
+\end{theorem}
+
+Now we construct the cross product.
+
+\begin{proof}[Proof of Theorem~\ref{thm:ChainLevelCrossProduct}]
+	We decompose $\Delta_p \times \Delta_q$ as a collection of $(p + q)$-simplices. Denote the vertices of $\Delta_p \times \Delta_q$ to be $V = \{(i, j): 0 \le i\le p, 0\le j\le q\} $.
+
+	Define a partial ordering on $V$, by term-wise $\le $. Let
+	\[
+		\mathcal{P}_{p, q} = \left\{\text{order-preserving maps } \{0, ..., p + q\}  \to V\right\} 
+	.\] 
+	Now, for any such map $\phi$, we have
+	\[
+		\phi(i) < \phi(i + 1) \implies \phi_x(i) + \phi_y(i)
+		\le \phi_x(i + 1) + \phi_y (i + 1) - 1
+	.\] 
+	Iterate, we get
+	\[
+		0\le \phi_x(0) + \phi_y(0) \le  \phi_x(p + q) + \phi_y(p + q) - (p + q) \le 0
+	.\] 
+	This implies $\phi(0) = (0,0)$, and $\phi(p + q) = (p, q)$, $\phi_x(i) + \phi_y(i) = \phi_x(i+1) + \phi_y(i+1)-1$. Thus either $\phi_x(i) = \phi_x(i+1)$ and $\phi_y(i) = \phi_y( i + 1) - 1$, or the other way around.
+
+	Geometrically, this is set of zig-zag increasing paths from $(0,0)$ to $(p, q)$ on integer lattice.
+
+	Now, think of each $\phi$ as an affine map $\Delta_{p + q} \to  \Delta_p \times \Delta_q$.
+	\[
+		s(\phi):= \sum_{i = 0}^{p + q - 1} \left( \phi_y(i + 1) - \phi_y(i) \right) \left( p - \phi_x(i) \right) 
+	.\] 
+	Think of this as the area under the path in the square $[0,p] \times [0,q]$.
+
+	Now define
+	\[
+		c_{p, q} = \sum_{\phi \in \mathcal{P}_{p, q}} (-1)^{s(\phi)} \phi \in S_{p + q}\left( \Delta_p \times \Delta_q \right) 
+	.\] 
+
+	Finally, for $\sigma: \Delta_p \to X$, $\tau: \Delta_q \to Y$, define
+\[
+	\sigma \tilde \times l\tau := \left( \sigma, \tau \right) _* (c_{p, q})
+.\] 
+Extend $\tilde \times $ bilinearly.
+
+\todo{check the properties. note, the Leibniz rule is about as complicated as the proof of homotopy invariance.}
+\end{proof}
+

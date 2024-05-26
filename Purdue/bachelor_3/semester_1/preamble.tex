@@ -14,6 +14,7 @@
 \usepackage{xcolor}
 \usepackage{bbm}
 \usepackage{showlabels}
+\usepackage{csquotes}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -293,7 +294,7 @@
 % These are the fancy headers
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-
+\setlength{\headheight}{14.5pt}
 % LE: left even
 % RO: right odd
 % CE, CO: center even, center odd
@@ -313,7 +314,7 @@
 
 
 % Todonotes and inline notes in fancy boxes
-\usepackage{todonotes}
+\usepackage[obeyFinal]{todonotes}
 \usepackage{tcolorbox}
 
 % Make boxes breakable
@@ -366,9 +367,7 @@
 	\color{lightgray}{\texttt{\!]\!]}}
 }}
 
-\newcommand{\disclaimer}[2]{
-    \textbf{Disclaimer.} These are lecture notes taken in #1's course, #2. Correctness of material is not guaranteed. These notes are treated as derived work of #1, and distribution of the material to people unaffliated to the class without the professor's written permission is prohibited.
-}
-
-\newcommand{\EDIT}[1]{{\color{cyan}\textsf{ \logseq{EDIT} #1}}}
 \newcommand{\tags}[1]{{\color{cyan} tags: #1}}
+\newcommand{\ask}[1]{\todo[inline, color=cyan]{Question: #1}}
+\newcommand{\edit}[1]{\todo[color=orange]{Edit: #1}}
+\renewcommand{\comment}[1]{\todo[inline, color=green]{Comment: #1}}

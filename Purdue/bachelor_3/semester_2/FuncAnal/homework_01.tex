@@ -1,0 +1,115 @@
+\homework{1}{Tue 09 Jan 2024 15:34}{homework}
+\newpage
+\begin{problem}
+	1. Show that a normed linear space $X$ is a Banach space if and only if for every sequence $\left(x_n\right)$ of vectors in $X$, the condition $\sum_{n=1}^{\infty}\left\|x_n\right\|<\infty$ implies the convergence of $\sum_{n=1}^{\infty} x_n$ in $X$.
+\end{problem}
+\begin{proof}
+	To prove sufficiency, note that the convergence of sum of norms implies that $\sum_{n = 1}^\infty x_n$ is Cauchy, since for all $N < M$
+	\[
+		\left\| \sum_{n = 1}^N x_n - \sum_{n = 1}^M x_n \right\| 
+		\le 
+		\sum_{n=N}^{M} \|x_n\| \to 0 \text{ as } N \to \infty 
+	.\] 
+	Thus, since $X$ is complete, the series converges.
+
+	To prove necessity, first take a Cauchy sequence in $X$, call it $x_n$. Take a subsequence $y_n$ of $x_n$ such that
+	\[
+		\|y_n - y_m\| < \frac{\varepsilon}{2^n} \text{ for all } 0 < n < m
+	.\] 
+	Let $z_n = y_{n + 1} - y_n$ be telescoping difference of  $y_n$. Then we have $\|z_n\| < \frac{\varepsilon}{2^n} $ for all $n$, thus $\sum_{n=1}^{\infty} \|z_n\| < 2 \varepsilon < \infty  $, thus $\sum_{n=1}^{\infty} z_n = x \in X$, i.e. the series converges. But then we see that $\sum_{n=1}^{N} z_n = y_{N+1}$ for all $N$, so $y_n \to  x$. But then $x_n \to  x$ since $y_n$ is a subsequence of $x_n$ and $x_n$ is Cauchy.
+\end{proof}
+
+
+\begin{problem}
+2. Let $T$ be a compact Hausdorff space and let $C(T)$ denote the linear space of all continuous functions from $T$ to $\mathbb{C}$, endowed with the norm
+\[
+\|f\|_{\infty}=\sup \{|f(t)|: t \in T\}
+\]
+
+Show that $C(T)$ is a Banach space.
+Hint: One possible approach is to show that $C(T)$ is a closed normed linear subspace of $\ell^{\infty}(T)$.
+\end{problem}
+\begin{proof}
+	We already know $C(T)$ is a vector space and $\|\cdot \|_\infty $ is a norm. We also know that $\ell^\infty (T)$ is a Banach space, and that $C(T)$ is a vector subspace of $\ell^\infty (T)$ with the same norm. It suffices to only show that $C(T)$ is closed.
+
+	But any functional convergence under sup norm in a compact metric space is uniform; and uniform limit of continuous functions are continuous. So we know that $C(T)$ is closed.
+
+	To give a detailed argument: Take $f_n \in C(T)$ and suppose $\|f_n - f\|_\infty  \to 0$. 
+	Take $t, t' \in T$. Then
+	\begin{align*}
+		\left| f(t) - f(t') \right| &\le \left| f(t) - f_n(t) \right|  + \left| f_n(t) - f_n(t') \right| + \left| f_n(t') + f(t) \right| \\
+		&\leq 2 \|f_n - f\|_\infty  + \left| f_n(t) - f_n(t') \right| 
+	.\end{align*} 
+	Each $f_n$ is uniformly continuous since $T$ is compact. Thus, $\left| f_n(t) - f_n(t') \right| \to 0$ whenever $t' \to  t$, for all $t$. Moreover, $\|f_n - f\|_\infty < \varepsilon$ for large enough $n$. Hence
+	\[
+		\limsup_{t' \to  t} \left| f(t) - f(t') \right| \le \varepsilon
+	.\] 
+	This is true for all $\varepsilon$, so $|f(t) - f(t')| \to 0$ as $t' \to  t$.
+\end{proof}
+
+
+
+\begin{problem}
+3. (a) Show that the space $C[0,1]=\{f:[0,1] \rightarrow \mathbb{C}, f$ continuous $\}$ endowed with the norm $\|f\|_1=\int_0^1|f(t)| d t$ is not a Banach space.\\
+(b) Consider the space $C[0,1]$ endowed with the norm $\|f\|_1=\int_0^1|f(t)| d t$. Show that the linear functional $\lambda: C[0,1] \rightarrow \mathbb{C}, \lambda(f)=f(1 / 2)$ is discontinuous.
+\end{problem}
+\begin{proof}
+	(a) {\color{red} Consider the example $f_n(x) = x^n$}. Then for $m < n$,
+	 \[
+		\|f_n - f_m\|_1 = \int_0^1 (x^m - x^n) dx \le \int _0^1 x^m d x \to  0 \text{ as } m \to \infty 
+	.\] 
+	Hence $f_n$ is Cauchy. But its pointwise limit is $f(x) = 1(x = 1)$. This function is not continuous.
+
+	\begin{correction}
+		$1(x = 1)$ is a.e. equal to $0$ function, so this is not a counterexample.
+
+		For a genuine example, consider the sequence of constant functions taking value $\sum_{k = 1}^n \frac{1}{k}$. This is a Cauchy sequence, but there is no limit.
+	\end{correction}
+
+	(b) To show $\lambda$ is discontinuous, we make the following construction: Let $f, g$ be step functions compactly supported on $[\frac{1}{2} - \varepsilon, \frac{1}{2} + \varepsilon]$.
+
+	Let $f$ take constant value $f(\frac{1}{2})$ over the interval, and so does $g$. Now the distance between $f$ and $g$ is
+	\[
+		\|f - g\|_1 = 2 \varepsilon \left| f(\frac{1}{2}) - g(\frac{1}{2}) \right| 
+	.\] 
+	But note, that we can first choose arbitrary $f(\frac{1}{2})$ and $g(\frac{1}{2})$ so that their difference is large, and then take $\varepsilon$ small such that $\|f - g\|_1$ is arbitrarily small. Thus, the evaluation map $ f \mapsto  f(\frac{1}{2})$ cannot be continuous.
+\end{proof}
+
+
+\begin{problem}
+	4. Let $C[0,1]$ be endowed with the norm $\|f\|_{\infty}=\sup \{|f(t)|: t \in T\}$. For $f \in C[0,1]$, consider the linear operator $T$ on $\left(L^1[0,1],\|\cdot\|_1\right)$ defined by multiplication by $f$.
+\[
+T=M_f: L^1[0,1] \rightarrow L^1[0,1], \quad M_f(\xi)=f \cdot \xi, \forall \xi \in L^1[0,1] .
+\]
+$L^1[0,1]=L^1([0,1], d t)$ is defined with respect to the Lebesgue measure.
+(a) Show that $M_f$ is a bounded operator with norm as an element of $B\left(L^1[0,1], L^1[0,1]\right)$
+\[
+\|T\|=\left\|M_f\right\|=\|f\|_{\infty} .
+\]
+(b) Fix now $f \in C[0,1]$ with $f(t)=t, \forall t \in[0,1]$ and $T=M_f$ as above. Show that for any $\lambda \in \mathbb{C}$, the equation $T \xi=\lambda \xi$ admits only the solution $\xi=0$. In other words $T$ admits no eigenvalues.\\
+Reminder: We work here over $\mathbb{C}$.
+\end{problem}
+\begin{proof}
+		(a) Recall that $\|T\| = \sup \{\|T \xi\|_{\infty }: \|\xi\|_\infty = 1\} $.
+		Then by triangle inequality, for all $\xi$,
+		\[
+			\|T \xi\|_\infty = \|f \xi\|_\infty \le \|f\|_\infty  \|\xi\|_\infty  = \|f\|_\infty 
+		.\] 
+		This establishes $\|T\|\le \|f\|_\infty $.
+		To prove the other direction, now fix $\xi \equiv 1$. We have $\|T \xi\|_\infty  = \|f\|_\infty $. Thus $\|T\| \ge \|f\|_\infty	$.
+
+		(b) Suppose $\xi(t) \neq 0$, for some $t \in T$. Then
+		\[
+			(T \xi)(t) = f(t) \xi(t) = t \xi(t) 
+		.\] 
+		But by continuity of $\xi$, there exists a nonempty open set containing $t \in T$ such that $\xi$ is nonzero on that open set. This means there exists at least one point where $t \neq \lambda \wedge \xi(t) \neq 0$, so that $T \xi(t) \neq  \lambda \xi(t)$, implying $T \xi \neq \lambda \xi$.
+
+		\begin{correction}
+			Pick any two points $t \in [0,1]$ such that $\xi(t) \neq 0$. Then we have the following linear equations:
+			\[
+				t \xi(t) = \lambda \xi(t)
+			.\] 
+			Since $\lambda \neq 0$, this directly simplifies to $t = \lambda$. But now for any other $s \neq t$, we would have $\xi(s) = 0$. This means $\xi$ can be nonzero at at most one point, so it is equivalent to $0$ in $L^1[0,1]$.
+		\end{correction}
+\end{proof}
+

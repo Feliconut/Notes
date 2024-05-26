@@ -1,0 +1,75 @@
+\lecture{10}{Wed 31 Jan 2024 13:37}{Locally Convex Space}
+
+Let $X$ be a locally convex linear space. Let $(p_\alpha)_{\alpha \in A}$ be a family of seminorms. We define the topology as follows: let the subbase of open sets at the origin be sets of the form
+\[
+	\{x \in X: p_\alpha(x) < \varepsilon\} 
+.\] 
+Then the base is
+\[
+	\{\cup_F (x_0, \varepsilon)\} _{x_0 \in X, F \subset\subset A, \varepsilon > 0}
+\] 
+where
+\[
+	\cup_F(0,\varepsilon) = \{x \in X: p_\alpha(x) < \varepsilon, \forall \alpha \in F\} 
+.\] 
+
+\begin{definition}[Locally Convex Space]
+	\label{defn:LocallyConvexSpace}
+	A locally convex space (LCS) is a TVS whose topology is defined by a family of seminorms $\left(p_\alpha\right)_{\alpha \in A}$ such that $\bigcap_{\alpha \in A}\left\{x: p_\alpha(x)=0\right\}=(0)$.
+\end{definition}
+\todo{need to parse through this definition and its implications.}
+
+\begin{example}
+	Consider $M = \text{Map}(T, \mathbb{C})$. Then we have a family of seminorms $(p_t)_{t \in T}$, where $p_t(f) = |f(t)|$.
+
+	Then, $f \in \cup_F (f_0, \varepsilon) \iff \left| f(t) - f_0(t) \right| < \varepsilon$ for all $t \in F$.
+
+	This topology is not metrizable nor normable, since $T$ is possibly uncountable.
+
+We say $f_n \to f_0$ if it converges in any finite-dimensional projection.
+\end{example}
+
+Now,
+\[
+	X^* \subset \text{Map}(X, \mathbb{C}) = \prod_{x \in X} \mathbb{C}
+\]
+The weak* topology $(X^*, w^*)$ is the same as the induced topology by the product topology on $\text{Map}(X, \mathbb{C})$.
+
+\ask{spend some time on those topologies, and ask clarifying questions. Pointwise convergence defined by convergence in any finite number of coordinates?}
+
+Similarly, $X \subset \text{Map}(X^*, \mathbb{C})$, the induced topology is the weak topology. We have a correspondence $x \leftrightarrow \left\langle x, \cdot  \right\rangle $.
+
+\begin{proposition}(equivalent definition for weak topologies)
+
+	\label{prop:WeakTopologyEquivalent}
+	Let $X$ be a normed space.\\
+(a) The weak*-topology of $X^*$ is the locally convex topology defined by the seminorms $\left(p_x\right)_{x \in X}$ where $p_x(f)=|f(x)|, \forall x \in X, \quad f \in X^*$.\\
+(b) The weak-topology of $X$ is the locally convex topology defined by the seminorms $\left(p_f\right)_{f \in X^*}$ where $p_f(x)=|f(x)|, \forall x \in X, \quad f \in X^*$.
+\end{proposition}
+
+\begin{example}
+	\begin{itemize}
+		\item $X = (C_0(\mathbb{N}), \|.\|_\infty )$, then $X^* = \ell^1(\mathbb{N})$. 
+			Consider $x_n = \delta_n$. Then $\|x_n\| = 1$, but $x_n \to 0$ in weak topology. To show this, let $y \in X^*$, then $\left\langle x, y \right\rangle = \sum_{k = 1}^\infty x(k) y(k) = y_n \to 0$. Thus $\left\langle x_n, \cdot  \right\rangle \to 0$ pointwise. Thus $x_n \to  0$ in weak topology.
+	\end{itemize}
+\end{example}
+
+\begin{theorem}[Banach-Alaoglu Theorem]
+	\label{thm:BanachAlaogluThm}
+	Let $(X, \|\cdot \|)$ be a normed space. Then $B_{X^*}(0,1) = \{f \in X^*: \|f\|\le 1\} $ is compact in the weak* topology.
+\end{theorem} 
+
+\begin{lemma}(Riesz's Lemma about Perpendicularity)
+	\label{lem:Riesz}
+	Let $(X, \|\cdot \|)$ be a normed space, $Y \subsetneq X$ a closed subspace. Then for any $\varepsilon > 0$ there exists $x \in X$ such that $\|x\| = 1$, such that $\text{dist}(x, Y) \ge  1 - \varepsilon$.
+\end{lemma}
+This is saying that, we can always find a vector ``almost perpendicular'' to the subspace $Y$.
+
+\begin{proof}
+	Fix $x_0 \in X\setminus Y$. Since $Y$ is closed, 
+	\[
+		d := \text{dist}(x_0, Y) = \inf \{\|x_0 - y\|: y \in Y\} > 0
+	.\] 
+	Choose $\eta > 0$, such that $\frac{d}{d + \eta}> 1 - \varepsilon$. Choose $y_0 \in Y$ such that $d \le \|x_0 - y_0\| < d + \eta$. Now set $x = \frac{x_0 - y_0}{\|x_0 - y_0\|}$. Now, for any $y \in Y$, we have $\|x - y\| = \|\frac{x_0 - (y_0 + \|x_0 - y_0\|y)}{\|x_0 - y_0\|}\| \ge \frac{d}{d + \eta} > 1 - \varepsilon$ . 
+\end{proof}
+

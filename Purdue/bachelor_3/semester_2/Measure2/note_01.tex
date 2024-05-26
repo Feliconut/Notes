@@ -1,0 +1,183 @@
+\note{1}{Wed 14 Feb 2024 15:31}{Concept Review - Differentiation}
+
+\newpage
+\begin{theorem}[Vitali Covering Lemma]
+	\label{thm:VitaliCoveringLem}
+	
+	A \textit{Vitali covering} for a closed set $E \subset \mathbb{R}$ is a collection $\mathcal{F}$ of closed intervals such that for each $\varepsilon>0, x \in E$ there exists $I \in \mathcal{F}$, $|I| < \varepsilon$, such that $x \in E$.
+
+	The lemma states that any Vitali cover can be reduced to a countable, pairwise disjoint subset $\{I_n\} _{n \in \mathbb{N}}$ such that $m^*(E \setminus \cup I_n) = 0$.
+\end{theorem}
+\begin{proof}
+	We may assume without loss of generality that $m^*(E) < \infty $, by using the fact that $\mathbb{R}$ is $\sigma$-finite. 
+
+	Let $O$ be open such that $E \subset O, m^*(O) < \infty $. Now we can assume for each $I \in \mathcal{F}$, $I \subset O$, since removing the intervals in $\mathcal{F}$ that does not lie in $O$ still leaves us with a Vitali cover. Now, we construct a sequence iteratively:
+	\begin{enumerate}
+		\item Assume we already have constructed $I_{1}, \ldots, I_n \in \mathcal{F}$ pairwise disjoint, and assume that $m^*(E \setminus \cup _{k = 1}^n I_k) > 0$.
+		\item Let $k_n = \sup \{|I|: I \in \mathcal{F}, I \subset O \setminus  \cup _{k = 1}^n I_k\} $. Intuitively, this is the ``largest'' size of interval that you can fit in and not overlap the previous ones. Since $O \setminus \cup_{k = 1}^n I_k$ is open nonempty, we have $k_n > 0$. Since $m^*(O) < \infty $, $k_n < \infty $.
+		\item Pick $I_{n + 1}$ such that $|I_{n + 1}| > \frac{1}{2} k_n$.
+	\end{enumerate}
+	If this process terminates due to the assumption not being met, then we are done. From now on we assume that this process never terminates, giving us an infinite sequence $I_n$. From pairwise disjointness, $\sum_{k = 1}^n |I_k| = m^*(\cup _{k = 1}^n I_k) \le m^*(O) < \infty $ for each $n$, so $\sum_{k = 1}^\infty  |I_k| < \infty $. 
+
+	Now, let $N(\eta)$ be such that $\sum_{k = N(\eta) + 1}^\infty |I_k| < \frac{\eta}{5}$. We want to prove
+	\[
+		m^*\left( E \setminus \bigcup_{k = 1} ^{N(\eta)} I_k \right) 
+		\le 
+		m^*\left( E \setminus \bigcup_{k = 1} ^{\infty } I_k \right) 
+		< \eta
+	.\] 
+	To this end, we want to show
+	\[
+		E\setminus \bigcup_{k = 1} ^{N(\eta)} I_k
+		\subset 
+		\bigcup_{k = N(\eta) + 1} ^\infty 5 I_k
+	,\] 
+	where by $5 I_k$ we mean the interval with center fixed and radius expanded $5$ times. To verify this, consider any $x \in E \setminus \cup_{k = 1}^{N(\eta)} I_k$. Then there exists $I \in \mathcal{F}$, $x \in I \subset E \setminus \cup_{k = 1}^{N(\eta)} I_k$. 
+
+	We claim that there must be some $I_{n_0}$, $n_0 > N(\eta)$, such that $I_{n_0} \cap I \neq \emptyset $; if not, then for all $k > N(\eta)$ we have $|I| \le n_k \le 2 |I_{n + 1}|$, contradicting the fact that $\sum |I_k| < \infty $. 
+
+	But this implies $I \subset 5 I_{n_0}$, thus $x \in \bigcup_{k = N(\eta) + 1} ^{\infty } 5 I_k$.
+\end{proof}
+
+We can generalize this to higher dimensions.
+
+\begin{theorem}[Wiener Covering Lemma]
+	\label{thm:WienerCoveringLem}
+
+	If $E \subset \mathbb{R}^n$ is measurable and covered by balls $(B_j)_{j \in A}$, where $\sup _{j \in A} \text{diam} B_j < \infty $, then there exists a sequence of pairwise disjoint balls $(B_k)_{k \in \mathbb{N}}$ that,
+	\[
+		m(E) \le 5^n \sum_k m(B_k)
+	.\] 
+\end{theorem}
+\begin{proof}
+	We pick balls using a ``greedy algorithm'':
+	\begin{enumerate}
+		\item Assume that we have already picked balls $B_1, \ldots, B_k$.
+		\item Let $d_k = \sup \{\text{diam}B_j: j \in A, B_j \text{ disjoint from } B_1, \ldots, B_k\} $. By uniform boundedness of diameters,  $d_k < \infty $. If $d_k = 0$, we terminate and end up with a finite sequence.
+		\item Pick $B_{k + 1}$ such that $\text{diam} B_{k + 1} > \frac{1}{2} d_k$. 
+	\end{enumerate}
+	We assume $\sum_{k = 1}^\infty |B_k| < \infty $, otherwise the result becomes trivial. It suffices to show that
+	\[
+		E \subset \sum_k 5 B_k
+	.\] 
+	If the collection of balls $B_k$ is finite, then $d_k = 0$ for all large $k$, so $\cup B_k$ is open and dense in $E$, which implies $E \subset \cup B_k$.
+
+	From now on assume the collection $B_k$ is infinite. It suffices to show that
+	\[
+		\bigcup_{j \in A} B_j \subset \bigcup_{k \in \mathbb{N}}  5 B_k
+	.\] 
+	Fix any $j \in A$ and $x \in B_j$. Since $\sum |B_k| < \infty $, $\text{diam} B_k \to 0$, hence $d_k \to  0$. Let $k_0$ be smallest natural number such that $d_{k_0} < \text{diam} B_j$. Then we must have $B_{k_0} \cap B_{j}\neq \emptyset $. 
+
+	But then $\text{diam}B_{k_0} > \frac{1}{2} d_{k_0 - 1} \ge \frac{1}{2} \text{diam} B_j$. Thus $B_j \subset 5 B_{k_0} \subset \bigcup_{k \in \mathbb{N}}  5 B_k$.
+\end{proof}
+
+\begin{theorem}[Monotone Differentiation Theorem]
+	\label{thm:MonotoneDifferentiatithm}
+	
+	For $f$ a real-valued increasing function on $[a,b]$, then $f$ is differentiable almost everywhere, $f'$ is measurable, and $\int _a^b f' \le f(b) - f(a)$.
+\end{theorem}
+\begin{proof}
+	\textbf{Part 1. Showing almost-everywhere differentiability.}
+	Begin by breaking the definition of $\lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$ to four components, i.e. the \logseq{Dini Derivatives}. Then we show that the difference between any two pairs in the Dini derivatives is controlled. 
+	For this proof, we only verify that
+	\[
+		\limsup_{h \to 0 + } \frac{f(x + h) - f(x)}{ h} \le \liminf_{h \to 0 +}\frac{f(x) - f(x - h)}{h} \quad \text{almost everywhere}
+	.\] 
+	To verify this, it suffices to show that for every $r, s \in \mathbb{Q}$, $r > s$, the set
+	\[
+		E_{r, s} := \left\{ 
+\limsup_{h \to 0 + } \frac{f(x + h) - f(x)}{ h} > r > s > \liminf_{h \to 0 +}\frac{f(x) - f(x - h)}{h}
+		\right\}
+	\] 
+	has measure zero, since $f$ is monotone.
+
+	We split the definition into two parts,
+	\[
+		E_{r, s} = A_r \cap B_s =:
+		\left\{ 
+		\limsup_{h \to 0 + } \frac{f(x + h) - f(x)}{ h} > r \right\} \cap  \left\{  s > \liminf_{h \to 0 +}\frac{f(x) - f(x - h)}{h}
+		\right\}
+	.\] 
+
+	\begin{observation}
+		At every $y \in A_r$, for infinitely many small $k>0$ we would have
+		\[
+			f(y + k) - f(y) > r k 
+		.\] 
+		On the other hand, at every $x \in B_s$, for infinitely many small $h$ we would have
+		\[
+			f(x) - f(x - h) < s h
+		.\] 
+		We call $[y, y+k]$ an $r$-\textit{steep} interval and $[x-h, x]$ an $s$-\textit{flat} interval.
+
+
+		The idea is to ``collect'' those local increments to get some global statement about $f$ and $E_{r, s}$. Suppose we have a collection of disjoint $r$-steep intervals $J_j = [y_i, y_i + k_i]$ such that $m^*(E_{r, s} \setminus \cup J_j) < \varepsilon$, then
+		\[
+			\sum_{j} [f]_{J_j} > r \sum_j k_j = r \sum_j m(J_j) > r\left( m^*(E_{r, s}) - \varepsilon \right) 
+		.\] 
+		Similarly, if we also have disjoint intervals $I_i = [x_i - h_i, x_i]$ so that $m^*(E_{r, s} \Delta \cup I_i) < \varepsilon$, then
+		\[
+			\sum_i [f]_{I_i} < s \sum_i h_i = s \sum_i m(I_i) < s \left( m^*(E_{r, s}) + \varepsilon\right) 
+		.\] 
+
+		If we also have $\sum_{j} [f]_{J_j}  < \sum_i [f]_{I_i}$, the chain of inequality will give us control of $m^*(E_{r, s})$. This can be achieved if all those $J_j$ intervals are nested inside the $I_i$ intervals.
+
+	\end{observation}
+
+	Now let's do the real proof. Fix an open set $U$ such that $E_{r, s} \subset U$ and $m^*(U \setminus E_{r, s}) < \varepsilon$. Now, at each $x \in B_s$ there are infinitely many $s$-flat intervals of the form $[x - h, x]$ that are arbitrarily small. Thus,
+	\[
+		\mathcal{F} = \left\{ [x - h, x] \subset U: x \in B_s, h > 0, s \text{-flat}  \right\} \quad \text{ is a Vitali cover of $E_{r, s}$}
+	.\] 
+	Then, we can choose disjoint $I_1, \ldots, I_N \in \mathcal{F}$ so that $m^*\left( E_{r, s} \setminus \cup_i I_i \right) < \varepsilon$.
+
+	Now, for each $y \in A_r$, there are infinitely many $r$-steep intervals of the form $[y, y + k]$ that are arbitrarily small. Now pick $V$ open such that $\cup _{i = 1}^N I_i \subset V$, and $m^*\left( V \setminus \cup _i I_i \right) < \varepsilon$. Thus
+	\[
+		\mathcal{G} = \left\{ [y, y+k] \subset V:y \in A_r, k > 0, r\text{-steep} \right\} \quad \text{ is a Vitali cover of }E_{r, s} \cap \cup_{i = 1} ^N I_i
+	.\] 
+	Then we can choose $J_1, \ldots, J_M \in \mathcal{G}$ so that $m^*\left( E_{r, s} \cap \cup _i I_i \setminus \cup _j J_j \right)  < \varepsilon$.
+
+	Now, we have
+	\[
+		\sum_{i} [f]_{I_i} < s \sum_i h_i = s m\left( \cup _i I_i \right) < s m(U) < s\left( m^*(E_{r, s} + \varepsilon) \right) 
+	.\] 
+	On the other hand,
+	\[
+		\sum_j [f]_{J_j} > r \sum_j k_j = r m\left( \cup _j J_j \right)  > r\left( m^*\left( E_{r, s} \right)  - 2 \varepsilon\right)
+	.\] 
+	The last inequality is a little more annoying, but here it goes:
+	\begin{align*}
+		m^*(\cup _j J_j) + \varepsilon 
+		&> m^*\left( E_{r, s} \cap  \cup _i I_i \setminus \cup _j J_j \right)  + m^*(\cup _j J_j) \\
+		&\geq m^*\left( E_{r, s} \cap \cup _i I_i \right)  \\
+		&\ge m^*\left( E_{r, s} \right)  - m^*\left( E_{r, s} \setminus  \cup _i I_i \right)  \\
+		&> m^*\left( E_{r, s} \right)  - \varepsilon
+	.\end{align*}
+	Since $f$ is monotone increasing, by construction, we also have
+	\[
+		\sum_j [f]_{J_j} \le \sum_i [f] _{I_i}
+	.\] 
+	So these combines to give
+	\[
+		m^*(E_{r, s}) < \frac{s + 2 r}{r - s} \varepsilon
+	.\] 
+	Hence $m^*(E_{r, s}) = 0$.
+	
+
+	\textbf{Part 2. Showing measurability and FTC.} Write $\tilde f := \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$, which exists a.e. Since $f$ is monotone increasing, it is bounded on $[a, b]$, thus $\tilde f < \infty $ a.e., thus $f'$ is well-defined a.e. Now the functions
+	\[
+		f_n(x) = \begin{cases}
+			n \left[ f(x + \frac{1}{n}) - f(x) \right] & x \in [a, b - \frac{1}{n}] \\
+			0 & \text{otherwise}
+		\end{cases}
+	\] 
+	are measurable, and converge a.e. to $f'$, thus $f'$ is measurable.
+
+	Finally, by Fatou's Lemma,
+	\begin{align*}
+		\int _a^b f' 
+		&\leq \liminf \int _a^b n f_n \\
+		&= \liminf n \left( \int_{a + \frac{1}{n}}^b f - \int _a^{b - \frac{1}{n}}f \right)  \\
+		&\le  f(b) - f(a)
+	.\end{align*}
+\end{proof}
+

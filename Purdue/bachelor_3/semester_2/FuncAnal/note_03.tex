@@ -1,0 +1,561 @@
+\note{3}{Thu 23 May 2024 22:34}{Fredholm Theory}
+\tags{Compact operator, Fredholm operator}
+
+\section{Fredholm Theory and Spectral Theory}
+
+
+\subsection{Compact Operators}
+
+
+
+Recall those facts:
+\begin{itemize}
+	\item In a complete metric space, relatively compact $\iff $ totally bounded $\iff $ sequentially compact
+	\item Continuous functions preserve compact sets.
+	\item (Riesz) A normed space is finite dimensional iff the unit ball is compact.
+\end{itemize}
+
+\begin{definition}[Compact Operator]
+	\label{defn:CompactOperator} 
+	In $\normalfont{Ban} $,
+	an operator $T: E \to F$ is \textit{compact} if the following equivalent conditions hold:
+	\begin{enumerate}
+		\item  $T(U_{E}(0,1))$ is relatively compact, i.e. its closure is compact.
+		\item  $T(B_{E}(0,1))$ is relatively compact, i.e. its closure is compact.
+		\item $T$ maps bounded sets to relatively compact sets.
+	\end{enumerate}
+\end{definition}
+
+\begin{intuition}
+	Compact operators are ``almost finite dimensional'', just like linear operators in finite dimensional vector spaces. As we will see later, those operators form a closed two-sided ideal, so it makes sense to mod them out and form the \logseq{Calkin Algebra}.
+\end{intuition}
+
+\begin{proposition}
+	\label{prop:CompactTwoSidedIdeal}
+	$\mathcal{K}(X)$ is a closed two-sided ideal of $B(X)$.
+\end{proposition}
+\begin{proof}
+	It is easy to see that $\mathcal{K}(X)$ is a linear subspace.
+
+	Take $K \in \mathcal{K}(X)$, $T \in B(X)$. $T$ is continuous, thus preserves compact sets. Thus $TK \in \mathcal{K}(X)$. $T$ is bounded, so $KT \in \mathcal{K}(X)$.
+
+	Finally we verify $\mathcal{K}(X)$ is a closed subspace. Let $\left( T_n \right) $ be a sequence in $\mathcal{K}(X, Y)$ and $T \in B(X, Y)$, such that $\|T_n - T\| \to 0$. We want to show $T \in \mathcal{K}(X, Y)$. For this we show $T(U(0,1))$ is totally bounded. Fix $\varepsilon > 0$, and we have $\|T_n - T\| < \varepsilon$ for large $n$. Since $T_n \in \mathcal{K}(X, Y)$, $T_n(U(0,1))$ is totally bounded, so there exists finitely many $x_1, \ldots, x_m \in U(0,1)$ such that $T_n(U(0,1)) \subset \cup_{i = 1}^m U(T_n x_i, \varepsilon)$. 
+
+	Now take $x \in U(0,1)$, and let $x_i$ be such that $T_n x \in U(T_n x_i, \varepsilon)$. Now
+	\[
+		\|T x - T x_i\| 
+		\le  \|T x - T_n x\| + \|T_n x - T_n x_i\| + \|T_n x_i - T x_i\|
+		\le \varepsilon + \varepsilon + \varepsilon
+	.\] 
+\end{proof}
+
+\begin{example}
+	\begin{itemize}
+		\item Every finite-rank operator is compact, since a closed bounded set in a finite-dimensional linear space is compact.
+		\item Every projection into an infinite dimensional subspace is not compact, by invoking Riesz's Lemma of perpendicularity.
+		\item Topological isomorphisms between infinite dimensional Banach spaces are never compact.
+	\end{itemize}
+\end{example}
+
+Thus, any operator that can be approximated by finite-rank operators is compact, i.e. $\overline{\mathcal{F}(X,Y)} \subset \mathcal{K}(X,Y) $.
+
+In a Hilbert space, the converse is also true:
+\begin{proposition}
+	\label{prop:CompactOperatorLimit}
+	In a Hilbert space $H$, compact operators are limits of finite-rank operators. That is, $\mathcal{K}(H) = \overline{\mathcal{F}(H)} $.
+\end{proposition}
+\begin{proof}
+	We may assume $\operatorname{dim} H = \infty $. Fix an orthonormal basis $(e_n)$. Define $P_n = \left\langle \cdot , e_1 \right\rangle e_1 + \ldots + \left\langle \cdot , e_n \right\rangle e_n$, the projection onto $\text{span}(e_1, \ldots, e_n)$. We claim that $\|T - P_n T\| \to 0$ for all $T \in \mathcal{K}(H)$.
+
+	Fix $\varepsilon>0$. Using compactness of $T$, there exists finitely many $x_1, \ldots, x_m \in U(0,1)$ such that $T(U(0,1)) \subset \cup_{i = 1}^m U(T(x_i), \varepsilon)$. Now pick $x \in U(0,1)$ and $x_i$ be such that $T x \in U(T x_i, \varepsilon)$. We have
+	\[
+		\|T x - P_n T x\| \le \|T x - T x_i\| + \|T x_i - P_n T x_i\| + \|P_n T x_i - T x\|
+	.\] 
+	Since there are finitely many $x_i$, for large $n$ independent of $x$, we have $\|T x_i - P_n T x_i\| < \varepsilon$. Thus $\|T x - P_n T x\| < 3 \varepsilon$.
+\end{proof}
+
+This is to say that every Hilbert space has the \logseq{approximation property}. A Banach space $F$ has the approximation property if for every Banach space $E$ every compact operator from $E$ to $F$ can be approximated in the operator norm by finite-dimensional operators.
+
+Here are some facts that we will not prove here, consult, for example, \cite{khelemskiiLecturesExercisesFunctional2006}, section 3.3.
+
+\begin{itemize}
+	\item If a Banach space has a \logseq{Schauder basis}, then it has the approximation property. In particular, the spaces $L_p(X, \mu), C(\Omega), c_0, l_p$ all have approximation property.
+	\item (P. Enflo, 1972). There exist separable Banach spaces, in particular, closed subspaces in $c_0$, that do not have the approximation property. As a corollary (see Theorem 2) there are separable Banach spaces without Schauder bases.
+\end{itemize}
+
+
+\begin{proposition}[Schauder]
+	\label{prop:SchauderCompactAdjoint}
+	$T: E \to F$ is compact iff the Banach adjoint operator $T^*:F^* \to E^*$ is compact.
+\end{proposition}
+Warning: not to be confused with the Hilbert adjoint.
+\begin{proof}
+	We only need to show $T$ compact implies $T^*$ compact. The other side follows from the canonical embedding of a space into its double dual.
+
+	Using compactness of $T$, pick $N_F \subset F$ an $\varepsilon$-net of $T U_E$. Define the functional
+	\begin{align*}
+		S: F^* &\longrightarrow \mathbb{C}^{N_F} \\
+		f &\longmapsto S(f) = f(y_i)_{y_i \in N_F}
+	.\end{align*}
+	$S$ is a compact operator. Now pick $N_{F^*} \subset F^*$ such that $S N_{F^*}$ is an $\varepsilon$-net of $S U_{F^*}$. 
+
+	Now pick $f \in U_{F^*}$ and $x \in E, \|x\| = 1$. We have for all $f \in U_{F^*}$,
+	\[
+		(T^* f) x = f T x \sim f y_i = \pi_i S f \sim \pi_i S f_j = f_j y_i \sim f_j T x = (T^* f_j) x
+	.\] 
+	The first $\sim $ is taking $y_i \in N_{F}$ such that $\|T x - y_i\| < \varepsilon$. The second $\sim $ is justified by taking $f_j \in N_{F^*}$ such that $\|S f - S f_j\| < \varepsilon$. Since $\|f\| < 1$ and $\|x\| = 1$ we have
+	\[
+		\|T^* f - T^* f_j\| < 3 \varepsilon
+	.\] 
+	That is, $T^* N_{F^*}$ is a $3 \varepsilon$-net of $T^* U_{F^*}$.
+	
+\end{proof}
+
+
+\begin{proposition}
+	\label{prop:CompactWeakTop}
+	If two operators are weak topology equivalent, then they are either both compact or both not compact.
+\end{proposition}
+
+\subsubsection{Examples of Compact Operators}
+
+\begin{proposition}
+	\label{prop:DiagonalOperatorCompact}
+	The diagonal operator $T_\lambda : l_p \to l_p$, $\lambda \in l_\infty $ is compact if and only if $\lambda \in c_0$ ($\lambda \to 0$ ).
+\end{proposition}
+
+\begin{proposition}
+	\label{prop:ShiftOperatorNotCompact}
+	The shift operators on $l_p, l_p(\mathbb{Z})$ or $L_p(\mathbb{R})$ are never compact.
+\end{proposition}
+
+\begin{proposition}
+	\label{prop:MultOperatorNotCompact}
+	The multiplication operator $T_f: L_p[a, b] \to L_p[a, b]$, $1 \le p \le \infty $, $f \in L_\infty [a, b]$ is not compact, unless $f = 0$.
+\end{proposition}
+
+\begin{proposition}
+	\label{prop:IndefIntCompact}
+	The operator of indefinite integration acting on $L_2[0,1]$, $C[0,1]$ or $L_1[0,1]$ is compact.
+\end{proposition}
+
+\begin{theorem}
+	\label{prop:IntegralOperatorCompact}
+	Every integral operator on $L_2[a,b]$ is compact.
+\end{theorem}
+
+\begin{proposition}
+	\label{prop:DifferentiationNotCompact}
+	Differentiation operators $D^k : C^{n + k}[a,b] \to C^n[a,b]$ are never compact. 
+\end{proposition}
+
+\begin{proposition}[Hilbert Adjoint Examples]
+	\label{prop:ExAdjoint}
+	\begin{enumerate}
+		\item The adjoint operator for the diagonal operator $T_\lambda: l_2 \to l_2$ is $T_{\overline{\lambda} }$, where $\overline{\lambda} $ is complex conjugate of the sequence $\lambda$.
+		\item The adjoint operator for the left shift operator $T_l: l_2 \to l_2$ is the right shift operator $T_r: l_2 \to l_2$, and vice versa.
+		\item The adjoint operator for the multiplication operator $T_f: L_2(X, \mu) \to L_2(X, \mu)$ is $T_{\overline{f} }$.
+		\item The adjoint operator for the indefinite integration operator on $L_2[0,1]$, $T: x \mapsto \int 0^t x(s) ds$, is $T^*: x \mapsto \int _t^1 x(s) d s$.
+		\item Let $T_K:L_2[a,b] \to L_2[a,b]$ be an integral operator with the kernel $K(s, t)$. Then the adjoint operator is the integral operator $T_{\overline{K} }$.
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Fredholm Operators}
+
+On a Banach space, since $\mathcal{K}(X,Y)$ is closed two-sided ideal of $B(X,Y)$, we can form the category $\mathbf{Ban}/\mathcal{K}$, where the objects are same as in $\mathbf{Ban}$, and the morphisms $\mathbf{h}_{\mathbf{Ban}/\mathcal{K}}$ are cosets $f + \mathcal{K}(E,F)$ where $f$ is in $\mathbf{h}_{\mathbf{Ban}}$.
+
+In $\mathbf{Ban}/\mathcal{K}$, the zero maps are exactly the compact operators. The isomorphisms are, in some sense, ``anti-compact'' operators, and we are going to see that they are precisely cosets of \textit{Fredholm operators}.
+
+This idea is more straightforward in the case of bounded operators on Hilbert spaces, and we are going to develop some theory about it later on.
+
+\begin{definition}[Calkin Algebra]
+	\label{defn:CalkinAlgebra}
+	
+	On a Hilbert space $H$, the \textit{Calkin algebra} is the quotient $C^*$-algebra $B(H) / K(H)$, satisfying the following short exact sequence in the category of $C^*$-algebras:
+	\[
+		0 \to K(H) \to B(H) \to B(H)/K(H) \to 0
+	.\] 
+\end{definition}
+
+Back to Banach spaces, let's first make the central definition.
+
+\begin{definition}[Fredholm Operator]
+	\label{defn:FredholmOperator}
+	In $\mathbf{Ban}$, $S: E \to F$ is a \textit{Fredholm operator} if  $\operatorname{dim} \operatorname{ker} S < \infty $ and $\operatorname{dim} \operatorname{coker} S < \infty $. 
+
+	The \textit{index} of $S$ is $\operatorname{ind } S = \operatorname{dim} \operatorname{ker} S - \operatorname{dim} \operatorname{coker} S$.
+\end{definition}
+
+The most important facts we are going to justify are:
+\begin{itemize}
+	%\item $T \in \mathcal{K}(E,F)$ is never Fredholm.
+	%\item For $\lambda \neq 0 \in \mathbb{C}$, $\lambda1 - T$ is Fredholm.
+	\item For $S: E \to F$ and $R: F \to G$ Fredholm, $\operatorname{ind}(RS) = \operatorname{ind } R + \operatorname{ind } S $.
+	\item $S$ is Fredholm iff its coset $S + \mathcal{K}(E, F)$ is an isomorphism in $\mathbf{Ban}/\mathcal{K}$.
+	\item $\Phi(E, F)$ is open in $B(E, F)$ and  $S \mapsto \operatorname{ind } S$ is continuous.
+\end{itemize}
+
+\begin{example}
+	\begin{itemize}
+		\item In finite-dimensional vector spaces, for a linear map $T: E \to F$, we always have $\operatorname{dim} \operatorname{ker} T + \operatorname{dim} \operatorname{Im} T  = \operatorname{dim} E$, which implies $\operatorname{Ind } T = \operatorname{dim} \operatorname{ker} T - (\operatorname{dim} F - \operatorname{dim} \operatorname{Im} T) = \operatorname{dim} E - \operatorname{dim} F$. In infinite dimensions, however, the index of $T$ will not follow simply from the geometry of the spaces, because $\operatorname{Im} T$ may be infinite.
+		\item Every topological isomorphism between Banach spaces is Fredholm with index $0$.
+		\item Every bounded projection with finite codimension $n$ is Fredholm with index $-n$.
+		\item The left and right shift operators in $l_p(\mathbb{N})$ are Fredholm with index $1$ and $-1$.
+		\item The differential operator $T: x\mapsto x^{(n)} + f_1(t) x^{(n - 1)} + \ldots + f_{n - 1} x^{(1)} + f_n(t)$, $f_1, \ldots, f_n \in C[a,b]$ from $C^n[a,b]$ to $C[a,b]$ has index $n$.
+		\item The derivative $x \mapsto x'$ from $C^1(\mathbb{T})$ to $C(\mathbb{T})$ has index $0$.
+	\end{itemize}
+\end{example}
+\begin{proof}(Of last two statements.)
+	$D^n: C^n[a,b] \to C[a,b]$ has index $n$ since $\operatorname{ker} D^n = \{f: D^{n - 1} f \text{ is constant}\} $, we may do indefinite integration to $D^n f = 0$ to get $f = c_1 + c_2 x + \ldots + c_n x^{n - 1}$.
+
+	Now verify for $T$. The general theory of ODE says that there are $n$ independent solutions to $T x = 0$, i.e. $\operatorname{dim} \operatorname{ker} T = n$. The cokernel is 0 since $\operatorname{Im} T$ is dense in $C[a,b]$; $x^{(1)}, \ldots, x^{(n)}$ can be independently tweaked to cover the whole range of $T$.
+
+	Verify $D: C^1[\mathbb{T}] \to C[\mathbb{T}]$ has index 0: we have $\operatorname{ker} D = \{f: \text{constant on } \mathbb{T} \} = \mathbb{C} $, and $\operatorname{Im} D = \{f: \int f = 0\} $ by fundamental theorem of calculus. Then the sequence
+	\[
+		C^1[\mathbb{T}] \xrightarrow{D} C[\mathbb{T}] \xrightarrow{\int } \mathbb{C} 
+	\] 
+	is exact. From this we know $\operatorname{coker} D = \mathbb{C}$, so $\operatorname{ker} D = \operatorname{coker} D$.
+\end{proof}
+
+
+\begin{nonexample}
+	\begin{proposition}
+		\label{prop:CompactNotFred}
+	In the case of infinite dimensional $E$ or $F$, compact operators $T: E \to F$ are never Fredholm.
+	\end{proposition}
+
+	\begin{proof}
+		If $T$ is Fredholm, then $\operatorname{Im} T$ is a Banach space. Suppose $F$ infinite dimensional, then $\tilde T: E \to \operatorname{Im} T$ is a surjective operator onto an infinite-dimensional Banach space, hence $T(U(0,1))$ is open in $\operatorname{Im} T$, which cannot be compact (since unit ball in infinite dimensional normed space is not compact).
+
+		If $F$ is finite dimensional, then  $\operatorname{ker} T$ finite dimensional implies $E$ finite dimensional, a contradiction.
+	\end{proof}
+\end{nonexample}
+
+The index is a better property than the $\operatorname{dim} \operatorname{ker} T$ and $\operatorname{dim} \operatorname{coker} T$, since it satisfies the multiplicative property.
+
+\begin{theorem}[Multiplicative property of index]
+	\label{thm:MultiplicativePropertyIndex}
+	Let $S: E \to F$ and $R: F \to G$ Fredholm, then $RS$ is Fredholm, and $\operatorname{ind}(RS) = \operatorname{ind } R + \operatorname{ind } S $.
+\end{theorem}
+\begin{proof}
+	It's easily checked that $RS$ is Fredholm. To compute index, consider the following exact sequence:
+	\[
+		0 \to \operatorname{ker} S \hookrightarrow \operatorname{ker} RS \xrightarrow{S} \operatorname{ker} R \xrightarrow{+ \operatorname{Im} S} \operatorname{coker} S 
+		\xrightarrow{R} \operatorname{coker} RS \xrightarrow{+ \operatorname{Im} R} \operatorname{coker} R \to 0
+	.\] 
+	The desired equation follows from the following fact:
+\begin{lemma}
+	\label{lem:EulerCharacteristicZero}
+	The \logseq{Euler Characteristic} of an exact sequence in the category of finite dimensional vector spaces is zero. To be specific, let
+\[
+0 \rightarrow A^0 \xrightarrow{d_0} A^1 \xrightarrow{d_1} A^2 \xrightarrow{d_2} \cdots \rightarrow A^m \rightarrow 0
+\]
+be an exact sequence of finite-dimensional vector spaces. Then
+\[
+\sum_{k=0}^m(-1)^k \operatorname{dim} A^k=0
+\]
+\end{lemma}
+The Lemma follows from the rank-nullity theorem from linear algebra,
+\[
+\operatorname{dim} A^k=\operatorname{dimker} d_k+\operatorname{dimim} d_k .
+\]
+Use exactness condition to simplify the sum.
+
+\end{proof}
+
+Next, we study the stability of index under compact perturbation.
+For $T: E \to E$ compact, consider the operator $S = 1 - T$. This is an important special class of Fredholm operators, originally motivated by the study of \textit{integral equations} $f - \int K f = g$.
+
+\begin{theorem}
+	\label{thm:ITFredholm}
+	$S = 1 - T$ is Fredholm.
+\end{theorem}
+\begin{proof}
+	\textbf{Kernel is finite dimensional.} For each $x \in \operatorname{ker} S$, we have $x = T x$. Thus $T|_{\operatorname{ker} S}$ is both an identity operator, and a compact operator (since $T$ is). Hence $\operatorname{ker} S$ is finite dimensional. We can then take $E_S$ be a closed subspace that is linear complement of $\operatorname{ker} S$, i.e. $E = \operatorname{ker}  S \oplus E_S$.
+
+	\textbf{Image is closed.} Take $x_n' \in E$ such that $y_n = S x_n' \to y \in E$. We want to show $y \in \operatorname{Im} S$. Let $x_n \in E_S$ be projection of $x_n'$.
+
+	We first verify $(x_n)$ is bounded. Suppose in contrary that $\|x_n\| \to \infty $. Then $x_n^0 = \frac{x_n}{\|x_n\|}$ are unit vectors such that $S x_n^0 \to 0$. Since $T$ is compact, $T x_n^0 \to z$ after passing to a subsequence. Since $\|x_n^0 - T x_n^0\| \to 0$, $x_n^0 \to z$ along the same subsequence. Thus $S z = 0$. But now we have  $z \in \operatorname{ker} S, z \in E_S, $ and $\|z\| = 1$, which is impossible.
+
+	Since $(x_n)$ is bounded, $T x_n \to z$ after passing to a subsequence. We have $y_n = S x_n = x_n - T x_n$, so $x_n = y_n + T x_n \to y + z$, whence $S x_n \to S(y + z) = y$.
+
+	\textbf{Image has finite codimension.} First observe that $\operatorname{Im} S$ is an invariant space of $S$, and $T$ as well. (Since $T S = S T$, we have $T (S x) = S(T x)$ for all $x \in E$) 
+	We can form the quotient $\tilde E = E / \operatorname{Im} S$, and have operators $\tilde S, \tilde T: \tilde E \to \tilde E$. Now for every $\dot{x} \in \tilde E$, we have $\tilde S \dot{x} = 0$ and $\tilde S \dot{x} = \dot{x} - \tilde T \dot{x}$, so $\tilde T$ is identity on $\tilde E$.
+
+	Let $\operatorname{pr} : E \to \tilde E$ be the natural projection. Then
+	\[
+		(\operatorname{pr}  \circ T)(B_E) = (\tilde T \circ \operatorname{pr} )(B_E) = \tilde T (B_{\tilde E}) = B_{\tilde E}
+	.\] 
+	Since $\operatorname{pr }  \circ T$ is compact ($\mathcal{K}$ (E) is two-sided ideal), $B_{\tilde E}$ is relatively compact. Hence $\operatorname{dim} \tilde E < \infty $, i.e. $\operatorname{dim} \operatorname{coker} S < \infty $.
+\end{proof}
+
+\iffalse
+\begin{proof}[Alternative proof for finite codimension]
+Suppose for contradiction that  $\operatorname{Im} S$ had infinite codimension. Then we can pick a sequence of strictly increasing subspaces $\operatorname{Im} S  = V_0 \subsetneq V_1 \subsetneq \ldots$, increasing dimension one at a time. Using the Riesz Lemma ( Lemma~\ref{lem:Riesz}), we can choose unitary $x_n \in V_n, \text{dist}(x_n, V_{n - 1}) > \frac{1}{2}$. But $S x_n = x_n - T x_n \in V_{n - 1}$. 
+\end{proof}
+\fi
+
+\begin{theorem}[Nikol'skii, Atkinson]
+	\label{thm:NikolskiiAtkinson}
+	Consider $S : E \to F$ in $\mathbf{Ban}$. Then $S$ is a Fredholm operator $\iff $ $S + \mathcal{K}(E, F)$ is an isomorphism in $\mathbf{Ban}/\mathcal{K}$. In other words, $S$ is Fredholm $\iff $ there exists $R: F \to E$ such that $RS = 1_E - T_1, SR = 1_F - T_2$ where $T_1 \in \mathcal{K}(E), T_2 \in \mathcal{K}(F)$.
+
+	Moreover, $R$ can be chosen such that $T_1$ and $T_2$ are finite-dimensional.
+	
+\end{theorem}
+\begin{proof}
+	($\implies$)
+	Take Fredholm $S: E \to F$. Since  $\operatorname{dim} \operatorname{ker} S < \infty $, we can take its closed linear complement $E_S$, so there is a projection $P_1$ onto $E_S$ along $\operatorname{ker} S$. Since $\operatorname{dim} \operatorname{coker} S < \infty $, $\operatorname{Im} S$ is a closed subspace and there is a projection $P_2$ onto $\operatorname{Im} S$. 
+
+	Let $S_0^0: E_S \to \operatorname{Im} S$ be the corestriction of $S$, then it is a bijective map between Banach spaces. Hence by Banach theorem (open mapping theorem) it is a topological isomorphism. 
+
+	Now let $R: F \to E$ be defined as $R = (S_0^0)^{-1} P_2$, where $E_S$ naturally embeds into $E$. We have $RS = (S_0^0)^{-1} P_2 S_0^0 P_1 = P_1 = 1 - (1 - P_1)$ and $SR = S_0^0 P_1 (S_0^0)^{-1} P_2 = P_2 = 1 - (1 - P_2)$, where both $1 - P_1$ and $1 - P_2$ are finite dimensional (since they are projections onto $\operatorname{ker} S$ and $\operatorname{coker} S$).
+
+	($\impliedby$) From the assumption, by Theorem~\ref{thm:ITFredholm} we know $RS$ and $SR$ are Fredholm operators. Then observe that $\operatorname{ker} S \subset \operatorname{ker} RS$ and $\operatorname{Im} S \supset \operatorname{Im} SR$.
+
+\end{proof}
+
+\begin{theorem}[Continuity of Index]
+	\label{thm:ContinuityIndex}
+	$\text{Fred}(E,F)$ is an open subset of $B(E,F)$. The index map $S \mapsto \operatorname{ind } S$ is locally constant and in particular continuous.
+\end{theorem}
+\begin{proof}
+	By Theorem~\ref{thm:NikolskiiAtkinson}, there are closed subspaces $E_0 \subset E$ and $F_0 \subset F$, each with finite codimension, such that the corestriction $S_0^0: E_0 \to F_0$ is a topological isomorphism. Write $\iota : E_0 \to E$ for the natural embedding and $\pi : F \to F_0$ for the natural projection. Then $S_0^0 = \pi \circ S \circ \iota $. 
+
+Now, $\text{Iso}(E_0, F_0)$ is open in $B(E_0, F_0)$, since $\text{Iso}(E_0, E_0) = \text{GL}(B(E_0))$ is open (Proposition~\ref{prop:GLOpen}), and for each $V \in \text{Iso}(F_0, E_0)$,
+	 \[
+		\text{Iso}(E_0, F_0) \ni T \mapsto VT \in \text{Iso}(E_0, E_0)
+	\] 
+	is a homeomorphism.
+
+	Now, choose $\varepsilon_0>0$ such that $U(\pi S \iota, \varepsilon_0) \subset \text{Iso}(E_0, F_0) $. Now, fix $S \in \text{Fred}(E, F)$ and let $R$ be such that $\|R - S\| < \frac{\varepsilon_0}{(\|\iota\|+1)(\|\pi\|+1)}$, then
+	\[
+		\|\pi R \iota - \pi S \iota\|
+		\le \|\pi\| \|R - S\| \|\iota\|
+		< \varepsilon_0
+	.\] 
+	Thus  $\operatorname{ker} R \subset \operatorname{ker} S, \operatorname{Im} R \supset \operatorname{Im} S$, thus $R \in \text{Fred}(E, F)$. Now both $\pi R \iota$ and $\pi S \iota$ are topological isomorphisms with Fredholm index $0$, so by Theorem~\ref{thm:MultiplicativePropertyIndex} we have
+	\[
+		\text{ind}\pi + \text{ind}R + \text{ind}\iota =
+		\text{ind}\pi + \text{ind}S + \text{ind}\iota = 0
+	.\] 
+	Thus $\text{ind} R = \text{ind} S$.
+\end{proof}
+
+\begin{corollary}[Stability of index under compact perturbations]
+	\label{cor:CompactPerturbation}
+	If $S$ is a Fredholm operator and $T$ a compact operator between Banach spaces $E$ and $F$, then $S + T$ is a Fredholm operator and $\text{ind}(S + T) = \text{ind}(S)$.
+\end{corollary}
+\begin{proof}
+	The map $[0,1] \ni \text{ind}(T + t K) \in \mathbb{Z}$ is continuous.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:ITindex}
+	If $K \in \mathcal{K}(E)$, the operator $S = 1 - K$ has index $0$.
+\end{corollary}
+
+
+
+
+
+\begin{theorem}[Fredholm Alternative]
+	\label{thm:FredholmAlternative}
+	Let $T \in \mathcal{K}(E)$ be a compact operator. Then for each $\lambda \in \mathbb{C}$, $\lambda\neq 0$, either $\lambda$ is an eigenvalue of $T$ with finite dimensional eigenspace, or $\lambda - T$ invertible.
+\end{theorem}
+
+Other equivalent statements of Fredholm Alternative:
+\begin{itemize}
+	\item 
+	either $0 < \operatorname{dim} \operatorname{ker} 1 - T < \infty $, or $1 - T$ invertible. 
+	\item $1 - T$ injective $\iff  1 - T $ surjective.
+	\item either $(\lambda - T) v = 0$ has some nonzero solution $v \in E$, or $(\lambda - T) v = w$ always have unique solution $v$ for arbitrary  $w \in E$, in which case $v$ depends continuously on $w$.
+\end{itemize}
+
+\begin{proof}
+	$\lambda \mathbf{1}$ is a Fredholm operator. By the above corollary, $\lambda - T$ is Fredholm with index $0$. Then either $\operatorname{dim} \operatorname{ker} (\lambda - T) = \operatorname{dim} \operatorname{coker} (\lambda - T) 0$, in which case $\lambda - T$ is invertible, or $0 < \operatorname{ker} T < \infty $, in which case $\lambda$ is an eigenvalue.
+\end{proof}
+
+We have seen from Theorem~\ref{thm:ContinuityIndex} that $\Phi(E, F)$ is union of open-closed subsets $\Phi_n(E, F)$ of Fredholm operators with index $n$, $n \in \mathbb{Z}$.
+
+\begin{theorem}[Atiyah]
+	\label{thm:AtiyahFredConnected}
+	Let $H$ and $K$ be Hilbert spaces. Then every $\Phi_n(H, K)$ is non-empty and path-connected.
+\end{theorem}
+
+\subsubsection{Homological Algebra and Adjointness}
+
+\begin{proposition}
+	\label{prop:FredholmExactSequence}
+	In category $\mathbf{Ban}$, an operator $S: E \to F$ is Fredholm iff there is an exact sequence
+	\[
+		0 \to K \to E \xrightarrow{S} F \to C \to 0
+	.\] 
+	with finite-dimensional $K$ and $C$.
+\end{proposition}
+\begin{proof}
+	Omitted due to simplicity.
+\end{proof}
+
+
+\begin{theorem}[Banach Adjoint is Exact]
+	\label{thm:BanachAdjointExact}
+	The Banach adjoint functor is exact.
+\end{theorem}
+\begin{proof}
+	\todo{Not done yet.}
+\end{proof}
+
+
+\begin{proposition}
+	\label{prop:FredholmAdjoint}
+	In $\mathbf{Ban}$, $S: E \to F$ is Fredholm iff $S^*: F^* \to E^*$ is Fredholm. Furthermore, we have $\operatorname{dim} \operatorname{ker} S^* = \operatorname{dim} \operatorname{coker} S$, $\operatorname{dim} \operatorname{coker} S^* = \operatorname{dim} \operatorname{ker} S$, and their index are the same.
+\end{proposition}
+\begin{proof}
+	$S$ Fredholm implies $S^*$ Fredholm by applying Theorem~\ref{thm:BanachAdjointExact} to Proposition~\ref{prop:FredholmExactSequence}, noting that for finite dimensional $C$ and $K$, $C \cong C^*$ and $K \cong K^*$. 
+
+	Now assume $S^*$ Fredholm. If we can show $\operatorname{Im} S$ is closed, then applying the first part to $S$ again gives the result. To do this, consider the natural embedding $\alpha: E\to E^{* *}, F \to F^{* *}$. $S^*$ Fredholm implies $S^{* *}: E^{* *} \to F^{* *}$ Fredholm. We have the following commutative diagram:
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJFXnsqICp9Il0sWzIsMCwiRl57KiAqfSJdLFswLDIsIkUiXSxbMiwyLCJGIl0sWzAsMSwiU157KiAqfSJdLFsyLDMsIlMiXSxbMywxLCJcXGFscGhhIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwwLCJcXGFscGhhIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{E^{* *}} \&\& {F^{* *}} \\
+	\\
+	E \&\& F
+	\arrow["{S^{* *}}", from=1-1, to=1-3]
+	\arrow["S", from=3-1, to=3-3]
+	\arrow["\alpha"{description}, hook, from=3-3, to=1-3]
+	\arrow["\alpha"{description}, hook, from=3-1, to=1-1]
+\end{tikzcd}\]
+We may omit $\alpha$ without loss of rigor.
+
+We have $\operatorname{ker} S \subset \operatorname{ker} S^{* *}$ finite dimensional, so  we may take its orthogonal complement $E_0$ in $E$ and $E^1$ in $E^{* *}$. Thus  $E = K \oplus E_0$ and $E^{* *} = K \oplus E_1$. In particular, $\operatorname{Im} S^{* *}$ is closed.
+
+To show  $\operatorname{Im} S$ closed, we show $\alpha \operatorname{Im} S = S^{* *} ( \alpha E) = S^{* *}(\alpha E_0)$ is closed. Take a sequence $x_n \in E_0$ such that $S^{* *} x_n \to y \in F^{* *}$. Since $S^{* *}$ is Fredholm, $S^{* *}$ after corestricted to $E_1$ and $\operatorname{Im} S^{* *}$ is a topological isomorphism.
+Then the Banach theorem says $x_n \to x \in E_1$. But  since $E_0$ is closed, $x \in E_0$, and we have $S^{* *} x = y$.
+
+%Suppose $\|x_n\| \to \infty $. Then we let $x_n^0 = \frac{x_n}{\|x_n\|}$, and $S^{* * } x_n^0 \to 0$. Since $S^{* *}$ is Fredholm, $S^{* *}$ after corestricted to $E_1$ and $\operatorname{Im} S^{* *}$ is a topological isomorphism, thus $x_n^0 \to 0$, a contradiction. Thus $(x_n)$ is bounded. 
+
+	
+\end{proof}
+
+\begin{remark}
+	If we work in the category of Hilbert spaces instead, then $T^{* *} = T$ and we only keep the first line of the proof.
+\end{remark}
+
+
+\subsubsection{Examples on Lp and lp spaces}
+
+\begin{proposition}
+	A diagonal operator $T_\lambda : l_p \to l_p$, $1 \le p \le \infty $ is Fredholm iff zero is not a limit point of the sequence $\lambda$. If it is Fredholm, its index is always equal to zero.
+\end{proposition}
+\begin{proof}
+	If $T_\lambda$ is Fredholm, its birestriction to the (infinite-dimensional) subspace generated by arbitrary family of unit vectors is still Fredholm, thus such birestrictions cannot be compact. If zero is a limit point of the sequence $\lambda$, we may choose sequence of unit vectors $\delta_{n_k} \in l_p$ such that $\lambda_{n_k} < \frac{1}{k}$. Then $T_\lambda$ restricted to subspace spanned by $(\delta_{n_k})$, is compact, since the Hilbert cube is compact.
+
+	If zero is not a limit point, then without loss of generality we may find a lower bound $\theta>0$ of all $\lambda_n$. Then $T_\lambda$ becomes invertible, hence Fredholm.
+
+To see $\text{ind} T_\lambda = 0$, it suffices to observe that both $\operatorname{ker} T_\lambda$ and $\operatorname{coker} T_\lambda$ are the space $\operatorname{span } \{\delta_k : \lambda_k = 0\}$.
+\end{proof}
+
+\begin{proposition}
+	\label{prop:LpMultFredholm}
+	The multiplication vector $T_f: L_p[a,b] \to L_p[a,b]; 1 \le p \le \infty $, where $f \in L_\infty [a,b]$ is Fredholm $\iff $ $\|f\| > \theta > 0$ a.e. on $[a,b]  \iff $ $T_f$ is invertible.
+\end{proposition}
+\begin{proof}
+	We first prove $T_f$ invertible $\iff $ $T_f$ Fredholm. We only need to prove $\impliedby$. In case $K_0 = \{|f| = 0\} $ as positive measure, $\operatorname{ker} T_f = L(K_0)$ has infinite dimension, a contradiction. Thus $K_0$ has zero measure, then $T_f$ is injective. Since $T_f$ Fredholm, $\operatorname{Im} T_f$ is closed (Lemma~\ref{lem:ImageClosed}). Thus $T_f$ is topologically injective, thus $T_f$ is invertible (see the following lemma). 
+\end{proof}
+
+\begin{lemma}
+	The following are equivalent:
+	\begin{enumerate}
+		\item $T_f$ is a topological isomorphism.
+		\item $T_f$ is topologically injective.
+		\item $T_f$ is topologically surjective.
+		\item $T_f$ is surjective.
+		\item $|f| > \theta > 0$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Assume $5$, then $T_{f^{-1}} = T_f^{-1}$ is bounded. Thus $T_f$ is topological isomorphism.
+
+	Assume $5$ is false. Let $K_n = \{|f| < \frac{1}{n}\} $. Write $\chi_n = \chi_{K_n}$. Consider
+	\[
+		T_f \frac{\chi_n}{\|\chi_n\|} = \frac{f \chi_n}{ \|\chi_n\|} < \frac{1}{n} \frac{\chi_n}{\|\chi_n\|} \to 0
+	.\] 
+	Thus $T_f$ is not bounded below, thus not invertible.
+
+	$1 \to 2, 3, 4$ is trivial. Assume $2$. Topologically injective means $T_f U(0,1)$ is open, thus $T_f$ surjective, thus $T_f$ is topological isomorphism (See Lemma).
+
+	Assume 4. Then $1$ follows by Open Mapping Theorem.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:TopInjectiveSurjective}
+	In the category of normed spaces $\mathbf{Nor}$, for $T:E \to F$, TFAE:
+	\begin{enumerate}
+		\item $T$ is topological isomorphism,
+		\item $T$ is topologically injective and surjective,
+		\item $T$ is injective and topologically surjective
+	\end{enumerate}
+\end{lemma}
+
+\subsubsection{Motivations for Fredholm Operators}
+
+The study of compact and Fredholm operators originally stem from the study of \logseq{integral equations of the second kind}, of the form
+\[
+	x(s) - \int _a^b K(s, t) x(t) dt = y(s)
+.\] 
+When $y(s) = 0$ this is a \textit{homogeneous} integral equation. From algebraic point of view this is an \textit{operator equation}. We consider $E = F = L_2[a,b]$, and $S = 1 - T$, where $T$ is an integral operator on $L_2[a,b] $ with kernel $K(s, t)$. 
+
+The theory of Fredholm operators gives us the following, classic result:
+
+\begin{theorem}[Triple Fredholm Theorem]
+	\label{thm:TripleFredholmThm}
+	Consider the integral equation of the second kind
+\[
+	x(s) - \int _a^b K(s, t) x(t) dt = y(s)
+.\]
+Then
+\begin{enumerate}
+	\item There is a finite family $x_1(s), \ldots, x_m(s)$ of linearly independent and spanning solutions to the homogeneous equation.
+	\item There is a finite family $z_1(s), \ldots, z_n(s)$ of linearly independent functions in $L_2[a,b]$ such that the right hand sides $y(s)$ of which the inhomogeneous equation has at least one solution are precisely those functions of which $\int _a^b y(t) \overline{z_k(t)} dt = 0 $ for $k = 1, \ldots, n$.
+	\item $m = n$.
+\end{enumerate}
+
+\end{theorem}
+\begin{proof}
+	In the Hilbert space $H = L_2[a,b]$, consider the operator $S = 1 - T$, where $T$ is the integral operator with kernel $K(s, t)$. Part (1) is equivalent to saying  $\operatorname{dim} \operatorname{ker} S  < \infty $, a direct corollary of Theorem~\ref{prop:IntegralOperatorCompact} and Theorem~\ref{thm:ITFredholm}. We have $m = \operatorname{dim} \operatorname{ker} S$.
+
+	(2) is equivalent to
+	\[
+		\operatorname{Im} S = \left( \operatorname{span } \{z_1(s), \ldots, z_n(s)\}  \right) ^\perp 
+	.\] 
+	This is equivalent to saying that $\operatorname{Im} S$ is closed and $\operatorname{dim} (\operatorname{Im} S) ^{\perp} < \infty $. This is true since $\operatorname{dim} \operatorname{Im} (S) ^\perp =\operatorname{dim} \operatorname{coker} S < \infty  $. Thus $n = \operatorname{dim} \operatorname{coker} S$.
+
+	Finally, Corollary~\ref{cor:ITindex} implies $m = n$.
+\end{proof}
+
+In the self-adjoint case Theorem~\ref{thm:TripleFredholmThm} has a simplification.
+\begin{proposition}[Fredholm]
+	\label{prop:FredholmSA}
+	Suppose
+	\[
+		x(s)-\int_a^b K(s, t) x(t) d t=y(s)
+	\]
+	is an integral equation of the second kind, with symmetric kernel, and 
+\[
+		x(s)-\int_a^b K(s, t) x(t) d t=0
+	\]
+	is the corresponding homogeneous equation. Then there exists a linearly independent system $x_1, \ldots, x_m$ of solutions of the homogeneous equation satisfying the following conditions:
+	\begin{enumerate}
+		\item every solution of the homogeneous equation is a linear combination of $x_1, \ldots, x_m$;
+		\item the $y(s)$ for which the inhomogeneous equation has at least one solution are precisely the functions satisfying the equations $\int _a^b y(t) \overline{x_k(t)} dt = 0 $ for all $k = 1, \ldots, m$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Let $S = 1 - T_K$ where  $T_K$ is the integral operator with kernel $K$. Then $S$ is self-adjoint. We have
+	$\operatorname{ker} S = \operatorname{ker} S^* = \left( \operatorname{Im} S \right) ^\perp$.
+\end{proof}
+
+
+
+
+
+

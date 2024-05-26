@@ -1,0 +1,94 @@
+\homework{7}{Wed 01 May 2024 18:17}{}
+
+\begin{problem}
+	Let $R$ be a commutative ring, and $P$ be an $R$-module. Let $F=\operatorname{Hom}_R(P, \cdot): \operatorname{Mod}_R \rightarrow$ $\operatorname{Mod}_R$ be the functor that sends an $R$-module $M$ to $\operatorname{Hom}_R(P, M)$ and sends a morphism $f: M \rightarrow N$ to $\operatorname{Hom}_R(P, f): \operatorname{Hom}_R(P, M) \rightarrow \operatorname{Hom}_R(P, N)$ where $\operatorname{Hom}_R(P, f)(\phi)=f \circ \phi$.\\
+a). Prove that $F$ is left exact. That is, for any exact sequence
+\[
+0 \longrightarrow N^{\prime} \xrightarrow{f} N \xrightarrow{g} N^{\prime \prime}
+\]
+the following sequence is exact,
+\[
+0 \longrightarrow F\left(N^{\prime}\right) \xrightarrow{F(f)} F(N) \xrightarrow{F(g)} F\left(N^{\prime \prime}\right)
+\]
+b). Prove that if $P$ is projective, then $F$ is exact, that is, $F$ maps a short exact sequence to a short exact sequence.
+\end{problem}
+\begin{proof}
+	(a) Exactness at  $F(N')$ : Take $(\varphi: P \to N') \in F(N')$ be nonzero. Then the map $F(f)(\varphi) = f \circ \varphi \neq 0$ since $f$ is injective. Hence $F(f)$ is injective.
+
+	Exactness at $F(N)$ : Take $\varphi \in F(N')$ , then $F(g) F(f) \varphi = (g \circ f \circ \varphi) = 0$. 
+
+	Now take $\psi \in F(N)$ and suppose that $F(g) \psi = 0$. Then for every $p \in P$, we have $g \psi(p) = 0$. By exactness at $N$, there exists a unique $n'_p$ such that $f(n'_p) = \psi(p)$. Define the map $\psi' \in F(N')$ such that $\psi'(p) = n'_p$. This is a uniquely defined function, and is a module homomorphism. Therefore $F(f) \psi' = \psi$.
+
+	(b) Assume in addition that $P$ is projective, and we want to show exactness at $F(N'')$. Take $\varphi'': P \to N''$. Since $g: N \to N''$ is surjective, by universal property of $P$, there exists a unique $\varphi : P \to N$ such that $\varphi'' = g \circ \varphi$. Thus $F(g)$ is surjective.
+\end{proof}
+
+
+\begin{problem}
+	For an $R$-module $M$ and given a short exact sequence
+\[
+0 \longrightarrow N^{\prime} \xrightarrow{f} N \xrightarrow{g} N^{\prime \prime} \longrightarrow 0
+\]
+show there exists a long exact sequence,
+\begin{align*}
+\longrightarrow\operatorname{Ext}_n^R\left(M, N^{\prime}\right) \longrightarrow \operatorname{Ext}_n^R(M, N) \longrightarrow \operatorname{Ext}_n^R\left(M, N^{\prime \prime}\right) \longrightarrow \operatorname{Ext}_{n+1}^R\left(M, N^{\prime}\right)
+\end{align*}
+\end{problem}
+\begin{proof}
+	Let $I'$ be an injective resolution of $N'$, and $I''$ be an injective resolution of $N''$. Then there exists an injective resolution $I$ of $N$ such that
+% https://quiver.local:8080/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIk4nIl0sWzIsMCwiTiJdLFszLDAsIk4nJyJdLFs0LDAsIjAiXSxbMCwxLCIwIl0sWzEsMSwiSSdfKiJdLFsyLDEsIklfKiJdLFszLDEsIkknJ18qIl0sWzQsMSwiMCJdLFsxLDZdLFsyLDddLFszLDhdLFswLDFdLFsxLDJdLFsyLDNdLFszLDRdLFs1LDZdLFs2LDddLFs3LDhdLFs4LDldXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	0 \& {N'} \& N \& {N''} \& 0 \\
+	0 \& {I'_*} \& {I_*} \& {I''_*} \& 0
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]	
+commutes and the rows are exact (see last hw). Thus we have a short exact sequence of chains $0 \to I' \to I \to I'' \to 0$ that splits. Hence $0\to \text{Hom}(M, I') \to \text{Hom}(M, I) \to \text{Hom}(M, I'') \to 0$ is a short exact sequence. Therefore we get the desired long exact sequence of Ext.
+\end{proof}
+
+
+\begin{problem}
+	Let $X$ be a topological space and $p>0$ be an integer. Show that if $H_n(X)$ is free for each $n$, then $H^*\left(X ; \mathbb{Z}_p\right)$ and $H^*(X) \otimes \mathbb{Z}_p$ are isomorphic as rings, where the product structure on $H^*(X) \otimes \mathbb{Z}_p$ is given by the obvious one, that is $(\alpha \otimes[m])(\beta \otimes[n])=\alpha \beta \otimes[m n]$.
+\end{problem}
+\begin{proof}
+	Apply universal coefficient theorem with $\mathbb{Z}_p$ coefficient, in the category of abelian groups, we get the s.e.s.
+	\[
+		0 \to  \text{Ext}^1(H_{i - 1}(X), \mathbb{Z}_p) \to  H^i(X; \mathbb{Z}_p) \to \text{Hom}(H_i(X), \mathbb{Z}_p) \to 0
+	.\] 
+	By assumption $H_{i - 1}(X)$ is free, so the Ext term is zero. Hence we have an isomorphism
+	\[
+		H^i(X, \mathbb{Z}_p) \xrightarrow{h_p} \text{Hom}(H_i(X), \mathbb{Z}_p)
+	.\] 
+	given by
+	\[
+		h_p([f])([x]) = f(x)
+	.\] 
+	Similarly, applying UCT with $\mathbb{Z}$ coefficient, we have an isomorphism
+	\[
+		H^i(X) \xrightarrow{h} \text{Hom}(H_i(X), \mathbb{Z})
+	\] 
+	with $h$ being defined in a similar way.
+Since $H_i(X)$ is free, we have
+\[
+	\text{Hom}(H_i(X), \mathbb{Z}) = H_i(X), \quad
+	\text{Hom}(H_i(X), \mathbb{Z}_p) = H_i(X) \otimes \mathbb{Z}_p
+.\] 
+Combining those, we get an isomorphism
+\[
+	H^i(X; \mathbb{Z}_p) = H_i(X) \otimes \mathbb{Z}_p
+.\] 
+Hence
+\[
+	H^*(X; \mathbb{Z}_p) = H_{*}(X) \otimes \mathbb{Z}_p
+.\] 
+\end{proof}
+
+

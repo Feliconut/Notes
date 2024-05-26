@@ -1,0 +1,20 @@
+\lecture{10}{Thu 08 Feb 2024 10:33}{No Cloning}
+
+Next week we are going to cover
+1. No cloning theorem, 2. Superdense coding, 3. Bernstein, 4. Vazini, 5. BQP $\subset $ PSPACE.
+
+\begin{theorem}[No Cloning]
+	\label{thm:NoCloning}
+	There does not exist a unitary operator such that $U\left( \left| \psi \right\rangle \otimes \left| 0 \right\rangle  \right)  = \left| \psi \right\rangle  \otimes  \left| \psi \right\rangle $.
+\end{theorem}
+\begin{proof}
+	Suppose there is such a $U$. Then 
+	\[
+		U\left( \left| \psi_1 \right\rangle  \otimes \left| 0 \right\rangle  \right) + U(\left| \psi_2 \right\rangle \otimes \left| 0 \right\rangle ) = \left| \psi_1 \right\rangle \otimes \left| \psi_1 \right\rangle + \left| \psi_2 \right\rangle \otimes \left| \psi_2 \right\rangle  
+	.\] 
+	But
+	\[
+		U(\left| \psi_1 \right\rangle \otimes \left| 0 \right\rangle  + \left| \psi_2 \right\rangle \otimes \left| 0 \right\rangle ) = 
+	.\] 
+\end{proof}
+

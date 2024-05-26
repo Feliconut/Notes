@@ -1,0 +1,141 @@
+\homework{5}{Wed 21 Feb 2024 06:59}{}
+
+\begin{problem}
+	The direct sum of a countable family of Hilbert spaces $\left(H_n\right)_{n=1}^{\infty}$ denoted
+\[
+H=\bigoplus_{n=1}^{\infty} H_n
+\]
+is defined as the space consisting of all sequences $x=\left(x_n\right)_{n=1}^{\infty}$ with the property that $\|x\|^2:=\sum_{n=1}^{\infty}\left\|x_n\right\|^2<\infty$. It is known that $H$ is a Hilbert space with respect the scalar product
+\[
+\langle x, y\rangle=\sum_{n=1}^{\infty}\left\langle x_n, y_n\right\rangle .
+\]
+
+For each $n \geq 1$ let $T_n \in B\left(H_n\right)$ and suppose that $\sup _n\left\|T_n\right\|<\infty$. Define $T: \bigoplus_{n=1}^{\infty} H_n \rightarrow \bigoplus_{n=1}^{\infty} H_n$ by
+\[
+T\left(x_1, x_2, \ldots, x_n, \ldots\right)=\left(T_1 x_1, T_2 x_2, \ldots, T_n x_n, \ldots\right) .
+\]
+
+Show that the map $T$ is a well-defined linear bounded operator on $H$ and that $\|T\|=\sup _n\left\|T_n\right\|$.
+\end{problem}
+\begin{proof}
+	$T$ is clearly linear if well-defined. To check it is well-defined, take $x \in H$ and note that
+	\[
+		\|T x\|^2 := \sum_{n = 1}^\infty \|T_n x_n\|^2 
+		\le \sup \|T_n\|^2 \sum_{n = 1}^\infty  \|x_n\|^2 < \infty 
+	.\] 
+
+	Next, for each $H_n$ choose $e_n \in H_n$ such that $\|e_n\| = 1$ and $\|T_n e_n\| \ge \|T_n\| - \varepsilon$. Then let $\xi_n \in H$ be such that $(\xi_n)_n = e_n$ and $(\xi_n)_m = 0$ for $m \neq n$. Now
+	\[
+		\|T\| \ge \|T \xi_n\| = \|T_n e_n\| \ge  \|T_n\| - \varepsilon
+	.\] 
+	Those together show that $\|T\| = \sup _n \|T_n\|$.
+\end{proof}
+
+\begin{problem}
+	Define $T: L^2[0,1] \rightarrow L^2[0,1]$ by
+\[
+T f(x)=f(x)+\int_0^x y f(y) d y .
+\]
+a) Show that $T$ is bounded.\\
+b) Show that $T \in B\left(L^2[0,1]\right)$ is invertible.
+\end{problem}
+\begin{proof}
+	$T$ is bounded if it is a sum of bounded operators. Thus it suffices to show that $T': f \mapsto \int _0^\cdot y f(y) d y$ is bounded. 
+	Let $I_x$ be the identity function on $[0,x]$ embedded in $[0,1]$. Note that
+	\[
+		\left( \int _0^x y f(y) dy  \right) ^2 =
+		\left| \left\langle I_x, f \right\rangle  \right| ^2
+		\le \|I_x\|_2^2 \|f\|_2^2 = \frac{1}{3} x^3 \|f\|_2^2
+	.\] 
+	Now
+	\[
+		\|T' f\|_2^2 = \int _0^1 (T f(x))^2 dx = \frac{1}{12}\|f\|_2^2
+	.\] 
+	Hence $T'$ is bounded, therefore $T$ is bounded.
+
+	To show $T$ invertible it suffices to show $T$ does not vanish and maps injectively for each element in the orthonormal basis $\{e^{2 \pi in x}\}_{n \in \mathbb{Z}} $.
+	
+	We compute for $n \neq 0$,
+	\[
+		T e^{2 \pi i n x} = e^{2 \pi i n x} + \int _0^x y e^{2 \pi i n y} d y = -\frac{1}{4 \pi^2 n^2} + \frac{1 - 2 \pi i n x + 4 \pi^2 n^2}{ 4 \pi^2 n^2} e^{2 \pi i n x}
+	.\] 
+
+	For $n \neq $ we may define
+	\[
+		T^{-1} e^{2 \pi i n x} = \frac{ 4 \pi^2 n^2}{1 - 2 \pi i n x + 4 \pi^2 n^2} \left(e^{2 \pi i n x} + \frac{1}{4 \pi^2 n^2}\right)
+	.\] 
+	Now we have $T T^{-1} e^{2 \pi i n x} = T^{-1} T e^{2 \pi i n x} = e^{2 \pi i n x}$ for each $n \neq 0$.
+
+	We have
+	\[
+		Tf =  \sum_{n \neq 0} \left\langle f, e^{2 \pi i n x} \right\rangle \frac{1 - 2 \pi i n x + 4 \pi^2 n^2}{ 4 \pi^2 n^2} e^{2 \pi i n x} + \left\langle f, 1 \right\rangle - \frac{1}{4 \pi ^2} \sum_{n \neq 0} \left\langle f, e^{2 \pi i n x} \right\rangle \frac{1}{n^2}
+	.\] 
+	We may define
+	\[
+		T^{-1}f =  \sum_{n \neq 0} \left\langle f, e^{2 \pi i n x} \right\rangle  \frac{ 4 \pi^2 n^2}{1 - 2 \pi i n x + 4 \pi^2 n^2} e^{2 \pi i n x} + \left\langle f, 1 \right\rangle + \sum_{n \neq 0} \left\langle f, e^{2 \pi i n x} \right\rangle \frac{1}{1 - 2 \pi i n x + 4 \pi^2 n^2}
+	.\] 
+	There is no problem in our definition because we can note that the denominators never vanish and $T$ is bounded.
+\end{proof}
+
+\begin{problem}
+	(a) Let $H_1, H_2$ be Hilbert spaces and let $x_1, \ldots, x_n \in H_1$ and $y_1, \ldots, y_n \in H_2$. Let $T \in B\left(H_1, H_2\right)$ be defined by $T x=\sum_{i=1}^n\left\langle x, x_i\right\rangle y_i$ for $x \in H_1$. Compute the adjoint operator $T^*$.\\
+(b) Let $\left(\alpha_n\right)$ be a bounded sequence in $\mathbb{C}$. Let $S: \ell^2(\mathbb{N}) \rightarrow \ell^2(\mathbb{N})$ be defined by
+\[
+S\left(x_1, x_2, \ldots, x_n, \ldots\right)=\left(0, \alpha_1 x_1, \alpha_2 x_2, \ldots, \alpha_n x_n, \ldots\right) .
+\]
+
+Find an explicit formula for the adjoint operator $S^*$.
+\end{problem}
+\begin{proof}
+	(1) We want $T^* \in B(H_2, H_1)$ such that
+	\[
+		\left\langle x, T^*y \right\rangle 
+		= \left\langle T x, y \right\rangle 
+		= \sum_{i=1}^{n} \left\langle x, x_i \right\rangle \left\langle y_i, y \right\rangle 
+	.\] 
+	We may choose
+	\[
+		T^*(y) = \sum_{i=1}^{n} \left\langle y_i, y \right\rangle x_i
+	.\] 
+
+	(2)
+	Take
+	\[
+		S^*(y) = \left( \overline{\alpha_1} y_2, \overline{\alpha_2} y_3, \ldots  \right) 
+	.\] 
+	Verify:
+	\begin{align*}
+		\left\langle S x, y \right\rangle 
+		&= \sum_{i=2}^{\infty } \left\langle \alpha_{i - 1} x_{i-1 }, y_i \right\rangle  \\
+		&= \sum_{i=1}^{\infty} \left\langle x_i, \overline{\alpha_i}  y_{i + 1} \right\rangle  \\
+		&= \left\langle x, S^*y \right\rangle  
+	.\end{align*}
+
+\end{proof}
+
+\begin{problem}
+	Let $A$ be a unital Banach algebra. Let $a \in A$ and let $U$ be an open set containing the spectrum of $a$. Show that there is $\varepsilon>0$ such that for any $b \in A$ with $\|b-a\|<\varepsilon$, the spectrum of $b$ is contained in $U$.
+\end{problem}
+\begin{proof}
+	We know $g: S_A(a) \to A$ defined by $\lambda\mapsto (\lambda - a)^{-1}$ is analytic, so $f:S_A(a) \to \mathbb{C}$ defined by $f(\lambda) = \|(\lambda - a)^{-1}\|$ is continuous. We also have $\lim_{\lambda \to \infty } f(\lambda) = 0$, so $f$ is bounded on $U^c$. 
+
+	Take $\lambda \in U^c$. For any $b \in A$ we have
+	\[
+		\lambda - b = \lambda - a + a - b = (\lambda - a)\left( (\lambda - a)^{-1} (a - b) + 1 \right) 
+	.\] 
+	We have
+	\[
+		\| (\lambda - a)^{-1} (a - b) + 1  - 1\| \le \|(\lambda - a)^{-1}\| \|a - b\|
+	.\] 
+	Thus for $b \in U(a, \frac{1}{\|(\lambda - a)^{-1}\|})$ , we would have $\| (\lambda - a)^{-1} (a - b) + 1  - 1\| < 1$, thus  $((\lambda - a)^{-1} (a - b) + 1)$ is invertible, hence $\lambda - b$ is invertible as a product of invertibles.
+
+	This means  $\lambda \not\in \sigma(b)$. Take a union on both sides, use the fact that $\|(\lambda - a)^{-1}\|$ is bounded from above by some constant $R$, we have
+	\[
+		U^c \subset \left( \cup _{b \in U\left( a, \frac{1}{R} \right) } \sigma(b) \right) ^c
+	.\] 
+	That is,
+	\[
+		\cup _{b \in U\left( a, \frac{1}{R} \right) } \sigma(b) \subset U
+	.\] 
+\end{proof}
+

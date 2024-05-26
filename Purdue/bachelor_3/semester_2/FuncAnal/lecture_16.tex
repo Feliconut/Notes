@@ -1,0 +1,81 @@
+\lecture{16}{Fri 16 Feb 2024 13:57}{Banach Algebra, cont.}
+
+\begin{proposition}
+	\label{prop:ResolvantAnalytic}
+
+	For any $a \in A$, $A$ a Banach algebra with identity, 
+	\[
+		f: S_A(a) \to A \qquad f(\lambda) = (\lambda - a)^{-1}
+	\] 
+	is analytic.
+\end{proposition}
+\begin{proof}
+	Let $\lambda_0 \in S_A(a)$. Choose $r_0 = \frac{1}{\|f(\lambda_0)\|} = \frac{1}{\|(\lambda_0 - a)^{- 1}\|}$.
+
+	Let $\lambda \in U\left( \lambda_0, \frac{1}{\|(\lambda_0 - a)^{-1}\|} \right) $. Thus $\lambda - a$ is invertible. Then,
+	\[
+		\|(\lambda - a) - (\lambda_0 - a)\| = |\lambda - \lambda_0| \le \frac{1}{\|(\lambda _0 - a)^{- 1}\|}
+	.\] 
+
+	By Proposition~\ref{prop:GLOpen}, $\lambda - a \in \text{GL}(A)$, thus $\lambda \in S_A(a)$. Additionally,
+	\[
+		(\lambda - a)^{- 1} = 
+		\sum_{k=0}^{\infty} \left( (\lambda_0 - a)^{- 1} (\lambda_0 - \lambda) \right) ^k (\lambda_0 - a)^{- 1}
+	.\] 
+	Thus
+	\[
+		f(\lambda) = \sum_{k=0}^{\infty} (\lambda- \lambda_0)^k (-1)^k f(\lambda_0)^{k + 1}
+	.\] 
+\end{proof}
+
+
+
+\begin{theorem}[Gelfand Theorem]
+	\label{thm:Gelfand}
+
+	Let $A$ be a Banach algebra with identity, then for any $a \in A$, $\sigma_A(a) \neq \emptyset $.
+
+\end{theorem}
+\begin{corollary}[Gelfand-Mazur]
+	\label{cor:GelfandMazur}
+
+	If $A$ is a complex Banach algebra with identity, suppose $\text{GL}(A) = A \setminus \{0\} $, then $A \cong \mathbb{C}$.
+\end{corollary}
+\begin{proof}
+	Define
+	 \[
+		\phi: \mathbb{C} \to A \qquad \phi(\lambda) = \lambda 1_{A}
+	.\] 
+	This is an isometry between algebras:
+	\[
+		\left| \phi(\lambda) \right| = \|\lambda 1_A\| = |\lambda| \|1\| = |\lambda| .\] 
+
+	It remains to prove surjectivity. Let $a \in A$. By Gelfand Theorem, there exists $\lambda \in \sigma_A(a) \neq \emptyset $. Then $\lambda - a$ is not invertible; thus $\lambda - a = 0$ since $\text{GL}(A) = A \setminus \{0\} $.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:Gelfand}]
+
+	Suppose $\sigma_A(a) = \emptyset $ for some $a$. Then $S_A(a) = \mathbb{C}$. Hence $f: \mathbb{C} \to A$, $f(\lambda) = (\lambda - a)^{-1}$ is analytic on $\mathbb{C}$, i.e. it is entire. 
+
+	\begin{remark}
+		$\|f(\lambda)\| \le \frac{1}{|\lambda| - \|a\|}$ for all $|\lambda| > \|a\|$. To verify,
+
+		\[
+			f(\lambda) = (\lambda - a)^{-1} = \left( \lambda(1 - \frac{a}{\lambda}) \right) ^{-1} = \frac{1}{\lambda} (1 - \frac{a}{\lambda})^{-1}j
+		.\] 
+		Thus
+		\[
+			\|f(\lambda)\| \le \frac{1}{|\lambda|} \frac{1}{1 - \|\frac{a}{\lambda}\|} = \frac{1}{|\lambda| - \|a\|}
+		.\] 
+	\end{remark}
+
+	Therefore, $f$ continuous and $\lim_{\lambda \to \infty } f(\lambda) = 0$, and $f$ bounded inside the unit disk (since it is compact). Thus, $f$ is bounded on $\mathbb{C}$.
+
+	By Liouville's Theorem, $f$ is constant. Then $f = 0$. This is a contradiction.
+\end{proof}
+
+\begin{remark}(Generalized \logseq{Liouville's Theroem} for Banach space)
+	Suppose $f: \mathbb{C} \to A$ is entire and bounded.
+	Then for any $\alpha \in A^*$, $\alpha \circ f$ is entire and bounded. Thus $\alpha \circ f$ is constant, by Liouville's Theorem for scalar functions. Moreover $\lim_{\lambda \to \infty } \alpha (f(\lambda)) = 0$, thus $\alpha(f(\lambda)) = 0$ for all $\lambda, $ all $\alpha \in A^*$. By Hahn-Banach, $f = 0$. (For all nonzero $x \in A$, there exists $\alpha \in X^*, \alpha(x) = 1$. Thus $x \not\in \cap_{\alpha \in X^*} \operatorname{ker} \alpha$. See Corollary~\ref{cor:ExtensionDual}.)
+\end{remark}
+

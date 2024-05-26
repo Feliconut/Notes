@@ -1,0 +1,25 @@
+\lecture{1}{Fri 12 Jan 2024 13:15}{third lecture}
+
+This is one of the most important theorems in this course. Also very important in probability.
+
+\begin{theorem}[Borel Cantelli Lemma]
+	\label{thm:BorelCantelliLem}
+	
+	Suppose $(X, \mathcal{A}, \mu)$ is a measure space, let $E_k$, $k \ge 1$, be a sequence of sets in $\mathcal{A}$ with $\sum_{k = 1}^\infty  \mu(E_k) < \infty $. Then $\mu(\limsup E_k) = 0$.
+\end{theorem}
+\begin{proof}
+	Let $\limsup E_k = \bigcap_{m = 1} ^\infty  \bigcup_{n = m} ^\infty E_n = \bigcap_{m = 1}^\infty {B_m}  $.
+	Note $B_m$ are decreasing, also
+	\[
+		\mu(B_1) = \mu\left( \bigcup_{n = 1} ^\infty  E_n \right) \le \sum_{n = 1}^\infty  \mu(E_n) < \infty 
+	.\] 
+	Apply continuity from above,
+	\[
+		\mu\left( \limsup E_k \right)  = \mu \left( \lim B_k \right) = \lim \mu\left( B_k \right) 
+	.\] 
+	But
+	\[
+		\mu(B_k) = \mu\left( \bigcup_{n = k} ^\infty  E_n \right) \le \sum_{n = k}^\infty  \mu(E_n) \to 0
+	.\] 
+\end{proof}
+

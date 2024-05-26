@@ -1,0 +1,120 @@
+\lecture{3}{Fri 12 Jan 2024 13:31}{Bounded Linear Operators}
+
+\begin{definition}[Bounded Linear Operator]
+	\label{defn:BoundedLinearOperator}
+	A linear map $T: (X, \|\cdot \|) \to (Y, \|\cdot \|)$ is bounded if there exists $M \ge  0$ such that
+	\[
+		\|T x\| \le  M \|x\| \qquad \forall  x \in X
+	.\] 
+\end{definition}
+
+\begin{notation}
+	$B(X,Y)$ denotes all bounded linear maps $X \to Y$.
+\end{notation}
+
+Note that sum of bounded linear operators are bounded, since
+\[
+	\|(T + S) x\| \le  \|T x\|+ \|S x\|
+.\] 
+Thus $B(X, Y)$ is a linear space.
+
+\begin{remark}
+	By homogeneity $\|\lambda x\| = |\lambda| \|x\|$, $U(0,r) = r U(0,1), B(0,r) = r B(0,1)$, we have for $x \neq 0$,
+	\[
+		\|T x\| \le  M \|X\| \iff \|T \frac{x}{\|x\|}\| \le  M
+	.\] 
+	Thus it is equivalent to say
+	\begin{itemize}
+		\item $\sup _{\|x\| = 1} \| T x \| \le  M$
+		\item $\sup _{\|x\| \le 1} \| T x \| \le  M$
+		\item $T(B(0,1))$ is bounded
+		\item image of any bounded set is bounded.
+	\end{itemize}
+\end{remark}
+
+\begin{definition}[Norm of Bounded Operator]
+	\label{defn:NormOfBoundedOperator}
+	For $T \in B(X, Y)$, define
+	\[
+		\|T\| = \sup _{x \neq 0} \frac{\|T x\|}{\|x\|} 
+		=
+		\sup _{\|x\|\le 1} \|T x\|
+	.\] 
+	Geometrically, it is the radius of smallest ball, centered at origin, that contains image of unit ball.
+	\[
+		\|T\| = \inf  \{r: T\left( B_X(0,1) \right) \subset r B_Y(0,1)\} 
+	.\] 
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item 
+	 Consider $T$ be an operator on  $\left( \mathbb{C}^n, \|\cdot \|_2 \right) $. Let $T = \text{diag}(\lambda_1, \ldots, \lambda_n)$. In this case $\|T\| =\max |\lambda_i|$.
+ \item Let $f \in \ell^\infty (\mathbb{N})$. Define  $(T \xi)(m) = f(m) \xi(m)$. Then
+	 \[
+	 	\|T\| = \sup |f(n)|= \|f\|_\infty 
+	 .\] 
+	 Note, if we let $\xi = \delta_n$, $T \xi = f(n) \delta_n$.
+ \item We will prove later that if $A \in M_n(\mathbb{C})$, $Tx = A x$, $\|A\|^2 = \|T\|^2 =$ the largest eigenvalue of $A^* A$.
+	\end{enumerate}
+\end{example}
+
+\begin{proposition}(Operator Space is Banach)
+	\label{prop:OperatorSpaceIsBanach}
+	If $X$ is normed linear space, $Y$ is Banach, then $\left( B(x, Y), \|\cdot \| \right) $ is Banach.
+\end{proposition}
+
+\begin{remark}
+	$T$ is Lipchitz by linearity:
+	\[
+		\|T x - T y\| \le \|T\| \|x - y\|
+	.\] 
+\end{remark}
+
+\begin{proof}
+	Let $T_n$ be a Cauchy sequence in $B(X, Y)$, so that $\|T_n - T_m\| \to 0$. Thus for every $x \in X$, $T_n x$ is Cauchy in $Y$. $Y$ complete, so $T_n \to y$ for some $y \in Y$, $y$ unique since $Y$ Hausdorff. 
+	We have uniquely defined $x \mapsto T x$ that is linear and pointwise limit of $T_n$.
+
+	First note that $\|T_n\|$ is bounded uniformly by some $m$. Then $T_n \le  m \| x\|$ for all $n$. By continuity of norm, $T_n x \to T_x $ implies $\|T_n x \|\to \|T x\|$. Hence $\|T_x\| \le  m \|x\|$ for all $x$, thus $T \in B(X, Y)$.
+
+	Finally verify $\|T_m - T\| \to 0$. For $\varepsilon>0$, $T_n$ Cauchy implies that for $n, m$ large, $\|T_n - T_m\| < \varepsilon$. Thus for every $x \in X$, $\|T_n x - T_m x\|\le m \|x\|$. Take $m \to \infty $, have $\|T_n x - T \| \le  \varepsilon \|x\|$. Hence $\|T_n - T\|\le  \varepsilon$.
+\end{proof}
+
+\begin{definition}[Dual Space]
+	\label{defn:DualSpace}
+	Dual space of $(X, \|\cdot \|)$ is $X^* = B(X, \mathbb{C})$.
+\end{definition}
+
+\begin{remark}
+	Linear functional play the role of coordinates in a space.
+
+	For example, the coordinate map $\mathbb{R}^3 \to \mathbb{R}$ such that $(x_1, x_2, x_3) \mapsto x_1$, is a map in the dual space.
+\end{remark}
+
+\begin{example}
+	For $X$ a finite dimensional normed linear space, let $\xi_1, \ldots, \xi_n$ be a basis. Define the \textit{dual basis} $f_1, \ldots, f_n$ to be
+	\[
+		f_i(\xi_j) = \delta_{i j}
+	.\] 
+\end{example}
+
+\begin{proposition}[Continuous Linear Operator]
+	\label{prop:ContinuousLinearOperator}
+	For $T: X \to Y$ linear, the following are equivalent:
+	\begin{enumerate}
+		\item $T$ is continuous.
+		\item  $T$ is continuous at $0$.
+		\item $T$ is bounded.
+		\item $T$ is Lipschitz.
+	\end{enumerate}
+	
+\end{proposition}
+\begin{proof}
+	$1 \implies 2$, $4 \implies1$ are trivial. 
+
+	$2 \implies 3$ : $T$ is continuous at $0$, so there exists $r > 0$ such that $T(U(0,r)) \subset U(0,1)$. Thus $\|x\| < r \implies \|T x\| < 1$. If $\|y\|\le 1$ then $\|\frac{r}{2}y\|\le \frac{r}{2} < r$. Thus $\|T \left( \frac{r}{2} y \right) \| < 1$. Thus
+	$\|T y\| < 2 / r$.
+
+	$3 \implies4$ : $\|T x - T y\| \le  \|T\| \|x - y\|$.
+\end{proof}
+

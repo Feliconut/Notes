@@ -1,0 +1,92 @@
+\homework{3}{Wed 07 Feb 2024 11:44}{}
+
+\begin{problem}
+	1. $X=\left(C_0(\mathbb{N}),\|\cdot\|_{\infty}\right)$. View the elements $x \in X$ as functions $x: \mathbb{N} \rightarrow \mathbb{C}$.\\
+(a) Show that if $\left(x_n\right)$ is a bounded sequence in $X$, then $x_n \xrightarrow{w} x \in X$ if and only if $x_m(k) \rightarrow x(k)$ for all $k \in \mathbb{N}$.\\
+(b) Exhibit a sequence $\left(x_n\right)$ in $X$ with $\left\|x_n\right\|=1$ for all $n \in \mathbb{N}$ such that $\left(x_n\right)$ has no weakly convergent subsequences.
+\end{problem}
+\begin{proof}
+	(a) First assume $x_n \xrightarrow{w} x $, then since projections  $p_k: x \mapsto x(k)$ are continuous in the weak topology, we have $p_k(x_n) \to p_k(x)$, so that $x_m(k) \to x(k)$ for each $k$.
+
+	Next, assume $x_m(k) \to x_k$ for each $k$. We use the fact that $\{p_k\} _{k \in \mathbb{N}}$ span a dense subspace of $X^*$. Let $\xi_k \in X^*$ be defined as $\xi_k(x) = x(k)$. Each linear functional $\lambda$ can be approximated by a sequence of functionals
+	\[
+		\tilde \lambda ^{(N)}= \sum_{k = 1}^N \lambda(\delta_k) \xi_k \to \lambda \text{ pointwise in }X
+	.\] 
+	Also, for  $\tilde \lambda^{(N)}$ supported on $\text{span}(\xi_1, \ldots, \xi_N)$, $x_m(k) \to x_k$ for all $k$ implies $\tilde \lambda^{(N)} (x_m) \to \tilde \lambda(x_m)$ for all $N \in \mathbb{N}, m \in \mathbb{N} \cup \{\infty \} $.
+
+	Now, since $x_m$ is a bounded sequence, this implies that the convergence $\tilde \lambda^{(N)} (x_m) \to \lambda(x_m)$ is uniform in $N$. This implies that
+	\[
+		\lim_{m \to \infty} \lambda(x_m)
+		= \lim_m \lim_N \tilde \lambda^{(N)}(x_m)
+		= \lim_N \lim_m \tilde \lambda^{(N)}(x_m)
+		= \lim_N \tilde \lambda^{(N)}(x)
+		= \lambda(x)
+	.\] 
+
+	For an example, let $x_n(k) = 2^{-k} \mathbf{1}\left( n \equiv 0 \mod k \right) $. For any subsequence to converge, one has to jump in lcm of $1, 2, 3, \ldots$, which is impossible.
+\end{proof}
+
+
+\newpage
+\begin{problem}
+	2. Let $X$ be a normed space.\\
+(a) Let $P \in B(X)$ satisfy $P^2=P$. Show that the range of $P$, $P(X)=\{P x: x \in X\}$ is a closed subspace of $X$.|\
+(b) Let $x_1, x_2, \ldots, x_n$ be linearly independent vectors in $X$. Show that there are $f_1, f_2, \ldots, f_n \in X^*$ such that $P=f_1(\cdot) x_1+f_2(\cdot) x_2+\cdots+f(\cdot) x_n$ defines $P \in B(X)$ with $P^2=P$ and $P(X)=\operatorname{span}\left\{x_1, x_2, \ldots, x_n\right\}$.\\
+(c) Show that if $Y \subset X$ is a finite dimensional linear subspace, then $Y$ is closed and there is a closed linear subspace $Z \subset X$ such that $Y+Z=X$ and $Y \cap Z=\{0\}$. Thus finite dimensional subspaces admit closed complements.
+\end{problem}
+\begin{proof}
+	(a) Suppose $x_n \in X$ and $Px_n \to y \in X$. Then since $P$ is continuous, we have $PP x_n \to Py$, but $PP x_n = P x_n$, so $y = Py$, i.e. $y \in PX$.
+
+	(b) Write $Y = \text{span}(x_1, \ldots, x_n)$. First define  $f_i: Y \to \mathbb{C}$ as $f_i\left( \sum_{k = 1}^n c_k x_k \right) = c_i$. Obviously $f_i \in Y^*$. Then use Hahn-Banach theorem to arbitrarily extend $f_i$ to some linear functional in $X^*$ which we also denote as $f_i$, an abuse of notation. Now define
+	\begin{align*}
+		P: X &\longrightarrow \mathbb{C} \\
+		x &\longmapsto P(x) = \sum_{k = 1}^n f_k(x) x_k
+	.\end{align*}
+	We may verify that $P^2 = P$, since
+	\begin{align*}
+		f_i(P(x)) = f_i(\sum_{k = 1}^n f_k(x) x_k) = \sum_{k = 1}^n f_k(x) \delta_{i k} = f_i(x)
+	.\end{align*}
+
+	Also, $P \in X^*$ since it is linear combination of elements of $X^*$. We have $P(X) \subset Y$ by definition; $Y \subset P(X)$ follows from the fact that $P$ fixes $Y$.
+
+	(c) Define $Z = \operatorname{ker} P$. Since $P$ is continuous, $\operatorname{ker} P$ is closed. Since $p$ is linear, $Z$ is a linear subspace of $X$. Now for any $x \in X$, $x - P x \in Z$, so $X \subset Y + Z$. For any $x \in Y \cap Z$, we have $P x = x$ and $P x = 0$, so $x = 0$, therefore $Y \cap Z = \{0\}$.
+\end{proof}
+
+\newpage
+\begin{problem}
+	3. (a) Show that the linear map $J: \ell^1(\mathbb{N}) \rightarrow \ell^2(\mathbb{N}), J(\xi)=\xi$ is well-defined and continuous.\\
+(b) Show that the range of $J$ is not closed. In other words show that the subspace $J\left(\ell^1(\mathbb{N})\right)$ of $\ell^2(\mathbb{N})$ is not a closed subset of of $\ell^2(\mathbb{N})$.
+\end{problem}
+\begin{proof}
+	To check well-definedness, note that $\|x\|_1 = \sum |x(k)| < \infty $ implies $|x(k)| < 1$ eventually, say for $k > N$. Hence
+	\[
+		\|x\|_2^2 = \sum_{k = 1}^N |x(k)|^2 + \sum_{k = N+1}^\infty |x(k)|^2 < \sum_{k = 1}^N |x(k)|^2 + \sum_{k = N+1}^\infty |x(k)| <\infty 
+	.\] 
+
+	To check continuity, we only need to observe that for $\|x\|_2 < 1$, we must have $|x(k)| < 1$  for all $k$, hence $\|x\|_2^2 < \|x\|_1$.
+
+	To see that $J\left( \ell^1(\mathbb{N}) \right) $ is not closed, consider the following sequence
+	\[
+		x_n(k) = \frac{1}{k} \mathbf{1}(k < n)
+	.\] 
+	Then each $x_n$ is in $\ell^1(\mathbb{N}) \cap \ell^2(\mathbb{N})$, $x_\infty = \left( \frac{1}{k} \right) _{k \in \mathbb{N}}$ is in $\ell^2(\mathbb{N}) \setminus \ell^1(\mathbb{N})$.
+\end{proof}
+
+\newpage
+\begin{problem}
+	4. Let $X$ be an infinite dimensional Banach space. Show that any algebraic basis of the vector space $X$ is uncountable.\\
+(Hint: Seeking a contradiction assume $X$ has a countable basis. Under this assumption show that $X$ is an increasing union of closed finite dimensional linear subspaces and invoke Baire's Category Theorem.)
+\end{problem}
+\begin{proof}
+	Assume $X$ has a countable basis $(a_n)_{n \in \mathbb{N}}$. We know that each finite-dimensional linear subspace of a Banach space is closed. Write $A_n = \text{span}(a_1, \ldots, a_n)$. Then
+	\[
+		X = \cup_{n = 1}^\infty  A_n
+	.\] 
+
+	Since $X$ is of second category, there must be some $n$ such that $\text{int} \overline{A_n} \neq \emptyset $. Say we have $x \in U \subset A_n$ where $U$ is open nonempty. Then since $A_n$ is a linear subspace,
+	\[
+		0 \in U - x \subset A_n
+	.\] 
+	But we have a direct contradiction: pick any $y \in X \setminus A_n$, and let $N$ be large enough such that $\frac{y}{(N + 1) \|y\|} \in B_{\frac{1}{N}}(0_X)\subset U - x$, thus $y \in A_n$.
+\end{proof}
+

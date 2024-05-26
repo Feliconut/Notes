@@ -1,0 +1,136 @@
+\lecture{4}{Wed 17 Jan 2024 13:36}{}
+
+\begin{proposition}
+	\label{prop:IsometryC0dualL1}
+	\[
+		C_0(\mathbb{N})^* \cong \ell^1(\mathbb{N})
+	.\] 
+	where by $\cong$ we mean a linear continuous surjective isometry, and
+\[
+	C_0(\mathbb{N}) = \{f: \mathbb{N} \to \mathbb{C}: \lim _{n \to \infty } f(n) = 0\} 
+.\] 
+\end{proposition}
+\begin{proof}
+	We begin by constructing such a linear map. Define
+\begin{align*}
+	A: \ell^1(\mathbb{N}) &\longrightarrow C_0(\mathbb{N})^* \\
+	\beta &\longmapsto A(\beta) 
+.\end{align*}
+\begin{align*}
+	A\beta: C_0(\mathbb{N}) &\longrightarrow \mathbb{C} \\
+	\alpha &\longmapsto A\beta(\alpha) 
+	= \sum_{n = 1}^\infty \alpha_n \beta_n
+.\end{align*}
+First check $A$ is well-defined. Pick $\beta \in \ell^1(\mathbb{N})$, $\alpha \in C_0(\mathbb{N})$. We have
+\[
+	 \sum_{n = 1}^\infty |\alpha_n \beta_n |
+	 \le \|\alpha\|_\infty \|\beta\|_1 < \infty 
+.\] 
+Thus $A \beta(\alpha)$ converges absolutely, thus it is well-defined in $\mathbb{C}$.
+
+Next we check $A$ is bounded, which (by Proposition~\ref{prop:ContinuousLinearOperator}) implies $A$ is continuous. Take $\beta \in \ell^1(\mathbb{N})$, then
+\[
+	\| A \beta\| = \sup _\alpha \left| A \beta (\alpha) \right| / \|\alpha\|_\infty 
+	\le \sup _\alpha \|\alpha\|_\infty \|\beta\|_1 / \|\alpha\|_\infty 
+	= \|\beta\|_1
+.\] 
+This implies $\|A \beta\|/ \|\beta\|_1 \le 1$, so $\|A\| \le 1$.
+
+Now comes the harder part of this proof: fix any $f \in C_0(\mathbb{N})^*$, and we want to demonstrate some $\beta \in \ell^1(\mathbb{N})$ such that $A \beta = f$. Note, that the space $C_0(\mathbb{N})$ contains as a dense subspace $C_c(\mathbb{N})$, the space of all functions $\mathbb{N} \to \mathbb{C}$ with finite support. By Theorem~\ref{thm:FundamentalResult}, $f$ is completely specified by its restriction to $C_c(\mathbb{N})$. Now observe that $C_c(\mathbb{N})$ is spanned by the indicator functions $\xi_n, \xi_n(m) = \delta_{n m}$. 
+
+We define $\beta$ by considering how $f$ acts on $\xi_n$. Define $\beta_n = f(\xi_n)$. Now consider
+	\[
+		\gamma_N = \left( \frac{\overline{\beta} _1}{|\beta _1|}, \ldots, \frac{\overline{\beta} _N}{|\beta_N|},0,\ldots \right) \in C_0(\mathbb{N})
+	\]
+	And we have
+	\[
+		|f\gamma_N| = 
+		\left| f\left(  \frac{\overline{\beta} _1}{|\beta _1|} \xi_1 +  \ldots+ \frac{\overline{\beta} _N}{|\beta_N|}\xi_N \right)  \right| 
+		= \|\beta\|_1
+	.\] 
+	But we also have
+	\[
+		\left| f \gamma_N \right|  \le \|f\| \|\gamma_N\|_{\infty } \le \|f\|
+	.\] 
+	This verifies $\|\beta\|_1 \le \|f\|$, so in particular  $\beta \in \ell^1(\mathbb{N})$.
+	By definition $A \beta$ and $f$ coincide on all $\xi_n$, so $A \beta = f$. This concludes that $A$ is surjective.
+
+	Finally, from the proof above we see that $\|\beta\|_1 \le \|f\| = \|A \beta\| \le \|\beta\|_1$, so $\|A \beta\| = \|\beta\|_1$, showing $A$ is an isometry.
+\end{proof}
+
+%\begin{proof}[In Class]
+%	To warm up, say $f: C_0(\mathbb{N}) \to \mathbb{C}$ is linear and continuous. Consider  $\xi_n \in C_0(\mathbb{N})$. Consider $\text{span} \{\xi_n, n \ge L\} = \{f: \text{finite support}\} $. Now $\|f\|_\infty  = \sup _{n \ge 1} |f(n)|$. If $f$ is continuous and linear, it is uniquely determined by $f|_{\text{span} \{\xi_n: n \ge 1\} }$ which is a dense subspace of $C_0(\mathbb{N})$. 
+%
+%	Collect $\left( f(\xi_n)\right)_{n \in \mathbb{N}}  $, 
+%	\begin{align*}
+%		f\left( \alpha_1, \alpha_2, \ldots, \alpha_n, 0, \ldots \right) 
+%		&= f\left( \sum_{i = 1}^n \alpha_i \xi_i \right)  \\
+%		&= \sum_{i = 1}^n \alpha_i f(\xi_i) \\
+%		&= \sum _{i = 1}^n \alpha_i \beta_i
+%	.\end{align*}
+%
+%	Now for the real proof. Define
+%	\begin{align*}
+%		A: \ell^1(\mathbb{N}) &\longrightarrow C_0(\mathbb{N})^* \\
+%		\beta &\longmapsto A(\beta) = f
+%	.\end{align*}
+%	\begin{align*}
+%		f: C_0(\mathbb{N}) &\longrightarrow \mathbb{C} \\
+%		\alpha &\longmapsto f(\alpha) = \sum_{n = 1}^\infty \alpha_n \beta_n
+%	.\end{align*}
+%
+%	Now $f(\xi_n) = \beta_n$. We need to verify $f(\alpha)$ is convergent. 
+%	\begin{align*}
+%		\sum_{n = 1}^\infty \left| \alpha_n \beta_n \right| \le \|\alpha\|_\infty \sum_{n = 1}^\infty  |\beta_n| = \|\alpha\|_\infty  \|\beta\|_1
+%	.\end{align*}
+%	Thus $\left| f(\alpha) \right| \le \|\beta\|_1 \|\alpha\|_\infty $. Thus $\|f\|\le \|\beta\|_1$, $\|A \beta\|\le \|\beta\|_1$, thus $A$ continuous.
+%
+%	Next we need to show $A$ is surjective and isometric. 
+%	Let $f \in C_0(\mathbb{N})^*$. Define $\beta_n = f(\xi_n)$. Consider 
+%	\[
+%		\gamma_N = \left( \frac{\overline{\beta} _1}{|\overline{\beta} _1|}, \ldots, \frac{\overline{\beta} _N}{|\beta_N|},0,\ldots \right) \in C_0(\mathbb{N})
+%	\] 
+%	with convention $\frac{0}{0} = 0$.
+%	What is $\|\gamma_N\|_\infty $? We have $\|\gamma_N\|_\infty \le 1$. Let's compute $f(\gamma_N)$.
+%
+%	\begin{align*}
+%		f(\gamma_N)
+%		&= \sum_{i = 1}^N \beta_i \frac{\overline{\beta} _i}{|\beta_i| } \\
+%		&= \sum_{i = 1}^N |\beta_i| 
+%	.\end{align*}
+%	But
+%	\[
+%		|f(\gamma_N)| \le \|f\| \|\gamma_N\| \le  \|f\|
+%	.\] 
+%	Thus
+%	\[
+%		\|\beta\|_1 \le \|f\|
+%	.\] 
+%	Thus $\beta \in \ell^1(\mathbb{N})$ and $A\beta = f$, since $A \beta = f$ on $\xi_n$.
+%
+%	From those we conclude that $\|A \beta\| = \|\beta\|$. Hence, $A$ is a surjective isometry.
+%\end{proof}
+
+
+\begin{definition}[Partially Ordered Set]
+	\label{defn:POSet}
+	The tuple $(P, \le )$ with a set $P$ and a relation $\le $ is a \textit{partially ordered set}, if
+	\begin{itemize}
+		\item $\le $ is reflexive and transitive.
+		\item $\le $ is antisymmetric: $x\le y, y \le x \implies x = y$.
+	\end{itemize}
+	Consider $A \subset P$, $a \in P$. If $x \le a$ for all $x \in A$, we say $a$ is an \textit{upper bound} for $A$.
+
+	We say $m \in P$ is \textit{maximal} if for all $x \in P$, $x \ge m \implies x = m$.
+
+	We say $A \subset P$ is \textit{totally ordered} if for all $x, y \in A$, either $x \le y$ or $y \le  x$.
+\end{definition}
+
+\begin{example}
+	For $X$ nonempty set, $(\mathcal{P}(X), \subseteq )$ is a poset.
+\end{example}
+
+\begin{lemma}[Zorn's Lemma]
+	\label{lem:Zorn}
+	Let $(P, \le )$ be a poset, suppose that any $A \subset P$ which is totally ordered has an upper bound in $P$. Then $P$ has a maximal element.
+\end{lemma}

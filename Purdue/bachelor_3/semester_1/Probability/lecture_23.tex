@@ -1,0 +1,131 @@
+\lecture{23}{Mon 04 Dec 2023 10:41}{}
+
+After applying Stone-Weierstrass approximation, we want some continuity that allows us to pass from approximation in $C^2(B_R)$ to approximation for stochastic integrals. Precisely, we want to
+prove termwise convergence (in $L^2(P)$) for the following:
+\begin{align*}
+	 P_n(X_t) &= P_n(X_0) + \frac{1}{2} \int _0^t P_n'(X_s) dX_s + \frac{1}{2} \int _0^t P_n'' (X_s) d \left\langle X \right\rangle _s\\
+	\to 
+	f(X_t) &= f(X_0) + \frac{1}{2}\int _0^t	f'(X_s) d X_s + \frac{1}{2} \int _0^t f''(X_s) d\left\langle X \right\rangle _s
+.\end{align*}
+
+We localize, take $T_r = \inf \{t: \left| X_t \right| > r\} $, and apply the argument to $X_{T_r \wedge t}$. 
+
+Then, 
+\begin{align*}
+	&E\left| \int _0^t f'(X_s) d X_s - \int _0^t P_n(X_s) d X_s \right| ^2\\
+	&\le  E \int _0^t \left| f'(X_s) - P_n'(X_s) \right| ^2 d \left\langle X \right\rangle _s
+	+ E \left(\int _0^t \left| f'(X_s) - P_n'(X_s) \right| d A_s\right)^2\\
+	&\le \|f - P_n\|_{C^2(B_r)}^2 \left\langle X \right\rangle _t + \|f - P_n\|_{C^2(B_r)}^2 \|A_t\|_{TV}^2
+.\end{align*} 
+
+\subsubsection{Some comment on Stratonovich formula}
+
+Take $\sigma_k = (1 - \lambda) t_k + \lambda t_{k+1}$. Then
+\[
+	\sum_k B_{\sigma_k}\left( B_{t_{k+1}} - B_{t_k} \right) 
+	\to  \frac{1}{2} B_t + \left( \lambda - \frac{1}{2} \right) t
+.\] 
+$\lambda = 0$ corresponds to the Itô integral. $\lambda = \frac{1}{2}$ is the Stratonovich formula.
+
+Recall
+\[
+	\sum_k X_{t_k} \left( Y_{t_{k+1}} - Y_{t_k} \right) 
+	\to  \int X_s d Y_s + \frac{1}{2} \left\langle X, Y \right\rangle _t
+	= \frac{1}{2} X_t Y_t - \frac{1}{2} \left\langle X, Y \right\rangle 
+.\] 
+With $\lambda = \frac{1}{2}$, we get
+\[
+	\int _0^t X_s \circ d Y_s = \frac{1}{2} X_t Y_t
+.\] 
+We have
+\[
+	\int _0^t X_s \circ d Y_s 
+	= \int _0^t X_s d Y_s + \frac{1}{2} \left\langle X, Y \right\rangle _t
+.\] 
+Thus
+\[
+	X_t Y_t - X_0 Y_0 = \int _0^t X_s \circ d Y_s + \frac{1}{2}_0^t Y_s \circ d X_s
+.\] 
+
+\begin{proposition}[Stratonovich Formula]
+	\[
+		f(X_t) - f(X_0) = \int _0^t f'(X_s) d X_s
+	.\] 
+	and $d f(X) = f'(X)  d X$.
+\end{proposition}
+Remark: we would need $f \in C^3$.
+
+\subsubsection{Multidimensional D\"oblin-Itô Formula}
+
+\begin{theorem}[D\"oblin-Itô Formula] (II)
+	Let $X_t^1, \ldots, X_t^d$ be semimartingale, let $f \in C_c^2(\mathbb{R}^d), f : \mathbb{R}^d \to  \mathbb{R}$, then
+	\[
+		f(\vec{X} _t) = 
+		f(\vec{X} _0) 
+		+ \sum_{i=1}^{d} \int _0^t \frac{\partial f}{\partial x_i} (\vec{X} _s) d X_s^i
+		+ \frac{1}{2}\sum_{i, j=1}^{d} \int _0^t \frac{\partial^2 f}{\partial x_i \partial x_j} (\vec{X} _s) d \left\langle X^i, X^j \right\rangle 
+	.\] 
+	
+\end{theorem}
+
+For example, for Brownian motion we have $\left\langle B_t^i, B_t^j \right\rangle  = \delta_{i j}t$, so
+\[
+	f(B_t) - f(B_0) = \int _0^t \nabla f(B_s) d B_s + \frac{1}{2}\int _0^t \Delta f(B_s) d s
+.\] 
+Consider the process $\vec{X} _t = (A_t, X_t)$, where $A_t$ is a bounded variation process. Then, (use fact that $\left\langle A, X \right\rangle  = 0$ ),
+\begin{align*}
+	f(A_t, X_t) - f(A_0, X_0) 
+	&= \int _0^t \frac{\partial f}{\partial x_1} (\vec{X} _s) d A_s 
+	+ \int _0^t \frac{\partial f}{\partial x_2} (\vec{X} _s) d X_s
+	+ \frac{1}{2} \int _0^t \frac{\partial ^2 f}{\partial x_2^2} (\vec{X} _s) d \left\langle X \right\rangle _s
+.\end{align*} 
+
+Let $A_t = \left\langle M \right\rangle _t$, $X = M_t$ a martingale,
+\begin{align*}
+	&u\left( \left\langle M \right\rangle _t, M_t \right)  - f\left( \left\langle M \right\rangle _t, M_t \right) \\
+	&= \int _0^t u_{x_1}\left( \left\langle M \right\rangle _s, M_s \right)  d \left\langle A_s \right\rangle 
+	+ \int _0^t u_{x_1} \left( \left\langle M \right\rangle _s, M_s \right)  d M_s
+	+ \int _0^t u_{x_2 x_2} \left( \left\langle M \right\rangle _s, M_s \right)  d \left\langle M \right\rangle _s\\
+	&=  \int _0^t u_{x_2}\left( \left\langle M \right\rangle _s, M_s \right)  d M_s 
+	+ \int _0^t u_x\left( \left\langle M \right\rangle _s,  M_s \right)  + \frac{1}{2} u_{x_2 x_2} \left( \left\langle M \right\rangle _s, M_s \right)  d M_s\\
+	&=  M_t + \int _0^t \left( u_x\left( \left\langle M \right\rangle _s, M_s \right) + \frac{1}{2} u_{x_2 x_2} \left( \left\langle M \right\rangle _s, M_s \right)  \right)  d M_s
+.\end{align*} 
+
+Thus, if you take a function $u(t, x)$ such that
+\[
+	u_t + \frac{1}{2} u_{x x} = 0
+.\] 
+Then
+\[
+	u\left( \left\langle M_t \right\rangle , M_t \right) \qquad \text{ is a martingale}
+.\] 
+
+\begin{corollary}
+	If $u(t, x) = \exp\left( \lambda x - \frac{\lambda^2}{2} t \right) $, then
+	\[
+		u\left( \left\langle M \right\rangle _t, M_t \right) 
+		= \exp\left( \lambda M_t - \frac{\lambda^2}{2}\left\langle M \right\rangle _t \right)  \qquad \text{ is a martingale}
+	.\] 
+\end{corollary}
+Note that this is \textit{exponential martingale} we encountered before.
+
+\begin{theorem}(Levy)
+	Suppose $M_t$ is a continuous martingale with $\left\langle M \right\rangle _{\infty } = \infty $, and $\left\langle M \right\rangle _t = t$, then $M_t$ is Brownian motion.
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		E (e^{\lambda M_t - \frac{\lambda^2}{2}t} | \mathcal{F}_s)
+		&= e^{\lambda M_s - \frac{\lambda^2}{2} s} 
+	.\end{align*}
+	Thus
+	\[
+		E\left( e^{\lambda (M_t - M_s)} | \mathcal{F}_s \right) 
+		= e^{- \frac{\lambda^2}{2}(t - s)}
+	.\] 
+	From earlier work, we know $M_t = B_t$.
+\end{proof}
+
+Next: 
+Time changes Brownian motion, and
+Conformal invariance. See note 5.
+

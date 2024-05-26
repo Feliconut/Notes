@@ -1,0 +1,61 @@
+\lecture{5}{Wed 14 Feb 2024 12:43}{Chebyshev Inequality}
+\tags{Chebyshev Inequality}
+
+\subsubsection{Chebyshev Inequality}
+
+
+For $f \ge 0, \lambda > 0$, we have 
+\[
+	\mu \{x \in X: f(x) \ge \lambda\} 
+	\le \frac{1}{\lambda} \int_E f d \mu \le \frac{1}{\lambda} \int _X f d \mu
+.\] 
+
+We can use an increasing function to transform $f$ and get another inequality:
+
+\[
+	\mu(E) = \mu \{x \in X: \psi(f)(x) \ge  \psi(\lambda)\} \le 
+	\frac{1}{\psi(\lambda)} \int _X \psi(f) d \mu
+.\] 
+
+In this way, we can get a whole family of inequalities.
+
+\begin{example}
+	Consider $f \ge 0$ and $\int _E f d \mu = 0$ for some $E \in \mathcal{F}$. Then $f = 0$ on $E$. To see this:
+
+	\begin{align*}
+		\mu \{x \in E: f(x) > 0\} 
+		&= \mu \cup_n \{x \in E: f(x) > \frac{1}{ n}\} \\
+		&\le \sum_n \mu \{x \in E: f(x) > 1 / n\}\\
+		&\leq \sum_n n \int _E f d \mu  = 0
+	.\end{align*}
+
+	This can be strengthened to any $f \in L^1$. If $\int _E f d \mu = 0$ for every $E \in \mathcal{F}$, then the above argument can be applied to positive and negative parts of  $f$ and conclude that $f = 0$ a.e.
+\end{example}
+
+\begin{example}
+	If $f_n$ have property that 
+	\[
+		\int _X |f_n|^2 d \mu \le \frac{1}{n}m\qquad 0 < p< \infty 
+	.\] 
+	Then $f_n / n \to 0$ a.e. To see this, let $\varepsilon > 0$, and 
+	\begin{align*}
+		\mu \{x \in X: f_n(x) > \varepsilon n\} \le 
+		\frac{1}{\varepsilon^p n^p} \int _X |f_n|^p d \mu 
+		\le \frac{1}{\varepsilon^p n^p} \frac{1}{n} = \frac{1}{\varepsilon^p n^{p + 1}} < \infty 
+	.\end{align*}
+	Thus $\sum_{n = 1}^\infty \mu \{x \in X: |f_n(x)| > \varepsilon n\}  < \infty $. By Borel-Cantelli, $\mu \{x \in X: |f_n(x) / n| > \varepsilon \text{ i.o.}\} = 0 $, thus $\limsup |f_n| / n \le \varepsilon$.
+
+	Remark: Adding $\varepsilon$ allows us to apply Borel-Cantelli.
+
+\end{example}
+
+\subsubsection{Jensen's Inequality}
+
+For $ \psi$ convex measurable,
+\[
+	\psi \left( \int _X f d \mu \right)  \le  \int _X \psi(f) d \mu
+.\] 
+
+Proof. Same as Durret.
+
+

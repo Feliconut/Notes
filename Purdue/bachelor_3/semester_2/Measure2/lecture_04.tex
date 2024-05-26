@@ -1,0 +1,38 @@
+\lecture{4}{Wed 17 Jan 2024 12:36}{}
+
+Recall definition of measurable space.
+
+\begin{proposition}
+	Following properties of measure:
+	\begin{itemize}
+		\item Monotonicity. If $E \subset F$, then $\mu(E) \le \mu(F)$. To show this, observe $\mu(F) = \mu(E) + \mu(F \setminus E)$. If $\mu(F) < \infty $, then $\mu(E) = \mu(F) - \mu(F \setminus E)$.
+
+		\item Subadditivity. For any sequence  $E_k$, $\mu\left( \bigcup_{k} E_k \right)  \le  \sum_{k} \mu(E_k)$. To show this, consider increasing annuli, apply monotonicity and countable additivity.
+
+		\item Upward monotone convergence / Continuity from below. If $A_1 \subset A_2 \subset \ldots$, then $\mu\left( \lim A_k \right)  = \lim \mu(A_k)$.
+		\item Continuity from above. If $A_1\supset A_2 \ldots$, and $\mu(A_k)$ finite for some $k$, then $\mu(\lim A_k) = \lim \mu(A_k)$. For counterexample when the finite assumption is removed, let $A_k = \{k, k+1, \ldots\} \subset \mathbb{N}$.
+	\end{itemize}
+\end{proposition}
+
+\begin{lemma}[Borel Cantelli Lemma]
+	\label{lem:BorelCantelliLem}
+	If $A_k \in \mathcal{F}$, and $\sum_{k = 1}^\infty \mu(A_k) < \infty $, then $\mu\left(\limsup A_k\right) = 0$.
+\end{lemma}
+
+\begin{example}
+	Let $A_k = (0,\frac{1}{k}]$. The Lebesgue measure is $\frac{1}{k}$. Take $\mu = m = \text{Lebesgue}$, then $\mu(A_k) = \frac{1}{k}$. The limsup is empty. On the other hand, $\sum \mu(A_k) = \infty $.
+\end{example}
+
+\begin{definition}[Null Sets]
+	\label{defn:NullSets}
+	Sets of measure zero are called \textit{null sets}.
+\end{definition}
+
+\begin{definition}[Complete measure space]
+	\label{defn:CompleteMeasureSpace}
+	A measure space $(X, \mathcal{F}, \mu)$ is called \textit{complete} if for all $A \in \mathcal{F}$ such that $\mu(A) = 0$, we have $\mu(B) = 0$, in particular $B \in \mathcal{F}$, whenever $B \subset A$.
+\end{definition}
+
+\begin{example}
+	Let $X = \{a,b,c\} $, $\mathcal{F} = \{\{a\} ,\{b, c\} ,\emptyset , X\} $. Define $\mu(\{a\} ) = 1$, $\mu(\{b, c\} ) = 0$. This is \textit{not} a complete measure space.
+\end{example}

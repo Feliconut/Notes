@@ -1,0 +1,156 @@
+\lecture{9}{Tue 06 Feb 2024 13:30}{Eilenberg-Steenrod Axioms and the Locality principle}
+
+What we have so far: (1) singular homology, (2) relative version of singular homology. They have several properties that can be summarized in axioms:
+
+\begin{definition}[Homology Theory]
+	\label{defn:HomologyTheory}
+	\begin{itemize}
+		\item Functors $h_n, n \in \mathbb{N}$ from \textbf{Top2} to \textbf{Ab}. We write $h_n(X)$ for $h_n(X, \emptyset )$.
+		\item Natural Transformations $\partial: h_n(X, A) \to h_{n - 1}(A)$. \todo{what are the functors involved?}
+		\item (Homotopy Invariance) If $f_0 \cong f_1: (X, A) \to (Y, B)$ are homotopic, then $f_{0 *} = f_{1 *}: h_n(X, A) \to h_n(Y, B)$.
+		\item An excision $\left( X - U, A - U \right) \to (X, A)$ induces isomorphism in homology.
+		\item (Long exact sequence) For $(X, A)$, 
+			\[
+				\to h_n(A) \to h_n(X) \to h_n(X, A) \xrightarrow{\partial} h_{n - 1}(A) \to \ldots
+			\] 
+			is exact.
+		\item (Dimension Axiom) $h_n(*) \neq 0$ only for $n = 0$.
+		\item (Milnor Axiom) For a family of topological spaces $(X_i)_{i \in \Lambda}$, define the inclusion
+			\[
+				X = \bigsqcup_{i \in \Lambda} X_i
+			\] 
+			then there is a unique map
+			\[
+				\eta: \bigoplus_{i \in \Lambda} h_n(X_i) \to h_n\left( \bigsqcup_{i \in \Lambda} X_i \right) 
+			\] 
+			such that $\eta| _{h_n(X_i)} = (\eta_i)_*$.
+			The axioms says that $\eta$ is an isomorphism, i.e. $h_n$ preserves coproduct.
+	\end{itemize}
+\end{definition}
+
+For singular homology, $(X, A) \mapsto H_n(X, A)$. Recall that for $f_0 \cong f_1: X \to Y$, we constructed a chain homotopy $\phi_n: S_n(X) \to S_{n+1}(Y)$ between $(f_0)_*$ and $(f_1)_*$. 
+
+Now, for $f_0 \cong f_1: (X, A) \to (Y, B)$ and $f_0 \cong f_1: X \to Y$, we can check \todo{check.} that $\phi_n(S_n(A)) \subset S_{n + 1}(B)$. Then, $\phi_n$ induces a chain homotopy $\phi_n: S_n(X, A) \to  S_{n + 1}(Y, B)$ between $(f_0)_*$ and $(f_1)_*$. So, we indeed have homotopy invariance of pairs.
+
+To check dimension axiom, observe $H_0(*) = \mathbb{Z}$.
+
+\begin{remark}
+	Why abstract: in 1950s, 1960s, there were a lot of different homology theories that looked very much like each other. 
+\end{remark}
+
+\subsubsection{Locality Principle}
+
+\begin{definition}[Cover]
+	\label{defn:Cover}
+	Let $X$ be a topological space. $\mathcal{A} = \{\mathcal{A}_\alpha\} _{\alpha \in \Lambda}$ is a family of subspaces of $X$. We call $\mathcal{A}$ a \textit{cover} of $X$ if $X = \cup_{\alpha \in \Lambda} \text{Int}A_\alpha$. 
+\end{definition}
+
+\begin{definition}[A-Small]
+	\label{defn:ASmall}
+	Let $\mathcal{A}$ be a cover of $X$. A singular $n$-simplex $\sigma_n$ is $\mathcal{A}$-small if there exists $A$, $\text{Im}\sigma_n \subset A \in \mathcal{A}$.
+
+	Let $\text{Sin}_n^{\mathcal{A}}$ be the set of all $\mathcal{A}$-small $n$-simplices. We have
+	\[
+		\text{Sin}_n^{\mathcal{A}}(X) = \bigcup_{\alpha \in \Lambda} \text{Sin}_n(\mathcal{A}_\alpha) \subset \text{Sin}_n(X)
+	.\] 
+
+	Then, we have the $\mathcal{A}$-small singular $n$-chains,
+	\[
+		S_n^{\mathcal{A}}(X) = \mathbb{Z}\text{Sin}_n^{\mathcal{A}}(X) = \sum_{\alpha \in \Lambda} S_n(\mathcal{A}_\alpha) \subset S_n(X)
+	.\] 
+\end{definition}
+
+\begin{remark}
+	If $\sigma \in \text{Sin}_n^{\mathcal{A}}(X)$, then $d \sigma \in S_{n - 1}^{\mathcal{A}}(X)$. Thus $d$ preserves $\mathcal{A}$-small chains and defines a chain complex $S_*^{\mathcal{A}}(X)$, a subcomplex of $S_*(X)$.
+\end{remark}
+
+Consider the inclusion $i: S_*^{\mathcal{A}}(X) \to S_*(X)$. Denote $H_n^{\mathcal{A}}(X) := H_n\left( S_*^{\mathcal{A}}(X) \right) $. 
+
+\begin{theorem}[Locality Principle]
+	\label{thm:LocalityPrinciple}
+	$i_*: H_n^{\mathcal{A}} (X) \to H_n(X)$ is an isomorphism.
+\end{theorem}
+
+We defer the proof to later; we use this theorem to prove excision.
+
+\begin{proof}[Proof of Excision]
+	For an excision  $U \subset A \subset X$, $\overline{U}  \subset \text{Int}(A)$, let $\mathcal{A} = \{A, X - U\} $ be a cover of $X$. Now we are interested in the inclusion $(X - U, A - U) \to (X, A)$. Write $B = X - U$ so that $(X - U, A - U) = (B, A \cap B)$.
+
+	Consider the chain complex $0 \to S_*(A) \to S_*^{\mathcal{A}}(X) \to S_*^{\mathcal{A}}(X) / S_* (A) \to  0$.
+% https://quiver.local:8080/#q=WzAsMTAsWzAsMCwiMCJdLFsyLDAsIlNfKihBKSJdLFs0LDAsIlNfKl5cXG1hdGhjYWx7QX0oWCkiXSxbNiwwLCJTXypeXFxtYXRoY2Fse0F9KFgpIC8gU18qKEEpIl0sWzgsMCwiMCJdLFswLDIsIjAiXSxbMiwyLCJTXyooQSkiXSxbNCwyLCJTXyooWCkiXSxbNiwyLCJTXyooWCwgQSkiXSxbOCwyLCIwIl0sWzAsMV0sWzEsMl0sWzIsM10sWzMsNF0sWzgsOV0sWzcsOF0sWzUsNl0sWzYsN10sWzEsNiwiSWQiXSxbMiw3LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFszLDgsIlxcb3ZlcmxpbmV7aX0iLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dXQ==
+\[\begin{tikzcd}
+	0 && {S_*(A)} && {S_*^\mathcal{A}(X)} && {S_*^\mathcal{A}(X) / S_*(A)} && 0 \\
+	\\
+	0 && {S_*(A)} && {S_*(X)} && {S_*(X, A)} && 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow[from=1-5, to=1-7]
+	\arrow[from=1-7, to=1-9]
+	\arrow[from=3-7, to=3-9]
+	\arrow[from=3-5, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+	\arrow["Id", from=1-3, to=3-3]
+	\arrow[hook', from=1-5, to=3-5]
+	\arrow["{\overline{i}}", hook', from=1-7, to=3-7]
+\end{tikzcd}\]
+By locality principle, the inclusion in the middle induces isomorphism in homology; therefore by five lemma, $\overline{i} $ induces isomorphism in homology.
+
+Write the quotient as $C_*$.
+\[
+	C_n = \frac{S_n(A) + S_n(B)}{S_n(A)} \cong \frac{S_n(B)}{S_n(A) \cap S_n(B)}  = \frac{S_n(B)}{S_n(A \cap B)} = S_n(B, A \cap B)
+.\] 
+
+Therefore
+\[
+	S_*(B, A \cap B) \cong C_* \cong S_*(X, A)
+.\] 
+This gives
+\[
+	H_n(B, A \cap B) \cong H_n(X, A)
+.\] 
+
+
+\end{proof}
+
+\begin{proposition}[Mayer-Vietoris Sequence]
+	\label{prop:MayerVietorsequence}
+	
+Assume $\mathcal{A} = \{A, B\} $ be a cover of $X$. Consider the commutative diagram of inclusions
+% https://quiver.local:8080/#q=WzAsNCxbMCwwLCJBIFxcY2FwIEIiXSxbMiwwLCJBIl0sWzIsMiwiWCJdLFswLDIsIkIiXSxbMCwxLCJqXzEiXSxbMSwyLCJpXzEiXSxbMCwzLCJpXzIiLDJdLFszLDIsImpfMiIsMl1d
+\[\begin{tikzcd}
+	{A \cap B} && A \\
+	\\
+	B && X
+	\arrow["{j_1}", from=1-1, to=1-3]
+	\arrow["{i_1}", from=1-3, to=3-3]
+	\arrow["{i_2}"', from=1-1, to=3-1]
+	\arrow["{j_2}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+Now, consider the s.e.s.
+\[
+	0 \to S_n(A) \cap S_n(B) \xrightarrow{(j_{1 *}, - j_{2 *})}  S_n(A) \oplus S_n(B) \xrightarrow{i_{1 *} + i_{2 *}} S_n(A) + S_n(B) \to  0
+.\] 
+This is exactly
+\[
+	0 \to S_*(A \cap B) \to S_*(A)\oplus S_n^*(B) \to S_*^{\mathcal{A}}(X) \to  0
+.\] 
+\todo{Exercise}. Check that $H_n(S_*(A) \oplus S_*(B)) \cong H_n(A) \oplus H_n(B)$. Thus we have s.e.s. for homologies, and furthermore a long exact sequence:
+% https://quiver.local:8080/#q=WzAsNixbMiwwLCJIX24oQSBcXGNhcCBCKSJdLFswLDAsIlxcZG90cyJdLFs0LDAsIkhfbihBKSBcXG9wbHVzIEhfbihCKSJdLFs2LDAsIkhfbihYKSJdLFsyLDIsIkhfe24gLTF9KEEgXFxjYXAgQikiXSxbNCwyLCJcXGRvdHMiXSxbMSwwXSxbMCwyXSxbMiwzXSxbMyw0XSxbNCw1XV0=
+\[\begin{tikzcd}
+	\dots && {H_n(A \cap B)} && {H_n(A) \oplus H_n(B)} && {H_n(X)} \\
+	\\
+	&& {H_{n -1}(A \cap B)} && \dots
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow[from=1-5, to=1-7]
+	\arrow[from=1-7, to=3-3]
+	\arrow[from=3-3, to=3-5]
+\end{tikzcd}\]
+\end{proposition}
+
+
+
+
+

@@ -1,0 +1,160 @@
+\note{1}{Sun 03 Dec 2023 23:00}{Approximation Theorems in Real Analysis}
+\tags{Approximation, Stone-Weierstrass, Density Result}
+
+\subsection{Approximating continuous functions}
+
+\subsubsection{Explicit construction (Bernstein)}
+
+\begin{theorem}[Bernstein Approximation]
+	For any $f \in C([0,1] \to \mathbb{R})$, the sequence of Bernstein polynomials
+	\[
+		B_n(x;f) = \sum_{k=0}^{n} f\left( \frac{k}{n} \right) \binom{n}{k} x^k (1-x)^{n - k}
+	\] 
+	converges uniformly to $f$.
+\end{theorem}
+\begin{proof}
+	We give a probabilistic proof. Note that
+	\[
+		B_n(x; f) \equiv E\left[ f\left( X^{(n)} / n \right)  \right] \qquad X^{(n)} \sim \text{Binom}(n, x) 
+	.\] 
+	Now, by strong law of large numbers,
+	\[
+		X^{(n)} / n \to x \text{ a.s. as} n\to \infty  
+	.\] 
+	By continuity of $f$, $f(X^{(n)} / n) \to f(x)$ a.s. Take expectation, by DCT,
+	\[
+		Ef(X^{(n)} / n) \to f(x)
+	.\] 
+	However, to show this convergence is uniform in $x$, we need a finer argument and the SLLN won't help us directly. Apply the Chebyshev inequality,
+	\[
+		P\left( \left| X^{(n)} / n - x \right| > \delta \right) \le \frac{\operatorname{Var} X^{(n)}}{n^2 \delta^2} = \frac{x(1-x)}{n \delta^2} \le \frac{1}{4 n \delta^2}
+	.\] 
+	Now, by uniform continuity of $f$, 
+	\[
+		P\left( \left| f\left( X^{(n)}/n \right)  - f(x) \right|  > \varepsilon \right) \le \frac{1}{4 n \delta(\varepsilon)^2}
+	.\] 
+	Thus
+	\[
+		E\left[ f\left( X^{(n)} / n\right) - f(x) \right] 
+		\le  \varepsilon + \frac{2 M}{4 n \delta^2}
+	.\] 
+	where $M$ is uniform bound for $f$. First take $n \to \infty $, then take $\varepsilon \to 0$.
+\end{proof}
+This theorem is given in \cite{bartle1964elements}, and Example 2.2.4 in \cite{durrettProbabilityTheory}. Bartle offers a more explicit proof that does not use probability.
+
+Now, this directly implies
+\begin{corollary}[Weierstrass Approximaion]
+	Let $\mathcal{P}(I)$ be set of polynomials defined on $I$. Then
+	$\mathcal{P}(I)$ is dense in $C(I)$, for all compact intervals $I \subset \mathbb{R}$.
+\end{corollary}
+This follows from a simple scaling argument.
+
+\subsubsection{More abstract approaches}
+
+\begin{theorem}[Stone Approximation]
+	Any collection $\mathcal{A}$ of continuous real-valued functions on $K$ is dense in $C(K)$ if $\mathcal{A}$ is:
+	\begin{enumerate}
+		\item closed under pairwise $\inf $ and $\sup $;
+		\item \textit{separating}, in the sense that, for any $x\in K$ there exists $f, g \in \mathcal{A}$ such that $f(x) \neq g(x)$;
+		\item \textit{non-vanishing}, in sense that for any $x \in K$ there exists $f \in \mathcal{A}$, $f(x) \neq 0$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	We first state without proving the following simple claim:
+	\begin{claim}
+		Under \textit{non-separating} and \textit{non-vanishing} conditions, for any $x, y \in K$ and $c_1, c_2 \in \mathbb{R}$, there exists $f, g \in \mathcal{A}$ such that 
+		\[
+			f(x) = c_1, \quad f(y) = c_2
+		.\] 
+	\end{claim}
+	Now, for any $f \in C(K)$, we can have a family of functions $g_{xy} \in \mathcal{A}$ where $g(x) = f(x), f(y) = f(y)$. By continuity, for each $g_{xy}$ there exists a neighborhood $N \supset y$ such that $g_{xy}(z) > f(y) - \varepsilon$ for $z \in N$. Using compactness of $K$, we may take supremum over finitely many such functions, to obtain
+	\[
+		g_x(x) = x, g_x(y) > f(y) - \varepsilon, \forall y \in K
+	.\] 
+	Iterate this argument to obtain some $g$ that is $\varepsilon$-close with $f$ everywhere. This implies density.
+\end{proof}
+
+Now, the assumption of closure under taking max and min can be replaced with the condition that $\mathcal{A}$ forms an algebra, that is, closed under addition, multiplication and scalar multiplication.
+
+
+\begin{theorem}[Stone-Weierstrass Approximation]
+	Any collection $\mathcal{A}$ of continuous real-valued functions on compact $K$ is dense in $C(K)$ if $\mathcal{A}$ is:
+	\begin{enumerate}
+		\item an \textit{algebra} closed under uniform limit;
+		\item \textit{separating}, in the sense that, for any $x\in K$ there exists $f, g \in \mathcal{A}$ such that $f(x) \neq g(x)$;
+		\item \textit{non-vanishing}, in sense that for any $x \in K$ there exists $f \in \mathcal{A}$, $f(x) \neq 0$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	From Weierstrass approximation, we can take a sequence of polynomials  $p_n(x)$ that approximates $|x|$. Hence, for any $g \in \mathcal{A}$, $p_n(g(x))$ approximates $|g|$. Since $\mathcal{A}$ is uniformly closed, $|g| \in \mathcal{A}$. 
+
+	Now, use the relations
+	\[
+		\max(f, g) = \frac{1}{2}(f + g) + \frac{1}{2}\left| f - g \right| 
+	.\] 
+	we know that $\max(f, g) \in \mathcal{A}$; similar for $\min(f, g)$. We have recovered the first assumption in Stone approximation, so our result follows.
+\end{proof}
+ 
+This can be generalized to complex-valued functions:
+
+\begin{theorem}[Stone-Weierstrass Approximation]
+	(Complex)
+	Any collection $\mathcal{A}$ of continuous real-valued functions on compact $K$ is dense in $C(K)$ if $\mathcal{A}$ is:
+	\begin{enumerate}
+		\item a \textit{*-algebra} closed under uniform limit;
+		\item \textit{separating}, in the sense that, for any $x\in K$ there exists $f, g \in \mathcal{A}$ such that $f(x) \neq g(x)$;
+		\item \textit{non-vanishing}, in sense that for any $x \in K$ there exists $f \in \mathcal{A}$, $f(x) \neq 0$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Use the fact that $\mathcal{A}$ is self-adjoint (closed under complex conjugate), there exists a sub-algebra $\mathcal{A}_R \subset \mathcal{A}$ of real-valued functions, satisfying all assumptions for real-valued version of this theorem. Therefore, $\overline{\mathcal{A}_R} = C(K \to \mathbb{R})$.
+
+	If $f = u + i v \in C(K \to \mathbb{C})$, then $u, v \in \overline{\mathcal{A}_R}$, thus $f \in \overline{\mathcal{A}} $ and we are done.
+\end{proof}
+
+\subsubsection{Higher-order continuity}
+
+Let $C^k(K)$ be the space of $k$ times continuously differentiable functions supported on compact set $K$, with the norm
+\[
+	\|f - g\|_{C^k(K)} = \sup \left\{\|f^{(j)} - g^{(j)}\|_{L^\infty (K)}: 0 \le j \le  k\right\} 
+.\] 
+
+We have the following generalization of Stone-Weierstrass approximation:
+
+
+\subsection{Approximation of $L^1$ functions}
+
+\begin{theorem}[Approximating $L^1$ functions]
+	(\cite{taoMeasureTheory2011}, Theorem 1.3.20.)
+	$L^1(\mathbb{R}^d)$ has the following dense subsets (wrt $L^1$ norm):
+	\begin{enumerate}
+		\item $L^1(\mathbb{R}^d) \cap \text{Simp}(\mathbb{R}^d)$, absolutely integrable simple functions.
+		\item Step functions.
+		\item $C_0(\mathbb{R}^d)$, continuous, compactly supported functions.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	The first one follows from construction of Lebesgue integral: we define the Lebesgue integral of $f$ as supremum of integrals of simple functions controlled by $f$. 
+
+	To obtain the second fact, note that each simple function can be approximated by step functions; since Lebesgue-measurable sets can be approximated by elementary sets.
+
+	To obtain the final fact, we can approximate a step function by $C_0$ functions by convolution with a mollifier, or by some other direct construction.
+\end{proof}
+
+\subsection{Approximation by power series}
+
+
+\subsection{Trigonometric approximation}
+
+\begin{theorem}
+	(Rudin) Continuous, $2 \pi$-periodic functions are approximated by trigonometric polynomials.
+\end{theorem}
+\begin{proof}
+	Such functions are exactly $C(S^1 \to \mathbb{C})$, $S^1$ the unit circle is compact. Trigonometric polynomials satisfy assumptions of the Stone-Weierstrass Theorem. Thus the claim follows.
+\end{proof}
+
+
+
+
+
+

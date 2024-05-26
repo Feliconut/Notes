@@ -1,0 +1,255 @@
+\homework{2}{Tue 13 Feb 2024 20:39}{}
+
+\begin{problem}
+
+Given a short exact sequence of Abelian groups $0 \to A \overset{i}{\to} B \overset{p}{\to} C \to 0$. Show the following are equivalent:
+    \begin{enumerate}[label = \alph*).]
+        \item There is a homomorphism $s: C \to B$ such that $p \circ s = id_C$.
+        \item There is a homomorphism $r: B \to A$ such that $r \circ i = id_A$.
+        \item There is an isomorphism $\alpha: A \oplus C \to B$ such that $\alpha(a,0) = i(a)$, $p \alpha(a,c) = c$ for all $(a,c) \in A \oplus C$.
+    \end{enumerate}
+    A short exact sequence satisfying the above conditions is said to be {\it split}. Show the following sequence does not split,
+    \begin{equation*}
+       \begin{tikzcd}
+           0 \arrow[r, ""] & \mathbb{Z}_4 \arrow[r, "\text{x } 2"] & \mathbb{Z}_8 \arrow[r, "\mod 2"] & \mathbb{Z}_2 \arrow[r, ""] & 0
+       \end{tikzcd}
+    \end{equation*}
+
+\end{problem}
+\begin{proof}
+	\textbf{(c) implies (a).} Pick canonical inclusion $\iota : C \hookrightarrow A \oplus C$, define section map $s = \alpha \iota : C \to B$. Then for $c \in C$, $p s (c) = p \alpha \iota (c) = p \alpha (0,c) = c$. Thus $p s = \text{Id}_C$.
+	
+	\textbf{(c) implies (b).} Pick canonical projection $p_A: A \oplus C \to A$. Define retraction map $r = p_A \alpha^{-1}: B \to A$. Then
+	for $a \in A$, $r i (a) = p_A \alpha^{-1} i a = p_A \alpha^{-1} \alpha(a, 0) = p_A (a, 0) = a$. Hence $r i = \text{Id}_A$.
+
+	\textbf{(a) implies (c).} 
+	We claim $B =  \operatorname{ker} p \oplus\operatorname{Im} s$. First check $B = \operatorname{ker} p + \operatorname{Im} s $. Pick $b \in B$. Then $pspb = pb \implies b \in spb + \operatorname{ker} p \subset \operatorname{ker} p + \operatorname{Im} s $. Now assume $b \in \operatorname{Im} s \cap \operatorname{ker} p$. Then there exists $c \in C$, $s c = b, p b = 0$. Then $p s c = 0 \implies c = 0 \implies b = 0$.
+
+	By exactness, $\operatorname{ker} p = \operatorname{Im} i$, and $\operatorname{Im} i \cong A$, since $i$ injective. Apply first isomorphism theorem to $p$, we get $B / \operatorname{ker} p \cong C$, therefore $\operatorname{Im} s \cong C$. Thus $s$ is injective. 
+
+	Now define $\alpha: A \oplus C \to B$ by $\alpha = i \oplus s$. Since $B = \operatorname{Im} i \oplus \operatorname{Im} s$ and $i, s$ injective, $\alpha$ is an isomorphism. Now we can check
+	$\alpha(a, 0) = i a + s 0 = i a$ and $p \alpha(a, c) = p i a + p s c = 0 + c = c$.
+
+	\textbf{(b) implies (c).} The argument is symmetrical.
+
+	Finally we verify the counterexample. For the sequence to split we would have $\mathbb{Z}_8 \cong \mathbb{Z}_4 \oplus \mathbb{Z}_2$. But $\mathbb{Z}_8$ contains an element of order $8$, while the right hand side does not.
+\end{proof}
+
+
+\begin{problem}
+     (Long exact sequence of a triple.) Given a triple $(X, B, A)$ of topological spaces with $A \subset B \subset X$, consider the inclusions $i: (B,A) \to (X, A)$ and  $j: (X, A) \to (X, B)$, which induce chain maps 
+     \begin{equation*}
+          \begin{tikzcd}
+           0 \arrow[r, ""] & S_*(B,A) \arrow[r, "i_*"] & S_*(X,A) \arrow[r, "j_*"] & S_*(X,B) \arrow[r, ""] & 0.
+       \end{tikzcd} 
+     \end{equation*}
+     Show the above is a short exact sequence of chain complexes, and provide the associated long exact sequence of homology groups.
+\end{problem}
+\begin{proof}
+	\textbf{Exactness at the left.} We need to show $i_*$ injective. Take $\sigma_n \in S_n(B, A)$ such that $i_* \sigma_n = 0 \in S_n(X, A)$. Then there is $\tau_n$, $i_* \sigma_n = \tau_n \in S_n(A)$. Thus $\sigma_n = \tau_n \in S_n(A) \implies \sigma_n = 0 \in S_n(X, A)$.
+
+	\textbf{Exactness at the right.} Take $\sigma_n + S_n(B) \in S_n(X, B)$. Then since $S_n(A) \subset  S_n(B)$, we have $j_*(\sigma_n + S_n(A)) = \sigma_n + S_n(A) + S_n(B) = \sigma_n + S_n(B)$.
+
+	\textbf{Exactness at the middle.} Take $\sigma_n + S_n(A) \in S_n(B, A)$. Then $j_* i_* (\sigma_n + S_n(A)) = \sigma_n + S_n(A) + S_n(A) + S_n(B) = S_n(B) = 0 \in S_n(X, B)$. Thus $\operatorname{Im} i_* \subset \operatorname{ker} j_*$. On the other hand, if $j_*(\sigma_n + S_nA) = 0$, then $\sigma_n + S_nA + S_nB = 0 = S_n(B) \in S_n(X, B)$. This implies $\sigma_n \in S_n(B)$, but then $i_*(\sigma_n + S_nA) = \sigma_n + S_nB$.
+\end{proof}
+
+\begin{problem}
+	
+       Suppose we have the following commuting diagrams of Abelian groups,
+                 \begin{equation*}
+                     \begin{tikzcd}
+                         \cdots \arrow[r, ""] & C_{n+1}' \arrow[r, "k"]\arrow[d, "h"] & A_n' \arrow[r, ""]\arrow[d, "f"] & B_n' \arrow[r, ""]\arrow[d, "\cong \ \phi"] & C_n' \arrow[r, ""]\arrow[d, "h"] & \cdots \\
+                          \cdots \arrow[r, ""] & C_{n+1} \arrow[r, "k"] & A_n \arrow[r, ""] & B_n \arrow[r, ""] & C_n \arrow[r, ""] & \cdots \\
+                     \end{tikzcd}
+                 \end{equation*}
+                 where the rows are long exact sequences, and every third vertical arrow (the $\phi \;$s in the diagram) is an isomorphism. Define the map,
+                 \begin{equation*}
+                     \partial \colon A_n \to B_n \overset{\phi^{-1}}{\to} B_n' \to C_n'.
+                 \end{equation*}
+                 Consider the following sequence,
+                 \begin{equation*}
+                     \begin{tikzcd}
+                         \cdots \arrow[r, ""] & C_{n+1}' \arrow[r, "(h\text{,}\ -k)"] & C_{n+1} \oplus A_n'\arrow[r, "k + f"] & A_n\arrow[r, "\partial"] & C_n' \arrow[r, ""] &\cdots 
+                     \end{tikzcd}
+                 \end{equation*}
+                 Show the above sequence is exact. 
+\end{problem}
+\begin{proof}
+	\textbf{Part 1:} exact at $C_{n + 1} \oplus A'_n$. $(k + f) (h, -k) = k h - f k = 0$ by the commutative diagram. Thus $\operatorname{Im} (h, -k) \subset \operatorname{ker} (k + f)$. To prove the other side, take $a'_n + c_{n + 1} \in A'_n \oplus C_{n + 1}$ such that $f a'_n + k c_{n + 1} = 0$. Apply $k$ to this and we see that $k f a'_n = 0$. Since $k f = \phi k$,  $\phi k a'_n = 0$, hence $k a'_n = 0$. By exactness, there exists $c'_{n + 1}$ such that $a'_n = k c'_{n + 1}$. 
+
+	Now we claim that $k(c_{n + 1} + h c'_{n + 1}) = 0$. This is true since $k h c'_{n + 1} = f k c'_{n + 1} = f a'_n = - k c_{n + 1}$. Write $c = c_{n + 1} + h c'_{n + 1}$ so that $k c = 0$. Thus there exists $b_{n + 1}, c = k b_{n + 1}$. But since $\phi$ is isomorphism, there exists $b'_n$, $c = k \phi b'_{n + 1} = h k b'_{n + 1}$. Finally, take $c' = -c'_{n + 1} + k b'_{n + 1}$, we have $-k(c') = k c'_{n + 1} = a'_n$ and $h c' = - h c'_{n + 1} + h k b'_{n + 1} = - h c'_{n + 1} + k b_{n + 1} = - h c'_{n + 1} + c = - h c'_{n + 1} + h c'_{n + 1} + c_{n + 1} = c_{n + 1}$.
+
+	\textbf{Part 2:} exact at $A_n$. First, we verify that $\partial (k + f) (c_{n + 1}, a'_n) = \partial(k c_{n + 1} + f a'_n) = k \phi^{-1} k (k c_{n + 1} + f a'_n) = k \phi^{-1} k f a'_n = k \phi^{-1} \phi k a'_n = k k a'_n = 0$.
+
+	Now, take $a_n$ such that $k \phi^{-1} k a_n = 0$. By exactness, there exists $a'_n \in A'_n$, $k a'_n = \phi^{-1} k a_n$. Thus $k a_n = \phi k a'_n = k f a'_n$, that is, $k(f a'_n - a_n) = 0$. Then by exactness again, there exists $c_{n + 1}, k c_{n + 1} = f a'_n - a_n$. Now
+	\[
+		(k + f) (- c_{n + 1}, a'_n) = - k c_{n + 1} + f a'_n
+		= - f a'_n + a_n + f a'_n = a_n
+	.\] 
+
+	\textbf{Part 3:} exact at $C'_n$. First, verify that $(h, -k) \partial = (h, -k) (k \phi^{-1} k) = (h k \phi^{-1} k, -k k \phi^{-1} k) $. Now both $h k \phi^{-1} k = k \phi \phi^{-1} k = 0$ and $- k k \phi^{-1} k = 0$.
+
+	Now take $c'_n $ such that $(h, -k) c'_n = 0$. Then since  $k c'_n = 0$, by exactness there exists $b'_n$ such that $k b'_n = c'_n$. Hence $h k b'_n = h c'_n = 0 k \phi b'_n$. By exactness again, there exists $a_n$, $k a_n = \phi b'_n$. Now
+	\[
+		\partial a_n = k \phi^{-1} k a_n = k \phi^{-1} \phi b'_n = k b'_n = c'_n
+	.\] 
+\end{proof}
+\begin{problem}
+		 	
+
+     Let $A$ be a subspace of the circle $S^1$ consisting of two points. Compute $H_n(S^1, A)$, $n \geq 0$.
+
+    
+\end{problem}
+\begin{proof}
+	From the short exact sequence for chains
+	\[
+		0 \to S_*(A) \to S_*(S^1) \to S_*(S, A) \to 0
+	,\] 
+	we obtain the long exact sequence:
+% https://quiver.local:8080/#q=WzAsOSxbMCwyLCJIXzEoQSkgPSAwIl0sWzAsNCwiSF8wKEEpID0gXFxtYXRoYmJ7Wn0gXFxvcGx1cyBcXG1hdGhiYntafSJdLFsyLDIsIkhfMShTXjEpID0gXFxtYXRoYmJ7Wn0iXSxbNCwyLCJIXzEoU14xLCBBKSJdLFs0LDAsIlxcZG90cyJdLFsyLDQsIkhfMChTXjEpID0gXFxtYXRoYmJ7Wn0iXSxbNCw0LCJIXzAoU14xLCBBKSJdLFswLDYsIkhfey0xfShBKSA9IDAiXSxbMiw2LCJcXGRvdHMiXSxbMCwyXSxbMiwzXSxbMywxXSxbNCwwXSxbMSw1XSxbNSw2XSxbNiw3XSxbNyw4XV0=
+\[\begin{tikzcd}
+	&&&& \dots \\
+	\\
+	{H_1(A) = 0} && {H_1(S^1) = \mathbb{Z}} && {H_1(S^1, A)} \\
+	\\
+	{H_0(A) = \mathbb{Z} \oplus \mathbb{Z}} && {H_0(S^1) = \mathbb{Z}} && {H_0(S^1, A)} \\
+	\\
+	{H_{-1}(A) = 0} && \dots
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+	\arrow[from=3-5, to=5-1]
+	\arrow[from=1-5, to=3-1]
+	\arrow[from=5-1, to=5-3]
+	\arrow[from=5-3, to=5-5]
+	\arrow[from=5-5, to=7-1]
+	\arrow[from=7-1, to=7-3]
+\end{tikzcd}\]
+we sadly cannot get enough information. Let's try to apply the reduced version of Mayer–Vietoris sequence. Let $X, Y$ be the neighborhoods of two arc segments separated by $A$. Then $X, Y$ are each homotopic to $S^1$, and $X \cap Y$ is contractible. We have
+
+% https://quiver.local:8080/#q=WzAsNyxbMiwwLCJcXHRpbGRlIEhfMShYKSBcXG9wbHVzIFxcdGlsZGUgSF8xKFkpID0gXFxaXjIiXSxbNCwwLCJcXHRpbGRlIEhfMShYL0EpIl0sWzAsMCwiXFx0aWxkZSBIXzEoWFxcY2FwIFkpID0gMCJdLFswLDIsIlxcdGlsZGUgSF8wKFhcXGNhcCBZKSA9IDAiXSxbMiwyLCJcXHRpbGRlIEhfMChYKSBcXG9wbHVzIFxcdGlsZGUgSF8wKFkpID0gMCJdLFs0LDIsIlxcdGlsZGUgSF8wKFgvQSkiXSxbNSwyLCIwIl0sWzAsMV0sWzIsMF0sWzEsM10sWzMsNF0sWzQsNV0sWzUsNl1d
+\[\begin{tikzcd}
+	{\tilde H_1(X\cap Y) = 0} && {\tilde H_1(X) \oplus \tilde H_1(Y) = \Z^2} && {\tilde H_1(X/A)} \\
+	\\
+	{\tilde H_0(X\cap Y) = 0} && {\tilde H_0(X) \oplus \tilde H_0(Y) = 0} && {\tilde H_0(X/A)} & 0
+	\arrow[from=1-3, to=1-5]
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-5, to=3-1]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+	\arrow[from=3-5, to=3-6]
+\end{tikzcd}\]
+
+From this we know that $\tilde H_1(S^1 / A) = \mathbb{Z}^2, \tilde H_0(S^1 / A) = 0$. Also, for all $n > 1$, $\tilde H_1(S^1 / A) = 0$ since it is surrounded by  $0$ in the l.e.s.
+
+Now, by excision theorem, we have
+\[
+	H_n(S, A) \cong H_n(S / A, *) \cong \tilde H_n(S / A)
+.\] 
+
+Since $H_*(X, A) \to H_*(X, B)$ is induced by inclusions and is hence surjective, the boundary maps in the l.e.s. are all zero.
+\end{proof}
+
+\begin{proof}[Proof without M-V]
+	Let $\alpha, \beta$ be two points on the circle, let $a$ be a $1$-cycle on $(S^1, \{\alpha\} )$ defined by a full traverse of the circle starting from $\alpha$; let $a'$ be a 1-simplex $[\alpha, \beta]$ induced by $a $, and $b'$ be a $1$-simplex $[\beta, \alpha]$ induced by $a$. Thus $a = a' + b'$. 
+
+	Now consider the space $(S^1, A = \{\alpha, \beta\} )$. Then, $a', b'$ are both 1-cycles in this space. We verify that $[a'] \neq [b']$ in $H_1(S^1, A)$ : $a' - b' = [\beta, \alpha] \circ a \circ [\alpha, \beta] \sim a$ which is not a 1-boundary in $(S^1, \{\alpha\} )$, thus not a 1-boundary in $(S^1, A)$. Hence $a'$ and $b'$ are not homologous.
+
+	Next, consider the boundary map $H_1(S^1, A) \to H_1(A, \{\alpha\} ) \cong \mathbb{Z}$. It sends $[a'] \mapsto c^0_\beta - c^0_\alpha = c^0_\beta$ and $[b'] \mapsto c^0_\alpha - c^0_\beta = - c^0_\beta$. We see the boundary map is surjective.
+
+	Now, define a section map $s: H_1(\{\alpha, \beta\} , \{\alpha\} ) \to H_1(S^1, A)$ by $s(c^0_\beta) = [a']$. Now $j \circ s = \text{Id}$. See the following diagram:
+
+
+% https://quiver.local:8080/#q=WzAsMTEsWzAsMCwiSF8xKEEsIEIpID0gMCJdLFsyLDAsIkhfMShTXjEsIEIpIl0sWzQsMCwiSF8xKFNeMSwgQSkiXSxbNiwwLCJIXzAoQSwgQikiXSxbOCwwLCJIXzAoU14xLCBBKSA9IDAiXSxbMiwxLCJbYV0iXSxbNCwxLCJbYSddICsgW2InXSJdLFs0LDIsIlthJ10iXSxbNiwyLCJjXjBfXFxiZXRhIl0sWzQsMywiW2InXSJdLFs2LDMsIi1jXjBfe1xcYmV0YX0iXSxbMCwxXSxbMSwyLCJpIl0sWzIsMywiaiJdLFszLDRdLFs1LDYsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNyw4LCIiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9LCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzksMTAsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMywyLCJzIiwxLHsib2Zmc2V0IjoxLCJjdXJ2ZSI6M31dXQ==
+\[\begin{tikzcd}[cramped]
+	{H_1(A, B) = 0} && {H_1(S^1, B)} && {H_1(S^1, A)} && {H_0(A, B)} && {H_0(S^1, A) = 0} \\
+	&& {[a]} && {[a'] + [b']} \\
+	&&&& {[a']} && {c^0_\beta} \\
+	&&&& {[b']} && {-c^0_{\beta}}
+	\arrow[from=1-1, to=1-3]
+	\arrow["i", from=1-3, to=1-5]
+	\arrow["j", from=1-5, to=1-7]
+	\arrow[from=1-7, to=1-9]
+	\arrow[shorten <=11pt, shorten >=11pt, maps to, from=2-3, to=2-5]
+	\arrow[shorten <=13pt, shorten >=13pt, maps to, from=3-5, to=3-7]
+	\arrow[shorten <=13pt, shorten >=13pt, maps to, from=4-5, to=4-7]
+	\arrow["s"{description}, shift right, curve={height=18pt}, from=1-7, to=1-5]
+\end{tikzcd}\]
+By the split lemma, $H_1(S^1, A) \cong \operatorname{Im} i \oplus \operatorname{Im} s$. That is,
+\[
+	H_1(S^1, A) = \mathbb{Z}\left\langle [a' + b'], [a'] \right\rangle \cong \mathbb{Z} \oplus \mathbb{Z}
+.\] 
+
+\end{proof}
+
+
+\begin{problem}
+	
+     ($H_1$ as the Abelianization of $\pi_1$.) For any group $G$, denote by $[G,G]$ the normal subgroup generated by elements of the form $ghg^{-1}h^{-1}$, $g,h \in G$, and denote by $G_{\text{ab}} := G/[G,G]$. By construction, $G_{\text{ab}}$ is an Abelian group and is called the Abelianization of $G$.  For any path-connected topological space $X$, we are going to prove the following classic result: $\pi_1(X)_{\text{ab}} \cong H_1(X)$.
+    
+    Follow the  steps below or come up with your own proof. Let's set up some notation. A path means a continuous map $I = [0,1] \to X$. A path can also be thought of as a singular 1-simplex if we identify $I$ with the standard 1-simplex. For two paths $\gamma_1, \gamma_2$, denote by $\gamma_1 \simeq \gamma_2$ if $\gamma_1$ and $\gamma_2$ are homotopic, fixing end points. (In particular, this requires $\gamma_1|_{\partial I} = \gamma_2|_{\partial I}$.) Denote by $\gamma_1 \sim \gamma_2$ if they are homologous, that is, if $\gamma_1 - \gamma_2$ is the boundary of a 2-chain.
+
+\end{problem}
+    \begin{enumerate}
+      \item For $x \in X$, denote by $p_x$ the constant path at $x$. Show $p_x \sim 0$, i.e., $p_x$ is the boundary of a 2-chain.
+      \item For two paths $\gamma_1, \gamma_2$ which agree at end points, if $\gamma_1 \simeq \gamma_2$, prove $\gamma_1 \sim \gamma_2$.
+      \item For two paths $\gamma_1, \gamma_2$ such that $\gamma_1(1) = \gamma_2(0)$, show $\gamma_1*\gamma_2 $ and $ \gamma_1 + \gamma_2$ are homologous. (Hint: construct a singular 2-simplex whose boundary consists of $\gamma_1, \gamma_2$, and $\gamma_1*\gamma_2$.)
+      \item For a path $\gamma$, denote by $\bar{\gamma}$ the path  $\gamma$ with reversed orientation, i.e., $\bar{\gamma}(t):= \gamma(1-t)$. Use previous results to show $\bar{\gamma} \sim -\gamma$.
+    \end{enumerate}
+    \begin{proof}
+    	\begin{enumerate}
+    		\item Note that $d(c^2_x) = c^1_x - c^1_x + c^1 _x = c^1 _x = p_x$.
+		\item This follows from homotopy invariance of homology.
+		\item Let $\sigma: \Delta_2 \to X$ be constructed as follows: Let $\pi: \Delta_2 \to \Delta_1$ be an affine map that preserves vertex $[0]$ and $[1]$ and sends $[2]$ to $\frac{1}{2}([0] + [1])$. Now $\gamma_1 * \gamma_2 \in \text{Sin}_1(X)$. Let $\sigma = (\gamma_1 * \gamma_2) * \pi$. Now note that $\sigma|_{[0]} = \gamma_1(0), \sigma|_{[1]} = \gamma_2(1), \sigma|_{[2]} = \gamma_1(1) = \gamma_2(0)$, so
+			\[
+				\partial \sigma = \sigma|_{[1 2]} - \sigma|_{[0,2]} + \sigma|_{[0 1]} = \gamma_2 - \gamma_1* \gamma_2 + \gamma_1
+			.\] 
+		\item Note that $\gamma * \overline{\gamma} \sim \gamma + \overline{\gamma}$, but $\gamma * \overline{\gamma} = c_1^{\gamma(0)} \sim  0$, so $\gamma + \overline{\gamma} \sim  0 \implies\overline{\gamma} \sim  - \gamma $.
+	\end{enumerate}
+    \end{proof}
+    
+
+    Now choose a base point $x_0 \in X$. For any loop $\gamma$ based at $x_0$, it is a cycle when viewed as a 1-chain. Results from parts $a)-c)$ imply that the map,
+    \begin{equation*}
+        q: \pi_1(X, x_0) \to H_1(X)
+    \end{equation*}
+    sending $[\gamma]$ to $[\gamma]$ is a well-defined group homomorphism. Since $H_1(X)$ is Abelian, $q$ automatically factors through $\pi_1(X,x_0)_{\text{ab}}$,
+    \begin{equation*}
+        \begin{tikzcd}
+            \pi_1(X, x_0)\arrow[r, "q"]\arrow[d,""] & H_1(X)\\
+            \pi_1(X,x_0)_{\text{ab}} \arrow[ru, "\tilde{q}"]
+        \end{tikzcd}
+    \end{equation*}
+    \begin{enumerate}[resume]
+    \item (Surjectivity of $q$ and hence $\tilde{q}$.) Convince yourself (no need to write out) that for any homology class $[\sigma] \in H_1(X)$, we can always choose a representative cycle $\sigma$ such that $\sigma = \sum \sigma_i$ where each $\sigma_i$ is a loop. To prove surjectivity, it hence suffices to show for any loop $\gamma: I \to X$, $\gamma(0) = \gamma(1)$, the homology class $[\gamma]$ is in the image of $q$. Show this.
+\begin{proof}
+	Pick $\gamma \in Z_1(X)$, $\gamma(0) = \gamma(1)$. Then since $X$ is path-connected, we can find $\tau \in \text{Sin}_1(X)$, $\tau(0) = x_0$, $\tau(1) = \gamma(0)$. Now
+	\[
+		\gamma = \gamma + \tau - \tau ~ \tau * \gamma * (- \tau) \in \pi_1(X, x_0)
+	.\] 
+	Hence $q([\tau * \gamma * (- \tau)]) = \tau * \gamma * (- \tau) + B_1(X) = \gamma + B_1(X)$.
+\end{proof}
+
+    \item (Injectivity of $\tilde{q}$). \textbf{This part is optional and has no required work.} For $[\gamma] \in \pi_1(X,x_0)$, if $q([\gamma]) = 0$, we show $[\gamma] = 0 \in \pi_1(X,x_0)_{\text{ab}}$. There exists a 2-chain $\sigma = \sum \epsilon_i \sigma_i$ such that $\partial \sigma = \gamma$, where each $\sigma_i$ is a singular 2-simplex (not necessarily distinct) and $\epsilon_i = \pm 1$. For each $\sigma_i$, denote by $\partial_{jk} \sigma_i$ the $[jk]$ face of $\sigma_i$. If $p\in X$ is a vertex of some $\sigma_i$, arbitrarily choose and fix a path $\tau_{p}$ connecting $x_0$ to $p$.  \begin{equation*}
+    \end{equation*}
+    For each $\sigma_i$, it has the boundary equation,
+    \begin{equation*}
+        \partial \sigma_i =  \partial_{01} \sigma_i + \partial_{12} \sigma_i - \partial_{02} \sigma_i.
+    \end{equation*}
+    To avoid lengthy notation, simply denote the three vertices $\sigma_i(0), \sigma_i(1), \sigma_i(2)$ (not necessarily distinct)  of $\sigma_i$ by $0,1,2$, respectively. Then in $\pi_1(X,x_0)_{\text{ab}}$ which we treat as an additive group, we have the equality,
+    \begin{equation*}
+        \tau_0 * \partial_{01} \sigma_i*\bar{\tau_1} + \tau_1 * \partial_{12} \sigma_i*\bar{\tau_2} - \tau_0 * \partial_{02} \sigma_i*\bar{\tau_2} = 0.
+    \end{equation*}
+    Basically, we turn each face of $\sigma_i$ into a loop based at $x_0$ and the loops corresponding to the three faces satisfy the above equality in $\pi_1(X,x_0)_{\text{ab}}$.
+    Now since,
+    \begin{equation*}
+        \sum \epsilon_i (\partial_{01} \sigma_i + \partial_{12} \sigma_i - \partial_{02} \sigma_i) = \gamma,
+    \end{equation*}
+    All the terms $\epsilon_i \partial_{jk} \sigma_i$, except one, on the LHS cancel in pairs, and the one left is exactly equal to $\gamma$ as a chain. Therefore, we also have the equality in $\pi_1(X,x_0)_{\text{ab}}$,
+    \begin{equation*}
+         \sum \epsilon_i (\tau_0 * \partial_{01} \sigma_i*\bar{\tau_1} + \tau_1 * \partial_{12} \sigma_i*\bar{\tau_2} - \tau_0 * \partial_{02} \sigma_i*\bar{\tau_2}) = \tau_{\gamma(0)}*\gamma*\overline{\tau_{\gamma(1)}} = \gamma,
+    \end{equation*}
+    where note that $\gamma(0) = \gamma(1) = x_0$, and hence $\tau_{\gamma(0)} = \tau_{\gamma(1)}$ is an element of $\pi_1(X, x_0)$, and hence the conjugation is canceled in the Abelianization. This implies $\gamma = 0 \in \pi_1(X,x_0)_{\text{ab}}$.
+    \end{enumerate}
+    
+    Now you should have a good idea of the generators of $H_1(X)$ if you know $\pi_1(X)$. For instance, think about what generate $H_1(S^1)$ and $H_1(S^1 \times S^1)$. (No need to answer.)

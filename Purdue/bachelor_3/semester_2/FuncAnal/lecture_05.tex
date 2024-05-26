@@ -1,0 +1,88 @@
+\lecture{5}{Fri 19 Jan 2024 13:31}{}
+
+\begin{definition}[Sublinear Functional]
+	\label{defn:SublinearFunctional}
+	Let $X$ be a linear space over $\mathbb{R}$. Say $q: X \to \mathbb{R} $ is a \textit{sublinear functional} if
+	\begin{enumerate}
+		\item $q(x + y) \le q(x) + q(y)$ 
+		\item $q ( \lambda x) = \lambda q(x)$ for all $\lambda \ge 0$ (Positively Homogeneous)
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	\begin{itemize}
+		\item If $f: X \to \mathbb{R}$ linear, take $q(x) = |f(x)|$.
+		\item If $X$ is normed, take $q(x) = \|x\|$.
+	\end{itemize}
+\end{example}
+
+\begin{theorem}[Hahn-Banach Theorem]
+	\label{thm:HahnBanachThm}
+	Let $X$ be a linear space over $\mathbb{R}$. Let $q: X \to \mathbb{R}$ be a sublinear functional. Let $Y \subset X$ be a linear subspace. Let $f: Y \to \mathbb{R}$ be a linear map such that $f$ is dominated by $q$. Then there exists $F: X \to \mathbb{R}$ linear, $F|_Y = f$, and such that $F(x) \le q(x)$ for all $x \in X$.
+\end{theorem}
+
+\begin{corollary}
+	Let $X$ be a normed space, let $Y \subset X$ be a subspace. Then for all $f \in Y^*$, there exists $F\in X^*$ such that $F|_Y = f$ and $\|F\| = \|f\|$.
+\end{corollary}
+
+% https://quiver.local:8080/#q=WzAsNixbMCwwLCIwIl0sWzIsMCwiWSJdLFs0LDAsIlgiXSxbMiwyLCJZXioiXSxbNCwyLCJYXioiXSxbMCwyLCIwIl0sWzAsMV0sWzEsMl0sWzEsMywiIiwwLHsibGV2ZWwiOjJ9XSxbNCwzXSxbMyw1XV0=
+\[\begin{tikzcd}
+	0 && Y && X \\
+	\\
+	0 && {Y^*} && {X^*}
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow[Rightarrow, from=1-3, to=3-3]
+	\arrow[from=3-5, to=3-3]
+	\arrow[from=3-3, to=3-1]
+\end{tikzcd}\]
+\todo{explain this diagram.}
+
+\begin{proof}[Proof of Corollary]
+	Let $q(x) = \| f\| \| x\|$. Then $f \in Y^* \implies |f(y)| \le  \|f\| \|y\|$ for all $y \in Y$. Then, by HB1, there exists $F \in X^*$ such that $F|_Y = f$, and $|F(x)| \le \|f\| \|x\|$.
+	It follows that $\|F\| \le  \|f\|$. But $\|F\| \ge  \|f\|$ always, for extensions.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:HahnBanachThm}]
+	First prove
+	\begin{lemma}[Banach's Lemma]
+		\label{lem:Banachlem}
+		Informally, we can increase $Y$ by one dimension.
+
+		Let $q: X \rightarrow \mathbb{R}$ be a sublinear function on a real vector space $X$, let $f: Y \rightarrow \mathbb{R}$ a linear functional on a proper vector subspace $Y \subsetneq X$ such that $f \leq q$ on $M$ (meaning $f(y) \leq q(y)$ for all $y \in Y$ ), and let $x \in X$ be a vector not in $Y$ (so $Y \oplus \mathbb{R} x=\operatorname{span}\{Y, x\}$ ). There exists a linear extension $F: Y \oplus \mathbb{R} X \rightarrow \mathbb{R}$ of $f$ such that $F \leq q$ on $Y \oplus \mathbb{R} x$.
+	\end{lemma}
+	Define $X_0 = Y + \mathbb{R} x_0$. Extend $f$ to $f_0: X_0 \to \mathbb{R}$, linear by $f_0(y + \lambda x_0) = f(y) + \lambda f_0(x_0)$, all $\lambda \in \mathbb{R}$, with $f_0(x_0)$ to be determined. We want to check domination. Under assumption $\lambda \neq 0$,
+	\begin{align*}
+		& f_0(\lambda x_0 + y) \le  q(\lambda x_0 +  y) \\
+		&\iff  f_0\left( \frac{\lambda}{|\lambda|} x_0 + \frac{y}{|\lambda|} \right) \le q\left(  \frac{\lambda}{|\lambda|} x_0 + \frac{y}{|\lambda|}  \right) \\
+		&\iff \begin{cases}
+			f_0(x_0) + f(y) = f_0(x_0 + y) \le q(x_0 + y) & \forall y \in Y \\
+			-f_0(x_0) + f(z) = f_0(-x_0 + z) \le q(- x_0 + z) & \forall  z \in Y
+		\end{cases}\\
+		&\iff f(z) - q(- x_0 + z) \le f_0(x_0) \le  q(x_0 + y) - f(y) \quad \forall  z, y \in Y
+	.\end{align*}
+	To choose such a number $x_0$, we need
+	\[
+		\sup _{z, y} f(z) - q(- x_0 + z) 
+		\le \inf _{y} q(x_0 + y) - f(y)
+	.\] 
+	This is equivalent to
+	\begin{align*}
+		&f(z) - q(-x_0 + z) \le q(x_0 + y) - f(y)\\
+		&\iff f(y + z) \le q(x_0 + y) + q(-x_0 + z)
+	.\end{align*}
+	By assumption $f \le q$ on $Y$, so 
+	\[
+		f(y + z) \le q(y + z) \le q\left( (x_0 + y) + (-x_0 + z) \right) 
+	,\] 
+	where in the first inequality we use domination of $q$, in the second inequality we used the fact that $q$ is defined in $X$. Now since  $q$ is sublinear,
+	\[
+		 q\left( (x_0 + y) + (-x_0 + z) \right) \le q(x_0 + y) + q(-x_0 + z) 
+	.\] 
+
+	\textbf{Part 2.} Let $P$ be the set of all pairs $(X', f')$ where $f': X' \to \mathbb{R}$ is linear, $X \subset X'$, $f'|X = f$, $f' \le q$ on $X'$. This is all extensions of $f$ to larger subspaces that preserve subordination by $q$. 
+
+	Introduce partial order $(P, \le )$ by the extension relation $X ' \subset X'', f''|_{X'} = f'$. We check that any chain $\left( X_\alpha, f_\alpha \right) _{\alpha \in A} \subset P$, has an upper bound. Consider $\left( \bigcup_{\alpha \in A} X_\alpha, \bigcup_{\alpha \in A} f_\alpha \right) $. We claim this is an upper bound for $\left( X_\alpha, f_\alpha \right) _{\alpha \in A}$.
+
+	Zorn's Lemma (Lemma~\ref{lem:Zorn}) tells us that there exists $(Z, f) \in P$ maximal. Now Banach's Lemma shows $Z = X$.
+\end{proof}
+

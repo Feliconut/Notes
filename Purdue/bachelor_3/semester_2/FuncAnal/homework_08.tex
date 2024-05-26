@@ -1,0 +1,85 @@
+\homework{8}{Tue 16 Apr 2024 01:38}{}
+
+\begin{problem}
+	1. Let $H$ be a Hilbert space. Let $T \in B(H)$ be a nonzero normal operator such that $T^5-2 T^3+4 T=0$.\\
+(a) Show that each point in the spectrum of $T$ is an eigenvalue.\\
+(b) Compute $\|T\|$.	
+\end{problem}
+\begin{proof}
+	Let $f(z) = z^5 - 2 z^3 + 4 z$.
+	Consider the continuous functional calculus for  $T$, and use spectral mapping theorem to conclude
+	\[
+		f(\sigma(T)) = \sigma(f(T)) = \sigma(0) = 0
+	.\] 
+	We denote the solutions to $f(z) = 0$ by $\sigma(f)$. By fundamental theorem of algebra, $\sigma(f)$ is a finite set. The equality above give us $\sigma(T) \subset \sigma(f)$, hence $\sigma(T)$ contains isolated points. Hence every element of $\sigma(T)$ is an eigenvalue.
+
+	We are still not sure if $\sigma(T) = \sigma(f)$, but that does not matter. The solution to $f(z) = 0$ are $z = 0$ and $z = \pm \sqrt{3 / 2} \pm i 1 / \sqrt{2} $. It cannot be the case that $\sigma(T) = \{0\} $, otherwise $T$ has to be zero (for it's normal). Therefore, from continuous functional calculus,
+	\[
+		\|T\| = \|z \mapsto z\|_{\sigma(T)} = \sqrt{3 / 2 + 1 / 2} = \sqrt{2}  
+	.\] 
+\end{proof}
+
+\begin{problem}
+	2. Let $H$ be a separable Hilbert space with scalar product $\langle\cdot, \cdot\rangle$ and let $T \in B(H)$ have the property that there is $c>0$ such that $\langle T x, x\rangle \geq c\langle x, x\rangle$ for all $x \in H$. Show that $T$ is an invertible operator.
+\end{problem}
+\begin{proof}
+	We only need to verify that $\sigma(T) \subset [c, \infty )$, so the continuous functional calculus for $T$ lets us define $T^{-1} = f(T)$ where $f(\lambda) = \frac{1}{\lambda}$.
+
+	Well, take $\lambda_0 \in \sigma(T)$, since $T$ normal, $\lambda_0$ is an approximate eigenvalue, so for every $x \in H$ there exists a sequence $x_n$ of unit vectors such that $\lim_n \|(T - \lambda0)) x_n\| = 0$. Hence, $\left\langle T x _n, x_n \right\rangle  \to \lambda_0$. But this implies $\lambda_0 \ge c$.
+\end{proof}
+
+\begin{problem}
+	3. Let $H$ be a separable Hilbert space and assume that $T \in B(H)$ is a normal operator such that $\lim _{n \rightarrow \infty}\left\|T^n x\right\|=0$ for all $x \in H$. Show that $\|T\| \leq 1$.
+\end{problem}
+\begin{proof}
+	We have
+	\[
+		\int _{\sigma(T)} \left| \lambda^n \right| ^2 d \|E(\lambda) x\|^2 = \|T^n x\|^2 \to 0 \quad \text{as } n \to \infty \text{for each }x \in H
+	.\] 
+	We claim that $d \|E(\lambda) x\|^2$ is a Borel measure with total measure $\|x\|^2$. 
+
+	Thus, we must have $\left| \lambda \right| \le 1$, otherwise the integral diverges as $n \to \infty $.
+
+	Since $T$ is a normal operator,
+
+	\[
+		\|T\| = \limsup_n \|T^n\|^{1 / n} = r(T) \le 1
+	.\] 
+\end{proof}
+
+\begin{problem}
+	4. Let $U \in B\left(\ell^2(\mathbb{Z})\right)$ be the bilateral shift defined by $U \delta_k=\delta_{k+1}$, $k \in \mathbb{Z}$.
+(a) Compute the spectrum of $U$.\\
+(b) Compute $\left\|\left(i I+\frac{1}{2} U\right)^{-1}\right\|$.\\
+(Here we write $I$ for the identity operator of $\ell^2(\mathbb{Z})$ ).\\
+Hint. For (a) one may use vectors of the form
+\[
+v_n = \frac{1}{\sqrt{n+1}} \sum_{k=0}^n \lambda^k \delta_k .
+\]
+\end{problem}
+\begin{proof}
+	First of all, $U$ is a unitary operator, thus $\sigma(U) \subset S^1$.
+
+	Now, for each $\lambda \in \mathbb{C}$, $|\lambda| = 1$, we want to show that $U - \lambda^{-1}$ is not invertible. Recall some facts:
+	\begin{itemize}
+		\item If $A$ is a normal operator, then $A$ is bounded from below, i.e. exists $c > 0$ such that $\left\langle A x, x \right\rangle \ge c \left\langle x, x \right\rangle $, if and only if $A$ is invertible.
+		\item $A \in B(H)$ is not bounded from below, if and only if there exists a sequence $v_n$ of unit vectors, such that $\|A v_n\| \to 0$.
+	\end{itemize}
+	Thus, it suffices to verify that $\|\left( U  - \lambda^{-1} \right) v_n\| \to 0$:
+	\begin{align*}
+		\|U v_n - \lambda^{-1} v_n\|
+		&= \frac{1}{n + 1} \|\sum_{k=0}^{n} \lambda^k \delta_{k + 1} - \sum_{k=0}^{n} \lambda^{k - 1} \delta_k \|^2 \\
+		&= \frac{1}{n + 1} \|\lambda^n \delta_{n + 1} - \lambda^{-1} \delta_0\| \\
+		&= \frac{2}{n + 1} \to 0
+	.\end{align*}
+	Thus, $\sigma(U) = S^1$.
+
+	To compute $\left\|\left(i I+\frac{1}{2} U\right)^{-1}\right\|$, we use continuous functional calculus. This is equal to
+	\[
+		\sup _{|z| = 1} \left| \left( i 1 + \frac{1}{2} z \right) ^{-1} \right| = \left| \left( i + \frac{1}{2}(- i) \right)^{-1}  \right| = 2
+	.\] 
+\end{proof}
+
+
+
+

@@ -1,0 +1,57 @@
+\lecture{9}{Tue 06 Feb 2024 10:51}{}
+
+Quantum Advantage in the sense of quantum algorithms:
+\begin{itemize}
+	\item \textbf{Hidden subgroup problems.} Includes the quantum part of Shor's algorithm. Good news: probable exponential advantage in query complexity. Bad news: Query model is unrealistic (in general, unless abelian group).
+	\item \textbf{Unstructured search (Grover's).} Good news: Can find a needle in a haystack of size $N$ in time $\sqrt{N}$. Bad news: cannot do better than $\sqrt{N} $. Worse: overhead in quantum error correction might negate any advantage.
+
+\end{itemize}
+
+
+Other frameworks for potential quantum advantage exist, but poorly characterized:
+
+\begin{itemize}
+	\item HHL algorithm for inversion of sparse matrix
+	\item Quantum annealing / adiabatic quantum computing / VQE / Quantum Optimization (use quantum tunneling to find minima of energy).
+
+	\item Quantum simulation
+	\item Quantum random walks
+\end{itemize}
+
+Quantum advantage is also something that can be expired in information theoretic sense, e.g.
+\begin{itemize}
+	\item Bell inequalities
+	\item Entanglement games
+\end{itemize}
+
+\subsubsection{Quantum Teleportation}
+
+Bell states (EPR states): 
+\begin{align*}
+\left| \beta_{0 0} \right\rangle  &= \left| 00 \right\rangle + \left| 11 \right\rangle \\
+\left| \beta_{0 1} \right\rangle  &= \left| 01 \right\rangle + \left| 10 \right\rangle \\
+\left| \beta_{1 0} \right\rangle  &= \left| 00 \right\rangle - \left| 11 \right\rangle \\
+\left| \beta_{1 1} \right\rangle  &= \left| 01 \right\rangle - \left| 10 \right\rangle \\
+.\end{align*}
+Allows instantaneous knowledge of the other person's qubit, when measurement is done on one side. However, this is not to say that communication is done that violates speed of light. 1) Person B does not know if person A has performed measurement. 2) We cannot transmit information using the mechanism.
+
+\begin{remark}
+	EPR = ER conjecture (quantum information and wormhole duality).
+\end{remark}
+
+EPR circuit (diagram omitted)
+
+\begin{claim}
+	To build a quantum network, suffices to have a classical network and some ``tubes'' that can move the individual qubits in Bell states around. Then, we can use this to move around any quantum states.
+\end{claim}
+\begin{proof}
+	Follow the procedure (\todo{fill in diagram and procedure})
+
+\end{proof}
+
+\subsubsection{Deutsch-Jozsa}
+
+
+
+
+

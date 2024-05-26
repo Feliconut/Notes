@@ -1,0 +1,106 @@
+\lecture{22}{Mon 18 Mar 2024 12:10}{}
+
+Recall that the Gelfand-Mazur Theorem states that $\mathbb{C}$ is the only complex Banach algebra with identity where every nonzero element is invertible. 
+
+In a unital, commutative Banach algebra, a non-invertible element $a \in A$ gives rise to a proper ideal $(a) = a A$. (Conversely, any proper ideal gives us some non-invertible element.) Zorn's Lemma says every proper ideal is contained in some maximal ideal,  $(a) \subset I \in \text{Max}(A)$.
+
+But when we quotient $A$ by some maximal ideal $I$, the resulting Banach algebra $A / I$ cannot have a nonzero, non-invertible element for algebraic reasons. Therefore, those quotient maps $A \to A / I$ are actually special homomorphisms into $\mathbb{C}$, i.e. \textit{characters.}
+
+\begin{proposition}
+	\label{prop:MaximalQuotientIsC}
+	Let $A $ be a unital commutative Banach algebra. $I \in \text{Max}(A)$ iff $A / I \cong \mathbb{C}$.
+\end{proposition}
+\begin{proof}
+	Assume $I$ is maximal, $A / I$ does not contain a nonzero non-invertible element. Otherwise, say there is some non-zero non-invertible $\overline{a}  \in A / I$, we may pull back the proper ideal $(\overline{a} ) \subset A / I$ to some proper ideal $J \subset A$, $I \subsetneq J$. This contradicts maximality of  $I$.
+	Now, Gelfand-Mazur implies $A / I \cong \mathbb{C}$.
+
+	If $A / I \cong \mathbb{C}$, take $J \in \text{Max}(A)$ such that $I \subset J$. Then $A / J \cong \mathbb{C}$, so $A / I = A / J$. This implies $I = J$. (Otherwise, if there is $z \in J \setminus  I$, then $z + I \neq 0 + I$ but $z + J = 0 + J$, a contradiction).
+
+\end{proof}
+
+\begin{definition}[Character Space]
+	\label{defn:CharacterSpace}
+	Let $A$ be a unital Banach algebra. 
+	The \textit{Character Space} $\Omega\left(A \right) $ 
+	is the collection of homomorphisms $A \to \mathbb{C}$ of unital Banach algebras. 
+
+	In other words, $\omega \in \Omega(A)$ is linear, preserves multiplication, and preserves identity.
+\end{definition}
+
+Now we explore the algebraic, topological and spectral properties of character space.
+
+\begin{proposition}	
+	\label{prop:MaxAOmegaA}
+	Let $A$ be a unital commutative Banach algebra.
+	There is canonical bijection $\text{Max}(A) \to \Omega(A)$.
+\end{proposition}
+\begin{proof}
+	For $I \in \text{Max}(A)$, the algebra morphism $A \to A / I \cong \mathbb{C}$ is a character. 
+
+	For any $\omega \in \Omega(A)$, $\operatorname{ker} \omega$ is a maximal ideal since $A / \operatorname{ker} \omega \cong \mathbb{C}$.
+\end{proof}
+
+\begin{proposition}
+	\label{prop:CharacterTopology}
+	Let $A$ be a unital Banach algebra.
+
+	1. $\Omega(A)$ are continuous maps $A \to \mathbb{C}$, and $\Omega(A) \subset A^*$ with $\|\omega\| = 1$.
+
+	2. $\Omega(A)$ is a compact Hausdorff space when endowed with the weak-* topology. 
+\end{proposition}
+\begin{proof}
+	1. $\omega \in \Omega(A)$ is linear by definition, and $\omega(1) = 1$, so we only need to prove $\omega$ is bounded, in particular $\|\omega\| \le 1$. Take any $a \in A$, we have $\omega(a - \omega(a)1) = \omega(a) - \omega(\omega(a)1) = 0$ $\not\in \text{GL}(A)$, so $\omega(a) \in \sigma_A(a)$. Thus
+	\[
+		\|\omega(a)\|\le r_A(a) \le \|a\| \quad \forall a \in A
+	.\] 
+
+	2. We already know $\Omega\left(A \right) \subset B_{A^*}(1)$, that is weak*-compact Hausdorff, by Banach-Alaoglu. It suffices to show that $\Omega(A)$ is closed. Say $\omega_\alpha \to f \in B_{A^*}(1)$ in weak*. Then, by definition, $\omega_\alpha(a) \to f(a)$ for every $a \in A$. Since $\omega_\alpha$ are multiplicative and unital, so must be  $f$. Hence $f \in \Omega(A)$.
+\end{proof}
+
+\begin{proposition}
+	\label{prop:CharacterSpectrum}
+	Let $A$ be a unital commutative Banach algebra. Then for any $a \in A$,
+	\[
+		\sigma_A(a) = \{\omega(a): \omega \in \Omega(A)\} 
+	.\] 
+\end{proposition}
+\begin{proof}
+	In proving Proposition~\ref{prop:CharacterTopology} (1) we have verified $\omega(a) \in \sigma_A(a)$. 
+
+	Now take any $\lambda \in \sigma_A(a)$. Then $\lambda - a $ is a non-invertible element. We can take $I \in \text{Max}(A)$ such that $\lambda - a \in I$. (Note, the case $\lambda - a =0$ is covered.) 
+	Now, from Proposition~\ref{prop:MaxAOmegaA} we may take $\omega_I \in \Omega(A)$. Now $\omega_I(\lambda - a) = 0$ so that $\omega_I(a) = \lambda$, i.e. $\lambda \in \{\omega(a): \omega \in \Omega(A)\} $.
+\end{proof}
+
+We have so far seen that the character space $\Omega(A)$ is intimately related to the Banach algebra $A$ itself, in algebraic, topological and spectral aspects. We are now eager to draw a direct correspondence. This is partially done by introducing
+
+\begin{definition}[Gelfand Transform]
+	\label{defn:Gelftransform}
+	Let $A$ be a unital and commutative Banach algebra. The \textit{Gelfand transform} is the map
+	\[
+		\Gamma: A \to C(\Omega(A))
+	\] 
+	defined by $\Gamma(a)(\omega) = \omega(a)$. 
+
+	We denote $\hat{a}  = \Gamma(a)$.
+\end{definition}
+
+\begin{theorem}
+	\label{thm:GelfandProp}
+	Let $A $ be a unital and commutative Banach algebra.
+	\begin{enumerate}
+		\item $\Gamma$ is a continuous homomorphism of unital algebras.
+		\item $\Gamma$ is a continuous isomorphism between $GL(A)$ and $GL(C(\Omega(A)))$.
+		\item $a$ and $\hat{a}$ have same spectrum.
+		\item $\|\Gamma(a)\| = r_A(a)$.
+	\end{enumerate}
+\end{theorem}
+
+The next important questions is when $\Gamma$ gives us not only a homomorphism, but an isomorphism $A \to C(\Omega(A))$. For unital commutative Banach algebras, we have $\sigma_A(a) = \{\omega(a): \omega \in \Omega(A)\} $, so $C(\sigma_A(a)) = C(\Omega(A))$. If we have the desired isomorphism, we can do functional calculus merely by defining continuous functions on the spectrum, a tool even more versatile than the holomorphic functional calculus.
+
+To do so we shall need the theory of C*-algebras. It will turn out that $\Gamma$ becomes an isomorphism when the algebra is generated by an element that is \textit{normal}.
+
+
+
+
+
+

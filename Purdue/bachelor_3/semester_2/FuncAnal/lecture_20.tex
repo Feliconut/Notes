@@ -1,0 +1,95 @@
+\lecture{20}{Fri 23 Feb 2024 13:35}{}
+
+\begin{corollary}[Cayley-Hamilton]
+	\label{cor:CayleyHamilton}
+	If $A \in M_n(\mathbb{C}), p(\lambda) = \text{det}(\lambda 1 - A)$, then $p(A) = 0$.
+\end{corollary}
+\begin{proof}
+	\begin{align*}
+		p(A)
+		&= \frac{1}{2 \pi i} \int _\gamma p(\lambda) (\lambda 1 - A)^{-1} d \lambda \\
+		&= \frac{1}{2 \pi i} \int _\gamma \text{det}(\lambda 1 - A) \frac{1}{\text{det}(\lambda 1 - A)} \text{adj}(\lambda 1 - A) d \lambda \\
+		&= \frac{1}{2 \pi i} \int _{\gamma} \text{adj}(\lambda 1 - A) d \lambda \\
+		&= 0 
+	.\end{align*}
+	In the last step, we used the fact that $\text{adj}(\lambda 1 - A)$ is analytic.
+\end{proof}
+
+\begin{theorem}[Spectral Mapping Theorem]
+	\label{thm:SpectralMappingThm}
+	If $f \in \text{Hol}(U)$, $\sigma_A(a) \subset U$ open, then $\sigma(f(a)) = f(\sigma(a))$.
+\end{theorem}
+\begin{proof}
+	If $\mu \not\in f(\sigma(a))$, then $\frac{1}{\mu - f(\lambda)} \in \text{Hol}(U)$. 
+	Let $g(\lambda) = \frac{1}{\mu - f(\lambda)}$, then $g(\lambda) (\mu - f(\lambda)) = (\mu - f(\lambda)) g(\lambda) = 1$. By the holomorphic functional calculus, 
+	\[
+		g(a) (\mu - f(a)) = (\mu - f(a)) g(a) = 1
+	.\] 
+	Thus, $\mu \not\in  \sigma(f(a))$.
+
+	Conversely, let $\mu \in f(\sigma_A(a))$. Then $\mu = f(\lambda_0) $ for some $\lambda_0 \in \sigma_A(a)$.
+	Consider
+	\[
+		h(\lambda) = 
+		\begin{cases}
+			\frac{f(\lambda) - f(\lambda_0)}{\lambda - \lambda_0} & \lambda \neq \lambda_0\\
+			f'(\lambda_0) & \lambda = \lambda_0
+		\end{cases}
+	.\] 
+
+	Thus $h(\lambda) \in \text{Hol}(U)$. Thus $f(\lambda) - f(\lambda_0) = (\lambda - \lambda_0) g(\lambda)$ for all $\lambda \in U$. Now apply functional calculus,
+	\[
+		f(a) - \mu = f(a) - f(\lambda_0)= (a - \lambda_0) g(a) = g(a) (a - \lambda_0)
+	.\] 
+	Now $a - \lambda_0$ not invertible since $\lambda_0 \in \sigma_A(a)$. By Lemma, $f(a) - \mu$ not invertible, hence $\mu \in \sigma_A(f(a))$.
+
+\end{proof}
+
+\begin{remark}
+	If $\pi: A \to B$ is a unital continuous homomorphism of Banach algebras, and if $a \in A$, then $\sigma_B(\pi(a)) \subset \sigma_A(a)$.
+
+	The explanation is that $\pi$ preserves invertibility, so the resolvent set can only become larger, thus the spectrum decreases.
+
+	Also, if $f \in \text{Hol}(U), \sigma_A(a) \subset U$, then $f(\pi(a)) = \pi(f(a))$.
+\[
+		\pi\left( \frac{1}{2 \pi i} \int _\gamma f(\lambda) (\lambda - a)^{-1} d \lambda \right) 
+		= \frac{1}{2 \pi i} \int _\gamma f(\lambda) \pi\left( (\lambda - a)^{-1} \right) d \lambda
+		= f(\pi(a))
+	.\]
+\end{remark}
+
+In particular if $\alpha \in \text{Aut}(A)$ continuous, we have 
+ \[
+	\alpha(f(a)) = f(\alpha(a))
+.\] 
+Thus, if $v \in \text{GL}(A)$, $v f(a) v^{-1} = f(v^{-1} a v)$.
+
+\begin{example}
+	Take $A = M_n(\mathbb{C}) = B(\mathbb{C}^n, \|\cdot \|_2)$.
+	Then $\sigma(A) = \{\lambda_1, \ldots, \lambda_r\} $. There exists $v \in \text{GL}_n(\mathbb{C})$, such that $v^{-1} A v$ is block diagonal, in Jordan form, $\text{diag}(J_1, J_2, \ldots, J_r)$.
+
+	Now, what is $f(A)$? Take $U$ open, $\sigma(A) \subset U$, $f \in \text{Hol}(U)$. We can restrict to $J_1$, and reduce to the question when
+	\[
+		J =
+		\begin{bmatrix}
+			\lambda_0 & * & 0 & 0 \\
+			0 & \lambda_0 & * & 0 \\
+			0 & 0 & \ldots & \ldots \\
+			0 & 0 & 0 & \lambda_0 \\
+		\end{bmatrix}
+	.\] 
+	Or, generally, $J = \lambda_0 1_k + N$, where $N^k = 0$.
+	
+	\begin{align*}
+		f(J)
+		&= \frac{1}{2 \pi i}\int _\gamma f(\lambda)(\lambda - J)^{-1} d \lambda \\
+		\lambda - J &= (\lambda - \lambda_0) - N = \frac{1}{\lambda - \lambda_0}\left( 1 - \frac{N}{\lambda - \lambda_0} \right)  \\
+		(\lambda - J)^{-1} &= \frac{1}{\lambda - \lambda_0} \left( 1 + \frac{N}{\lambda - \lambda_0} + \ldots + \frac{N^k}{(\lambda - \lambda_0)^k} \right) \\
+		f(J)
+		&= \sum_{j= 0}^k \left( \frac{1}{2 \pi i} \int _\gamma \frac{f(\lambda)}{ (\lambda - \lambda_0)^{k + 1}}d \lambda \right)  N^k \\
+		&= f(\lambda_0) 1_k + \frac{f'(\lambda)}{1!} N + \ldots + \frac{f^{(k)}(\lambda)}{k!} N^k 
+	.\end{align*}
+	\todo{finish the argument.}
+
+	Now, for general matrix $A$, take disjoint open balls $U_1$ contains $\lambda_1$, etc. Now $\chi_{U_1}(A) = \text{diag}\left(1_{\operatorname{dim} J_1}, 0, \ldots, 0\right)$. This is a projection into generalized eigenspace!
+\end{example}

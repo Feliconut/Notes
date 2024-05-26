@@ -6,7 +6,7 @@
 		E\left( \int _0^t B_s d B_s \right) ^2 
 		= E \int _0^t |B_s|^2 d s
 	.\] 
-	To check, RHS is $\int _0^t E B_s^2 ds = \int _0^t s ds = \frac{t^2}{2}$. LHS is $E\left( \frac{1}{4} \left( B_t^4 - 2 B_t^2 t + t_{62} \right)  \right) = \frac{1}{4}\left( E B_t^4 - 2 E B_t^2 t + t^2 \right) = \frac{1}{4} \left( 3 t^2 - 2 t^2 + t^2 \right) = \frac{1}{2} t^2$.
+	To verify: RHS is $\int _0^t E B_s^2 ds = \int _0^t s ds = \frac{t^2}{2}$. LHS is $E\left( \frac{1}{4} \left( B_t^4 - 2 B_t^2 t + t^2 \right)  \right) = \frac{1}{4}\left( E B_t^4 - 2 E B_t^2 t + t^2 \right) = \frac{1}{4} \left( 3 t^2 - 2 t^2 + t^2 \right) = \frac{1}{2} t^2$.
 \end{remark}
 
 \begin{remark}
@@ -17,6 +17,9 @@
 
 Now we move on to general stochastic integral.
 
+\subsubsection{General Stochastic Integral}
+
+
 \begin{definition}
 	A stochastic process $X_t$ on a filtered probability space $\left(\Omega, \mathcal{F}, P, \{\mathcal{F}_t\}\right) $ is called \textit{progressively measurable} if
 	\begin{enumerate}
@@ -26,23 +29,26 @@ Now we move on to general stochastic integral.
 \end{definition}
 
 \begin{proposition}
-	A continuous stochastic process is progressively measurable, i.e. $t \mapsto X_t$ continuous, and adapted to $\mathcal{F}_t$. Further,
+	A continuous stochastic process ($t \mapsto X_t$ continuous) is progressively measurable and adapted to $\mathcal{F}_t$. Further,
 	\begin{enumerate}
 		\item Progressive measurability is preserved under $L^2$ limits and in-probability limits.
-		\item Any modification of a progressively measurable process is progressively measurable.
+		\item Any modification of a progressively measurable process is progressively measurable. By ``modification'' we mean any process that agrees with $X_t$ a.s.
 	\end{enumerate}
 \end{proposition}
 
 \begin{definition}
-	Let $(\Omega, \mathcal{F}, \mathcal{F}_t, P)$ be the space where Brownian motion lives, i.e. Wiener space. Assume $\mathcal{F}$ contains all sets of probability zero. Fix $0 \le  T < \infty $. Let $\mathbb{H}$ be space of all $u_t : [0,\infty ) \times \Omega \to  \mathbb{R}$ that are progressive measurable, and for which
+	Let $(\Omega, \mathcal{F}, \mathcal{F}_t, P)$ be the space where Brownian motion lives, i.e. Wiener space. Assume $\mathcal{F}$ contains all sets of probability zero. Fix $0 \le  T < \infty $. 
+
+	Let $\mathbb{H}$ be space of all $u_t : [0,\infty ) \times \Omega \to  \mathbb{R}$ that are progressive measurable, and for which
 	\[
 		E \left( \int _0^T |u_s(\omega)|^2 ds  \right) < \infty 
 	.\] 
 \end{definition}
+$\mathbb{H}$ is in fact a Hilbert space with $L^2$ norm.
 
 The set of all $e \in \mathbb{H}$ of the form $e_t = \sum_{k=0}^{n-1} e_k(\omega) 1_{[t_k, t_{k+1})}(t)$, $e_k \in \mathcal{F}_{t_k}$, is called elementary set, denoted by $\mathcal{E}$.
 
-$e \in \mathbb{H}$ is called an \textit{elementary function}.
+$e \in \mathcal{E}$ is called an \textit{elementary function}.
 
 \begin{definition}[Itô Integral](for Elementary Functions)
 	For $e \in \mathcal{E}$, define
@@ -83,7 +89,7 @@ Next we want to show $\mathcal{E}$ is dense in $\mathbb{H}$.
 	\begin{enumerate}
 		\item Suppose $h \in \mathbb{H}$, truncate by defining
 			\[
-				g^m(t, \omega) = h(t, \omega)_{\{-m \le  h(t, \omega) \le  m\} } 1(t, \omega)
+				g^m(t, \omega) = h(t, \omega) 1_{[-m, m]}\left( h(t, \omega) \right) 
 			.\] 
 			Then DCT implies (tail integral of  $L^2$ function vanishes)
 			\[
@@ -167,10 +173,10 @@ So $\left\{ \int _0^T e^n_t dB_t \right\} $ is also a Cauchy sequence in $L^2(P)
 Define $\int _a^b u_t dB_t$ in the usual way. Then the following hold:
 \begin{proposition}
 	\begin{enumerate}
-		\item $\int _a^b = \int _a^c + \int _c^b$
-		\item Linearity of integrand
-		\item 
-		\item 
+		\item $\int _a^b u_t d B_t = \int _a^c u_t d B_t+ \int _c^bu_t d B_t$
+		\item Linearity of integrand: $c \int _a^b u_t d B_t + d \int _a^b v_t d B_t = \int _a^b (cu_t + dv_t) d B_t$
+		\item $E \int _a^b u_t d B_t = 0$
+		\item $\int _a^b u_t d B_t \in \mathcal{F}_t$
 		\item \[
 			E\left( \int _0^T u_t dB_t \right) \left( \int _0^T V_t dB_t \right) 
 			= E\left( \int _0^T u_t v_t dt \right) 

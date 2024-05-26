@@ -1,7 +1,7 @@
 \lecture{21}{Wed 29 Nov 2023 10:40}{}
 
 \begin{proposition}
-	Let $M_t$ be a continuous $L^2$-martingale. Then it has bounded variation only when it is constant.
+	Let $M_t$ be a continuous $L^2$-martingale. Then it has bounded variation only when it is constant, i.e., $M_t \equiv M_0$.
 \end{proposition}
 \begin{proof}
 If $M _t$ is bounded variation on $[0,t]$, then $\left\langle M \right\rangle _t = 0$. To verify, note that
@@ -21,32 +21,46 @@ Take expectation again,
 \[
 	E | M_t - M_s| ^2 = 0 \implies M_t \text{ is constant}
 .\] 
-This can be shown from Chebyshev: $P\left( M_t - M_s > \varepsilon \right) \le \frac{E\left( M_t - M_s \right) ^2}{\varepsilon^2} = 0$.
+%This can be shown from Chebyshev: $P\left( M_t - M_s > \varepsilon \right) \le \frac{E\left( M_t - M_s \right) ^2}{\varepsilon^2} = 0$.
 \end{proof}
 
+Thus, we can proceed exactly as in the case of BM.
+
+\begin{definition}[Ito integral](Elementary functions, general continuous martingale)
+	
+Consider $M$ a continuous $L^2$ martingale.
 Let $L_M^2$ be space of progressively measurable processes $u_ t$ wrt $\mathcal{F}_t$ such that
 \[
 	E\left( \int _0^t u_s^2 d\left\langle M \right\rangle _s \right) < \infty 
 .\] 
-Note: this is just a Riemann-Stieltjes integral. Let $u \in \mathcal{E}$ be elementary, taking value $F_k $ on $[t_k, t_{k+1})$, then define
+Define the elementary processes $\mathcal{E}$ by
+\[
+	\mathcal{E} = \left\{ u_t \in L^2_M: u_t = \sum_{k = 0}^{n - 1} F_k 1_{[t_k, t_{k+1})}(t), E|F_k|^2 < \infty , F_k \in \mathcal{F}_{t_k} \right\} 
+.\] 
+
+Let $u \in \mathcal{E}$ be elementary, taking value $F_k $ on $[t_k, t_{k+1})$, then define
 \[
 	I_M(u) = \int _0^T u_s d M_s = \sum_{k = 0}^{n - 1} F_k \left( M_{t_{k+1}} - M_{t_k} \right) 
 .\] 
+\end{definition}
 
 Proceed in the same way as previous theorem about Brownian motion, we have
 
-\begin{theorem}
+\begin{theorem}[Ito Integral]
 	There exists a unique linear map $I_M: L^2_M \to  L^2_M$ such that
 	\begin{enumerate}
 		\item $I_M(u) = \sum_{k = 0}^{n - 1} F_k \left( M_{t_{k+1}} - M_{t_k} \right) , u \in \mathcal{E}$ (Ito integral for elementary functions)
 		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) , u \in \mathcal{E}$ (Ito isometry for elementary functions)
 		\item $\mathcal{E}$ is dense in $L^2_M$
 		\item  $I_M(u) =_{L^2} \lim_{m \to \infty} I_M(e^m), e^m \in \mathcal{E}$ (Continuity of $I_M$)
-		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) $ (Extend Ito isometry to whole space $L^2_M$ )
+		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) $, $u \in L^2_M$ (Ito isometry)
 	\end{enumerate}
 \end{theorem}
+The proof is completely parallel to the $M_t = B_t$ case.
 
 \begin{remark}
+	We have $\int _0^t u_s d M_s$ is a continuous martingale (equivalent of Theorem~\ref{thm:ito-martingale-continuous}).
+	Applying Ito isometry and consider the continuous martingale $\left( \int _0^t u_s d M_s \right) ^2 - \left\langle \int _0^t u_s d M_s \right\rangle $, we have
 	\[
 		\left\langle \int _0^\cdot u_s d M_s \right\rangle _t = \int _0^t u_s^2 d \left\langle M \right\rangle _s
 	.\] 
@@ -65,14 +79,12 @@ Proceed in the same way as previous theorem about Brownian motion, we have
 		u \in L_M^2 \iff  
 		E\left( \int _0^t |u_s|^2 d \left\langle M \right\rangle _s \right)  = E \left( \int _0^t |H_s|^2 u_s^2 ds \right)  < \infty 
 	.\] 
-	apply Ito isometry to both sides, \logseq{ASK}
-	\[
-		E\left( \int _0^t u_s d M_s \right) ^2 =  E\left( \int _0^t u_s H_s d B_s \right) ^2
-	.\] 
-	Same proof works regardless of range of integration. Thus the two integrals are the same in $L^2(P)$ :
+	Thus $u_s H_s \in L_B^2$. 
+	In this case we have,
 	\[
 		\int _0^t u_s d M_s = \int _0^t u_s H_s \cdot d B_s
 	.\] 
+	To justify, both are continuous martingales, and their quadratic variation are identical. Continuous martingales are characterized by their quadratic variations, as we will verify in the Martingale Representation Theorem.
 \end{example}
 
 \begin{remark}
@@ -87,11 +99,11 @@ Proceed in the same way as previous theorem about Brownian motion, we have
 	\[
 		X_t = A_t + M_t
 	.\] 
-	where $M_t$ is a local martingale, and $A_t$ is a process of bounded variation. We can define
+	where $M_t$ is a local martingale, and $A_t$ is a process of locally finite variation. We can define
 	\[
 		\int _0^t H_s d X_s = \int _0^t H_s d A_s + \int _0^t H_s d M_s
 	.\] 
-	where the first integral is just R-S, and the second is defined for local martingales.
+	where the first integral is just Riemann-Stieltjes integral, and the second is defined for local martingales.
 	\end{enumerate}
 \end{remark}
 
@@ -110,12 +122,23 @@ Proceed in the same way as previous theorem about Brownian motion, we have
 		+ 2(A_{t_{k+1}} - A_{t_k}) (M_{t_{k+1}} - M_{t_k})
 		+ \left| M_{t_{k+1}} - M_{t_k}\right|^2  
 	.\end{align*}
-	The first two terms go to zero when we take sum and let $\Delta_k \to 0 $, using the fact that $A$ is bounded variation and $M$ is continuous.
+	The first two terms go to zero when we take sum and let $\Delta_k \to 0 $, using the fact that $A$ is bounded variation on $[0,t]$ and $M$ is continuous.
 \end{proof}
 \begin{remark}
 	We have same argument for $\left\langle X, Y \right\rangle _t = \left\langle M_t, N_t \right\rangle $ where $X_t = A_t + M_t$, $Y_t = C_t + N_t$.
 \end{remark}
 
+Furthermore,
+\begin{lemma}
+	For $f, g \in C^2$, $X, Y$ semimartingales,
+	\[
+		\left\langle f(X), g(Y) \right\rangle 
+		= \int _0^t f'(X_s) g'(Y_s) d \left\langle X, Y \right\rangle _s
+	.\]
+\end{lemma}
+
 \subsection{Ito Formula}
 
-Motivation comes from integration by parts. If we know $I(X)$ and $I(Y)$, we can know $I(f(X,Y))$ where $f$ is polynomial.
+\subsubsection{Motivation and special case}
+
+Motivation comes from integration by parts. If we know $I(X)$ and $I(Y)$, we can know $I(f(X,Y))$ where $f$ is polynomial. Now we want to generalize to all $C^2$ functions.

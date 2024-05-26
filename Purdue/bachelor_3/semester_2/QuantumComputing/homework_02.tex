@@ -1,0 +1,225 @@
+\homework{2}{Sat 27 Jan 2024 15:41}{}
+
+Author: Anirudh Rao, Xiaoyu Liu
+
+Date: 29 January 2024
+\begin{problem}
+	Exercise 2.57: (Cascaded measurements are single measurements) Suppose $\left\{L_l\right\}$ and $\left\{M_m\right\}$ are two sets of measurement operators. Show that a measurement defined by the measurement operators $\left\{L_l\right\}$ followed by a measurement defined by the measurement operators $\left\{M_m\right\}$ is physically equivalent to a single measurement defined by measurement operators $\left\{N_{l m}\right\}$ with the representation $N_{l m} \equiv M_m L_l$.
+\end{problem}
+\begin{proof}
+	
+Let \(|\psi\rangle\) be a state of a quantum system. The state of the system after measurement operators \(\{L_l\}\) is
+\[ \frac{L_l |\psi\rangle}{\sqrt{\langle \psi|L_l^* L_l|\psi\rangle}} \]
+
+Taking this state and applying another set of measurement operators \(\{M_m\}\) gives us
+\[ \frac{M_m L_l |\psi\rangle}{\sqrt{\langle \psi|L_l^* M_m^* M_m L_l|\psi\rangle}} \]
+
+Now, we can rearrange this to find that the above state is equivalent to applying the measurement operators \(\{N_{lm}\}\) where \(N_{lm} \equiv M_m L_l\).
+\[ \frac{M_m L_l |\psi\rangle}{\sqrt{\langle \psi|L_l^* M_m^* M_m L_l|\psi\rangle}} = \frac{(M_m L_l) |\psi\rangle}{\sqrt{\langle \psi|(M_m L_l)^* (M_m L_l)|\psi\rangle}} = \frac{N_{lm} |\psi\rangle}{\sqrt{\langle \psi|N_{lm}^* N_{lm}|\psi\rangle}} \]
+
+Therefore, a measurement defined by the measurement operators \(\{L_l\}\) followed by \(\{M_m\}\) is equivalent to a single measurement defined by measurement operators \(\{N_lm\}\) where \(N_{lm} \equiv M_m L_l\).
+\end{proof}
+
+\begin{problem}
+	Exercise 2.58: Suppose we prepare a quantum system in an eigenstate $|\psi\rangle$ of some observable $M$, with corresponding eigenvalue $m$. What is the average observed value of $M$, and the standard deviation?
+\end{problem}
+\begin{proof}
+
+The average observed value of \(M\) would be:
+\[ \mathbb{E}\left(M | |\psi\rangle\right) = \langle\psi|M|\psi\rangle = m \langle\psi|\psi\rangle = m \]
+The standard deviation would be:
+\[ \Delta\left(M | |\psi\rangle\right) = \sqrt{\langle M^2 \rangle - \langle M \rangle^2} = \sqrt{\langle \psi | M^2 | \psi \rangle - \langle \psi | M | \psi \rangle^2} \]
+\[ = \sqrt{m^2\langle\psi|\psi\rangle - \left(m\langle\psi|\psi\rangle\right)^2} = \sqrt{m^2 - m^2} = 0 \]
+
+Therefore, the average observed value of \(M\) would be \(m\) and the standard deviation would be \(0\).
+	
+\end{proof}
+
+\begin{problem}
+	Exercise 2.59: Suppose we have qubit in the state $|0\rangle$, and we measure the observable $X$. What is the average value of $X$ ? What is the standard deviation of $X$ ?
+\end{problem}
+\begin{proof}
+	We can see that the measurement of the observable \(X\) has eigenvalues +1 and -1 with corresponding eigenvectors \(|+\rangle\) and \(|-\rangle\). Therefore, the average value of \(X\) would be:
+\[ \mathbb{E}(X | |0\rangle) = +1 \cdot p(+1) + (-1) \cdot p(-1) = \langle0|+\rangle \langle+|0\rangle - \langle0|-\rangle \langle-|0\rangle = \frac{1}{2} - \frac{1}{2} = 0 \]
+
+To find the standard deviation, we must find the second moment, \(\mathbb{E}(X^2||0\rangle)\). We also know that \(X\) is unitary so \(X^2 = I\). Since \(I\) only has eigenvalue +1, this means that the expected value of \(I\) is +1 with probability 1. As a result, the variance can be calculated to be:
+\[ \Delta(X||0\rangle) = \sqrt{\langle X^2||0\rangle\rangle - \left(\langle X^2||0\rangle\rangle\right)^2} = \sqrt{1 - 0^2} = \sqrt{1} = 1 \]
+\end{proof}
+
+\begin{problem}
+	Exercise 2.60: Show that $\vec{v} \cdot \vec{\sigma}$ has eigenvalues $\pm 1$, and that the projectors onto the corresponding eigenspaces are given by $P_{ \pm}=(I \pm \vec{v} \cdot \vec{\sigma}) / 2$.
+\end{problem}
+\begin{proof}
+	First, 
+some algebraic manipulations give us $P_+^2 =  P_+$ and $P_-^2 = P_-$, verifying they are projections:
+\[
+	(I + \vec{v} \cdot \vec{\sigma} )^2 = I + 2 \vec{v} \cdot \vec{\sigma}  + (v_1^2 \sigma_1^2 + v_2^2\sigma_2^2 + v_3^2\sigma_3^2) = 2 (I + \vec{v}  \cdot \vec{\sigma} )
+.\] 
+
+
+We will prove that \((\vec{v} \cdot \vec{\sigma}) P_+ |\psi\rangle = P_+ |\psi\rangle\) and \((\vec{v} \cdot \vec{\sigma}) P_- |\psi\rangle = -P_- |\psi\rangle\) respectively. This will imply that $(\vec{v}  \cdot  \vec{\sigma} )$ has eigenvalues $\pm 1$, and that $P_{+ -}$ brings any vector to the $\pm 1$-eigenspace. 
+
+\[ (\vec{v} \cdot \vec{\sigma}) P_+ |\psi\rangle = (\vec{v} \cdot \vec{\sigma}) \left(\frac{I + \vec{v} \cdot \vec{\sigma}}{2}\right)|\psi\rangle = \frac{1}{2}((\vec{v} \cdot \vec{\sigma}) + (\vec{v} \cdot \vec{\sigma})^2)|\psi\rangle \]
+
+\[ (\vec{v} \cdot \vec{\sigma}) P_- |\psi\rangle = (\vec{v} \cdot \vec{\sigma}) \left(\frac{I - \vec{v} \cdot \vec{\sigma}}{2}\right)|\psi\rangle = \frac{1}{2}((\vec{v} \cdot \vec{\sigma}) - (\vec{v} \cdot \vec{\sigma})^2)|\psi\rangle \]
+
+In order to continue this proof, we show that \((\vec{v} \cdot \vec{\sigma})^2 = I\).
+\[ (\vec{v} \cdot \vec{\sigma})^2 = (v_1 \sigma_1 + v_2 \sigma_2 + v_3 \sigma_3)^2 \]
+\[ = v_1^2 \sigma_1^2 + v_1 v_2 \sigma_1 \sigma_2 + v_1 v_3 \sigma_1 \sigma_3 + v_1 v_2 \sigma_2 \sigma_1 + v_2^2 \sigma_2^2 + v_2 v_3 \sigma_2 \sigma_3 + v_1 v_3 \sigma_3 \sigma_1 + v_2 v_3 \sigma_3 \sigma_2 + v_3^2 \sigma_3^2 \]
+
+We know that \(\sigma_1, \sigma_2, \sigma_3\) are anticommutative. That is, \(\sigma_i \sigma_j = - \sigma_j \sigma_i\) for any possible \(i \neq j\). Moreover, these operators are also unitary and Hermitian so \(\sigma_i^2 = I\) for any possible \(i\). Therefore, the above expression simplifies neatly into:
+\[ (\vec{v} \cdot \vec{\sigma})^2 = v_1^2 I + v_2^2 I + v_3^2 I = (v_1^2 + v_2^2 + v_3^2) I = I \]
+
+We can now replace \((\vec{v} \cdot \vec{\sigma})^2\) with \(I\) to continue our proof:
+\[ (\vec{v} \cdot \vec{\sigma}) P_+ |\psi\rangle = \frac{1}{2}((\vec{v} \cdot \vec{\sigma}) + (\vec{v} \cdot \vec{\sigma})^2)|\psi\rangle = \frac{1}{2}((\vec{v} \cdot \vec{\sigma}) + I)|\psi\rangle = P_+ |\psi\rangle \]
+\[ (\vec{v} \cdot \vec{\sigma}) P_- |\psi\rangle = \frac{1}{2}((\vec{v} \cdot \vec{\sigma}) - (\vec{v} \cdot \vec{\sigma})^2)|\psi\rangle = \frac{1}{2}((\vec{v} \cdot \vec{\sigma}) - I)|\psi\rangle = - P_- |\psi\rangle \]
+
+Since \((\vec{v} \cdot \vec{\sigma}) P_+ |\psi\rangle = P_+ |\psi\rangle\) and \((\vec{v} \cdot \vec{\sigma}) P_- |\psi\rangle = - P_- |\psi\rangle\), this means that \(P_+\) is the 1-eigenspace and \(P_-\) is the (-1)-eigenspace.
+
+\end{proof}
+
+\begin{problem}
+	Exercise 2.61: Calculate the probability of obtaining the result +1 for a measurement of $\vec{v} \cdot \vec{\sigma}$, given that the state prior to measurement is $|0\rangle$. What is the state of the system after the measurement if +1 is obtained?
+\end{problem}
+\begin{proof}
+	The probability of obtaining +1 for a measurement \((\vec{v} \cdot \vec{\sigma})\) from state \(|0\rangle\) can be found by simplifying the following expression:
+\[ p(+1) = \langle 0 | P_+ | 0 \rangle = \frac{1}{2}\left(\langle 0 | I | 0 \rangle + \langle 0 | (\vec{v} \cdot \vec{\sigma}) | 0 \rangle\right) \]
+\[ = \frac{1}{2} (\langle 0 | 0 \rangle + v_1 \langle 0 | \sigma_1 | 0 \rangle + v_2 \langle 0 | \sigma_2 | 0 \rangle + v_3 \langle 0 | \sigma_3 | 0 \rangle) \]
+\[ = \frac{1}{2}(1 + 0 + 0 + v_3) = \frac{1 + v_3}{2} \]
+
+The state of the system after the measurement if \(|+\rangle\) is obtained from finding \(\frac{P_+|0\rangle}{\sqrt{p(+1)}}\). Since we already found \(p(+1)\) above, we will focus on evaluating \(P_+ |0\rangle\) here.
+\[ P_+ |0\rangle = \frac{1}{2}(I |0\rangle + v_1 \sigma_1 |0\rangle + v_2 \sigma_2 |0\rangle + v_3 \sigma_3 |0\rangle) \]
+\[ = \frac{1}{2}(|0\rangle + v_1|1\rangle + v_2 i |1\rangle + v_3 |0\rangle) \]
+\[ = \frac{1 + v_3}{2}|0\rangle + \frac{v_1 + v_2 i}{2}|1\rangle \]
+
+Now, we can see that the state of the system is
+\[ \frac{P_+ |0\rangle}{\sqrt{p(+1)}} = \sqrt{\frac{2}{1 + v_3}} \left(\frac{1 + v_3}{2}|0\rangle + \frac{v_1 + v_2 i}{2}|1\rangle\right) = \frac{\sqrt{1 + v_3}}{\sqrt{2}}|0\rangle + \frac{v_1 + v_2 i}{\sqrt{2 + 2 v_3}}|1\rangle \]
+
+Therefore, the probability of obtaining +1 for a measurement \((\vec{v} \cdot \vec{\sigma})\) from state \(|0\rangle\) is \(\frac{1 + v_3}{2}\) and the resulting state of the system would be \(\frac{\sqrt{1 + v_3}}{\sqrt{2}}|0\rangle + \frac{v_1 + v_2 i}{\sqrt{2 + 2 v_3}}|1\rangle\).
+\end{proof}
+
+\begin{problem}
+	Exercise 2.66: Show that the average value of the observable $X_1 Z_2$ for a two qubit system measured in the state $(|00\rangle+|11\rangle) / \sqrt{2}$ is zero.
+\end{problem}
+\begin{proof}
+	The measurement of the observable \(X_1 Z_2\) can be written as the tensor of \(X\) and \(Z\) which is
+\[ X \otimes Z = \begin{bmatrix} 0 & 1 \\ 1 & 0 \\ \end{bmatrix} \otimes \begin{bmatrix} 1 & 0 \\ 0 & -1 \\ \end{bmatrix} = \begin{bmatrix} 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1 \\ 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \end{bmatrix} \]
+
+We can then apply this matrix to the corresponding vector representing \((|00\rangle + |11\rangle)/\sqrt{2}\) to give us:
+\[ \begin{bmatrix} 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1 \\ 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \\ \end{bmatrix} = \begin{bmatrix} 0 \\ -1 \\ 1 \\ 0 \\ \end{bmatrix} \]
+
+The dot product of the resultant vector and the original vector gives us \(1 \cdot 0 + 0 \cdot -1 + 0 \cdot 1 + 1 \cdot 0 = 0\). Therefore, the average value of the observable \(X_1 Z_2\) on the state \((|00\rangle + |11\rangle)/\sqrt{2}\) is 0.
+\end{proof}
+
+\begin{problem}
+	(a) A vector $|\psi\rangle$ in a tensor product Hilbert space $V \otimes W$ is called separable (or unentangled) if there exist vectors $|v\rangle \in V$ and $|w\rangle \in W$ such that $|\psi\rangle=|v\rangle \otimes|w\rangle$. Give an exampe of a state $|\psi\rangle \in\left(\mathbb{C}^2\right)^{\otimes 2}$ on two qubits that is not separable (in other words, it is entangled). Justify your answer.
+	\\
+(b) Show that $V \otimes W$ has no entangled states if and only if $V$ or $W$ is 0 or 1 dimensional.
+\end{problem}
+\begin{proof}
+	(a)
+An example of an entangled state is \(\frac{1}{\sqrt{2}}\left(|00\rangle + |11\rangle\right)\). We can see that it is entangled by attempting to find two vectors that can make up its state. The general form of a state in \((\mathbb{C}^2)^{\otimes 2}\) is:
+
+\[
+\begin{bmatrix} a \\ b \\ \end{bmatrix} \otimes \begin{bmatrix} c \\ d \\ \end{bmatrix} = \begin{bmatrix} ac \\ ad \\ bc \\ bd \\ \end{bmatrix}
+\]
+
+To find two vectors whose tensor is \(\frac{1}{\sqrt{2}}\left(|00\rangle + |11\rangle\right)\), we would need to find a solution to the following system of equations:
+
+\[
+\begin{cases}
+    ac = \frac{1}{\sqrt{2}} \\
+    ad = 0 \\
+    bc = 0 \\
+    bd = \frac{1}{\sqrt{2}} \\
+\end{cases}
+\]
+
+However, this system cannot be satisfied. Consider the second equation, \(ad = 0\). This implies either \(a\) or \(d\) is 0. However, if \(a\) is 0, the first equation is not satisfied and if \(d\) is 0, the last equation is not satisfied. Therefore, \(\frac{1}{\sqrt{2}}\left(|00\rangle + |11\rangle\right)\) is an entangled state.
+
+(b)
+This directly follows from the fact that $V \otimes 0 = 0$ and $V \otimes \mathbb{C} \cong V$. Then they are in effect zero or one dimensional vector spaces, which cannot have entanglement. 
+
+If both $V, W$ have dimension at least $2$, then $(\mathbb{C}^2)^{\otimes 2} \subset V \otimes W$, so part (a) suffices to show that $V \otimes W$ contains entangled states.
+
+\end{proof}
+
+
+	Let's work through the details of quantum state tomography via repeated measurements in the computational basis.
+
+Let
+\[
+|\psi\rangle=\sum_{b=0}^{2^n-1} z_b|b\rangle \in\left(\mathbb{C}^2\right)^{\otimes n}
+\]
+be some unknown state on $n$ qubits, which we will assume is normalized. The goal of quantum state tomography is to determine what the amplitudes $z_b$ are - up to a given error, with high confidence. We don't yet have the tools to do things at this level of precision quite yet, but we can at least ask about trying to determine, say, $\left|z_0\right|^2$ up to some given accuracy.
+Since measurement collapses the state, we will assume that we are able to prepare copies of this state for free. On each copy, we will perform projective measurement in the computational basis. The outcomes will be independent and identically distributed. If we do this $k$ times, we get a sequence of outcomes $\left(i_1, \ldots, i_k\right)$ where each $i_j \in\left\{0, \ldots, 2^n-1\right\}$. From this, we may compute an empirical probability distribution $\tilde{p}_k$ on the set $\left\{0, \ldots, 2^{n-1}\right\}$ simply by counting the different outcomes and dividing by $k$
+\[
+\tilde{p}_k(i):=\frac{\#\left\{j \mid i_j=i\right\}}{k} .
+\]
+
+Of course, the true distribution of outcomes is given by the Born rule:
+\[
+p(i)=p(i|| \psi\rangle)=\left|z_i\right|^2=z_i z_i^* .
+\]
+
+Let $\epsilon>0$. We would like to know how many rounds of our experiment we need to perform-that is, how large $k$ needs to be-in order for us to be able to confidently say that our empirical estimate $\tilde{p}_k(0)$ is within $\epsilon$ of the true value $p(0)$. This requires a little bit of explaining, basically having to do with the fact that $\tilde{p}_k(0)$ is itself a random variable (on the set $\{0,1 / k, 2 / k, \ldots, k / k=1\}$, but don't think too hard about this).
+Let us say that we are $\delta$-confident that our observed $\tilde{p}_k(0)$ is within $\epsilon$ if we pick $k$ large enough so that
+\[
+\operatorname{Prob}\left(\left|\tilde{p}_k(0)-p(0)\right| \geq \epsilon\right) \leq \delta
+\]
+Our goal is to find a lower bound on $k$ (as a function of $\epsilon$, but independent of everything else) that makes this inequality true.
+To do so, we can use Chebyshev's inequality (see Appendix 1 in Nielsen and Chuang). This problem will walk you through this. The idea is exactly the same as trying to get a good estimate of the bias of an unfair coin with high confidence.
+
+\begin{problem}
+(a) Let $Y$ be the random variable on the set $\{0,1\}$ with $p(0)=1-\left|z_0\right|^2$ and $p(1)=\left|z_0\right|^2{ }^1$ Show that $\mathbb{E}(Y)=\mathbb{E}\left(Y^2\right)=\left|z_0\right|^2$. Use this to show the variance $\operatorname{var}(Y)=\left|z_0\right|^2-\left|z_0\right|^4=\left|z_0\right|^2\left(1-\left|z_0\right|^2\right)$.\\
+(b) Show that $\max _{0 \leq p \leq 1} p(1-p)=1 / 4$. Conclude that $\operatorname{var}(Y) \leq 1 / 4$.\\
+(c) Now let $Y_1, \ldots, Y_k$ be $k$ i.i.d variables all having the same distribution as $Y .{ }^2$ Let $X_k$ be the sample mean
+\[
+\frac{1}{k} \sum_{i=1}^k Y_i
+\]
+
+Show that $X_k$ is exactly the same thing as $\tilde{p}_k(0)$. (This should be very easy.)\\
+(d) Use the fact that expectation values are linear to show $\mathbb{E}\left(X_k\right)=\mathbb{E}\left(\tilde{p}_k(0)\right)=p(0)$. (In the language of probability theory, this shows that $\tilde{p}_k(0)$ is an "unbiased estimator" of the true probability $p(0)$.)\\
+(e) Since the $Y_i$ are independent, the variance of their sum is the sum of their variances. Use this to show $\operatorname{var}(X)=\frac{1}{k} \operatorname{var}(Y)$.\\
+(f) Now use Chebyshev's inequality to argue that we should take $k \geq \frac{1}{4 \epsilon^2 \delta}$.\\
+(g) How big should $k$ be if we want to be $95 \%$ confident that our estimate of $\left|z_0\right|^2$ is correct up to $b$ bits?
+
+Let me conclude by noting that there are better ways to do quantum state tomography!
+\end{problem}
+\begin{proof}
+	(a)
+
+\[ \mathbb{E}(Y) = 0 \cdot p(0) + 1 \cdot p(1) = p(1) = |z_0|^2 \]
+\[ \mathbb{E}(Y^2) = (0 \cdot 0) (p(0) \cdot 1) + (0 \cdot 1) (p(0) \cdot 0) + (1 \cdot 0) (p(1) \cdot 0) + (1 \cdot 1) (p(1) \cdot 1) \]
+\[ \mathbb{E}(Y^2) = 1 \cdot p(1) = p(1) = |z_0|^2 \]
+\[ \textbf{Var}(Y) = \mathbb{E}(Y^2) - (\mathbb{E}(Y))^2 = |z_0|^2 - \left(|z_0|^2\right)^2 = |z_0|^2 - |z_0|^4 \]
+
+(b)
+
+Taking the derivative of \(p(1-p)\), we get \(1 - 2p\) which has a root at \(p=\frac{1}{2}\). To find the maximum over \(0 \leq p \leq 1\), we take the maximum of \(p(1-p)\) on \(p = 0, \frac{1}{2}, 1\). These correspond to \(0, \frac{1}{4}, 0\) respectively. Therefore, \(\max_{0 \leq p \leq 1}p(1-p) = \frac{1}{4}\).
+
+Since we know \(\textbf{Var}(Y) = |z_0|^2(1 - |z_0|^2)\) and \(0 \leq |z_0|^2 \leq 1\), this means \(\textbf{Var}(Y) \leq \frac{1}{4}\).
+
+(c)
+
+To show \(X_k\) is the same as \(\tilde{p}_k(0)\), we need to show that \(\sum_{i=0}^k Y_i\) is equivalent to \(\#\{j | i_j = 0\}\) since both divide by \(k\), the number of outcomes that have occurred. We can see that \(\sum_{i=0}^k Y_i\) counts the number of times \(Y_i\) equals 0. \(\#\{j | i_j = 0\}\) for a sequence of \((i_1, \dotsc, i_k)\) also counts the number of times the sequence of random variables is 0 as well. Therefore, these are equivalent.
+
+(d)
+
+\[ \mathbb{E}(X_k) = \mathbb{E}\left(\frac{1}{k} \sum_{i=1}^k Y_i\right) = \frac{1}{k} \mathbb{E}\left(\sum_{i=1}^k Y_i\right) = \frac{1}{k} \sum_{i=1}^k \mathbb{E}\left(Y_i\right) = \frac{1}{k} \sum_{i=1}^k p(1) = \frac{1}{k} \cdot (k \cdot p(1)) = p(1) \]
+
+(e)
+
+\[ \textbf{Var}\left(X_k\right) = \textbf{Var}\left(\frac{1}{k} \sum_{i=1}^k Y_i\right) = \frac{1}{k^2} \sum_{i=1}^k \textbf{Var}\left(Y_i\right) = \frac{1}{k^2} (k \cdot \textbf{Var}(Y)) = \frac{1}{k} \textbf{Var}(Y) \]
+
+(f)
+
+We can be \(\delta\)-confident in our observations if we choose \(k \geq \frac{1}{4 \epsilon^2 \delta}\). From Chebyshev's inequality, we know that \(\mathbb{P}(|X_k - \mathbb{E}(X_k)| \geq \lambda \sqrt{\textbf{Var}(X_k)}) \leq \frac{1}{\lambda^2}\). We take \(\lambda = \frac{1}{\sqrt{\delta}}\) to obtain \(\mathbb{P}(|X_k - \mathbb{E}(X_k)| \geq \frac{1}{\sqrt{\delta}} \sqrt{\textbf{Var}(X_k)}) \leq \delta\). Now, we substitute \(\mathbb{E}(X_k)\) and \(\textbf{Var}(X_k)\) to get \(\mathbb{P}(|X_k - p(0)| \geq \frac{1}{\sqrt{\delta k}} \sqrt{\textbf{Var}(Y)}) \leq \delta\). If we set \(k = \frac{1}{4 \epsilon^2 \delta}\) and simplify, we get \(\mathbb{P}(|X_k - p(0)| \geq \frac{\epsilon}{2} \sqrt{\textbf{Var}(Y)}) \leq \delta\). Since the maximum of \(\textbf{Var}(Y)\) is \(\frac{1}{4}\), setting \(k\) to a value equal to or greater than \(\frac{1}{4 \epsilon^2 \delta}\) allows us to get \(\mathbb{P}(|X_k - p(0)| \geq \epsilon) \leq \delta\). Since \(X_k = \tilde{p}_k(0)\), we get the \(\delta\)-confident inequality described in the question, \(\mathbb{P}(|\tilde{p}_k(0) - p(0)| \geq \epsilon) \leq \delta\).
+
+(g)
+
+If we want to be 95\% confident our estimate to be correct up to \(b\) bits, we substitute \(\epsilon = \frac{1}{2^b}\) and \(\delta = 0.95\) to obtain
+
+\[ k \geq \frac{1}{4\left(\frac{1}{2^b}\right)^2(0.95)} = \frac{1}{2^{2-2b}(0.95)} \]
+\end{proof}
+

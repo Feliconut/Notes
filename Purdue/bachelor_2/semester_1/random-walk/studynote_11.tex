@@ -1,0 +1,190 @@
+\studynote{11}{Tue 26 Dec 2023 21:58}{Limiting distribution for Transient Markov Cookie Stacks}
+
+This note follows the paper \cite{kosyginaExcitedRandom2017}. We re-prove Theorem 1.6, 1.7, 1.8. These three theorems establish (1) criterion for directional transience and recurrence, (2) criterion for ballisticity, (3) limiting behaviors for different ranges of expected drift. 
+
+\subsection{Preparations}
+
+\subsubsection{Connection with BLP}
+
+Both the forward BLP $U$ and the backward BLP $V$ are spatially homogeneous Markov chains, under the annealed measure $\eta$ (inhomogeneous under quenched measure). 
+The forward BLP, once dies out, remains dead. The backward BLP never dies due to constant migration.
+However, it may hit zero, which corresponds to edges only up-crossed but never down-crossed at $T_n$.
+
+Say $X_t = x > 0$. Then the up-steps $\mathcal{E}_x$ and down-steps $\mathcal{D}_x$ are related as follows: 
+\begin{itemize}
+	\item (Lemma 2.2) On $\{\gamma_n < \infty\} $, if $U_0 = n$, then $U_i = \mathcal{E}_i^n$. That is, on returns to zero, up-crossings to the right corresponds to $U$. By symmetry, down-crossings to the left also corresponds to $U$.
+	\item If $\gamma_n = \infty $ then $U_i \ge  \mathcal{E}_i^n$.
+	\item (Lemma 2.3) If $n\ge 1$ and is a.s. hit, then the downsteps from $n$ to $0$ corresponds to the BLP $V$, that is, $(\mathcal{D}_n, \mathcal{D}_{n-1}, \ldots, \mathcal{D}_0)$ has same distribution as $(V_0, \ldots, V_n)$.
+\end{itemize}
+In short, the local time profile of the walk is a piece-together of $U$ and $V$ : When $X_k = x > 0$, in the recurrent case, the downsteps from 0 corresponds to $U$, the downsteps from $x$ to $0$ corresponds to $V$, and the upsteps from $x$ corresponds to another copy of $U$.
+
+\subsubsection{Relating hitting time to total progeny}
+
+First observe that, on the event $\{T_n < \infty \} $,
+\[
+	T_n = n + 2 \sum_{x < n} \mathcal{D}_x
+.\] 
+If we consider the sum from $0$ to $n$, this can be related to BLP:
+\[
+	\sum_{x = 0}^{n-1} \mathcal{D}_x = \sum_{i = 1}^n V_i
+.\] 
+
+
+
+\subsubsection{Renewal structure of transient walk}
+
+By renewal structure, we mean that the BLP $V_i$ can be split into regenerations, by considering all hitting times to $0$. If we let $\tilde V_i$ be the process that stays identical with $V_i$ and killed when hits $0$, we can conversely visit $V_i  $ as repeated realizations of $\tilde V_i$.
+
+This provides that, 
+\[
+	\lim_{n \to \infty } \sum_{i = 1}^n V_i
+	= \frac{E_0\left( \sum _{i = 0}^{\sigma_0^V - 1} V_i \right) }{E_0 \sigma_0^V}
+.\] 
+
+It turns out that this ``law of large numbers'' for $V$ plays crucial role in the proof. We can see from this equation that tail asymptotics for the total progeny and regenerations times of $V$ are both helpful.
+
+\subsubsection{Tail Asymptotics}
+
+The proofs for asymptotics are omitted in this note. We record the obtained asymptotics: Assume $\overline{p}  = \frac{1}{2}$ and $\delta$ be expected total drift of a site. Then
+\begin{itemize}
+	\item If $\delta>1$ then $P^{U, y} (\sigma_0^U = \infty ) > 0$ for all $y \ge 1$.
+	\item If $\delta \le 1$ then 
+	\[
+		\lim n^{1 - \delta} P^{U, y}\left( \sigma_0^U > n \right)  = c_1(y, \eta) \qquad
+		\lim n^{(1 - \delta) / 2}P^{U, y}\left( \sum_{j = 0}^{\sigma_0^U - 1}U_j > n \right)  = c_2(y, \eta)
+	.\] 
+\item If $\delta < 0$ then $P^{V, y}(\sigma_0^V = \infty ) > 0$ for all $y \ge 0$.
+\item if $\delta \ge 0$ then 
+	\[
+		\lim n^\delta P^{V, y}(\sigma_0^V > n) = c_3(y, \eta) \qquad
+		\lim n^{\delta / 2} P^{V, y}\left( \sum_{j = 0}^{\sigma_0^V - 1} V_j > n \right) 
+	.\] 
+\end{itemize}
+In all cases, when the polynomial term vanishes, we replace that with $\log n$.
+
+\subsubsection{Other preliminary results}
+
+The first one is a standard argument in RW: we have $\lim\sup  X_n, \lim\inf X_n \in \{- \infty , \infty \} $. Suppose not, say $\lim \sup  X_n = x \in \mathbb{Z}$. Then the walk visits $x$ i.o. But then by the ellipticity assumption, the transition probabilities are uniformly strictly bounded between 0 and 1. Then by Borel-Cantelli, the walk must go below $x$ infinitely often, a contradiction.
+
+The second one is a 0-1 law for transience: $P(\lim X_n = \infty ), P(\lim X_n = - \infty ) \in \{0, 1\} $. This also implies that the $\lim \sup  X_n$ and $\lim \inf  X_n$ are deterministic.
+
+The third one is prior knowledge that the limiting speed exists. 
+
+The second and third results are nontrivial and depend on previous work in this field. Consider reading them later.
+
+
+\subsubsection{Background knowledge in probability}
+
+The background knowledge is CLT for stable distributions, see Durett theorem 3.8.2 for a reference. 
+We give a rough version of this theorem.
+
+For nonnegative r.v. $X_1$, this theorems says that, if distribution of $X_1$ has tail of the form $x^{- \alpha} $, where $0 < \alpha < 2$, we have 
+\[
+	\frac{S_n - n E(X_1 1(X_1 < n^{\frac{1}{\alpha}})) }{n^{\frac{1}{\alpha}}} \implies L_{\alpha, b, \xi}
+\] 
+for some $b \in [-1, 1], \xi \in \mathbb{R}$. This is $\alpha$-stable distribution with skewness $b$ and translation $\xi$.
+
+\subsection{Transience and recurrence}
+
+We want to separately consider transience and recurrence to the left and to the right. To this end, introduce a coupled environment $\omega^+$, which is same as $\omega$ but each cookie at site $0$ is modified to $1$. We are effectively considering only the behavior of the walk to the right.
+
+Now, we have
+\[
+	P_{\omega^+}  (\gamma_n < \infty ) = P_\omega ^{U, n} (\sigma_0^U < \infty )
+.\] 
+This is true because we have ``removed'' all behavior of the walk to the left of origin. Therefore, at hitting times of $0$, the walk is completely characterized by the BLP $U$ running to the right.
+
+\subsubsection{Transience}
+
+If $ \delta > 1$, the asymptotics give us that  $P^{U, 1}(\sigma_0^U = \infty ) > 0$. Therefore, with positive probability, the walk goes right at the first step, and returns to $0$. But on this event, we must have $\lim X_n = \infty $. Since this happens with positive probability, the 0-1 law gives that $P(\lim X_n = \infty ) = 1$. Hence $\delta > 1$ implies transience to the right.
+
+\subsubsection{Recurrence}
+
+If $\delta \le 1$, the asymptotics give us $P(\sigma_0^U > n) \to 0$ as $n \to \infty $.
+Thus, $P(\sigma_0^U < \infty ) = 1$. By the coupling, we have
+\[
+	P_{\omega^+} (\gamma_n < \infty ) = 1
+.\] 
+This implies that every excursion to the right eventually returns.
+
+If this also holds true for excursions to the left, then the walk makes infinitely many visit to $0$. From this and Borel-Cantelli we conclude that the walk visits every site infinitely often, i.e. is recurrent.
+
+
+\subsection{Ballisticity}
+
+It is known that the limiting speed, $\lim X_n / n$, always exists and is in the range  $[-1, 1]$. Now if the walk is recurrent, it must visit $0$ infinitely often, so the limit can only be $0$.
+
+Now consider transience to the right. In this case, the walk makes finitely many visits to sites to the left of origin, and then goes to the right forever. This means that $2 \sum _{x < 0} \mathcal{D}_x = \# \{k: X_k < 0\} < \infty $. Thus it makes sense to consider $T_n = \sum_{x < n} \mathcal{D}_n$, and
+\[
+	\frac{1}{v_0} = \lim \frac{T_n}{n}=  \lim \frac{1}{n} \left(n + \sum_{x < n} \mathcal{D}_n \right)
+	= 1 + \lim \frac{2}{n} \sum _{x = 0}^{n - 1} \mathcal{D}_x
+.\] 
+
+By removing the part below $0$, we can transfer to BLP:
+\[
+	\lim \frac{1}{n} \sum _{0 \le  x < n} \mathcal{D}_x = \lim \frac{1}{n} \sum_{i = 1}^{n} V_i
+.\] 
+By considering renewal structure,
+\[
+	\lim_{n \to \infty } \sum_{i = 1}^n V_i
+	= \frac{E_0\left( \sum _{i = 0}^{\sigma_0^V - 1} V_i \right) }{E_0 \sigma_0^V}
+.\]
+Now consider what are the conditions for these two expectations to exist. The expectation of total progeny exists iff $\delta > 2$; the expectation of regeneration time exists iff $\delta > 1$. Therefore, $v$ exists iff $\delta > 2$. In this case, we have $v > 0$.
+
+\subsection{Limiting Behavior}
+
+\subsubsection{Limiting distribution for regeneration times and total progeny}
+
+We give the proof for $\delta = 2$. Let $r_k$ be the time of $k$-th return to zero. Let $W_k$ be the total progeny in the $k$-th regeneration, i.e. between $r_{k-1}$ and $r_k$. The asymptotics give
+\[
+	P^{V, 0}(r_1 > t) \sim t^{-2} \qquad P^{V, 0} (W_1 > t) \sim t^{-1}
+.\] 
+From these tails, we can apply stable CLT to obtain
+\[
+	\frac{\sum_{k = 1}^n W_k - n m(n)}{n} \implies L_{1, b', \xi'}
+.\] 
+\[
+	\frac{r_n - n \overline{r} }{A \sqrt{n \log n} } \implies \Phi
+.\] 
+
+\subsubsection{Limiting distribution of hitting times}
+
+The walk is transient to the right, so $T_n$ has same limiting distribution as $n + 2 \sum_{i = 1}^n V_i$. To obtain limiting distribution of progeny of $V$, we compare to $W$:
+\begin{align*}
+	P^{V, 0}\left( \left| \sum_{i = 1}^n V_i - \sum _{k = 1}^{n / \overline{r} } W_k \right| > \varepsilon n  \right) 
+	&\leq P\left( \left| r_{\left\lfloor n / \overline{r}  \right\rfloor} - n \right| > n^{3 / 4} \right)  + P\left( \sum_{i = n / \overline{r}  + 1}^{n / \overline{r}  + n^{3 / 4}} > \varepsilon n \right) \\
+	&\leq P\left( \left| r_{\left\lfloor n / \overline{r}  \right\rfloor} - n \right| > n^{3 / 4} \right)  + P\left( \sum_{k = 1}^{n^{3 / 4}} W_k > \varepsilon n \right)
+.\end{align*} 
+Both terms vanish as $n \to \infty $. From these, we obtain that (details omitted, original paper is clear)
+\[
+	\frac{T_n - 2 \frac{n}{\overline{r} }m(\frac{n}{\overline{r} })}{n} \implies L_{1, b, \xi}
+.\] 
+
+\subsubsection{Limiting distribution of position}
+
+The method is to relate position to hitting times. Observe the following:
+\[
+	\{T_m > n\}  \subset \{X_n < m\} \subset \{T_{m + r} > n\}  \cup \{\inf _{k \ge  T_{m + r}} X_k < m\} 
+.\] 
+to justify the second $\subset $, consider two cases: hit $m + r$ before $X_n$, and hit $m + r$ after $X_n$.
+
+Then we need to (1) control the additional event, (2) choose appropriate $r$ such that the control in (1) holds, and $T_m$ and $T_{m +r}$ provide exactly same limiting distribution.
+
+The control of additional event is done by Peterson in 2012; we omit the proof at the moment. The bound is
+\[
+	P\left( \inf _{k \ge  T_{m + r}} X_k < m \right) \le  C r^{1 - \delta}
+.\] 
+
+Now let's see how to center and scale $X_n$. First, define $D(n) = \xi + \frac{2}{\overline{r} } m (\frac{n}{\overline{r} })$, so that
+\[
+	\frac{T_n - n D(n)}{n} \implies L_{1, b}
+.\] 
+
+TBD.
+
+
+
+
+
+
+

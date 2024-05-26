@@ -1,10 +1,18 @@
 \lecture{6}{Fri 10 Mar 2023 16:46}{Connection with Riemann Integration}
 
-\begin{theorem}
-	A function is Riemann Integrable iff its is continuous a.e.
+\subsubsection{Riemann Lebesgue Theorem}
+
+
+
+\begin{theorem}[Riemann-Lebesgue Theorem]
+	If a function $f$ is bounded on $[a,b]$, then it is Riemann integrable iff its is continuous a.e.
 \end{theorem}
+Note that Riemann integrability requires boundedness.
 \begin{proof}
-	TODO ($\implies$) direction TBD.
+	($\implies$) Assume $f$ is Riemann integrable. Then there exists a sequence of elementary functions $g_n$ monotone increasing, such that $g_n \le  f$ and 
+$R.\int g_n \to R. \int f$. Similarly, there exists elementary functions $h_n \ge f$, monotone decreasing and $R.\int  h_n \to R. \int f$. Both $g_n$ and $h_n$ have limits, call them $g$ and $h$. Then $g \le h$, so $g = h$ a.e. 
+
+Now, take some $x \in [a,b]$ such that $g(x) = h(x) $ and all $g_n, h_n$ are continuous at $x$. Then $f$ is continuous at $x$. Since $g_n, h_n$ each discontinuous at finitely many points, almost every $x \in [a,b]$ satisfies the above condition. Therefore $f$ continuous a.e.
 
 	($\impliedby$) If $P: a = x_0 < x_1 < \ldots < x_n = b$, let
 	\[
@@ -39,6 +47,15 @@
 	.\] 
 	Hence everything is equal, so the lower and upper integral matches, so $f$ is integrable.
 \end{proof}
+
+\begin{example}
+	
+For example of a function continuous a.e., consider some $f : \mathbb{R}\to \mathbb{R}$ such that
+\[
+	f\left(\frac{m}{n}\right) = \frac{1}{n} \text{ for } m \in \mathbb{Z}, n \in \mathbb{N}, \text{gcd}(m, n) = 1
+.\] 
+And $f = 0$ on $\mathbb{R}\setminus \mathbb{Q}$. Then $f$ is continuous at every irrational number.
+\end{example}
 
 \subsection{Improper Integral}
 

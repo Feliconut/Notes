@@ -1,0 +1,84 @@
+\note{4}{Sat 30 Dec 2023 02:21}{Why we need inverse map in defining pushforward}
+
+\begin{lemma}
+	Let $\Sigma_1$ and $\Sigma_2$ be set families that each have unique maximal element, and closed under boolean operations.
+	A set function $\nu: \Sigma_1 \to  \Sigma_2$ respects finite boolean operations iff the following holds:
+	\begin{itemize}
+		\item $\nu$ is surjective, furthermore $\nu(\Omega_1) = \Omega_2$.
+		\item $\nu$ is monotone and preserves disjointness.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	If finite boolean operations are respected, then monotonicity and preserving disjointness are clear. To prove $\nu \Omega_1 = \Omega_2$, by monotonicity, $\nu \Omega_1$ is maximal in $\Sigma_2$, which can only be $\Omega_2$.
+
+	Now suppose the two conditions hold and we show that Boolean operations are respected. It suffices to show that taking complement and set exclusion are respected. Since unique maximal elements exist, it makes sense to talk about complements. Now $\nu(A^c) \cap \nu(A) = \emptyset $ by preservation of disjointness, so $\nu(A^c) \subset \nu(A)^c$. On the other direction, we first note that, by preservation of disjointness, there is no set in $\Sigma_2$ disjoint from both $\nu (A)$ and $\nu(A^c)$. Since $\Sigma_2$ is boolean complete, $\Omega_2 = \nu(A) \cup  \nu(A^c)$. Therefore $\nu(A^c) = \nu(A)^c$.
+
+	Then we verify preservation of set exclusion. First, $\nu(A \setminus  B) \subset \nu(A) \setminus \nu(B)$ follows from applying monotonicity and preservation of disjointness to $A \setminus B \subset A$ and $(A \setminus B ) \cap B = \emptyset $. For the other direction, note that
+	\[
+		\nu(A) \setminus \nu(B) = \nu(A) \setminus \nu(A \cap B) \qquad 
+		\nu(A \setminus B) = \nu\left( A \setminus \left( A \cap  B \right)  \right) 
+	.\] 
+	By restricting $\nu$ to $A$ we can regard $A$ as the universal set and $A \cap B$ a subset of $A$, apply the result for set complement and we are done.
+\end{proof}
+
+Now: observe that 
+for a general function $f: \Omega_1 \to \Omega_2$, naturally induce $f: \Sigma_1 \to  \Sigma_2$, $f$ is monotone but not necessarily preserves disjointness. However, $f^{-1}$ is always monotone and preserves disjointness.
+
+In this way, $f^{-1}$ is a homomorphism of set algebra $\Sigma_2 \to  \Sigma_1$ but $f$ is in general not.
+
+Now consider a measurable space $(\Omega_1, \mathcal{F}_1)$ and some $f: \Omega_1 \to  \Omega_2$. Say we want to \textit{induce } some measurable space on $\Omega_2$. What is the natural thing to do? If we let $\mathcal{F}_2 = f \mathcal{F}_1$, we cannot generate a set algebra structure in $\mathcal{F}_2$. However, if we do
+\[
+	\mathcal{F}_2 = \{B \in \Omega_2: f^{-1} (B) \in \mathcal{F}_1\} 
+\] 
+then $\mathcal{F}_2$ has a set algebra structure:
+\[
+	A, B \in \mathcal{F}_2 \iff  f^{-1}(A), f^{-1} (B) \in \mathcal{F}_1 \implies f^{-1}(A \cap B) \in \mathcal{F}_1 \iff  A \cap B \in \mathcal{F}_2
+.\] 
+And so on for other Boolean operations. This is exactly because $f^{-1}$ preserves set algebra. Therefore, this motivates definition of measurable map by the property satisfied by our construction:
+\begin{definition}
+	$f$ is measurable if  $f^{-1} \mathcal{F}_2 \subset \mathcal{F}_1$.
+\end{definition}
+
+We see that, the induced measurable space is the  \textit{largest} measurable space on $\Omega_2$ that preserves measurability of $f$. In this case, we see that
+\[
+	f_*: \mathcal{F}_2 \to  \mathcal{F}_1 \qquad \text{is a $\sigma$-algebra homomorphism}
+.\] 
+
+Now move on to measure: if $P_1$ is a measure on $\Omega_1$ and $f: \Omega_1 \to  \Omega_2$ measurable, then we can do the following construction:
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7Rn1fMSJdLFsyLDAsIlxcbWF0aGNhbHtGfV8yIl0sWzEsMiwiWzAsXFxpbmZ0eV0iXSxbMSwwLCJmXyoiLDJdLFswLDIsIlBfMSIsMl0sWzEsMiwiUF8yIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\begin{equation}\begin{tikzcd}
+	{\mathcal{F}_1} && {\mathcal{F}_2} \\
+	\\
+	& {[0,\infty]}
+	\arrow["{f_*}"', from=1-3, to=1-1]
+	\arrow["{P_1}"', from=1-1, to=3-2]
+	\arrow["{P_2}", dashed, from=1-3, to=3-2]
+\end{tikzcd}
+\end{equation}
+
+Then, 
+
+\begin{claim}[Change of Variables]
+if $X_2$ is some integrable function on $\Omega$, then
+% https://q.uiver.app/#q=WzAsNixbMCwzLCJcXG1hdGhjYWx7Rn1fMSJdLFsyLDMsIlxcbWF0aGNhbHtGfV8yIl0sWzEsNSwiWzAsXFxpbmZ0eV0iXSxbMSwwLCJcXFIiXSxbMiwyLCJcXE9tZWdhXzIiXSxbMCwyLCJcXE9tZWdhXzEiXSxbMSwwLCJmXyoiLDJdLFswLDIsIlBfMSIsMl0sWzEsMiwiUF8yIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMywiWF8yIiwyXSxbNSw0LCJmIl0sWzUsMywiWF8yIFxcY2lyYyBmIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	& \R \\
+	\\
+	{\Omega_1} && {\Omega_2} \\
+	{\mathcal{F}_1} && {\mathcal{F}_2} \\
+	\\
+	& {[0,\infty]}
+	\arrow["{f_*}"', from=4-3, to=4-1]
+	\arrow["{P_1}"', from=4-1, to=6-2]
+	\arrow["{P_2}", dashed, from=4-3, to=6-2]
+	\arrow["{X_2}"', from=3-3, to=1-2]
+	\arrow["f", from=3-1, to=3-3]
+	\arrow["{X_2 \circ f}", dashed, from=3-1, to=1-2]
+\end{tikzcd}\]
+
+And we have the Change of Variables  formula:
+\[
+	\int _{\Omega_2} X_2 d P_2 = \int _{\Omega_1} X_2 \circ f d P_1
+.\] 
+\end{claim}

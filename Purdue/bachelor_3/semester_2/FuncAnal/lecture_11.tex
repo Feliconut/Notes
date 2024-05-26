@@ -1,0 +1,392 @@
+\lecture{11}{Fri 02 Feb 2024 13:34}{}
+
+\begin{proof}[Proof of Theorem~\ref{thm:BanachAlaogluThm}]
+	Let $B = B_{X^*}(0,1)$, and for $x \in X$, write
+	\[
+		D_{\|x\|} = \{\lambda \in \mathbb{C}: \left| \lambda \right|  \le  \|x\|\} 
+	.\] 
+	Let
+	\[
+		P = \prod_{x \in X} D_{\|x\|} \subset \prod_{x \in X} \mathbb{C}
+	.\] 
+	$P$ is compact by Tikhonov Theorem. Put induced product topology on $P$.
+
+
+	Observe, that  $B \subset X^* \cap P$. Indeed, take $f \in X^*$, $f \in P$ if $\left| f(x) \right| \le \|f\| \|x\| \le \|x\|$, so $f(x) \in D_{\|x\|}$. The restriction of topology on $P$ to $X^*$ is the weak* topology.
+
+	Since $P$ is compact, it suffices to show that $B \subset P$ is closed.
+
+	Now, let $g \in \overline{B} $. Since $g \in P$, $\left| g(x) \right| \le \|x\|$ for all  $x \in X$. It is enough to show that $g$ is linear, i.e. $\left| g(x + y) - g(x) - g(y) \right| < 3 \varepsilon$ for all $\varepsilon > 0$. 
+
+	Since $g \in \overline{B} $, there is $f \in B$ such that $\left| f(x) - g(x) \right|  < \varepsilon$, $\left| f(y) - g(y) \right| < \varepsilon$, $\left| f(x + y) - g(x + y) \right|  < \varepsilon$. This verifies $B$ is closed.
+\end{proof}
+
+\begin{definition}[Equivalent Norms]
+	\label{defn:EquivalentNorms}
+	Let $\|\cdot \|'$, $\|\cdot \|''$ be two norms on $X$, we say they are equivalent if
+	\[
+		\exists \alpha, \beta> 0, \alpha \|x\|' \le \|x\|'' \le \beta \|x\|'
+	.\] 
+\end{definition}
+\begin{example}
+	$\|\cdot \|_1 \sim \|\cdot \| _2$ in $\mathbb{R}^n$.
+\end{example}
+Note, $\|\cdot \|' \sim  \|\cdot \|'' \iff \text{id}_X (X, \|\cdot \|') \to (X, \|\cdot \|'')$ is bicontinuous.
+
+\begin{proposition}
+	\label{prop:FiniteDimNorms}
+	On $X$ a finite dimensional linear space, all norms are equivalent.
+\end{proposition}
+\begin{proof}
+	Fix $e_1, \ldots, e_n$ a basis in $X$. Define
+	\[
+		\|x\|_1 = \|\lambda_1 e_1 + \ldots + \lambda_n e_n\| = \left| \lambda_1 \right|  + \ldots + \left| \lambda_n \right| 
+	.\] 
+	Let $\|\cdot \|$ be another norm. We show $\|\cdot \|\sim \|\cdot \|_1$.
+
+	\begin{align*}
+		\|x\| &= \|\lambda_1 e_1 + \ldots \lambda_n e_n\| \\
+		&\leq \left| \lambda_1 \right| \|e_1\| + \ldots + \left| \lambda_n \right| \|e_n\| \\
+		&\leq \left( \left| \lambda_1 \right| + \ldots + \left| \lambda_n \right|  \right) \max_{1 \le i \le n} \|e_i\| \\
+		&\leq M \|x\|_1 
+	.\end{align*}
+
+	For the other direction, define $g(\lambda_1, \ldots, \lambda_n) = \|\lambda_1 e_1 + \ldots + \lambda_n e_n\|$ as a function on unit sphere of $\left( \mathbb{C}^n, \|\cdot \|_1 \right) $. This is a compact set, and $g$ is a continuous function. Therefore, $g$ has a minimum value $m>0$ (by linear independence). This gives $\|x\| \ge  m \|x\|_1$.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:subspace closed}
+	If $Y \subset (X, \|\cdot \|)$ is a finite dimensional linear subspace. Then $Y$ is closed in $X$.
+
+	Also, if $Y$ is a finite dimensional linear subspace, $Z$ Banach, then any linear map $T:Y \to Z$ is continuous.
+\end{corollary}
+\begin{proof}
+	$Y$ is isomorphic to $\left( \mathbb{C}^n, \|\cdot \|_1 \right) $, $\mathbb{C}^n$ is complete, so $Y$ is complete, therefore $Y$ is closed.
+
+	To prove the second part, note that by Proposition~\ref{prop:FiniteDimNorms}, $Y \cong (\mathbb{C}^n, \|\cdot \|_1)$. Then we can take the $n$ standard basis vectors and argue that for any $x \in U_1(0_{\mathbb{C}^n})$,
+	\[
+		\|T x\| \le \|T e_1\| + \ldots + \|T e_n\| < \infty 
+	.\] 
+\end{proof}
+
+
+\todo{parse through the following two theorems.}
+
+\begin{corollary}
+	\label{cor:InfiniteDimUnitBall}
+	If $X$ is an infinite dimensional normed space, $B_X(0,1)$ is not compact in the norm-topology.
+\end{corollary}
+\begin{proof}
+	By Riesz's lemma, we construct inductively a sequence of unit vectors $\left(x_n\right)$ such that
+\[
+\operatorname{dist}\left(x_{n+1}, \operatorname{span}\left\{x_1, x_2, \ldots, x_n\right\}\right) \geqslant 1-1 / n \text {. }
+\]
+
+Such a sequence does not have convergent subsequences and hence $B_X(0,1)=\{x \in X:\|x\| \leqslant 1\}$ is not compact.
+\end{proof}
+
+\begin{theorem}
+	\label{thm:LCSClosure}
+	The statements below refer to nonempty subsets of a normed space.\\
+1) The weak closure of a convex set is equal to its norm closure.\\
+2) A convex set is weak closed iff it is normed closed.\\
+3) A convex set is weak dense iff it is norm dense.
+\end{theorem}
+\begin{proof}
+	Proof. The second and third statement obviously follow from the first, and the weak closure obviously contains the norm closure. So it remains to show that if $x$ does not belong to the norm closure of a convex set $E$, then there is a weak neighborhood of $x$ which doesn't intersect $E$. This follows immediately from the separation theorem(Theorem~\ref{thm:Separation}).
+\end{proof}
+
+
+
+
+
+
+
+\subsection{Baire Theroems}
+
+\begin{theorem}[Baire's Theorem]
+	\label{thm:Baire}
+	Let $(X, d)$ be a complete metric space $F_n$ be a sequence of closed subsets. If $X = \bigcup_{n = 1 }^\infty F_n $, then at least one $F_n$ contains an open ball.
+\end{theorem}
+\begin{proof}
+	Prove the contrapositive. Suppose that $F_n\neq \emptyset $, $F_n$ has no interior. Note that if $\phi\neq U \subset X$, then $U \setminus F_n \neq \emptyset $ and open. Now $X \setminus F_n$ is open nonempty. Pick some $U(x_1, r_1) \in X \setminus F_1$ . Iterate this argument on $U(x_1, r_1)$ and have $U(x_2, r_2) \subset U(x_1, r_1) \setminus F_2$. Let $r_n < 2^{- n}$. Then we can pick a Cauchy sequence whose limit avoids any $F_n$, so $X \setminus \bigcup_{n = 1} ^\infty F_n$ is nonempty.
+\end{proof}
+
+A set in a topological space is said to be of \textit{first category} if it is countable union of nowhere dense sets.
+
+A set is said to be of \textit{second category} if it is not of first category.
+
+This is to say that, \textbf{Complete metric spaces are of second category.} In particular, Banach spaces are of second category.
+
+In particular, an infinite-dimensional Banach space cannot have countable algebraic dimension.
+
+\subsection{Uniform Boundedness Principle}
+
+\begin{theorem}[Banach-Steinhaus Theorem] \logseq{Uniform Boundedness Principle}
+	\label{thm:BanachSteinhausThm}
+
+Let $X $ be a Banach space, $Y$ be a normed space, and let $\mathcal{F}$ be a collection of bounded linear operators $A: X \to Y$ such that
+\[
+	\sup_{A \in \mathcal{F}} \|A x\| < \infty \quad \text{for each }x \in X
+,\]
+then
+\[
+	\sup _{A \in \mathcal{F}} \|A\| < \infty 
+.\] 
+That is, the collection $\mathcal{F}$ is uniformly bounded.
+\end{theorem}
+\begin{proof}
+	By assumption we have
+	\[
+		X = \bigcup_{n \in \mathbb{N}} \{\sup_{A \in \mathcal{F}} \|A x\| \le n\} 
+	.\] 
+	This is a countable union of closed sets. By Baire Category Theorem, at least one of those sets contain a open ball. Say
+	\[
+		U(x_0, r) \subset \{\sup_{A \in \mathcal{F}} \|A x \le n\|\} 
+	.\] 
+	This implies
+	\[
+		\sup _{x \in U(x_0, r)} \sup_{A \in \mathcal{F}} \|A x\| \le n
+	.\] 
+	By triangle inequality and linearity,
+	\[
+		\sup _{x \in U(0, 1)} \sup _{A \in \mathcal{F}} \|A x\| \le \frac{2 n}{r} < \infty 
+	.\] 
+	That is,
+	\[
+		\sup _{A \in \mathcal{F}}\|A\| < \infty 
+	.\] 
+\end{proof}
+
+\begin{corollary}
+	\label{cor:WeaklyBounded}
+	
+	A subset $B$ of a normed space $X$ is bounded iff it is weakly bounded, i.e. $f(B)$ is bounded in $\mathbb{C}$ for each $f \in X^*$.
+\end{corollary}
+\begin{proof}
+	Assume $B$ is weakly bounded.
+	 Embed $B$ into $X^{**}$ using the isometry $j: X \hookrightarrow X^{* *}$. Now for each $f \in X^*$,
+	 \[
+	 	\sup _{b \in B} j(b)(f) = \sup _{b \in B} f(b) < \infty 
+	 .\] 
+	 By Theorem~\ref{thm:BanachSteinhausThm}, $\sup _{b \in B} \|j(b)\|$ is bounded, that is, $B$ is bounded in norm.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:MapConverge}
+	Let $X, Y$ be Banach spaces. If $A_n \in B(X, Y)$ and pointwise converges, i.e. $\lim_{n \to \infty }A_n x$ exists for all $x \in X$, then $Ax := \lim_{n \to \infty } A_n x$ defines a bounded operator $A \in B(X, Y)$ and $\|A\| \le \sup_n \|A_n\| < \infty $.
+\end{corollary}
+\begin{proof}
+	$A$ is certainly linear, and applying Theorem~\ref{thm:BanachSteinhausThm}, $\sup _n \|A_n\| < \infty $. Since $A x \le \sup _n A_n x$ for all $x$, $\|A\| \le \sup _n\|A_n\|<\infty $, that is, $A \in B(X, Y)$.
+\end{proof}
+
+
+
+
+
+\subsection{Open Mapping, Closed Graph}
+
+
+
+\begin{theorem}[Open Mapping Theorem]
+	\label{thm:OpenMappingThm}
+	
+	If $A \in B(X, Y)$, then $A $ is open iff $A$ is surjective.
+\end{theorem}
+\begin{proof}
+	If $A$ is open then we can pick some open neighborhood of $0_X$ and apply linearity to conclude that $A$ is surjective. 
+
+	Now assume $A$ is surjective and we try to prove $A$ is open.
+
+	\textbf{Step 1.} We claim that $\overline{A B_r(0_X)} $ has nonempty interior. Since $X = \cup_{n \in \mathbb{N}} B_n(0_X)$, and $A$ surjective, we have $Y = \cup_{n \in \mathbb{N}} A B_n(0_X)$. But $Y$ is of second category, so there exists some $n$ such that $\text{int} (\overline{A B_n(0_X)}) \neq \emptyset $. Now use the fact that multiplication is linear homeomorphism, multiply $r / n$ to both sides and we get the claim.
+
+	\textbf{Step 2.} We claim that $\overline{A B_r(0_X)} $ contains a neighborhood of $0_Y$. First choose $B_\varepsilon(y) \subset \overline{A B_r(0_X)} $. Now,
+	\[
+		B_\varepsilon(0_Y) = B_\varepsilon(y) - y \subset \overline{A B_r(0_X)} - \overline{A B_r(0_X)} = \overline{A B_{2 r}(0_X)}
+	.\] 
+
+	\textbf{Step 3.} We show $\overline{A B_{r}(0_X)} \subset A B_{2 r}(0_X)$. Use an iterative argument. Fix $y = y_0 \in \overline{A B_{r}(0_X)} $. Let $x_1 \in B_r(0_X)$, $y_0 - A x_1 \in B_\varepsilon(0_Y) \subset \overline{A B_{2^{-1}r}(0_X)} $. Iterate the argument and get
+	\[
+		x_n \in B_{2^{1 - n}r}(0_X), \quad
+		y_{n - 1} - A x_n \in B_{2^{1 - n} \varepsilon}(0_Y)
+		\subset \overline{A B_{2^{- n}r}(0_X)}
+	.\] 
+	Expand the terms and we have
+	\[
+		y - \sum_{j = 1}^n A x_j \in B_{2^{1 - n} \varepsilon}(0_Y)
+		\subset \overline{A B_{2^{- n}r}(0_X)}
+	.\] 
+	Since $\sum_{j = 1}^n \|x_j\| < \sum_{j = 1}^n 2^{1 - j} r < 2 r$, we may define $x = \sum_{j = 1}^\infty x_j$ and have $x \in B_{2 r}(0_X)$.
+
+	Also, $A x = A \sum_{j = 1}^\infty  x_j = \sum_{j = 1}^\infty  A x_j \in \cap_{n \in \mathbb{N}} B_{2^{1 - n}\varepsilon}(y)$, so $A x = y$, by continuity of $A$.
+
+	Therefore, $\overline{A B_{r}(0_X)} \subset A B_{2 r}(0_X)$.
+
+
+	\textbf{Step 4.} Combining the results we have
+	\[
+		B_\varepsilon(0_Y) \subset \overline{A B_{2r}(0_X)} \subset A B_{4 r}(0_X)
+	.\] 
+	Now $B_\varepsilon(0_Y) \in \text{Nbhd}(0_Y)$, $B_{4 r}(0_X)$ is a local basis of $X$ at $0_X$, we only need to verify
+
+	\begin{lemma}
+		If $f: X \to Y$ is linear, $X, Y$ are TVS. Then $f$ is open iff the image of every neighborhood of $0_X$ contains some neighborhood of $0_Y$.
+	\end{lemma}
+	The proof of the lemma is omitted.
+\end{proof}
+
+\begin{corollary}[Bounded Inverse Theorem]
+	\label{cor:BoundedInverseThm}
+	Let $X, Y$ be Banach spaces, $A: X \to Y$ bijective. Then $A^{-1}$ is bounded.
+\end{corollary}
+\begin{proof}
+	$A^{-1}$ continuous since $A$ is open.
+\end{proof}
+
+This directly gives
+\begin{corollary}[Banach Isomorphism Theorem]
+	\label{cor:BanachIsomorphismThm}
+	A continuous linear bijective map between Banach spaces is an isomorphism.
+\end{corollary}
+
+\begin{lemma}
+	\label{lem:BoundedBelow}
+	Let $H$ be a Banach space, and $T \in B(H)$. Then  $T$ is invertible if and only if it is bounded below and has dense range.
+\end{lemma}
+\begin{proof}
+	Assume $T$ is invertible. Then for every $x \in H$,
+	\[
+		\|x\| = \|T^{-1} T x\| \le \|T^{-1}\| \|T x\|
+	.\] 
+	Thus $\|T x\| \le \|T^{-1}\|^{-1} \|x\|$.
+
+	Conversely, assume that $T$ is bounded below and has dense range. Now, for every Cauchy sequence $(T x_n)$ in $\operatorname{Im} T$, we have $(x_n)$ is a Cauchy sequence, since $T$ is bounded below. Thus $\operatorname{Im} T$ is closed, therefore $T$ is bijective. By open mapping theorem, $T$ is invertible.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:BoundedBelowInjectiveRangeClosed}
+	$T \in  B(X, Y)$ is bounded below if and only if it is injective, and its range is closed.
+\end{lemma}
+\begin{proof}
+	Same argument as last lemma shows the $(\implies)$ direction. Now assume the range is closed. Then $T: X \to B\left(X \right) $ is a bijective map between Banach spaces, thus $T^{-1}$ is continuous, by the Open Mapping Theorem. But now for each $x \in X$,
+	\[
+		\|x\| = \|T^{-1} T x\| \le \|T^{-1}\| \|T x\|
+	.\] 
+\end{proof}
+
+
+
+
+
+
+\begin{remark}
+	Let $X, Y, A$ be as in the corollary. Then there exist $a, b \ge 0$ such that
+	\[
+		a \|x\| \le  \|A x\| \le  b \|x\|, \quad \forall x \in X
+	.\] 
+	If $A \neq 0$, take $b = \|A\|, a = \|A^{-1}\|^{-1}$.
+\end{remark}
+\begin{proof}
+	Exercise. \todo{do it, and the one below.}
+\end{proof}
+
+\begin{proposition}
+	\label{prop:CartesianProductBanachSpace}
+	
+	For $X, Y$ Banach spaces, $X \times Y$ is a Banach space with $\|(x, y)\| = \|x\| + \|y\|$.
+\end{proposition}
+\begin{proof}
+	Exercise.
+\end{proof}
+
+Define the \textit{graph} of a map $T: X \to Y$ to be
+\[
+	\Gamma(T) = \{(x, T x): x\in X\} \subset X \subset Y
+.\] 
+
+\begin{theorem}[Closed Graph Theorem]
+	\label{thm:ClosedGraphThm}
+	Let $X, Y$ be Banach spaces,  $T$ is linear. Then $T$ is bounded iff $\Gamma(T)$ is closed.
+\end{theorem}
+\begin{proof}
+	$T$ bounded implies $\Gamma(T)$ closed, by continuity.
+
+	For the converse, consider
+% https://quiver.local:8080/#q=WzAsMyxbMSwwLCJcXEdhbW1hKFQpIl0sWzAsMiwiWCJdLFsyLDIsIlkiXSxbMCwxLCJcXHBpXzEiXSxbMCwyLCJcXHBpXzIiLDJdLFsxLDIsIlQiLDAseyJjb2xvdXIiOlswLDYwLDYwXX0sWzAsNjAsNjAsMV1dXQ==
+\[\begin{tikzcd}
+	& {\Gamma(T)} \\
+	\\
+	X && Y
+	\arrow["{\pi_1}", from=1-2, to=3-1]
+	\arrow["{\pi_2}"', from=1-2, to=3-3]
+	\arrow["T", color={rgb,255:red,214;green,92;blue,92}, from=3-1, to=3-3]
+\end{tikzcd}\]
+
+$\pi_1$, $\pi_2$ are linear, bounded, $\|\pi_i\| \le  1$. Moreover, $\pi_1$ is bijective. $\Gamma(T)$ closed implies  $\Gamma(T)$ is a Banach subspace. The Open Mapping Theorem implies $\pi_1^{-1}$ is continuous, thus $T = \pi_2 \circ \pi_1^{-1}$ is continuous.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:BoundedOperatorSequence}
+	Let $T : X \to Y$ be a linear operator. Then $T$ is bounded if and only if for any sequence $x_n \in X$, $\lim x_n = 0$, and $\lim T x_n = z$, one must have $z =0$.
+\end{corollary}
+
+\subsection{Quotient Space}
+
+
+
+\begin{definition}[Quotient Space]
+	\label{defn:QuotientSpace}
+	Let $X$ be a normed space, $N \subset X$ a closed subspace. Then $X / N$ is a normed space where 
+	\begin{align*}
+		q: X &\longrightarrow X/N  \\
+		x &\longmapsto q(x) = \overline{x}  = x + N
+	.\end{align*}
+
+	Define
+	\[
+		\|\overline{x} \| = \text{dist}(x, N) = \inf _{n \in N} \|x + n\|
+	.\] 
+\end{definition}
+
+\begin{proof}(Verify this is indeed a normed space)
+	
+Verify that we do have a norm: we want to show
+\[
+	\|\overline{x}  + \overline{y} \|\le \|\overline{x} \| + \|\overline{y} \| + 2 \varepsilon
+.\] 
+
+Choose $n_1, n_2 \in N$ such that
+\[
+	\|x + n_1\|< \|\overline{x} \| + \varepsilon
+\] 
+\[
+	\|y + n_2\| < \|\overline{y} \| + \varepsilon
+.\] 
+
+Hence
+\[
+	\|\overline{x}  + \overline{y} \| \le \|x + y + n_1 + n_2\|
+	\le \|x + n_1\| + \|y + n_2\| < \|\overline{x} \| + \varepsilon + \|\overline{y} \| + \varepsilon
+.\] 
+\end{proof}
+
+\begin{proposition}
+	\label{prop:QuotientMapContinuous}
+	The map $q: X \to X / N$ is a continuous, linear contraction. Also, if $T \in B(X, Y)$, and $N = \operatorname{ker} T$, then the induced map $\overline{T} : X / N \to Y$ is continuous, and $\|\overline{T} \|= \|T\|$. 
+
+
+\end{proposition}
+\begin{proof}
+	The first claim is obvious: $\|q x\| = \inf _n \|x + n\| \le \|x\|$.
+
+	To verify the second claim,
+
+	\[
+		\|\overline{T}  \overline{x} \| = \|T (x + n)\| \le  \|T\| \| x + n\| = \|T\| \|\overline{x} \|
+	.\] 
+	For the other side, $\| T\| = \|\overline{T}  \circ q\| \le \|\overline{T} \| \|q\| \le \|\overline{T} \|$.
+\end{proof}
+
+
+
+

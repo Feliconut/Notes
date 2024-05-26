@@ -1,0 +1,70 @@
+\homework{7}{Wed 20 Mar 2024 12:40}{}
+
+\begin{problem}
+	1) Let $T$ be a compact Hausdorff space and let $C(T)$ be the Banach algebra of all complex valued continuous functions on $T$. Show that every maximal proper ideal of $C(T)$ is of the form
+\[
+I_{t_0}=\left\{f \in C(T): f\left(t_0\right)=0\right\}
+\]
+for some $t_0 \in T$.
+\end{problem}
+\begin{proof}
+	1. Take any maximal ideal $I$. If at each $x \in T$, there exists $f_x \in I$ such that $f_x(x) \neq 0$, we can pick some open neighborhood $U_x \ni x$ such that $|f_x| >0$ on $U_x$. All those $\{U_x: x \in T\} $ form an open cover, and since $T$ is compact, we can pick a finite subcover $U_{x_i}, i = 1, \ldots, n$. Let $\chi_i \in C(T)$ be a test function strictly positive on $U_{x_i}$ and supported on $\overline{U_{x_i}} $. Then the following function
+	\[
+		\chi_1 |f_{x_1}| + \ldots  \chi_n |f_{x_n}|
+	\] 
+	is positive throughout $T$. Note that we can take absolute value since each $f_{x_i}$ either stays positive or stays negative on $U_{x_i}$. Now this function is invertible, so $1 \in I$, so $I$ is not maximal. Hence, there must exist some $t_0 \in T$ where $I \subset I_{t_0}$.
+
+	2. But $I$ is maximal, and $I_{t_0}$ is proper, so $I = I_{t_0}$.
+\end{proof}
+
+\begin{problem}
+2) Let $H$ be a Hilbert space and assume that $T \in B(H)$ is a normal operator. Show that $\operatorname{Ker}(T)=\operatorname{Ker}\left(T^2\right)$.	
+\end{problem}
+\begin{proof}
+	$\operatorname{ker} T$ is a closed subspace of $H$, then there exists a projection $\pi: H \to \operatorname{ker} T$. Thus, the following short exact sequence splits:
+	\[
+		0 \to \operatorname{ker} T \hookrightarrow H \xrightarrow{T} \text{coker} T \to 0
+	.\] 
+	By split lemma, $H = \operatorname{ker} T \oplus \text{coker}T$. That is, $\operatorname{coker} T = (\operatorname{ker} T)^\perp$. Thus, for every $x \in \operatorname{coker} T$, $x \neq 0$, we have $T x \neq 0$ since $x \not\in \operatorname{ker} T$.
+\end{proof}
+
+\begin{problem}
+	3) Define $S: \ell^2(\mathbb{N}) \rightarrow \ell^2(\mathbb{N})$ by
+\[
+S\left(x_1, x_2, x_3, \ldots\right)=\left(0, x_1, x_2, x_3, \ldots\right) .
+\]
+(a) Show that for any $\lambda \in \mathbb{C}, \operatorname{ker}(S-\lambda I)=\{0\}$.\\
+(b) Show that for any $|\lambda|<1, \operatorname{ker}\left(S^*-\lambda I\right) \neq\{0\}$. What is the dimension of $\operatorname{ker}\left(S^*-\lambda I\right)$ ?|\
+(c) Determine $\sigma(S)$ and $\sigma\left(S^*\right)$.\\
+Hint: Consider the relationship between $\sigma\left(T^*\right)$ and $\sigma(T)$ for $T \in B(H)$, where $H$ is a Hilbert space.
+\end{problem}
+\begin{proof}
+	(a) Suppose $\|(S - \lambda I) (x)\|= 0$, then $\|\left( -\lambda x_1, x_1 - \lambda x_2, \ldots \right) \| = 0$. But by definition of $\ell^2$ norm we see that $x_1 = 0, x_1 - \lambda x_2 = 0, x_2 - \lambda x_3 = 0$, etc. This inductively implies that $x = 0$.
+
+	(b) By setting $(S^* - \lambda I)(x) = 0$, we obtain an infinite array of linear systems: $x_2 - \lambda x_1 = 0, x_3 - \lambda x_2 = 0, \ldots$. Suppose $x \neq 0$, then $x_2 = \lambda x_1, x_3 = \lambda x_2 = \lambda^2 x_1, \ldots$. From this we see that $\operatorname{dim} \operatorname{ker} (S^* - \lambda I) \le 1$.
+
+	Now fix $|\lambda| < 1$. Then $x_i = \lambda^{i - 1} x_1$ gives an element of $\ell^2(\mathbb{N})$ : $\|x\| = \sum_{i = 1}^\infty  (\lambda^{i - 1} x_1)^2 < \infty $. Thus  $\operatorname{dim} \operatorname{ker} (S^* - \lambda I) = 1$.
+
+	(c) $B(H)$ is a $C^*$-algebra, so $\sigma(S^*) = \overline{\sigma(S)} $. Since $(S - \lambda I)$ is surjective whenever $\lambda \neq 0$, and $\operatorname{ker}  (S - \lambda I) = 0$, we  know $\sigma(S) = \{0\} $. Hence $\sigma(S^*) = \{0\} $.
+\end{proof}
+
+\begin{problem}
+	4. Let $H$ be a Hilbert space and assume that $T \in L(H)$ is a normal operator. Suppose that $\sigma(T)=\{a+b i: 1 \leq a \leq 2,1 \leq b \leq 2\}$.\\
+(a) Compute $\left\|T^{-1}\right\|$.\\
+(b) Compute $\left\|T^*+T^{-1}\right\|$.
+\end{problem}
+\begin{proof}
+	Apply continuous functional calculus, $\varphi: C(\sigma(T)) \to  C^*\{1, T\} $. $\varphi$ is an isometry, so $\|T^{-1}\| = \|\frac{1}{z}\|$, and $\|T^* + T^{-1}\| = \|\overline{z}  + \frac{1}{z}\|$.
+	\[
+		\|\frac{1}{z}\| = \sup _{z \in \sigma\left(T \right) } |\frac{1}{z}| = |1 + 1 i| = \sqrt{2} 
+	.\] 
+	\[
+		\|\overline{z}  +\frac{1}{z}\|
+		= \sup _{a, b \in [1,2]} \left| a - i b + \frac{1}{a + i b} \right| 
+		= \sup \left| \frac{a^2 + b^2 + 1}{ a + i b} \right| 
+		= \left| (2^2 + 2^2 + 1) / (2 + 2 i) \right| 
+		= \frac{9}{2 \sqrt{2} }
+	.\] 
+\end{proof}
+
+

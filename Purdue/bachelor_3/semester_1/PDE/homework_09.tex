@@ -1,0 +1,123 @@
+\homework{9}{Thu 30 Nov 2023 01:49}{}
+
+\begin{problem}
+	Show that the function
+\[
+u(x, t):=\sum_{k=-\infty}^{\infty}(-1)^k \Phi(x-2 k, t), \quad \text { where } \quad \Phi(x, t)=\frac{1}{\sqrt{4 \pi t}} \exp \left(-\frac{x^2}{4 t}\right)
+\]
+is positive for $|x|<1, t>0$.
+Hint: Show that $u$ satisfies $u_t=u_{x x}$ for $t>0$,
+\[
+\begin{array}{rll}
+u=0 & \text { on } & \{|x|=1\} \times\{t \geq 0\} \\
+u=\delta_0 & \text { on } & \{|x| \leq 1\} \times\{t=0\}
+\end{array}
+\]
+
+Then, carefully apply maximum (minimum) principle in a domain $\{|x| \leq 1\} \times\{\epsilon \leq t \leq T\}$ for small $\epsilon>0$ and large $T>0$ and pass to the limit as $\epsilon \rightarrow 0+$ and $T \rightarrow \infty$.
+\end{problem}
+\begin{proof}
+	$\Phi(x, t) $ satisfies the homogeneous heat equation $\Phi_{xx} = \Phi_t$ since it is the fundamental solution for heat equation, and can be straightforwardly verified by direct calculation.
+
+	We have
+	\[
+		u(1, t) = \frac{1}{\sqrt{4 \pi t} } \exp\left( - \frac{1}{4 t} \right) \sum_{k = - \infty }^{\infty } (-1)^k \exp\left( \frac{k}{t} \right) \exp\left( - \frac{k^2}{t} \right) 
+	.\] 
+	The term inside summation is an odd function of $k$, and absolutely converges (due to the $\exp\left( - k^2 / t \right) $ term), for each $t > 0$. Therefore, the sum is zero. Hence $u(1, t) \equiv 0$. By symmetry we have $u(-1, t) \equiv 0$.
+
+	We also know that $\int \Phi(x, t) dx  = 1$ for each $t$, and $\Phi(x, t) \to 0$ as $t \to  0+$ for any $x \neq 0$, so $\Phi(x, t) \to  \delta_0$ as $t\to 0+$ in the sense of distributions.
+
+	In the domain $\{|x| \le 1\} \times \{\varepsilon \le t \le T\} $, $u$ is a uniformly convergent series in both $k$ and $x$ for each $t$. For each $n \in \mathbb{Z}, n > 0$, let $\varepsilon_n>0$ be such that $|u(x, \varepsilon)| > -\frac{1}{n}$ for all $x\neq 0$. 
+
+	Apply minimum principle to the domain $\{|x| \le 1\} \times \{\varepsilon_n \le t \le T\} $, we get that $u \ge  - \frac{1}{n}$ in this domain. Take $T \to \infty $ and we get that $u \ge  - \frac{1}{n}$ whenever  $|x| \le 1, t \ge \varepsilon_n$. Take $\varepsilon_n \to  0$ and we obtain that $u \ge 0$ whenever $|x| \le 1, t > 0$.
+
+	Finally we want to remove the equal sign and get $u > 0$ in the parabolic interior. If $u = 0$ at any point in the parabolic interior, then the strong minimum principle implies $u(x, \varepsilon) = 0$ for all $|x| \le 1, \varepsilon > 0$. But then we must have $u(x, 0) = 0$, a contradiction.
+\end{proof}
+
+\begin{problem}
+	Evaluate the integral
+\[
+\int_{-\infty}^{\infty} \cos (a x) e^{-x^2} d x \quad(a>0) .
+\]
+
+Hint: Use the separation of variables to find the solution of the corresponding initial-value problem for the heat equation.
+\end{problem}
+\begin{proof}
+	Note, that by representation formula for solution of heat equation, this is $\sqrt{\pi} $ times the solution of the following IVP evaluated at $x = 0, t = 1$:
+	\[
+		\begin{cases}
+			\Delta u - u_t = 0 & \text{ on } \mathbb{R} \times (0,\infty )\\
+			u(x,0) = \cos\left(\frac{a}{2} x\right) & \text{ on } \mathbb{R}
+		\end{cases}
+	.\] 
+	Note that $\cos\left( \frac{a}{2} x \right) $ is an eigenfunction of $\Delta$ with eigenvalue $\left( \frac{a}{2} \right) ^2$, so one solution is given by
+	\[
+		u(x, t) \cos\left( \frac{a}{2} x \right) \exp\left( - \left( \frac{a}{2} \right) ^2 t \right) , x \in \mathbb{R}, t > 0
+	.\] 
+	By uniqueness of solution for heat equation, this is equal to the solution given by representation formula. Hence the integral is equal to
+	\[
+		u(0,1) = \exp\left( - \left( \frac{a}{2} \right) ^2 \right) 
+	.\] 
+	Hence our integral evaluates to 
+	\[
+		\int_{-\infty}^{\infty} \cos (a x) e^{-x^2} d x = \sqrt{\pi} 
+		\exp\left( - \left( \frac{a}{2} \right) ^2 \right) 
+	.\] 
+\end{proof}
+
+\begin{problem}
+	3. (a) Show that for $n=3$ the general solution of the wave equation $u_{t t}-\Delta u=0$ with spherical symmetry about the origin has the form
+\[
+u=\frac{F(r+t)+G(r-t)}{r}, \quad r=|x|
+\]
+with suitable $F, G$.\\
+(b) Show that the solution with initial data of the form
+\[
+u=0, \quad u_t=h(r)
+\]
+$(h=$ even function of $r$ ) is given by
+\[
+u=\frac{1}{2 r} \int_{r-t}^{r+t} \rho h(\rho) d \rho .
+\]
+\end{problem}
+\begin{proof}
+	Assume $u = u(r, t)$, then we have
+	\[
+		u_{tt} = u_{r r} + \frac{2}{r} u_r
+	.\] 
+	Let $\tilde u = r u$, then the IVP is converted to
+	\[
+		\begin{cases}
+			\tilde u_{t t} = \tilde u_{r r} & r > 0, t > 0 \\
+			\tilde u(r, 0) = g(r) \\
+			\tilde u_t(r, 0) = h(r)
+		\end{cases}
+	.\] 
+	From solution to 1-d wave equation for semi-infinite string, we have
+	\[
+		\tilde u(r, t)
+		= \frac{1}{2}\left( \tilde g(r + t) + \tilde g(r - t) \right)  + \frac{1}{2} \int _{r - t}^{r + t} \tilde h (s) ds
+	.\] 
+
+	Divide $r$ from both sides,
+\[
+		u(r, t)
+		= \frac{1}{2 r}\left( \tilde g(r + t) + \tilde g(r - t) \right)  + \frac{1}{2r} \int _{r - t}^{r + t} \tilde h (s) ds
+	.\]
+	Hence we can define
+	\[
+		F(x) = \tilde g(x) + \int _0^x \tilde h(s) ds 
+	.\] 
+ 	\[
+		G(x) = \tilde g(x) - \int _0^x \tilde h(s) ds 
+	.\]
+	and the solution will have the desired form.
+
+
+	Finally, plug in $g = 0$  and our solution reads
+	\[
+		u(r, t) = \frac{1}{2 r} \int _{r - t}^{r + t} \rho h(\rho) d \rho
+	.\] 
+\end{proof}
+
+

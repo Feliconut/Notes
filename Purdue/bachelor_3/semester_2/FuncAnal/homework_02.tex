@@ -1,0 +1,119 @@
+\homework{2}{Tue 23 Jan 2024 23:38}{}
+\begin{problem}
+	1. Let $X$ be a Banach space. An element $T \in B(X)$ is invertible if there is $S \in B(X)$ such that $S T=1$ and $T S=1$ where $1 \in B(X)$ denotes the identity operator $1=\operatorname{id}_X$. Denote $S$ by $T^{-1}$.\\
+(a) (Neumann Series) Prove that if $T \in B(X)$ and $\|1-T\|<1$, then $T$ is invertible and in fact $T^{-1}=\sum_{k=0}^{\infty}(1-T)^k$.\\
+(b) Show the subset of invertible operators is open in $B(X)$.
+\end{problem}
+\begin{proof}
+	Since $\|1 - T\| < 1$, the series $\sum_{k = 0}^\infty (1 - T)^k$ converges absolutely, so $T^{- 1}$ is well-defied and in $B(X)$. Now we verify that $T^{ - 1}$ is indeed the inverse of $T$. Calculate
+
+	\begin{align*}
+		\left( \sum_{k = 0}^n (1 - T)^k \right) T
+		&= \sum_{k = 0}^n (1 - T)^k (1 - (1 - T)) \\
+		&= \sum_{k = 0}^n (1 - T)^k 
+		- \sum_{k = 1}^{n + 1} (1 - T)^k \\
+		&= (1 - T)^0 - (1 - T)^{ n + 1}
+	\end{align*}
+	where the last line converges to $1$ as $n \to \infty $. Thus $T^{-1} T = 1$. A completely symmetric argument works for $T T^{-1}$.
+
+	Now take $B \in B(X)$ such that $\|B\| < \varepsilon$, $\varepsilon < \|T^{-1}\|^{-1}$. We want to show $T + B$ is invertible. To do this, we note that $T + B = T (1 + T^{-1} B)$, and 
+	\[
+		\|1 - (1 + T^{-1}B)\| \le \|B\| \|T^{-1}\| < \varepsilon \|T^{-1}\| < 1
+	.\] 
+	Then by part one, $1 + T^{-1}B$ is invertible. Since $T$ is invertible, $T + B$ is invertible as product of invertibles.
+\end{proof}
+
+
+\begin{problem}
+	2. Prove that $\ell^1(N)^* \cong \ell^{\infty}(\mathbb{N})$ via an isometric bijection.
+
+Hint: Consider the values of $\ell^1(N)^*$ on a certain set of unit vectors of $\ell^1(N)$ which span a dense subset of $\ell^1(N)$.
+\end{problem}
+\begin{proof}
+	Consider the dense subspace of $\ell^1(\mathbb{N})$,
+	\[
+		\ell^1_c(\mathbb{N}) = \{f: \mathbb{N} \to \mathbb{C}, f \text{ finite support}\} 
+	.\] 
+	Define
+	\begin{align*}
+		A: \ell^1(\mathbb{N})^*  &\longrightarrow \ell^\infty (\mathbb{N}) 
+	.\end{align*}
+	To define $A$, let  $\xi_m \in \ell^1_c(\mathbb{N})$ be such that $\xi_m(n) = \delta_{m n}$. Then let
+	\[
+		(A f)_m = f \xi_m
+	.\] 
+	Now we need to do some checks.
+	\begin{itemize}
+		\item First check $A$ is well-defined. If $f \in \ell^1 (\mathbb{N})^*$, then
+			\[
+			\left| f \xi_i \right| \le \|f\| \|\xi_i\| = \|f\| < \infty 
+			.\] 
+			Hence $\|A f\|_{\infty } = \sup _m \left| f \xi_m \right| \le  \|f \| < \infty $.
+		\item The fact that $A$ is linear follows directly from how we have constructed it. 
+		\item Check $A$ is surjective. Fix any $\alpha \in \ell^\infty (\mathbb{N})$. We consider
+			\[
+				f_\alpha \in \ell^1(\mathbb{N})^*, \qquad
+				f_\alpha(\beta) = \sum_{m = 0}^\infty \alpha_i \beta_i
+			.\] 
+			This is well-defined since $\left| f_\alpha(\beta) \right| \le \|\alpha\|_\infty  \|\beta\|_1 < \infty $, thus $\|f_\alpha\| \le \|\alpha\|_\infty $ and thus it is a linear functional. Now, 
+			\[
+				(A f_\alpha)_m = f_\alpha(\xi_m) = \alpha_m
+			.\] 
+	\end{itemize}
+	Finally, we want to show that $A$ is an isometry. Fix some $f \in \ell^1(\mathbb{N})^{*}$. We have $\|f\| = \sup \{f(\beta): \beta \in \ell^1(\mathbb{N}), \|\beta\|_1 = 1\} $. Now fix some $ \beta \in \ell^1(\mathbb{N})$ such that $\|\beta\| = 1$ and $f(\beta) > \|f\| - \varepsilon$. But since
+	\[
+		f(\beta) = \sum f(\xi_m) \beta_m
+	,\] 
+	there must exist some $\xi_m$ such that $f(\xi_m) \ge f(\beta)$. Then, we have
+	\[
+		\|A f\|_\infty  \ge f(\xi_m) > \|f\| - \varepsilon
+	.\] 
+	We already know that $\|A f\|_\infty  \le  \|f\|$. Combine those and we get $\|A f\|_\infty  = \|f\|$.
+\end{proof}
+
+
+\begin{problem}
+	3. Let $Y \subset \ell^{\infty}(\mathbb{N})$ be the subspace
+\[
+Y=\left\{a=\left(a_k\right)_k \in \ell^{\infty}(\mathbb{N}): \lim _{k \rightarrow \infty} a_k \text { exists }\right\} .
+\]
+(a) Define $u: Y \rightarrow \mathbb{C}$ via $u(a)=\lim _{k \rightarrow \infty} a_k, \quad a \in Y$.
+Prove that $u$ is a bounded linear functional on $Y$.
+(b) By the Hahn-Banach theorem, there exists $v \in\left(\ell^{\infty}(\mathbb{N})\right)^*$ such that $\left.v\right|_Y=u$. Prove that there is no $b=\left(b_k\right)_k \in \ell^1(\mathbb{N})$ such that for all $a \in \ell^{\infty}(\mathbb{N})$
+\[
+v(a)=\sum_{k=1}^{\infty} a_k b_k
+\]
+
+Hint: Towards a contradiction, suppose that there exists $b=\left(b_k\right)_k \in$ $\ell^1(\mathbb{N})$ such that for all $a \in \ell^{\infty}(\mathbb{N}), v(a)=\sum_k a_k b_k$, and consider $v\left(e_n\right)$ where $e_n=\left(\delta_{n k}\right)_k \in \ell^{\infty}(\mathbb{N})$.
+\end{problem}
+\begin{proof}
+	To prove boundedness, observe that for any $a \in Y $ such that $\|a\|_\infty \le 1$, we have $|\lim a| \le \sup _k |a_k| \le 1$. 
+
+	Linearity of $u$ directly follows from linearity of limit of real number sequences.
+
+	To obtain the contradiction, suppose that there exists $b \in \ell^1(\mathbb{N})$ such that $v(a) = \sum_k a_k b_k$. Now take $e_n = (\delta_{n k})_k$, and now
+	\[
+		v(e_n) = \sum \delta_{n k} b_k = b_n
+	\] 
+	But
+	\[
+		e_n \in Y, \qquad u(e_n) = \lim e_n = 0
+	.\] 
+\end{proof}
+
+
+\begin{problem}
+	4. Show that any infinite dimensional normed space $X$ admits a discontinuous linear map $f: X \rightarrow \mathbb{C}$.
+
+Hint: Any linear space $X$ admits a Hamel basis, i.e. a subset of $X$ consisting of linearly independent vectors that $\operatorname{span} X$. Construct $f$ by using a Hamel basis consisting of vectors of length one.
+\end{problem}
+\begin{proof}
+	Take such a Hamel basis, first assume it is countable, say $\xi_1, \xi_2, \ldots$, each of length $1$, and take
+	\[
+		f(\xi_m) = m
+	.\] 
+	Now $f$ is linear and well-defined, since we have defined it on the basis. However, $f$ is not bounded, since  $f(\xi_m)$ can get arbitrarily large if we take $m \to  \infty $.
+
+	Now, if this basis is uncountably infinite, use axiom of dependent choice to get a sequence $\xi_m$ that is a basis for a countably-infinite dimensional subspace, say $H \subset X$. Now set $f(\xi_m) = m$ and $f(x) = 0$ for $x \in X \setminus H$.
+\end{proof}
+

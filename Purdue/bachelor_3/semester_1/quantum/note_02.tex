@@ -1,5 +1,27 @@
 \note{2}{Wed 04 Oct 2023 17:19}{Midterm Cheatsheet}
 
+\textbf{Norm of a quantum state.} For orthogonal eigenstates $\left| + \right\rangle , \left| - \right\rangle $, a state $\left| \phi \right\rangle = a \left| + \right\rangle  + b \left| - \right\rangle $, $a, b \in \mathbb{C}$, has norm / length $|a|^2 + |b|^2$. For example,,
+\[
+	\left(\frac{2+\sqrt{2}}{\sqrt{2}}\right)|+\rangle+\left(\frac{1+i}{\sqrt{2}}\right)|-\rangle
+.\] 
+has norm
+\[
+	\left(\frac{2+\sqrt{2}}{\sqrt{2}}\right)^2+\left(\frac{(1 + i) ( 1 - i)}{2}\right)
+.\]
+
+\textbf{Matrix element:} The matrix element of operator $H$ in $\left| a_i \right\rangle $ basis, $a_i$ orthonormal, is $\left\langle a_j \right| H \left| a_i \right\rangle $.
+
+\textbf{Change of basis:} Always we can insert another orthonormal (orthogonal and unit) basis $\sum_{b_j} \left| b_j \right\rangle \left\langle b_j \right| $. Thus
+\[
+	\left\langle a_j \right| H \left| a_i \right\rangle 
+	= \sum_{b_k}
+	\left\langle a_j \right| \left| b_k \right\rangle \left\langle b_k \right|  H \left| a_i \right\rangle 
+.\] 
+This changes from $a, a$ basis to $b, a$ basis. Also, feel free to do
+\[
+	\left\langle p \right| H \left| x \right\rangle = \int dx' \left\langle p \right|  \left| x' \right\rangle \left\langle x' \right| H \left| x \right\rangle 
+.\] 
+
 \textbf{State Evolution in Schrodinger Picture.} Initial state is $\left| S_x, + \right\rangle $, Hamiltonian is $H = \omega S_z$, what is state at time $t$? ANS: $\left| S_x, +, t \right\rangle = \mathcal{U}(t) \left| S_x, + \right\rangle $ where $\mathcal{U}(t) = \exp\left( \frac{- i H t }{\hbar} \right) $. In eigenbasis of $S_z$, calculate $\exp\left( - i H t /\hbar \right) \left| S_x, + \right\rangle \doteq$
 \[
 	\begin{bmatrix}
@@ -70,7 +92,6 @@ $\left\langle x \middle| \psi' \right\rangle = \left\langle x \right| \mathcal{J
 
 \textbf{Time evolution of position operator for simple harmonic oscillator.} We want to calculate $\exp(i H t / \hbar) x \exp\left( - i H t /\hbar \right) = x \cos \omega t+\frac{p}{m \omega} \sin \omega t$. Use the previous lemma, $[H, x(0)] = \frac{-i \hbar p(0)}{m}$ and $[H, p(0)] = i \hbar m \omega^2 x(0)$. 
 
-\newpage
 
 \textbf{Proof of uncertainty principle.} For hermitian $A, B$, we have  $\left\langle (\Delta A)^2 \right\rangle \left\langle (\Delta B)^2 \right\rangle \ge \left| \left\langle \Delta A \Delta B \right\rangle  \right| ^2$ (Schwartz Inequality) 
 $= \left| \left\langle \frac{1}{2}[\Delta A, \Delta B] + \frac{1}{2} \left\{ \Delta A, \Delta B \right\}  \right\rangle  \right|^2 $ \\$= \frac{1}{4} \left( \left\langle [\Delta A, \Delta B] \right\rangle ^2 + \left\langle \left\{ \Delta A, \Delta B \right\}  \right\rangle  \right)  $ (since the commutator is anti-Hermitian and the anti-commutator is Hermitian, their expected values are purely imaginary and real), where $[\Delta A, \Delta B] = [A, B]$.
@@ -99,8 +120,6 @@ $\int dp' \frac{\partial }{\partial p'} \delta(p' - p'') f(p') = \int  dp' \delt
 From position representation of momentum operator, conclude $\left\langle x' \right| p \left| p' \right\rangle = - i \hbar \frac{\partial }{\partial x'} \left\langle x' \middle| p \right\rangle $. Therefore $p' \left\langle x' \middle| p' \right\rangle = - i \hbar \frac{\partial }{\partial x'} \left\langle x' \middle| p \right\rangle $. Solve for differential equation, get $\left\langle x' \middle| p' \right\rangle = N \exp\left( \frac{i p' x'}{\hbar} \right) $. To determine $N$, calculate $\int dp' \left\langle x' \middle| p' \right\rangle \left\langle p' \middle| x'' \right\rangle $. On one hand, it is $\delta(x - x')$. On the other hand, it is $N^2 \int dp' \exp\left( \frac{i p' (x' - x'')}{\hbar} \right) $. Use the orthogonality of different planar waves: $\int dp' \exp(i p' a) \exp(- i p' b) = 2 \pi \delta(a-b)$. Hence $\left\langle x' \middle| p' \right\rangle = 2 \pi \hbar N^2 \delta(x - x'')$. From this, find the normalization $N = \frac{1}{\sqrt{2 \pi \hbar} }$.
 
 
-\newpage
-
 \textbf{Matrix form of spin states.} (in $S_z$ basis) $S_z = \frac{\hbar}{2} \left( \left| + \right\rangle \left\langle + \right|  - \left| - \right\rangle \left\langle - \right|  \right) $,
 $S_x = \frac{\hbar}{2}\left( \left| + \right\rangle \left\langle - \right| + \left| - \right\rangle \left\langle + \right|  \right) $,
 $S_y = i \frac{\hbar}{2} \left( \left| - \right\rangle \left\langle + \right| - \left| + \right\rangle \left\langle - \right|  \right) $.
@@ -109,14 +128,15 @@ $S_y = i \frac{\hbar}{2} \left( \left| - \right\rangle \left\langle + \right| - 
 \textbf{Fourier Transform of Wave Function.} A state $\left| \alpha \right\rangle $ may be represented in position wave function $\psi_\alpha (x') = \left\langle x' \middle| \alpha \right\rangle $ or momentum wave function $\phi_\alpha(p') = \left\langle p' \middle| \alpha \right\rangle $. To convert between them, use the identity $\left\langle x' \middle| p' \right\rangle = \frac{1}{\sqrt{2 \pi \hbar} }\exp\left( \frac{i p' x'}{\hbar} \right) $. For example of converting from position to momentum: $\left\langle x' \middle| \alpha \right\rangle = \int dp' \left\langle x' \middle| p' \right\rangle \left\langle p' \middle| \alpha \right\rangle = \int dp' \left\langle x' \middle| p' \right\rangle \phi_\alpha (p')$.
 
 \textbf{Solving SE for Time Independent Hamiltonian}.
-If there exists a complete set of mutually compatible observables $A_k$ that also commute with $H$, then $\mathcal{U}$ has a spectral decomposition:
-\[
-	\mathcal{U}_{t} = \exp\left( \frac{- i H t}{\hbar} \right) 
+If there exists a complete set of mutually compatible observables $A_k$ that also commute with $H$, then $\mathcal{U}$ has a spectral decomposition: $\mathcal{U}_{t} = \exp\left( \frac{- i H t}{\hbar} \right) 
 	= \sum_{K'} \exp\left( \frac{- i E_{K'} t}{\hbar} \right) \left| K' \right\rangle \left\langle K' \right| 
-.\] 
+.$ 
 Where $\left| K' \right\rangle$ means some eigenstate labelled by its eigenvalues assigned by each $A_k$, and $E_{K'}$ is the eigenvalue assigned by $H$ to $\left| K' \right\rangle $.
 This guarantee that $\mathcal{U}$ is a unique linear combination of $A_k$.
 To solve the equation, we only need to decompose the initial state according to the eigenbasis, and apply the time evolution operator to each component.
+
+
+\iffalse
 
 \textbf{Solution for one-dimensional potential well.}
 For a constant potential $V=V_0$ and $E>V$, the solution is
@@ -165,3 +185,100 @@ Note also that $\kappa$ and $k$ are related by
 \[
 \frac{2 m V_0 a^2}{\hbar^2}=\left(k^2+\kappa^2\right) a^2
 \]
+\fi
+
+\textbf{Generation.} $A \to B$ means $A$ generates $B$ in the form $\exp\left( - \frac{i}{\hbar} A \Delta b \right) \left| b \right\rangle  = \left| b + \Delta b \right\rangle $. Momentum $\to $ position / translation; Angular momentum $J \cdot \hat{n}  \to $ angular position / rotation; Energy $ H \to $ time / time evolution.
+
+\textbf{Addition of angular momentum.} Two angular momentums $(J_1^2, J_{1z})$ and $\left( J_2^2, J_{2 z} \right) $ can be added to form $J^2, J_z, J_1^2, J_2^2, J_{1z}, J_{2z}$. Those above are operators; their values denoted by $J, M, j_1, j_2, m_1, m_2$. \textbf{Two types of set of observables}: \[
+	(J_1, J_2, J, J_z) \qquad (J_1, J_2, J_{1z}, J_{2z})
+.\] 
+\textbf{Example for reading Clebsch–Gordan coefficients table: Addition of angular momentum for spin-1/2 particles}. 
+In this case we have $j_1 = j_2 = \frac{1}{2}$, corresponding to top-left corner. If $J = 1, M = 0$, then our state is  $\left| J=1, M = 0; j_1 j_2 \right\rangle  =  \frac{1}{\sqrt{2} }\left| m_1=\frac{1}{2}, m_2 = -\frac{1}{2}; j_1 j_2 \right\rangle  + \frac{1}{\sqrt{2} }\left| m_1 = -\frac{1}{2}, m_2 = \frac{1}{2}; j_1 j_2 \right\rangle .$
+
+\textbf{Parity.} The \textbf{Spin Statistics Theorem} says fermions  (half integer spin particles) have odd symmetry, i.e. wave function takes a minus sign under exchange of particles. The parity is $-1$ / odd, if exchange gives a minus sign / particles anticommute. The parity is $1$ / even if particles commute.
+
+Parity of state of a particle is product of parity of spin angular momentum $S$ state and parity of orbital angular momentum $L$ state.  $L$ is given by $(-1)^l$. Parity of $S$ state needs to be read from $\left| j_1, j_2, m_1, m_2 \right\rangle $ representation.
+
+
+
+\textbf{Pauli exclusion principle} says two fermions cannot be in identical state. By "identical" we mean the same spatial state and same spin state. Example: for two electrons orbiting each other, they cannot both spin up, i.e. be in $\left| ++ \right\rangle  \equiv \left| m_1 = \frac{1}{2}, m_2 = \frac{1}{2}; j_1 = \frac{1}{2}, j_2 = \frac{1}{2} \right\rangle $ state, or both spin down. Example: for two electrons orbiting a nucleus, to have same spin quantum number $m_1 = m_2$, they must be in different orbits, i.e. have different orbital quantum number.
+
+\textbf{2D rotation matrix} $\begin{bmatrix}
+		\cos \theta & - \sin \theta \\
+		\sin \theta &  \cos \theta \\
+	\end{bmatrix}
+.$ 
+
+\textbf{Axial rotation for spin $\frac{1}{2}$ and Pauli quantum gates}: $D(\hat{x} , \pi) = - i X$, same for $Y$, $Z$. $X = 
+	\begin{bmatrix}
+		0 & 1 \\
+		1 & 0 \\
+	\end{bmatrix}
+	\qquad
+	Y = 
+	\begin{bmatrix}
+		0 & -i \\
+		i & 0 \\
+	\end{bmatrix}
+	\qquad
+	Z = 
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & -1 \\
+	\end{bmatrix}
+.$ 
+
+\textbf{Infinitesimal and finite operations}: When $\Delta \phi$ is small, we have $D(\hat{n} , \Delta \phi) := \exp\left( - \frac{i}{\hbar} J \cdot  \hat{n}  \Delta \phi \right) \approx 1 - \frac{i}{\hbar} J \cdot  \hat{n}  \Delta \phi$. To justify, use taylor expansion to first order.
+
+\textbf{Rotation and Wigner d-matrix.} (textbook 3.203)
+\[
+\begin{aligned}
+\mathscr{D}_{m^{\prime} m}^{(j)}(\alpha, \beta, \gamma) & =\left\langle j, m^{\prime}\left|\exp \left(\frac{-i J_z \alpha}{\hbar}\right) \exp \left(\frac{-i J_y \beta}{\hbar}\right) \exp \left(\frac{-i J_z \gamma}{\hbar}\right)\right| j, m\right\rangle \\
+& =e^{-i\left(m^{\prime} \alpha+m \gamma\right)}\left\langle j, m^{\prime}\left|\exp \left(\frac{-i J_y \beta}{\hbar}\right)\right| j, m\right\rangle\\
+& =e^{-i\left(m^{\prime} \alpha+m \gamma\right)}d_{m^{\prime} m}^{(j)}(\beta)
+\end{aligned}
+\]
+\textbf{Representation of angular momentum operator.} $\left\langle x\left|L_z\right| \psi\right\rangle=-i \hbar \frac{\partial}{\partial \phi} \psi(x)$.
+Proof: 
+ Start from the polar coordinate transform: $\begin{cases}
+  x = r \cos \phi \sin \theta \\
+  y = r \sin \phi \sin \theta \\
+  z = r \cos \theta
+  \end{cases}
+  .$- Doing partial differentiation to the function $\psi(r,\theta, \phi) = \psi(x,y,z)$ , we have
+-
+  \begin{align*}
+  \frac{\partial }{\partial \phi} \psi(x,y,z)
+  &= \frac{\partial \psi}{\partial x} \frac{\partial x}{\partial \phi} + \frac{\partial \psi}{\partial y} \frac{\partial y}{\partial \phi}  + \frac{\partial \psi}{\partial z} \frac{\partial z}{\partial \phi} \\
+  &= - r \sin \phi \sin \theta \frac{\partial \psi}{\partial x}  + r \cos \phi \sin \theta \frac{\partial \psi}{\partial y} \\
+  &= - y \frac{\partial \psi}{\partial x}  + x \frac{\partial \psi}{\partial y}
+  .
+  \end{align*}
+Thus,$1 - \frac{i}{\hbar} \left\langle \mathbf{x} \right| \varepsilon L_z \left| \psi \right\rangle
+  \approx \psi(x,y,z) - \varepsilon \frac{\partial }{\partial \phi} \psi(x,y,z)
+  .$
+
+  Therefore
+$\left\langle \mathbf{x} \right| L_z \left| \psi \right\rangle
+  = - i \hbar \frac{\partial }{\partial \phi} \psi(\mathbf{x})
+  .$ 
+
+\textbf{Orbital angular momentum Ladders:} eqn. (3.222), 
+
+$\left\langle \mathbf{x}' \right| L_{\pm} \left| \alpha \right\rangle
+  = - i \hbar e^{ \pm i \phi} \left(  \pm  i \frac{\partial }{\partial \theta} - \cot \theta \frac{\partial }{\partial \phi}  \right)
+  \left\langle \mathbf{x}' \middle| \alpha \right\rangle
+  .$ 
+
+$\left\langle \hat{\mathbf{n}}  \middle| l, m - 1\right\rangle
+= \frac{1}{\sqrt{(l + m) (l - m + 1)} } e^{- i \phi} \left( - \frac{\partial }{\partial \theta} + i \cot \theta \frac{\partial }{\partial \phi}  \right) \left\langle \hat{\mathbf{n}}  \middle| l,m \right\rangle
+.$
+
+\textbf{Time evolution for ensemble.} In Schodinger picture, $\rho(t)=\mathscr{U}\left(t, t_0\right) \rho\left(t_0\right) \mathscr{U}^{\dagger}\left(t, t_0\right)$. 
+
+$$
+\begin{aligned}
+i \hbar \frac{\partial \rho}{\partial t} & =\sum_i w_i\left(H\left|\alpha^{(i)}, t_0 ; t\right\rangle\left\langle\alpha^{(i)}, t_0 ; t|-| \alpha^{(i)}, t_0 ; t\right\rangle\left\langle\alpha^{(i)}, t_0 ; t\right| H\right) \\
+& =-[\rho, H]
+\end{aligned}
+$$

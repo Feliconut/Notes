@@ -1,0 +1,129 @@
+\lecture{22}{Fri 01 Dec 2023 10:37}{}
+
+D\"oblin-Itô formula for Brownian motion (Durett 7.6.1):
+
+\[
+	f(B_t) = f(B_0) + \int _0^t f'(B_s) d B_s + \frac{1}{2} \int _0^t f''(B_s) d s
+.\] 
+
+Consider the integral
+\[
+	\int X_s d X_s = \frac{1}{2} X_t^2 - \left\langle X \right\rangle _t
+\] 
+and apply the identity
+\[
+	\sum_{k=0}^{n-1} (a_{k+1} - a_k)^2
+	=
+\sum_{k=0}^{n-1} (a_{k+1}^2 - a_{k}^2) 
+- 2 \sum_{k=0}^{n-1} a_k (a_{k+1} - a_k)
+.\] 
+We obtain Ito formula for $f(x) = x^2$:
+for square integrable martingale,
+		\[
+			X_s^2 - X_0^2 = 2 \int_{0}^t X_s d X_s + \frac{1}{2} \int _0^t 2 d\left\langle X \right\rangle _s
+		.\] 
+
+This formula can be understood as
+\[
+	d f(B) = f'(B) d B + \frac{1}{2} f'' (B) d t
+.\] 
+
+This can be done for more general $f$ and not only for Brownian motion. 
+
+\subsubsection{Proof of D\"oblin-Itô formula}
+
+Recall from real analysis: 
+	Suppose $g$ is of bounded variation, and $f$ is continuous. Then $\int _0^t f d g $ exists. Then $\int _0^t g df $ also exists, and 
+	\[
+		\int _0^t f dg + \int _0^t g df = fg |_0^t
+	.\] 
+We want an integration by part formula for semimartingales.
+
+\begin{proposition}
+	(Integration by parts for semimartingales)
+	Let $X_t, Y_t$ be continuous semimartingales, then
+	\[
+		X_t Y_t - X_0 Y_0 = \int _0^t X_s d Y_s + \int _0^t Y_s d X_s + \left\langle X, Y \right\rangle _t
+	.\] 
+	This can be understood as
+	\[
+		d(XY) = X dY + Y d X + d\left\langle X, Y \right\rangle 
+	.\] 
+\end{proposition}
+\begin{proof}
+	Apply what we know to $(X + Y)_t$.
+	\begin{align*}
+		(X_t + Y_t)^2 - (X_0 + Y_0)^2
+		&= \int _0^t 2\left( X_s + Y_s \right) d (X_s + Y_s) + \left\langle X + Y \right\rangle _t\\
+		&= \int _0^t 2X_s d (X_s + Y_s) + \int _0^t 2Y_s d (X_s + Y_s) +\left\langle X+ Y \right\rangle _t
+	.\end{align*} 
+	Also apply to  $(X - Y)_t$ we get
+\begin{align*}
+		(X_t - Y_t)^2 - (X_0 - Y_0)^2
+		&= \int _0^t 2X_s d (X_s - Y_s) - \int _0^t 2Y_s d (X_s - Y_s) +\left\langle X - Y \right\rangle _t
+	.\end{align*}
+	Multiply both sides by $\frac{1}{4}$ and subtract, we get
+	\begin{align*}
+		X_t Y_t - X_0 Y_0 = \int _0^t X_s d Y_s+  \int _0^t Y_s d X_s + \frac{1}{4} \left( \left\langle X + Y \right\rangle  - \left\langle X - Y \right\rangle  \right) 
+	.\end{align*}
+	Remark: this argument sometimes referred to as ``polarization''. \ask{what does this mean}
+\end{proof}
+
+\begin{theorem}[D\"oblin-Itô Formula](I)
+	Let $f, g$ be twice continuously differentiable, and $X_t, Y_t$ continuous semimartingales. Then $f(X_t)$ is a semimartingale and satisfies
+	\begin{align*}
+		f(X_t) - f(X_0) 
+		&= \int _0^t f'(X_s) d X_s + \frac{1}{2} \int _0^t f''(X_s) d\left\langle X \right\rangle _s\\
+		&= \int _0^t f'(X_s) d A_s + \int _0^t f'(X_s) d M_s + \frac{1}{2 }\int _0^t f''(X_s) d \left\langle M \right\rangle _s 
+	.\end{align*} 
+\end{theorem}
+\begin{proof}
+	(Sketch)
+	We already know this when  $f(x) = x$. We want to prove that the set of functions having this property forms an algebra. Then we want to apply Stone-Weierstrass approximation to gain this result for all $f \in  C^2(B_R)$, $R > 0$. Taking a limit will extend the result to all $f \in C^2(\mathbb{R})$.
+\end{proof}
+
+The only thing we need to verify before applying Stone-Weierstrass is the following:
+\begin{claim}
+	If $f, g$ as in the statement satisfies the formula, so does $f g$.
+\end{claim}
+\begin{proof}
+	Apply integration by parts.
+	\begin{align*}
+		\int _0^t f(X_s) d g(X_s) 
+		&= \int _0^t f(X_s) \left( g'(X_s) d X_s + \frac{1}{2} g''(X_s) d \left\langle X \right\rangle _s \right)  \\
+		&= \int _0^t f(X_s) g'(X_s) d X_s + \frac{1}{2} \int _0^t f(X_s) g''(X_s) d \left\langle X \right\rangle _s 
+	.\end{align*}
+	Similarly,
+	\[
+		\int _0^t g(X_s) d f(X_s) = \int _0^t g(X_s) f'(X_s) d X_s + \frac{1}{2} \int _0^t g(X_s) f''(X_s) d \left\langle X \right\rangle _s
+	.\] 
+	Apply this identity (we already know) (generalization for semimartingales)
+	\[
+		\left\langle \int _0^t u_s d B_s, \int _0^t v_s d B_s \right\rangle = \int _0^t u_s v_s d s
+	.\] 
+	\[
+		\left\langle f(X), g(X) \right\rangle 
+		= \int _0^t f'(X_s) g'(X_s) d \left\langle X \right\rangle _s
+	.\] 
+	
+	Now we can prove the formula:
+	\begin{align*}
+		f(X_t) g(X_t) - f(X_0) g(X_0)
+		&= \int _0^t f(X_s) g'(X_s) + g(X_s) f'(X_s) d X_s\\
+		&+ \int _0^t \frac{1}{2} \left( f(X_s) g''(X_s) + f''(X_s) g(X_s) - 2 f'(X_s) g'(X_s) \right) d\left\langle X \right\rangle _s \\
+		&= \int _0^t (fg)' (X_s) dX_s + \frac{1}{2} \int _0^t (fg)'' (X_s) d \left\langle X \right\rangle _s 
+	.\end{align*}
+\end{proof}
+
+\begin{fact}
+	If $f$ is twice continuously differentiable, there exists polynomials $p_n$ such that
+	\begin{enumerate}
+		\item $p_n \to f$
+		\item $p_n' \to  f'$
+		\item $p_n'' \to  f''$
+	\end{enumerate}
+	uniformly on compact sets.
+\end{fact}
+
+
+

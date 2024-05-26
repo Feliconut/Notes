@@ -1,0 +1,375 @@
+% Some basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{dcolumn}
+\newcolumntype{2}{D{.}{}{2.0}}
+\usepackage{xcolor}
+\usepackage{bbm}
+\usepackage{showlabels}
+\usepackage{csquotes}
+\usepackage{quiver}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\pdfminorversion=7
+
+\usepackage[
+    backend=biber,
+    style=authoryear-icomp,
+    sortlocale=auto,
+    natbib=true,
+    url=false, 
+    doi=true,
+    eprint=false
+]{biblatex}
+% \addbibresource{example.bib}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+}
+
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+
+% Other font I sometimes use.
+% \usepackage{cmbright}
+
+% Math stuff
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+% Fancy script capitals
+\usepackage{mathrsfs}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+%\renewcommand\O{\ensuremath{\emptyset}}
+%\newcommand\Q{\ensuremath{\mathbb{Q}}}
+%\newcommand\C{\ensuremath{\mathbb{C}}}
+
+% Easily typeset systems of equations (French package)
+\usepackage{systeme}
+
+% Put x \to \infty below \lim
+\let\svlim\lim\def\lim{\svlim\limits}
+
+%Make implies and impliedby shorter
+\let\implies\Rightarrow
+\let\impliedby\Leftarrow
+\let\iff\Leftrightarrow
+\let\epsilon\varepsilon
+% \let\phi\varphi
+
+% Add \contra symbol to denote contradiction
+\usepackage{stmaryrd} % for \lightning
+\newcommand\contra{\scalebox{1.5}{$\lightning$}}
+
+
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+
+% horizontal rule
+\newcommand\hr{
+    \noindent\rule[0.5ex]{\linewidth}{0.5pt}
+}
+
+% hide parts
+\newcommand\hide[1]{}
+
+% si unitx
+\usepackage{siunitx}
+\sisetup{}
+
+% Environments
+\makeatother
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{statement}{Statement}[subsection]
+\newmdtheoremenv[nobreak=true]{definition}{Definition}[subsection]
+%\newmdtheoremenv[nobreak=true]{characteristic}{Characteristic}
+%\newmdtheoremenv[nobreak=true]{consequence}{Consequence}
+\newmdtheoremenv[nobreak=true]{lemma}{Lemma}[subsection]
+\newmdtheoremenv[nobreak=true]{theorem}{Theorem}[subsection]
+\newmdtheoremenv[nobreak=true]{proposition}{Proposition}[subsection]
+\newmdtheoremenv[nobreak=true]{axiom}{Axiom}[subsection]
+\newmdtheoremenv[nobreak=true]{postulate}{Postulate}[subsection]
+\newmdtheoremenv[nobreak=true]{prop}{Proposition}[subsection]
+\newmdtheoremenv[nobreak=true]{corollary}{Corollary}[subsection]
+\newmdtheoremenv{conclusion}{Conclusion}
+\newmdtheoremenv{bonus}{Bonus}
+\newmdtheoremenv{conjecture}{Conjecture}[subsection]
+\newtheorem*{repetition}{Repetition}
+\newtheorem*{interlude}{Interlude}
+\newtheorem*{notation}{Notation}
+\newtheorem*{observation}{Observation}
+\newtheorem*{excercise}{Excercise}
+\newtheorem*{remark}{Remark}
+\newtheorem*{fact}{Fact}
+\newtheorem*{claim}{Claim}
+\newtheorem*{practice}{Practice}
+%\newtheorem*{problem}{Problem}
+\newtheorem*{terminology}{Terminology}
+\newtheorem*{application}{Application}
+\newtheorem*{example}{Example}
+\newtheorem*{nonexample}{Nonexample}
+\newtheorem*{question}{Question}
+\newtheorem*{previouslyseen}{As previously seen}
+\newmdtheoremenv[nobreak=true]{problem}{Problem}[subsection]
+
+%\newmdtheoremenv[nobreak=true]{definition}{Definition}
+%\newtheorem*{notation}{Notation}
+%\newtheorem*{remark}{Remark}
+%\newtheorem*{note}{Note}
+\newtheorem*{observe}{Observe}
+\newtheorem*{property}{Property}
+\newtheorem*{intuition}{Intuition}
+%\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
+%\newtheorem{exercise}{Exercise}[section]
+
+% End example and intermezzo environments with a small diamond (just like proof
+% environments end with a small square)
+\usepackage{etoolbox}
+\AtEndEnvironment{example}{\null\hfill$\diamond$}%
+\AtEndEnvironment{interlude}{\null\hfill$\diamond$}%
+
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+
+
+% Exercise 
+% Usage:
+% \exercise{5}
+% \subexercise{1}
+% \subexercise{2}
+% \subexercise{3}
+% gives
+% Exercise 5
+%   Exercise 5.1
+%   Exercise 5.2
+%   Exercise 5.3
+\newcommand{\exercise}[1]{%
+    \def\@exercise{#1}%
+    \subsection*{Exercise #1}
+}
+
+\newcommand{\subexercise}[1]{%
+    \subsubsection*{Exercise \@exercise.#1}
+}
+
+
+% \lecture starts a new lecture (les in dutch)
+%
+% Usage:
+% \lecture{1}{di 12 feb 2019 16:00}{Inleiding}
+%
+% This adds a section heading with the number / title of the lecture and a
+% margin paragraph with the date.
+
+% I use \dateparts here to hide the year (2019). This way, I can easily parse
+% the date of each lecture unambiguously while still having a human-friendly
+% short format printed to the pdf.
+
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@doctype{}%
+
+
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Lecture #1}%
+    }{%
+        \def\@doctype{Lecture #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+
+\newcommand{\lab}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Lab #1}%
+    }{%
+        \def\@doctype{Lab #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+\newcommand{\homework}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Homework #1}%
+    }{%
+        \def\@doctype{Homework #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+\newcommand{\assignment}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Assignment #1}%
+    }{%
+        \def\@doctype{Assignment #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+\newcommand{\studynote}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Note #1}%
+    }{%
+        \def\@doctype{Note #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+\newcommand{\note}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@doctype{Note #1}%
+    }{%
+        \def\@doctype{Note #1: #3}%
+    }%
+    \subsection*{\@doctype}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+
+\newcommand{\submit}[3]
+
+
+
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{14.5pt}
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Xiaoyu Liu}
+
+\fancyhead[RO,LE]{\@doctype} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\makeatother
+
+
+
+
+% Todonotes and inline notes in fancy boxes
+\usepackage[obeyFinal]{todonotes}
+\setuptodonotes{inline}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+
+% Verbetering is correction in Dutch
+% Usage: 
+% \begin{correction}
+%     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+%     tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+%     vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+%     no sea takimata sanctus est Lorem ipsum dolor sit amet.
+% \end{correction}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+
+% Noot is note in Dutch. Same as 'verbetering' but color of box is different
+
+
+% Figure support as explained in my blog post.
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Fix some stuff
+% %http://tex.stackexchange.com/questions/76273/multiple-pdfs-with-page-group-included-in-a-single-page-warning
+\pdfsuppresswarningpagegroup=1
+
+
+% My name
+\author{Xiaoyu Liu}
+
+
+% Logseq [[ ]] link support
+\newcommand{\logseq}[1]{
+	\href{logseq://graph/Feliconut?page=#1}{
+	\color{lightgray}{\texttt{[\![\!}}
+	\color{cyan}{\textsf{#1}}
+	\color{lightgray}{\texttt{\!]\!]}}
+}}
+
+\newcommand{\tags}[1]{{\color{cyan} tags: #1}}
+\newcommand{\ask}[1]{\todo[inline, color=cyan]{Question: #1}}
+\newcommand{\edit}[1]{\todo[color=orange]{Edit: #1}}
+\renewcommand{\comment}[1]{\todo[inline, color=green]{Comment: #1}}

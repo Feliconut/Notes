@@ -1,0 +1,116 @@
+\homework{6}{Tue 27 Feb 2024 00:53}{}
+
+\begin{problem}
+	1) Let $H$ be the Hilbert space $L^2([0,1], d t)$. Let $\varphi:[0,1] \rightarrow \mathbb{C}$ be a continuous function. Define $T \in B(H)$ by $(T x)(t)=\varphi(t) x(t)$ for all $t \in[0,1]$ and $x \in H$. T is called the operator of multiplication by $\varphi$ and is often denoted by $M_{\varphi}$.
+Show that the spectrum of $T, \sigma_{B(H)}(T)=\{\varphi(t): t \in[0,1]\}$.
+Hint: If an operator $T$ is invertible, then $T$ is bounded below. This means that there is $C>0$ such that $\|T x\| \geq C\|x\|$ for all $x \in H$.
+\end{problem}
+\begin{proof}
+	We first prove the following claim: $0 \in \operatorname{Im} \varphi$ iff $T_\varphi$ is not invertible.
+
+	If $0 \in \operatorname{Im} \varphi$, we can pick $t_0 \in [0,1], \delta > 0$ such that $\varphi(U(t_0, \delta)) \subset [-\varepsilon, \varepsilon]$ since $\varphi$ is continuous. Now pick a test function $\xi(t)$ such that $\text{supp} \xi \subset U(t_0, \delta)$ and $\|\xi\| = 1$. Now
+	\[
+		\|\varphi(t) \xi(t)\|< \|\varepsilon \xi(t)\| = |\varepsilon| \|\xi\| = \varepsilon
+	.\] 
+	Thus, $T_\varphi$ is not bounded below, which mean $T_\varphi$ is not invertible.
+
+	If $0 \not\in \operatorname{Im} \varphi$, since $\varphi$ is continuous and $[0,1]$ is compact, we know $\varphi$ is bounded away from $0$. Thus, $1/\varphi$ is well-defined and bounded away from zero. Now $T_\varphi T_{1 / \varphi} = T_{1 / \varphi} T_\varphi = \text{Id}$, so $T_\varphi$ is invertible.
+
+	Finally we note that
+	\[
+		\lambda x(t) - \varphi(t) x(t) = (\lambda - \varphi)(t) x\left( t \right)  = T_{\lambda - \varphi} x(t)
+	.\] 
+	Thus,
+	\[
+		\lambda \in \operatorname{Im} \varphi \iff 0 \in \operatorname{Im} (\varphi - \lambda) \iff
+		T_{\varphi - \lambda} \in \text{GL}(L^2[0,1])
+		\iff  
+		T_{\varphi }- \lambda \in \text{GL}(L^2[0,1])
+	.\]
+\end{proof}
+
+
+\begin{problem}
+	2). Let $\left(H_n\right)_{n=1}^{\infty}$ be a family of Hilbert spaces and let $H=\bigoplus_{n=1}^{\infty} H_n$ be the Hilbert space which is the direct sum of the family $\left(H_n\right)_{n=1}^{\infty}$ as defined in HW5. If $T_n \in L\left(H_n\right)$ and $\sup _n\left\|T_n\right\|<\infty$ for all $n \geq 1$, define $T \in B(H)$ by
+\[
+T\left(x_1, x_2, \ldots, x_n, \ldots\right)=\left(T_1 x_1, T_2 x_2, \ldots, T_n x_n, \ldots\right) .
+\]
+(a) Show that $T$ is invertible in $B(H)$ if and only if each $T_n$ is invertible in $B\left(H_n\right)$ and $\sup _n\left\|T_n^{-1}\right\|<\infty$.\\
+(b) Show that
+\[
+\overline{\cup_{n=1}^{\infty} \sigma\left(T_n\right)} \subset \sigma(T) .
+\]
+\end{problem}
+\begin{proof}
+	(a) Assume $T$ invertible in $B(H)$. Define natural inclusion and projection
+	\[
+		H_n \xhookrightarrow{\iota} H \xrightarrow{\pi} H_n
+	.\] 
+	Now define
+	\[
+		T_n^{-1} = \pi T^{-1} \iota
+	.\] 
+	We have
+	\[
+		\|T_n^{-1}\| \le \|\pi\| \|T^{-1}\| \|\iota\| = \|T^{-1}\|
+	.\] 
+	Since
+	 \[
+		T_n = \pi T \iota
+	,\] 
+	we have
+	\[
+		T_n^{-1} T_n = \pi T^{-1} \iota \pi T \iota = \pi T^{-1} T \iota = \text{Id}_n
+	,\] 
+	\[
+		T_n T_n^{-1} = \pi T \iota \pi T^{-1} \iota = \pi T T^{-1} \iota = \text{Id}_n
+	.\] 
+
+	Thus, $T_n^{-1} \in B(H)$ and is the inverse of $T_n$.
+
+	For the other direction, if $T_n^{-1}$ exists for all $T_n$ and $\sup  \|T_n^{-1}\| < \infty $, we directly define $T^{-1}(x_1, \ldots) = (T_1^{-1}x_1, T_2^{-1}x_2, \ldots)$. This is justified by Homework 5 Problem 1.
+
+	(b) Since $\sigma(T)$ is closed, it suffices to show $\cup_{n = 1}^\infty  \sigma(T_n) \subset \sigma(T)$. Then it suffices to show that $\sigma(T_n) \subset \sigma(T)$ for all $n$. But we can notice that for $\lambda \in \mathbb{C}$,
+	\[
+		(\lambda - T) (x_1, x_2, \ldots)
+		= \left( (\lambda - T_1)(x_1), (\lambda - T_2)(x_2), \ldots \right) 
+	.\] 
+	Thus, by part (a), $\lambda - T$ cannot be invertible if $\lambda - T_n$ is not invertible for some $n$. Thus $\sigma(T_n) \subset \sigma(T)$.
+\end{proof}
+
+\newpage
+
+\begin{problem}
+	3) Give an example of a bounded linear operator $T: \ell^2(\mathbb{N}) \rightarrow \ell^2(\mathbb{N})$ such that $\sigma(T)=\{0\}$ but $T^n \neq 0$ for all $n \geq 1$. Here $\sigma(T)$ denotes the spectrum of $T$ in the Banach algebra $B\left(\ell^2(\mathbb{N})\right.$.
+\end{problem}
+\begin{proof}
+	Fix $\alpha \in \left( 0, 1 \right) $.
+	Consider
+	\[
+		T(x_1, x_2, \ldots)
+		= (0, \alpha x_1, \alpha^2 x_2, \ldots)
+	.\] 
+
+	Now
+	\begin{align*}
+		r(T)
+		&= \lim_{n \to \infty } \|T^n\|^{1 / n} \\
+		&\le \lim_{n \to \infty} \left( \alpha^{n(n+1) /2} \right) ^{1 / n} \\
+		&= \lim_{n \to \infty } \alpha^{(n + 1) / 2} \\
+		&= 0 
+	.\end{align*}
+	Hence $\sigma(T) \subset \{0\} $. Also note that $T$ itself does not have a right inverse, hence is noninvertible. Thus $0 \in \sigma(T)$. Therefore $\sigma(T) = \{0\} $.
+\end{proof}
+
+
+\begin{problem}
+	4) Let $H$ be a separable Hilbert space. Let $S, T \in B(H)$ be such that $\|S x\| \leq\|T x\|$ for all $x \in H$. Show that there is $V \in B(H)$ such that $S=V T$.
+\end{problem}
+\begin{proof}
+	Since $H$ is separable, we can pick an orthonormal basis $e_1, e_2, \ldots$. Now define $V$ to be
+	\[
+		V(e_n) = \frac{\|S e_n\|}{\|T e_n\|}e_n
+	\] 
+	with the convention $\frac{0}{0} = 0$. Note that $S(e_n) = V T(e_n)$ for all $n$, and $\|V\| \le 1$. Hence $V \in B(H)$ is the operator we want.
+\end{proof}
+

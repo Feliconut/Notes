@@ -1,0 +1,141 @@
+\lecture{6}{Mon 22 Jan 2024 13:29}{}
+
+Review of Hahn-Banach 1.
+
+% https://quiver.local:8080/#q=WzAsMyxbMCwwLCJZIl0sWzIsMCwiXFxSIl0sWzAsMiwiWCJdLFswLDEsImYgXFxsZXEgcSJdLFswLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMSwiRiBcXGxlcSBxIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	Y && \R \\
+	\\
+	X
+	\arrow["{f \leq q}", from=1-1, to=1-3]
+	\arrow[hook, from=1-1, to=3-1]
+	\arrow["{F \leq q}"', dashed, from=3-1, to=1-3]
+\end{tikzcd}\]
+
+\begin{definition}[Seminorm]
+	\label{defn:Seminorm}
+	Consider $p: X \to [0,\infty )$ such that
+	\begin{itemize}
+		\item $p(x, + y) \le  p(x) + p(y)$
+		\item $p(\lambda x) = |\lambda| p(x)$ for all $\lambda \in \mathbb{F}$
+	\end{itemize}
+\end{definition}
+\begin{example}
+	\begin{itemize}
+		\item Say $f_1, f_2 : X \to \mathbb{R}$ linear, then $q(x) = |f_1(x)| + |f_2(x)|$ is a seminorm.
+		\item $p: L^1[0,1] \to  [0,\infty )$, $p(f) = \int_0^{1 / 2} |f(t)| d t$
+	\end{itemize}
+\end{example}
+
+\begin{lemma}
+	\label{lem:RealComplexHom}
+	Take $X$ be linear space over $\mathbb{C}$, $p$ be a seminorm on $X$. Then
+	\begin{itemize}
+		\item There is a bijection between $\operatorname{Hom} _{\mathbb{R}}(X, \mathbb{R})$ and $\operatorname{Hom} _{\mathbb{C}}(X, \mathbb{C})$. It is given by
+			\[
+				f \mapsto \tilde f(x) = f(x) - i f(i x)
+			.\] 
+			The converse is
+			\[
+				f = \operatorname{Re} (\tilde f)
+			.\] 
+		\item $\left| \tilde f (x) \right| \le p(x) \iff  \left| f(x) \right| \le p(x)$
+		\item If $p$ is a norm on $X$, $p(x) = \|x\|$, then $f$ is continuous $\iff $ $\tilde f$ is continuous. Moreover, $\|f\| = \|\tilde f\|$
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	\begin{itemize}
+		\item Let $g: X \to \mathbb{C}$, $\mathbb{C}$-linear. Then
+			\[
+				g(x) = \alpha(x) + i \beta(x)
+			\] 
+		where $\alpha, \beta: X \to  \mathbb{R}$, $\mathbb{R}$-linear, and $g(i x) = i g(x)$, so $\alpha(i x) + i \beta(i x) = - \beta(x) + i \alpha(x)$.
+
+		Thus, $\alpha (i x) = - \beta(x)$, and $\beta(i x) = \alpha(x) \iff  \beta(- x) = \alpha(i x)$, but $\beta(- x) = - \beta(x)$, so they are the same condition. 
+
+	\item $|f(x)| = \left| \operatorname{Re} (\tilde f(x)) \right|  \le  \left| \tilde f(x) \right| \le p(x)$.
+
+		On the other side, suppose $f(x) \le  p(x)$. Write 
+		 \[
+			\tilde f(x) = e^{ i \theta} \left| \tilde f(x) \right| 
+		.\] 
+		Thus
+		\begin{align*}
+			\left| \tilde f(x) \right| &= e^{ - i \theta} \tilde f(x)\\
+			&= \operatorname{Re} \left( e^{- i \theta} \tilde f(x) \right) \\
+			&= \operatorname{Re} \left( \tilde f(e^{- i \theta} x) \right) \\
+			&= f\left( e^{- i \theta }x \right)  \\
+			&= |f\left( e^{- i \theta }x \right)|  \\
+			&\leq p\left( e^{- i \theta} x \right) = p(x) 
+		.\end{align*}
+	\item Suppose $f$ is continuous. Then
+		\[
+			\left| f(x) \right|  \le  \|f\| \|x\|
+		.\] 
+		But $\|f\| \|x\|$ is a seminorm. Then
+		\[
+			\left| \tilde f (x) \right| \le \|f\| \|x\|
+		.\] 
+		Thus $\|\tilde f\| \le \|f\|$. The other side is symmetric. 
+		\todo{complete it.}
+	\end{itemize}
+\end{proof}
+
+
+\begin{corollary}[Hahn-Banach II]
+	\label{cor:HahnBanachII}
+	
+	Let $X$ be a linear space, $p: X \to [0,\infty )$ a seminorm. $Y \subset X$ is a linear subspace. $f: Y \to  \mathbb{R}$ or $\mathbb{C}$, such that $|f(y)| \le  p(y)$.
+
+	Then there exists $F: Y \to  \mathbb{R}$ (or $\mathbb{C}$ ) such that $F(y) = f(y)$ for all $y \in Y$, and $\left| F(x) \right| \le p(x)$.
+\end{corollary}
+\begin{remark}
+	We strengthened the assumption on $p$, making it a seminorm (instead of a linear functional; that is, added \textit{homogeneity}). Also, we assumed control of $f$ by absolute value, and obtain same absolute value control of $F(x)$.
+\end{remark}
+
+\begin{proof}
+	We first prove over $\mathbb{R}$. Apply Theorem~\ref{thm:HahnBanachThm} for $f(y) \le p(y)$ on $Y$, obtain an extension $F(x) \le  p(x)$ on $X$. Note, 
+	\[
+		F(- x) \le p(- x) \implies -F(x) \le p(x) \implies -p(x) \le F(x)
+	.\] 
+	This gives $|F(x)|\le p(x)$.
+	
+	For the complex part, use Lemma~\ref{lem:RealComplexHom}.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:ExtensionDual}
+	Take $(X, \|\cdot \|)$ a normed space. Let $Y \subset X$ be a linear subspace. Now for any $f \in Y^*$, there exists $F \in X^*$ such that $F|_{Y^*} = f$ and $\|F\| = \|f\|$. 
+\end{corollary}
+\todo{complete the proof.}
+
+
+\begin{corollary}
+	\label{cor:NormFromDual}
+	Let $(X, \|\cdot \|)$ be a normed space. For any $x \in X$, we have
+	\[
+		\|x\| = \sup \left\{|f(x)|: f \in X^*, \|f\| \le  1\right\} 
+	.\] 
+\end{corollary}
+\begin{proof}
+	May assume $x \neq 0$. Set $Y = \mathbb{C} \cdot x$. Define $f \in Y^*$, $f(\lambda x) = \lambda \|x\|$. By Corollary~\ref{cor:ExtensionDual}, there is $F \in X^*$, $F|_Y = f$, $\|F\| = \|f\| = 1$, $F(x) = f(x) = \|x\|$.
+
+	A priori we have $\ge $, now we have a specific $\|F\| = \|x\|$, so we have  $=$.
+\end{proof}
+
+We have
+\[
+	X^* = \{f: X \to \mathbb{C}, \text{ linear bounded}\} 
+.\] 
+\[
+	X^{**} = \{h: X^* \to \mathbb{C}, \text{ linear continuous}\} 
+.\] 
+Define
+\begin{align*}
+	j: X &\longrightarrow X^{* *} \\
+	x &\longmapsto j(x) : \left( f \mapsto f(x) \right) 
+.\end{align*}
+$j$ is an injective isometry.
+
+
+

@@ -1,0 +1,89 @@
+\note{2}{Mon 11 Dec 2023 22:21}{Transforming Hamiltonian to Action Angle Representation}
+
+\section{Hamiltonian Mechanics}
+
+\subsection{First integral}
+
+First integral means independent of $H$ on some coordinate will imply existence of some conserved quantity. For example, if $H(p_1, q_1, p_2, q_2)$ is independent of $q_2$, then
+\[
+	\dot{p}_2 = \frac{\partial H}{\partial q_2}  = 0
+.\] 
+Which means the conjugate momentum $p_2$ is conserved. If $H$ is independent of $t$, then $H$ itself is conserved. 
+
+Note that first integral in Hamiltonian dynamics is much simpler than in the Lagrangian, due to the simple form of Hamiltonian equation.
+
+
+
+
+\subsubsection{Canonical transformation}
+
+A canonical transformation 
+\[
+\begin{aligned}
+& p \rightarrow P(q, p) \\
+& q \rightarrow Q(q, p) \quad H(q, p, t) \rightarrow K(Q, P, t)
+\end{aligned}
+\]
+from $p, q$ coordinate to $P, Q$ coordinate is given by a transformation function $M(q, Q)$ such that
+\[
+\sum_{a=1}^N p_a \dot{q}^a-H(q, p, t)=\sum_{a=1}^N P_a \dot{Q}^a-K(Q, P, t)+\frac{d M}{d t}
+.\]
+
+\subsubsection{Liouville Theorem}
+
+Recall from vector calculus, that for vector field $f$ and closed region $D$ with smooth boundary $\partial D$, we have
+\[
+	\oint_{\partial D} f \cdot  \nu dS = \int _D \nabla \cdot f d x
+\] 
+where $\nu$ is outward normal of boundary.
+That is, outward flux can be obtained by integrating the divergence. Let $x = (p, q)$.
+
+Recall also that the total area of $D$ is
+\[
+	|D| = \int _D d x 
+	= \int _D \nabla \cdot (p, 0) d x
+	= \oint_{\partial D} (p, 0) \cdot  \nu d S 
+	= \oint_{\partial D} p dq
+.\] 
+
+Rate of change of phase space volume is
+\[
+	\frac{dV}{dt} = \oint_{\partial D} \dot{x} \cdot \nu d S
+	= \oint_{\partial D} (\nabla \times H) \cdot \nu d S
+	= \int_{D} \nabla \cdot  (\nabla \times H) dx
+.\] 
+since, $\dot{x} = (\frac{\partial H}{\partial q}, - \frac{\partial H}{\partial p} ) = \nabla \times H $. From this we see that, any system described by time-independent Hamiltonian must conserve volume in phase space.
+
+\subsubsection{Conversion to Action-Angle}
+
+The goal is to transform the system described by  $H(p_\alpha, q^\alpha)$ to a system described by $K(J, \theta)$. We may set $H = K$ and let $M(q, \theta) = p q - J \theta$. 
+
+$dM = p d q - J d \theta$ is an exact form. Hence $\oint dM = 0$ along a closed orbit. From this we conclude
+
+\[
+	\oint J d \theta = \oint p d q
+.\] 
+We want $J$ constant along any closed orbit, and any orbit to be described by $2 \pi$-periodicity in $\theta$. Hence, 
+\[
+	2 \pi J = \oint p d q
+.\] 
+Now
+\[
+	\oint_{\partial D} p d q
+	=\oint_{\partial D} p \cdot \nu_p d s
+	=\iint_D dx = |D|
+.\] 
+
+Hence
+\[
+	J = \frac{1}{2 \pi} \oint_{\partial D} p d q
+.\] 
+By integrating over $q$, we get $J = J(H)$. Invert to get $H = H(J)$, independent of $\theta$.
+
+Now, angular frequency is given by
+\[
+	\omega = \dot{\theta} = \frac{\partial H}{\partial J} 
+.\] 
+
+Note that $\omega$ is always a constant.
+
