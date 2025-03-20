@@ -1,0 +1,123 @@
+\section{Reading Note: ABR09}
+
+\subsection{Dependence Structure}
+
+\subsection{Proof of Corollary 10 from Lemma 9}
+We explicitly write out the proof sketched in the paper. The main ideas used is the ``amplification argument'', which is considering independent sub BRWs from vertices of the original BRW. 
+
+\begin{tcolorbox}[title=,colback=gray!10,colframe=black,breakable]
+    Lemma 9. For all values of $m$ for which $m^*-m=o(\sqrt{n})$,
+
+\[
+\mathbf{E}\left\{\left|G_{n, m} \|\right| v_n \in G_{n, m}\right\}=\mathbf{E}\left|G_{n, m}\right|+O(1)
+\]
+
+
+Assume for the moment that Lemma 9 holds, and let
+
+\[
+m^{\prime}=m^*-\frac{\log n}{2 t}=\Lambda^{\prime}(t) n-\frac{3 \log n}{2 t}
+\]
+
+
+By Lemma 7 and linearity of expectation, we see that $m^{\prime}$ is within $O(1)$ of the smallest value $m$ for which $\mathbf{E}\left|G_{n, m}\right| \geq 1$. Applying (25) with $\mathcal{R}=G_{n, m^{\prime}}$, it follows immediately that $\mathbf{P}\left\{\left|G_{n, m^{\prime}}\right|>0\right\}=\Omega(1)$. Since $G_{n, m} \subseteq N_{n, m}$ for all $m$, it follows that $\mathbf{P}\left\{\left|N_{n, m^{\prime}}\right|>0\right\}=\Omega(1)$, so $\mathbf{P}\left\{M_n \leq m^{\prime}\right\}=\Omega(1)$. By applying an amplification argument exactly as we did when proving Theorem 4, we immediately obtain exponential tail bounds for the upper tail of $M_n$ :
+
+Corollary 10. There exist constants $C_1>0, \delta_1>0$ such that for all $x>0$,
+
+\[
+\mathbf{P}\left\{M_n \geq m^{\prime}+x \mid \delta\right\} \leq C_1 e^{-\delta_1 x}
+\]
+
+\end{tcolorbox}
+
+\begin{proof}[Proof of Corollary~10]
+    \textbf{Step 1.} We have previously seen, by calculation using Theorem~1, that $m'$ is within $O(1)$ of $\Gamma'(t) n - 3 \log n / 2t$, the smallest value of $m$ such that $P(S_v \le m) \ge n / (EB)^n$. Recall the definition of $G_{n, m}$:
+    \[
+G_{n, m}=\left\{v \in N_n: m-1 \leq S_v \leq m, S_v \text { is strictly leading }\right\},
+\]
+    and note that $E |G_{n, m}| = |N_{n}| P(S_v \in G_{n, m})$. By Lemma~7, we have $P(S_v \in G_{n, m}) = \Theta(P(S_v \le m) / n).$ Thus, $E |G_{n, m}| = \Theta(1)$.
+
+    \textbf{Step 2.} We apply the Chung-Erdős inequality:
+    \begin{tcolorbox}[title=Chung-Erdős Inequality,colback=gray!10,colframe=black,breakable]
+        for any integer $i \geq 1$ and any random set $\mathcal{R} \subseteq N_n^{\prime}$ (recall that $N_n^{\prime}$ is the set of nodes at depth $n$ in $T_n^{\prime}$ ),
+\[
+\mathbf{P}\{|\mathcal{R}|>0\} \geq \frac{\mathbf{E}|\mathcal{R}|}{1+\sup _{v \in N_n^{\prime}} \mathbf{E}\{| \mathcal{R} | \mid  v \in \mathcal{R}\}}
+\]
+
+    Below is a format statement in its original form:
+
+    Let $A_1, \ldots, A_n$ be events. Assume that $\operatorname{Pr}\left[A_i\right]>0$ for some $i$. Then
+
+    \[
+    \operatorname{Pr}\left[A_1 \vee \cdots \vee A_n\right] \geq \frac{\left(\sum_{i=1}^n \operatorname{Pr}\left[A_i\right]\right)^2}{\sum_{i=1}^n \sum_{j=1}^n \operatorname{Pr}\left[A_i \wedge A_j\right]}
+    \]
+
+    The proof is by Paley-Zygmund inequality.
+\end{tcolorbox}
+
+Take $\mathcal{R} = G_{n, m'}$. Since $|G_{n, m'}| > 1$ for our choice of $m'$, we have $\mathbf{P}\left\{|G_{n, m'}| > 0\right\} = \Omega(1)$. Since $G_{n, m'} \subseteq N_{n, m'}$ for all $m$, it follows that $\mathbf{P}\left\{|N_{n, m'}| > 0\right\} = \Omega(1)$. Thus, $\mathbf{P}\left\{M_n \leq m'\right\} = \Omega(1)$.
+
+\textbf{Step 3.} We now apply an amplification argument. Intuitively, we first identify some vertices to the left of $x$ at some intermediate time. For the event $\{M_n \geq m' + x, S\}$ to happen, their subtrees must all travel at least $m'$ steps to the right, which is unlikely due to Step 2. 
+
+Since the process is supercritical, we apply the following inequality due to (McDiarmid, 1995, Lemma 1) to control the number of vertices from below:
+\[
+\mathbf{P}\left\{0<\left|N_i\right| \leq \gamma_0^i\right\} \leq c_0 e^{-\delta_0 i}\]
+\textbf{Intuition.} $|N_i|$ is expected to grow like $B^i$, thus we expect $E |N_i| \sim \exp(i \log EB)$. Choosing a smaller exponent $\gamma_0$ will result in an exponentially decaying tail bound.
+
+Take $\ell(x) = \lceil \log _{\gamma_0} x \rceil$. Then, for $n \ge \ell(x)$, we have
+\begin{align*}
+    \begin{aligned}
+    \mathbf{P}\left\{M_n>x + m', \mathscr{S}\right\} 
+    & \leq \mathbf{P}\left\{0<\left|N_{\lfloor\ell(x)\rfloor}\right| \leq x\right\}+\mathbf{P}\left\{M_n>x + m' | | N_{\ell(x)} \mid>x\right\} \\
+    & \leq c_0 e^{-\delta_0 x}+\sup _{x<k \leq d^{\ell(x)}} \mathbf{P}\left\{M_n>x + m'| | N_{\ell(x)} \mid=k\right\} .
+    \end{aligned}
+\end{align*}
+Let $F_{x, d}$ be the set of nodes with depth $d$ and position at most $x$.
+For fixed $k$ in the above range, we have
+
+\[
+\begin{aligned}
+& \mathbf{P}\left\{M_n>x + m'| | N_{\ell(x)} \mid=k\right\} \\
+& =\sum_{i=0}^k\left(\mathbf { P } \left\{M_n>x + m' | | N_{\ell(x)}\left|=k,\left|F_{x, \ell(x)}\right|=i\right\}\right.\right. \\
+& \left.\cdot \mathbf{P}\left\{\left|F_{x, \ell(x)}\right|=i \| N_{\ell(x)} \mid=k\right\}\right) \\
+& \leq \sum_{i=0}^k\left(1-p_0\right)^i \mathbf{P}\left\{\left|F_{x, \ell(x)}\right|=i \| N_{\ell(x)} \mid=k\right\} \\
+& \leq\left(1-p_0\right)^{k / 2}+\mathbf{P}\left\{\left|F_{x, \ell(x)}\right| \leq k / 2| | N_{\ell(x)} \mid=k\right\} ,
+\end{aligned}
+\]
+where $p_0 = \mathbf{P}\left\{M_n \geq m' \right) = \Omega(1)$.
+
+The rest follows word-by-word. 
+
+\textbf{Intuition}. Since $\ell(x)$ grows logarithmically with $x$, for a vertice in $N_{\ell(x)}$ to be outside of $F_{x, \ell(x)}$, it has to travel exponentially many steps to the right, which is unlikely. Thus the bound of the right hand side.
+\end{proof}
+To summarize again: We first run the walk for $\ell(x)$ steps to obtain around $k$ vertices. It is very unlikely for most of them to go beyond $x$, since it requires exponential speedup. On the other hand, for $M_n \ge x + m'$, the subtree of each of them must travel at least $m'$ steps to the right, which has a probability strictly less than 1. Thus, the probability of the event is exponentially small in $x$.
+
+
+\subsection{Proof of Lemma 7}
+
+We first give a hand-wavy yet intuitive proof of Lemma 6, and then demonstrate how it implies Lemma 7.
+
+\begin{tcolorbox}[title=,colback=gray!10,colframe=black,breakable]
+    LEMMA 6. Given a random walk $S$ with steps distributed as $X$, and real numbers $a, c$ with $c>\mathbf{E} X \geq a$ and for which $\mathbf{P}\{\mathbf{E} X<X \leq c\}>0$,
+
+\[
+\mathbf{P}\left\{S_n \leq a n, S_n \text { is strictly leading }\right\} \leq \frac{\mathbf{P}\left\{S_n \leq a n\right\}}{n}
+\]
+
+and
+
+\[
+\mathbf{P}\left\{S_n \leq a n, S_n \text { is strictly leading }\right\} \geq \mathbf{P}\{\mathbf{E} X<X \leq c\} \cdot \frac{\mathbf{P}\left\{S_{n-1} \leq a n-c\right\}}{n-1}
+\]
+
+\end{tcolorbox}
+
+For the upper bound: (1) By drawing a picture, one is convinced that at most one path in all cyclic permutations can be strictly leading. Draw it like a periodic function, and slide the window to represet a permuted walk. (2) The event $S_n \le an$ is fixed by all cyclic permutations.
+
+For the lower bound: We showcase a strictly leading path among the permutations. First, note that for $S_n \le a n$ and $S_n$ strictly leading, it suffices to have the first step $X_1$ greater than $EX_1$ and the rest of the steps leading, with appropriate condition on the last step. Then, one sees that \textit{any} path has at least one leading path among its cyclic permutations.
+
+
+\subsection{Proof of Lemma 9} 
+
+For this one we need two controls on probability of $S_n$ staying above a level $a$ and ending at some site $m$. In the proofs we use Lemma 7, the cyclic permutation, and Theorem 1, the large deviation estimate.
+

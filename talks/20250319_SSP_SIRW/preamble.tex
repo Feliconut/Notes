@@ -1,0 +1,113 @@
+\pagestyle{empty} %no header, footer,  nor page numbers
+\setcounter{secnumdepth}{0} %create counter
+\setlength\paperheight{36in} \setlength\paperwidth{48in} %set poster size
+\setlength\textwidth{\paperwidth} %give names to poster width
+\setlength\textheight{\paperheight} %give names to poster height
+
+% The textpos package is necessary to position textblocks at arbitary
+% places on the page.
+\usepackage[overlay,absolute]{textpos}
+\usepackage[justification=centering]{caption}
+% Graphics to include graphics. Times is nice on posters, but you
+% might want to switch it off and go for CMR fonts.
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{color}
+\usepackage{wallpaper}
+\usepackage{tikz}
+\usepackage{hanging}
+
+\usepackage{url}
+\usepackage{colortbl}
+\usepackage{multirow,bigdelim}
+\usepackage{arydshln}
+\usepackage{booktabs}
+\usepackage{caption, subcaption}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{etex}
+\usepackage{MnSymbol,wasysym}
+\usepackage{cite}
+\usepackage{verbatim}
+\usepackage[justification=centering]{caption}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{multicol}
+\pgfplotsset{compat=1.15}
+\usepackage{comment}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\captionsetup{justification=centering}
+
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows.meta}
+
+\definecolor{DarkBlue}{rgb}{0.3,0.28,0.5}
+\definecolor{dollarbill}{rgb}{0.52, 0.73, 0.4}
+\definecolor{teagreen}{rgb}{0.82, 0.94, 0.75}
+
+\definecolor{carolinablue}{rgb}{0.6, 0.73, 0.89}
+\definecolor{non-photoblue}{rgb}{0.64, 0.87, 0.93}
+\definecolor{powderblue(web)}{rgb}{0.69, 0.88, 0.9}
+\definecolor{beaublue}{rgb}{0.74, 0.83, 0.9}
+\definecolor{byzantium}{rgb}{0.44,0.16,0.39}
+\definecolor{columbiablue}{rgb}{0.61, 0.87, 1.0}
+\definecolor{coolblack}{rgb}{0.0, 0.18, 0.39}
+\definecolor{deepjunglegreen}{rgb}{0.0, 0.29, 0.29}
+\definecolor{junglegreen}{rgb}{0.16, 0.67, 0.53}
+\definecolor{mangotango}{rgb}{1.0, 0.51, 0.26}
+\definecolor{steelblue}{RGB}{0, 69, 128}
+\definecolor{purduegold}{RGB}{203, 186, 150}
+
+%\definecolor{background}{RGB}{176,213,255}
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{black}{rgb}{0.0, 0.0, 0.0}
+%\pagecolor{background}
+
+\color{black}
+
+\newcommand{\smallspace}{\vspace{2mm}}
+% \newcommand{\ds}{\displaystyle}
+% see documentation for a0poster class for the size options here
+\let\Textsize\normalsize
+
+\def\LHead#1{\colorbox{steelblue}{\noindent{\textbf{\Huge\color{white} #1}}\bigskip}}
+\def\Title#1{\noindent{\textbf{\VeryHuge\color{steelblue} #1}}}
+\def\Subtitle#1{\noindent{\textbf{\Huge\color{steelblue} #1}}}
+
+\newtheorem{theorem}{Theorem}
+
+\usepackage[most]{tcolorbox}
+
+\tcbset {
+  base/.style={
+    arc=0mm, 
+    bottomtitle=0.5mm,
+    boxrule=0mm,
+    colbacktitle=purduegold!70,%blue!10!white, 
+    coltitle=black, 
+    fonttitle=\bfseries, 
+    left=0.5in,
+    leftrule=2mm,
+    right=1in,
+    title={#1},
+    fonttitle=\bfseries\Large, 
+    toptitle=0.75mm, 
+  }
+}
+
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+\newtcolorbox{mainbox}[1]{
+  colframe=purduegold!80!black, 
+  base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+  colframe=black!30!white,
+  base={#1}
+}

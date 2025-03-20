@@ -1,0 +1,437 @@
+
+% \maketitle
+
+\section{Section 2.4, Higher-Order Correction of SLLN}
+
+This section presents the following higher-order correction of SLLN of a branching random walk where each individual walker is simple and environment is symmetric.
+
+\begin{tcolorbox}[colback=gray!10,colframe=black]
+Theorem 4 (Zeitouni 2020, p.9). Under Assumptions A1-A3, we have
+
+\[
+E M_n=n x^*-\frac{3}{2 I^{\prime}\left(x^*\right)} \log n+O(1)
+\]
+\end{tcolorbox}
+
+\subsection{Ballet Theorem}
+
+The proof starts from this ballet theorem:
+
+\begin{tcolorbox}[colback=gray!10,colframe=black]
+Theorem 5 (Ballot theorem). Let $X_i$ be iid random variables of zero mean, finite variance, with $P\left(X_1 \in(-1 / 2,1 / 2)\right)>0$. Define $S_n=\sum_{i=1}^n X_i$. Then, for $0 \leq k \leq \sqrt{n}$,
+
+\[
+P\left(k \leq S_n \leq k+1, S_i>0,0<i<n\right)=\Theta\left(\frac{k+1}{n^{3 / 2}}\right)
+\]
+
+and the upper bound in (2.5.2) holds for any $k \geq 0$.
+Here, we write that $a_n=\Theta\left(b_n\right)$ if there exist constanst $c_1, c_2>0$ so that
+
+\[
+c_1 \leq \liminf _{n \rightarrow \infty} \frac{a_n}{b_n} \leq \limsup _{n \rightarrow \infty} \frac{a_n}{b_n} \leq c_2 .
+\]
+
+
+Theorem 5 is plausible in that its continuous limit is easily proved by using Brownian motion and the reflection principle, see [Br78], or Bessel processes, see [Ro11].
+\end{tcolorbox}
+
+The problem encountered by the reader is how to explain this ballot theorem in terms of Brownian bridge. Here we present the detailed reasoning.
+
+\begin{tcolorbox}[title=Intuition of Ballot Theorem via Brownian Meander,colback=yellow!10,colframe=black,breakable]
+The ballot theorem in the continuous limit an be viewed as a statement about the Brownian Meander. (See Revuz, Yor 1991, Sect. XII, Exercise 4.18. Also see Wikipedia.) The Brownian Meander is intuitive Brownian Motion contitioned on starying positive for all time. The probability of $P(B_t > 0, t \in [0,1]) = 0$, so the Brownian Meander is constructed a little differently, as
+\[
+W_t^{+}:=\frac{1}{\sqrt{1-\tau}}\left|W_{\tau+t(1-\tau)}\right|, \quad t \in[0,1] .
+\]
+``In words, let $\tau$ be the last time before 1 that a standard Brownian motion visits $\{0\}$. ( $\tau<1$ almost surely.) We snip off and discard the trajectory of Brownian motion before $\tau$, and scale the remaining part so that it spans a time interval of length 1.''(Wikipedia.)
+
+The Brownnian Meander has law
+\[
+P\left(W_1^{+} \in d y\right)=y \exp \left\{-y^2 / 2\right\} d y, \quad y>0,
+\]
+, which is computed from the law of BM.
+
+Now, we connect the Brownian Meander to the ballot theorem.
+\begin{align*}
+    &P\left(k \leq S_n \leq k+1, S_i>0,0<i<n\right) \\
+    &=P\left(k \leq S_n \leq k+1, S_i>0,0<i<n, S_n=0\right)\\
+    &=P\left(k/ \sqrt{n} \leq S_n / \sqrt{n} \leq (k+1) / \sqrt{n}, S_i>0,0<i<n, S_n=0\right)\\
+    &\sim P\left(k/ \sqrt{n} \leq W_1^{+} \leq (k+1) / \sqrt{n}\right)\\
+    &=\int_{k / \sqrt{n}}^{(k+1) / \sqrt{n}} y \exp \left\{-y^2 / 2\right\} d y\\
+    &=\Theta\left(\frac{k+1}{n}\right) .
+\end{align*}
+
+This is{ \color{red} inconsistent} with the ballot theorem. This points needs further clarification. 
+
+\end{tcolorbox}
+
+For now, let's at least understand the law of Brownian Meander.
+
+\begin{tcolorbox}[breakable,title=Law of Brownian Meander,colback=yellow!10,colframe=black,]
+    The law of Brownian Meander is given by
+    \[
+    P\left(W_1^{+} \in d y\right)=y \exp \left\{-y^2 / 2\right\} d y, \quad y>0.
+    \]
+    The proof relies on the reflection principle of Brownian motion, see (Durett, 2010, Example 7.4.2.) and read the intuitie proof given after example. The reflection principle (in the simplest form) states that
+    \begin{tcolorbox}[title=,colback=gray!10,colframe=black]
+        Let $a>0$ and let $T_a=\inf \left\{t: B_t=a\right\}$. Then
+        \[
+            P_0\left(T_a<t\right)=2 P_0\left(B_t \geq a\right).
+            \]
+    \end{tcolorbox}
+%     Another intuitive version of the reflection principle is 
+%     \[
+% P_x\left(B_t \leq y, \text { path hits } 0\right)=P_{-x}\left(B_t \leq-y\right).
+% \]
+
+    Now, we prove the law of Brownian Meander. The statement we are going to prove is, for $0 \le s \le t \le 1$, 
+    \[
+    p(s, x, t, y)=\left[\varphi_{t-s}(y-x)-\varphi_{t-s}(y+x)\right] \frac{\Phi_{1-t}(0, y)}{\Phi_{1-s}(0, x)}
+    \]
+    which is the joint (transition) probability of a Brownian meander, at position and time $(x,s)$ and $(y,t)$, respectively. Here, $\varphi_t(x)=\frac{1}{\sqrt{2 \pi t}} \exp \left\{-x^2 / 2t\right\}$ is the density of Brownian motion at time $t$ and $\Phi_t(x,y)$ is the cumulative distribution function.
+
+    % Proceed in 4 steps:
+
+    % \begin{enumerate}
+    %     \item 
+    %     \[
+    %     P_x\left(B_t \leq y, \min _{0 \leq u \leq t} B_u>0\right)=P_x\left(B_t \leq y\right)-P_x\left(B_t \leq y,\text{ path hits }0\right).
+    %     \]
+    %     \item By the reflection principle,
+    %     \[
+    %     P_x\left(B_t \leq y, \text{ path hits } 0\right)=P_{-x}\left(B_t \leq -y\right).
+    %     \]
+    %     \item Hence,
+    %     \[
+    %     P_x\left(B_t \leq y, \min _{0 \leq u \leq t} B_u>0\right)=\int_{-\infty}^y \varphi_t(z-x)\,dz-\int_{-\infty}^{-y} \varphi_t(z+x)\,dz.
+    %     \]
+    %     \item Differentiating with respect to $y$ yields the density:
+    %     \[
+    %     P_x\left(B_t \in dy, \min _{0 \leq u \leq t} B_u>0\right)  = \varphi_t(y-x)-\varphi_t(y+x).
+    %     \]
+    % \end{enumerate}
+
+    % Next, we justify the two ratios.
+
+    The first part is from ths fact
+        \[
+        P_x\left(B_t \in dy, \min _{0 \leq u \leq t} B_u>0\right)  = \varphi_t(y-x)-\varphi_t(y+x).
+        \]
+    For proof, see (Ito and McKean, 1996, p. 30, Problem 7). It is shown in (Belkin 1972, page 61) that the process is continuous, non-homogeneous Markov process. 
+    {\color{blue} The proof of this part is not direct application of the reflection principle in its simplest form. There is reflection in proof of the joint density of position and extremum, Problem 1.}
+
+    The second part is regarding the ratio of the two densities. 
+
+    {\color{red} It is currently not clear to me why this ratio is needed.}
+
+    The law
+    \[
+        P\left(W_1^{+} \in d y\right)=y \exp \left\{-y^2 / 2\right\} d y, \quad y>0
+    \]
+    is a easy consequence of the formula we have above.
+\end{tcolorbox}
+
+% We recall the proof of the reflection principle.
+% \begin{tcolorbox}[title=Proof of Reflection Principle, colback=gray!10,colframe=black,breakable]
+%     Follow Durett as in the last box. We explain in simpler words the proof of the equality $P_0\left(T_a<t, B_t>a\right)=\frac{1}{2} P_0\left(T_a<t\right)$ (eqn. (7.4.5)), via Strong Markov Inequality.
+
+%     For any $0 < s < t$, we have by symmetry $ E_a 1(B_t > a) = 1/2 $
+%     , and for any random variable $Y_t$, the Markov Property states that $E_0 [Y_t \circ \theta_s | \mathcal{F}_s] = E_{B_s} [Y_{t-s}]$. The strong Markov property lets us condition on a stopping time; take $S = T_a \wedge t$. Then the strong Markov property reads $E_0 [Y_t \circ \theta_S | \mathcal{F}_S] = E_{B_S} [Y_{t-S}]$.
+
+%     Write $\omega(t) = B_t(\omega)$ and $\theta_s(\omega)(t) = \omega(t-s)$.
+
+%     Define our $Y$ as $Y_s(\omega) = 1(s < t, \omega(t - s) > a)$. Then $Y_S(\theta_S (\omega)) = 1(S < t, \omega(t) > a)$. We have the following:
+
+%     \begin{itemize}
+%         \item $E_0 [Y_S \circ \theta_S | \mathcal{F}_S] = E_{B_S} [Y_{S}]$
+%         \item $E_a Y_s = E_a 1(s < t, B_{t - s} > a) = 1/2$ if $\{s < t\}$.
+%         \item On $\{S < t\}$, we have $B_S = a$.
+%     \end{itemize}
+%     Hence
+%     \begin{align*}
+%         P_0(T_a < t, B_t > a)
+%         &= E_0 [Y_t \circ \theta_S] \\
+%         &= E_0 [Y_t \circ \theta_S; S < t] \\
+%         &= E[E_0 [Y_t \circ \theta_S | \mathcal{F}_S] ; S < t]\\
+%         &= E[E_{B_S} [Y_{S}] ; S < t]\\
+%         &= E[E_a [Y_{S}] ; S < t]\\
+%         &= 1/2 \, P_0(B_t > a).
+%     \end{align*}
+% \end{tcolorbox}
+
+Note: The application of Reflection Principle can be seen in proving the law of Maximum of Brownian Motion. For reference, see (Convergence of Probability Measure, eqn. (8.20)).
+
+(Durrett, Iglehart and Miller 1977) gives good review of Brownian meander and Brownian excursion.
+
+The Ballett theorem cited by Zeitouni is
+\begin{theorem}[\cite{addario-berryBallotTheorems2008}, Theorem 1]
+    For any $A$ which is acceptable for $X$, there is $C>0$ depending only on $X$ and A such that for all $n$, for all $k>0$,
+
+\[
+\mathbf{P}\left\{k \leq S_n<k+A, S_i>0 \forall 0<i<n\right\} \leq \frac{C \max \{k, 1\}}{n^{1 / 2}},
+\]
+and for all $k$ with with $0<k \leq \sqrt{n}$,
+\[
+\mathbf{P}\left\{k \leq S_n<k+A, S_i>0 \forall 0<i<n\right\} \geq \frac{\max \{k, 1\}}{C n^{1 / 2}}.
+\]
+\end{theorem}
+
+
+
+
+\subsection{Proof of Theorem 4}
+
+Proceed with Theorem 4. %Define $a_n = x^* n - \frac{3}{2 I'(x^*)} \log n$. 
+We follow [ABR09] since it provides much more motivation and background. In this section we write a sketch of main ideas with moderate details. 
+
+The proof depends on the previous asymptotic large deviation estimate
+\begin{tcolorbox}[colback=gray!10,colframe=black, breakable]
+    THEOREM 1 (Bahadur and Rao [5]). Let $S=\left\{S_n\right\}_{n \in \mathbb{N}}$ be a random walk with step size $X$, and define $\Lambda$ and $D_{\Lambda}^o$ as above. Choose any $t \in D_{\Lambda}^o$ with $t<0$ and any function $g(n)$ tending to plus infinity with $n$; then if $X$ is nonlattice then for any $a \in R$ with $a \leq \sqrt{n} / g(n)$,
+
+\[
+\mathbf{P}\left\{S_n \leq \Lambda^{\prime}(t) n-a\right\}=(1+o(1)) \cdot \frac{e^{a t-n\left(t \Lambda^{\prime}(t)-\Lambda(t)\right)}}{\sqrt{\Lambda^{\prime \prime}(t) \cdot 2 \pi n}}
+\]
+
+uniformly over $a$ in the above range. Furthermore, if $X$ is a lattice random variable with period $p$, then for any a which is a multiple of $1 / p$ and for which $a \leq \sqrt{n} / g(n)$, the same result holds.
+\end{tcolorbox}
+
+\subsubsection{Step 1: Independent Random Walks}
+
+We first consider independent random walkers, and then add branching structure as a correction. See [ABR09, p. 1051]. The result for independent random walkers is
+
+\[
+\mathbf{E}\left\{M_n^{\mathrm{ind}}\right\}=\Lambda^{\prime}(t) n-\frac{\log n}{2 t}+O(1) =: m^* + O(1).
+\]
+
+Remark. The first-order term should be $E[M_n^{\text{ind}}] = n (x^* + o(1))$, where $I(x^*) = \log E B$, since $E[B^n]e^{-n I(x^*)} \sim 1$. The rate function is given by the lagendre transform of $\Lambda(t) = \log E e^{tB}$, which is $I(x) = \sup_{t} (tx - \Lambda(t))$. For differentiable $I(x)$, have $x^* = \Lambda'(t^*)$, so $I(x^*) = t \Lambda'(t^*) - \Lambda(t^*)$. 
+Also note, tha the $\log n / 2t$ term is from the $\sqrt{n}$ on the denominator of the large deviation estimate.
+
+Choose $t = t^*$. One one side, for $a = o(\sqrt{n})$ and $a > 0$,
+\begin{align*}
+    \begin{aligned}
+    \mathbf{P}\left\{M_n^{\text {ind }} \leq \Lambda^{\prime}(t) n-a\right\} & \leq(1+o(1))\left\lfloor(\mathbf{E} B)^n\right\rfloor \cdot \frac{e^{a t-n\left(t \Lambda^{\prime}(t)-\Lambda(t)\right)}}{\sqrt{\Lambda^{\prime \prime}(t) \cdot 2 \pi n}} \\
+    & =(1+o(1)) \frac{\left\lfloor(\mathbf{E} B)^n\right\rfloor}{(\mathbf{E} B)^n} \frac{e^{a t}}{\sqrt{\Lambda^{\prime \prime}(t) \cdot 2 \pi n}} \\
+    & =e^{a t-(\log n) / 2-O(1)},
+    \end{aligned}
+\end{align*}
+where in the first step we used independence of the random walkers, and in the second step we used $t \Lambda^{\prime}(t) - \Lambda(t) = \log E B$.
+
+On the other side, to bound the minimum from above, we have for $a = o(\sqrt{n})$ and $a < 0$,
+\begin{align*}
+    \begin{aligned}
+    \mathbf{P}\left\{M_n^{\text {ind }}>\Lambda^{\prime}(t) n-a\right\} & =\left(1-\mathbf{P}\left\{S_n \leq \Lambda^{\prime}(t)-a\right\}\right)^{\left\lfloor(\mathbf{E} B)^n\right\rfloor} \\
+    & =\left(1-(1+o(1)) \frac{e^{a t-(\log n) / 2-O(1)}}{(\mathbf{E} B)^n}\right)^{\left\lfloor(\mathbf{E} B)^n\right\rfloor} \\
+    & \leq \exp \left\{-(1+o(1)) e^{a t-(\log n) / 2-O(1)}\right\}
+    \end{aligned}
+\end{align*}
+
+Intuition. In the upper bound, increasing $a$ makes stricter bound, so the probability should decrease. This is consistent since $a t < 0$. Similarly, in the lower bound, decreasing $a$ (hereby increase its absolute value) makes the bound stricter, so the probability should decrease. This is consistent since in this case $a t > 0$.
+
+Hence, the probability mass of $M_n^{\text{ind}}$ is concentrated when $a = \log n / 2$, i.e. $M_n^{\text{ind}} = \Lambda^{\prime}(t) n - \log n / 2$. Hence,
+\[
+\mathbf{E}\left\{M_n^{\text{ind}}\right\} = \Lambda^{\prime}(t) n - \frac{\log n}{2t} + O(1).
+\]
+% {\color{red} Why do we still need a Chernoff bound?}
+To prove the upper bound, note that for $a = \log n / 2t + \delta$, where $\delta > 0$, makes $P(M_n^{\text{ind}} \geq \Lambda^{\prime}(t) n - \log n / 2t - \delta)$ large.
+\begin{align*}
+    E M_n &\ge (\Lambda'(t) - a) P(M_n^{\text{ind}} \ge \Lambda'(t) n - a) \\
+    &\ge (\Lambda'(t) n - (\log n / 2t + \delta)) (1 - \epsilon)
+\end{align*}
+To prove the lower bound, however, the result above is not enough. To see this, we try to compute
+\begin{align*}
+    E M_n &\le n P(M_n^{\text{ind}} \ge \Lambda'(t) n - a) + (\Lambda'(t) n - a) 
+\end{align*}
+where, for $a = \log n / 2t - \delta$, the first probability does not decay fast enough in $n$ to make this term vanish. Hence, we need a Chernoff bound to make the probability decay faster. First compute
+\[
+p = P(S_n < \Lambda'(t) n - \log n / 2t + O(1)) = e^{-n I(x) + o(n)}
+\]
+Recall Chernoff bound for $\operatorname{Binomial}(N, p)$ says
+\[
+\mathbf{P}\{X \leq(1-\delta) N p\} \leq \exp \left(-\delta^2 N p / 2\right),
+\]
+Take $\delta = 1$, $N = \left\lfloor(\mathbf{E} B)^n\right\rfloor$, and $p = e^{-n I(x) + o(n)}$ to get
+\[
+\mathbf{P}\{M_n \geq \Lambda'(t) n - \log n / 2t + O(1)\} \leq \exp \left(-\left\lfloor(\mathbf{E} B)^n\right\rfloor e^{-n I(x) + o(n)} / 2\right).
+\]
+Indeed, by appropriate choice of $x$, we can make the right-hand side decay exponentially in $n$.
+
+
+\subsubsection{Step 2: Branching Structure}
+Let $\mathscr{S}$ be the event of survival. Theorem 4 can now be written as
+\[
+\mathbf{E}\left\{M_n \mid \mathscr{S}\right\}=m^*-\frac{\log n}{t}+O(1).
+\]
+We first try to understand the explanation given in the end fo section 1.2. 
+
+We say a walk (1-ary subtree) is \textit{leading} if $S_i \geq S_n \cdot(i / n)$ for all $i=1, \ldots, n$.
+
+
+
+\begin{tcolorbox}[title=,colback=gray!10,colframe=black,breakable]
+    By this method, we will straightforwardly be able to show that for all $v \in N_n$ and for values $m \leq \mathbf{E} M_n$ that are not too far from the breakpoint $m^*$,
+
+\[
+\mathbf{P}\left\{S_v \leq m \text { and } v \text { is a leading node }\right\}=\Theta\left(\frac{\mathbf{P}\left\{S_v \leq m\right\}}{n}\right)
+\]
+
+(We shall make this more formal in Section 3.) It follows that for such $m$,
+(12)
+
+\[
+\begin{aligned}
+\mathbf{E}\left\{\mid\left\{v \in N_n, S_v \leq m, v \text { is leading }\right\} \mid\right\} & =\Theta\left(\frac{\mathbf{E}\left\{\left|\left\{v \in N_n, S_v \leq m\right\}\right|\right\}}{n}\right) \\
+& =\Theta\left(\frac{(\mathbf{E} B)^n}{n} \cdot \mathbf{P}\left\{S_v \leq m\right\}\right)
+\end{aligned}
+\]
+\end{tcolorbox}
+Note that, by the \textit{rotation argument}, i.e. arguments that use cyclic permutation of the walk in the style of some Ballot theorems, finding a leading node approximately adds a factor of $1/n$ to the probability.
+\drawpicture
+
+\begin{tcolorbox}[title=,colback=gray!10,colframe=black,breakable]
+so we are in fact asserting that $\mathbf{E} M_n$ is within $O(1)$ of the smallest value $m$ for which, for nodes $v$ at depth $n$ in $T, \mathbf{P}\left\{S_v \leq m\right\} \geq \color{brown}((\mathbf{E} B)^n / n)^{-1}$. (corrected typo)
+\end{tcolorbox}
+
+We do a heuristic calculation using Theorem 1. Let $m = \Lambda'(t) n - a$, where $a = b \log n / t$ for some $b$. Then, we have
+\begin{align*}
+    \mathbf{P}\left( S_n \ge \Lambda'(t) - a\right) 
+    &\simeq \frac{e^{a t - n(t \Lambda'(t) - \Lambda(t))}}{\sqrt{\Lambda''(t) 2 \pi n}} \simeq \frac{n}{e^{n I(x^*)}}
+\end{align*}
+Cancel,
+\[
+e^{a t} \simeq n^{3 / 2} + O(1) \implies a = \frac{3}{2} \frac{\log n}{t}.
+\]
+
+\begin{tcolorbox}[title=,colback=gray!10,colframe=black,breakable]
+It follows immediately by Theorem 1 that $m$ is within $O(1)$ of $m^*+(\log n) / t$, in accordance with (7) and (9). We may then view the term $(\log n) / t$ as the correction required in order to find a leading node.
+\end{tcolorbox}
+
+Thus, the speed of $M_n$ is $x^* n - \frac{3 \log n}{2t} = m^* - \frac{\log n}{t}$.
+
+\begin{proof}[A slightly more precise argument]
+    Recall Theorem~1. With our choice of $t<0$ such that $t \Lambda'(t) - \Lambda(t) = \log E B$, we have $I(x^*) = t \Lambda'(t) - \Lambda(t)$. We see that as $m = \Lambda'(t) n - a$ decreases, $P(S_n \le m)$ decreases to $0$. We want to find the smallest $m$ such that $P(S_n \le m) \geq e^{- n I(x^*)} n$. A direct cancellation yields
+    \[
+        C (1 + o(1)) e^{a t - \log n / 2} \geq n
+    \]
+    Take logarithm,
+    \[
+        a t - \log n / 2 \geq \log n + O(1)
+    \]
+    which gives $a = 3 \log n / 2t$. This is the leading order term. The correction term is $O(1)$.
+\end{proof}
+
+\subsection{Generalizability to BRWRE}
+
+Mar 9 2025. The cyclic argument is likely not generalizable to BRWRE directly, because the cyclic argument relies on the fact that the random walk is spatially homogeneous. However, under assumptions like iid environments, one might still obtain similar results. The cyclic argument at its heart is purely combinatorial acting on deterministic instances of paths. 
+
+\subsection{Literature Review}
+
+\subsubsection{Starting Point: Homogeneous BRW}
+
+See \cite[Sect.~1]{addario-berryMinimaBranching2009}, and \cite[Sect.~1]{fangBranchingRandom2012}
+
+\textbf{From SLLN to logarithmic correction.}
+
+\begin{enumerate}
+\item The starting point is the LLN for minimum displacement $M_n$ of a branching random walk after $n$ steps, $M_n / n \to \gamma \quad \text{a.s.}$, proven by Hammersley(1974), Kingman(1975), and Biggins(1976). Hammersley initiated this line of research, leaving question about lower-order corrections of $M_n - \gamma n$ open. 
+
+\item \autocite{mcdiarmidMinimalPositions1995} extends the result by showing for some $c_1 < \infty$, 
+\[
+\limsup _{n \rightarrow \infty} \frac{1}{\log n} \inf _{|u|=n} V(u) \leq c_1.
+\]
+
+\item Exact value of constants were founded by \autocite[Theorem~1.2]{hushiMinimalPosition2009}, under some supercriticality assumptions,
+\[
+\begin{aligned}
+& \limsup _{n \rightarrow \infty} \frac{1}{\log n} \inf _{|u|=n} V(u)=\frac{3}{2} \quad \text { a.s., } \\
+& \liminf _{n \rightarrow \infty} \frac{1}{\log n} \inf _{|u|=n} V(u)=\frac{1}{2} \quad \text { a.s., } \\
+& \lim _{n \rightarrow \infty} \frac{1}{\log n} \inf _{|u|=n} V(u)=\frac{3}{2} \quad \text { in probability. }
+\end{aligned}
+\]
+Thus, their results gives the $\frac{3}{2t} \log n$ correction term, in probability. They additionally provided the fluctuation estimates. As remarked in their paper, \autocite[p.~744]{hushiMinimalPosition2009}, this is in contrast with known results of Bramson [1978] and Dekking and Host [1991] stating that, for a class of branching random walks, $\frac{1}{\log \log n} \inf _{|u|=n} V(u)$ converges almost surely to a finite and positive constant. \followup {What is the class of BRW for which this holds?}
+
+\item  This was answered by \autocite{addario-berryMinimaBranching2009}. They provided the following result:
+\[
+M_n=\Lambda'(t) n-\frac{3}{2t}  \log n+O_P(1), \quad I(x^*) = t \Lambda'(t) - \Lambda(t) = \log E B,
+\]
+where $I(x)$ is the rate function of single particle's speed, and $B$ is the offspring distribution. They also showed that under suitable assumptions, that
+the sequence of the minimum is tight around its mean. 
+\end{enumerate}
+
+\textbf{Tightness and Convergence in Law of the extremum.} 
+
+\begin{enumerate}
+    \item In \autocite{addario-berryMinimaBranching2009}, they showed that, under suitable assumptions, the sequence of the minimum is tight around its mean. 
+    \item \autocite{aidekonConvergenceLaw2013} Through recursive equations, \cite{bramsonTightness2009} obtained the tightness of $M_n$ around its median, when assuming some properties on the decay of the tail distribution. In the particular case where the step distribution is log-concave, the convergence in law of $M_n$ around its median was proved earlier by Bachmann in 2000. 
+    \item In \autocite{aidekonConvergenceLaw2013}, it is shown that $M_n$ is tight around its mean, and converges in law to a Gumbel distribution. 
+    They introduce the tool of \textit{derivative martingale}, 
+    \[
+    D_n:=\sum_{|x|=n} V(x) \mathrm{e}^{-V(x)}.
+    \]
+    \item In \autocite{bramsonConvergenceLaw2016}, ideas from \autocite{bramsonConvergenceLaw2016a} is used, and they give a shorter proof of \autocite{aidekonConvergenceLaw2013}. ``Instead of spine methods and a careful analysis of the renewal measure for killed random walks, our approach
+    employs a modified version of the second moment method that may be of independent interest.''
+
+
+\end{enumerate}
+
+
+
+
+
+\textbf{Analogous results for BBM.} 
+
+\begin{enumerate}
+    \item \cite{bramsonMaximalDisplacement1978} gives the first result of this kind for Branching Brownian Motion. 
+    Let $M_t=\max _{u \in \mathcal{N}_t} Y_u(t)$ be the position of the maximal particle at time $t$, and denote by $m(t)$ the median position of $M_t$. Using a connection between the maximal displacement and the F-KPP equation, Bramson showed that as $t \rightarrow \infty$,
+\[
+    m(t)=\sqrt{2} t-\frac{3}{2 \sqrt{2}} \log t+O(1)
+\]
+
+    \item Bramson's proof was simplified by \autocite{robertsSimplePath2013}, who also proved that almost surely
+\[
+    \liminf _{t \rightarrow \infty} \frac{M_t-\sqrt{2} t}{\log t}=-\frac{3}{2 \sqrt{2}}, \quad \limsup _{t \rightarrow \infty} \frac{M_t-\sqrt{2} t}{\log t}=-\frac{1}{2 \sqrt{2}} .
+\]
+    \item Another proof using PDE techniques is given by \autocite{lauNonlinearDiffusion1985}.
+
+    \item \autocite{lalleyConditionalLimit1987} gives tightness and convergence in law of the maximal position.
+\end{enumerate}
+
+\subsubsection{CLT of the body of particles}
+
+\begin{tcolorbox}[title=,colback=gray!10,colframe=black,breakable]
+    Theorem 4. \autocite{bigginsCentralLimit1990} In the homogeneous process suppose that $E N \log N<\infty$ and $\nu$ is in the domain of attraction of a stable law with exponent $\alpha$ (and characteristic function $\left.g_\alpha(u)\right)$, so that for suitable $\left\{a_n, b_n\right\}$,
+\[
+\mathrm{e}^{\mathrm{i} u a_n} \phi\left(u / b_n\right)^{n+1} \rightarrow g_\alpha(u)
+\]
+
+then
+
+\[
+\mathrm{e}^{\mathrm{i} u a_n} \Psi^{(n+1)}\left(u / b_n\right) \rightarrow g_\alpha(u) W \quad \text { a.s. }
+\]
+
+where the null set can be taken to be independent of $u$ and the convergence is then uniform in $u$, on compact sets.
+
+(where $\Phi$ is chf of point process of particle positions.)
+\end{tcolorbox}
+
+
+\subsubsection{Random Environments}
+
+\begin{tcolorbox}[title=,colback=blue!10,colframe=black,breakable]
+We note that existing literature on BRWRE all concern the randomized branching distributions, either temporally inhomogeneous or spatially inhomogeneous. 
+This is different from the random environment in the sense of RWRE, which we currently try to understand in branching setting.
+\end{tcolorbox}
+
+\begin{enumerate}
+    \item \autocite{bramsonTightness2009} 
+    \item \autocite{fangTightnessMaxima2012}
+    \item \autocite{fangBranchingRandom2012}
+\end{enumerate}
+
+\subsubsection{Gaussian Free Field}
+
+\subsubsection{Super Brownian Motion}
+
+\subsubsection{Parabolic Anderson Model}
+
+\subsubsection{Spin Glass}
+

@@ -1,0 +1,1140 @@
+\section{Itô Calculus}
+
+\subsection{Development of Ito Integral}
+
+Let's first visit some basic notions of integration and see why we cannot directly apply them to Brownian motion. First, consider the Riemann-Stieltjes integral. Let $f, g: [0,1] \to \mathbb{R}$ be continuous functions. Then the Riemann-Stieltjes integral is defined as
+\[
+	\int _0^1 f(s) dg(s) = \lim_{n \to \infty} \sum_{k=0}^{n-1} f(s_k) \left( g(s_{k+1}) - g(s_k) \right)
+\]
+where $0 = s_0 < s_1 < \ldots < s_n = 1$ is a partition of $[0,1]$. The limit exists if $f$ is continuous and $g$ is of bounded variation. In this way, it is possible to define $\int _0^1 B_s dg(s)$, where $B_s$ is Brownian motion and $g$ is of bounded variation. We could also make sense of $\int _0^1 g(s) dB_s$ by the integration by parts formula.
+However, Brownian motion is not of bounded variation, so we cannot have a Riemann-Stieltjes integral $\int _0^1 B_s dB(s)$. Nevertheless, we have seen that the most important example we hope to define is $\int _0^t B_s dB_s$. 
+
+\subsubsection{Preliminary Notions of Stochastic Integration}
+
+\begin{definition}[Young's Integral]
+	Let $f, g: [0,1] \to \mathbb{R}$ be such that $f$ is Holder continuous of order $\alpha$ and $g$ is Holder continuous of order $\beta$, $\alpha + \beta > 1$. Then the Riemann sums $R_n$ converges to a quantity $\int _0^1 g d f$.
+\end{definition}
+\begin{remark}
+	This construction is actually quite powerful in the theory of fractional Brownian motion and rough paths, as long as one has enough regularity in the integrand.
+\end{remark}
+\begin{proof}
+	Consider dyadic partition of $[0,1]$, write $t^n_i = \frac{i}{2^n}$. Write $R_n$ for the Riemann sum using partition $(t^n_i)_{i=0}^{2^n}$.
+	We control the telescoping sum $R_n - R_{n-1}$:
+	\begin{align*}
+		R_n &= \sum_{i=0}^{2^n - 1} f(t^n_i) \left( g(t^n_{i+1}) - g(t^n_i) \right) \\
+		&= \sum_{i=0}^{2^{n} - 1} f(t^{n+1}_{2i}) \left( g(t^{n+1}_{2i+1}) - g(t^{n+1}_{2i}) \right) + f(t^{n+1}_{2i}) \left( g(t^{n+1}_{2i+2}) - g(t^{n+1}_{2i+1}) \right) \\
+		R_{n + 1} &= \sum_{i=0}^{2^{n+1} - 1} f(t^{n+1}_i) \left( g(t^{n+1}_{i+1}) - g(t^{n+1}_i) \right) \\
+		&= \sum_{i=0}^{2^{n}- 1} f(t^{n+1}_{2i}) \left( g(t^{n+1}_{2i+1}) - g(t^{n+1}_{2i}) \right) + f(t^{n+1}_{2i + 1} ) \left( g(t^{n+1}_{2i+2}) - g(t^{n+1}_{2i+1}) \right) \\
+		|R_{n+1} - R_n| &= \left| \sum_{i=0}^{2^n - 1} (f(t^{n+1}_{2i+ 1} ) - f(t^{n+1}_{2i})) \left( g(t^{n+1}_{2i+2}) - g(t^{n+1}_{2i+1}) \right) \right| \\
+		&\leq \sum_{i=0}^{2^n - 1} C_f |t^{n+1}_{2i+1} - t^{n+1}_{2i}|^{\alpha} C_g |t^{n+1}_{2i+2} - t^{n+1}_{2i+1}|^{\beta} \\
+		&= C (2^n) (2^{-n - 1})^{\alpha + \beta} \to 0
+	\end{align*}
+\end{proof}
+
+
+Unfortunately BM are $\alpha$-Holder continuous a.s. with $\alpha < \frac{1}{2}$ (see Note on BM, Sect.~3.4), so Young's integral does not apply to Brownian motion.
+
+Next, we follow the previous comment on Riemann-Stieltjes integral and try to define $\int _0^t B_s dB_s$ by integration by parts. We have
+
+
+\begin{definition}[Paley-Wiener-Zygmund Integral]
+	If $g$ is continuously differentiable, $g(0) = g(1) = 0$, define
+	\[
+		\int _0^1 g d B_s = - \int _0^1 g'(s) B(s) ds
+	.\] 
+	Then
+	\begin{enumerate}
+		\item $E\left( \int _0^1 g(s) d B_s  \right)  = 0$
+		\item (Ito's isometry) $E\left( \int _0^1 g(s) d B_s \right) ^2 = \int _0^1 g(s)^2 ds$
+	\end{enumerate}
+\end{definition}
+\begin{proof}
+	To prove 1,
+	\[
+		E\left( \int _0^1 g'(s) B_s ds  \right) 
+		= \int _0^1 g'(s) E(B_s) ds = 0
+	.\] 
+	To prove 2,
+	\begin{align*}
+		E\left( \int _0^1 g'(s) B_s ds \right) ^2
+		&= E\left( \int _0^1 \int _0^1 g'(s) g'(t) B_s B_t ds dt \right)  \\
+		&= \int _0^1 \int _0^1 g'(s) g'(t) E(B_s B_t) ds dt \\
+		\intertext{using covariance formula for BM,}
+		&= \int _0^1 \int _0^1 g'(s) g'(t) (s \wedge t) ds dt \\
+		&= \int _0^1 g'(t) \left(\int _0^t g'(s) (s \wedge t) ds + \int _t^1 g'(s) (s \wedge t) ds \right) dt \\
+		&= \int _0^1 g'(t) \left(\int _0^t g'(s) s ds + t \int _t^1 g'(s) ds \right) dt \\
+		\intertext{since $g(0) = g(1) = 0$,}
+		&= \int _0^1 g'(t) \left(g(t) t - \int _0^t g(s) ds + t\left( g(1) - g(t) \right) \right) dt \\
+		&= - \int _0^1 g'(t) \int _0^t g(s) ds dt \\
+		&= - \int _0^1 g'(t) \int _0^1 g(s) 1_{[0,t]}(s) ds dt \\
+		\intertext{change order of integration,}
+		&= - \int _0^1 g(s) \int_0^1 g'(t) 1_{[0,t]}(s) dt ds \\
+		&= - \int _0^1 g(s) \int_s^1 g'(t) dt ds \\
+		&= \int _0^1 g^2(s) ds
+	.\end{align*}
+\end{proof}
+
+This gives preliminary properties of the stochastic integral we expect. It can be useful to gather intuition from the Paley-Wiener-Zygmund integral. However, this is still not powerful enough to define $\int _0^t B_s dB_s$.
+
+\subsubsection{Integral wrt Brownian Motion}
+
+We want to define  $\int _0^t B_s d B_s$.
+Recall that $Q_n = \sum_{k=0}^{n-1} \left( B_{t_{k+1}^{(n)}} - B_{t_{k}^{(n)}} \right)^2 \to  t$ in $L^2$ when $\Delta_n \to  0$. This can be directly verified from the covariance for BM:
+\[
+	E Q_n = 
+	\sum_{k=0}^{n-1} E B_{t_{k+1}^{(n)}}^2 + E B_{t_{k}^{(n)}}^2 - 2 EB_{t_{k+1}^{(n)}}B_{t_{k}^{(n)}}
+	=
+	\sum_{k=0}^{n-1} t_{k+1}^{(n)} + t_{k}^{(n)} - 2 t_{k}^{(n)} = t
+.\] 
+The limit of $Q_n$ is the \textit{quadratic variation} process $\left\langle B \right\rangle _t = t$.
+
+Let $0 \le  \lambda \le 1$, and set $\sigma_k^{(n)} = (1 - \lambda) t_k^{(n)} + \lambda t_{k+1}^{(n)}$. When $\lambda = 0$, it is left end point; $\lambda = 1$ is right end point; $\lambda = \frac{1}{2}$ is middle point.
+
+
+\begin{theorem}(Existence of stochastic integral)
+
+	Let $R_n = \sum_{k=0}^{n-1} B_{\sigma_k^{(n)}} \left( B_{t_{k+1}^{(n)}} - B_{t_k^{(n)}} \right) $. Then $R_n \to \frac{1}{2} B_t^2 + (\lambda - \frac{1}{2}) t$ in $L^2$.
+\end{theorem}
+\begin{remark}
+	For classical Riemann integral, the choice of sample point $\sigma_k$ inside each interval in the partition is irrelevant. However, for stochastic integration, the position of $\sigma_k$, parameterized by $\lambda$, is relevant. 
+\end{remark}
+
+If $\lambda = 0$, then $R_n \to \frac{1}{2} B_t^2 - \frac{1}{2} t$, a martingale. It is called the \textbf{Ito integral}:
+\[
+	\int _0^t B_s dB_s = \frac{1}{2}\left( B_t^2  - t\right) 
+.\] 
+If $\lambda = \frac{1}{2}$, this is called the \textbf{Stratonovich Integral}:
+\[
+	\int _0^t B_s \circ d B_s = \frac{1}{2} B_t^2
+.\] 
+
+\begin{proof}
+	Consider the identity
+	\begin{align*}
+		R_n &= \sum_{k=0}^{n-1} B_{\sigma_k^{(n)}} \left( B_{t_{k+1}^{(n)}} - B_{t_k^{(n)}} \right)  \\
+		&= \frac{1}{2} \left( \sum_{k=0}^{n-1} B_{t_{k+1}} - B_{t_k} \right) ^2 - \frac{1}{2} \sum_{k=0}^{n-1} \left( B_{t_{k+1}} - B_{t_k} \right) ^2 \\
+		&+ \sum_{k=0}^{n-1} \left( B_{\sigma_k} - B_{t_k} \right) ^2 + \sum_{k=0}^{n-1} \left( B_{t_{k+1}} - B_{\sigma_k} \right) \left( B_{\sigma_k} - B_{t_k} \right) \\
+		&= \frac{1}{2}B_t^2 - \frac{1}{2} I + II + III
+	.\end{align*}
+	We have, by the fact that $Q_n \to  t$ in $L^2$,
+	\[
+		- \frac{1}{2} I \to  - \frac{t}{2}
+	.\] 
+	\[
+		II \to  \lambda t
+	.\] 
+	Finally we verify that $III \to  0$,
+	Let $Y_k = \left( B_{t_{k+1}} - B_{\sigma_k} \right) \left( B_{\sigma_k} - B_{t_k} \right) $. Then $EY_k = 0$ since they are independent increments. Now note also, that $Y_k, Y_j$ are independent if $k \neq j$. Thus
+	\begin{multline*}
+		E| \sum_{k=0}^{n-1} Y_k |^2 
+		= \sum_{k=0}^{n-1} E|Y_k|^2
+		= \sum_{k=0}^{n-1} E\left( B_{t_{k+1}} - B_{\sigma_k} \right) ^2 E\left( B_{\sigma_k} - B_{t_k} \right) ^2
+		= \sum_{k=0}^{n-1} (t_{k+1} - \sigma_k) (\sigma_k - t_k)\\
+		= \sum_{k = 0}^{n - 1} \left( (1 - \lambda) (t_{k+1} - t_k) \right) \left( \lambda \left( t_{k+1} - t_k \right)  \right) 
+		\le \lambda (1 - \lambda) \Delta_n t
+	.\end{multline*} 
+	This goes to $0$ as $\Delta_n \to  0$.
+
+\end{proof}
+
+\begin{proof}[For Ito case]
+	\begin{align*}
+		R_n &= \sum_{k = 0}^{n - 1}B_{t_k}^{(n)} \left( B_{t_{k+1}^{(n)}} - B_{t_k^{(n)}} \right) \\
+		&= \sum - \frac{1}{2} (B_{t_{k+1}^{(n)}} - B_{t_k^{(n)}})^2 + \frac{1}{2} (B_{t_{k+1}^{(n)}}^2 - B_{t_k^{(n)}}^2) \\
+		&\to - \frac{1}{2} \left\langle B\right\rangle_t + \frac{1}{2} B_t^2\\
+		&= \frac{1}{2} B_t^2 - \frac{1}{2} t
+	 \end{align*}
+\end{proof}
+From this computation we clearly see that, the Riemann sums yield both the ordinary integral, and a correction term due to the quadratic variation of Brownian motion. For integral of functions with bounded variation, the quadratic variation vanish. Thus, the presence of correction term in the integral is a consequence of the \textit{roughness} of the integrand. In the theory we are going to develop, we only consider $L^2$ martingales, which have well-defined quadratic variation. In general the quadratic variation process is not necessarily deterministic. See below for precise definitions and examples. 
+
+\followup What does integral look like in rough path theory?
+
+
+
+\begin{remark}
+	With our example we have so called \textit{Itô isometry}:
+	\[
+		E\left( \int _0^t B_s d B_s \right) ^2 
+		= E \int _0^t |B_s|^2 d s
+	.\] 
+	To verify: RHS is $\int _0^t E B_s^2 ds = \int _0^t s ds = \frac{t^2}{2}$. LHS is $E\left( \frac{1}{4} \left( B_t^4 - 2 B_t^2 t + t^2 \right)  \right) = \frac{1}{4}\left( E B_t^4 - 2 E B_t^2 t + t^2 \right) = \frac{1}{4} \left( 3 t^2 - 2 t^2 + t^2 \right) = \frac{1}{2} t^2$.
+\end{remark}
+
+\begin{remark}
+	Look at $\{B_{t_k}\} _k$, it is a martingale on $\{\mathcal{F}_{t_k}\} $. Now $R_n = \sum_{k=0}^{n-1} B_{t_k} \left( B_{t_{k+1}} - B_{t_k} \right) $ is a martingale transform. 
+
+	\textbf{Martingales are discrete Ito integrals; Ito integrals are limits of martingale transforms.}
+\end{remark}
+
+Now we move on to general stochastic integral. We are going to use the above principle, to define Ito integrals on the space of \textit{simple processes}, just like how one defines Lebesgue integral for simple functions. One then uses a standard approximation procedure to extend the integration functional to the space of all progressively measurable processes.
+
+\subsubsection{General Stochastic Integral}
+
+
+To ensure that $\int_0^t X_s ds$ is a random variable, we neeed joint measurability of $X(s, \omega)$. Hence we define
+\begin{definition}
+	A stochastic process $X_t$ on a filtered probability space $\left(\Omega, \mathcal{F}, P, \{\mathcal{F}_t\}\right) $ is called \textit{progressively measurable} if
+	\begin{enumerate}
+		\item $(t, \omega) \mapsto X_t(\omega) = X(t, \omega)$ is $\mathcal{B}_{[0,t]} \times \mathcal{F}_t$-measurable, $\mathcal{B}$ Borel $\sigma$-algebra, for each $t>0$.
+		\item $X_t$ adapted to $\mathcal{F}_t$. (consequence of (1))
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item A continuous stochastic process ($t \mapsto X_t$ continuous, $X_t$ adapted to $\mathcal{F}_t$) is progressively measurable.
+		\item Progressive measurability is preserved under $L^2$ limits and in-probability limits. 
+		\item Any modification of a progressively measurable process is progressively measurable. By ``modification'' we mean any process that agrees with $X_t$ a.s. for all $t$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	(2). The process $X(t, \omega)$ is a measurable function on the product $\sigma$-algebra $\mathcal{B} \times \mathcal{F}$. A $L^2$ or in-probability limit in this space will preserve measurability (from measure theory). Now, $X$ is measurable on the product $\sigma$-algebra, not its completion; this means all sections $X_t(\omega)$ are measurable in $\mathcal{F}_t$. (Recall, a product of $\sigma$-algebras is the smallest $\sigma$-algebra that makes all projections measurable, and all slices are measurable, see Tao Exercise 1.7.18.)
+
+	(1) Joint measurability follows from the three facts:
+	\begin{enumerate}
+		\item For each $\omega$, $t \mapsto X_t(\omega)$ is continuous, hence Borel measurable.
+		\item For each $t$, $\omega \mapsto X_t(\omega)$ is $\mathcal{F}_t$-measurable.
+		\item Both $\mathcal{B}$ and $\mathcal{F}_t$ are countably generated.
+	\end{enumerate}
+
+	\todo{Write out the details of the proof.}
+
+	(3) Since $\mathcal{B}$ is countably generated, it suffices to consider measure-zero sets (where $X$ differs from its modification) in $\mathcal{F}_t$ for each generator. In case of continuous functions, we take dyadic $t$. This is bounded by a null set in the product measure.
+	\todo{check correctness}
+\end{proof}
+
+\begin{definition}
+	Let $(\Omega, \mathcal{F}, \mathcal{F}_t, P)$ be the space where Brownian motion lives, i.e. Wiener space. Assume $\mathcal{F}$ contains all sets of probability zero. Fix $0 \le  T < \infty $. 
+
+	Let $\mathbb{H}$ be space of all $u_t : [0,\infty ) \times \Omega \to  \mathbb{R}$ that are progressive measurable, and for which
+	\[
+		E \left( \int _0^T |u_s(\omega)|^2 ds  \right) < \infty 
+	.\] 
+\end{definition}
+$\mathbb{H}$ is in fact a Hilbert space with $L^2$ norm.
+
+\begin{definition}
+The set of all $e \in \mathbb{H}$ of the form $e_t = \sum_{k=0}^{n-1} e_k(\omega) 1_{[t_k, t_{k+1})}(t)$, $e_k \in \mathcal{F}_{t_k}$, is called elementary set, denoted by $\mathcal{E}$.
+$e \in \mathcal{E}$ is called an \textit{elementary function}.
+\end{definition}
+
+\begin{definition}[Itô Integral](For Elementary Functions)
+	For $e \in \mathcal{E}$, define
+	\[
+		\int _0^T e_s(\omega) d B_s(\omega)
+		= \sum_{k=0}^{n-1} e_k(\omega) \left( B_{t_{k+1}} - B_{t_k} \right) 
+	\] 
+	and $E e_k^2 < \infty $.
+\end{definition}
+
+\begin{lemma}
+	(Itô isometry for $\mathcal{E}$ )
+	For $e \in \mathcal{E}$, we have
+	\[
+		E\left( \int _0^T e_s dB_s \right) ^2 = E\left( \int _0^T e_s^2 d s \right) 
+	.\] 
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		E\left( e_k e_j \left( B_{t_{k+1} - B_{t_k}} \right) \left( B_{t_{j+1}} - B_{t_j} \right)  \right) 
+		&= \delta_{jk } E\left( e_k^2 \left( t_{k+1} - t_k \right)  \right) 
+	.\end{align*}
+	Hence
+	\begin{align*}
+		E\left( \int _0^T e_s d B_s \right) ^2
+		&= \sum_{k=0}^{n-1} E(e_k^2) \left( t_{k+1} - t_k \right)  \\
+		&= E \int _0^T e_s^2 ds
+	.\end{align*}
+\end{proof}
+
+Next we want to show $\mathcal{E}$ is dense in $\mathbb{H}$.
+\begin{enumerate}
+	\item For each $f \in \mathbb{H}$, there exists $g^m \in \mathbb{H}$ bounded, such that $g^m \to  f$ in $\mathbb{H}$-norm.
+	\item For each $g \in \mathbb{H}$ bounded, there exists $h^m \in \mathbb{H}$ bounded and continuous in $t$, such that $h^m \to  g$ in $\mathbb{H}$-norm.
+	\item For each $h \in \mathbb{H}$ bounded and continuous in $t$, there exists $e^m \in \mathcal{E}$ such that $e^m \to  h$ in $\mathbb{H}$-norm.
+\end{enumerate}
+\begin{proof}
+	\begin{enumerate}
+		\item Suppose $h \in \mathbb{H}$, truncate by defining
+			\[
+				g^m(t, \omega) = h(t, \omega) 1_{[-m, m]}\left( h(t, \omega) \right) 
+			.\] 
+			Then DCT implies (tail integral of  $L^2$ function vanishes)
+			\[
+				E\left( \int _0^T \left| g^m(t, \omega) - h(t, \omega) \right|^2 dt  \right) \to  0
+			.\] 
+		\item Let $g \in \mathbb{H}$ be bounded, i.e. $g(t, \omega) \le  M$ for all $t, \omega \in [0,\infty  ) \times \Omega$.
+
+			Define 
+			\[
+				h^m(t, \omega) = \frac{1}{m} \int _{t - m}^t g(s, \omega) ds \qquad \frac{1}{m} \le  t \le T
+			.\] 
+			Note that $h^m $ is adapted, and bounded continuous by definition. Then Lebesgue differentiation theorem implies $h^m(t, \omega) \to g(t, \omega)$  for a.e. $t$. DCT implies
+			\[
+				E\left( \int _0^T \left| h^m(t, \omega) - g(t, \omega) \right|^2 dt  \right)  \to 0
+			.\] 
+		\item Let $h \in \mathbb{H}$  be bounded continuous. Let $t_k = \frac{k T}{2^n}$ and
+			\[
+				e^m(t, \omega) = 
+				\sum_{k=0}^{2^m - 1} h(t_k, \omega) 1_{[t_k, t_{k+1})} (t)
+			.\] 
+			Note $e^m \in \mathcal{E}$. We have  $e^m(t, \omega) \to h(t, \omega)$ as $m \to  \infty $. DCT gives convergence in $\mathbb{H}$-norm.
+
+	\end{enumerate}
+\end{proof}
+
+\textbf{}
+Now, let $u \in \mathbb{H}$, take a sequence of elementary functions $e^m$  such that as $m \to \infty $,
+\[
+	E\left( \int _0^T \left| u_t(\omega) - e^m(t, \omega) \right| ^2 dt  \right) \to 0
+.\] 
+We have
+\[
+	\|e^m - e^n\|_{\mathbb{H}} \le  \|e^m - u\|_{\mathbb{H}} + \|e^n - u\|_{\mathbb{H}}
+.\] 
+So $\{e^m\}$ is Cauchy sequence in $\mathbb{H}$. By Itô isometry for elementary functions
+\[
+	\left( E\left( \int _0^T \left| e^n_t - e^m_t \right| ^2 dt  \right)  \right) ^{\frac{1}{2}} 
+	= \left( E\left( \int _0^T \left( e_t^n - e_t^m \right) d B_t  \right) ^2 \right) ^{\frac{1}{2}}
+.\] 
+So $\left\{ \int _0^T e^n_t dB_t \right\} $ is also a Cauchy sequence in $L^2(P)$. We define its limit to be $\int _0^T u_t dB_t$.
+
+\begin{definition}[Itô Integral]
+	\[
+		\mathcal{I}(u)_t = \int _0^T u(t, \omega) d B_t
+		=_{L^2} \lim_{n \to \infty} \int _0^T e^m(t, \omega) d B_t
+	.\] 
+	whenever $e^m \to  u$ in $L^2(P)$.
+		This definition is independent of approximation $e^m$ in $L^2(P)$, as shown above.
+\end{definition}
+\begin{corollary}[Itô Isometry]
+	For all $u \in \mathbb{H}$,
+	\[
+		E\left( \int _0^T u_t(\omega) d B_t(\omega) \right) ^2
+	= E\left( \int _0^T |u_t|^2 d t \right) 
+	.\] 
+\end{corollary}
+
+\begin{corollary}
+	If $u \in \mathbb{H}$, $u^n \to  u \in \mathbb{H}$, i.e.
+	\[
+		E \left( \int _0^T \left| u^n(t, \omega) - u(t, \omega) \right| ^2 d t \right)  \to  0
+	.\] 
+	Then we have the following convergence in $L^2(P)$:
+	 \[
+		\int _0^T u^n(t, \omega) dB_t \to \int _0^T u(t, \omega) d B_t
+	.\] 
+\end{corollary}
+
+\begin{remark}
+	See Øskendal Definition 3.3.2 for extension to a wider class than $\mathbb{H}$. The extension is two-fold: (1) We can have a bigger filtration than the Brownian filtration; that is, the process may depend on some other predictable stochasticity. (2) Instead of working with $L^2$ predictable processes $\mathbb{H}$ we could work with weak $L^2$, the condition
+	$\lambda^2 P(\int_0^T |f(t, \omega)|^2 d s > \lambda) < C$, or an even weaker one, almost sure square integrability: $P(\int_0^T |f(t, \omega)|^2 d s < \infty) =1 $. Then we replace $L^2$ convergence by in probability convergence, i.e. $L^0$ convergence. In this case we do not obtain martingales in general; we get \textit{local martingales}.
+\end{remark}
+
+\begin{remark}
+	One defines $\int _0^\infty  u_t(\omega) d B_t (\omega)$ in the usual way, then
+	\[
+		\int _0^t u_s(\omega) dB_s(\omega)
+		= \int _0^\infty 1_{[0, t]}(s) u_s d B_s
+	.\] 
+\end{remark}
+
+Define $\int _a^b u_t dB_t$ in the usual way. Then the following hold:
+\begin{proposition}
+	\begin{enumerate}
+		\item $\int _a^b u_t d B_t = \int _a^c u_t d B_t+ \int _c^bu_t d B_t$
+		\item Linearity of integrand: $c \int _a^b u_t d B_t + d \int _a^b v_t d B_t = \int _a^b (cu_t + dv_t) d B_t$
+		\item $E \int _a^b u_t d B_t = 0$
+		\item $\int _a^b u_t d B_t \in \mathcal{F}_t$
+		\item \[
+			E\left( \int _0^T u_t dB_t \right) \left( \int _0^T v_t dB_t \right) 
+			= E\left( \int _0^T u_t v_t dt \right) 
+		.\] 
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	To prove (v), apply Ito isometry, use identity  $2 ab = (a + b)^2 - a^2 - b^2$.
+\end{proof}
+The last property gives Ito isometry between two Hilbert spaces. \followup Verify.
+
+
+\begin{lemma}
+	($L^2$ convergence preserves martingales) If $\{M_t^n\} $ is a sequence of martingales, and if $M_t^n \to M_t$ in $L^2(P)$, then $M_t$ is a martingale.
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		\|M_s - E\left( M_t | \mathcal{F}_s \right) \|
+		&\leq \|M_s - M_s^n\| + \|M_s^n - E\left( M_t | \mathcal{F}_s \right) \| \\
+		&= \|M_s - M_s^n\| + \|E\left( M_t^n | \mathcal{F}_s \right)  - E\left( M_t | \mathcal{F}_s \right) \| \\
+		&= \|M_s - M_s^n\| + \|E\left( M_t^n - M_t | \mathcal{F}_s \right) \| \\
+		&= 2\|M_s - M_s^n\| \to 0
+	.\end{align*}
+\end{proof}
+
+\begin{theorem}
+	\label{thm:ito-martingale-continuous}
+	Let $u \in \mathbb{H}$, $I_t(u) = \int _0^t u_r d B_r$. Then the following hold:
+	\begin{enumerate}
+		\item $\{I_t(u)\} $ is a martingale.
+		\item $\{I_t(u)\} $ has a continuous modification, i.e. $J_t$ continuous and $P(J_t = I_t, t \in [0,T]) = 1$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Let $e^m \in \mathcal{E}$ such that $e^m \to  u$. We claim
+	\begin{enumerate}
+		\item $I_t(e^m)$ is continuous. (HW)
+		\item $I_t(e^m)$ is a martingale.
+	\end{enumerate}
+	To prove (ii), let $s < t$. Then
+	\begin{align*}
+		E(I_t(e^m) | \mathcal{F}_s)
+		&= E\left(\int _0^s e^m_r d B_r  | \mathcal{F}_s\right) + E\left(\int _s^t e_r d B_r | \mathcal{F}_s\right)  \\
+		&= \int _0^s e^m_r d B_r + E\left(\sum_{s \le t_k^m \le  t_{k+1}^m \le t} e_r \left( B_{t_{k+1}^m - B_{t_k^m}} \right)  | \mathcal{F}_s\right)  \\
+		&= \int _0^s e^m_r d B_r + \sum_{s \le t_k^m \le  t_{k+1}^m \le t} E \left(e_k \left( B_{t_{k+1}^m - B_{t_k^m}} \right)  | \mathcal{F}_s\right)  \\
+		&= \int _0^s e^m_r d B_r + \sum_{s \le t_k^m \le  t_{k+1}^m \le t} E \left(E \left(e_k \left( B_{t_{k+1}^m - B_{t_k^m}} \right)  | \mathcal{F}_s\right) | \mathcal{F}_k \right)  \\
+		&= \int _0^s e^m_r d B_r + \sum_{s \le t_k^m \le  t_{k+1}^m \le t} E \left(e_k E \left(  B_{t_{k+1}^m - B_{t_k^m}}   | \mathcal{F}_k\right) | \mathcal{F}_s \right)  \\
+		\intertext{note that $ E \left(  B_{t_{k+1}^m - B_{t_k^m}}   | \mathcal{F}_k\right)  = 0$, so}
+		&= \int _0^s e^m_r d B_r = I_s(e^m)
+	.\end{align*}
+
+	Now recall that sums of martingales are martingales, so
+	\[
+		\{I_t(e^n) - I_t(e^m)\} _{t \in [0,T]} \qquad \text{ is a martingale}
+	.\] 
+	Therefore, by Doob's maximal inequality,
+	\[
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^n) - I_t(e^m) \right| \ge \varepsilon \right) 
+		\le \frac{1}{\varepsilon^2} E \left| I_T(e^n) - I_T(e^m) \right| ^2
+	.\] 
+	% (If an operator takes from L2 to L2, then it takes from weak L2 to L2. This is Chebyshev.) \ask{what does this mean?}
+
+	We have $E \left| I_T(e^n) - I_T(e^m) \right| ^2 \to 0$ as $n , m \to  \infty $. Given $k$, there exists $N_k$ such that $n, m \ge n_k$, $E \left| I_T(e^n) - I_T(e^m) \right| ^2 \le  \frac{1}{2^{3k}}$. Now
+\[
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^{n_k + 1}) - I_t(e^{n_k}) \right| \ge \frac{1}{2^k} \right) 
+		\le \frac{2^{2k}}{2^{3k}} \to  0 
+	.\]
+	Borel-Cantelli says 
+	\[
+		P\left( \sup _{0 \le t\le T} \left| I_t(e^{n_k + 1}) - I_t(e^{n_k}) \right| \le \frac{1}{2^k} \text{ eventually}\right)  = 1
+	.\] 
+	In this event, convergence is uniform, so the limit is continuous.
+\end{proof}
+
+\subsubsection{Some extensions of Itô integral}
+
+First, some simple extensions:
+\begin{enumerate}
+	\item Since $L^2 $ convergence implies convergence in probability, we have
+		\[
+			I_t(e^n) \to  \int _0^t u_r d B_r \quad \text{i.p.}
+		.\] 
+		If we consider $u_r$ such that $\int _0^t u_r^2 dr < \infty $ a.s. for all $t$, then one can define $\int _0^t u_r d B_r$ as convergence in probability for elementary functions. In this case we have local martingales.
+	\item Extension to several dimensions. Let $B_t = \left( B_t^1, \ldots, B_t^d \right) $ be BM in $\mathbb{R}^d$. Let $H_r = \left( H_r^1, \ldots, H_r^d \right) $ be progressively measurable, with $E\left( \int _0^t \left| H_r \right| ^2 dr  \right) < \infty $. Then we can define
+		\[
+			I_t(H) = \int _0^t H_s \cdot d B_s
+		.\] 
+	\item Further, we can let $A_r = \left[ H_r^{ij } \right] $ be an $m \times d$ matrix, with progressively measurable entries, and $E \int _0^t \left| A_s \right| ^2 ds < \infty $. Then define
+		\[
+			I_t(A) = \int _0^t A_s d B_s
+		.\] 
+\end{enumerate}
+
+\followup It might be good to stop there and do a bunch of exercises from Øskendal.
+
+\subsubsection{Integral wrt Martingales}
+
+
+
+Now we want to make sense of
+\[
+	\int _0^t f(M_t) d M_t
+\] 
+and
+\[
+	\int _0^t \left| f(M_t) \right|^2 d \left\langle M \right\rangle _t 
+.\] 
+
+Now we consider square integrable, continuous martingales. 
+Recall, that a martingale $M_t$ in $(\Omega, \{\mathcal{F}_t\} _{t \ge 0}, \mathcal{F}, P)$ is an $L^2  $-martingale if $E|M_t|^2 < \infty $ for all $t$.
+
+\begin{theorem}[Quadratic Variation]
+	Let $\{M_t\} _{t \ge 0}$ be an $L^2$-martingale with continuous paths, and suppose $M_0 = 0$. Then there exists a unique stochastic process $\{\left\langle M \right\rangle _t\} _{t \ge 0}$ such that
+	\begin{enumerate}
+		\item  $t \mapsto \left\langle M \right\rangle _t$ is continuous,
+		\item $\left\langle M \right\rangle _t$ is increasing,
+		\item $\left\langle M \right\rangle _0 = 0$,
+		\item $M_t^2 - \left\langle M \right\rangle _t$ is martingale.
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+Quadratic variation comes in two places: 1) Doob decomposition, 2) Direct construction.
+
+Note: There is also square bracket $[M_t]$ for process that has jumps. In general, for a $L^2$ semimartingale, there exists a unique right-continuous and increasing process $\left[ M_t \right] $ starting at zero such that $M - [M]$ is a local martingale.
+
+For continuous locally $L^2$ martingales, Doob decomposition gives the process $\left\langle M \right\rangle _t$, which coincides with $[M_t]$.
+\end{remark}
+
+\begin{fact}
+	If $\Delta_n(t) \to 0$, then
+	\[
+		\sum_{k = 0}^{n - 1} \left| M_{t_{k+1}} - M_{t_k} \right| ^2 \to \left\langle M \right\rangle _t
+	\] 
+	in $L^2$.
+\end{fact}
+
+
+
+
+
+\begin{claim}
+	If $M_t = \int _0^t u_s d B_s$, then $\left\langle M \right\rangle _t = \int _0^t u_s^2 d s$.
+\end{claim}
+\begin{proof}
+	We need to show
+	\[
+		E\left( M_t^2 - \left\langle M \right\rangle _t | \mathcal{F}_s \right)  = M_s^2 - \left\langle M \right\rangle _s
+	.\] 
+	Have
+	\begin{align*}
+		E\left( M_t^2 | \mathcal{F}_s \right) 
+		&= E\left(\left( \int _0^s u_r d B_r + \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right) \\
+		&= E\left( \left(\int _0^s u_r d B_r \right)^2 + 2\left( \int _0^s u_r d B_r \right) \left( \int _s^t u_r d B_r \right)  + \left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		\intertext{using independence from $\mathcal{F}_s$,}
+		&= \left(\int _0^s u_r d B_r \right)^2 + 2 \left( \int _0^s u_r d B_r \right) E\left( \int _s^t u_r d B_r | \mathcal{F}_s\right)  + E\left(\left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_r d B_r \right)^2 + 2 \left( \int _0^s u_r d B_r \right) E\left( \int _s^t u_r d B_r \right)  + E\left(\left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		&= \left(\int _0^s u_r d B_r \right)^2 + E\left(\left( \int _s^t u_r d B_r \right) ^2 | \mathcal{F}_s\right)  \\
+		\intertext{Apply Ito isometry,}
+		&= \left(\int _0^s u_r d B_r \right)^2 + E\left( \int _s^t u_r^2 d r | \mathcal{F}_s\right)  \\
+		&= \left( \int _0^s u_r d B_r \right) ^2 + E\left( \int _0^t u_r^2 d  r | \mathcal{F}_s \right)  - \int _0^s u_r^2 d r \\
+		&= M_s^2 + E\left( \left\langle M \right\rangle _t | \mathcal{F}_s \right)  - \left\langle M \right\rangle _s
+	.\end{align*}
+
+\end{proof}
+
+\begin{corollary}[Covariation]
+	Suppose $M_t$ and $N_t$ are two continuous $L^2$-martingales, $M_0 = 0 = N_0$. There exists a unique process $\left\langle M, N \right\rangle _t$ such that
+	\begin{enumerate}
+		\item $M_t N_t - \left\langle M, N \right\rangle _t$ is martingale,
+		\item $\left\langle M, N \right\rangle _t$ is increasing,
+		\item $\left\langle M, N \right\rangle _0 = 0$,
+		\item $t \mapsto \left\langle M, N \right\rangle _t$ is continuous a.s.
+	\end{enumerate}
+	We call $\left\langle M, N \right\rangle _t$ the \textit{covariation process.}
+\end{corollary}
+\begin{proof}
+	\[
+		M_t N_t = \frac{1}{4} \left( (M + N)^2_t - (M - N)^2 _t \right) 
+	.\] 
+	Apply two previous theorem to both sides.
+\end{proof}
+
+\begin{example}
+$\left\langle B_t, \tilde B_t \right\rangle = 0$, if $B, \tilde B$ are two independent BMs. 
+\end{example}
+As a consequence,
+\begin{corollary}
+	If $B_t$ is BM in $\mathbb{R}^d$, then 
+	\[
+		\left\langle B_t^i B_t^j \right\rangle = \delta_{i j} t
+	.\] 
+\end{corollary}
+\begin{proof}
+	We begin with
+\begin{claim}
+	\[
+		X_t = \frac{1}{\sqrt{2} } \left( B_t + \tilde B_t \right)  \qquad \text{ is a BM}
+	.\] 
+	And so is $Y_t = \frac{1}{\sqrt{2} } (B_t- \tilde B_t)$.
+\end{claim}
+This follows from direct observation that $B_t, \tilde B_t \sim N\left( 0,t \right) $ and they are independent. So $X_t \sim N(0,t)$. In fact $X_t - X_s \sim N(0,t -s )$ and increments are independent. Hence $X_t$ is BM. Similar for $Y_t$.
+
+Now the proof of previous corollary gives $\left\langle B_t \tilde B_t \right\rangle = 0$.
+\end{proof}
+
+In fact,
+\[
+	B_t \tilde B_t = \int_0^t B_s d \tilde B_s + \int_0^t \tilde B_s d B_s
+.\] 
+This is the \textit{integration by parts}, a special case of \textit{Ito formula} that we will develop later. 
+
+Not to be confused with $2 \int _0^t B_s d B_s = B_t^2 - t$, another special case of Ito formula.
+
+Examine a more general question: What is 
+\[
+	\int _0^t M_s d M_s \text{ ?}
+\] 
+\begin{claim}
+	\[
+	2 \int _0^t M_s d M_s = M_t^2 - \left\langle M \right\rangle _t
+.\]
+\end{claim}
+\begin{proof}
+	Let $R_t$ be Riemann sum wrt a partition $t_k$. Then
+\[
+	2 R_t = 2 \sum_{k = 0}^{n - 1} M_{t_k} \left( M_{t_k+1} - M_{t_k} \right) 
+.\] 
+Apply the following identity to the right hand side:
+\[
+	2 M_s (M_t - M_s) = M_t^2 - M_s^2 - (M_t - M_s)^2
+.\] 
+We have
+\[
+	2 R_t = M_t^2 - \sum_{k = 0}^{n - 1} \left( M_{t_{k+1}} - M_{t_k} \right)^2  
+	\to  M_t^2 - \left\langle M \right\rangle _t
+.\] 
+So
+\[
+	2 \int _0^t M_s d M_s = M_t^2 - \left\langle M \right\rangle _t
+.\] 
+\end{proof}
+
+
+\begin{proposition}
+	Let $M_t$ be a continuous $L^2$-martingale. Then it has bounded variation only when it is constant, i.e., $M_t \equiv M_0$.
+\end{proposition}
+\begin{proof}
+If $M _t$ is bounded variation on $[0,t]$, then $\left\langle M \right\rangle _t = 0$. To verify, note that
+\[
+	\sum_{k = 0}^{n - 1} \left| M_{t_{k+1}} - M_{t_k} \right| ^2
+	\le \sup _{0\le k\le n-1} \left| M_{t_{k+1}} - M_{t_k} \right| \sum_{k=0}^{n-1} \left| M_{t_{k+1}} - M_{t_k} \right|
+.\] 
+Where the $\sup $ goes to zero by continuity and the second term goes to the total variation which is bounded.
+
+Therefore, $M_t^2$ is a martingale. We also know that $M_t$ is a martingale. Then
+\[
+	E\left( \left( M_t - M_s \right) ^2 | \mathcal{F}_s\right)	
+	= E\left( M_t^2 - M_s^2 | \mathcal{F}_s \right) 
+	= 0
+.\] 
+Take expectation again,
+\[
+	E | M_t - M_s| ^2 = 0 \implies M_t \text{ is constant}
+.\] 
+%This can be shown from Chebyshev: $P\left( M_t - M_s > \varepsilon \right) \le \frac{E\left( M_t - M_s \right) ^2}{\varepsilon^2} = 0$.
+\end{proof}
+
+Thus, we can proceed exactly as in the case of BM.
+
+\begin{definition}[Ito integral](Elementary functions, general continuous martingale)
+	
+Consider $M$ a continuous $L^2$ martingale.
+Let $L_M^2$ be space of progressively measurable processes $u_ t$ wrt $\mathcal{F}_t$ such that
+\[
+	E\left( \int _0^t u_s^2 d\left\langle M \right\rangle _s \right) < \infty 
+.\] 
+Define the elementary processes $\mathcal{E}$ by
+\[
+	\mathcal{E} = \left\{ u_t \in L^2_M: u_t = \sum_{k = 0}^{n - 1} F_k 1_{[t_k, t_{k+1})}(t), E|F_k|^2 < \infty , F_k \in \mathcal{F}_{t_k} \right\} 
+.\] 
+
+Let $u \in \mathcal{E}$ be elementary, taking value $F_k $ on $[t_k, t_{k+1})$, then define
+\[
+	I_M(u) = \int _0^T u_s d M_s = \sum_{k = 0}^{n - 1} F_k \left( M_{t_{k+1}} - M_{t_k} \right) 
+.\] 
+\end{definition}
+
+Proceed in the same way as previous theorem about Brownian motion, we have
+
+\begin{theorem}[Ito Integral]
+	There exists a unique linear map $I_M: L^2_M \to  L^2_M$ such that
+	\begin{enumerate}
+		\item $I_M(u) = \sum_{k = 0}^{n - 1} F_k \left( M_{t_{k+1}} - M_{t_k} \right) , u \in \mathcal{E}$ (Ito integral for elementary functions)
+		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) , u \in \mathcal{E}$ (Ito isometry for elementary functions)
+		\item $\mathcal{E}$ is dense in $L^2_M$
+		\item  $I_M(u) =_{L^2} \lim_{m \to \infty} I_M(e^m), e^m \in \mathcal{E}$ (Continuity of $I_M$)
+		\item $E\left( I_M(u) \right) ^2 = E\left( \int _0^T u_s^2 d \left\langle M \right\rangle _s \right) $, $u \in L^2_M$ (Ito isometry)
+	\end{enumerate}
+\end{theorem}
+The proof is completely parallel to the $M_t = B_t$ case.
+
+\begin{remark}
+	We have $\int _0^t u_s d M_s$ is a continuous martingale (equivalent of Theorem~\ref{thm:ito-martingale-continuous}).
+	Applying Ito isometry and consider the continuous martingale $\left( \int _0^t u_s d M_s \right) ^2 - \left\langle \int _0^t u_s d M_s \right\rangle $, we have
+	\[
+		\left\langle \int _0^\cdot u_s d M_s \right\rangle _t = \int _0^t u_s^2 d \left\langle M \right\rangle _s
+	.\] 
+\end{remark}
+
+\begin{example}
+	As for BM,  $\int _0^t u_s d B_s$ is a martingale, and in fact it is continuous.
+\end{example}
+\begin{example}
+	When $M_t  = \int _0^t H_s d B_s$. Then
+	\[
+		\left\langle M \right\rangle _t = \int _0^t |H_s|^2 ds
+	.\] 
+	We have $d \left\langle M \right\rangle _t = |H_t|^2 dt$. Thus we have
+	\[
+		u \in L_M^2 \iff  
+		E\left( \int _0^t |u_s|^2 d \left\langle M \right\rangle _s \right)  = E \left( \int _0^t |H_s|^2 u_s^2 ds \right)  < \infty 
+	.\] 
+	Thus $u_s H_s \in L_B^2$. 
+	In this case we have,
+	\[
+		\int _0^t u_s d M_s = \int _0^t u_s H_s \cdot d B_s
+	.\] 
+	To justify, both are continuous martingales, and their quadratic variation are identical. Continuous martingales are characterized by their quadratic variations, as we will verify in the Martingale Representation Theorem.
+\end{example}
+
+\begin{remark}
+	\begin{enumerate}
+		\item In order to define stochastic integral, we only need local integrability on the martingale in time, i.e. $E M_t^2 < \infty $ for all $t$.
+
+\begin{definition}
+	A stochastic process $M_t$ adapted to $\mathcal{F}_t$ is called a \textit{local martingale} if there exists stopping times $T_n$ going to infinity, such that $M_{t \wedge T_n}$ is a martingale.
+\end{definition}
+
+\item A \textit{semimartingale} is a process of the form
+	\[
+		X_t = A_t + M_t
+	.\] 
+	where $M_t$ is a local martingale, and $A_t$ is a process of locally finite variation. We can define
+	\[
+		\int _0^t H_s d X_s = \int _0^t H_s d A_s + \int _0^t H_s d M_s
+	.\] 
+	where the first integral is just Riemann-Stieltjes integral, and the second is defined for local martingales.
+	\end{enumerate}
+\end{remark}
+
+\begin{lemma}
+	Let $X_t = X_0 + A_t + M_t$ be a continuous semimartingale. Let $\left| \Delta_n(t) \right|  \to  0$ as $n \to \infty $, then
+	\[
+		\lim \sum_{n=0}^{n-1} \left| X_{t_{n+1}} - X_{t_n} \right| ^2 = \left\langle M \right\rangle _t
+	.\] 
+	i.e., $\left\langle X \right\rangle _t = \left\langle M \right\rangle _t$
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		\left| X_{t_{k+1}} - X_{t_k} \right| ^2
+		&= \left| (A_{t_{k+1}} - A_{t_k})+(M_{t_{k+1}} - M_{t_k}) \right|^2  \\
+		&= \left| A_{t_{k+1}} - A_{t_k}\right|^2
+		+ 2(A_{t_{k+1}} - A_{t_k}) (M_{t_{k+1}} - M_{t_k})
+		+ \left| M_{t_{k+1}} - M_{t_k}\right|^2  
+	.\end{align*}
+	The first two terms go to zero when we take sum and let $\Delta_k \to 0 $, using the fact that $A$ is bounded variation on $[0,t]$ and $M$ is continuous.
+\end{proof}
+\begin{remark}
+	We have same argument for $\left\langle X, Y \right\rangle _t = \left\langle M_t, N_t \right\rangle $ where $X_t = A_t + M_t$, $Y_t = C_t + N_t$.
+\end{remark}
+
+Furthermore,
+\begin{lemma}
+	For $f, g \in C^2$, $X, Y$ semimartingales,
+	\[
+		\left\langle f(X), g(Y) \right\rangle 
+		= \int _0^t f'(X_s) g'(Y_s) d \left\langle X, Y \right\rangle _s
+	.\]
+\end{lemma}
+
+\subsection{Ito Formula}
+
+\subsubsection{Motivation and special case}
+
+Motivation comes from integration by parts. If we know $I(X)$ and $I(Y)$, we can know $I(f(X,Y))$ where $f$ is polynomial. Now we want to generalize to all $C^2$ functions.
+
+D\"oblin-Itô formula for Brownian motion (Durett 7.6.1):
+
+\[
+	f(B_t) = f(B_0) + \int _0^t f'(B_s) d B_s + \frac{1}{2} \int _0^t f''(B_s) d s
+.\] 
+
+Consider the integral
+\[
+	\int X_s d X_s = \frac{1}{2} X_t^2 - \left\langle X \right\rangle _t
+\] 
+and apply the identity
+\[
+	\sum_{k=0}^{n-1} (a_{k+1} - a_k)^2
+	=
+\sum_{k=0}^{n-1} (a_{k+1}^2 - a_{k}^2) 
+- 2 \sum_{k=0}^{n-1} a_k (a_{k+1} - a_k)
+.\] 
+We obtain Ito formula for $f(x) = x^2$:
+for square integrable martingale,
+		\[
+			X_s^2 - X_0^2 = 2 \int_{0}^t X_s d X_s + \frac{1}{2} \int _0^t 2 d\left\langle X \right\rangle _s
+		.\] 
+
+This formula can be understood as
+\[
+	d f(B) = f'(B) d B + \frac{1}{2} f'' (B) d t
+.\] 
+
+This can be done for more general $f$ and not only for Brownian motion. 
+
+\subsubsection{Proof of D\"oblin-Itô formula}
+
+Recall from real analysis: 
+	Suppose $g$ is of bounded variation, and $f$ is continuous. Then $\int _0^t f d g $ exists. Then $\int _0^t g df $ also exists, and 
+	\[
+		\int _0^t f dg + \int _0^t g df = fg |_0^t
+	.\] 
+We want an integration by part formula for semimartingales.
+
+\begin{proposition}
+	(Integration by parts for semimartingales)
+	Let $X_t, Y_t$ be continuous semimartingales, then
+	\[
+		X_t Y_t - X_0 Y_0 = \int _0^t X_s d Y_s + \int _0^t Y_s d X_s + \left\langle X, Y \right\rangle _t
+	.\] 
+	This can be understood as
+	\[
+		d(XY) = X dY + Y d X + d\left\langle X, Y \right\rangle 
+	.\] 
+\end{proposition}
+\begin{proof}
+	Apply what we know to $(X + Y)_t$.
+	\begin{align*}
+		(X_t + Y_t)^2 - (X_0 + Y_0)^2
+		&= \int _0^t 2\left( X_s + Y_s \right) d (X_s + Y_s) + \left\langle X + Y \right\rangle _t\\
+		&= \int _0^t 2X_s d (X_s + Y_s) + \int _0^t 2Y_s d (X_s + Y_s) +\left\langle X+ Y \right\rangle _t
+	.\end{align*} 
+	Also apply to  $(X - Y)_t$ we get
+\begin{align*}
+		(X_t - Y_t)^2 - (X_0 - Y_0)^2
+		&= \int _0^t 2X_s d (X_s - Y_s) - \int _0^t 2Y_s d (X_s - Y_s) +\left\langle X - Y \right\rangle _t
+	.\end{align*}
+	Multiply both sides by $\frac{1}{4}$ and subtract, we get
+	\begin{align*}
+		X_t Y_t - X_0 Y_0 = \int _0^t X_s d Y_s+  \int _0^t Y_s d X_s + \frac{1}{4} \left( \left\langle X + Y \right\rangle  - \left\langle X - Y \right\rangle  \right) 
+	.\end{align*}
+	Remark: this argument sometimes referred to as ``polarization''. \ask{what does this mean}
+\end{proof}
+
+\begin{theorem}[D\"oblin-Itô Formula](I)
+	Let $f, g$ be twice continuously differentiable, and $X_t, Y_t$ continuous semimartingales. Then $f(X_t)$ is a semimartingale and satisfies
+	\begin{align*}
+		f(X_t) - f(X_0) 
+		&= \int _0^t f'(X_s) d X_s + \frac{1}{2} \int _0^t f''(X_s) d\left\langle X \right\rangle _s\\
+		&= \int _0^t f'(X_s) d A_s + \int _0^t f'(X_s) d M_s + \frac{1}{2 }\int _0^t f''(X_s) d \left\langle M \right\rangle _s 
+	.\end{align*} 
+\end{theorem}
+\begin{proof}
+	(Sketch)
+	We already know this when  $f(x) = x$. We want to prove that the set of functions having this property forms an algebra. Then we want to apply Stone-Weierstrass approximation to gain this result for all $f \in  C^2(B_R)$, $R > 0$. Taking a limit will extend the result to all $f \in C^2(\mathbb{R})$.
+\end{proof}
+
+The only thing we need to verify before applying Stone-Weierstrass is the following:
+\begin{claim}
+	If $f, g$ as in the statement satisfies the formula, so does $f g$.
+\end{claim}
+\begin{proof}
+	Apply integration by parts.
+	\begin{align*}
+		\int _0^t f(X_s) d g(X_s) 
+		&= \int _0^t f(X_s) \left( g'(X_s) d X_s + \frac{1}{2} g''(X_s) d \left\langle X \right\rangle _s \right)  \\
+		&= \int _0^t f(X_s) g'(X_s) d X_s + \frac{1}{2} \int _0^t f(X_s) g''(X_s) d \left\langle X \right\rangle _s 
+	.\end{align*}
+	Similarly,
+	\[
+		\int _0^t g(X_s) d f(X_s) = \int _0^t g(X_s) f'(X_s) d X_s + \frac{1}{2} \int _0^t g(X_s) f''(X_s) d \left\langle X \right\rangle _s
+	.\] 
+	Apply this identity (we already know) (generalization for semimartingales)
+	\[
+		\left\langle \int _0^t u_s d B_s, \int _0^t v_s d B_s \right\rangle = \int _0^t u_s v_s d s
+	.\] 
+	\[
+		\left\langle f(X), g(X) \right\rangle 
+		= \int _0^t f'(X_s) g'(X_s) d \left\langle X \right\rangle _s
+	.\] 
+	
+	Now we can prove the formula:
+	\begin{align*}
+		f(X_t) g(X_t) - f(X_0) g(X_0)
+		&= \int _0^t f(X_s) g'(X_s) + g(X_s) f'(X_s) d X_s\\
+		&+ \int _0^t \frac{1}{2} \left( f(X_s) g''(X_s) + f''(X_s) g(X_s) - 2 f'(X_s) g'(X_s) \right) d\left\langle X \right\rangle _s \\
+		&= \int _0^t (fg)' (X_s) dX_s + \frac{1}{2} \int _0^t (fg)'' (X_s) d \left\langle X \right\rangle _s 
+	.\end{align*}
+\end{proof}
+
+\begin{fact}
+	If $f$ is twice continuously differentiable, there exists polynomials $p_n$ such that
+	\begin{enumerate}
+		\item $p_n \to f$
+		\item $p_n' \to  f'$
+		\item $p_n'' \to  f''$
+	\end{enumerate}
+	uniformly on compact sets.
+\end{fact}
+
+
+
+
+After applying Stone-Weierstrass approximation, we want some continuity that allows us to pass from approximation in $C^2(B_R)$ to approximation for stochastic integrals. Precisely, we want to
+prove termwise convergence (in $L^2(P)$) for the following:
+\begin{align*}
+	 P_n(X_t) &= P_n(X_0) + \frac{1}{2} \int _0^t P_n'(X_s) dX_s + \frac{1}{2} \int _0^t P_n'' (X_s) d \left\langle X \right\rangle _s\\
+	\to 
+	f(X_t) &= f(X_0) + \frac{1}{2}\int _0^t	f'(X_s) d X_s + \frac{1}{2} \int _0^t f''(X_s) d\left\langle X \right\rangle _s
+.\end{align*}
+
+We localize, take $T_r = \inf \{t: \left| X_t \right| > r\} $, and apply the argument to $X_{T_r \wedge t}$. 
+
+Then, 
+\begin{align*}
+	&E\left| \int _0^t f'(X_s) d X_s - \int _0^t P_n(X_s) d X_s \right| ^2\\
+	&\le  E \int _0^t \left| f'(X_s) - P_n'(X_s) \right| ^2 d \left\langle X \right\rangle _s
+	+ E \left(\int _0^t \left| f'(X_s) - P_n'(X_s) \right| d A_s\right)^2\\
+	&\le \|f - P_n\|_{C^2(B_r)}^2 \left\langle X \right\rangle _t + \|f - P_n\|_{C^2(B_r)}^2 \|A_t\|_{TV}^2
+.\end{align*} 
+
+\subsubsection{Some comment on Stratonovich formula}
+
+Take $\sigma_k = (1 - \lambda) t_k + \lambda t_{k+1}$. Then
+\[
+	\sum_k B_{\sigma_k}\left( B_{t_{k+1}} - B_{t_k} \right) 
+	\to  \frac{1}{2} B_t + \left( \lambda - \frac{1}{2} \right) t
+.\] 
+$\lambda = 0$ corresponds to the Itô integral. $\lambda = \frac{1}{2}$ is the Stratonovich formula.
+
+Recall
+\[
+	\sum_k X_{t_k} \left( Y_{t_{k+1}} - Y_{t_k} \right) 
+	\to  \int X_s d Y_s + \frac{1}{2} \left\langle X, Y \right\rangle _t
+	= \frac{1}{2} X_t Y_t - \frac{1}{2} \left\langle X, Y \right\rangle 
+.\] 
+With $\lambda = \frac{1}{2}$, we get
+\[
+	\int _0^t X_s \circ d Y_s = \frac{1}{2} X_t Y_t
+.\] 
+We have
+\[
+	\int _0^t X_s \circ d Y_s 
+	= \int _0^t X_s d Y_s + \frac{1}{2} \left\langle X, Y \right\rangle _t
+.\] 
+Thus
+\[
+	X_t Y_t - X_0 Y_0 = \int _0^t X_s \circ d Y_s + \frac{1}{2}_0^t Y_s \circ d X_s
+.\] 
+
+\begin{proposition}[Stratonovich Formula]
+	\[
+		f(X_t) - f(X_0) = \int _0^t f'(X_s) d X_s
+	.\] 
+	and $d f(X) = f'(X)  d X$.
+\end{proposition}
+Remark: we would need $f \in C^3$.
+
+\subsubsection{Multidimensional D\"oblin-Itô Formula}
+
+\begin{theorem}[D\"oblin-Itô Formula] (II)
+	Let $X_t^1, \ldots, X_t^d$ be semimartingale, let $f \in C_c^2(\mathbb{R}^d), f : \mathbb{R}^d \to  \mathbb{R}$, then
+	\[
+		f(\vec{X} _t) = 
+		f(\vec{X} _0) 
+		+ \sum_{i=1}^{d} \int _0^t \frac{\partial f}{\partial x_i} (\vec{X} _s) d X_s^i
+		+ \frac{1}{2}\sum_{i, j=1}^{d} \int _0^t \frac{\partial^2 f}{\partial x_i \partial x_j} (\vec{X} _s) d \left\langle X^i, X^j \right\rangle 
+	.\] 
+	
+\end{theorem}
+
+For example, for Brownian motion we have $\left\langle B_t^i, B_t^j \right\rangle  = \delta_{i j}t$, so
+\[
+	f(B_t) - f(B_0) = \int _0^t \nabla f(B_s) d B_s + \frac{1}{2}\int _0^t \Delta f(B_s) d s
+.\] 
+Consider the process $\vec{X} _t = (A_t, X_t)$, where $A_t$ is a bounded variation process. Then, (use fact that $\left\langle A, X \right\rangle  = 0$ ),
+\begin{align*}
+	f(A_t, X_t) - f(A_0, X_0) 
+	&= \int _0^t \frac{\partial f}{\partial x_1} (\vec{X} _s) d A_s 
+	+ \int _0^t \frac{\partial f}{\partial x_2} (\vec{X} _s) d X_s
+	+ \frac{1}{2} \int _0^t \frac{\partial ^2 f}{\partial x_2^2} (\vec{X} _s) d \left\langle X \right\rangle _s
+.\end{align*} 
+
+Let $A_t = \left\langle M \right\rangle _t$, $X = M_t$ a martingale,
+\begin{align*}
+	&u\left( \left\langle M \right\rangle _t, M_t \right)  - f\left( \left\langle M \right\rangle _t, M_t \right) \\
+	&= \int _0^t u_{x_1}\left( \left\langle M \right\rangle _s, M_s \right)  d \left\langle A_s \right\rangle 
+	+ \int _0^t u_{x_1} \left( \left\langle M \right\rangle _s, M_s \right)  d M_s
+	+ \int _0^t u_{x_2 x_2} \left( \left\langle M \right\rangle _s, M_s \right)  d \left\langle M \right\rangle _s\\
+	&=  \int _0^t u_{x_2}\left( \left\langle M \right\rangle _s, M_s \right)  d M_s 
+	+ \int _0^t u_x\left( \left\langle M \right\rangle _s,  M_s \right)  + \frac{1}{2} u_{x_2 x_2} \left( \left\langle M \right\rangle _s, M_s \right)  d M_s\\
+	&=  M_t + \int _0^t \left( u_x\left( \left\langle M \right\rangle _s, M_s \right) + \frac{1}{2} u_{x_2 x_2} \left( \left\langle M \right\rangle _s, M_s \right)  \right)  d M_s
+.\end{align*} 
+
+Thus, if you take a function $u(t, x)$ such that
+\[
+	u_t + \frac{1}{2} u_{x x} = 0
+.\] 
+Then
+\[
+	u\left( \left\langle M_t \right\rangle , M_t \right) \qquad \text{ is a martingale}
+.\] 
+
+\begin{corollary}
+	If $u(t, x) = \exp\left( \lambda x - \frac{\lambda^2}{2} t \right) $, then
+	\[
+		u\left( \left\langle M \right\rangle _t, M_t \right) 
+		= \exp\left( \lambda M_t - \frac{\lambda^2}{2}\left\langle M \right\rangle _t \right)  \qquad \text{ is a martingale}
+	.\] 
+\end{corollary}
+Note that this is \textit{exponential martingale} we encountered before.
+
+\begin{theorem}(Levy)
+	Suppose $M_t$ is a continuous martingale with $\left\langle M \right\rangle _{\infty } = \infty $, and $\left\langle M \right\rangle _t = t$, then $M_t$ is Brownian motion.
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+		E (e^{\lambda M_t - \frac{\lambda^2}{2}t} | \mathcal{F}_s)
+		&= e^{\lambda M_s - \frac{\lambda^2}{2} s} 
+	.\end{align*}
+	Thus
+	\[
+		E\left( e^{\lambda (M_t - M_s)} | \mathcal{F}_s \right) 
+		= e^{- \frac{\lambda^2}{2}(t - s)}
+	.\] 
+	From earlier work, we know $M_t = B_t$.
+\end{proof}
+
+Next: 
+Time changes Brownian motion, and
+Conformal invariance. See note 5.
+
+
+\subsection{Stochastic Differential Equations}
+
+
+\[
+	u(X_t) = 
+	u(X_0) + \int _0^t \sigma^T \nabla u(X)s) \cdot  d B_s + \int _0^t \left(\sum_{i=1}^{d} b_i \frac{\partial u}{\partial x_i} + \frac{1}{2} \sum_{i , j} a_{i,j}(x) \frac{\partial u}{\partial x_i x_j} (x) \right)  ds
+.\] 
+
+\subsubsection{First application: Dirichlet Problem}
+
+
+
+
+Define the second-order differential operator,
+\[
+	L u(x) = \sum_{i=1}^{d} b_i(x) \frac{\partial u}{\partial x_i} + \frac{1}{2} \sum_{i , j} a_{i,j}(x) \frac{\partial u}{\partial x_i x_j} (x)
+.\] 
+
+Then
+\[
+	u(X_t) = u(X_0) + M_t + \int _0^t L u(X_t) ds
+.\] 
+From a SDE, we obtain a PDE.
+
+If $u$ is such that $L u = 0$, then $u(X_t) = u(X_0) + M_t$.
+
+Take expectation wrt $X_0 = x$. 
+\begin{align*}
+	E_x\left( u(X_t) \right) 
+	&= E_x\left( u(X_0) \right) + E_x(M_t) \\
+	u(x) &= E(u(X_t)) 
+.\end{align*}
+
+
+Now, suppose we have an open connected region $D$ in $\mathbb{R}^d$. Start $x \in D$ and run an SDE, stop when it hits $\partial D$ :
+\[
+	\tau_D = \inf \{t: X_t \not\in D\}\} 
+.\] 
+By continuity, $X_{\tau_D} \in \partial D$.
+
+We look at
+\[
+	u(B_{t \wedge \tau_D}) = u(X_0) + M_{t \wedge \tau_D}
+.\] 
+Let $u$ be a solution to $L$, with  $u|_{\partial D} = f$, in other worlds, we have the Dirichlet problem
+\[
+	\begin{cases}
+		L u = 0 & \text{ in }D \\
+		u = f & \text{ on }\partial D
+	\end{cases}
+.\] 
+Take expectation on both sides,
+\[
+	E_x(u(X_{\tau_D \wedge t})) = u(x)
+.\] 
+Let $t \to  \infty $, 
+\[
+	E_x(u(X_{t_D})) = u(x)
+.\] 
+The solution is
+\[
+	u(x) = E_x\left( f(X_{\tau_D}) \right) 
+.\] 
+
+Take $L = \frac{1}{2} \Delta$, $X_t = B_t$. 
+Take $D$ to be ball; we get mean value property of harmonic functions.
+
+If $X_{\tau_D}$ has a density, we have some kernel function $K(x, y)$ such that
+\[
+	u(x) = \int _{\partial D} K(x,y) f(y)
+.\] 
+
+\subsubsection{Second application: Heat equation}
+
+Let $u : \mathbb{R}^d \times [0,T]$, fix some $T$, $u \in C^{2, 1}$. Then (Ito formula applied to $\mathbb{R}^{d + 1}$),
+
+\[
+	u(X_t, T- t) = u(X_0, T) + \int _0^t \sigma^T(X_s) \nabla_x u(X_s, T - s) d B_s
+	+ \int _0^t \left( - \frac{\partial u}{\partial t} (X_s, T - s) + L u(X_s, T - s) \right)  d s
+.\] 
+
+Then
+\[
+	u(X_t, T - t) = u(X_0, T) 
+	+ M_t + \int _0^t \left( \frac{\partial u}{\partial t} (X_s, T - s) + L u(X_s, T + s) \right)  d s
+.\] 
+If $u$ satisfies
+\[
+	- \frac{\partial u}{\partial t} + L u = 0
+.\] 
+Then $u(X_t, T - t) = u(X_0, T) + M_t$. Thus
+\[
+	E_x(X_t, T - t) = u(X_0, T)
+.\] 
+
+Let $t \in  [0,T)$ and $t \to T$. Take expectations wrt $E_x$, we have
+\[
+	u(x, T) = E_x(u(X_T, 0))
+.\] 
+Thus, if $u$ satisfies the initial boundary value problem
+\[
+	\begin{cases}
+		\frac{\partial u}{\partial t}  = L u  & \text{ in }\mathbb{R}^d \times [0,\infty )\\
+		u(x, 0) = f(x)
+	\end{cases}
+.\] 
+Then, the solution is 
+\[
+	u(x, t) = E_x(f(X_t))
+.\] 
+
+If $(a_{i j}) = I$, we know $X_t = B_t$. In case of BM, we have a density.
+
+\textbf{Question: when is there a density? Or, when is there a heat kernel for this PDE?}
+
+If we assume \textit{ellipticity}, i.e. 
+\[
+	\sum_{i, j} a_{i, j}(x) \xi_i \xi_j \ge C |\xi|^2
+,\] 
+then there exists a kernel $P_t(x, y)$ such that
+\[
+	u(x, t) = \int _{\mathbb{R}^d} P_t(x, y) f(y) dy
+.\] 
+
+For self-adjoint operators, $\int L u \cdot  v = \int  u Lv$ holds, and the process is reversible.
+
+\begin{definition}
+	Brownian motion $B_t$ in $\mathbb{R}^d$ is
+	\begin{enumerate}
+		\item Transient if $\lim_{t \to \infty} |B_t| = \infty $
+		\item Point recurrent if for $\forall  x \in \mathbb{R}^d$, $\exists  t_k$ increasing such that $B_{t_k} = x$ for all $k$ a.s., that is, 
+			\[
+				P\left( B_{t_k} = x \text{ i.o.} \right) = 1
+			.\] 
+		\item Neighborhood recurrent if for all all $x \in \mathbb{R}^d$ and $\varepsilon>0$, there exists $t_k $ increasing such that $B_{t_k} \in B(x, \varepsilon)$ for all $k$ a.s., that is,
+			\[
+				P\left( B_{t_k} \in  B(x, \varepsilon) \text{ i.o.} \right) = 1
+			.\] 
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	In $d = 1$, $B_t$ is point recurrent. In  $d = 2$, $B_t$ is neighborhood recurrent. In  $d \ge 3$, $B_t$ is transient.
+\end{theorem}
+In 1d: consider intervals.
+In 2d: consider annuli.
+In 3d: apply Ito formula to the fundamental solution to the Cauchy problem. 

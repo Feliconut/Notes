@@ -1,0 +1,61 @@
+\documentclass[a0]{a0poster}
+% You might find the 'draft' option to a0 poster useful if you have
+% lots of graphics, because they can take some time to process and
+% display. (\documentclass[a0,draft]{a0poster})
+
+% \usepackage{fix-cm} % Allows arbitrary font sizes without substitution warnings
+
+\input{preamble.tex}
+
+% \usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\begin{document}
+
+\TPGrid[1.5in,1.5in]{45}{33}      % margins 1.5in all around
+
+\parindent=0pt
+\parskip=0.5\baselineskip
+
+\begin{textblock}{5}(0,0)
+\includegraphics[width=5in]{src/purdue.png}
+\end{textblock}
+\begin{textblock}{5}(40,0)
+\includegraphics[width=5in]{src/epfl.png}
+\end{textblock}
+
+\begin{textblock}{35}(5,0)
+\begin{center}
+\Title{Convergence of scaled asymptotically-free 
+self-interacting random walks to Brownian motion perturbed at extrema
+} 
+%\vspace{30pt} Hamiltonian Systems}\\
+% \vspace{85pt}
+\Subtitle{Xiaoyu Liu (Purdue, USA), Zhe Wang (EPFL, Switzerland)}
+\end{center}
+\end{textblock}
+
+\begin{textblock}{48}(0,3.5)
+    \begin{center}
+        \Huge{\color{steelblue}
+        \verb|arXiv:2402.11828| \qquad Submitted to \textit{Electronic Journal of Probability}
+        }
+    \end{center}
+\end{textblock}
+
+
+%==============================================================================
+% END OF HEADER
+%==============================================================================
+
+
+\begin{textblock}{45.5}(-0.25 ,4.5)
+\hspace{0in}
+\hrule
+\end{textblock}
+
+\begin{textblock}{45}(0, 4.75)
+    \begin{multicols}{3}
+        \input{col1.tex}
+    \end{multicols}
+\end{textblock}
+
+\end{document}

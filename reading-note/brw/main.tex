@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+
+\usepackage[backend=bibtex,style=authoryear,sorting=nyt,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=false]{biblatex}
+\addbibresource{BRW.bib}
+
+\title{Your Title}
+\author{Your Name}
+\date{\today}
+
+\newcommand{\drawpicture}{{\color{cyan!70} This is immediate when one draws a picture.} }
+\newcommand{\why}{{\color{red}(Why?)}}
+\newcommand{\followup}{{\color{orange}(This needs further follow-up.)}}
+
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+
+\input{ZeitouniNote.tex}
+\input{Comets02.tex}
+% \input{brw-research.tex}
+
+
+
+
+\newpage
+\printbibliography
+
+\end{document}

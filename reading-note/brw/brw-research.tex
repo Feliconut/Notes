@@ -1,0 +1,56 @@
+\section{BRW research}
+
+\subsection{Branching RWRE, stepping effect}
+
+Mar 11 2025.
+
+Unlike ``trapping effect'', we claim that in presence of branching, we have a ``stepping effect'' arising from the trapping. We claim a \textbf{linear} correction term to the SLLN:
+\[
+M_n = \Lambda'(t) n + c^* n + o(n),
+\]
+where, $\Lambda'(t) n$ is the speed arising from large deviation principle \autocite{cometsQuenchedAnnealed2003}, and $c^* n$ is the correction term.
+
+We consider the position of maximum particle $M_n$, with deterministic branching number $k$. Consider an environment such that $I(0) = \log k$ so that the expected speed is $0$ in absence of trapping. We want to prove
+\[
+M_n = c^* n + o(n).
+\]
+
+Fix some constant $K$, and we claim that $c^* > 0$ whenever for trap $[a,b]$ of size $\geq K$,
+\[
+    p_K = P((T_{v})_n \cap [a,b] \neq \emptyset, \forall n | v \in [a,b]) > 0.
+\]
+That is, the probability of surviving in a trap of size $\geq K$ conditioned on reaching this trap is positive. Given this condition, we demonstrate the following steps:
+\begin{enumerate}
+    \item Upon start of the walk, stay around the origin, and send a lot of particles to the left of the origin, survive in the first trap of size $\geq K$.
+    \item Given survival in the first trap, we can send infinitely many particles to the right until the walk survives in the second trap of size $\geq K$.
+    \item Repeat the process. Since the distribution of traps is stationary, this gives a linear speed.
+\end{enumerate}
+
+Next, we try to give conditions on the environment to make $c^* > 0$. When this happens we give a lower estimate of $c^*$.
+
+\textbf{Claim.} When $k \geq 3$, $p_K > 0$.
+\begin{proof}
+    \[
+    p_K \geq P((T_{v})_{1 .. 10} \subset [a, b] \mid v \in [a, b]) P(T_{v} \text{ survives in }[a,b] | (T_v)_{1 .. 10} \subset [a, b]).
+    \]
+    That is, the probability of staying in the trap for the first $10$ steps, and then surviving in the trap. 
+
+    The first probability is positive. A lower bound for the second probability is given by moving all particles to the edge of trap. Given the large number of particles, the probability of survival is close to $1$, and the number of particels grows exponentially.
+\end{proof}
+
+Next, estimate $c^*$ from below.
+
+The time required to reach from a survived trap to the next trap and survive there is
+\[
+ (k / 2)^n \frac{\kappa^{L(K)}}{p_K} \approx 1
+\]
+where $n$ is the upper approximate of the time required. Thus a lower bound of $c^*$ is given by
+\[
+c^* \geq \frac{L(K)} {L(K) \log_{k / 2} \frac{1}{\kappa}  + \log _{k / 2} p_K}
+\]
+
+Let $K \to \infty$ and $p_K$ does not decay as fast as $\exp(-L(K))$. We have
+\[
+    c^* \approx \frac{\log (k / 2)}{\log{\frac{1}{\kappa}}}
+\]
+This is valid for small $k$. For large $k$, we expect $c^*$ be such that the speed $M_n / n$ is essentially $1$.
