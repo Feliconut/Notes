@@ -1,0 +1,60 @@
+\subsection{Janjigian, HW4}
+
+\begin{enumerate}
+    \item \textbf{Problem 2.} Let $x \in \mathbb{R}$ be given and let $B_t$ be standard Brownian motion on $\mathbb{R}$. Find the analytic solution to the stochastic differential equation
+
+    \[
+    d X_t=\left(\frac{2 X_t}{1+t}+5(1+t)^2\right) d t+5\left(1+t\right)^2 d B_t, \quad X_0=x
+    \]
+    
+    
+    Hint: Use an integrating factor.
+    
+    \textbf{Solution.} First apply a change of variable:
+    \begin{gather*}
+        2 Y_t = 2 X_t + 5(1+t)^3 \\
+        2 d Y_t = 2 d X_t + 15(1+t)^2 d t 
+    \end{gather*}
+    So that the original SDE becomes
+    \[
+        d X_t = \frac{2 Y_t}{1+t} dt + 5(1+t)^2 d B_t
+    \]
+    which simplifies to
+    \[
+        d Y_t = \frac{2 Y_t}{1+t} dt + \frac{25}{2} (1+t)^2 d B_t
+    \]
+    Now we are in good shape to apply the \strategy{integrating factor technique for solving differential equations}.
+    Note that for a classical ODE of the form
+    \[
+        d f(t) = (P(t) f(t) + Q(t)) dt
+    \]
+    we can apply the integrating factor
+    \[
+        \mu(t) = e^{-\int P(t) dt}
+    \]
+    and apply the product rule on $\mu(t) f(t)$.
+
+    Let's apply this to our SDE. We have $P(t) = \frac{2}{1+t}$.
+    Integrating yields $\int P(t) dt = (1+t)^{-2}$.
+    So we have
+    \[
+        d((1+t)^{-2} Y_t) 
+        = (1+t)^{-2} d Y_t -2 Y_t (1+t)^{-3} dt
+        = \frac{25}{2} d B_t.
+    \]
+    Integrating on both sides, we can solve for $X_t$:
+    \begin{gather*}
+        (1+t)^{-2} Y_t = \frac{25}{2} B_t + C \\
+        Y_t = \frac{25}{2} (1+t)^2 B_t + C (1+t)^2\\
+        2 X_t + 5(1+t)^3 = \frac{25}{2} (1+t)^2 B_t + C (1+t)^2\\
+        X_t = \frac{25}{4} (1+t)^2 B_t + \frac{C}{2} (1+t)^2 - \frac{5}{2} (1+t)^3\\
+    \end{gather*}
+    modulo computation mistakes. But anyhow you get the idea.
+
+        
+        
+
+
+
+
+\end{enumerate}

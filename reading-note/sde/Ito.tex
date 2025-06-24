@@ -685,11 +685,14 @@ The proof is completely parallel to the $M_t = B_t$ case.
 	A stochastic process $M_t$ adapted to $\mathcal{F}_t$ is called a \textit{local martingale} if there exists stopping times $T_n$ going to infinity, such that $M_{t \wedge T_n}$ is a martingale.
 \end{definition}
 
-\item A \textit{semimartingale} is a process of the form
+\begin{definition}[Semimartingale]
+	A \textit{semimartingale} is a process of the form
 	\[
 		X_t = A_t + M_t
 	.\] 
-	where $M_t$ is a local martingale, and $A_t$ is a process of locally finite variation. We can define
+	where $M_t$ is a local martingale, and $A_t$ is a process of locally finite variation. 
+\end{definition}
+	We can define
 	\[
 		\int _0^t H_s d X_s = \int _0^t H_s d A_s + \int _0^t H_s d M_s
 	.\] 

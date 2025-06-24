@@ -1,0 +1,332 @@
+\section{Stochastic Calculus, SDEs}
+
+\subsection{Stochastic Differential Equations (SDEs)}
+
+We consider the following result from (Karatzas et al, 1991), page 289.
+\begin{theorem}[Existence and Uniqueness of SDE under Lipschitz Condition]
+    
+    Suppose that the coefficients $b(t, x), \sigma(t, x)$ satisfy the global Lipschitz and linear growth conditions
+
+\[
+\begin{aligned}
+\|b(t, x)-b(t, y)\|+\|\sigma(t, x)-\sigma(t, y)\| & \leq K\|x-y\| \\
+\|b(t, x)\|^2+\|\sigma(t, x)\|^2 & \leq K^2\left(1+\|x\|^2\right)
+\end{aligned}
+\]
+
+for every $0 \leq t<\infty, x \in \mathbb{R}^d, y \in \mathbb{R}^d$, where $K$ is a positive constant. On some probability space $(\Omega, \mathscr{F}, P)$, let $\xi$ be an $\mathbb{R}^d$-valued random vector, independent of the r-dimensional Brownian motion $W=\left\{W_t, \mathscr{F}_t^W ; 0 \leq t<\infty\right\}$, and with finite second moment:
+
+\[
+E\|\xi\|^2<\infty
+\]
+
+
+Let $\left\{\mathscr{F}_t\right\}$ be as in (2.3). Then there exists a continuous, adapted process $X=$ $\left\{X_t, \mathscr{F}_t ; 0 \leq t<\infty\right\}$ which is a strong solution of equation (2.1) relative to $W$, with initial condition $\xi$. Moreover, this process is square-integrable: for every $T>0$, there exists a constant $C$, depending only on $K$ and $T$, such that
+
+\[
+E\left\|X_t\right\|^2 \leq C\left(1+E\|\xi\|^2\right) e^{C t} ; \quad 0 \leq t \leq T
+\]
+
+\end{theorem}
+The basic idea is that Lipschitz conditions on the coefficients can be used to bound the growth of the solution in terms of Gronwall inequality, and Picard iteration can be used.
+
+To demonstrate the method, we first show uniqueness. Let $X$ and $\hat X$ be two solutions of the SDE with initial conditions $Z$ and $\hat Z$ respectively. Then their $L^2$ distance can be written as
+\[
+    \mathbb{E}\left[ \left( X - \hat{X}  \right) ^2 \right] = \mathbb{E}\left[ \left(  (Z - \hat{Z} ) + \int _0^t \left( \mu(s, X_s) - \mu(s, \hat{X} _s) \right) ds + \int _0^t \left( \sigma(s, X_s) - \sigma(s, X_s) \right)   d B_s \right) ^2 \right]
+\]
+Recall from \strategy{AM-GM inequality} we have $\|v_1 + \ldots + v_k\|^2 \le k^2 \left( \|v_1\|^2 + \ldots + \|v_k\|^2 \right) $. Then the above quantity can be splited into three expectation, at cost of a factor of $9$. Then apply \strategy{Jensen's inequality} to $\frac{1}{t} \int_0^t$ for the $ds$ term, and Ito's isometry for the $dB$ term. We have
+\[
+	9\left( \mathbb{E}\left[ (Z - \hat{Z} )^2 \right]  + 9 t \mathbb{E}\left[ \int _0^t (\mu - \hat{\mu} )^2 ds  \right] + 9 \mathbb{E}\left[ \int _0^t (\sigma - \hat{\sigma} )^2 ds \right]  \right) 
+.\] 
+
+Then we can apply the Lipschitz condition to the $ds$ term:
+\[
+	\mathbb{E}\left[ (X_t - \hat{X} _t)^2 \right] 
+	\le 9 \mathbb{E}\left[ (Z - \hat{Z} )^2 \right] 
+	+ 9 (1 + t) D^2 \int _0^t \mathbb{E}\left[ |X - \hat{X} |^2 \right] 
+.\] 
+
+We observe that this is an inequality of the form
+\[
+	v(t) \leq F + A \int _0^t v(s) ds
+.\] 
+By \strategy{using Gronwall Inequality to provide exponential growth bound of integral equations}, we have
+\[
+	v(t) \le F \exp(At)
+\] 
+where $F = 3 \mathbb{E}\left[ |Z - \hat{Z} |^2 \right] $, and $A = 3 ((1 + T) D^2$.
+
+For identical initial condition $Z = \hat{Z} $, we immediately have $\mathbb{E}\left[ |X_t - \hat{X} _t|^2 \right]  = 0$. By \strategy{using dyadic points to improve one-point event to the whole path}, (applying Bore-Cantelli and using pathwise continuity), we conclude that $X_t = \hat{X} _t$ pathwise a.s.
+
+For general domain $[0,\infty )$, we \strategy{use localization to upgrade results for semimartingales to local semimartingales}.
+
+Next, we discuss proof for existence using Picard iteration. The iteration rule reads
+
+\[
+	\begin{cases}
+		X_t^{(0)} \equiv Z \\
+		X_t^{(k+1)} = Z + \int _0^t \mu\left( s, X_s^{(k)} \right) d s + \int _0^t \sigma(s, X_s^{(k)}) d B_s, 0 \le t < \infty 
+	\end{cases}
+.\] 
+To prove convergence of $X_t^{(k)}$, we control telescoping sums. Apply the same computation as in the proof of uniqueness, we get
+
+\[
+E\left[\left|X_t^{(k+1)}-X_t^{(k)}\right|^2\right] \leq(1+T) 3 D^2 \int_0^t E\left[\left|X_s^{(k)}-X_s^{(k-1)}\right|^2\right] d s
+\]
+
+If we work with $L^2$ Ito processes, we can iterate this inequality to get 
+\[
+E\left[\left|X_t^{(k+1)}-X_t^{(k)}\right|^2\right] \leq \frac{A_2^{k+1} t^{k+1}}{(k+1)!} ; \quad k \geq 0, t \in[0, T]
+\]
+
+This implies the sequence $(X_t^{k})_k$ is Cauchy in $L^2(\lambda \times P)$ where $\lambda$ is Lebesgue measure on $[0,T]$. Thus we have the desired limit. 
+
+We can show straightforwardly that the limit $X_t$ satisfies the SDE, obeys growth conditions, and admits a continuous modification.
+
+One can also obtain a direct proof of continuity.
+
+
+\subsection{Tilting, and Girsanov's theorem}
+
+\begin{definition}
+	If we have $\mathbb{E}^{\mathbb{P}}(Z) = 1$ where $Z\geq 0$, we may define $d \mathbb{Q} = Z d \mathbb{P}$, i.e. for any event $A \in \mathcal{F}$,
+	\[
+		\mathbb{Q}(A) =  \mathbb{E}^\mathbb{P}\left[ 1_A Z \right] 
+	.\] 
+	In this case, $Z =  \frac{d \mathbb{Q}}{d \mathbb{P}}$ is the Radon-Nikodym derivative.
+	
+	This construction is called a \textit{change of measure}. In particular, when $\mathbb{P}$ is itself a distribution on $\mathbb{R}$ (or some general space), we call this \textit{tilting}.
+\end{definition}
+
+\begin{example}
+	\textbf{Classical Conditioning.}
+	Take $Z = 1_C / P(C)$, we have
+	\[
+		\mathbb{Q}(A) = \mathbb{P}(A \cap C) / \mathbb{P}(C)
+	.\] 
+	We see that taking $Z$ to be (normalized) indicator of an event is equivalent to classical conditional probability. Thus, we may view change of measure as a ``soft'' version of classical conditioning: instead of forcing an event to happen, we reweight the events, rewarding the ones we would like to happen more. This will become clear in later examples.
+\end{example}
+
+\begin{example}
+	\textbf{Large Deviations.} Exponential tilting is used to put emphasis on tail behavior of normal-like random variables. For example, in the proof of Cr\'amer's Theorem, one performs exponential tilting of the form
+\begin{align*}
+    P\left( S_n > n x \right)
+    &= E\left[ 1_{S_n > n x} \right] \\
+    &= E\left[ 1_{S_n > n x} \frac{e^{\lambda S_n - n \lambda x}}{ E \left[ e^{\lambda S_n - n \lambda x} \right]} e^{-\lambda S_n + n \lambda x} \right] E \left[ e^{\lambda S_n - n \lambda x} \right] \\
+    &= \tilde E \left[ 1_{\hat S_n > n x} e^{-\lambda \hat S_n + n \lambda x} \right] E \left[ e^{\lambda S_n - n \lambda x} \right] \\
+\end{align*}
+see note \verb|brw/ldp|. We see that, after tilting with appropriate exponential moment $ \lambda$, the random variable $\hat{S} _n$ becomes centered at $nx$, allowing us to use CLT, and all exponential information are concentrated in the second term from which we derive the large deviation principle. In this example, tilting allows us to ``shift'' the mean of a normal-like variable.
+
+\end{example}
+Note that in the above tilting process we have changed the variance. For normal variables it is possible to shift the mean without changing variance; but preserving variance is not possible in general. To the contrast, we often want to decrease the variance using tilting to enable efficient sampling, see the next example.
+
+\begin{example}
+	\textbf{Importance Sampling, Variance Reduction Technique.}
+
+	Suppose that, under $\mathbb{Q}$, the r.v. $X$ has pmf
+	\[
+		f_X^{\mathbb{Q}}(k) = \begin{cases}
+			10^{-6} & k = 10^6 \\
+			1 - 10^{-6} & k = 0
+		\end{cases}
+	.\] 
+	Direct estimation of its mean via sampling is inefficient, as
+	\[
+		\operatorname{Var}^{\mathbb{Q}}\left( \frac{1}{n} \sum_{n = 1}^n X_i \right)  = \frac{\operatorname{Var} ^{\mathbb{Q}}X_1}{n} = \frac{10^6 - 1}{n}
+	.\] 
+	Thus, if one want a precision of $0.1$, one wants  $\text{Std}^{\mathbb{Q}} \sim  \frac{10^3}{\sqrt{n} } \sim 0.1$, i.e. $n ~ 10^{7}$.
+	
+	It is possible to do better, if one is allowed to tilt the distribution. Define a new r.v.  $Y$ whose support coincides with $X$, whose law under  another measure $\mathbb{P}$ is given by
+	\[
+		f_Y^{\mathbb{P}}(k) = \begin{cases}
+			p & k = 10^5 \\
+			1 - p & k = 0
+		\end{cases}
+	.\] 
+	Define $Z \in \sigma(Y)$ on $(\Omega, \mathbb{P})$, as
+	\[
+		Z = \frac{f_X^{\mathbb{Q}}}{f_Y^{\mathbb{P}}}
+	\]
+	so that
+	\[
+		Z = \begin{cases}
+			\frac{10^{-5}}{p} & \text{when }X = 10^5 \\
+			\frac{1 - 10^{-5}}{1 - p} & \text{when } X = 0
+		\end{cases}
+	.\] 
+	Then, one can check,
+	\[
+		\mathbb{E}^{\mathbb{P}}[X Z] = \mathbb{E}^{\mathbb{Q}}[X]
+	.\] 
+	Our sampling scheme for $\mathbb{E}^{\mathbb{Q}}[X]$ would be
+	\begin{enumerate}
+		\item Sample $X$ under $\mathbb{P}$.
+		\item Compute $Z(X)$.
+		\item Get a sample for $XZ$.
+	\end{enumerate}
+	To see why this new sampling scheme is superior, we note:
+	\[
+		\operatorname{Var} \left[ \frac{1}{n} \sum_{i=1}^{n} X_i Z_i \right] = \frac{\operatorname{Var} \left[ X_1 Z_1 \right] }{n} = \frac{\frac{1}{p} - 1}{n}
+	.\] 
+
+	One may choose, for example, $p = \frac{1}{2}$. Then the number of samples is $~100$.
+
+	Note, however, the above tilting preserves the expectation of  $X $ but not its variance. We are basically reducing the variance to facilitate sampling.
+\end{example}
+
+
+
+\subsubsection{Change of Measure for Normal Random Variables}
+
+We proceed to discuss Gaussian change of measures. We consider only $\mathbb{R}$ though the result holds in general. If $X\sim N(0, \sigma^2)$ and $Y \sim N(\mu, \sigma^2)$, we see that the two gaussian measures are absolutely continuous wrt each other, and
+ \[
+	 L(x) := \frac{f_X(x)}{f_Y(x)} = e^{-\frac{x^2}{2 \sigma^2} + \frac{(x - \mu)^2}{2 \sigma^2}} = e^{- \frac{\mu}{\sigma^2}x + \frac{\mu^2}{ 2 \sigma^2}}
+.\] 
+$L(Y)$ will be used to change measure. We may verify,
+\[
+	\mathbb{E}_Y[L(Y)] = 1
+.\] 
+Here, $L$ is called the \textit{likelihood ratio}. For any nice function $g$, we have
+\begin{align*}
+	\mathbb{E}\left[ g(X) \right] 
+	&= \int g(x) f_{X}(x) dx \\
+	&= \int g(y) f_{Y}(y) L(y) dy \\
+	&= \mathbb{E}\left[ g(Y) L(Y) \right]
+.\end{align*}
+
+\begin{example}
+	
+Say, if I want to numerically estimate
+\[
+	\mathbb{P}\left( N(0, 1) > 7 \right) \sim  1.28 \times 10^{-12}
+.\] 
+Direct sampling requires $10^{16}$ samples to get to 2 digits of accuracy. However, if we perform tilting, take $X \sim N(0, 1)$ and $Y \sim N(7, 1)$, we have
+\[
+	\mathbb{P}(X > 7) = \mathbb{E}\left[ 1(Y > 7) e^{- 7 Y + \frac{49}{2}} \right] 
+.\] 
+We generate samples for $Y$, compute likelihood ratios, to estimate this expectation. The variance in this case is very small. We only need $\sim 10^6$ samples this time.
+
+\end{example}
+
+\subsection{Girsanov's theorem}
+
+First, let's introduce some motivation.
+Consider the SDE
+\[
+	dX = f(t) dt + d B_t
+.\] 
+A discretized ``solution'' takes the form
+\[
+	X_{t_{k}} = \sum_{i=1}^{k} \left(f(t_i) \frac{1}{n} + Y_i \frac{1}{\sqrt{n} }\right), \quad Y_i \sim N(0,1)
+.\] 
+To center each increment, one uses the likelihood ratio
+\[
+	L_i(y) = \frac{f_{N(\frac{f(t_i)}{n}, \frac{1}{n})}}{f_{N(0,\frac{1}{n})}} 
+	= \exp \left( f(t_i) y - \frac{1}{2n} f(t_i)^2 \right) 
+.\] 
+Tilting each increment independently, one has, for all nice $g$,
+\[
+	\mathbb{E}\left[ g(X_{t_k}) \right] 
+	= \mathbb{E}\left[ g(B_{t_k}) \exp \left( \sum_i f(t_i) Y_i - \frac{1}{2n} f(t_i)^2 \right)  \right] 
+.\] 
+In the continuous limit, one expects
+\[
+    \mathbb{E}\left[ g(X_{t}) \right] 
+    = \mathbb{E}\left[ g(B_{t}) \exp \left( \int_0^t f(s) d B_s - \frac{1}{2} \int_0^t f(s)^2 ds \right)  \right]
+\]
+Conversely, if we tilt each $dX$, we have
+\[
+    \mathbb{E}\left[ B_t \right] 
+    = \mathbb{E}\left[ X_t \exp \left( \int_0^t f(s) d X_s - \frac{1}{2} \int_0^t f(s)^2 ds \right)  \right] 
+\] 
+i.e.,
+\[
+    X_t \exp \left( -\int_0^t f(s) d B_s - \frac{1}{2} \int_0^t f(s)^2 ds \right)
+    \quad \text{is a martingale}.
+\]
+This is part of the Girsanov theorem, one can explicitly check via Ito's formula. Now, let's state the full theorem and prove it.
+
+\begin{theorem}[Girsanov's theorem]
+    Let $Y(t) \in \mathbf{R}^n$ be an Itô process of the form
+\[
+d Y(t)=a(t, \omega) d t+d B(t) ; \quad t \leq T, \quad Y_0=0
+\]
+where $T \leq \infty$ is a given constant and $B(t)$ is $n$-dimensional Brownian motion. Put
+\[
+M_t=\exp \left(-\int_0^t a(s, \omega) d B_s-\frac{1}{2} \int_0^t a^2(s, \omega) d s\right) ; \quad 0 \leq t \leq T
+\]
+Assume that $M_t$ is a martingale with respect to $\mathcal{F}_t^{(n)}$ and $P$. Define the measure $Q$ on $\mathcal{F}_T^{(n)}$ by
+\[
+d Q(\omega)=M_T(\omega) d P(\omega)
+\]
+Then $Q$ is a probability measure on $\mathcal{F}_T^{(n)}$ and $Y(t)$ is an n-dimensional Brownian motion w.r.t. $Q$, for $0 \leq t \leq T$.
+\end{theorem}
+
+\begin{remark}
+    \begin{enumerate}
+        \item The Novikov condition is a sufficient condition for the martingale property of $M_t$.
+        \item Since $M_t$ is a martingale, we have
+        \[
+            M_T dP = M_t dP \quad \text{on } \mathcal{F}_T^{(n)}.
+        \]
+    \end{enumerate}
+\end{remark}
+
+\begin{proof}
+    We recall the L\'evy's characterization of Brownian motion: a process $Y(t)$ is a Brownian motion w.r.t. probability measure $Q$ if and only if
+    \begin{enumerate}
+        \item $Y(t)$ is a martingale,
+        \item $Y_i(t) Y_j(t) - \delta_{ij} t$ is a martingale for all $i, j$.
+    \end{enumerate}
+    By above result,
+    \begin{align*}
+        \mathbb{E}\left[ Y_i(t) | \mathcal{F}_s \right] 
+	&= \frac{\mathbb{E}\left[ M_t Y_i(t) | \mathcal{F}_s \right] }{\mathbb{E}\left[ M_t | \mathcal{F}_s \right] } \\
+	&= \frac{M_s Y_s}{ M_s} = Y_s
+    \end{align*}
+    In the first equality we used the \textit{Bayes Formula}, stated and proven below. In the second equality we used the fact that $M_s Y_s$ is a $\mathbb{P}$-martingale, as shown above.
+\end{proof}
+
+\begin{lemma}[Bayes' Rule]
+	\label{lem:BayesRule}
+	Let $\mu$ and $\nu$ be probability measures on a measurable space $(\Omega, \mathcal{G})$ such that $d\nu = f d \mu$, $f \in L^1(\mu)$. Let $X$ be $L^1(\nu)$. Let $\mathcal{H} \subset \mathcal{F}$. Then
+	\[
+		\mathbb{E}_\nu\left[ X | \mathcal{H} \right] 
+		\mathbb{E}_\mu \left[ f | \mathcal{H} \right] 
+		= \mathbb{E}_\mu \left[ f X | \mathcal{H} \right] 
+		\quad \text{a.s.}
+	\] 
+\end{lemma}
+
+\textbf{Intuition.} We have that
+\[
+    \mathbb{E}_\nu\left[ X ; H \right]
+    = \mathbb{E}_\mu\left[ f X ; H \right]
+    ,
+\]
+but it is not the case that
+\[
+    \mathbb{E}_\nu\left[ X | \mathcal{H} \right]
+    = \mathbb{E}_\mu\left[ f X | \mathcal{H} \right]
+    .
+\]
+This is because
+\[
+	\mathbb{E}_\nu \left[ X ;H \right] 
+	= \mathbb{E}_\nu \left[ \mathbb{E}_\nu[X | \mathcal{H}] \right] 
+	= \mathbb{E}_\nu \left[ \frac{\mathbb{E}_\mu\left[ f X | \mathcal{H} \right] }{\mathbb{E}_\mu \left[ f | \mathcal{H}  \right] } \right] 
+	= \mathbb{E}_\mu\left[ f X ;H \right] \mathbb{E}_\mu \left[ \frac{ 1 }{\mathbb{E}_\mu \left[ f | \mathcal{H}  \right] } f 1_H \right] 
+.\] 
+
+\begin{proof}
+	\begin{align*}
+		&\int _H \mathbb{E}_\mu\left[ f | \mathcal{H} \right] \mathbb{E}_\nu \left[ X | \mathcal{H} \right]  d \mu \\
+        &= \mathbb{E}_\mu\left[ \mathbb{E}_\mu\left[ f | \mathcal{H} \right] \mathbb{E}_\nu \left[ X | \mathcal{H} \right] 1_H \right]  \\
+        &= \mathbb{E}_\mu\left[ \mathbb{E}_\mu \left[ \mathbb{E}_\nu \left[ X | \mathcal{H} \right] f 1_H | \mathcal{H} \right]  \right]  \\
+        &= \mathbb{E}_\mu \left[ \mathbb{E}_\nu \left[ X | \mathcal{H} \right] f 1_H \right] \\
+        &= \mathbb{E}_\nu \left[ \mathbb{E}_\nu \left[ X | \mathcal{H} \right] 1_H \right] \\
+        &= \mathbb{E}_\nu \left[ X 1_H \right] \\
+        &= \mathbb{E}_\mu \left[ fX 1_H \right] 
+	.\end{align*}
+\end{proof}
+

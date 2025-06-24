@@ -10,8 +10,8 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{tcolorbox}
-% \usepackage[backend=bibtex,style=authoryear,sorting=none,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=false]{biblatex}
-% \addbibresource{zotero_truncated.bib}
+\usepackage[backend=bibtex,style=authoryear,sorting=none,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=false]{biblatex}
+\addbibresource{SDE.bib}
 \usepackage{enumitem}
 \usepackage{caption}
 \tcbuselibrary{breakable}
@@ -53,13 +53,18 @@
 \newcommand{\edit}[1]{\todo[color=orange]{Edit: #1}}
 \renewcommand{\comment}[1]{\todo[inline, color=green]{Comment: #1}}
 
+\newcommand{\strategy}[1]{{\color{blue} #1}}
+
 \title{Your Title}
 \author{Your Name}
 \date{\today}
 
 \begin{document}
 \tableofcontents
-\input{bm.tex}
-\input{Ito.tex}
-\input{martingale.tex}
+% \input{bm.tex}
+% \input{Ito.tex}
+% \input{martingale.tex}
+% \input{bessel-sim.tex}
+\input{exercises/janjigian-4.tex}
+\input{sde.tex}
 \end{document}

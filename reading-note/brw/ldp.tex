@@ -1,0 +1,99 @@
+\section{Large Deviations}
+
+\subsection{Cramer's theorem}
+
+Start with an i.i.d sequence $X_1, X_2, \ldots$ with moment condition $E e^{t X_1} < \infty$ for all $t \in \mathbb{R}$. We also assume for now that
+\begin{enumerate}
+    \item $E X_1 = 0$. This can be easily removed by centering the random variable.
+    \item $X_1$ has both positive and negative tails. The one-sided case can be handled by a very simple proof which we ignore for now.
+\end{enumerate}
+We want to obtain the large deviation principle for $S_n / n$, where $S_n = X_1 + \ldots + X_n$. In other words, we want to obtain information about exponential decay of the probability
+\[
+    P\left( \frac{S_n}{n} > x \right)
+\]
+We may still simplify the proof by considering 
+\begin{enumerate}[resume]
+    \item $x = 0$. The proof can be easily extended to the case $x \neq 0$.
+\end{enumerate}
+
+We start by applying an exponential change of measure:
+\begin{align*}
+    P\left( \frac{S_n}{n} > 0 \right) &= P\left( S_n > 0 \right) \\
+    &= E\left[ 1_{S_n > 0} \right] \\
+    &= E\left[ 1_{S_n > 0} \frac{e^{\lambda S_n}}{ E \left[ e^{\lambda S_n} \right]} e^{-\lambda S_n} \right] E \left[ e^{\lambda S_n} \right] \\
+    &= \tilde E \left[ 1_{\hat S_n > 0} e^{-\lambda \hat S_n} \right] E \left[ e^{\lambda S_n} \right] \\
+\end{align*}
+
+We use the notation $\tilde E$ to denote the expectation with respect to the new measure. We denote by $\hat S_n$ the random variable $S_n$ under the new measure. 
+
+The second term $E \left[ e^{\lambda S_n} \right]$ contains the information about the tails of the distribution: $\frac{1}{n} \log E \left[ e^{\lambda S_n} \right] =: \Lambda_n(\lambda) \to \Lambda(\lambda)$. We want to find the $\lambda$ such that this term contains \textit{all the information} about the tails of the distribution, i.e. the other term is $e^{- o(n)}$. It turns out that there is only one such $\lambda^*$, and we say $I(0) = -\Lambda(\lambda^*)$, giving the LDP 
+\[
+    \frac{1}{n} \log P\left( \frac{S_n}{n} > 0 \right) = - I(0) + o(1).
+\]
+
+Look at the left hand side. One notices that the term $e^{-\lambda \hat S_n}$ grows or decays exponentially fast unless $\hat S_n$ is centered, in which case it is $O(\sqrt{n})$ due to the central limit theorem (Note that $\hat S_n$ inherits all moment conditions, and all summands remain independent due to the product structure of the Radon-Nikodym derivative.) How can we center $\hat S_n$? Let's compute the moment generating function of $\hat S_n$:
+\begin{align*}
+    \tilde \varphi_{\hat S_n}(t) &= \tilde E \left[ e^{t \hat S_n} \right] \\
+    &= E \left[ e^{t S_n} \frac{e^{\lambda S_n}}{E \left[ e^{\lambda S_n} \right]} \right] \\
+    &= \varphi_{S_n}(t + \lambda) / \varphi_{S_n}(\lambda)
+\end{align*}
+
+If we take $\lambda$ such that $\varphi'(\lambda) = 0$, we have
+\[
+    \tilde E[\hat S_n] = \tilde \varphi_{\hat S_n}'(0) = \frac{\varphi_{S_n}'(\lambda)}{\varphi_{S_n}(\lambda)} = 0.
+\]
+
+To finish the proof one performs the following sanity checks:
+\begin{enumerate}
+    \item When $X_1$ has both positive and negative tails, $\varphi_{S_n}(\lambda)$ is continuous, differentiable, strictly convex and has a unique minimum at $\lambda^* \in \mathbb{R}$. 
+\end{enumerate}
+
+Next, we give the proof for $x \neq 0$. We can use the same proof as above, but we need to be careful about the change of measure. We have
+
+\begin{align*}
+    P\left( S_n > n x \right)
+    &= E\left[ 1_{S_n > n x} \right] \\
+    &= E\left[ 1_{S_n > n x} \frac{e^{\lambda S_n - n \lambda x}}{ E \left[ e^{\lambda S_n - n \lambda x} \right]} e^{-\lambda S_n + n \lambda x} \right] E \left[ e^{\lambda S_n - n \lambda x} \right] \\
+    &= \tilde E \left[ 1_{\hat S_n > n x} e^{-\lambda \hat S_n + n \lambda x} \right] E \left[ e^{\lambda S_n - n \lambda x} \right] \\
+\end{align*}
+
+First look at the second term. We have
+\[
+    \frac{1}{n} \log E \left[ e^{\lambda S_n - n \lambda x} \right] = \frac{1}{n} \log E \left[ e^{\lambda S_n} \right] - \lambda x = \Lambda_n(\lambda) - \lambda x
+    \to \Lambda(\lambda) - \lambda x.
+\]
+
+% If we minimize over $\lambda$, we can have the exponential decay: $-I(x) = \inf_{\lambda} \left( \Lambda(\lambda) - \lambda x \right)$.
+It turns out that the minimizer $\lambda^*$ is exactly the one making the first term $e^{o(n)}$. By the same argument as above, we can center $\hat S_n - n x$ by taking $\lambda$ such that $\varphi_{S_n - n x}'(\lambda) = 0$. 
+We have
+\[
+    E [ (S_n - n x) e^{\lambda S_n - n \lambda x} ] = 0
+,\]
+i.e., 
+\[
+    E [S_n e^{\lambda S_n} ] = n x E [ e^{\lambda S_n} ],
+\]
+i.e.,
+\[
+    \varphi_{S_n}'(\lambda) = n x \varphi_{S_n}(\lambda),
+\]
+i.e.,
+\[
+    \Lambda_n'(\lambda) = x.
+\]
+
+When $\Lambda_n(\lambda)$ is differentiable and strictly convex in some domain, such $\lambda$ is the unique maximizer in the Legendre transform
+\[
+    I(x) = \sup_{\lambda} \left( \lambda x - \Lambda(\lambda) \right).
+\]
+
+Relaxing assumptions (1) and (2) are left as an exercise. Let's state the result:
+
+\begin{theorem}[Cramer's theorem]
+    Let $X_1, X_2, \ldots$ be an i.i.d. sequence of random variables with moment condition $E e^{t X_1} < \infty$ for all $t \in \mathbb{R}$. Then the sequence $S_n = X_1 + \ldots + X_n$ satisfies the large deviation principle with rate function
+    \[
+        I(x) = \sup_{\lambda} \left( \lambda x - \Lambda(\lambda) \right).
+    \]
+\end{theorem}
+
+For properties of the rate function, see \autocite[Lemma~I.14]{denhollanderLargeDeviations2008}. 

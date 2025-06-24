@@ -1,20 +1,21 @@
 \newcommand{\thiswork}{{\color{blue}[This Work]}}
 \begin{mainbox}{Background, Problem, Previous Work}
-    We consider a family of one-dimensional nearest-neighbor random walks with self-interaction [1].
+    We consider a family of one-dimensional nearest-neighbor random walks with self-interaction, called \textit{Self-interacting Random Walks} (SIRW), originally introduced and study by Toth [1].
     % : when the walker moves around the integer lattice $\mathbb{Z}$, the edges accumulate a weight that depends on the local time accumulated at the edges, and edges with higher weight tend to be visited more frequently. 
     Edges accumulate a weight that depends on the local time, according to the weight function
     \begin{equation*}
         w(n) = n^{\alpha}(1 + 2^p B n^{-p} + O(n ^{-1 - \kappa}))^{-1}, \qquad
         \alpha \in \mathbb{R}, p > 0, \kappa > 0.
     \end{equation*}
+
     \begin{multicols}{2}
     \includegraphics[width=1\linewidth]{src/doodle-def2.png}
     \columnbreak
     \includegraphics[width=1\linewidth]{src/doodle-def3.png}
     \end{multicols}
 
-
-    Previous works have shown the following characterization of the walk in different parameter regimes:
+    {\color[RGB]{234, 51, 35} How do the SIRWs behave in different parameter regimes? When do we have a functional central limit theorem? }
+    We have the following characterization:
 
     \begin{multicols}{2}
     \includegraphics[width=\linewidth]{figures/cases.png}
@@ -24,7 +25,7 @@
     \textsc{Linearly Reinforced}: limiting distribution with no scaling [3]\\
     \textsc{Weakly Reinforced}: limiting distribution with scaling [4]\\
     \textsc{Polynomially Self-repelling}: limiting distribution DNE, one-point distribution open [1] [5]\\
-    \textsc{Asymptotically Free}: limiting distribution is BMPE [1] [5, $p > \frac{1}{2}$] \thiswork
+    \textsc{Asymptotically Free}: limiting distribution is BMPE. ([1] identifies the limit, [5] proves $p \in (\frac{1}{2}, 1]$, \thiswork proves $\in (0, \frac{1}{2}]$)
         
     \end{multicols}
 
@@ -38,8 +39,7 @@
     \[
     W_t^{\theta^{+}, \theta^{-}}=B_t+\theta^{+} \sup _{s \leq t} W_s+\theta^{-} \inf _{s \leq t} W_s, \quad t \geq 0, \quad W_0=0, \quad \theta^{\pm} < 1,
     \]
-    where $B_t$ is a standard Brownian motion [6] [7].
-
+    where $B_t$ is a standard Brownian motion [6] [7]. 
     It has a \textit{martingale part} and a \textit{drift part}. A classical technique is to consider the Doob decomposition of the walk
     \[
     X_k = M_k + \Gamma_k
@@ -50,7 +50,7 @@
 \end{mainbox}
 
 \begin{mainbox}{Main Theorem}
-Theorem 1.3. Let $w(\cdot)$ be as assumed. For $p \in\left(0, \frac{1}{2}\right]$, and $\kappa>0$. Consider the SIRW $\left(X_k\right)_{k \geq 0}$  with $X_0=0$. We have the following process-level convergence [11]:
+Let $w(\cdot)$ be as assumed. For $p \in\left(0, \frac{1}{2}\right]$, and $\kappa>0$. Consider the SIRW $\left(X_k\right)_{k \geq 0}$  with $X_0=0$. We have the following process-level convergence [11]:
 
 \[
 \left(\frac{X_{\lfloor n t\rfloor}}{\sqrt{n}}\right)_{t \geq 0} \Longrightarrow\left(W_t^{\gamma, \gamma}\right)_{t \geq 0}
@@ -84,7 +84,7 @@ Where, the parameter $\gamma$ is given by
     One limitation of this approach is the difficulty to generalize to higher dimensions.
 \end{mainbox}
 
-\begin{mainbox}{Branching-Like Process, P\'olya's Urn Process}
+\begin{mainbox}{Branching-Like Process}
 
 \begin{multicols}{2}
     Fix a time $k$ where the site local time at $X_k = x$ is $m$. We define the \textit{Branching-Like Process} (BLP) $\left( \zeta^{(x,m)}_k \right) _{k \ge 0}$ as the directed edge local times
@@ -93,19 +93,30 @@ Where, the parameter $\gamma$ is given by
 \]
 as directed edge local times on the event $\{X_k = x, L(x,k) = m\}$. They are Markov processes with respect to spatial filtration.
 
+ Besides, we have the \textit{generalized P\'olya's Urn Process} describes left and right excursions from a single site.
+ 
+%  , with blue balls representing left excursions, and red balls representing right excursions. As a consequence of recurrence, each color is drawn from the urn infinitely often.
+\vfill
+
     \columnbreak
     \includegraphics[width=0.8\linewidth]{src/pet16.png}
 
     Figure: Two types of BLPs [9].
-\end{multicols}
-\begin{multicols}{2}
 
-    The \textit{generalized P\'olya's Urn Process} describes left and right excursions from a single site, with blue balls representing left excursions, and red balls representing right excursions. As a consequence of recurrence, each color is drawn from the urn infinitely often.
-
-    \columnbreak
     \includegraphics[width=\linewidth]{src/doodle-blp2.png}
 
+    Figure: The directed edge local times.
 \end{multicols}
+
+\vspace{0.5in} 
+
+% \begin{multicols}{2}
+
+
+%     \columnbreak
+
+
+% \end{multicols}
 
 
 
@@ -175,7 +186,7 @@ as directed edge local times on the event $\{X_k = x, L(x,k) = m\}$. They are Ma
 % \end{mainbox}
 \begin{mainbox}{Good Events, Two-step Approximation}
     \begin{multicols}{2}
-    [To complete steps (1), (2) and (3), we work on good events $G_{n,K,t}$ and its ``procedual realization'' $G_{n,K}^{(x,m)}(y)$ adapted to the BLP filtration. Those events are proved typical via concentration-type inequalities associated to the BLP and the P\'olya's urn process.]
+    [To complete steps (1), (2) and (3), we work on good events $G_{n,K,t}$ and its ``procedual realization'' $G_{n,K}^{(x,m)}(y)$ adapted to the BLP filtration. Those events are proved typical via concentration-type inequalities associated to the BLP and the P\'olya's urn process (excursions).]
     \vspace{-1em}
     \includegraphics[width=0.8\linewidth]{figures/goodevent.png}
 
@@ -199,7 +210,7 @@ as directed edge local times on the event $\{X_k = x, L(x,k) = m\}$. They are Ma
 % \end{mainbox}
 % \begin{mainbox}{Two-step Approximation}
     Let $\rho_y^{(x, m)}=\mathbb{E}\left[\Delta_y^{(x, m)} \mid \mathcal{G}_{y-1}^{(x, m)}\right]$. 
-    $\mathcal{G}_{y-1}^{(x, m)}$ is the filtration generated by the BLP.
+    $\mathcal{G}_{y-1}^{(x, m)}$ is the filtration generated by the BLP. This gives a spatial martingale describing the drift.
     Convergence of $\Gamma_k$ follows from
     \[
 \lim _{n \rightarrow \infty} \mathbb{P}\left(\sup _{k \leq\lfloor n t\rfloor}\left|\sum_{y>X_k}\left(\rho_y^{\left(X_k, L\left(X_k, k\right)-1\right)}-\gamma \cdot \operatorname{sgn}(y)\right)\right|>\varepsilon \sqrt{n}\right)=0 .
@@ -208,8 +219,9 @@ and
 \[
 \lim _{n \rightarrow \infty} \mathbb{P}\left(\sup _{k \leq\lfloor n t\rfloor}\left|\sum_{y>X_k}\left(\Delta_y^{\left(X_k, L\left(X_k, k\right)-1\right)}-\rho_y^{\left(X_k, L\left(X_k, k\right)-1\right)}\right)\right|>\varepsilon \sqrt{n}\right)=0 .
 \]
-The first one is via Polya's urn process.
-The second one is via control of the martingale increments on the good event, and an argument using Azuma's inequality.
+The first one is analyzed using Polya's urn process on the good event.
+The second one is controlled on the good event where the drift forms a spatial martingale with bounded increments.
+
 \end{mainbox}
 \begin{mainbox}{Future Directions}
     \begin{itemize}

@@ -1,0 +1,48 @@
+
+\section{Bessel Process, simulation}
+\subsection{Numerical Scheme for SDE}
+
+The simplest numerical scheme for simulating SDEs is the Euler-Maruyama method, described in \autocite[Chp.~9,10]{kloedenNumericalSolution1992}.
+It's higher-order correction is the Milstein scheme.
+
+The Euler-Maruyama method is a simple extension of the Euler method for ODEs.
+Given an SDE
+\begin{equation}
+    dX_t = b(X_t, t) dt + \sigma(X_t, t) dW_t,
+\end{equation}
+the Euler-Maruyama method is
+\begin{equation}
+    X_{n+1} = X_n + b(X_n, t_n) \Delta t + \sigma(X_n, t_n) \Delta W_n,
+\end{equation}
+where $\Delta t = t_{n+1} - t_n$ and $\Delta W_n = W_{n+1} - W_n$.
+
+The Milstein scheme is a higher-order correction to the Euler-Maruyama method.
+It is given by
+\begin{equation}
+    X_{n+1} = X_n + b(X_n, t_n) \Delta t + \sigma(X_n, t_n) \Delta W_n + \frac{1}{2} \sigma(X_n, t_n) \sigma'(X_n, t_n) (\Delta W_n^2 - \Delta t),
+\end{equation}
+where $\sigma'(X_n, t_n)$ is the derivative of $\sigma$ with respect to $X$ evaluated at $X_n$ and $t_n$.
+
+The Euler-Maruyama method is essentially replacing the integral with a Riemann sum, using the left endpoint of each interval. It converges to the Ito integral of the SDE.
+
+\ask{What is the difference for the Stratonovich integral?}
+
+\subsection{Bessel Process}
+
+Example 4.2.2 Let $B=\left(B_1, \ldots, B_n\right)$ be Brownian motion in $\mathbf{R}^n, n \geq 2$, and consider
+
+\[
+R(t, \omega)=|B(t, \omega)|=\left(B_1^2(t, \omega)+\cdots+B_n^2(t, \omega)\right)^{\frac{1}{2}}
+\]
+
+i.e. the distance to the origin of $B(t, \omega)$. The function $g(t, x)=|x|$ is not $C^2$ at the origin, but since $B_t$ never hits the origin, a.s. when $n \geq 2$ (see Oksendal Exercise 9.7, or SDE lecture note) Itô's formula still works and we get
+
+\[
+d R= \frac{B(t)}{R} \cdot d B(t)+\frac{n-1}{2 R} d t
+\]
+
+\begin{intuition}
+    The first term: $B(t) / R$ is the unit vector pointing to current direction; when $R$ is large, it changes according to the Brownian motion's $R$-direction.
+
+    The second term: When $R$ is small, it doesn't want to reach the origin, so we have an effective drift away from the origin. \todo{The exact reason why we have drift to the order of $1/R$ is not clear to me.}
+\end{intuition}

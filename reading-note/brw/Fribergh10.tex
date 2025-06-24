@@ -1,0 +1,98 @@
+\section{Reading Note: Fribergh et al. (2010), Moderate Deviation for RWRE}
+\label{sec:fribergh10}
+
+\newcommand{\fcite}[2]{\autocite[\href{skim:///Users/xiaoyu/Library/CloudStorage/OneDrive-Personal/Zotero-PC/Fribergh\%20et\%20al_2010_On\%20slowdown\%20and\%20speedup\%20of\%20transient\%20random\%20walks\%20in\%20random\%20environment.pdf\#page=#1}{#2}]{friberghSlowdownSpeedup2010} }
+
+\subsection{Summary of Results and Argument}
+
+Main Results:
+
+\begin{itemize}
+	\item \fcite{4}{Theorem~1.2} quenched slowdown
+	\item \fcite{5}{Theorem~1.3} annealed slowdown
+    \item \fcite{5}{Theorem~1.4} backtracking
+    \item \fcite{6}{Theorem~1.5} speedup
+\end{itemize}
+The moderate deviation profile in the \textbf{quenched case} are summarized in {Figure 1}.
+
+Take the quenched speedup as example. For $\nu \in (0,1)$, upon expanding the limit heuristically we get
+\[
+	P_\omega \left( X_n > n^ \nu \right) \sim e^{- n^{\frac{\nu - \kappa}{1 - \kappa}}} = e^{-n ^{1 - \delta}}
+.\] 
+We see that, in contrast with the LDP with exponential decrease $e^{- n I(x)}$ of probability, we instead have subexponential decrease. We see that the typical event is that
+\[
+	P_\omega(X_n \sim n^\kappa) \sim 1 - o(1)
+.\] 
+
+Such estimates are in term used in \cite{gantertMaximalDisplacement2011} to prove e.g. \href{lt://open/xIFUHEJJo0mDxQI2wskWtw}{Theorem 2.1}. We want to use a similar argument to understand branching random walk in random environment.
+
+\subsection{Line of Argument}
+
+Preliminary set-ups:
+Lemma 3.1 -- 3.6.
+\begin{itemize}
+	\item Potential: $V(x)$ potential, $\pi(x)$ reversible measure, 	
+	\item Valley Decomposition. $K_i(n)$ valley cutoffs with depth $\frac{3}{1 \wedge \kappa}\ln n$, $b_i$ bottom point of valley, $H_i$ depth of valley. $N_n(m, m')$ number of valleys between two points. $i_0, i_1$ notations for $|N(-n, 0)|$ and $|N(-n, n^\nu)$.
+	\item Upper tail for valley height: eqn. (2.7), $\mathbf{P}[S>h]=\Theta\left(e^{-\kappa h}\right)$.
+	\item Valley separation: Let $A(n)=\left\{\max _{i \leq 2 n}\left(K_{i+1}-K_i\right) \leq(\ln n)^2\right\}$, then $P(A(n)^c) = O(n^{-2})$. Typical separation $(\ln n)^2$.
+	\item Valleys $\ln \ln n$ deeper than usual. Let $B(n, v, a)^c=\left\{\operatorname{card}\left\{i \in N_n(-n^\nu, n^\nu\right): H_i \geq \frac{a}{\kappa} \ln n+\ln \ln n\right\}$ $ \geq n^{\nu-a}\}$ and we have $P(B^c) = O(n^{-2})$.
+
+
+		That is, $P(\text{a valley abnormally deep}) \sim n^{- a} / (\ln n)^2$.
+
+	\item Breaking record for $\frac{1}{\kappa}(\ln n+2 \ln \ln n)$. Let 
+		\[
+			\begin{aligned}
+G(n)^c= & \left\{\max _{k \geq n}(V(k)-V(n)) \geq \frac{1}{\kappa}(\ln n+2 \ln \ln n)\right\} \\
+& \bigcup\left\{\max _{k \geq-n}(V(k)-V(-n)) \geq \frac{1}{\kappa}(\ln n+2 \ln \ln n)\right\}
+\end{aligned}
+		.\] 
+		and we have $P(G(n)^c) = O(n^{-1} (\ln n)^{-2})$.
+	\item Deepest valley asymptotic. Let
+		\[
+			G_1(n)=\left\{\max _{i \in[-n, n]} \max _{k \geq i}(V(k)-V(i)) \leq \frac{1}{\kappa}(\ln n+2 \ln \ln n)\right\}
+		.\] 
+		and we have $\lim \inf G_1(n)$ is true a.s.
+
+	\item Existence of Deep Valley. Let
+		\[
+			\begin{aligned}
+D(n)^c= & \left\{\max _{i \in[0, n]} \max _{k \geq i}(V(k)-V(i)) \leq \frac{1}{\kappa}(\ln n-4 \ln \ln n)\right\} \\
+& \bigcup\left\{\max _{i \in[-n, 0]} \max _{k \geq i}(V(k)-V(i)) \leq \frac{1}{\kappa}(\ln n-4 \ln \ln n)\right\}
+\end{aligned}
+		.\]
+		and we have $P(D(n)^c) = O(n^{-2})$.
+
+		Thus, we have on one hand, valleys in $[-n, n]$ are deeper than $\frac{1}{\kappa}\left( \ln n - 4 \ln \ln n \right) $ ($p = O(n^{-2})$), on the other hand, shallower than  $\frac{1}{\kappa}(\ln n + 2 \ln \ln n)$ (eventually).
+		\[
+			\ln n - 4 \ln \ln n \leq \kappa H_i \le \ln n + 2 \ln \ln n,  \quad K_i \text{placed between }[-n, n]
+		.\]
+		
+
+	\item Uniform upper control of environment. Let 
+		\[
+			F(n)=\left\{\min _{i \in[-n, n]}\left(1-\omega_i\right)>n^{-3 / \varepsilon_0}\right\}
+		.\] 
+		and we have
+		$P(F(n)^c) = O(n^{-2})$.
+	
+
+	Using Borel-Cantelli, we may work on the event where
+	\[
+		A(n) \cap B'(n, v, m) \cap G_1(n) \cap D(n) \cap F(n)
+	\] 
+	holds eventually.
+
+\item Quick results: (1) $\pi(b_i) \le \frac{1}{2} \pi(b_{i + 1})$, lower bound on growth rate. (we know that $\pi$ grows exponentially, due to transience.) (2) $V(K_i) - V(K_{i + 1}) \le  \gamma_0 \ln n$, height drops $\ln n$ per valley. Compare to $ (\ln n)^2$ typical spacing.
+\end{itemize}
+
+
+Probability of Confinement: Proposition 4.1 -- 4.3.
+
+
+
+
+
+
+
+

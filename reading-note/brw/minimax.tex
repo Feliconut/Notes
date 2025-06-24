@@ -1,0 +1,317 @@
+\section{Note on Minimax Theorem}
+
+The starting point of this note is to understand the minimax theorem in its generalized form in Sion's 1958 paper \autocite{sionGeneralMinimax1958}. This is then used in the context of proof of LDP of RWRE in \autocite[Theorem~5]{cometsQuenchedAnnealed2000}. 
+
+It would be more convenient to take this theorem for granted and understand the proof of the LDP theorem, but it is still useful to understand the minimax theorem in its own right, becuase it is such a fundamental result.
+
+
+\subsection{Von Neumann’s Minimax Theorem}
+Von neumann’s work initiates game theory and his framework lasts until the contemporary study of games. His minmax theorem was not a new result if viewed from logical structure, since it is derivable from theory of linear inequalities and fixed point theorems, however those connections was not apparent to Von Neumann until decades later. Borel can also receive some credit for developing game theory. Ref a nice paper in history of math \autocite{kjeldsenJohnNeumanns2001}.
+
+\subsubsection{Von Neumann’s 1928 Proof}
+
+In Von Neumann’s original paper in 1928, he defined the problem of n-player zero-sum game. He then considers the simple 2-player case (the general existence result for n players established by Nash in 1949). The concept of “strategy” and “mixed strategy” were introduced. This linear mixing introduces convexity to the problem, and his proof involves a fixed point theorem in disguise.
+
+The original proof essentially uses idea from fixed point theorem; though in his paper only linear inequalities were considered, his proof works for nonlinear functions with appropriate convexity and continuity assumptions. To treat linear equations, a method of separating a point from a convex set by a hyperplane was used much later, leading to a transparent proof of Von Neumann’s minimax theorem.
+
+\begin{theorem}
+\label{thm:von-neumann-minimax}
+Let $A: \mathbb{R}^p_+ \times \mathbb{R}^q_+ \to \mathbb{R}$ be a bilinear form, and for each $\xi \in \mathbb{R}^p$, $\eta \in \mathbb{R}^q$, such that $\sum \xi_i = 1$ and $\sum \eta_j = 1$, define
+\[
+h(\xi, \eta) = \sum_{i=1}^p \sum_{j=1}^q A_{ij} \xi_i \eta_j.
+\]
+Then
+\[
+    \max_{\xi} \min_{\eta} h(\xi, \eta) = \min_{\eta} \max_{\xi} h(\xi, \eta).
+\]
+\end{theorem}
+
+Refer to \autocite{sionGeneralMinimax1958} for definition of quasi-concave-convex.
+
+\begin{proof}
+    First, we write $h$ as $h = h(\xi_1, \ldots, \xi_p, \eta_1, \ldots, \eta_q)$. Write $M^{\xi_i} f = \max_{\xi_i} h(\xi_1, \ldots, \xi_p, \eta_1, \ldots, \eta_q)$ and $m^{\eta_j} f = \min_{\eta_j} h(\xi_1, \ldots, \xi_p, \eta_1, \ldots, \eta_q)$. We note that the minimax theorem follows from the following two claims:
+    
+    \begin{itemize}
+        \item For continuous and quasi-concave-convex $f$, $M$'s commute with each other, and preserves quasi-concave-convexity. Same for $m$'s.
+        \item For continuous and quasi-concave-convex $f$, $M^{\xi_i} m^{\eta_j} f = m^{\eta_j} M^{\xi_i} f$.
+    \end{itemize}
+    The first claim is straightforward. We prove the second claim. It suffices to consider the case $p = q = 1$. For each $\xi$, there is an interval $[L(\xi), L'(\xi)]$ of minimizing $\eta$; and for each $\eta$, there is an interval $[K(\eta), K'(\eta)]$ of maximizing $\xi$. The fact that those are closed intervals follows from the continuity and quasi-concave-convexity of $f$. Moreover, $K, L$ are lower-semicontinuous while $K', L'$ are upper-semicontinuous. 
+
+    Now, define the set function
+    \[
+    \xi \mapsto D(\xi) := \bigcup_{\eta \in [L(\xi), L'(\xi)]} [K(\eta), K'(\eta)].
+    \]
+    If $\xi \in D(\xi)$, then there exists $\eta$, such that $\xi$ is maximizing and $\eta$ is minimizing, i.e. $(\xi, \eta)$ is a saddle point, i.e. the minimax theorem holds.
+
+    Using the semicontinuity of $K, L, K', L'$, we can show that $D$ is a closed boudned interval, with semicontinuous endpoints. One then shows that there exists a point $\xi^* \in D(\xi^*)$ and conclude the proof.
+\end{proof}
+
+The final step of the proof essentially uses a fixed-point theorem of a set function, which is a generalization of Brouwer's fixed-point theorem, and can be attributed to Kakutani's work in 1941 \autocite{kakutaniFixedPoint1941}. In 1949, Nash proved the fixed-point for $n$-player games using the Kakutani's fixed-point theorem, which renders Von Neumann's minimax theorem as a special case \autocite{nashEquilibrium1950}. 
+
+\begin{proof}[Nash's proof of minimax theorem]
+    Consider the product space of all mixed strategies of each player. Define a set function $C$ of ``countering strategies'', i.e. for each element $x$ in the product space, $C(x)$ is the set of all strategies that for each player $i$, $C(x)_i$ is a best response to $x_i$. The set $C(x)$ is nonempty and convex, and $C$ has a closed graph. Then by Kakutani's fixed-point theorem, there exists a point $x^*$ such that $x^* \in C(x^*)$. This means that each player is playing a best response to the others, i.e. $x^*$ is a Nash equilibrium. 
+\end{proof}
+
+\subsubsection{Von Neumann's 1944 Proof}
+In 1944, Von Neumann provided a new proof of minimax theorem in the context of linear inequalities and the theory of convexity, in the joint work ``Theory of Games and Economic Behavior'' with Oskar Morgenstern. The proof uses the linear structure of the problem together with convex analysis techniques (hyperplane separation), but not the fixed-point theorem directly. 
+
+They first established the lemma:
+
+\begin{lemma}
+    If $A$ is a $(n \times m)$  matrix then exactly one of the following two systems of inequalities has a solution:
+\[
+\begin{aligned}
+& A x \leq 0, \quad x \geq 0, \quad \sum_{j=1}^m x_j=1, \\
+& w A>0, \quad w>0, \quad \sum_{i=1}^n w_i=1 .
+\end{aligned}
+\]
+\end{lemma}
+\begin{proof}
+    Let's look at the first system of inequalities. $x$ defines a convex combination of the columns of $A$, and the inequalities $Ax \leq 0$ means that the convex combination touches the negative octant (where each entry is negative). 
+
+    The second system of inequalities is similar, but now $w$ defines a hyperplane passing throgh the origin, and $w > 0$ identifies the half-space including the positive octant. $w A > 0$ iff $w (Ax) > 0$ for all positive $x$. Such a hyperplane separating $Ax$ from the negative octant exists iff the convex hull of columns of $A$ does not intersect the negative octant.
+\end{proof}
+
+This lemma is a special case of the hyperplane separation theorem, which states that if two convex sets are disjoint, then there exists a hyperplane separating them. The proof of the minimax theorem follows from this lemma. 
+
+Now, we write the value function in the minimax theorem as:
+\[
+h(\xi, \eta)  = \xi A \eta
+\]
+where $\xi$ is now a row vector and $\eta$ is a column vector. 
+
+\begin{proof}[Linear proof of minimax theorem]
+The lemma implies that, either
+\begin{itemize}
+    \item There exists a $\xi$ such that $\xi A \eta \geq 0$ for all $\eta$, i.e. $\max_{\xi} \min_{\eta} h(\xi, \eta) \geq 0$, or
+    \item There exists a $\eta$ such that $\xi A \eta \leq  0$ for all $\xi$, i.e. $\min_{\eta} \max_{\xi} h(\xi, \eta) \leq 0$.
+\end{itemize}
+This means that it is never the case that
+\[
+\max_{\xi} \min_{\eta} h(\xi, \eta) < 0 < \min_{\eta} \max_{\xi} h(\xi, \eta).
+\]
+By replacing $A$ with an affine transformation $A' = A + \lambda$, such that $xA'y = xAy + \lambda$, we see that the proof of Lemma is still valid, and we can conclude that it's never the case that
+\[
+\max_{\xi} \min_{\eta} h(\xi, \eta) < \lambda < \min_{\eta} \max_{\xi} h(\xi, \eta).
+\]
+But we always have
+\[
+\max_{\xi} \min_{\eta} h(\xi, \eta) \leq \min_{\eta} \max_{\xi} h(\xi, \eta).
+\]
+Thus, we conclude that
+\[
+\max_{\xi} \min_{\eta} h(\xi, \eta) = \min_{\eta} \max_{\xi} h(\xi, \eta).
+\]
+This is the minimax theorem.
+\end{proof}
+
+\subsection{Sion's Generalized Minimax Theorem}
+
+The Sion’s 1958 version is very generalized; his proof does not involve a fixed-point theorem directly, and does not use the hyperplane approach. However his argument essentially relies on the KKM theorem which is a combinatorial version of fixed point theorem. 
+
+\subsubsection{The KKM Theorem, discrete fixed-point theorem}
+
+The KKM theorem is a set-covering version of Brouwer's fixed-point theorem.
+
+\begin{theorem}[KKM Theorem]
+    Let $\Delta_n$ be a $n$-simplex with vertices $0, 1, \ldots, n$. Let $C_0, C_1, \ldots, C_n$ be closed subsets of $\Delta_n$ such that for each $I \subseteq \{0, 1, \ldots, n\}$, the union $\bigcap_{i \in I} C_i$ covers the convex hull of $I$, i.e. the $I$-subsimplex. 
+
+    Then the intersection $\bigcap_{i=0}^n C_i$ is nonempty.
+\end{theorem}
+
+This theorem can be used to prove Brower's fixed-point theorem. However in Sion's version, the KKM theorem is used directly.
+
+The KKM theorem can be derived from the Sperner's lemma, which is a combinatorial lemma about graph coloring, which has two very nice proofs.
+
+\begin{theorem}[Sperner's Lemma]
+    Let $\Delta_n$ be a $n$-simplex and $\mathcal{S}$ its subdivision into smaller $n$-simplices. Color the vertices of $\mathcal{S}$ with labels $0, 1, \ldots, n$ such that for every $I \subseteq \{0, 1, \ldots, n\}$, the vertices of the $I$-subsimplex of $\Delta_n$ are colored with only the colors in $I$. For example, for $n=2$, the vertices of the triangle are colored with own label and each edge is colored with two colors.
+
+    Then there exists an element of $\mathcal{S}$ whose vertices colored with all $n+1$ colors. Moreover, there must be odd number of fully-colored elements in $\mathcal{S}$.
+\end{theorem}
+\begin{proof}[Proof by induction]
+    The base case $n = 1$ is trivial. Now, assume the theorem holds for $1, \ldots, n-1$. Consider the $n$-simplex $\Delta_n$ and its subdivision $\mathcal{S}$. Define a graph $G$ whose vertices are elements of $\mathcal{S}$ plus the area outside $\Delta_n$, and two elements are connected if they share a face of dimension $n-1$ colored by $\{ 0, 1, \ldots, n-1\}$. Then
+    \begin{itemize}
+        \item A fully-colored element is a vertex of $G$ of degree $1$.
+        \item A non-fully-colored element is a vertex of $G$ of degree $0$ or $2$.
+        \item The area outside $\Delta_n$ is a vertex of $G$ of odd degree. (This is from induction hypothesis; consider the $n-1$-subsimplex of $\Delta_n$.)
+    \end{itemize}
+    By the handshaking lemma (an elementary result in graph theory), the sum of degrees of all vertices is even. Since the area outside $\Delta_n$ has odd degree, there must be an odd number of fully-colored elements in $\mathcal{S}$. In particular, there must be at least one.
+\end{proof}
+
+\begin{proof}[Proof by volume]
+    Recall the volume formula for a positively-oriented $n$-simplex with vertices $v_0, v_1, \ldots, v_n$:
+    \[
+    \text{Vol}(\Delta_n) = \frac{1}{n!} \det(v_1 - v_0, v_2 - v_0, \ldots, v_n - v_0).
+    \]
+    Now consider the subdivision. We have
+    \[
+    \text{Vol}(\Delta_n) = \sum_{S \in \mathcal{S}} \text{Vol}(S),
+    \]
+    where $S$ is a $n$-simplex in the subdivision $\mathcal{S}$.
+
+    Now, define a perturbation of the vertices of $S$ such that the vertices are moved slightly in the direction of the color of the vertex, hitting that vertex at time $t = 1$. Then, we see two facts:
+    \begin{itemize}
+        \item Under small perturbation $\mathcal{S}$ remains a subdivision of $\Delta_n$, and the total volume remains constant.
+        \item For each $S \in \mathcal{S}$, the volume of $S(1)$ is nonzero iff $S$ is fully-colored. When it's nonzero, we have $\text{Vol}(S(1)) = \pm \text{Vol}(\Delta_n)$, depending on the orientation of the coloring.
+    \end{itemize}
+    Finally, we know that the total volume of $\mathcal{S}(t)$ is a polynomial in $t$, so in particular it is analytic. By (1) it is constant in a small neighborhood of $t = 0$, hence it is constant for all $t$. By (2), we get the conclusion because for a number of $\pm 1$ to sum to $1$, the number of summands must be odd.
+\end{proof}
+
+We now prove Brouwer's fixed point theorem using the Sperner's lemma.
+\begin{theorem}[Brouwer's Fixed Point Theorem]
+    Any continuous function from a convex compact subset of a Euclidean space to itself has a fixed point.
+\end{theorem}
+\begin{proof}
+    We consider the standard $n$-simplex. Let $\mathcal{S}$ be its subdivision, and $f$ a continuous function from the simplex to itself. For each vertex $v$ of some $S \in \mathcal{S}$, we color the vertex with the smallest index $i$ such that $f(v)_i \leq v_i$. This is a Sperner coloring.
+
+    Now, we apply the Sperner's lemma. There exists a fully-colored element $S^* \in \mathcal{S}$. Then any vertex $v$ of $S^*$ satisfies
+    \[
+    |f(v)_i - v_i| \leq |\mathcal{S}|
+    \].
+    Take finer and finer subdivisions of $\mathcal{S}$, and apply compactness of the simplex, we can find a fixed point $f(x) = x$ in the limit.
+\end{proof}
+
+Note that by going from the Sperner's lemma to the Brower's fixed-point theorem, we have used compactness. It is not motivated to demonstrate a proof in the reverse direction since the proof of Sperner's lemma is already elementary.
+
+One can also prove Brouwer's fixed-point theorem using the KKM theorem, but the idea should be essentially the same.
+
+\begin{proof}[Proof of KKM from Sperner]
+    Color each vertex of $S \in \mathcal{S}$ with the smallest-index color used inside $S$.
+\end{proof}
+\begin{proof}[Proof of Sperner from KKM]
+    Define $C_i$ to be the set of all points $x \in S \in \mathcal{S}$ such that the barycentric coordinates of $x$ has an $i$-colored vertex with weight at least $1/n$. \autocite{voorneveldKKMSperner2017}
+\end{proof}
+
+\subsubsection{Convex Covering Lemmas}
+
+\begin{thm}[Sion Theorem~3.1]
+    Let $S$ be $n$-dimensional simplex with vertices $a_0, a_1, \ldots, a_n$. If $A_0, A_1, \ldots, A_n$ is an open cover such that
+    \begin{itemize}
+        \item $S - A_i$ is convex,
+        \item $a_i \in A_j \iff i = j$.
+    \end{itemize}
+    Then $\bigcap_{i=0}^n A_i \neq \emptyset$.
+\end{thm}
+\begin{proof}
+    Use KKM theorem. (1) implies that $S - A_i$ satisfies the KKM condition. Using compactness, we can find closed approximations of $A_i$ that still cover $S$. Then we can apply KKM.
+\end{proof}
+
+\begin{thm}[Sion Theorem~3.2]
+    Let $U = \{ a_0, a_1, \ldots, a_n \}$ be a finite set of points in $\mathbb{R}^k$, where $k < n$. Then $\bigcap_{i=0}^n \text{conv}(U - \{a_i\}) \neq \emptyset$.
+\end{thm}
+\begin{proof}
+    $\bigcap_{i=0, i \neq j}^n \text{conv}(U - \{a_i\}) \ni a_j$, so every $n$-intersection of those $n+1$ convex sets is nonempty. Helly's theorem implies the result.
+\end{proof}
+Still, we can spend some time to understand the proof of Helly's theorem in order to build some intuition. \followup
+
+\begin{thm}[Sion Lemma~3.3]
+    Let $M$ be a convex set, $Y$ a finite set, and $f$ a function on $M \times Y$. Assume:
+    \begin{itemize}
+        \item $f$ is quasi-concave and upper semi-continuous in $M$.
+        \item $Y$ is minimal with respect to the property: for each $\mu \in M$ there exists a $y \in Y$ such that $f(\mu, y) < c$.
+    \end{itemize}
+    Then there exists a $\mu_0 \in M$ such that $f(\mu_0, y) < c$ for all $y \in Y$.
+\end{thm}
+\begin{proof}
+    Let $A_i = \{ \mu \in M : f(\mu, y_i) < c \}$. By construction, $M - A_i$ is convex. Since $Y$ is minimal, in particular $Y - y_i$ violates the property, i.e. there exists $a_i \in M$ such that $a_i \in M - A_j$ for all $j \neq i$. Thus $\operatorname{conv}(U - \{a_i\}) \subset M - A_i$. Moreover, $A_i$ cover $M$ by assumption. Hence $\bigcap_{i=0}^n \operatorname{conv}(U - \{a_i\}) = 0$. By the previous theorem 3.2, points in $U$ must span an $n$-simplex. By 3.1, we have $\bigcap_{i=0}^n A_i \neq \emptyset$, i.e. there exists such a $\mu_0$.
+\end{proof}
+
+\subsubsection{Main Theorem}
+
+\begin{theorem}[Sion's Generalized Minimax Theorem]
+    Let $M, N$ be convex, compact spaces, and $f: M \times N \to \mathbb{R}$ be quasi-concave-convex and u.s.c.-l.s.c.. Then $\sup_m \inf_n f(m, n) = \inf_n \sup_m f(m, n)$.
+\end{theorem}
+\begin{proof}
+    We assume that 
+    \[
+        \sup_m \inf_n f(m, n) < c < \inf_n \sup_m f(m, n).  
+    \]
+    \textbf{Step 1.} Define
+    \[
+        A_\mu = \{\nu: f(\mu, \nu) > c\}, \quad
+        B_\nu = \{\mu: f(\mu, \nu) < c\}
+    \]
+    By assumption, the collection of all $A_\mu$ cover $M$, and the collection of all $B_\nu$ cover $N$. Because $f$ is u.s.c.-l.s.c., level sets of the forms $A_\mu, B_\nu$ are open.
+    By compactness of $M, N$, we can choose finite subsets $X_1 \subset M$, $Y_1 \subset N$ such that $(A_\mu)_{\mu \in X_1}$ and $(B_\nu)_{\nu \in Y_1}$ are finite open covers of $M$ and $N$, respectively.
+    In other words, using convexity of $M, N$, 
+    \begin{itemize}
+        \item For each $\nu \in \operatorname{conv}(Y_1)$, there exists $\mu \in X_1$ such that $f(\mu, \nu) > c$.
+        \item For each $\mu \in \operatorname{conv}(X_1)$, there exists $\nu \in Y_1$ such that $f(\mu, \nu) < c$.
+    \end{itemize}
+
+    \textbf{Step 2.} Now, we iteratively reduce $X_1, Y_1$ until they become mutually minimal. So after finitely many steps, our finite subsets $X$ and $Y$ are such that:
+    \begin{itemize}
+        \item $X$ is minimal with respect to the property: for each $\nu \in \operatorname{conv}(Y)$, there exists $\mu \in X$ such that $f(\mu, \nu) > c$.
+        \item $Y$ is minimal with respect to the property: for each $\mu \in \operatorname{conv}(X)$, there exists $\nu \in Y$ such that $f(\mu, \nu) < c$.
+    \end{itemize}
+
+    \textbf{Step 3.} Now, we can apply the previous lemma twice (once in original form, once in parity). We have
+    \begin{itemize}
+        \item Exists $\mu_0 \in \operatorname{conv}(X)\subset M$, such that $f(\mu_0, \nu) < c$ for all $\nu \in Y$, thus all $\nu \in \operatorname{conv}(Y)$.
+        \item Exists $\nu_0 \in \operatorname{conv}(Y) \subset N$, such that $f(\mu, \nu_0) > c$ for all $\mu \in \operatorname{conv}(X)$.
+    \end{itemize}
+    This implies
+    \[
+        c < f(\mu_0, \nu_0) < c,
+    \]
+    a contradiction.
+\end{proof}
+
+\subsubsection{Concave-Convexlike Functions}
+
+\begin{thm}[Sion Theorem~4.1']
+Let $M, N$ be any spaces, $f$ a function on $M \times N$ that is concave-convexilike. If for any $c>\sup \inf f$ there exists a finite set $Y \subset N$ such that for any $\mu \in M$ there is a $y \in Y$ with $f(\mu, y)<c$, then sup $\inf f=\inf \sup f$.
+\end{thm}
+\begin{proof}
+    One possible proof is through the semi-finite generalization of the Von Neumann minimax theorem \autocite[Theorem~2.3.3, p.~46]{BlackwellGirshick1954}:
+
+    \begin{thm}
+        If a two-player zero-sum game $(X,Y,A)$ has finite strategy set $X$ for player I and value function $A$ bounded from below, then the game has a finite value and player I has an optimal mixed strategy.
+    \end{thm}
+
+    We will use the assumption in the theorem to reduce the problem to the case there one strategy set is finite. 
+
+    Fix a $c > \sup_\mu \inf_\nu f$. By assumption, there exists a finite set $Y \subset N$ such that for each $\mu \in M$, there exists a $y \in Y$ such that $f(\mu, y) < c$. We allow player II to choose a mixed strategy over $Y$. By assumption, we have 
+    \[
+        \sup_\mu \inf_{i} f(\mu, y_i) \leq c.
+    \]
+    Introduce convex mixing of $Y$, we have
+    \[
+    \sup_\mu \inf_i f(\mu, y_i) \geq
+    \sup_\mu \inf_{\Delta} \sum p_i f(\mu, y_i).
+    \]  
+    Apply the semifinite Von Neumann minimax theorem, we have
+    \[
+    \sup_\mu \inf_{\Delta} \sum p_i f(\mu, y_i)
+    = \inf_{\Delta} \sup_\mu \sum p_i f(\mu, y_i)
+    \]
+    Now, since $f(\mu, \nu)$ is convex-like in $\nu$, one obtains an element $\nu^* \in N$ such that
+    \[
+        \inf_{\Delta} \sup_\mu \sum p_i f(\mu, y_i)
+        \geq \inf_\Delta \sup_\mu f(\mu, \nu^*).
+    \]
+    Note that the infimum over $\Delta$ is still here, since $\nu^*$ can depend on the choice of $p_i$. Taking infimum over the larger set $\nu \in N$, we have
+    \[
+        \inf_\nu \sup_\mu f(\mu, \nu) \leq c.
+    \]
+    This is true for any $c$, hence we get the minimax theorem.
+\end{proof}
+
+\followup It looks like we've entered a rabbit hole here. This line of results leads into game theory, convex analysis, linear programming, etc. One more day is required in order to understand the basic ideas behind the proof of the Theorem used. How dare you, Sion, to sweep such much nuisance under the rug by just saying ``a direct consequence''! Also, the reader is completely confused by the author's claim that this is a direct consequence of the previous theorem for quasi-concave-convex functions.
+
+\begin{thm}[Sion Theorem~4.2]
+    Let $M$ be compact and $N$ be any space. Let $f$ be a function on $M \times N$ that is concave-convexilike. If $f(\mu, \nu)$ is u.s.c. in $\mu$ for each $\nu \in N$, then $\sup_\mu \inf_\nu f = \inf_\nu \sup_\mu f$.
+\end{thm}
+\begin{proof}
+    For $c > \sup_\mu \inf_\nu f$, let $A_\nu = \{ \mu : f(\mu, \nu) < c \}$. The $A_\nu$ are open and cover $M$, by u.s.c. and assumption. By compactness of $M$, finitely many of them cover $M$. Now apply the previous theorem 4.1'.
+\end{proof}
+
+The theorem used in RWRE-LDP is
+
+\begin{thm}[Sion Theorem~4.2']
+    Let $M$ be any space, $N$ compact, $f$ a function on $M \times N$ that is concave-convexlike. If $f(\mu, \nu)$ is lower semi-continuous in $\nu$ for each $\mu$, then sup $\inf f=\inf \sup f$.
+\end{thm}
+
+
+
+%Next step is to clarify connections to ergodic measures.

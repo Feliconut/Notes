@@ -223,7 +223,7 @@ class goodevent:
     plt.fill_between([-7, 7], 0, 14, color='lightgreen', alpha=0.5)
 
     plt.bar(list(rescaled_local_times.keys()), list(rescaled_local_times.values())
-        , width=1/10000**0.5, alpha = 1, color='orange')
+        , width=1/10000**0.5, alpha = 1, color='0,200,0')
     
     # show x axis ticks - K sqrt n and K sqrt n
     plt.xticks([-7, 7, 0], [r'$-K \sqrt{n}$', r'$K \sqrt{n}$', '0'])

@@ -5,9 +5,11 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{float} % [H] option for figures
 \tcbuselibrary{breakable}
 
-\usepackage[backend=bibtex,style=authoryear,sorting=nyt,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=false]{biblatex}
+\usepackage[backend=bibtex,style=authoryear-ibid,sorting=nyt,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=true]{biblatex}
 \addbibresource{BRW.bib}
 
 \title{Your Title}
@@ -17,6 +19,7 @@
 \newcommand{\drawpicture}{{\color{cyan!70} This is immediate when one draws a picture.} }
 \newcommand{\why}{{\color{red}(Why?)}}
 \newcommand{\followup}{{\color{orange}(This needs further follow-up.)}}
+\newcommand{\strategy}[1]{{\color{blue} #1}}
 
 
 \theoremstyle{plain}
@@ -24,12 +27,18 @@
 \newtheorem{remark}{Remark}
 \newtheorem{example}{Example}
 \newtheorem{theorem}{Theorem}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem{proposition}{Proposition}
 \begin{document}
+\tableofcontents
 
-\input{ZeitouniNote.tex}
-\input{Comets02.tex}
-% \input{brw-research.tex}
-
+\input{Fribergh10.tex}
+% \input{ZeitouniNote.tex}
+\input{Comets00.tex}
+\input{brw-research.tex}
+% \input{ldp.tex}
+\input{minimax.tex}
 
 
 
