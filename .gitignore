@@ -288,3 +288,6 @@ current_semester
 **/master.tex
 tags
 .vscode/settings.json
+reading-note/.bib
+**/zotero.bib
+**.swo

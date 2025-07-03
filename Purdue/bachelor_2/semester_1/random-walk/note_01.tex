@@ -1,0 +1,118 @@
+\studynote{1}{Tue 29 Oct 2024 22:35}{Note on SLLN for BRWRE}
+\newpage
+\subsection{SLLN for BRWRE}
+
+\subsubsection{Preliminary results and assumptions}
+
+Assumptions for BRW:
+\begin{enumerate}
+	\item The tree is a $k$-ary tree.
+\end{enumerate}
+Assumptions for the RE:
+\begin{enumerate}
+	\item Environment is ergodic.
+	\item Environment is strongly elliptic.
+\end{enumerate}
+
+According to [Comets et al 00], those assumptions on the RE gives the quenched LDP with rate function $I^q_\eta$, and the quenched path-LDP with rate function $I_\eta^{\text{traj}, q}[\phi(\cdot )] \doteq \int _0^1 I_\eta^q \left( \dot{\phi(t)}\right) d t$.
+
+
+Define the event $B^\varepsilon_v$, have the LDP
+\[
+	\frac{1}{n} \log P(B^\varepsilon_v) = - I(x^*) - o_{n \to \infty }(1) - o_{\varepsilon \to 0}(1)
+.\] 
+
+
+\subsubsection{The Argument using quenched LDP}
+
+
+
+\begin{proposition}
+	\label{prop:SLLN-BRWRE}
+	Under assumptions stated above, we have that
+	\[
+		M_n / n \to x^*, \quad \text{ almost surely}
+	.\] 
+\end{proposition}
+\textbf{Upper Bound.} Use same argument as in [Zei20]. 
+
+\textbf{Lower Bound.} We first give the proof for BRW, and then give a modified proof for BRW-RE satisfying above assumptions.
+
+Assume $v \in D_m$ and $S_v = x$. Construct the tree $T^v_\cdot $ as follows. Let $v$ be the root of the tree, $T^v_0 = \{v\} $. Take $T^v_1$ to be the sets of descendants $w$ of $v$ such that $\rho(v, w) = L$ and $S_w > S_v + (x^* - \varepsilon)L$.
+
+More generally, $T^v_j$ consists of all descendants $w$ of $v$ such that there exists $w' \in T^v_{j -1}$ where $\rho(w', w) = L$ and $S_w > S_{w'} + (x^* - \varepsilon) L$.
+
+\textbf{Claim.} The subtree $T^v$ is supercritical for all large $L$.
+To see this, calculate
+\begin{align*}
+	E|T^v_1|
+	&= E \sum_{w \in D^{v}_{L}} 1\left( S_w > S_v + (x^* - \varepsilon) L \right)  \\
+	&\geq E \sum_{w \in D^{v}_{L}} 1\left( B^{\varepsilon / 3, x^* - \frac{2}{3}\varepsilon}_{v, L}\right)  \\
+	&= k^L P\left( B^{\varepsilon / 3, x^* - \frac{2}{3}\varepsilon}_{v, L} \right)  \\
+	&= k^L e^{- LI(x^* - 2 \varepsilon / 3) - L o_\varepsilon(1) - L o_L(1)} \\
+	&= e^{L(I(x^*) - I(x^* - 2 \varepsilon / 3) - o_\varepsilon(1) - o_L(1))} \\
+	&> 1 \qquad \text{for $L$ large}
+.\end{align*}
+
+Fix some $L$ such that $T^v$ is supercritical. Now we construct a sequence of subtrees. Assume $k \ge 2$ and the walk is transient to the right or recurrent. Take $v_1$ to be a particle that first hits $1$. Take $v_2$ to be a particle that first hits $2$ and not a descendant of $v_1$. Continue in this fashion.
+
+Now, the sequence of trees $T^{v_i}$ are independent (actually iid up to translation, in the case of BRW with no RE), and each supercritical. By Borel-Cantelli, at least one of them survives. Now follow any $1$-ary subtree of that surviving tree, i.e. path of a particle, we get
+\[
+	\liminf_{n \to \infty } M_n / n \ge x^* - \varepsilon
+.\] 
+Take $\varepsilon \to 0$ and we obtain the desired lower bound.
+
+Now we consider the BRW-RE case. The difficulty comes from the fact that $E|T^v_1|$ now depends on the environment in $[S_v - L, S_v + L]$. Even if $E|T^0_1| > 1$, there will be some rare events where $E|T^w_1| \le 1$, so we cannot say that any subtree $T^v$ constructed as above is supercritical.
+
+However, we may introduce the following tempered subtree $\tilde T ^v$ and force it to be supercritical. The construction is as follows:
+\begin{itemize}
+	\item For any $v \in \tilde T^w$, compute $E|T^v_1|$. We can do so because we are working in quenched environment.
+	\item If $E|T^v_1| > 1$, branch as in the construction of $T^v$. That is, the descendants of $v$ in $\tilde T^w$ is $T^v_1$.
+	\item If $E|T^v_1|\le 1$, pick a random particle $v'$ in $D^v_L$, and the descendants of $v$ in $\tilde T^w$ is $T^v_1 \cup \{v'\} $.
+\end{itemize}
+
+By this construction, $\tilde T^w$ is supercritical. Construct a sequence of independent subtrees as in the BRW case. Then we obtain some subtree $\tilde T^w$ that survives.
+
+Now it suffices to show that, on the event of non-extinction, any infinite trajectory in $\tilde T^w$ has desired limiting velocity. Fix some trajectory $v_j \in T^w_n$ where $v_{j} \in D^{v_{j - 1}}_L$.
+
+Let
+\[
+	j^* = \sum_{k = 0}^{j - 1} \mathbf{1}\left( E|T_1^{v_k}| > 1 \right) , \qquad j_* = j - j^*
+.\] 
+
+Then for all $j > 0$,
+\[
+	M_{j L} \ge (x^* - \varepsilon) L j^* - L j_*
+.\] 
+The desired lower bound would follow if we can show
+\[
+	\lim_{L \to \infty}  \limsup_{j \to \infty } j_* / j  = 0 \quad \text{ a.s.}
+.\] 
+Using the ergodic theorem we can control the density of bad sites. Define
+\[
+	B_x := \{[-L + x, L + x] \text{ is bad}\}  := \{E|T^x_1| \le 1\} 
+.\] 
+Then
+\[
+	\frac{1}{N} \sum_{n=0}^{N} 1_{B_x} = \frac{1}{N} \sum_{n=0}^{N} 1_{B_0} \circ \theta^n = P(B_0) + o_N(1) = o_L(1) + o_N(1)
+.\] 
+
+Thus the density of bad sites is $o_L(1)$.
+
+\underline{This part need to be made rigorous.} The Borel-Cantelli argument gives no information about the starting position of $v_j$. Thus, the event of $v_j$ switching between good and bad sites can be approximated by a Markov chain with two states. Now, we may estimate those probabilities at $0$ :
+\begin{itemize}
+	\item $P(S_L \,\text{bad} | 0\, \text{bad} ) = o_L(1)$
+	\item $P(S_L \,\text{bad} | 0\, \text{good} ) = o_L(1)$
+\end{itemize}
+
+Thus, the stationary distribution of the good-bad Markov chain is given by
+\[
+	\mu(G) = 1 - o_L(1), \qquad \mu(B) = o_L(1)
+.\] 
+Therefore
+\[
+	j_* = j \mu(B) + o(j) = j o_L(1) + o(j)
+.\] 
+This completes the proof.
+
+

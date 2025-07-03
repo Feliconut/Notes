@@ -1,0 +1,61 @@
+\lecture{1}{Tue 19 Nov 2024 23:08}{Varadhan's Lemma}
+\tags{Probability, Large Deviations}
+
+\begin{theorem}[Varadhan's Lemma]
+    \label{thm:varadhan}
+    Let $(P_n)$ be a sequence of probability measures satisfying LDP with rate $n$ and good rate function $I$. Let $F: X \to \mathbb{R}$ be a continuous function bounded from above. Then
+    \[
+        \lim_{n \to \infty} \frac{1}{n} \log \int e^{nF(x)} \, P_n(dx) = \sup_{x \in X} \left( F(x) - I(x) \right)      
+    .\] 
+\end{theorem}
+
+\begin{intuition}
+    Large deviation principle roughly means $P_n(dx) \approx e^{-nI(x)}$. So, the integral is roughly $\int e^{nF(x)} e^{-nI(x)} \, dx = \int e^{n(F(x) - I(x))} \, dx$. The largest contribution to this integral will come from the largest value of $F(x) - I(x)$.
+\end{intuition}
+
+\begin{proof}
+    First, we prove the lower bound.
+    Write $b = \sup_{x \in X} \left( F(x) - I(x) \right)$. On the set $\{ x: F(x) \leq b \}$, we have the trivial bound
+    \[
+        \int e^{nF(x)} \, P_n(dx) \geq e^{nb} \int P_n(dx) \leq e^{nb}
+    .\]
+    On the set $\{ x: F(x) > b \}$, we consider the set $C_{b, \epsilon}= \{x: b \leq F(x) \leq b + \epsilon \}$. By the large deviation principle, we have
+    \[
+        P_n(C_{b, \epsilon}) \leq_* e^{-nI(C_{b, \epsilon})} 
+    .\]
+    Where, $\leq_*$ means that $\leq$ holds when we take $\lim\sup \frac{1}{n} \log$ on both sides. We have
+    \[
+        \int_{C_{b, \epsilon}} e^{nF(x)} \, P_n(dx) 
+        \leq_* e^{n(b + \epsilon)} e^{-nI(C_{b, \epsilon})} 
+    .\]
+    and
+    \[
+        {(b + \epsilon)} {-I(C_{b, \epsilon})} 
+        \leq \sup_{x \in C_{b, \epsilon}} \left( F(x) - I(x) \right) + \epsilon
+        \leq \sup_{x \in X} \left( F(x) - I(x) \right) + \epsilon
+        = b + \epsilon 
+    .\]
+    Note: this can be applied also to the sets $C_{b + \epsilon, \epsilon}$, $C_{b + 2\epsilon, \epsilon}$, $\ldots$. Call them $C_j^\epsilon$.
+
+    Now, by the ``largest exponent wins'' principle, i.e. $\log(a + b) \approxeq \log(a \vee b)$, we have
+    \[
+        \int_C e^{nF(x)} \, P_n(dx)
+        \sim
+        \max_{j} \int_{C_j^\epsilon} e^{nF(x)} \, P_n(dx)
+        \leq^* e^{n(b + \epsilon)} 
+    .\]
+    Take $\epsilon \to 0$ and combine with the result on $X \setminus C$ to get the upper bound.
+
+    For the lower bound, suffices to show that for every $x \in X$, $\int_X e^{nF(y)} \, P_n(dy) \geq_* e^{n(F(x) - I(x))}$. Consider the family of open sets $B_{x, \epsilon} = \{F(y) > F(x) - \epsilon\}$. We have by LDP
+    \[
+        P_n(B(x, \epsilon)) \geq_* e^{-nI(B(x, \epsilon))}
+    .\]
+    Since $I$ is lower semi-continuous, we have $I(x) = \lim_{\epsilon \to 0} I(B(x, \epsilon))$. So, we have
+    \[
+        \int_{B(x, \epsilon)} e^{nF(y)} \, P_n(dy) \geq_* e^{n(F(x) - \epsilon)} e^{-nI(B(x, \epsilon))} \to e^{nb - n \epsilon}
+    .\]
+
+    \todo{write this more intuitively...}
+
+\end{proof}
+

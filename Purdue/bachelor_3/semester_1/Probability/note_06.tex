@@ -1,0 +1,108 @@
+\studynote{6}{Tue 05 Nov 2024 00:11}{Stochastic Calculus}
+
+
+\subsection{Construction of the Itô Integral}
+
+\subsubsection{Preliminary Definitions and Function Spaces}
+\begin{itemize}
+    \item \textbf{Space of Progressive Processes}: Define $\mathbb{H}$ as the space of progressively measurable, square-integrable processes $u_t: [0, \infty) \times \mathbb{R}$. Explain progressive measurability and square-integrability.
+    \item \textbf{Hilbert Structure of $\mathbb{H}$}: Explain that $\mathbb{H}$ is a Hilbert space with the $L^2$ inner product $\langle u, v \rangle = \mathbb{E} \left( \int_0^\infty u(t) v(t) \, dt \right)$.
+    \item \textbf{Subspace $L^2_M[a,b]$}: Define $L^2_M[a,b]$ as the space of square-integrable, progressively measurable processes on $[a, b]$ with inner product
+    \[
+    \langle u, v \rangle = \mathbb{E} \left( \int_a^b u(t) v(t) \, d\langle M \rangle_t \right),
+    \]
+    where $\langle M \rangle$ is the quadratic variation of $M$.
+\end{itemize}
+
+\subsubsection{Elementary Processes and Density}
+\begin{itemize}
+    \item \textbf{Elementary Processes $\mathcal{E}$}: Define elementary processes as piecewise constant processes adapted to the filtration at discrete time points.
+    \item \textbf{Density of $\mathcal{E}$ in $L^2_M[a,b]$}: Prove that $\mathcal{E}$ is dense in $L^2_M[a,b]$, which allows for extension of the Itô integral to the entire space.
+\end{itemize}
+
+\subsubsection{Construction of the Itô Integral}
+\begin{itemize}
+    \item \textbf{Integral for Elementary Processes}: Define the Itô integral $I_M(u) = \int_a^b u(t) \, dM_t$ for $u \in \mathcal{E}$ as
+    \[
+    \int_a^b u(t) \, dM_t = \sum_{i=1}^n u(t_{i-1})(M_{t_i} - M_{t_{i-1}}).
+    \]
+    \item \textbf{Itô Isometry on Elementary Processes}: Show that for $u \in \mathcal{E}$,
+    \[
+    \mathbb{E} \left[ \left( \int_a^b u(t) \, dM_t \right)^2 \right] = \mathbb{E} \left[ \int_a^b u(t)^2 \, d\langle M \rangle_t \right].
+    \]
+    \item \textbf{Extension to $L^2_M[a,b]$}: Extend the Itô integral to all of $L^2_M[a,b]$ by continuity, using the density of $\mathcal{E}$.
+\end{itemize}
+
+\subsubsection{Properties of the Itô Integral}
+\begin{itemize}
+    \item \textbf{Itô Isometry for General Processes}: State and prove the isometry for $u \in L^2_M[a,b]$.
+    \item \textbf{Linearity and Boundedness of $I_M$}: Show that $I_M$ is a linear, bounded operator.
+    \item \textbf{Continuity and Adaptedness}: Discuss continuity properties and adaptedness of the Itô integral with respect to the filtration.
+\end{itemize}
+
+\subsection{Quadratic Variation Process}
+
+\subsubsection{Definition and Basic Properties}
+\begin{itemize}
+    \item \textbf{Quadratic Variation of a Martingale}: Define the quadratic variation $\langle M \rangle$ for a continuous martingale $M_t$.
+    \item \textbf{Key Properties of $\langle M \rangle$}: Prove linearity and monotonicity of the quadratic variation. For Brownian motion $B_t$, show that $\langle B \rangle_t = t$.
+\end{itemize}
+
+\subsubsection{Examples and Calculations}
+\begin{itemize}
+    \item \textbf{Example with Brownian Motion}: Verify that the quadratic variation of $B_t$ is $t$.
+    \item \textbf{Examples of Deterministic Quadratic Variation}: Include other processes with deterministic quadratic variations, such as constant-coefficient martingales.
+\end{itemize}
+
+\subsection{Properties of Function Spaces}
+
+\subsubsection{Hilbert Space Properties}
+\begin{itemize}
+    \item \textbf{Completeness of $\mathbb{H}$}: Show that $\mathbb{H}$ is a complete space with the $L^2$ inner product.
+    \item \textbf{Density of Elementary Processes in $L^2_M[a,b]$}: Revisit and confirm the density of elementary processes $\mathcal{E}$ in $L^2_M[a,b]$.
+\end{itemize}
+
+\subsubsection{Relationships Between Function Spaces}
+\begin{itemize}
+    \item \textbf{Inclusions and Hierarchies}: Explain the inclusion structure $\mathcal{E} \subset L^2_M[a,b] \subset \mathbb{H}$ and the induced properties.
+\end{itemize}
+
+\subsection{Martingale Properties of the Itô Integral}
+
+\subsubsection{Preservation of Martingale Properties}
+\begin{itemize}
+    \item \textbf{Martingales and Local Martingales}: Show that if $M_t$ is a martingale, $I_M(u)$ is also a martingale under suitable conditions on $u$.
+    \item \textbf{$L^2$-Convergence and Martingales}: Prove that $L^2$ convergence in $L^2_M[a,b]$ preserves the martingale property.
+\end{itemize}
+
+\subsubsection{Continuity and Modifications}
+\begin{itemize}
+    \item \textbf{Continuity of the Itô Integral with Brownian Motion}: Show that $I_B(u)$ has a continuous modification using Brownian motion’s properties.
+\end{itemize}
+
+\subsection{Itô Formula and Its Applications}
+
+\subsubsection{One-Dimensional Itô Formula}
+\begin{itemize}
+    \item \textbf{Statement and Derivation}: Derive the Itô formula for a smooth function $f(t, X_t)$ with an Itô process $X_t$. Discuss the origin of each term, especially the quadratic variation.
+    \item \textbf{Examples}: Calculate the differential of $f(X_t) = X_t^2$ when $X_t$ is Brownian motion to illustrate the formula.
+\end{itemize}
+
+\subsubsection{Multi-Dimensional Itô Formula}
+\begin{itemize}
+    \item \textbf{Multi-Dimensional Formula}: State the Itô formula for a multi-dimensional process $X_t \in \mathbb{R}^d$ and introduce the cross terms.
+    \item \textbf{Example of a Multi-Dimensional Process}: Show how these cross terms appear in an example with a two-dimensional Brownian motion.
+\end{itemize}
+
+\subsubsection{Integration by Parts}
+\begin{itemize}
+    \item \textbf{Itô’s Integration by Parts Formula}: Derive Itô’s integration by parts formula and compare it with classical integration by parts.
+    \item \textbf{Applications}: Use the formula in examples, such as calculating differentials of products of stochastic processes.
+\end{itemize}
+
+\subsubsection{Comparison with the Stratonovich Integral}
+\begin{itemize}
+    \item \textbf{Stratonovich vs. Itô Integrals}: Compare the definitions and interpretations of the Itô and Stratonovich integrals, emphasizing the differences in interpretation and usage.
+\end{itemize}
+
+

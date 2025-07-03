@@ -211,8 +211,9 @@ The following version of OST does not use uniform integrability, but assumes som
 \end{remark}
 
 Under a much nicer condition of \textit{uniform integrability}, we don't need any extra assumptions:
-\begin{theorem}
-	if $X_n$ is a uniformly integrable submartingale, then for any stopping time $T$ (possibly infinite), we have 
+\begin{theorem}[Optional Stopping Theorem]
+	\label{thm:OptionalStoppingThm}
+	If $X_n$ is a uniformly integrable submartingale, then for any stopping time $T$ (possibly infinite), we have 
 	\[
 		E X_0 \le  E X_T \le E X_\infty
 	\] 
@@ -359,6 +360,46 @@ Under a much nicer condition of \textit{uniform integrability}, we don't need an
 
 \subsection{Martingale Inequalities}
 Next: Lp convergence, (concentration) inequalities, upcrossing inequality, tail sigma fields and  01 laws, square integrability
+
+Write $\overline{X} _n = \max_{m \le n} X_m^+$.
+\begin{theorem}[Doob's L1 Inequality]
+	\label{thm:DooblInequality}
+	Let $X_n$ be a submartingale. Let $A = \{\overline{X} _n > \lambda\} $. Then
+	\[
+		\lambda P(A) \le E\left( X_n 1_A \right) \le E(X_n^+)
+	.\] 
+\end{theorem}
+\begin{proof}
+	Let $N = \inf \{m: X_m > \lambda\} \wedge n$, we have
+	\[
+		\lambda P(A) \le E(X_N 1_A) \le E(X_n 1_A) \le E(X_n^+)
+	.\] 
+	The first inequality is because $X_N > \lambda$ on $A$. The second inequality is due to Optional Stopping Theorem (Theorem~\ref{thm:OptionalStoppingThm}) and that $X_n = X_N$ on $A^c$. The last inequality is trivial.
+\end{proof}
+
+\begin{theorem}[Doob's Lp Maximal Inequality]
+	\label{thm:DooblpMaximalInequality}
+	Let $X_n$ be a submartingale. Then for all $1 < p \le \infty $,
+	\[
+		E\left( |\overline{X} _n|^p \right) 
+		\le 
+		\left( \frac{p}{p-1} \right)^p
+		E\left( (X_n^+)^p \right) 
+	.\] 
+\end{theorem}
+\begin{proof}
+	We work with $\overline{X} _n \wedge M$. Use layer-cake representation, then apply L1 inequality, and finally apply H\"older inequality:
+	\begin{align*}
+		E\left( |\overline{X} _n \wedge M|^p \right) 
+		&= \int _0^\infty p \lambda^{p - 1} P\left(  \overline{X} _n \wedge M > \lambda \right) d \lambda  \\
+		&\le  \int _0^\infty p \lambda^{p - 1} \lambda^{-1} \int _\Omega X_n^+ 1_{\overline{X} _n \wedge M > \lambda} dP d\lambda  \\
+		&= \int _\Omega X_n^+ \int _0^{\overline{X} _n \wedge M}  p \lambda^{p - 2} d\lambda dP \\
+		&= \frac{p}{p - 1} \int _\Omega X_n^+ |\overline{X} _n \wedge M|^{p - 1} dP \\
+		&\leq \frac{p}{p - 1} (E (X_n^+)^p)^{\frac{1}{p}} (E|\overline{X} _n \wedge M|^{p})^{\frac{p - 1}{p}} 
+	.\end{align*}
+	Divide both sides by $(E|\overline{X} _n \wedge M|^{p})^{\frac{p - 1}{p}}$ and raise to $p$-th power, we obtain the desired inequality.
+	The application of L1 inequality is justified because $P(\overline{X} _n \wedge M > \lambda) \le P (\overline{X} _n > \lambda)$.
+\end{proof}
 
 
 

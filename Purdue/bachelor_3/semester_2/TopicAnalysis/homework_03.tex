@@ -1,0 +1,319 @@
+\homework{3}{Mon 21 Oct 2024 20:21}{}
+
+\begin{enumerate}
+	\item 
+		For the function $K$ on $R^n \backslash\{0\}$ consider the three conditions:
+
+\[
+|\nabla K(x)| \leq \frac{B_1}{|x|^{n+1}}, \quad x \in \mathbb{R}^n \backslash\{0\}, \quad \text { (Gradient Condition) }
+\]
+
+
+\[
+|K(x-y)-K(x)| \leq \frac{B_2|y|^\alpha}{|x|^{(n+\alpha)}}, \quad \alpha>0, \quad|x| \geq 2|y| \quad \text { (General Lipschitz/Hölder condition) }
+\]
+
+
+\[
+\sup _{|y|>0} \int_{|x| \geq 2|y|}|K(x-y)-K(x)| d x \leq B_3, \quad \text { (Hörmader) }
+\]
+
+
+Prove that (3) is weaker than (2) which in turn is weaker than (1). In other words, if (1) holds, then (2) holds (with $\alpha=1$ ) and if (2) holds (for any $\alpha>0$ ) then (3) holds. Also, the useful applications of (2) are for $0<\alpha<1$, (see exercises in Grfakos, Section 4.4). Condition (2) is also called the "Strong Hörmader Condition." See Definition 7.17 in the Lecture Notes.
+
+Note: We have already done this problem in class.
+
+\begin{proof}
+	\begin{enumerate}
+		\item The mean value theorem gives
+			\[
+				|K(x - y) - K(x)| \le \left| \nabla  K(\xi) \right| |y|, \quad \xi = t (x - y) + (1 - t) x, t \in [0,1]
+			.\]
+		We have
+		\[
+			|\xi| = |x - t y| \ge |x| - t |y| \ge \frac{1}{2} |x|
+		.\] 
+		Thus
+		\[
+			|K(x - y) - K(x)| \le \frac{2^{n + 1}B_1|y|}{|x|^{(n+1)}}
+		.\] 
+		Since $|y| / |x| \le \frac{1}{2}$, we can raise both sides to power $\alpha$ and  multiply to the inequality, to get the general H\"older condition.
+
+		\item Integrate:
+			\begin{align*}
+				\int_{|x| \geq 2|y|}|K(x-y)-K(x)| d x
+				&\leq \int_{|x| \geq 2|y|} \frac{B_2|y|^\alpha}{|x|^{(n+\alpha)}} d x\\
+				&\leq B_2 |y|^\alpha \int_{2|y|}^{\infty } r^{n - 1}\frac{1}{r^{(n+\alpha)}} d r\\
+				&= B_2 |y|^\alpha \int_{2|y|}^{\infty } r^{- 1 - \alpha} d r\\
+				&= B_2 |y|^\alpha \frac{(2 |y|)^{ - \alpha}}{\alpha}\\
+				&= B_2 \frac{2^{ - \alpha}}{\alpha}
+			.\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\item 
+	Let $T$ be a singular integral with $K$ satisfying the conditions of our class Theorem 3 ( $K$ with Hörmander, bounded by $|x|^{-n}$, and mean value zero on shells). Prove the existence of $\lim _{\varepsilon \rightarrow 0} T_{\varepsilon} f(x)$ for every $x$ under the assumption that $f \in C_0^{\infty}\left(\mathbb{R}^n\right)$
+Note: This was already proved in class, its purpose is for you to review, fully understand the proof and write it carefully with full details.
+\begin{proof}
+	\begin{align*}
+		T_\varepsilon g(x) - T_g(x)
+		&= \int _{B(0,\varepsilon)} K_\varepsilon(y) g(x - y) d y \\
+		&= \int _{B(0,\varepsilon)} K(y) (g(x - y) - g(x)) d y \\
+		&= \int _{B(0,\varepsilon)} K(y) (g(x - y) - g(x)) d y
+	.\end{align*}	
+	We have used $\int _{B(0,\varepsilon)} K(y) d y = 0$. Still need to justify. \todo{Need to justify.}
+
+	Now, take absolute value on both sides and bring into the integral. Apply mean value theorem on $g(x - y) - g(x)$. Use the fact that the gradient of $g$ is bounded by $C$.
+	\begin{align*}
+		|
+		T_\varepsilon g(x) - T_g(x)|
+		&\leq B C \int _{B(0,\varepsilon)} |y|^{- n} |y| d y \\
+		&= B C \int_0^r r^{n - 1}r^{- n} r d r \\
+		&= B C \varepsilon
+	.\end{align*}
+	As $\varepsilon \to 0$, this converges to zero.
+\end{proof}
+\item 
+	Let $f=\chi_{[a, b]}$ (which is in $L^1(\mathbb{R}) \cap L^{\infty}(\mathbb{R})$ ). Let $H f$ be its Hilbert transform. Show that
+
+\[
+H f(x)=\frac{1}{\pi} \log \frac{|x-a|}{|x-b|}
+\]
+
+and conclude that $H f \notin L^1(\mathbb{R}) \cup L^{\infty}(\mathbb{R})$.
+
+\begin{proof}
+	We have already verified that the kernel for Hilbert Transform satisfies conditions for Theorem 5. Thus singular integral is justified. We have
+	\begin{align*}
+		H f(x)
+		&= p.v. \frac{1}{\pi} \int _\mathbb{R} \frac{\chi_{[a,b]}(x - y)}{y}dy \\
+		&= p.v. \frac{1}{\pi} \int _{x - b}^{x - a} \frac{1}{y} d y
+	.\end{align*}
+	When $x - a > x - b > 0$, the integral evaluates just as in calculus, and we get the desired formula: $H f(x) = \frac{1}{\pi}\log \frac{x - a}{x - b}$.
+
+	When $0 > x - a  > x - b$, we use symmetry of the function: $H f(x) = - \frac{1}{\pi} \int_{-(x - a)}^{(-(x - b)} \frac{1}{y} = \frac{1}{\pi} \log \frac{-(x - b)}{-(x - a)}  = \frac{1}{\pi} \log \frac{|x - a|}{ | x - b|}$.
+
+	When $x - a > 0 > x - b$, we assume with out loss of generality that $|x - a| \ge  |x - b|$. We use symmetry to conclude that the integral on $[-|x - b|, |x - b|]$ is zero. Then the integral equals to
+	$H f(x) = \frac{1}{\pi} \int _{|x - b|} ^{x  - a} \frac{1}{y} d y = \frac{1}{\pi} \log \frac{|x - a|}{|x - b|}$.
+
+	To conclude $Hf \not\in L^\infty $, take $b > a > 0$ and $x = (1 - \varepsilon)b$. Then
+	\[
+		\pi Hf(x) = \log \frac{(1 - \varepsilon) b - a}{-\varepsilon b} = - \log \varepsilon + \log \frac{a - b + \varepsilon}{ b}
+	.\] 
+	As $\varepsilon \to 0$ above, this diverges.
+
+	To conclude $H f \not\in  L^1$, take $b > a > 0$ and use mean value theorem write
+	\[
+		\pi H f(x) = \log \left( x - a \right)  - \log \left( x - b \right) = (b - a) \frac{1}{x_0} 
+	.\] 
+	Thus for $x > b$,
+	\[
+		\pi |H f(x)| \ge (b - a) \frac{1}{x - a}
+	.\] 
+	This does not integrate on $(b, +\infty )$.
+	\end{proof}
+
+
+\item Let $x, y \in \mathbb{R}^d$. Under the assumption that $|x| \geq 2|y|$, prove that their projections on the unit sphere $S^{n-1}$ satisfy
+
+\[
+\left|\frac{x-y}{|x-y|}-\frac{x}{|x|}\right| \leq c \frac{|y|}{|x|} .
+\]
+
+where $c$ is a constant not depending on $x$ and $y$.
+Note: The optimal constant in this inequality is $c=2 \sqrt{2-\sqrt{3}} \approx 1.03527 \ldots$ This was found by a student in this class a few years ago. Although you are not being asked to determine the optimal constant, you can try just for fun.
+
+\begin{proof}
+	Fix $|y|$. $\frac{x-y}{|x-y|}|x|$ is the result of rotating  $x$ to the direction of $x - y$. Thus, $\left|\frac{x-y}{|x-y|}-\frac{x}{|x|}\right| |x|$ can be interpreted as the length $b$ of base of an isosceles triangle, with side lengths $|x|$, and an angle $\alpha$ between the equal sides. It is clear geometrically that $b$ is a monotone increasing function of $\alpha$, so that the optimal constant comes from the case where $\alpha$ is maximized.
+
+	$\alpha$ is maximized when $y$ is orthogonal to $x - y$. In this case $\sin \left( \alpha \right)  = |y| / |x|$. Now
+	\[
+\left|\frac{x-y}{|x-y|}-\frac{x}{|x|}\right| \frac{|x|}{|y|}
+= \frac{b}{|y|} = \frac{2 x \cos \frac{\alpha}{2}}{ x \sin \alpha} = \frac{2 \cos \left( \frac{\alpha}{2} \right) }{\sin \left( \alpha \right) }
+	.\] 
+	The constraint $|y| < \frac{1}{2}|x|$ tells us $\sin \alpha \le \frac{1}{2}$. From this we conclude that
+	\[
+		\frac{2 \cos \left( \frac{\alpha}{2} \right) }{\sin \left( \alpha \right) } \le 2 \sqrt{2 - \sqrt{3} }  =: c
+	.\] 
+	The proof will be very clear with a hand-drawn picture.
+\end{proof}
+
+\item 
+	Let $T$ be a singular integral satisfying the conditions of any of the Theorems 3 (or any of the others for that matter). Suppose $f$ is supported in the ball $B$ with the property that $|f| \log (1+|f|)$ is integrable over $B$. Prove that $T f$ is integrable over $B$.
+
+Hint: You may assume the existence of two constant $c_1$ and $c_2$ depending on $n$ such that
+
+\[
+m\left\{x \in B:|T f(x)| \geq c_1 \alpha\right\} \leq \frac{c_2}{\alpha} \int_{\{x \in B:|f(x)| \geq \alpha\}}|f(x)| d x, \text { for } \alpha>0 .
+\]
+
+
+Note: This exercise is, essentially, already done in the Lecture Notes.
+
+\begin{proof}
+	The proof closely follows part of the proof of Theorem 5.11 in lecture notes. We have
+	\begin{align*}
+		\int _B |T f(x)| d x
+		&= 2 \int _0^\infty m \{x \in B: |T f(x)| > 2 \alpha\}  d \alpha \\
+		&\leq 2|B| + \int _1^\infty m \{x \in B: |T f(x)| > 2 \alpha\}  d \alpha \\
+		&= 2|B| + c_2 \int _1^\infty \frac{1}{\alpha} \int_{\{x \in B:|f(x)| \geq \alpha\}}|f(x)| d x  d \alpha \\
+		&= 2|B| + c_2 \int_{B} |f(x)| \int _1^{|f(x)|} \frac{d \alpha}{\alpha} d x \\
+		&= 2 |B| + c_2 \int _B |f(x)| \log^+ |f(x)| d x \\
+		&\leq 2 |B| + c_2 \int _B |f(x)| \log (1  + |f(x)|) d x
+	.\end{align*}
+\end{proof}
+
+\item 
+	Suppose $f$ is bounded and supported on the ball $B$. Prove that there is a constant $C$ (independent of $f$ ) such that $e^{C|T f|}$ is integrable over $B$.
+
+Hint: Use the bound for the constant $A_{p, n, B}$ in $\|T f\|_p \leq A_{p, n, B}\|f\|_p, \quad 2 \leq p<\infty$.
+
+\begin{proof}
+	Apply Taylor expansion we have
+	\[
+		\|e^{c |Tf|}\|_{L^1(B)} = \sum_{m=0}^{\infty} \frac{\|c^m |Tf|^m\|_{L_1(B)}}{m!}
+		= \sum_{m=0}^{\infty} \frac{c^m}{m!}\|T f\|^m_{L^m(B)}
+	.\] 
+	Now, apply the fact that
+	\[
+		\|f\|_{L^p(B)} \uparrow \|f\|_{L^\infty (B)} \quad \text{ as } p \to \infty 
+	.\] 
+	and that
+	\[
+		A_{p, n, B} = C_{n, B} (p - 1), \quad p \ge 2
+	.\] 
+	Thus
+	\[
+		\|e^{c |Tf|}\|_{L^1(B)} \le 
+		K + \sum_{m=2}^{\infty} \frac{c^m}{m!}(m - 1)^m C_{n, B}^m \|f\|^m_{L^\infty (B)}
+	.\] 
+	To make this converge, we can choose $c$ such that the summand decreases geometrically, that is
+	\[
+		\frac{1}{m}\log \left( \frac{c^m}{m!}(m - 1)^m C_{n, B}^m \|f\|^m_{L^\infty (B)} \right)  < 0
+	.\] 
+	Expand,
+\[
+		\frac{1}{m}\left( m \log (C + \|f\|_{L^\infty (B)} + \log(m - 1) + \log C_{n, B}) - m \log m + m + O(\log m) \right)   < 0
+	.\]
+	That is,
+\[
+		 \log C + \log \|f\|_{L^\infty (B)} + \log(m -1) + \log(C_{n, B}) - \log m + 1 + o(1)    < 0
+	.\]
+	Take $C < \frac{m}{3(m-1) C_{n, B} \|f\|_{L^\infty (B)}}  $ suffices to finish the proof.
+
+\end{proof}
+
+\item 
+	As already stated in class, prove that the least decreasing radial majorant of
+
+\[
+\Phi(x)=K * \varphi(x)-K_1(x)
+\]
+
+is integrable. Here, $\varphi$ is nonnegative, smooth, supported in the unit ball $B(0,1)$ with integral 1 and radially decreasing. $K$ is as in Theorem 4.
+
+Note: This is use to prove Cotlar's bound for the maximal singular integral.
+
+\begin{proof}
+	We first consider $|x| < 2$. We have
+	\[
+		|K_1(x)| < \frac{B}{1^n} = B
+	.\] 
+	and on the other hand,
+	\begin{align*}
+		K*\varphi(x)
+		&= \lim_{\varepsilon \to 0} K_\varepsilon * \varphi(x)\\
+		&= \lim_{\varepsilon \to 0} \int _{|x - y| < 1, |y| > \varepsilon} K(y) \varphi(x -y) dy \\
+		&=_1 \lim_{\varepsilon \to 0} \int _{\varepsilon < |y| < 3} K(y) \varphi(x -y) dy \\
+		&=_2 \lim_{\varepsilon \to 0} \int _{|x - y| < 1, |y| > \varepsilon} K(y) (\varphi(x -y) - \varphi(x)) dy
+	.\end{align*}
+	where, for (1) we use the fact that $\varphi$ supported on $B(0,1)$, and that $|y| \le |x - y| + |x| < 1 + 2 = 3$. For (2), we use the assumption that $K$ integrates to zero on shells.
+
+	Now take absolute value on both sides, and apply mean value theorem to $\varphi$, where $\sup_{z \in B(0,1)} \|\nabla  \varphi(z)\| < C_\varphi$:
+	\begin{align*}
+		|K*\varphi(x)|
+		&\leq \lim_{\varepsilon \to 0} \int _{\varepsilon < |y| < 3} |K(y)| |y| C_\varphi dy\\
+		&\leq C_\varphi B\lim_{\varepsilon \to 0} \int _{\varepsilon < |y| < 3} |y|^{-n} |y| d y\\
+		&= C_\varphi B\lim_{\varepsilon \to 0} \int _{\varepsilon < |y| < 3} |y|^{-n} |y| d y\\
+		&= 3 C_\varphi B
+	.\end{align*}
+
+	Therefore, for $|x| < 2$,
+	\[
+		|\Phi(x)| \le |K * \varphi(x)| + |K_1(x)| \le 3 C_\varphi B + B
+	.\] 
+
+	Now consider $|x| \ge 2$. We have
+	\begin{align*}
+		|K*\varphi(x) - K_1(x)|
+		&=_1 |\int_{B_1} K(x -y) \varphi(y) - K(x) \varphi(y) dy|\\
+		&= \int_{B_1}\left( |\frac{\Omega(x - y)|}{|x - y|^n} - \frac{|\Omega(x)|}{|x|^n} \right) \varphi(y) d y\\
+		&= \int_{B_1}\left( \frac{|\Omega(x - y)|}{|x - y|^n} - \frac{|\Omega(x)|}{|x - y|^n} \right) \varphi(y) d y + 
+	\int_{B_1}|\Omega(x)|\left( \frac{1}{|x - y|^n} - \frac{1}{|x|^n} \right) \varphi(y) d y	\\
+	&=: I + II
+	.\end{align*}
+
+	To control $II$, apply mean value theorem. 
+
+	\begin{align*}
+		|II|
+		&\leq C \int _{B_1} |y| \frac{1}{|\xi|^{n + 1}} d y, \quad \xi = (1 - t)x + t(x - y)
+	.\end{align*}
+	where we have used boundedness of $\Omega$ and $\varphi$, and mean value theorem applied to $\frac{1}{|x|^n}.$
+
+	We have $|\xi| \ge |x| - t |y| \ge \frac{1}{2} |x|$. Thus
+	\[
+		|II| \le C |x|^{- n - 1} \int _{B_1} |y| d y \le C |x|^{- n - 1}
+	.\] 
+	Integrate over $|x| > 2$,
+	\[
+		\int _{|x| > 2} |M_R(II)(x)| dx \le C \int _{x > 2} x^{n - 1} x^{- n - 1} dx < \infty 
+	.\] 
+
+	To control  $I$, we apply exercise 4 and use Dini continuity. 
+	From $|y| < 1$ and $|x| > 2$ we have $|x - y| > |x| - 1 > \frac{1}{2} |x|$, so
+	\begin{align*}
+		|I|
+		&\leq C \int _{B_1} \frac{|\Omega(x - y) - \Omega(x)|}{|x|^n} \varphi(y) d y 
+	.\end{align*}
+	From the fact that $\Omega$ is homogeneous of degree 0 and problem 4, we have
+	\[
+		|\Omega(x -y) - \Omega(x)| \le  \omega(c \frac{|y|}{|x|})
+	,\] 
+	where
+	\[
+		\omega(\delta) := \sup _{|z_1 - z_2| < \delta} \left| \Omega(z_1) - \Omega(z_2) \right| 
+	.\] 
+	Thus
+	\begin{align*}
+		|I| 
+		&\le C \int _{B_1} \frac{\omega\left( c \frac{|y|}{|x|} \right) }{|x|^n} \varphi(y) d y
+	.\end{align*}
+	 We may observe that the right hand side is radial in $x$ and monotone decreasing with $|x|$.
+	 
+	 Now, we integrate the least radial majorant of $I$, (denote by $M_R(I)$, in $|x| > 2$ :
+	 \begin{align*}
+	 	\int _{|x| > 2}|M_R(I)(x)| d x
+		&\leq C \int _{|x| > 2} \int _{|y|\le 1} \frac{\omega\left( c \frac{|y|}{|x|} \right) }{|x|^n} \varphi(y) d y  d x\\
+		&\leq_1 C \int _{|x| > 2} \int _{|y|\le 1} \frac{\omega\left( c \frac{|y|}{|x|} \right) }{|x|^n} d y  d x\\
+		&\leq_2 C \int _{x>2} \int _{y<1} x^{n - 1} y^{n - 1}\frac{\omega\left( c \frac{y}{x} \right) }{x^n} d y  d x\\
+		&= C \int _{x>2} \int _{y<1} y^{n - 1}\frac{\omega\left( c \frac{y}{x} \right) }{x} d y  d x\\
+		&= C  \int _{y<1} \int _{x>2} y^{n - 1}\frac{\omega\left( c \frac{y}{x} \right) }{x}   d x d y\\
+		&= C  \int _{y<1} y^{n - 1}\int _{\delta < c y / 2 < 1} \frac{\omega\left( \delta\right) }{\delta}   d \delta d y\\
+		&\leq_3 C \int _{y < 1} y^{n - 1} d y \\
+		&< \infty 
+	 .\end{align*} 
+	 In (1) we used boundedness of $\varphi$. In (2) we change to polar coordinates. In (3) we apply definition of Dini continuity.
+
+	 Combining the arguments, we have
+	 \begin{align*}
+	 	\int _{|x| > 2} \left| M_R(\Phi)(x) \right|  d x 
+		&\leq \int _{|x| > 2} |M_R(I)(x)| dx + \int _{|x| > 2} |M_R(II)(x)| dx \\
+		&\leq \infty 
+	 .\end{align*}
+\end{proof}
+
+
+
+
+\end{enumerate}

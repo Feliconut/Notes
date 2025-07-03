@@ -1,0 +1,308 @@
+\homework{4}{Fri 08 Nov 2024 17:13}{}
+
+\begin{enumerate}
+	\item Prove that
+$\left\|R_j R_k f\right\|_2 \leq \frac{1}{2}\|f\|_2, \quad$ for any $\quad j \neq k$
+
+\begin{proof}
+	\begin{align*}
+		\|R_j R_k f\|_2^2
+		&= \|\widehat{R_j R_k f}\|_2^2 \\
+		&= \|(i \frac{\xi_j}{|\xi|})(i \frac{\xi_k}{|\xi|}) \hat{f} \|_2^2 \\
+		&= \|\frac{\xi_j\xi_k}{|\xi|^2} \hat{f} \|_2^2 \\
+		&= \int \left| \frac{\xi_j \xi_k}{|\xi|^2} \hat{f} \right|^2 d \xi  \\
+		&\leq \int \frac{1}{4} \hat{f} ^2 d \xi \\
+		&= \frac{1}{4} \|\hat{f} \|_2^2 \\
+		&= \frac{1}{4} \|f \|_2^2
+	.\end{align*}
+	Where, in this inequality, we use the AM-GM inequality to show
+	\[
+		\sqrt{\xi_j^2 + \xi_k^2} 
+		\le \frac{1}{2} (\xi_j^2 + \xi_k^2) \le \frac{1}{2} \xi^2
+	.\] 
+\end{proof}
+
+\item 
+	For any unit vector $e \in \mathbb{R}^n$, the Hilbert transform of the function $f \in L^p\left(\mathbb{R}^n\right)$ in the direction of $e$ is the operator defined by $H^e f(x)=\lim _{\varepsilon \rightarrow 0} H_{\varepsilon}^e f(x)$ where
+
+\[
+H_{\varepsilon}^e f(x)=\frac{1}{\pi} \int_{\{|t|>\varepsilon\}} \frac{f(x-t e)}{t} d t=\frac{1}{\pi} \int_{\varepsilon}^{\infty} \frac{f(x-t e)-f(x+t e)}{t} d t
+\]
+
+
+Prove that $\left\|H^e f\right\|_{L^p\left(\mathbb{R}^n\right)} \leq H_p\|f\|_{L^p\left(\mathbb{R}^n\right)}, 1<p<\infty$, where $H_p$ is the $L^p$-bound for the one one dimensional Hilbert transform.
+Remark 1 The optimal constant $H_p$ for the Hilbert transform, that is, its norm on $L^p(\mathbb{R})$,
+
+\[
+H_p=\sup _{f \in L^p(\mathbb{R})} \frac{\|H f\|_p}{\|f\|_p}
+\]
+
+was explicitly found by Stylianos Pichorides (1972) to be
+
+\[
+H_p= \begin{cases}\tan \frac{\pi}{2 p}, & 1<p \leq 2 \\ \cot \frac{\pi}{2 p}, & 2 \leq p<\infty\end{cases}
+\]
+
+
+Problem 7 below gives a different proof of this fact for $p^{\prime}$ s that are powers of 2. Note that by L'Hopitals's rule you can find the asymptotics as $p \rightarrow \infty$ more precisely than just saying it is $O(p)$,
+
+Remark 2 The Pichorides' result can be proved via martingale theory and stochastic integrals with far reaching generalizations and applications to many geometric settings including Lie groups, manifolds and (infinite dimensional) Wiener space. This is done in many papers I've written including a 2021 paper with Li Chen, Fabrice Baoudoin, Yannick Sire. The probabilistic techniques also apply to much more difficult problems on discrete singular integrals. See for example, https://arxiv.org/pdf/2209.09737
+
+\begin{proof}
+	For each $x \in \mathbb{R}^n$ write $x = (\tilde x, t)$ where $t = \left\langle x, e \right\rangle $ and $\tilde x \in \left\langle e \right\rangle ^{\perp}$. Note that $x(\tilde x, t) - s e = x(\tilde x, t - s)$. 
+
+	For each $\tilde x$, define $g_{\tilde x}(t) = f\left( x(\tilde x, t) \right) $.
+
+	Now, we have
+	\begin{align*}
+		\|H^e f\|_{L^p(\mathbb{R}^n)}^p
+		&= \int _{\mathbb{R}^n} \left| H^e f \right| ^p dx \\
+		&= \int _{\mathbb{R}^{n - 1}} \int _{\mathbb{R}} \left| H^e f(\tilde x, t)\right|^p dt d\tilde x   \\
+		&= \int _{\mathbb{R}^{n - 1}} \int _{\mathbb{R}} \left| p.v. \int _{\mathbb{R}} \frac{f(x(\tilde x, t) - s e)}{s} d s\right|^p dt d\tilde x   \\
+		&= \int _{\mathbb{R}^{n - 1}} \int _{\mathbb{R}} \left| p.v. \int _{\mathbb{R}} \frac{g_{\tilde x}(t - s)}{s} d s\right|^p dt d\tilde x   \\
+		&= \int _{\mathbb{R}^{n - 1}} \int _{\mathbb{R}} \left| H g_{\tilde x} (t)\right|^p dt d\tilde x   \\
+		&\leq \int _{\mathbb{R}^{n - 1}} \int _{\mathbb{R}} H_p^p\left| g_{\tilde x} (t)\right|^p dt d\tilde x   \\
+		&= H_p^p \int _{\mathbb{R}^{n - 1}} \int _{\mathbb{R}}\left| f(x(\tilde x, t))\right|^p dt d\tilde x   \\
+		&= H_p^p \int _{\mathbb{R}^{n}} \left| f(x)\right|^p dt d x   \\
+		&= H_p^p \|f\|_p^p
+	.\end{align*}
+\end{proof}
+
+\item 
+Let $\Omega$ be homogeneous of degree zero and satisfying our hypothesis for the boundedness of singular integrals. In addition, suppose $\Omega$ is odd. That is, $\Omega(x)=-\Omega(-x)$. Let $T_{\varepsilon} f(x)$ be as in Theorem 5 , That is,
+
+\[
+K(x)=\frac{\Omega(x)}{|x|^n} .
+\]
+
+
+Prove that
+
+\[
+T_{\varepsilon} f(x)=\frac{\pi}{2} \int_{S^{n-1}} \Omega(e) H_{\varepsilon}^e f(x) d \sigma(e)
+\]
+
+and that
+
+\[
+\left\|T_{\varepsilon} f\right\|_p \leq\left(\frac{\pi}{2} H_p \int_{S^{n-1}}|\Omega(e)| d \sigma(e)\right)\|f\|_p, \quad 1<p<\infty .
+\]
+
+
+Remark 3 The most famous examples $\Omega^{\prime}$ sin $\mathbb{R}^n$ are those corrsspong to the Riesz transforms $R_j$, where
+
+\[
+\Omega_j(x)=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\pi^{(n+1) / 2}} \frac{x_j}{|x|} \quad j=1, \ldots, n
+\]
+
+
+Notice that when $n=1$ this is just the Hilbert transform. As shown in your problem, Assignment 1,
+
+\[
+\frac{\pi}{2} \int_{S^{n-1}}\left|\Omega_j(\theta)\right| d \sigma(\theta)=1
+\]
+
+
+This shows that the $L^p$ norm of the Riesz transforms in $\mathbb{R}^n$ is smaller or equal to that of the Hilbert transform in $\mathbb{R}$. That is, as operators on $L^p\left(\mathbb{R}^n\right)$ and $L^p(\mathbb{R}), R_j$ and $H$, respectively, satisfy
+
+\[
+\left\|R_j\right\|_p \leq\|H\|_{p^{\prime}} \quad 1<p<\infty
+\]
+
+
+In fact, the two quantities are actually equal. This is Exercise 8.24 p. 165 of the Lecture Notes. It depends on Proposition 1 (p.163) which is about Fourier extension. One of your fellow students has kindly agreed to present this proposition.
+\begin{proof}
+	Note that $H^e_\varepsilon f(x) = - H^{- e}_\varepsilon f(x)$.
+	\begin{align*}
+		T_\varepsilon f(x)
+		&= \int_{|y| > \varepsilon} \frac{\Omega(y)}{|y|^n} f(x - y) d y \\
+		&= \int _{S^{n - 1}} \int _\varepsilon^\infty  r^{n - 1} \frac{\Omega(e)}{r^{n}} f(x - r e) d r d \sigma(e) \\
+		&= \int _{S^{n - 1, +}} \left[\int _\varepsilon^\infty  \frac{\Omega(e)}{r} f(x - r e) d r + \int _\varepsilon^\infty  \frac{\Omega(-e)}{r} f(x - r (-e)) d r\right] d \sigma(e) \\
+		&= \int _{S^{n - 1, +}} \Omega(e) \int _{|t| > \varepsilon}  \frac{1}{r} f(x - r e) d r  d \sigma(e) \\
+		&= \int _{S^{n - 1, +}} \Omega(e) \pi H_\varepsilon^e f(x)  d \sigma(e) \\
+		&= \frac{\pi}{2} \left[\int _{S^{n - 1, +}} \Omega(e) H_\varepsilon^e f(x)  d \sigma(e)  + \int _{S^{n - 1, +}} \Omega(-e) H_\varepsilon^{-e} f(x)  d \sigma(e)\right]\\
+		&= \frac{\pi}{2} \int _{S^{n - 1}} \Omega(e) H_\varepsilon^e f(x)  d \sigma(e) 
+	.\end{align*}
+
+	For non-negative $f$, the second part of the problem follows from problem 2. To see this, apply Minkowski inequality,
+	\begin{align*}
+		\|T_\varepsilon f\|_p
+		&= \left(\int _{\mathbb{R}^n} \left| \frac{\pi}{2} \int_{S^{n-1}} \Omega(e) H_{\varepsilon}^e f(x) d \sigma(e) \right|^p dx\right)^{1 / p} \\
+		&\leq \frac{\pi}{2}\int_{S^{n-1}} \Omega(e) \left(\int _{\mathbb{R}^n}|H_{\varepsilon}^e f(x)|^p dx\right)^{1 / p} d \sigma(e)  \\
+		&\leq \frac{\pi}{2}\int_{S^{n-1}} \Omega(e) \left(\int _{\mathbb{R}^n}|H^e f(x)|^p dx\right)^{1 / p} d \sigma(e)  \\
+		&\leq \frac{\pi}{2}\int_{S^{n-1}} \Omega(e) H_p \|f\|_p d \sigma(e)  \\
+		&= \frac{\pi}{2}H_p\int_{S^{n-1}} \Omega(e)  d \sigma(e)\|f\|_p 
+	.\end{align*}
+
+\end{proof}
+
+\item 
+	(i) Prove that for any $x \in \mathbb{R}^m$ and any $0<p<\infty$,
+
+\[
+\int_{S^{m-1}}|\xi \cdot x|^p d \sigma(\xi)=|x|^p \int_{S^{m-1}}\left|\xi_1\right|^p d \sigma(\xi)
+\]
+
+where as usual $\xi \cdot x=\xi_1 x_1+\cdots+\xi_m x_m$ is the inner product in $\mathbb{R}^m$.
+(ii) Let $T: L^p\left(\mathbb{R}^n\right) \rightarrow L^p\left(\mathbb{R}^n\right), 1<p<\infty$, be a linear operator with operator norm $\|T\|$. Prove that $T$ extends to a bounded linear operator on $L^p\left(\mathbb{R}^n ; l^2\right)$ with norm no larger than the norm of $T$. That is, set, $F=\left(f_1(x), f_2(x), \ldots\right)$ and $\mathcal{T} F=\left(T f_1, T f_2, \ldots\right)$. Then
+
+\[
+\left\||\mathcal{T} F|_{l^2}\right\|_p \leq\|T\|\left\|\left.| | F\right|_{l^2}\right\|_p .
+\]
+
+
+Here, $F \in L^p\left(\mathbb{R}^n ; l^2\right)$ if
+
+\[
+\left\||F|_{l^2}\right\|_p=\left(\int_{\mathbb{R}^n}\left(\sum_{k=1}^{\infty}\left|f_k(x)\right|^2\right)^{p / 2} d x\right)^{1 / p}<\infty
+\]
+
+
+Hint: Start by proving that for any $\xi=\left(\xi_1, \ldots, \xi_m\right) \in S^{m-1}$, where $m>1$ is any integer and $F$ is of the form $F=\left(f_1(x), f_2(x), \ldots, f_m(x)\right)$, we have $\|\xi \cdot \mathcal{T} F\|_{L^p\left(\mathbb{R}^n\right)} \leq\|T\|\|\xi \cdot F\|_{L^p\left(\mathbb{R}^n\right)}$.
+
+\begin{proof}
+	Let $\rho$ be the positive rotation in $\mathbb{R}^m$ such that $\hat{x} = \rho e_1$.
+
+	\begin{align*}
+		\int _{S^{m - 1}} |\xi \cdot  x|^p d \sigma(\xi)
+		&= |x|^p \int _{S^{m - 1}} |\xi \cdot  \hat{x} |^p d \sigma(\xi) \\
+		&= |x|^p \int _{S^{m - 1}} |\xi \cdot  \rho e_1 |^p d \sigma(\xi) \\
+		&= |x|^p \int _{S^{m - 1}} |\rho^{-1} \xi \cdot  e_1 |^p d \sigma(\xi) \\
+		&= |x|^p \int _{S^{m - 1}} |\xi \cdot  e_1 |^p d \sigma(\xi) \\
+		&= |x|^p \int _{S^{m - 1}} |\xi_1|^p d \sigma(\xi)
+	.\end{align*}
+
+	To prove the hint, consider
+	\begin{align*}
+		\int \left| \xi \cdot \mathcal{T} F \right| ^p d x
+		&= \int |\xi_1 T f_1(x) + \ldots + \xi_m T f_m(x)|^p d x \\
+		&= \int |T \xi \cdot  F(x)|^p d x \\
+		&\leq \|T\|^p \|\xi \cdot  F\|_p^p
+	.\end{align*}
+
+	To prove (ii), first assume that $F$ is all zero after the $m$-th entry, that is, $f_j = 0$ for $j > m$. Then we can identify $F$ with a function in  $L^p(\mathbb{R}^n; \mathbb{R}^m)$.
+	\begin{align*}
+		\|\mathcal{T} F\|_p^p \int _{S^{m - 1}} \left| \xi_1 \right| ^p d \sigma(\xi)
+		&= \int _{\mathbb{R}^n} |\mathcal{T}F|^p \int _{S^{m - 1}} \left| \xi_1 \right| ^p d \sigma(\xi) d x \\
+		&= \int _{\mathbb{R}^n} \int _{S^{m - 1}} \left| \xi \cdot  \mathcal{T}F \right| ^p d \sigma(\xi) d x \\
+		&=  \int _{S^{m - 1}}\int _{\mathbb{R}^n} \left| \xi \cdot  \mathcal{T}F \right| ^p  d x d \sigma(\xi)\\
+		&\leq  \int _{S^{m - 1}} \|T\|^p \int _{\mathbb{R}^n} \left| \xi \cdot F \right| ^p  d x d \sigma(\xi)\\
+		&=  \|T\|^p \int _{\mathbb{R}^n} \int _{S^{m - 1}} \left| \xi \cdot F \right| ^p  d \sigma(\xi)d x \\
+		&=  \|T\|^p \int _{\mathbb{R}^n} \left| F \right| ^p \int _{S^{m - 1}} \left| \xi_1 \right| ^p  d \sigma(\xi)d x \\
+		&=  \|T\|^p \|F\|_p^p \int _{S^{m - 1}} \left| \xi_1 \right| ^p  d \sigma(\xi)d x 
+	.\end{align*}
+
+	Finally, observe that the elements in $\ell^2$ with finitely meany nonzero entries form a dense subspace $\ell^2_{\text{fin}}$, where our inequality holds. That is, the operator $\mathcal{T}$ when restricted to $L^p(\mathbb{R}^n;\ell^2_{\text{fin}})$ is bounded with operator norm less than $\|T\|$. Thus $\mathcal{T}$ is bounded on $L^p(\mathbb{R}^n, \ell^2)$ with norm controlled by $\|T\|$.
+
+\end{proof}
+
+\item 
+	Invariance properties of the Riesz transforms under Littlewood-Paley transformations. Let $g_v(f)$ and $g_h(f)$ be the Littlewood-Paley functions as in Assignment 2. Let $f \in L^2\left(\mathbb{R}^n\right) \cap L^p\left(\mathbb{R}^n\right)$ and let $R_j f, j=1, \ldots, n$, be its Riesz transforms. Use the generalized Cauchy-Riemann equations to prove that
+
+\[
+g_h(f)(x)=\sqrt{g_v^2\left(R_1 f\right)(x)+\cdots+g_v^2\left(R_n f\right)(x)}
+\]
+
+and hence
+
+\[
+g_v\left(R_j f\right)(x) \leq g(f)(x),
+\]
+
+for all $j=1, \ldots, n$.
+Remark 4 This will give as different proof of the $L^p$ boundeness of the Riesz transforms and points the way to Hörmader's Theorem for general multiples.
+\begin{proof}
+	Recall
+\[
+		g_v(f)(x) = \left( \int _0^\infty y \left| \frac{\partial u_f}{\partial y}  (x,y) \right|^2 dy \right) ^{\frac{1}{2}}
+	.\]
+	\[
+		g_h(f)(x) = \left( \int _0^\infty y \left| \nabla _x u_f (x,y) \right|^2 dy \right) ^{\frac{1}{2}}
+	.\] 
+	Write $y = x_0$,  and $f_0 = f$, $f_j = R_j f_0$. Write $u_j = u_{f_j}$. 
+	We have
+	\[
+		\sum_{j=1}^{n} g_v^2(R_jf) = \int _0^\infty y \sum_{j=1}^{n}\left| \frac{\partial u_j}{\partial x_0}  (x,y) \right|^2 dy
+	.\] 
+	By Cauchy-Riemann equation, since $f_j = R_j f_0$, we have $\frac{\partial f_j}{\partial x_0}  = \frac{\partial f_0}{\partial x_j} $. This means
+	\[
+		\sum_{j=1}^{n} g_v^2(R_jf) = \int _0^\infty y \sum_{j=1}^{n}\left| \frac{\partial u_0}{\partial x_j}  (x,y) \right|^2 dy = \int _0^\infty y \left| \nabla_x  u_f \right|^2 dy = g_h^2(f)
+	.\] 
+\end{proof}
+
+\item
+	Prove the following (non-linear) identity of M. Cotlar (1951): Suppose $f \in L^2 \cap L^p$ (in fact, you can take $f \in C_0^{\infty}$, it makes no difference). Then
+
+\[
+(H f)^2=f^2+2 H(f \cdot H(f)),
+\]
+
+$H$ the Hilbert transform.
+
+Hint: Show that their Fourier transforms are equal.
+
+\begin{proof}
+	We use Exercise 8.3.1, the connection with conjugate harmonic functions, which we will prove later.
+
+	By this exercise, we can find $\mathcal{U}$ and $\mathcal{V}$ be conjugate harmonic functions on the upper half complex plane where $\mathcal{U} \to f$ and $\mathcal{V} \to H f$ on the boundary.
+
+	Now, $\mathcal{U} + i \mathcal{V}$ is analytic, so $(\mathcal{U} + i \mathcal{V})^2$ is also analytic. Thus
+	\[
+		\mathcal{U}^2 - \mathcal{V}^2, \quad 2 \mathcal{U} \mathcal{V} \qquad \text{ are conjugate harmonic functions}
+	.\] 
+	By this exercise, their boundary values are related by the Hilbert transform:
+	\[
+		H(f^2 - (Hf)^2) = 2 f Hf
+	.\] 
+	Take Hilbert transform on both sides again,
+	\[
+		(Hf)^2 - f^2 = 2 H(f H f)
+	.\] 
+\end{proof}
+
+\item 
+	Use the identity and induction to show that for any $p$ of the form $2^k, k=1,2, \ldots$,
+
+\[
+\|H f\|_p \leq \cot \frac{\pi}{2 p}\|f\|_p
+\]
+
+
+From this conclude that
+
+\[
+\|H f\|_p \leq C_p\|f\|_p, \quad \text { for all } \quad 1<p<\infty
+\]
+
+
+Hint: Start by taking the $p$-norm of both sides, applying Minkowski, Hölder, $\ldots$ That is, $\|H f\|_{2 p}^2=\left\|(H f)^2\right\|_p=\ldots$
+
+\begin{proof}
+	\begin{align*}
+		\|H f\|_{2^k }^2
+		&= \|(H f)^2\|_{2^{k - 1}} \\
+		&= \|f^2 + 2 H (f H f)\|_{2^{k - 1} } \\
+		&\leq \|f^2 \|_{2^{k - 1}}+ \|2 H (f H f)\|_{2^{k - 1} } \\
+		&\leq \|f^2 \|_{2^{k - 1}}+ 2 \cot \left( \frac{\pi}{2^k } \right) \|f H f\|_{2^{k - 1} } \\
+		&\leq \|f^2 \|_{2^{k - 1}}+ 2 \cot \left( \frac{\pi}{2^k } \right) \|f\|_{2^k } \| H f\|_{2^{k } } \\
+		&= \|f\|_{2^{k}}^2 + 2 \cot \left( \frac{\pi}{2^k } \right) \|f\|_{2^k } \| H f\|_{2^{k } }
+	.\end{align*}
+	Now write $a = \|H f\|_{2^k }$, $b = \|f\|_{2^k }$. We have
+	\[
+		a^2 \le b^2 +2 \cot \left( \frac{\pi}{2^k } \right) a b
+	.\] 
+	Hopefully we can solve and get
+	\[
+		a \le  \cot \left( \frac{\pi}{2^{k + 1}} \right) b
+	.\] 
+	which gives us the desired result.
+
+
+	Now, for general $p$, pick $k$ such that $2^k \le p < 2^{k + 1}$. Apply Riesz-Thorin interpolation theorem and we obtain the result.
+\end{proof}
+
+
+
+
+
+\end{enumerate}

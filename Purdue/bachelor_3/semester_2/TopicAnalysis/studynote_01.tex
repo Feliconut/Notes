@@ -1,0 +1,88 @@
+\studynote{1}{Fri 01 Nov 2024 01:37}{The Maximal Ergodic Theorem}
+
+In this note, we develop the maximal ergodic theorem using the link between semigroups and martingales. The reference used is [Kim15]. 
+
+
+\begin{theorem}[Maximal Ergodic Theorem]
+	\label{thm:MaximalErgodicThm}
+	The harmonic extension of $f$ satisfies the following maximal inequality:
+	\[
+		\|\sup _{y > 0} \left| u_f(\cdot ,y) \right| \|_p
+		\le \frac{p}{p-1} \|f\|_p
+	\] 
+	for all $f \in L^p$ and for all $1 < p \le \infty $.
+\end{theorem}
+
+
+For a symmetric Markovian semigroup that is strongly continuous, there exists a corresponding stochastic process. For example, the heat semigroup is related to the Brownian motion.
+
+We may consider $y$ to be the time since a system with initial condition $f: \mathcal{S} \to \mathbb{R}$ starts to homogenize. The process of homogenization can be either expressed in terms of convolution with the heat semigroup
+\[
+	u_f(x, t) = Q_t f(x)
+,\] 
+and can also be expressed in terms of the related stochastic process:
+\[
+	u_f(x, t) = Q_t f(x) = \mathbb{E}^x\left[ f(X_t) \right] 
+.\] 
+Here, the stochastic process $X_t$ is a microscopic version of $Q_t$. Taking expectation of all possible outcomes of $X_t$ starting at $x$ allows one to average around $x$, giving the convolution $Q_t f(x)$.
+
+We remark here that the process $X_t$ is reversible, but the semigroup $Q_t$ is not reversible (since it is a semigroup). This distinction is similar to the one in statistical physics between microscopic reversibility and macroscopic irreversibility of a system.
+
+There is one obvious way to construct a martingale from $f(X_t)$. Let $T>0$ and consider for $0 \le t \le T$
+\[
+	E^x\left[ f(X_T) | \mathcal{F}_t \right] = E^{X_t}[X_{T - t}] = Q_{T - t} f(X_t)
+.\] 
+The Doob's Lp maximal inequality gives us
+\begin{equation}
+	\label{eqn:maximalErgodicDoob}
+	E^x\left[ \left| \sup _{0 < t < T} Q_{T - t} f(X_t) \right|^p  \right] 
+	\le  \left( \frac{p}{p-1} \right) ^p
+	E^x\left[ |f(X_T)|^p \right] 
+.\end{equation} 
+If we take integral with respect to $x$ on the RHS, then we get
+\[
+	\int _{\mathcal{S}} E^x \left[ |f(X_T)|^p \right]  d x
+	= \int _{S} |f(x)|^p dx = \|f\|_p^p
+.\] 
+To see this, observe that from the symmetric and unitary property of the semigroup $Q_t$, we have for any bounded measurable $g$,
+\begin{equation}
+	\label{eqn:semi-expect}
+	\int _{\mathcal{S}}E^x\left[ g(X_T) \right]  d x
+	= \left\langle Q_T g, 1 \right\rangle 
+	= \left\langle g, Q_T 1 \right\rangle 
+	= \left\langle g, 1 \right\rangle 
+	\equiv \int _{\mathcal{S}}g(x) d x
+.\end{equation} 
+
+
+The only thing remaining is to form some control of the maximal function in term of LHS of \eqref{eqn:maximalErgodicDoob}. Let's first understand the process in an intuitive manner, and then write a proof.
+
+The process $Q_{T - t}f(X_t)$ is a continuous interpolation between the two types of average: continuous averaging described by convolution with the semigroup $Q_t$, and discrete version described by sampling from the process $X_t$. At $t = 0$, the averaging is completely continuous; at $t = T$, we only get the value of $f$ at $X_T$. 
+
+The problem is that the location where we compute the local average $Q_{T - t}$ is moving with $X_t$. But in the theorem we want maximal value of action of $(Q_t)_{t > 0}$ at the same place. To resolve this, we can try to reduce this to local averages at $X_T$.
+
+Start from the LHS of \eqref{eqn:maximalErgodicDoob}.
+\begin{align*}
+	E^x\left[ \left| \sup _{0 < t < T} Q_{T - t} f(X_t) \right|^p  \right] 
+	&= E^x\left[ \left| \sup _{0 < t < T} Q_{T - t} f(X_{2 T - t}) \right|^p  \right] & \text{ by reversibility}\\
+	&= E^x\left[ E^x\left[\left| \sup _{0 < t < T} Q_{T - t} f(X_{2 T - t}) \right|^p  \mid \mathcal{F}_T\right]\right] & \text{}\\
+	&\geq E^x\left[ \left| \sup _{0 < t < T}E^x\left[ Q_{T - t} f(X_{2 T - t})  \mid \mathcal{F}_T\right] \right|^p \right] & \text{by Jensen's inequality}\\
+	&= E^x\left[ \left| \sup _{0 < t < T}E^{X_T}\left[ Q_{T - t} f(X_{T - t})\right] \right|^p \right]\\
+	&= E^x\left[ \left| \sup _{0 < t < T}Q_{T - t} Q_{T - t} f(X_{T}) \right|^p \right]\\
+	&= E^x\left[ \left| \sup _{0 < t < T}Q_{2(T - t)} f(X_{T}) \right|^p \right] & \text{by semigroup property}
+.\end{align*}
+
+We see that, in the lower bound, we run the process up to $f(X_T)$, and average on the scale 0 to $2 T$ at that point. A drawing would convince the reader that the bound makes sense.
+
+Now, take integrate wrt $dx $ and use \eqref{eqn:semi-expect} again, we obtain
+
+\[
+	\| \sup _{0 < t < T}Q_{2(T - t)} f(x)\|_p \le \frac{p}{p-1} \|f\|_p
+.\] 
+That is,
+\[
+	\| \sup _{0 < t < 2T}Q_{t} f(x)\|_p \le \frac{p}{p-1} \|f\|_p
+.\]
+Since the RHS is independent of $T$, we may take $T \to \infty $ and obtain the theorem.
+
+

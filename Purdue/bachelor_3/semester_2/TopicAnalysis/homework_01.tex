@@ -1,0 +1,414 @@
+\homework{1}{Thu 05 Sep 2024 17:56}{homework}
+
+\begin{enumerate}
+	\item Exercise 3.2.7 (pg 50 Lecture Notes). 
+Let $S^{n-1}=\left\{x \in \mathbb{R}^n:|x|=1\right\}$ and for any Borel set $E \in S^{n-1}$ set $\widetilde{E}=$ $\{r \theta: 0<r<1, \theta \in E\}$. Define the measure $\sigma$ on $S^{n-1}$ by $\sigma(E)=n|\widetilde{E}|$. Notice that with this definition the surface area $\omega_{n-1}$ of the sphere in $\mathbb{R}^n$ satisfies $\omega_{n-1}=n \gamma_n=2 \pi^{n / 2} / \Gamma(n / 2)$ where $\gamma_n$ is the volume of the unit ball in $\mathbb{R}^n$. Prove (integration in polar coordinates) that for all nonnegative Borel functions $f$ on $\mathbb{R}^n$,
+
+\[
+\int_{\mathbb{R}^n} f(x) d x=\int_0^{\infty} r^{n-1}\left(\int_{S^{n-1}} f(r \theta) d \sigma(\theta)\right) d r
+\]
+
+
+In particular, if $f$ is a radial function, that is, $f(x)=f(|x|)$, then
+
+\[
+\int_{\mathbb{R}^n} f(x) d x=\frac{2 \pi^{n / 2}}{\Gamma\left(\frac{n}{2}\right)} \int_0^{\infty} r^{n-1} f(r) d r=n \gamma_n \int_0^{\infty} r^{n-1} f(r) d r
+.\]
+\begin{proof}
+	Let $m$ be Borel measure on $\mathbb{R}^n$.
+	Consider the measurable map
+	\begin{align*}
+		\phi: \mathbb{R}^n \setminus \{0\}  &\longrightarrow (0,\infty ) \times S^{n - 1} \\
+		r \theta &\longmapsto \phi(r \theta) = (r, \theta)
+	\end{align*}
+	which is a smooth bijection. $\phi$ is a measurable map, thus induces a Borel measure $\phi_*m$ on $(0,\infty ) \times S^{n - 1}$. In particular, for each $a > 0$ and $E \in \mathcal{B}(S^{n - 1})$, the set
+	\[
+		E_a := \phi^{ - 1} \left( (0,a) \times E \right) 
+	\] 
+	is $m$-measurable.
+
+	We also define the radial measure on $(0,\infty )$ by
+	\[
+		d \rho = r^{n - 1} dr
+	.\] 
+	And the surface measure on $S^{n - 1}$ by
+	\[
+		\sigma(E) = n m(E_1)
+	.\] 
+	By Radon-Nikodym one confirms that $d \rho$ is a measure; and one confirms that $\sigma$ is a measure by noting that $(r \theta) \mapsto \theta$ restricted to $B(0,1)$ is a measurable map which induces $\sigma / n$.
+
+	Our goal now becomes to prove
+	\[
+		\phi_* m = \rho \times \sigma
+	.\] 
+	We first confirm this for simple sets of the form $(a, b] \times E , E \in \mathcal{B}(S^{n - 1})$. We have
+	\begin{align*}
+		\phi_*m \left( (a,b] \times E \right) 
+		&= m\left( \phi^{-1} \left( (a,b] \times E \right)  \right)  \\
+		&= m(E_b - E_a) \\
+		&= m(E_b) - m(E_a) \\
+		&= b^n m(E_1) - a^n m(E_1) \\
+		&= \int _a^b n r^{n - 1} d r \cdot m(E_1) \\
+		&= \rho(a, b) \sigma(E) 
+	.\end{align*}
+
+	Recall several facts from measure theory:
+	\begin{enumerate}
+		\item For Borel measurable spaces $(A, \mathcal{B}_A)$ and $(B, \mathcal{B}_B)$, $\mathcal{B}_A \times \mathcal{B}_B$ generates $\mathcal{B}(A \times B)$ the product $\sigma$-algebra.
+		\item If two measures $\mu, \nu$ agree (as pre-measures) on a set algebra $\mathcal{A}$, then they agree on $\sigma(\mathcal{A})$.
+	\end{enumerate}
+
+	Now, for $E \in \mathcal{B}(S)$, let $\mathcal{A}_E$ be the collections of sets that are finite disjoint unions of sets of the form $(a,b] \times E$. Then $\mathcal{A}_E$ is a set algebra that generates the $\sigma$-algebra $\mathcal{M}_E = \{A \times E: A \in \mathcal{B}((0,\infty ))\} $. Now, $\mathcal{M} = \cup _{E \in B(S^{n - 1})}\mathcal{M}_E = \mathcal{B}(0,\infty ) \times \mathcal{B}S^{n - 1}$ is the collection of all Borel cubes, which generate the product Borel $\sigma$-algebra on $(0,\infty ) \times S^{n - 1}$.
+
+	We have $\phi_* m = \rho \times \sigma$ on $\mathcal{A}_E$ by linearity, so they also agree on $\mathcal{M}_E$ for each $E$. Hence they agree on $ \mathcal{M}$, thus agree on $\mathcal{B}\left( (0,\infty ) \times S^{n - 1} \right) $.
+	
+\end{proof}
+
+
+
+
+	\item Exercise 3.2.9 (pg 50 Lecture Notes) 
+Let $e_1=(1,0, \ldots, 0)$ and for any $\xi \in S^{n-1}$ define $\theta, 0 \leq \theta \leq \pi$ such that $e_1 \cdot \xi=\cos \theta$. Prove, by first integrating over $L_\theta=\left\{\xi \in S^{n-1}: e_1 \cdot \xi=\cos \theta\right\}$ that for any $1 \leq p<\infty$
+
+\[
+\int_{S^{n-1}}\left|\xi_1\right|^p d \sigma(\xi)=\omega_{n-2} \int_0^\pi|\cos \theta|^p(\sin \theta)^{n-2} d \theta
+\]
+
+
+Use (3.12) and the fact that for any $r>0$ and $s>0$,
+
+\[
+2 \int_0^{\pi / 2}(\cos \theta)^{2 r-1}(\sin \theta)^{2 s-1} d \theta=\frac{\Gamma(s) \Gamma(r)}{\Gamma(r+s)}
+\]
+
+([Ru1], p. 194) to prove that for any $1 \leq p<\infty$
+
+\[
+\int_{S^{n-1}}\left|\xi_1\right|^p d \sigma(\xi)=\frac{2 \pi^{(n-1) / 2} \Gamma\left(\frac{p+1}{2}\right)}{\Gamma\left(\frac{n+p}{2}\right)}
+\]
+\begin{proof}
+	Define the map that is 1-1 onto the half-sphere $S^{n - 1, +}$:
+	\begin{align*}
+		\phi: B^{n - 2}(0,1) = (0,1) \times  S^{n - 2} &\longrightarrow S^{n-1, +} = (0,\frac{\pi}{2}) \times S^{n - 2} \\
+		(r, \xi)&\longmapsto \phi(r, \xi) = (\sin^{-1 } r, \xi)
+	.\end{align*}
+
+	Using result about polar coordinate, we have
+	\begin{align*}
+		\int _{S^{n -1, +}} f d \sigma 
+		&= \int _{B^{n - 1}(0,1)} f \circ \phi |J_ \phi| d m_{n - 1} \\
+		&= \int _{0}^1 \int _{S^{n - 2}} f \circ \phi |J_ \phi| r^{n - 2} d \sigma_{n - 2}(\xi) d r \\
+		&= \int _{S^{n - 2}} \int _{0}^1 f \circ \phi  |J_ \phi| r^{n - 2} d r d \sigma_{n - 2}(\xi) \\
+		\intertext{Change variable $r = \sin \left( \theta \right) $ in the inner integral,}
+		&= \int _{S^{n - 2}} \int _{0}^{\pi / 2} f \circ \phi \circ (\psi \times \operatorname{Id}_{S^{n - 2}} )|J_ \phi| |J_ \psi| \sin \left( \theta \right) ^{n - 2} d \theta d \sigma_{n - 2}(\xi)
+	,\end{align*}
+	where $\psi(\theta) = \sin \left( \theta \right) $ is the 1-dimensional change of variable. We may calculate that $|J_ \phi| = \frac{1}{\cos \left( \theta \right) }, |J_ \psi| = \cos \left( \theta \right) $. Hence we get the formula
+	\[
+		\int _{S^{n -1, +}} f d \sigma 
+		=
+		 \int _{0}^{\pi / 2}\int _{S^{n - 2}}  f (\theta, \xi) \sin \left( \theta \right) ^{n - 2}  \sigma_{n - 2}(\xi)d \theta 
+	.\] 
+	Apply the same argument to the other side of the sphere $S^{n - 1}$, we get the intended formula
+\[
+		\int _{S^{n -1}} f d \sigma 
+		=
+		 \int _{0}^{\pi}\int _{S^{n - 2}}  f (\theta, \xi) \sin \left( \theta \right) ^{n - 2}  \sigma_{n - 2}(\xi)d \theta 
+	.\]
+	
+	Now let's compute the formulas. One has
+	\begin{align*}
+		\int _{S^{n - 1}} |\xi|^p d \sigma(\xi)
+		&= \omega_{n - 2} \int _0^\pi |\cos \left( \theta \right) |^p \sin \left( \theta \right) ^{n - 2} d \theta\\
+		&= 2 \omega_{n - 2} \int _0^{\frac{\pi}{2}} |\cos \left( \theta \right) |^p \sin \left( \theta \right) ^{n - 2} d \theta 
+	.\end{align*}
+	Take $2 r - 1 = p, 2 s - 1 = n - 2$, one has
+\[
+	\int _{S^{n - 1}} |\xi|^p d \sigma(\xi) = 2 \omega_{n - 2} \frac{\Gamma( \frac{n - 1}{2}) \Gamma( \frac{p + 1}{2})}{\Gamma\left( \frac{ p + 1 }{2} \right) }
+.\] 
+Also note that
+\[
+	\omega_{n - 2} = \frac{2 \pi^{\frac{n - 1}{2}}}{\Gamma\left( \frac{n - 1}{2} \right) }
+.\] 
+Thus
+\[
+	\int _{S^{n - 1}} |\xi|^p d \sigma(\xi)
+	= \frac{4 \pi^{\frac{n - 1}{2}} \Gamma(\frac{p + 1}{2})}{\Gamma \left( \frac{p + n}{2} \right) }
+.\] 
+
+\end{proof}
+\item Exercise 4.1.1 (pg 53 Lecture Notes) 
+Let $1<p<\infty$ and $q=p /(p-1)$ be its conjugate exponent. Let $K(x, y)$, $x, y \in(0, \infty)$ be nonnegative and homogeneous of degree -1 . That is, $K$ has the property that for all $\lambda>0, K(\lambda x, \lambda y)=\lambda^{-1} K(x, y)$. Suppose that
+
+\[
+\int_0^{\infty} K(x, 1) x^{-1 / p} d x=\int_0^{\infty} K(1, y) y^{-1 / q} d y=a
+\]
+
+and denote the $L^p(0, \infty)$ norm of a function $f$ by $\|f\|_p$. Prove that
+
+\[
+\left\|\int_0^{\infty} K(x, y) f(x) d x\right\|_{L^p(d y)} \leq a\|f\|_p
+\]
+
+and that
+
+\[
+\left|\int_0^{\infty} \int_0^{\infty} K(x, y) f(x) g(y) d x d y\right| \leq a\|f\|_p\|g\|_q
+\]
+\begin{proof}
+	\begin{align*}
+		& \| \int _0^\infty  K(x, y) f(x) d x \|_{L^p(dy)} \\
+		&= \| \int _0^\infty  K(u,1) f(uy) d u \|_{L^p(dy)} \\
+		&\le  \int _0^\infty \|  K(u,1) f(uy) \|_{L^p(dy)} du  \\
+		&=  \int _0^\infty   K(u,1) \|f(uy) \|_{L^p(dy)} du
+	.\end{align*}
+	Where we used the Minkowskii's integral inequality. Now note that
+	\[
+		\|f(uy)\|_{L^p(dy)} 
+		= \left( \int _0^\infty f(uy)^p dy \right) ^{\frac{1}{p}}
+		= \left( \int _0^\infty uf(z)^p dz \right) ^{\frac{1}{p}} = 
+		u^{ - 1 / p}\|f(y)\|_{L^p(dy)} 
+	.\] 
+	Therefore
+\begin{align*}
+		& \| \int _0^\infty  K(x, y) f(x) d x \|_{L^p(dy)} \\
+		&\le   \int _0^\infty   K(u,1) u^{ - 1 / p}\|f(y) \|_{L^p(dy)} du
+		&=  a\|f\|_{L^p(dy)}
+	.\end{align*}
+
+	To prove the other inequality,
+	\begin{align*}
+		&\int _0^\infty  \int _0^\infty  K(x, y) f(x) g(y) dx dy\\
+		&= \int _0^\infty  \int _0^\infty  K(u, 1) f(uy) g(y) du dy \\
+		&\leq \int _0^\infty  \left| \int _0^\infty  K(u, 1) f(uy) g(y) du \right|  dy \\
+		&\leq \int _0^\infty    \|K(u, 1) f(uy) g(y)\|_{L^1(dy)}   du \\
+		&= \int _0^\infty    K(u, 1)\| f(uy) g(y)\|_{L^1(dy)}   du \\
+		&\leq \int _0^\infty    K(u, 1)\| f(uy) \|_{L^1(dy)}\|g(y)\|_{L^1(dy)}   du \\
+		&= a \|f\|_1 \|g\|_1
+	.\end{align*}
+	Where, we used Minkowskii's integral inequality in the second inequality, and for the last inequality we used the fact that $L^1$ space is a commutative Banach algebra.
+\end{proof}
+	
+\item Exercise 4.1.4 (pg 53 Lecture Notes) 
+	Suppose $r=p-1$ in Exercise 4.1.3. In this case we can write the inequality (4.4) as
+
+\[
+\left(\int_0^{\infty}\left(\frac{1}{x} \int_0^x f(y) d y\right)^p d x\right)^{1 / p} \leq \frac{p}{p-1}\left(\int_0^{\infty}(f(y))^p d y\right)^{1 / p}
+\]
+
+
+Prove that the constant $p /(p-1)$ cannot be improved.
+
+\begin{proof}
+	Define $f(x) = x^{- \alpha} 1(x > 1)$. We have
+	\[
+		\int _0^\infty \left( F(x) / x \right) ^p dx = \int _1^\infty  \left(\left( x^{- \alpha} - x^{- 1} \right) / (- \alpha + 1)\right)^p dx
+	.\] 
+	We want to pick $\alpha$ such that
+	\[
+		\frac{\int _1^\infty \left(  \frac{x^{- \alpha} - x^{-1}}{- \alpha + 1} \right)^p d x }{
+		\int _1^\infty x^{- \alpha p} dx}
+		\to C
+		\quad \text{ as } p \to \infty 
+	.\] 
+	Take $\alpha < 1$, we have 
+\[
+	\frac{\int _1^\infty \left(  \frac{x^{- \alpha} - x^{-1}}{- \alpha + 1} \right)^p d x }{
+		\int _1^\infty x^{- \alpha p} dx}
+		=
+		(- \alpha + 1)^{- p} \frac{\int _1^\infty x^{- \alpha p} + o(x^{- \alpha p}) d x }{
+		\int _1^\infty x^{- \alpha p} dx} \to (- \alpha + 1)^{- p}
+.\] 
+Thus, it suffices to take $\alpha = 1/p$, so that
+\[
+	(- \alpha + 1)^{- p} = C = \left( \frac{p}{p - 1} \right) ^p
+.\] 
+
+That is, as $p \to \infty $, the sequence of functions $x^{- 1 / p}1(x>1)$ satisfy the inequality tightly.
+
+\end{proof}
+
+
+\item Exercise 4.1.7 (pg 54 Lecture Notes) 
+Hardy's Inequality. Let $f$ be a nonnegative function on $[0, \infty), 1<p<\infty$ and $0<r<\infty$. Prove that
+
+\[
+\left(\int_0^{\infty}\left(\int_0^x f(y) d y\right)^p \frac{d x}{x^{r+1}}\right)^{1 / p} \leq \frac{p}{r}\left(\int_0^{\infty}(y f(y))^p \frac{d y}{y^{r+1}}\right)^{1 / p}
+\]
+\begin{proof}
+	\begin{align*}
+		& \left( \int _0^\infty \left( \int _0^x f(y) d y \right) ^p  \frac{d x}{x^{r + 1}} \right)^{1 / p} \\
+		&= \left( \int _0^\infty \left( \int _0^1 f(xs)x d s \right) ^p  \frac{d x}{x^{r + 1}} \right)^{1 / p} \\
+		&\le   \int _0^1\left( \int _0^\infty \left( f(xs)x \right) ^p  \frac{d x}{x^{r + 1}} \right)^{1 / p} ds \\
+		&= \int _0^1\left( \int _0^\infty \left( f(x)x \right) ^p  \frac{d x}{x^{r + 1}} \right)^{1 / p} s^{(- p + r + 1 - 1) / p} ds \\
+		&= \left( \int _0^\infty \left( f(x)x \right) ^p  \frac{d x}{x^{r + 1}} \right)^{1 / p} \int _0^1 s^{(- p + r + 1 - 1) / p} ds \\
+		&= \text{Qed}
+	.\end{align*}
+	where the inequality is due to Minkowskii, with respect to the measures $ds$ and $\frac{dx}{x^{r + 1}}$.
+\end{proof}
+
+\item Exercise 4.1.7 (pg 54 Lecture Notes)
+Let $u(x, y)$ be a differentiable function in the upper half space $\mathbb{R}_{+}^2=\{(x, y): x \in$ $\mathbb{R}, y>0\}$ of compact support. Prove that
+
+\[
+\int_{\mathbb{R}_{+}^2} \frac{|u(x, y)|^2}{y^2} d x d y \leq 4 \int_{\mathbb{R}_{+}^2}|\nabla u(x, y)|^2 d x d y
+\]
+\begin{proof}
+	By assumption, $u$ is compactly supported away from $0$. Thus
+	\[
+		u(x,y) = \int _0^y \frac{\partial u}{\partial y}  d y =: \int _0^y u_y dy
+	.\] 
+	Now, use the Hardy's inequality,
+	\begin{align*}
+		\int _{\mathbb{R}^2_+}  \frac{u(x,y)^2}{y^2} dy
+		&= \int _{\mathbb{R}} \int _0^\infty \left(  \int _0^y u_y dy \right)  ^2 \frac{dy }{y^2} dx\\
+		&\leq \int _{\mathbb{R}} 4\int _0^\infty u_y^2 dy dx\\
+		&= \int _{\mathbb{R}^2_+} 4 u_y^2 dx dy
+	.\end{align*}
+	Finally observe $\left| \nabla u(x,y) \right|^2 = u_x^2 + u_y^2 \ge u_y^2 $.
+\end{proof}
+\item 
+Let $f$ be the characteristic function of the interval $I=[a, b]$. Prove that
+
+\[
+Mf(x)= \begin{cases}\frac{(b-a)}{2|x-b|}, & x \leq a \\ 1, & x \in(a, b) \\ \frac{(b-a)}{2|x-a|}, & x \geq b\end{cases}.
+\]
+
+\begin{proof}
+
+First observe that $Mf \le 1$, and that we don't need to consider any ball larger than the one just containing $I$.
+
+\textbf{Case 1: \( x \in (a, b) \)}. \\
+For \( x \in (a, b) \), the interval \( [x-r, x+r] \) will entirely overlap with \( [a, b] \) for small \( r \), so
+\[
+\frac{1}{2r} \int_{x-r}^{x+r} f(t) \, dt = \frac{1}{2r} \cdot 2r = 1.
+\]
+Hence, \( Mf(x) = 1 \) for \( x \in (a, b) \).
+
+\textbf{Case 2: \( x \leq a \)}. \\
+When \( x \leq a \), the interval \( [x-r, x+r] \) will intersect \( [a, b] \) when \( r > a - x \), and the overlap length is \( r + (x - a) \). Thus,
+\[
+Mf(x) = \sup_{r > a - x} \frac{1}{2r} \cdot (b - a) = \frac{b - a}{2(a - x)}.
+\]
+
+\textbf{Case 3: \( x \geq b \)}. \\
+For \( x \geq b \), the interval \( [x-r, x+r] \) will overlap \( [a, b] \) when \( r > x - b \), and the overlap length is \( r - (x - b) \). Hence,
+\[
+Mf(x) = \sup_{r > x - b} \frac{1}{2r} \cdot (b - a) = \frac{b - a}{2(x - b)}.
+\]
+
+Thus, combining all cases, we have
+\[
+Mf(x) = \begin{cases}
+\frac{b - a}{2(a - x)}, & x \leq a, \\
+1, & x \in (a, b), \\
+\frac{b - a}{2(x - b)}, & x \geq b.
+\end{cases}
+\]
+\end{proof}
+
+\item Suppose $f \not \equiv 0$. Prove that $M f(x)>C_f^1 /|x|^n$ for all $|x|>C_f^2$, where the $C_f^1$ and $C_f^2$ are positive constant depend on $f$. Conclude that $M f$ is not in $L^1$.
+
+\begin{proof}
+	Take some ball $B(x_0, r)$ such that $\int _{B(x_0, r)} |f| dx \ge C > 0$. Without loss of generality we assume $x_0 = 0$. Now, for any $x$ such that $|x| > r$, one has
+	\[
+		B(x, 2 |x|) \supset B(0, r)
+	.\] 
+	Hence
+	\[
+		M f(x) 
+		\ge \frac{1}{(2|x|)^n \omega_n} \int_{B(x, 2|x|)}|f(x)| dx
+		\ge \frac{1}{(2|x|)^n \omega_n} \int_{B(0,r)}|f(x)| dx
+		\ge \frac{C}{(2|x|)^n \omega_n}
+	.\] 
+	This one may take $C^1_f = \frac{C}{2^n \omega_n}$, $C^2_f = r$.
+\end{proof}
+
+\item Let $f \in L^1\left(\mathbb{R}^n\right)$ and $0<p<1$. Prove that
+
+\[
+\int_E(M f(x))^p d x \leq C_p|E|^{1-p}\|f\|_1^p
+\]
+
+for all measurable $E \in \mathbb{R}^n$.
+\begin{proof}
+	\begin{align*}
+		\int _E (Mf)^p d \mu
+		&= \int _0^\infty p \alpha^{ p - 1} \mu \{x \in E: M f > \alpha\}  d \alpha \\
+		&= \int _0^\lambda p \alpha^{ p - 1} \mu \{x \in E: M f > \alpha\}  d \alpha +
+		 \int _\lambda^\infty p \alpha^{ p - 1} \mu \{x \in E: M f > \alpha\}  d \alpha \\
+		&\leq \int _0^\lambda p \alpha^{ p - 1} |E|  d \alpha +
+		 \int _\lambda^\infty p \alpha^{ p - 1} \mu \{x \in \mathbb{R}^n: M f > \alpha\}  d \alpha \\
+		 &\leq |E| \lambda^p - \|f\|_1 \frac{p 3^n}{p - 1} \lambda^{p - 1}
+	.\end{align*}
+	Take $\lambda = \|f\|_1 / |E|$, we get
+
+	\[
+		\int _E (Mf)^p d \mu
+		\le  \left( 1 + \frac{3^n p}{1 - p} \right) |E|^{1 - p} \|f\|_1^p
+	.\] 
+\end{proof}
+
+\item 
+	For any $\alpha>0$ and $x \in \mathbb{R}^n$, define the cone in $\mathbb{R}_{+}^{n+1}$ with vertex at $x$ and aperture $2 \arctan (\alpha)$, to be
+
+\[
+\Gamma_\alpha(x)=\left\{\left(x_0, y\right) \in \mathbb{R}_{+}^{n+1}:\left|x_0-x\right|<\alpha y\right\} .
+\]
+
+
+If $f \in L^p\left(\mathbb{R}^n\right), 1 \leq p \leq \infty$, the nontangential maximal function of $f$ is defined to be
+
+\[
+N_\alpha f(x)=\sup _{\left(x_0, y\right) \in \Gamma_\alpha(x)}\left|P_y * f\left(x_0\right)\right|
+\]
+
+
+Prove that there is a constant $C_{\alpha, n}$ such that
+
+\[
+N_\alpha f(x) \leq C_{\alpha, n} M f(x)
+\]
+
+and therefore the nontangential maximal function satisfies the boundedness properties of the Hardy-Littlewood maximal function.
+
+\begin{proof}
+	For each $(x_0, y) \in \Gamma_\alpha(x)$, define $\overline{y}  = \sqrt{1 - \alpha^2} y$, and let $C = \frac{1}{\sqrt{1 - \alpha^2} }$. We show 
+	\[
+		C T_x P_{\overline{y} } (\tilde x) \ge T_{x_0} P_y (\tilde x) \qquad \text{for all } \tilde x \in \mathbb{R}^{n}
+	.\] 
+	This amounts to show
+	\[
+		C \frac{\overline{y} }{\left( |\tilde x - x|^2 + \overline{y} ^2 \right) ^{\frac{n + 1}{2}}} 
+		\ge \frac{y }{\left( |\tilde x - x_0|^2 + y ^2 \right) ^{\frac{n + 1}{2}}}
+	,\] 
+	which is equivalent to
+	\[
+		\left| \tilde x - x_0 \right| ^2 + y^2 \ge  \left| \tilde x - x \right| ^2 + (1 - \alpha^2) y^2
+	.\] 
+	Note that $\Gamma_\alpha(x)$ imposes the constraint $|x_0 - x| \le \alpha y$.
+	But we have
+	\begin{align*}
+		|\tilde x - x_0|^2 + y^2
+		&= |\tilde x - x_0|^2 + (1 - \alpha^2)y^2 + \alpha^2y^2\\
+		&\geq |\tilde x - x_0|^2 + (1 - \alpha^2)y^2 + |x_0 - x|^2\\
+		&\geq |\tilde x - x|^2 + (1 - \alpha^2)y^2 
+	.\end{align*}
+
+	Thus we have $T_{x _0 - x} P_y \le C P_{\overline{y} }$. Therefore
+	\begin{align*}
+		N_\alpha f(x)
+		&= \sup _{(x_0, y) \in \Gamma_\alpha(x)}P_y * f(x_0) \\
+		&= \sup _{(x_0, y) \in \Gamma_\alpha(x)} T_{x_0 - x} P_y * f(x) \\
+		&\leq C \sup _{(x_0, y) \in \Gamma_\alpha(x)}  P_{\overline{y} } * f(x) \\
+		&= C \sup _{\varepsilon>0}  P_{\varepsilon} * f(x) \\
+		&\leq C \|P_1\| M f(x) = C M f(x)
+	.\end{align*}
+	Where we have used Theorem 5.4 from lecture note.
+
+\end{proof}
+
+
+
+	
+	
+\end{enumerate}

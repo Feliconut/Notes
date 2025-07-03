@@ -20,7 +20,7 @@ where:
 \begin{theorem}
 	If $p := p_1 + \ldots + p_r = p_{r + 1} + \ldots + p_n$, and if there exists a one-particle state $\left| \Psi \right\rangle $ of mass $m$ having nonzero intermediate matrix element
 	\[
-		\left\langle \Psi \right| \phi(x_1) \ldots \phi(x_n) \left| \Omega \right\rangle \neq 0
+		\left\langle \Psi \right| \phi(x_1) \ldots \phi(x_r) \left| \Omega \right\rangle \neq 0
 	,\] 
 	then $G$ has a pole at $p^2 = m^2$ and factorizes locally.
 \end{theorem}
@@ -28,19 +28,63 @@ The argument essentially goes as follows:
 \begin{itemize}
 	\item All on-shell mass-$m$ states, either one particle or multi-particle, of all spin states and other possible quantum numbers, form a complete set of states.
 	(By construction, they form the Fork space on which our theory is defined.)
-	\item The nonzero matrix elements corresponding to the possible on-shell intermediate mass-$m$ states that can be formed. For each such term one can demonstrate a pole and a factorization.
+	\item The nonzero matrix elements corresponding to the possible on-shell intermediate mass-$m$ states that can be formed.
+	\item For each on-shell intermediate state, one can obtain a simple pole that factorizes the amplitude. To understand this physically, look at the LSZ formula:
+\[
+\begin{array}{r}
+\langle f| S|i\rangle=\left[i \int d^4 x_1 e^{-i p_1 x_1}\left(\square+m^2\right)\right] \cdots\left[i \int d^4 x_n e^{i p_n x_n}\left(\square+m^2\right)\right] \\
+\times\langle\Omega| T\left\{\phi\left(x_1\right) \phi\left(x_2\right) \phi\left(x_3\right) \cdots \phi\left(x_n\right)\right\}|\Omega\rangle
+\end{array}
+\]
+	and see that each pole in the amplitude corresponds to an observable state that can be projected out to the scattering amplitude.
 \end{itemize}
 
 \followup If one chooses a different basis of the Fork space that involves states not on-shell, then the assumption of on-shell states can be lifted.
 
-\subsection{On-shell BCFW Recursion}
+\subsection{Spin-Helicity and Three-point Amplitudes}
 
-Here we follow the demonstration in \autocite[Chapter~27.6]{schwartzQFT2014}, for gluon scattering amplitudes (massless spin-1).
+Here we follow the demonstration in \autocite[Chapter~27.6]{schwartzQFT2014}, for gluon scattering amplitudes (massless spin-1), and QED in massless limit.
 
 The development crucially depends on the \textbf{Spin-Helicity Formalism}, which is a bi-spinor $\left( \frac{1}{2}, \frac{1}{2} \right) $ representation of spin-1 or spin-0 particles (we focus on spin-1 case). The most important feature is that, every four-momentum $p^\mu \in \mathbb{R}^{1,3}$ is represented in a $2$-tensor with two spinor indices, and $\operatorname{det } p^{\alpha \dot{\alpha}} = p_\mu^2$. When $p_{\mu}^2 = 0$, it can be written in terms of an outer product:
 $p^\mu \mapsto p \rangle  [p $, where $p \rangle$ is a left-handed spinor and $[p$ is its right-handed complex conjugate:  $p \rangle = \left( [p \right) ^\dag$. This is, for instance, true for massless on-shell states for which $p^2 = m^2 = 0$.
 
-This case is also special in that the matrix elements can only depend on the inner products of the respective spinors, and combining with a dimensional analysis argument, one can determine the expression of all 4-point amplitudes up to a coefficient.
+This case is also special in that the matrix elements can only depend on the inner products of the respective spinors, and combining with a dimensional analysis argument, one can determine the expression of all 3-point amplitudes up to a coefficient. 
+
+The dimensional analysis argument is as follows: 
+\begin{itemize}
+	\item The helicity spinor representation of a momentum has a redundancy captured by the little group transformation
+	\[
+		p \rangle \to z p \rangle, \quad [p \to z^{-1} [p.
+	\]
+	And the polarization vectors scale as
+	\[
+	\epsilon_p^{-}(r)=\sqrt{2} \frac{p\rangle[r}{[p r]} \rightarrow z^2 \epsilon_p^{-}(r), \quad \epsilon_p^{+}(r)=\sqrt{2} \frac{r\rangle[p}{\langle r p\rangle} \rightarrow z^{-2} \epsilon_p^{+}(r)
+	.\]
+	\item The amplitude only depends on the inner product between the momenta.
+	\item The amplitude must depend on only left-handed inner products or only right-handed inner products. To see this, start from momentum conservation
+	\[
+		1\rangle  [ 1 +  2\rangle [ 2 + 3\rangle  [ 3 = 0
+	\]
+	and contract with $\langle 1, \langle 2$. This gives two equations
+	\[
+	\langle 12\rangle[2=-\langle 13\rangle[3, \quad\langle 21\rangle[1=-\langle 23\rangle[3
+	\]
+	and implies either $\langle 12\rangle = \langle 23\rangle = \langle 31\rangle = 0$ or $[12] = [23] = [31] = 0$. 
+	\item The scaling of the amplitude solely depends on the scaling of the polarization vectors, since only for the polarization term the $\langle \rangle$ and $[]$ are not well-balanced. In particular, for a 3-point amplitude, the number of $\langle \rangle$ minus the number of $[]$ is $2$ for negative helicity gluon, $-2$ for positive helicity gluon. This holds respectively for each gluon. 
+	In particular, the only possible forms for the 3-point amplitude are
+	\[
+	\mathcal{M}(1^{a+}, 2^{b+}, 3^{c+}) = C^{abc} [12][23][31] \quad \text{or} \quad \frac{C^{abc}}{\langle 12\rangle \langle 23\rangle \langle 31\rangle}.
+	\]
+	but the second form diverges in the limit of real momenta, so it is not allowed. Hence the first form is the only possible form.
+	Using the same argument, we have
+	\[
+	\mathcal{M}\left(1^{a+} 2^{b+} 3^{c-}\right)=C^{a b c} \frac{[12]^3}{[13][32]} , \qquad 
+	\mathcal{M}\left(1^{a-} 2^{b-} 3^{c+}\right)=C^{a b c} \frac{\langle 12\rangle^3}{\langle 13\rangle\langle 32\rangle}.
+	\]
+\end{itemize}
+
+
+\subsection{On-shell BCFW Recursion}
 
 \textbf{Complex Momentum.} 
 Start with a scattering with in and out momenta $1 \rangle[1, \ldots, n \rangle [n $. For now, let's say they are physical, real, on-shell momenta, but this can be generalized. Now, fix some $1 \le i < j \le n$, and for any complex number $z$, set
@@ -61,13 +105,13 @@ This preserves masslessness, and conserves overall momenta. This complexifies th
 	\item Vanishing at infinity.
 \end{itemize}
 
-\textbf{On-shell intermediate states.} For interval $a \ldots b$ that includes $j$ but not $i$, consider its intermediate momenta $\hat{P} (z) = - z i \rangle [j + \sum_{k = a}^b k \rangle [k$. Remarkably, for unique choice of $z$:
+\textbf{On-shell intermediate states.} For interval $a \ldots b$ that includes $j$ but not $i$, consider its intermediate momenta $\hat{P} (z) = - z i \rangle [j + \sum_{k = a}^b k \rangle [k$. There is a unique choice of $z$:
 \[
 z_{a, b}^{\star}=\frac{\left(p_a+\cdots+p_b\right)^2}{\langle i a\rangle[a j]+\cdots+\langle i b\rangle[b j]}
 ,\] 
-we get $\hat{P} ^2(z^*) = 0$. Now, this state is an on-shell state and has a nonzero matrix element, given by inner product.
+such that $\hat{P} ^2(z^*) = 0$. Now, this state is an on-shell state and has a nonzero matrix element, given by inner product.
 
-\textbf{Applying Polology.} Our proof for polology is complex-analytic, so it also works for complex in and out momenta, except that our complete set of intermediate states is still real on-shell. Yet $\hat{P} (z^*)$ is real and on-shell. Hence polology can be applied, and we get the following local factorization:
+\textbf{Applying Polology.} The on-shell intermediate state $\hat{P}^2(z^*) = 0$ physically means that our scattering amplitude factorizes into two parts connected by a propagator with momentum $\hat{P} (z^*)$. This is made precise by the polology argument. Our proof for polology is complex-analytic, so it also works for complex in and out momenta (except that our complete set of intermediate states, in the proof of polology, is still real on-shell). $\hat{P} (z^*)$ is real and on-shell, and it has a nonzero matrix element. Hence polology can be applied, and we get the following local factorization:
 \begin{align*}
 	\mathcal{M}(1 \ldots n) = &\mathcal{M}\left( 1, \ldots, a-1, b+1 , \ldots, n \to \hat{P} (z^*) \right) \times \\
 	&\qquad \times  \frac{- z^*}{(p_a + \ldots + p_b)^2 (z - z^*)} \mathcal{M}\left( \hat{P} (z^*) \to a, \ldots, b \right) + \\
@@ -77,12 +121,12 @@ we get $\hat{P} ^2(z^*) = 0$. Now, this state is an on-shell state and has a non
 In other words, 
 \[
 	- \frac{1}{z^*} \operatorname{Res} _{z \to  z^*} \mathcal{M}(z) = M_1(z^*) \frac{1}{(p_a + \ldots + p_b)^2} M_2(z^*)
-.\] 
+.\]
 
 \begin{itemize}
-    \item In the proof of polology it is also guaranteed that the poles can be only simple poles, and we combine this with the further assumption that analyticity holds everywhere other than those poles.
+    \item In the proof of polology it is also guaranteed that the poles can be only simple poles, and we combine this with the further assumption that analyticity holds everywhere other than those poles. Argument of simple poles is as follows: In \autocite[pg.~4]{Britto:2005fq}, it is said that the poles are simple for ``general momenta'', this is just to say that the decomposition is for the function of $p$'s, not a particular choice of $p$'s. Then distinct subsets of external momenta $p_a, \ldots, p_b$ of course correspond to distinct poles, and in particular are simple poles.
 
-    \item We also rely on the polology fact that each pole must correspond to an on-shell intermediate state. Then this procedure will exhaust all possible poles, and in particular we have finitely many poles.
+    \item We also rely on the polology fact that each pole must correspond to an on-shell intermediate state. Then this procedure will exhaust all possible poles, and in particular we have finitely many poles. This is essentially from the assumption that (1) all tree-level diagrams are planar (satisfied by SU(N) Yang-Mills, \followup ), and (2) we are computing at the tree-level. Hence all intermediate propagators must carry momenta that are sums of subsets of external momenta, and momenta at different propagators are distinct.
 
     \item We also need to fact that it suffices to enumerate the connected intervals $a \ldots b$. This is mentioned in in \autocite[p.~3]{Britto:2005fq}: ``Recall first that the momentum flowing through a propagator in a tree diagram is always a sum of external momenta. \textit{In Yang-Mills theory, tree diagrams are planar}, and the momentum in a propagator is \textit{always a sum of momenta of adjacent external particles}''.
 \end{itemize}
@@ -107,3 +151,21 @@ Using the previous formula, we get the desired result \autocite[(27.117)]{schwar
 \subsection{Possible direction of Generalization}
 
 Check generalization to fermions and massive particles.
+
+\subsubsection{Massive Spin-Helicity and BCFW}
+
+The BCFW recursion, after its original formulation, was soon generalized to massive particles with arbitrary spins, in particular fermions. This line of work has started since the original BCFW formulation in 2005, and a recent seminal work is \autocite{Arkani-Hamed:2017jhn}. 
+A more recent line of research applies this general spin-helicity formalism to study various types of scattering amplitudes and recursion relations, such as \autocite{Abhishek:2022nqv} and references therein. Also see \autocite{Christensen:2024bdt, Ema:2024rss} and references therein.
+
+
+
+
+\subsubsection{Massless Off-shell BCFW}
+
+An early work on the off-shell BCFW is \autocite{vanHameren:2014iua}, for tree-level multi-gluon amplitudes. A recent work with a mathematical review of the BCFW-type construction is \autocite{Cohen:2024xuf}.
+
+In \autocite{Britto:2005fq} two external lines are shifted to complexify the amplitude; there has been generalization to all-line shifts \autocite{Cohen:2010mi}, and one-line shifts \autocite {Cohen:2024xuf}.
+
+\subsubsection{Loop-level Generalization}
+
+See \autocite{Arkani-Hamed:2010zjl}, where loop-level BCFW recursion is established for Supersymmetric Yang-Mills theory \textit{in the planar limit} (i.e., $SU(N)$ gauge theory with $N \to \infty$). In the planar limit, all Feymann diagrams are planar; its significance is also explained in \autocite{Beisert:2010jr}. In this line of work, the 

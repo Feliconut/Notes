@@ -1,0 +1,397 @@
+\homework{5}{Wed 11 Dec 2024 19:51}{}
+
+\begin{enumerate}
+	\item 
+First if we take $p>2$ and $0<\theta<1$, define the functions
+
+\[
+f_\theta(z)= \begin{cases}z|z|^{-2 \theta / p}, & \text { for }|z|<1 \\ \bar{z}^{-1}, & \text { for }|z| \geq 1\end{cases}
+\]
+
+
+Prove that
+
+\[
+\left|\frac{\partial f_\theta}{\partial z}\right|=\left\{\begin{aligned}
+\left(1-\frac{\theta}{p}\right)|z|^{-2 \theta / p}, & |z| \leq 1 \\
+0, & |z|>1
+\end{aligned}\right.
+\]
+
+and that
+
+\[
+\left|\frac{\partial f_\theta}{\partial \bar{z}}\right|= \begin{cases}\frac{\theta}{p}|z|^{-2 \theta / p,} & |z| \leq 1 \\ |z|^{-2}, & |z|>1\end{cases}
+\]
+		
+\begin{proof}
+	We first show an auxiliary result about differentiation on complex polynomials.
+	\begin{lemma}
+		
+		Let $P(a, b)$ be a polynomial of two variables. Then
+		\[
+			\frac{\partial }{\partial z} P(z, \overline{z} ) = \left(\frac{\partial }{\partial a} P\right)(z, \overline{z} )
+		.\] 
+		Similarly,
+\[
+			\frac{\partial }{\partial \overline{z} } P(z, \overline{z} ) = \left(\frac{\partial }{\partial b} P\right)(z, \overline{z} )
+		.\]
+	\end{lemma}
+	Using this lemma, we may use Stone's Theorem to approximate continuous functions on all compact subsets of the complex plane; and it follows that differentiation on continuous functions of $z$ and $\overline{z} $ behaves the same: $\frac{\partial }{\partial z} $ treats $\overline{z} $ as a constant, and vice versa.
+
+	Then, we may carry out the differentiation directly and obtain
+	\[
+		\frac{\partial }{\partial z} z (z \overline{z} )^{- \theta / p} = (z \overline{z} )^{- \theta / p} + z \overline{z} ^{- \theta / p} (- \theta / p) z^{- \theta / p - 1} = (1 - \frac{\theta}{p})|z|^{- 2 \theta / p}
+	.\] 
+	\[
+		\frac{\partial }{\partial z} \overline{z} ^{-1} = 0
+	.\] 
+	\[
+		\frac{\partial }{\partial \overline{z} } z (z \overline{z} )^{- \theta / p} = z z^{- \theta / p} (- \theta / p) \overline{z} ^{- \theta / p - 1} = (z \overline{z} ^{-1}) (- \frac{\theta}{p}) (z \overline{z} )^{- \theta / p}
+	.\] 
+	\[
+		\frac{\partial }{\partial \overline{z} } \overline{z} ^{-1} = - \overline{z} ^{- 2}
+	.\] 
+	Take modulus and we obtain the expected result.
+
+	\begin{proof}[Proof of Lemma]
+		Recall the definition
+		\[
+			\frac{\partial }{\partial z} = \frac{1}{2}\left( \frac{\partial }{\partial x}  - i \frac{\partial }{\partial y}  \right) 
+		.\] 
+\[
+			\frac{\partial }{\partial \overline{z} } = \frac{1}{2}\left( \frac{\partial }{\partial x}  + i \frac{\partial }{\partial y}  \right) 
+		.\]
+		Apply to $P(z, \overline{z} ) = z = x + i y$,
+		\[
+			\frac{\partial }{\partial z} (x + i y) = \frac{1}{2} ( 1 - i * i) = 1
+		.\] 
+		\[
+			\frac{\partial }{\partial \overline{z} }  (x + i y) = \frac{1}{2}(1 + i * i) = 0
+		.\] 
+		Those are consistent with our result. Result for higher-order polynomials follow from induction on the degree.
+	\end{proof}
+	
+\end{proof}
+
+\item 
+Recall from class (Lecture Notes, pp 173-174) that the Beurling-Ahlfors operator B satisfies
+
+\[
+B=4 \frac{\partial^2}{\partial z^2} \Delta^{-1}, \quad \text { and } B \circ \frac{\partial}{\partial z}=\frac{\partial}{\partial z} .
+\]
+
+
+Prove, by integrating in polar coordinates, that
+
+\[
+\frac{\left\|B \frac{\partial f_e}{\partial z}\right\|_p}{\left\|\frac{\partial f_g}{\partial z}\right\|_p}
+=\frac{\left\|\frac{\partial f_\theta}{\partial z}\right\|_p}{\left\|\frac{\partial f_p}{\partial z}\right\|_p}
+=\left(\frac{(p-1)(p-\theta)^p}{(p-1) \theta^p+(1-\theta) p^p}\right)^{1 / p} .
+\]
+
+
+What does this estimate say about the $L^p$ norm of the operator $B$ ?
+
+\begin{proof}
+	\begin{align*}
+		\|\frac{\partial f_ \theta}{\partial z} \|_p^p
+		&= \int _0^1 2 \pi r \left( 1 - \frac{\theta}{p} \right)^p r^{- 2 \theta} d r  \\
+		&= 2 \pi \left( 1 - \frac{\theta}{p} \right) ^p \int r^{- 2 \theta + 1} dr \\
+		&= 2 \pi \left( 1 - \frac{\theta}{p} \right) ^p \frac{1}{2(1 - \theta)}
+	.\end{align*}
+\begin{align*}
+		\|\frac{\partial f_ \theta}{\partial \overline{z} } \|_p^p
+		&= \int _0^1 2 \pi r \left( \frac{\theta}{p} \right)^p r^{- 2 \theta} d r  + \int _1^\infty 2 \pi r (r^{-2})^p dr\\
+		&= 2 \pi \left( \frac{\theta}{p} \right) ^p \frac{1}{2(1 - \theta)} + 2 \pi \frac{1}{2(p - 1)}
+	.\end{align*}
+	Compute the ratio,
+\[
+\frac{\left\|\frac{\partial f_\theta}{\partial z}\right\|_p}{\left\|\frac{\partial f_p}{\partial z}\right\|_p}
+= \frac{\left( 1 - \frac{\theta}{p} \right) ^p \frac{1}{1 - \theta}}{\left( \frac{\theta}{p} \right) ^p \frac{1}{1 - \theta} + \frac{1}{p - 1}}
+.\] 
+Simplify to get the result.
+\end{proof}
+
+\item 
+Let $H_t(x)$ be the heat kernel as above and define the operators in $T_t: L^2\left(\mathbb{R}^n\right) \rightarrow L^2\left(\mathbb{R}^n\right)$ by $T_t f(x)=H_t * f(x)$. Recall that
+
+\[
+\frac{d T_t f}{d t}(x, t)=\Delta_x T_t f(x) \text { and } \quad \lim _{t \rightarrow 0} T_t f(x)=f(x) \text {, a.e. }
+\]
+
+and that they family of operators $\left\{T_t, t>0\right\}$ gives a semigroup. Prove that the operators $T_t$ are self-adjoint. That is
+
+\[
+\int_{\mathbb{R}^n} g(x) T_t f(x) d x=\int_{\mathbb{R}^n} T_{t }g(x) f(x) d x
+\]
+\begin{proof}
+	We recall that $T_t$ commutes with translation and is hence a Fourier multiplier. We also recall that Fourier transform is an isometry on $L^2(\mathbb{R}^n)$ viewed as a Hilbert space, with inner product $\left\langle f, g \right\rangle = \int _{\mathbb{R}^n} f(x) g(x) dx$. Thus
+	\begin{align*}
+		\int _{\mathbb{R}^n} g(x) T_t f(x) dx
+		&= \int _{\mathbb{R}^n} \hat{g} (\xi) m_t(\xi) \hat{f} (\xi) d \xi \\
+		&= \int _{\mathbb{R}^n} m_t(\xi)\hat{g} (\xi)  \hat{f} (\xi) d \xi \\
+		&=  \int _{\mathbb{R}^n} T_t g(x) f(x) dx
+	.\end{align*}
+\end{proof}
+
+\item
+Let $f \in L^2\left(\mathbb{R}^n\right) \cap L^1\left(\mathbb{R}^n\right)$. Use duality, Exercise 9.2.1 and (9.2) to show that for all $t>0$,
+
+\[
+\int_{\mathbb{R}^n}\left|T_t f(x)\right|^2 d x \leq C t^{-n / 2}\|f\|_1^2
+\]
+
+\begin{proof}
+	We have
+	\[
+		\int _{\mathbb{R}^n} \left| T_t f(x) \right| ^2 dx
+		= \int _{\mathbb{R}^n} T_t f(x) T_t f(x) dx
+		= \int _{\mathbb{R}^n} T_2t f(x) * f(x) dx
+	.\] 
+	Use the following bound for heat kernel:
+	\[
+		|T_t f(x)| \le \frac{1}{\left( 4 \pi t \right) ^{n / (2 p)} }\|f\|_p
+	.\] 
+	Let $p = 1$. We have
+	\[
+		\left| T_{2 t} f(x) \right| \le \frac{1}{(8 \pi t)^{n / 2}} \|f\|_1
+	.\] 
+	Plug in and get
+	\[
+		\int _{\mathbb{R}^n} T_2t f(x) * f(x) dx
+		\le C t^{- n / 2} \|f\|_1^2
+	.\] 
+\end{proof}
+
+\item 
+	Let $f \in C_0^2\left(\mathbb{R}^n\right)$. Use
+
+\[
+T_{2 t} f(x)=f(x)+\int_0^{2 t} \frac{d T_s f(x)}{d s} d s,
+\]
+
+and integration by parts to conclude that for any $t>0$,
+
+\[
+\int_{\mathbb{R}^n}|f(x)|^2 d x \leq 2 t \int_{\mathbb{R}^n}|\nabla f(x)|^2 d x+C t^{-n / 2}\left(\int_{\mathbb{R}^n}|f(x)| d x\right)^2 .
+\]
+
+
+Minimize the right hand side with respect to $t$ to obtain another proof of Nash's inequality.
+
+\begin{proof}
+	Apply the heat equation $\frac{d}{d t} = \Delta _x$ :
+\[
+T_{2 t} f(x)=f(x)+\int_0^{2 t} \Delta_x T_s f(x) d s
+\]
+Multiply by anther $f(x)$ and integrate with respect to $x$, we get for each term
+\[
+	\int _{\mathbb{R}^n} T_{2 t} f(x) f(x) dx  \le C t^{- n / 2} \|f\|_1^2
+.\] 
+\[
+	\int _{\mathbb{R}^n} f(x) f(x) dx = \|f\|_2^2
+.\] 
+\begin{align*}
+	\int _{\mathbb{R}^n} f(x) \int _0^{2 t} \Delta_x T_s f(x) ds dx
+	&= \int _0^{2 t} \int _{\mathbb{R}^n} f(x) \Delta_x T_s f(x) dx ds \\
+	&= - \int _0^{2 t} \int _{\mathbb{R}^n} \nabla  f(x) \nabla T_s f(x) dx ds \\
+	&= - \int _0^{2 t} \int _{\mathbb{R}^n} \nabla  f(x) T_s \nabla f(x) dx ds \\
+	&= - \int _0^{2 t} \int _{\mathbb{R}^n} T_{s / 2} \nabla  f(x) T_{s / 2} \nabla f(x) dx ds \\
+	&= - \int _0^{2 t} \|T_{s / 2} \nabla f\|_2^2 ds \\
+	&= - \int _0^{2 t} \|\nabla f\|_2^2 ds \\
+	&= - 2 t \|\nabla f\|_2^2
+.\end{align*} 
+
+Combining these results we get the desired inequality
+\[
+	\|f\|_2^2 \le  2 t \|\nabla f\|_2^2 + C t^{- n / 2} \|f\|_1^2
+.\] 
+Now, minimize, using a Peter-Paul inequality method,
+take
+\[
+	t = \| \nabla  f\|_2^{- \frac{4}{n + 2}}
+	\|f\|_1^{\frac{4}{n + 2}}
+.\] 
+We get
+\[
+	\|f\|_2^2 \le \|\nabla f\|_{2}^{\frac{2 n}{n + 2}} \|f\|_1^{\frac{4}{n + 2}}
+.\] 
+Raise both sides to power of $\frac{n + 2}{n}$ and we obtain the desired claim.
+\end{proof}
+
+
+\item
+	Let $f, n$ and $p$ be as in the statement of the Sobolev inequality. Assume $p=1$. Starting from the fact that
+
+\[
+|f(y)| \leq \int_{\mathbb{R}}\left|\frac{\partial f}{\partial x_i}\left(y_1, y_2, \ldots y_{i-1}, x_i, y_{i+1}, \ldots y_n\right)\right| d x_i
+\]
+
+use the argument describe in class show that the following "Key inequality" holds:
+
+\[
+\|f\|_{\frac{n}{n-1}} \leq\left(\Pi_{i=1}^n \int_{\mathbb{R}^n}\left|\frac{\partial f}{\partial x_i}\right| d x\right)^{1 / n}
+\]
+
+
+The Sobolev inequality for $p=1$ follows from this and the geometric mean inequality as shown in class.
+
+\begin{proof}
+	Define
+	\[
+		h_i(y) = \int_{- \infty }^{y_i} \left| \frac{\partial f}{\partial x_i} (y_1, \ldots, x_i, \ldots y_n) \right| d x_i
+	.\] 
+	Then
+	\[
+		|f(y)| \le  h_i(y)
+	.\] 
+	So that
+	\[
+		|f(y)|^n \le \prod_i h_i(y)
+	.\] 
+	Hence,
+	\begin{align*}
+		\int _{\mathbb{R}^n} |f(y)|^{\frac{n}{n-1}} d y
+		&\le \int _{\mathbb{R}^n} \left( \prod_i h_i(y) \right) ^{\frac{1}{n-1}} dy\\
+		&= \int_{\mathbb{R}} \ldots \int _{\mathbb{R}} \left( \prod_i h_i(y) \right) ^{\frac{1}{n-1}} dy_1 \ldots dy_n
+	.\end{align*} 
+	Since $h_1(y)$ is independent of $y_1$, we may use H\"older inequality on the remaining $n-1$ terms:
+	\[
+		\int _{\mathbb{R}} \left(h_{2}(y) \ldots h_n(y)\right)^{\frac{1}{n-1}} d y_1
+		\le \prod_{i = 2}^n \|h_i^{\frac{1}{n-1}}\|_{L_{n - 1}(d y_1)}
+		\le \prod_{i = 2}^n \|h_i\|_{L_1(d y_1)}^{\frac{1}{n - 1}}
+	.\] 
+	Now our inequality looks like
+	\[
+		\int _{\mathbb{R}^n} |f(y)|^{\frac{n}{n-1}} d y
+		\le \int_{\mathbb{R}^{n - 1}} \left[h_1(y) \, \|h_2(y)\|_{L^1(d y_1)} \ldots \|h_n(y)\|_{L^1(d y_1)}\right]^{\frac{1}{n - 1}} d y_2 \ldots d y_n
+	.\] 
+	Note that we still have everything to the $\frac{1}{n - 1}$ power, the structure of the rhs is the same except with one less dimension. We may then separate out $\|h_2(y)\|_{L^1(d y_1)} $, which is independent on $dy_2$, and continue applying H\"older inequality on the $n-2$ remaining terms. Continue in this fashion and we finally get
+\begin{align*}
+		\int _{\mathbb{R}^n} |f(y)|^{\frac{n}{n-1}} d y
+		&\le \left[\|h_1\|_{L^1(d y_2, \ldots, d y_n)} \|h_2\|_{L^1(dy_1, dy_3, \ldots dy_n)} \ldots \|h_n\|_{L^1(dy_1, \ldots, dy_{n - 1})}\right]^{\frac{1}{n - 1}}\\
+		&= \|h_1 \ldots h_n\|_1^{\frac{1}{n - 1}}
+	.\end{align*}
+
+
+\end{proof}
+
+\item 
+Let $\lambda>1$. Set
+
+\[
+\varphi^\lambda(x)=\frac{1}{(|x|+1)^{n \lambda}} .
+\]
+
+
+Note that $\left\|\varphi^\lambda\right\|_1<\infty$. Recall that $\varphi_y^\lambda(x)=\frac{1}{y^\lambda} \varphi^\lambda(x / y)$. Define the Littlewood-Paley function
+
+\[
+\begin{aligned}
+g_\lambda^*\left(u_f\right)(x) & =\left(\int_{\mathbb{R}_{+}^{n+1}} \varphi_y^\lambda(x-w)\left|\nabla u_f(w, y)\right|^2 y d w d y\right)^{1 / 2} \\
+& =\left(\int_{\mathbb{R}_{+}^{n+1}}\left(\frac{y}{|x-w|+y}\right)^{\lambda n}\left|\nabla u_f(w, y)\right|^2 y^{1-n} d w d y\right)^{1 / 2}
+\end{aligned}
+\]
+
+
+Prove that
+
+1.
+
+\[
+A_\alpha\left(u_f\right)(x) \leq C g_\lambda^*\left(u_f\right)(x),
+\]
+
+for some constant $C$ depending only $n, \alpha, \lambda$.
+
+2. Prove that
+
+\[
+	\| g_\lambda^*\left(u_f\right)\|_2^2=\| \varphi^\lambda\|_1 \| g\left(u_f\right)\|_2^2=\frac{\left\|\varphi^\lambda\right\|_1}{4}\| f \|_2^2
+.\]
+\begin{proof}
+	For (1), we follow the Proof of Proposition 10.1. If we set $(w, y) \in \Gamma_\alpha(x)$ then $|w - x| < \alpha y$, and we have
+	\[
+		\frac{1}{(\alpha + 1)^{\lambda n}} \le  \left( \frac{y}{|x + w| + y} \right) ^{\lambda n}
+	.\] 
+	Thus, 
+	\begin{align*}
+		A_\alpha (u) (x)
+		&= \left( \int _{\Gamma_\alpha(x)} \left| \nabla  u(w, y) \right| ^2 y^{1 - n} d w d y \right) ^{1 / 2} \\
+		&\le  \left((\alpha + 1)^{\lambda n} \int _{\Gamma_\alpha(x)} \left( \frac{y}{|x + w| + y} \right) ^{\lambda n} \left| \nabla  u(w, y) \right| ^2 y^{1 - n} d w d y \right) ^{1 / 2} \\
+		&\le (\alpha + 1)^{\lambda n / 2}\left( \int _{\mathbb{R}^n_+} \left( \frac{y}{|x + w| + y} \right) ^{\lambda n} \left| \nabla  u(w, y) \right| ^2 y^{1 - n} d w d y \right) ^{1 / 2} \\
+		&= (\alpha + 1)^{\lambda n / 2} g_\lambda^* (u_f)(x) 
+	.\end{align*}
+
+	To show (2), 
+	\begin{align*}
+		\| g_\lambda^*\left(u_f\right)\|_2^2
+		&= \int _{\mathbb{R}^n} \left(\int_{\mathbb{R}_{+}^{n+1}} \varphi_y^\lambda(x-w)\left|\nabla u_f(w, y)\right|^2 y d w d y\right) d x\\
+		&=  \int_{\mathbb{R}_{+}^{n+1}}\int _{\mathbb{R}^n} \varphi_y^\lambda(x-w)d x \left|\nabla u_f(w, y)\right|^2 y  d w d y \\
+		&=  \int_{\mathbb{R}_{+}^{n+1}} \|\varphi^\lambda\|_1 \left|\nabla u_f(w, y)\right|^2 y  d w d y \\
+		&=  \|\varphi^\lambda\|_1 \|g(u_f)\|_2^2
+	.\end{align*}
+\end{proof}
+
+\item 
+	Take $1<p<\infty$. From the result on vector valued singular integrals as proved in class (Friday 11/22), we have
+
+\[
+\|g(f)\|_p \leq C_p\|f\|_p, \quad \text { for all } \quad f \in L^p .
+\]
+
+
+However, for the lower bound which we obtained by duality and a "polarization" inequality
+
+\[
+\int_{\mathbb{R}^n} f \bar{h} d x=2 \int_0^{\infty} \int_{\mathbb{R}^n} y \nabla u_f(x, y) \cdot \overline{\nabla u_h(x, y)} d x d y,
+\]
+
+we only have
+
+\[
+\|f\|_p \leq C_p\|g(f)\|_p, \quad \text { for } \quad f \in L^2 \cap L^p
+\]
+
+
+Prove that
+
+\[
+|g(f)(x)-g(h)(x)| \leq g(f-h)(x) .
+\]
+
+
+Conclude that if $f_n \rightarrow f$ in $L^p\left(\mathbb{R}^n\right)$, then $g\left(f_n\right) \rightarrow g(f)$ in $L^p\left(\mathbb{R}^n\right)$ and hence the inequality (8.1) holds for all $f \in L^p$.
+
+\begin{proof}
+	The proof falls in line with lecture note p.206. We try to provide more detail.
+	\begin{align*}
+		|g(f)(x) - g(h)(x)|^2
+		&= g(f)(x)^2 - 2 g(f)(x) g(h)(x) + g(h)(x)^2 
+	.\end{align*}
+	Now, by Cauchy-Schwartz,
+	\begin{align*}
+		g(f)(x) g(h)(x)
+		&= \left( \int _0^\infty \left| \nabla u_f(x,y) \right| ^2 y dy  \right) ^{1 / 2} \left( \int _0^\infty \left| \nabla u_h(x,y) \right| ^2 y dy  \right) ^{1 / 2}\\
+		&\ge  \int _0^\infty \left| \nabla u_f(x,y) \right|\left| \nabla u_h(x,y) \right|  y dy
+	.\end{align*}
+	Hence
+	\[
+		|g(f) - g(h)|^2
+		\le g(f)^2 - 2 \int _0^\infty \left| \nabla u_f(x,y) \right|\left| \nabla u_h(x,y) \right|  y dy + g(h)^2
+	.\] 
+	Finally, we note that
+	\begin{align*}
+		g(f - h)^2
+		&= \int _0^\infty \left| \nabla u_{f + h}(x, y) \right| ^2 y dy \\
+		&= \int _0^\infty \left| \nabla u_{f}(x, y) + u_h(x,y) \right| ^2 y dy \\
+		&\ge g(f)^2 - 2 \int _0^\infty \left| \nabla u_f(x,y) \right|\left| \nabla u_h(x,y) \right|  y dy + g(h)^2
+	.\end{align*}
+\end{proof}
+
+
+
+
+
+\end{enumerate}

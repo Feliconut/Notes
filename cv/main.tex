@@ -1,0 +1,224 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper, margin=0.6in}  % Reduced margins
+
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fontawesome5}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\pagestyle{empty}
+
+% Custom colors
+\definecolor{sectionblue}{RGB}{0,60,113}
+
+% Section title formatting - reduced spacing
+\titleformat{\section}
+{\Large\bfseries\color{sectionblue}}
+{}{0em}
+{}[\vspace{-0.8em}\rule{\textwidth}{0.4pt}]
+
+\titlespacing{\section}{0pt}{8pt}{4pt}  % Tighter section spacing
+
+% Subsection formatting
+\titleformat{\subsection}
+{\bfseries}
+{}{0em}{}
+
+\titlespacing{\subsection}{0pt}{4pt}{2pt}  % Tighter subsection spacing
+
+% Tighter list spacing
+\setlist{nolistsep}
+\setlist[itemize]{leftmargin=*,topsep=1pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=*,topsep=1pt,parsep=0pt}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries Xiaoyu Liu} \\[6pt]  % Increased spacing after name
+    \color{sectionblue}  % Contact info in blue
+    \href{mailto:liu2999@purdue.edu}{\faEnvelope\ liu2999@purdue.edu} 
+    \textcolor{black}{\ \textbullet\ } 
+    \faPhone\ (765) 715-0648
+    \textcolor{black}{\ \textbullet\ }
+    \faUniversity\ Purdue University
+\end{center}
+
+\section*{Education}
+\noindent
+% \textbf{Ph.D. in Applied Mathematics} \hfill 2019 -- 2025 (expected)\\
+% \textit{Purdue University}, West Lafayette, IN\\
+% Joint with Computational Interdisciplinary Graduate Programs\\
+% Advisor: Prof. Jianlin Xia\\[6pt]
+\textbf{B.S. in Mathematics and Physics}, Minor in Philosophy \hfill 2022 -- 2026\\
+\textit{Purdue University}, West Lafayette, IN \\
+% Mentor: Prof. Jonathon Peterson, Prof. Xiangxiong Zhang
+
+% \section*{Research Interests}
+% \begin{itemize}
+%     \item \textbf{Matrix Analysis in Neural Networks}
+%     \begin{itemize}
+%         \item Development of efficient second-order optimization methods for neural network training through structured matrix analysis
+%         \item Design and implementation of fast solvers for structured matrices in deep learning applications
+%     \end{itemize}
+%     \item \textbf{Randomized Numerical Linear Algebra}
+%     \begin{itemize}
+%         \item Advanced randomized algorithms for low-rank matrix approximations with emphasis on Nyström methods
+%         \item Theoretical analysis and practical implementation of random estimators for matrix properties
+%     \end{itemize}
+% \end{itemize}
+
+\section*{Publications}
+\begin{enumerate}[leftmargin=*]
+% \item  Z. Cai, \textbf{T. Ding}, M. Liu, X. Liu, and J. Xia. Fast solvers for shallow R{\scriptsize e}LU neural network approximations: the 2D case \\
+% \textit{In preparation for SIAM Journal on Matrix Analysis and Applications} \hfill 2025
+%     \item Z. Cai, \textbf{T. Ding}, M. Liu, X. Liu, and J. Xia. ``Matrix Analysis from Shallow R{\scriptsize E}LU Neural Network Least-Squares Approximations'' \\
+%     \textit{In preparation for SIAM Journal on Matrix Analysis and Applications} \hfill 2024
+
+% \item Z. Cai, \textbf{T. Ding}, M. Liu, X. Liu, and J. Xia. ``A Structure-Guided Gauss-Newton Method for Shallow R{\scriptsize E}LU Neural Network'' \\
+% \textit{Submitted to SIAM Journal on Scientific Computing} \hfill 2024\\
+% \href{https://arxiv.org/abs/2404.05064}{arXiv:2404.05064}
+\item \textbf{X. Liu} and Z. Wang. ``Convergence of scaled asymptotically-free
+self-interacting random walks to Brownian motion perturbed at extrema''\hfill 2024\\
+    \textit{To appear on the Electronic Journal of Probability}\\
+    \href{https://arxiv.org/abs/2402.11828}{arXiv:2402.11828}
+
+\end{enumerate}
+
+\section*{Current Research Projects}
+\begin{enumerate}[leftmargin=*,label=\arabic*.]
+    \item \textbf{One-dimensional branching random walk in random environment}
+    \\Advised by Prof. Peterson at Purdue University
+    \begin{itemize}
+        % \item Study law of large number and higher order fluctuations for position of the rightmost particle
+        % \item Try to generalize results from branching simple random walk
+        % \item Explore connections to diffusion processes
+        \item Investigate branching random walks in a random environment, emphasizing the impact of traps on the maximum particle’s limiting velocity.
+        \item Examine high-order corrections of SLLN using large-deviation estimates, environmental tilting and other tools, work toward a central limit theorem.
+        \item Explore potential connections to diffusion processes and surface growth models.
+    \end{itemize}
+    
+    \item \textbf{Top quark pair production at the LHC for quantum experiments}
+    \\Advised by Prof. Jung at Purdue University -- \href{https://www.physics.purdue.edu/jung/}{Jung's group}
+    \begin{itemize}
+        % \item Implement tests for Bell's inequality using CMS collider data
+        \item Analyze quantum entanglement in top pair production at the LHC.
+        \item Implement high-sensitivity tests for Bell inequalities through spin correlation analysis.
+        % \item Analyze quantum entanglement in top pair production at the LHC using novel observables defined on spin correlations, enabling high sensitivity test for Bell inequalities.
+        \item Planned exchange to TU Dortmund in Summer 2025, collaborating with Prof. Stamou in the \href{https://physik.tu-dortmund.de/en/research/research-focus-particle-physics/prof-dr-emmanuel-stamou/}{Arbeitsguppe}
+    \end{itemize}
+        \item \textbf{Analytical structure of $S$-matrix elements in quantum field theory}
+    \\Advised by Prof. Stamou -- \href{https://physik.tu-dortmund.de/en/research/research-focus-particle-physics/prof-dr-emmanuel-stamou/}{Prof. Stamou's group at TU Dortmund}
+    \begin{itemize}
+        % \item Implement tests for Bell's inequality using CMS collider data
+        % \item Understanding the analytical structure of S-matrix elements in quantum field theory.
+        \item Details will be discussed and refined during the program.
+    \end{itemize}
+\end{enumerate}
+
+\section*{Research Presentations}
+\subsection*{Talks}
+\begin{itemize}
+    \item ``Spectral methods in learning theory of boolean functions''\\
+    \textit{Purdue Student Probability Seminar} \hfill 2025
+
+    \item ``Convergence of scaled asymptotically-free self-interacting random walks to Brownian motion perturbed at extrema''\\
+    \textit{Rose-Hulman Undergraduate Mathematics Conference} \hfill 2024
+
+    % \item ``A Structure-Guided Gauss-Newton Method for Shallow R{\scriptsize E}LU Neural Networks''\\
+    % \textit{International Conference On Preconditioning Techniques For Scientific and Industrial Applications}, Atlanta \hfill 2024 
+    
+    % \item ``Randomized Techniques in Numerical Linear Algebra''\\
+    % \textit{Association for Women in Mathematics}, Purdue Chapter \hfill 2024
+\end{itemize}
+
+\subsection*{Poster Presentations}
+\begin{itemize}
+    \item ``Convergence of scaled asymptotically-free self-interacting random walks to Brownian motion perturbed at extrema''\\
+    \textit{Seminar on Stochastic Processes} \hfill 2025
+
+    \item ``Separating Standard Model and SUSY Dataframes Using Neural Networks''\\
+    With R. Patel, C. Suh and Y. Wu \\
+    \textit{Purdue Undergraduate Research Exhibition} \hfill 2024
+
+    % \item ``Scaling limits of self-interacting random walks''\\
+    % \textit{Purdue Undergraduate Research Exhibition} \hfill 2023
+    
+    % \item ``Fast Solvers for Neural Network Least-squares Approximations''\\
+    % \textit{NSF Computational Mathematics PI Meeting}, Seattle \hfill 2024 
+    
+    % \item ``Particle Method for the Landau Equation''\\
+    % \textit{Purdue Undergraduate Research Exhibition} \hfill 2019
+\end{itemize}
+
+% \section*{Teaching Experience}
+% \textbf{Teaching Assistant}, Department of Mathematics, Purdue University
+% \begin{itemize}
+%     \item MA 16600: \textit{Calculus II} -- Led recitation sections and held office hours \hfill Spring 2020
+% \end{itemize}
+
+% \textbf{Graduate Course Grader}, Department of Mathematics, Purdue University
+% \begin{itemize}
+%     \item MA 52700: \textit{Advanced Mathematics for Engineers}
+%     \item MA 35100: \textit{Linear Algebra}
+%     \item MA 45000: \textit{Abstract Algebra}
+% \end{itemize}
+
+\section*{Honors and Awards}
+\begin{itemize}
+    % \item T.T. Moh Graduate Scholarship Fund, Purdue University \hfill 2019, 2024
+    % \item Spira Undergraduate Research Award \hfill 2019
+    % \item Jandos Scholarship \hfill 2018
+    % \item Jean E. Rubin Memorial Scholarship \hfill 2017, 2018
+	\item Jerison Memorial Award in Analysis \hfill  2024
+    \item Joel Spira Undergraduate Research Fellowship \hfill  2023
+    \item Glen E. Baxter Award with Interests in Probability Theory \hfill  2023
+	\item Outstanding Sophomore in Mathematics \hfill  2023
+\end{itemize}
+
+\section*{Leadership \& Service}
+\textbf{Treasurer}, Society for Industrial and Applied Mathematics (SIAM) Student Chapter \hfill 2024 -- Present
+\begin{itemize}
+    \item Lead budget planning and financial management for chapter activities
+    \item Organize annual SIAM Student Chapter Conference and coordinate logistics 
+    % \item Collaborate with Center for Computational and Applied Mathematics (CCAM) to organize research seminars
+    \item Foster academic community through professional development and networking events
+\end{itemize}
+
+\textbf{Organizer}, Graduate Student Probability Seminar, Purdue University \hfill 2024 -- Present
+% \begin{itemize}
+%     \item Spring 2024: Martingale Theory
+%     \item Fall 2024: Concentration inequalities
+%     \item Spring 2025: Boolean Functions
+%     \item Fall 2025: Statistical Mechanics
+% \end{itemize}
+% \begin{itemize}
+%     \item Provided academic and cultural guidance to first-year undergraduate students
+%     \item Promoted diversity and inclusion in STEM fields through mentorship initiatives
+% \end{itemize}
+
+\textbf{Group Leader}, Global Dialogues, Purdue University \hfill 2022 -- Present
+\begin{itemize}
+    \item Provided academic and cultural guidance to first-year undergraduate students
+    \item Promoted diversity and inclusion in STEM fields through mentorship initiatives
+\end{itemize}
+
+\section*{Courses and Workshops Attended}
+\begin{itemize}
+    \item \textbf{IAS Park City Mathematics Institute}: ``Quantum Computation''. Park City, Utah \hfill 2023
+    \item \textbf{Midwest Probability Colloquium}, Northwestern University \hfill 2023-2024
+    \item \textbf{Seminar on Stochastic Processes}, Indiana University, Bloomington \hfill 2025 
+    \item \textbf{Mathematics Courses at Purdue}: Measure Theory, Probability Theory, Functional Analysis, Partial Differential Equations, Algebraic Topology, Stochastic Differential Equations, Reading in Topological QFT
+    \item \textbf{Physics Courses at Purdue}: Classical Mechanics, Quantum Mechanics, Statistical Mechanics, Research in High Energy Physics, Quantum Field Theory (starting Fall 2025)
+\end{itemize}
+
+\section*{Technical Skills}
+\begin{itemize}
+    \item \textbf{Scientific / Symbolic Computing}: MATLAB, Maple, Python (NumPy, SageMath), Lean
+    \item \textbf{Languages}: English (Fluent), Mandarin Chinese (Native), German (Basic)
+\end{itemize}
+
+\end{document}

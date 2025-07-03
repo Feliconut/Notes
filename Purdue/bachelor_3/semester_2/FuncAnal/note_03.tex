@@ -123,31 +123,74 @@ Warning: not to be confused with the Hilbert adjoint.
 	\label{prop:DiagonalOperatorCompact}
 	The diagonal operator $T_\lambda : l_p \to l_p$, $\lambda \in l_\infty $ is compact if and only if $\lambda \in c_0$ ($\lambda \to 0$ ).
 \end{proposition}
+\begin{proof}
+	Suppose $|\lambda_n| > \theta > 0$ infinitely often, then we can pick a sequence $|\lambda_{n_k}| > \theta$, such that the sequence $T_\lambda\left( \delta_{n_k} \right) = \left( \lambda_{n_k}\delta_{n_k} \right) $ is not totally bounded.
+
+	Suppose $\lambda_n \to 0$. Then $T_\lambda U_1 \subset \prod [-\lambda_n, \lambda_n]$ which is compact.
+\end{proof}
+
 
 \begin{proposition}
 	\label{prop:ShiftOperatorNotCompact}
 	The shift operators on $l_p, l_p(\mathbb{Z})$ or $L_p(\mathbb{R})$ are never compact.
 \end{proposition}
+\begin{proof}
+	$T_l U_1 = U_1$, $T_r U_1 = 0 \oplus U_1$. All those spaces are infinite-dimensional; from Riesz theorem we know that $U_1$ is not compact.
+\end{proof}
+
 
 \begin{proposition}
 	\label{prop:MultOperatorNotCompact}
 	The multiplication operator $T_f: L_p[a, b] \to L_p[a, b]$, $1 \le p \le \infty $, $f \in L_\infty [a, b]$ is not compact, unless $f = 0$.
 \end{proposition}
+\begin{proof}
+	On $K_\varepsilon = \{|f| > \varepsilon\} $, $T_f: L_p[K_\varepsilon] \to L_p[K_\varepsilon]$ is invertible, thus not compact, as the space $L_p[K_\varepsilon]$ is infinite-dimensional. Thus $T_f$ without restricting to $K_\varepsilon$ cannot be compact also.
+\end{proof}
+
 
 \begin{proposition}
 	\label{prop:IndefIntCompact}
 	The operator of indefinite integration acting on $L_2[0,1]$, $C[0,1]$ or $L_1[0,1]$ is compact.
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item Consider $C[0,1]$. Take $x$ inside the unit ball, then $|x(t)| < 1$. Then  $|Tx(t)| < 1$ and is $1$-Lipchitz. By Arzela theorem, since $T U_1$ is both equicontinuous and bounded, it is totally bounded.
+
+		\item Consider $L_2[0,1]$. Take $x \in U_1$. We have for all $t, t' \in [0,1]$, $t \le t'$,
+			\[
+				\|Tx(t) - T x(t')\| = \left\langle x, \chi_{[t, t']} \right\rangle 
+				\le \|x\|_2 \|\chi_{[t, t']}\|
+				\le \sqrt{\left| t - t' \right| } 
+			.\] 
+			Thus $T U_1$ is equicontinuous and bounded. This in particular implies $T U_1$ consists of continuous functions. Hence by Arzela theorem,  $T U_1$ is totally bounded in $C[0,1]$. Since $\|\cdot \|_2 \le \|\cdot \|_\infty $, $T U_1$ is totally bounded in $L_2[0,1]$.
+		\item Now consider $L_1[0,1]$. Take $x \in U_1$. Then $T f$ has total variation $\le 1$. We can decompose $Tf=:F$ into $F = F^+ - F^-$ where both  $F^+$ and $F^-$ are monotone increasing, starting from zero, and $\|F\|_{TV} = \|F^+\|_{TV} + \|F^-\|_{TV} = F^+(1) - F^-(1)$. Such monotone increasing function with $F^+(0) = 0, F^-(1) \le 1$ for a totally bounded space. Divide $[0,1]$ to $n$ horizontal bins and approximate $F^+$ from below with precision $\frac{1}{n}$. Then the total $L_1$-error is less than $2n (\frac{1}{n^2})$, while we need less than $n^2 / 2$ functions to form a $\frac{2}{n}$-net.
+	\end{itemize}
+\end{proof}
+
 
 \begin{theorem}
 	\label{prop:IntegralOperatorCompact}
 	Every integral operator on $L_2[a,b]$ is compact.
 \end{theorem}
+\begin{proof}
+	(sketch) For full proof see (Khelemskii 2006).
+
+	Apply two-dimensional fourier decomposition to the kernel $K(s, t)$:
+	\[
+		K(s, t) = \sum_{k, l \in \mathbb{N}} \lambda_{k, l} e_k(s) e_l(t)
+	.\] 
+	Then we verify that $T_K = \lim T_{K_n}$ where $K_n = \sum_{k, l \le n} \lambda_{k, l} e_k(s) e_l(t)$. Each $T_{K_n}$ is a compact operator, thus $T_K$ is compact.
+\end{proof}
+
 
 \begin{proposition}
 	\label{prop:DifferentiationNotCompact}
 	Differentiation operators $D^k : C^{n + k}[a,b] \to C^n[a,b]$ are never compact. 
 \end{proposition}
+\begin{proof}
+	Take unit ball $U_1$ in $C^n[a,b]$. Integrate this $k$ times and we get a bounded set. $D^k$ of this bounded set gives us $U_1$ which is not totally bounded.
+\end{proof}
+
 
 \begin{proposition}[Hilbert Adjoint Examples]
 	\label{prop:ExAdjoint}
@@ -159,6 +202,10 @@ Warning: not to be confused with the Hilbert adjoint.
 		\item Let $T_K:L_2[a,b] \to L_2[a,b]$ be an integral operator with the kernel $K(s, t)$. Then the adjoint operator is the integral operator $T_{\overline{K} }$.
 	\end{enumerate}
 \end{proposition}
+\begin{proof}
+	Directly verify using the adjoint equation $\left\langle T^* x, y \right\rangle  = \left\langle x, Ty \right\rangle $. Note the fact that Hilbert adjoint uniquely exists.
+\end{proof}
+
 
 \subsection{Fredholm Operators}
 

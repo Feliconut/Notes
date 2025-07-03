@@ -103,6 +103,7 @@ This note will supplement more material on spectral theory. We will
 	\label{prop:NormalResidualSpectrum}
 	Normal operators have no residual spectrum.
 \end{proposition}
+\todo{prove this.}
 
 
 \subsubsection{Spectral Theorem for Compact Operator}
@@ -328,6 +329,14 @@ commutes. Taking $f(t) \in L_p(\mathbb{R})$ and doing some algebra yields a uniq
 
 
 
+\begin{proposition}
+	\label{prop:SpectEssShift}
+	The essential spectrum of $T_l, T_r: l_p \to l_p$, $T_b: l_p(\mathbb{Z}) \to l_p(\mathbb{Z})$, $T_a: L_p(\mathbb{R}) \to L_p(\mathbb{R}); a \neq 0$, for $1 \le p \le \infty $, is $\mathbb{T}$.
+\end{proposition}
+\begin{proof}
+	Consider the Calkin algebra, ref. Proposition~\ref{prop:EssSpecCalkin}. We have $T^* T$ either is identity or is projection of codimension $1$. Thus $T + \mathcal{K}$ is unitary in the Calkin algebra. Then we have $\sigma(T + \mathcal{K}) \subset \mathcal{T}$. In view of Lemma~\ref{lem:ShiftTopEquiv}, and that the spectrum is nonempty, we have $\sigma_e(T) = \sigma(T + \mathcal{K}) = \mathcal{T}$.
+\end{proof}
+
 
 
 \begin{claim}
@@ -413,6 +422,8 @@ By the spectral radius formula, quasinilpotent elements in a Banach algebra are 
 \begin{proof}
 	We show $\|T^n\|^{1 / n} \to 0$. In each space, if we take $f$ inside the unit ball, we would have $T f(x) \le \|f\| \le 1$. Apply $T$ to both sides, we have $T^{n+1} f(x) \le \frac{t^n}{n!}; t \in [0,1]$. Thus $\|T^n\| \le \frac{1}{n!}$.
 \end{proof}
+
+\subsubsection{Norm of integration operator}
 
 
 

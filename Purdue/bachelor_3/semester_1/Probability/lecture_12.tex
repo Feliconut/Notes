@@ -5,7 +5,7 @@ Good-$\lambda$ inequality principle was invented by Burholder and Gundy in the 8
 Given a $L^2$ martingale $X_t$, we have $X_t^2 - \left\langle X \right\rangle _t$ is a martingale. We are comparing $\sup |X_t| = X^* $ and $\left\langle X \right\rangle $. For Brownian motions, to compare them we only need to compare at all stopping times.
 
 \begin{theorem}
-	\label{thm:BDGprev}
+	\label{thm:BDGprev}(Good-$\lambda$ inequality)
 	Let $B_t$ be standard Brownian Motion. Let $T$ be a stopping time. Then for all $\beta > 1$, $S>0$ and $\lambda>0$,
 	\begin{enumerate}
 		\item
@@ -57,19 +57,28 @@ This is equivalent to:
 		\intertext{Using strong Markov property,}
 		&= P(\rho < \infty ) P\left( \sup _{0 \le  t \le  (\delta \lambda)^2} |B_t | \ge  \lambda(\beta - 1) \right)  \\
 	.\end{align*}
-	Now
+	Now it suffices to show that $P\left( B^*_{(\delta\lambda)^2} > \lambda(\beta - 1) \right) \le e^{ - \frac{(\beta - 1)^2}{2 \delta^2} }$
 	\begin{align*}
 		P\left( B^*_{(\delta\lambda)^2} > \lambda(\beta - 1) \right) 
 		&= P\left( \delta \lambda B_1^* \ge  \lambda(\beta - 1) \right)  \\
 		&= P\left( B_1^* \ge  \frac{\beta -1}{\delta} \right)  
 	.\end{align*}
-	Use
+
+	Use reflection principle,
 	\[
-		P\left( \sup _{0 \le  t \le  1}B_t > \frac{\beta - 1}{\delta} \right) 
-		= P\left( \sup _{0 \le t \le 1} e^{B_t} > e^{-\frac{\beta - 1}{\delta}} \right) 
-		\le e^{-\frac{(\beta - 1)^2}{\delta^2}} 
-	.\] 
-	\logseq{ASK} The last bound for $\exp(B^*_1)$ I cannot verify.
+		P\left( B_1^* \ge  \theta \right)
+		= 2 P\left( B_1 \ge \theta \right)
+		= 2 \int _ \theta ^ \infty \frac{1}{2 \pi} e^{- x^2 / 2} d x
+		\le e^{- \theta^2 / 2}
+		.
+	\]
+	Or, one can use Doob's L1 inequality followed by exponential martingale:
+\[
+		P\left( B_1^* \ge  \theta \right)
+		= P\left( e^{\theta B_1^*} \ge e^{\theta ^2} \right) 
+		\le e^{- \theta^2} E\left[ e^{\theta B_1} \right] 
+		= e^{- \theta^2 / 2} E\left[ e^{\theta B_1} e^{- \theta ^2 / 2} \right] 
+		= e^{- \theta^2 / 2}
+		.
+	\]
 \end{proof}
-
-

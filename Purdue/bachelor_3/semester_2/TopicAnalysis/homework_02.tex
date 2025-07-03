@@ -1,0 +1,492 @@
+\homework{2}{Sun 29 Sep 2024 01:07}{}
+
+\begin{enumerate}
+\item Let $Q_k$ be a Whitney Cube center at $y^k$ and set $Q_k^*=2 \sqrt{n} Q_k$. Let $\varepsilon>0$ be given. Prove that
+1. If $x \notin Q_k^*$, then $\left|x-y^k\right| \geq 2\left|y-y^k\right|$ for any $y \in Q_k$.
+2. If $x \notin Q_k^*$ and for some $y_0 \in Q_k,\left|x-y_0\right|=\varepsilon$, then there is a constant $C_1$ depending only on $n$ such that $Q_k \subset \overline{B\left(x, C_1 \varepsilon\right)}$.
+3. If $x \notin Q_k^*$ and for some $y_0 \in Q_k,\left|x-y_0\right|=\varepsilon$, then there is a constant $C_2$ depending only on $n$ such that $|x-y| \geq C_2 \varepsilon$ for all $y \in Q_k$.
+\begin{proof}
+(1)
+Since $x \in Q_k^{* c}$, we have
+\[
+	|x - y^k| \ge \text{dist}(y^k, Q_k^{* c})
+.\] 
+But $B(y^k, \text{diam}Q_k) \subset Q_k^*$: if $Q_k$ is the cube centered at $y^k$ with side length $L$, then $\text{diam}(Q_k) = L\sqrt{n} $. The cube $Q_k^*$ with side length $2 \sqrt{n} L$ is the smallest cube centered at $y^k$ containing $B(y^k, \text{diam}(Q_k))$.
+
+Hence
+\[
+	\text{dist}(y^k, Q_k^{* c}) \ge 
+	\text{dist}(y^k, B(y^k, \text{diam}(Q_k))^c)
+	= \text{diam}(Q_k) \ge 2 |y - y^k|
+.\] 
+
+(2) and (3). Fix $x \in Q_k^{* c}, y_0 \in Q_k$. Take any $y \in Q_k$. Let
+\[
+	\varepsilon = |x - y_0|, \varepsilon' = |x - y|, d = |x - y^k|
+.\]
+We have
+\[
+	|x - y^k| - |y^k - y_0| \le |x - y_0| \le |x - y^k| + |y^k - y_0|
+.\] 
+By the inequality we just proved, $|y^k - y_0| \le \frac{1}{2} d$. Thus
+\[
+	\frac{1}{2} d \le \varepsilon \le \frac{3}{2} d
+.\]
+We also have
+\[
+	\frac{1}{2} d \le  \varepsilon' \le \frac{3}{2} d
+.\] 
+Thus
+\[
+	\frac{1}{3} \varepsilon \le \varepsilon' \le 3 \varepsilon
+.\] 
+
+Take $r = \frac{1}{3} \varepsilon$, $R = 3 \varepsilon$, we have
+\[
+	Q_k \subset B(x, R) \setminus B(x, r)
+.\] 
+\end{proof}
+
+\item 
+Prove that
+(i)
+
+\[
+e^{-\alpha}=\frac{2}{\pi} \int_0^{\infty} \frac{\cos (\alpha s)}{1+s^2} d s, \quad \forall \alpha>0
+\]
+
+(ii) Use (i), the fact that
+
+\[
+\frac{1}{1+s^2}=\int_0^{\infty} e^{-\left(1+s^2\right) t} d t
+\]
+
+and
+
+\[
+\int_0^{\infty} e^{-a^2 s^2} \cos (2 b s) d s=\frac{\sqrt{\pi}}{2 a} e^{-b^2 / a^2} \text { (Can you verify this?), }
+\]
+
+combined with Fubini's theorem, to prove that
+
+\[
+e^{-\alpha}=\frac{1}{\sqrt{\pi}} \int_0^{\infty} \frac{e^{-t}}{\sqrt{t}} e^{-\alpha^2 /(4 t)} d t
+\]
+
+\begin{proof}
+	First, we note
+	\[
+		\int_{-\infty}^{\infty} \frac{\cos (\alpha s)}{1+s^2} d s = \int_{-\infty}^{\infty} \frac{e^{i \alpha s}}{1+s^2} d s
+	.\] 
+	Now, to evaluate the integral in RHS, consider it as a path integral in complex plane. We see that the integrand $\to 0$ as $\operatorname{Re} s \to \pm \infty $ and $\operatorname{Im} s \to - \infty $. Thus
+	\begin{align*}
+		& \int_{-\infty}^{\infty} \frac{e^{i \alpha s}}{1+s^2} d s =: \int _{- \infty } ^\infty F(s) ds \\
+		&= \lim_{R \to \infty } \int _{-R}^R F(s) ds + \int_{0}^\pi F(R e^{- i \theta}) R d \theta \\
+		&= - 2 \pi i \operatorname{Res} \left( F, - i \right)  \\
+		&= - 2 \pi i \cdot (-\frac{e^{- \alpha}}{2 i}) = \pi e^{- \alpha}
+	.\end{align*} 
+	Thus $\frac{2}{\pi} \int_0^{\infty} \frac{\cos (\alpha s)}{1+s^2} d s = \frac{2}{\pi} \left( \frac{1}{2} \pi e^{- \alpha} \right) = e^{- \alpha}$.
+
+	Now,
+	\begin{align*}
+		& \int_0^{\infty} \frac{\cos (\alpha s)}{1+s^2} ds\\
+		&= \int_0^{\infty} \cos (\alpha s) \int _0^\infty \exp \left( -(1+s^2) t\right) d t  d s \\
+		&= \int_0^{\infty} e^{- t} \int _0^\infty e^{- s^2 t}cos( \alpha s) d s  d t \\
+		&= \int _0^\infty e^{- t} \frac{\sqrt{\pi} }{2 \sqrt{t} } e^{- \alpha^2 / (4 t)} \\
+	.\end{align*}
+	From which the result follows.
+\end{proof}
+
+\item Let
+
+\[
+P(x)=\frac{C_n}{\left(1+|x|^2\right)^{n+1 / 2}}, \quad C_n=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\pi^{\frac{n+1}{2}}}
+\]
+
+be the Poisson kernel as defined as defined in class. Prove that
+
+\[
+P(x)=\int_{\mathbb{R}^n} e^{-2 \pi|\xi|} e^{-2 \pi i x \cdot \xi} d \xi
+\]
+
+
+Thus $\hat{P}(\xi)=e^{-2 \pi|\xi|}$.
+Hint: Used the previous problem and write
+
+\[
+\int_{\mathbb{R}^n} e^{-2 \pi|\xi|} e^{-2 \pi i x \cdot \xi} d \xi=\int_{\mathbb{R}^n}\left(\frac{1}{\sqrt{\pi}} \int_0^{\infty} \frac{e^{-t}}{\sqrt{t}} e^{-4 \pi^2|\xi|^2 / 4 t} d t\right) e^{-2 \pi i x \cdot \xi} d \xi
+\]
+
+to reduce to the formula for for $\hat{H}(\xi)$.
+
+Remark 1 This "procedure" is called the "Bochner-subordination principle." (See Stein p. 61.)
+
+\begin{proof}
+\begin{align*}
+	\int_{\mathbb{R}^n} e^{-2 \pi|\xi|} e^{-2 \pi i x \cdot \xi} d \xi
+	&=\int_{\mathbb{R}^n}\left(\frac{1}{\sqrt{\pi}} \int_0^{\infty} \frac{e^{-t}}{\sqrt{t}} e^{-4 \pi^2|\xi|^2 / 4 t} d t\right) e^{-2 \pi i x \cdot \xi} d \xi \\
+	&=\frac{1}{\sqrt{\pi}}  \int_0^{\infty}\frac{e^{-t}}{\sqrt{t}} \int_{\mathbb{R}^n} e^{-4 \pi^2|\xi|^2 / 4 t}e^{-2 \pi i x \cdot \xi} d \xi  d t  \\
+.\end{align*}
+Recall
+\[
+	H_{\sqrt{t} }(x) = \frac{1}{\left( 4 \pi t \right) ^{n / 2}} e^{- |x|^2 / 4 t}, \quad \hat{H} _{\sqrt{t} }(\xi) = \hat{H} (\sqrt{t}  x) = e^{- 4 \pi^2 t \xi^2}
+.\] 
+Thus
+\begin{align*}
+	&=\frac{1}{\sqrt{\pi}}  \int_0^{\infty}\frac{e^{-t}}{\sqrt{t}} \int_{\mathbb{R}^n} \hat{H} _{\sqrt{\frac{1}{4 t}} }(\xi) e^{-2 \pi i x \cdot \xi} d \xi  d t  \\
+	&=\frac{1}{\sqrt{\pi}}  \int_0^{\infty}\frac{e^{-t}}{\sqrt{t}} H _{\sqrt{\frac{1}{4 t}} }(t) d t  \\
+	&=\frac{1}{\sqrt{\pi}}  \int_0^{\infty}\frac{e^{-t}}{\sqrt{t}} \left[ (4 \pi)^{- \frac{n}{2}} (4 t)^{n / 2} e^{- |x|^2 t} \right]  d t  \\
+	&= \pi^{- (n + 1) / 2} \int _0^\infty  t^{(n - 1) / 2} e^{- (|x|^2 + 1) t} d t\\
+	&= \pi^{- (n + 1) / 2} \int _0^\infty  (|x|^2 + 1)^{- (n + 1) / 2} s^{(n - 1) / 2} e^{- s} d s\\
+	&= \pi^{- (n + 1) / 2} (|x|^2 + 1)^{- (n + 1) / 2} \Gamma((n+ 1) / 2)
+.\end{align*}
+\end{proof}
+
+\item For $f \in L^2\left(\mathbb{R}^n\right) \cap L^1\left(\mathbb{R}^n\right)$ define
+
+\[
+u_f(x, y)=\int_{\mathbb{R}^n} \hat{f}(\xi) e^{-2 \pi y|\xi|} e^{-2 \pi i x \cdot \xi} d \xi
+\]
+
+and
+
+\[
+v_f(x, t)=\int_{\mathbb{R}^n} \hat{f}(\xi) e^{-4 \pi^2 t|\xi|^2} e^{-2 \pi i x \cdot \xi} d \xi .
+\]
+
+
+Prove that $u_f(x, y)=P_y * f(x)$ and $v_f(x, t)=H_t * f(x)$ and hence by previous problem $u_f$ is harmonic in $\mathbb{R}_{+}^{n+1}$ and $v_f$ satisfies the heat equation in $\mathbb{R}_{+}^{n+1}$, both with boundary values $f$. Notice, however, that these properties can be verified very easily with the above formulas by (easily justifying) differentiating under the integral sign.
+
+\begin{proof}
+	\begin{align}
+\begin{aligned}
+& P_y * f(x)=\int_{\mathbb{R}^n} P_y(x-z) f(z) d z=\int_{\mathbb{R}^n}\left(\int_{\mathbb{R}^n} e^{-2 \pi y|\xi|} e^{2 \pi i \xi \cdot(x-z)} d \xi\right) f(z) d z \\
+& =\int_{\mathbb{R}^n} e^{-2 \pi y|\xi|} e^{2 \pi i \xi \cdot x}\left(\int_{\mathbb{R}^n} f(z) e^{-2 \pi i \xi \cdot z} d z\right) d \xi \\
+& =\int_{\mathbb{R}^n} e^{-2 \pi y|\xi|} e^{2 \pi i \xi \cdot x} \hat{f}(\xi) d \xi \\
+& =u_f(x, y)
+\end{aligned}
+\end{align}
+
+\begin{align}
+\begin{aligned}
+& H_t * f(x)=\int_{\mathbb{R}^n} H_t(x-z) f(z) d z=\int_{\mathbb{R}^n}\left(\int_{\mathbb{R}^n} e^{-4 \pi^2 t|\xi|^2} e^{2 \pi i \xi \cdot(x-z)} d \xi\right) f(z) d z \\
+& =\int_{\mathbb{R}^n} e^{-4 \pi^2 t|\xi|^2} e^{2 \pi i \xi \xi \cdot x} \hat{f}(\xi) d \xi \\
+& =v_f(x, t)
+\end{aligned}
+\end{align}
+\end{proof}
+
+\item 
+	Let $f \in C_0^1\left(\mathbb{R}^n\right)$. Prove
+1 .
+
+\[
+\int_{\mathbb{R}^n}|\nabla f(x)|^2 d x=4 \pi^2 \int_{\mathbb{R}^n}|\xi|^2|\hat{f}(\xi)|^2 d \xi
+\]
+
+2. For all $y \in \mathbb{R}^n$ show that
+
+\[
+\int_{\mathbb{R}^n}|f(x+y)+f(x-y)-2 f(x)|^2 d x=4 \int_{\mathbb{R}^n}|\hat{f}(\xi)|^2|1-\cos (2 \pi \xi \cdot y)|^2 d \xi
+\]
+
+
+Remark 2 The first is the Dirichlet form of the Laplacian and the second is related to Dirichlet forms of some non-local (pseudo differential) operator-will see them a little later.
+
+\begin{proof}
+	This is proved using Plancherel's Theorem Fourier transform. 
+	\begin{align*}
+		\int _{\mathbb{R}^n} |\nabla f(x)|^2 dx
+		&= \int _{\mathbb{R}^n} \left| \hat{\nabla  f} (\xi) \right| ^2 d \xi \\
+		&= \int r_{\mathbb{R}^n} \left| \sum - 2 \pi i \xi_k \hat{f} (\xi) \right| ^2 d \xi \\
+		&= \int _{\mathbb{R}^n} (2 \pi)^2 |\xi|^2 |\hat{f} (\xi)|^2 d \xi \\
+		&= 4 \pi^2 \int_{\mathbb{R}^n}|\xi|^2|\hat{f}(\xi)|^2 d \xi \\
+	.\end{align*}
+
+	For the second part, we have
+	\begin{align*}
+		& \int_{\mathbb{R}^n}|f(x+y)+f(x-y)-2 f(x)|^2 d x \\
+		&= \int_{\mathbb{R}^n} |\hat{f}(\xi) e^{-2 \pi i \xi \cdot y} + \hat{f}(\xi) e^{2 \pi i \xi \cdot y} - 2 \hat{f}(\xi)|^2 d \xi \\
+		&= \int_{\mathbb{R}^n} |\hat{f}(\xi)|^2 |e^{-2 \pi i \xi \cdot y} + e^{2 \pi i \xi \cdot y} - 2|^2 d \xi \\
+		&= \int_{\mathbb{R}^n}|\hat{f}(\xi)|^2|2- 2\cos (2 \pi \xi \cdot y)|^2 d \xi \\
+		\end{align*}
+\end{proof}
+
+
+\item Let $f \in L^2\left(\mathbb{R}^n\right)$ and set $u_f(x, y)=P_y * f(x)$ and $v_f(x, t)=H_t * f(x)$. Set
+
+\[
+\nabla_x u_f=\left(\frac{\partial u_f}{\partial x_1}, \frac{\partial u_f}{\partial x_2}, \ldots, \frac{\partial u_f}{\partial x_n}\right)
+\]
+
+
+Define the Littlewood-Paley functions (will return to them later)
+
+\[
+\begin{aligned}
+g_v(f)(x) & =\left(\int_0^{\infty} y\left|\frac{\partial u_f}{\partial y}(x, y)\right|^2 d y\right)^{1 / 2} \\
+g_h(f)(x) & =\left(\int_0^{\infty} y\left|\nabla_x u_f(x, y)\right|^2 d y\right)^{1 / 2} \\
+g(f)(x) & =\left(\int_0^{\infty} y\left|\nabla u_f(x, y)\right|^2 d y\right)^{1 / 2} \\
+G_v(f)(x) & =\left(\int_0^{\infty} t\left|\frac{\partial v_f}{\partial t}(x, t)\right|^2 d t\right)^{1 / 2} \\
+G_h(f)(x) & =\left(\int_0^{\infty}\left|\nabla_x v_f(x, t)\right|^2 d t\right)^{1 / 2}
+\end{aligned}
+\]
+
+
+Prove that
+
+\[
+\left\|g_v(f)\right\|_2=\left\|g_h(f)\right\|_2=\left\|G_v(f)\right\|_2=\frac{1}{2}\|f\|_2
+\]
+
+and that
+
+\[
+\left\|G_h(f)\right\|_2=\frac{1}{\sqrt{2}}\|f\|_2
+\]
+
+\begin{proof}
+	We have
+	\begin{align*}
+		\left\|g_v(f)\right\|_2^2
+		&= \int _{\mathbb{R}^n} \left( \int _0^\infty y \left| \frac{\partial u_f}{\partial y} (x, y) \right| ^2 dy \right) dx \\
+		&= \int_0 ^\infty y \int _{\mathbb{R}^n} \left| \frac{\partial u_f}{\partial y} (x, y) \right| ^2 dx dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \widehat{ \frac{\partial u_f}{\partial y} }(\xi)\right| ^2 d \xi dy \\
+	\end{align*}
+	Now, note that
+	\[
+		\widehat{ \frac{\partial u_f}{\partial y} }(\xi) = \int \frac{\partial u_f}{\partial y} (x, y) e^{2 \pi i x \cdot \xi} dx = \frac{\partial}{\partial y} \left( \hat{P_y}(\xi) \hat{f}(\xi)
+		\right) 
+	.\]
+	\[
+		\hat{P_y} (\xi) = e^{-2 \pi y |\xi|}
+	\]
+	\[
+			\int _0^\infty y \left| \frac{\partial}{\partial y} \left( \hat{P_y}(\xi) \right) \right| ^2 d y = \int _0^\infty y (4 \pi^2 |\xi|^2) e ^{-4 \pi y |\xi|} dy = \frac{1}{4}
+	\]
+	Thus
+	\begin{align*}
+		\left\|g_v(f)\right\|_2^2
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \frac{\partial}{\partial y} \left( \hat{P_y}(\xi) \right) \right| ^2 |\hat{f}(\xi)|^2 d \xi dy \\
+		&= \int_ {\mathbb{R}^n} \int _0^\infty y \left| \frac{\partial}{\partial y} \left( \hat{P_y}(\xi) \right) \right| ^2 d y |\hat{f}(\xi)|^2 d \xi \\
+		&= \int _{\mathbb{R}^n} \frac{1}{4} |\hat{f}(\xi)|^2 d \xi \\
+		&= \frac{1}{4} \|f\|_2^2
+	\end{align*}
+	
+	Next, we control $\left\|g_h(f)\right\|_2$.
+
+	\begin{align*}
+		\left\|g_h(f)\right\|_2^2
+		&= \int _{\mathbb{R}^n} \left( \int _0^\infty y \left| \nabla_x u_f(x, y) \right| ^2 dy \right) dx \\
+		&= \int_0 ^\infty y \int _{\mathbb{R}^n} \left| \nabla_x u_f(x, y) \right| ^2 dx dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \nabla_x \widehat{u_f}(\xi, y) \right| ^2 d \xi dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \widehat{\nabla_x  P_y(\xi)} \hat{f}(\xi) \right| ^2 d \xi dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} 4 \pi^2 |\xi|^2 \left| P_y(\xi) \hat{f}(\xi)  \right| ^2 d \xi dy \\
+	\end{align*}
+
+	where
+
+	\[
+		\int_0^\infty y \widehat{P}_y(\xi) ^2 dy = \int_0^\infty y e^{-4 \pi y |\xi|} dy = \frac{1}{16 \pi^2 |\xi|^2}
+	.\]
+
+	Thus
+	\begin{align*}
+		\left\|g_h(f)\right\|_2^2
+		&= \frac{1}{4} \|\hat{f}\|_2^2 \\
+		&= \frac{1}{4} \|f\|_2^2
+	\end{align*}
+
+	The proof for $\left\|G_v(f)\right\|_2$ is similar to the proof for $\left\|g_v(f)\right\|_2$. We only need to replace $P_y$ with $H_t$ and $\nabla_x$ with $\frac{\partial}{\partial t}$. Use the following:
+
+	\begin{align*}
+		&\int_{0}^{\infty} t \left| \frac{\partial}{\partial t} \left( \hat{H_t}(\xi) \right) \right| ^2 d t \\
+		&= \int_{0}^{\infty} t \left| \frac{\partial}{\partial t} \left( e^{-4 \pi^2 t |\xi|^2} \right) \right| ^2 d t \\
+		&= \int_{0}^{\infty} t \left| - 4 \pi^2 |\xi|^2 e^{-4 \pi^2 t |\xi|^2} \right| ^2 d t \\
+		&= \int_{0}^{\infty} 16 \pi^4 |\xi|^4 t e^{-8 \pi^2 t |\xi|^2} d t \\
+		&= \frac{1}{4}
+	\end{align*}
+
+	Finally, for $\left\|G_h(f)\right\|_2$, we have	
+
+	\[
+		 \widehat{\nabla_x v_f}(\xi, t) 
+		 = \widehat{\nabla_x H_t}(\xi) \hat{f}(\xi)
+	\]
+
+
+	\begin{align*}
+		\| G_h(f) \|_2^2
+		&= \int _{\mathbb{R}^n} \left( \int _0^\infty t \left| \nabla_x v_f(x, t) \right| ^2 dt \right) dx \\
+		&= \int_0 ^\infty t \int _{\mathbb{R}^n} \left| \nabla_x v_f(x, t) \right| ^2 dx dt \\
+		&= \int _0^\infty t \int _{\mathbb{R}^n} \left|  \widehat{\nabla_x H_t}(\xi) \hat{f}(\xi) \right| ^2 d \xi dt \\
+	\end{align*}
+	
+	where
+	\begin{align*}
+		| \widehat{\nabla_x H_t}(\xi) |^2
+		&= \left( \nabla_x H_t * \nabla_x H_t(\xi) \right)^\wedge \\
+		&= (\Delta_x \left( H_t *  H_t \right))^\wedge (\xi) \\
+		&= (\Delta_x H_{2 t} )^\wedge (\xi) \\
+		&= -4 \pi^2 |\xi|^2 \hat{H}_{2 t}(\xi) 
+	.\end{align*}
+
+	Hence
+	\begin{align*}
+		\| G_h(f) \|_2^2
+		&= \int _0^\infty t \int _{\mathbb{R}^n} 4 \pi^2 |\xi|^2 \hat{H}_{2 t}(\xi) \left| \hat{f}(\xi) \right| ^2 d \xi dt \\
+		&= \int_ {\mathbb{R}^n} 4 \pi^2 |\xi|^2 \left[
+		\int _0^\infty t \hat{H}_{2 t}(\xi) d t \right] \left| \hat{f}(\xi) \right| ^2 d \xi \\
+	\end{align*}
+	We have
+	\begin{align*}
+		\int _0^\infty t \hat{H}_{2 t}(\xi) d t
+		&= \int _0^\infty t e^{-4 \pi^2 (4 t^2) |\xi|^2} d t \\
+		&= \frac{1}{32 \pi^2 |\xi|^2}
+	\end{align*}
+	Therefroe
+
+	\[
+		\| G_h(f) \|_2^2 = \frac{1}{8} \| f \|_2^2			
+	.\]
+
+		
+
+\end{proof}
+
+\item Let $f, h \in L^2\left(\mathbb{R}^n\right)$. Prove that
+
+\[
+\int_0^{\infty} \int_{\mathbb{R}^n} y \frac{\partial u_f}{\partial y}(x, y) \frac{\overline{\partial u_h}}{\partial y}(x, y) d x d y=\frac{1}{4} \int_{\mathbb{R}^n} f(x) \overline{h(x)} d x
+\]
+
+and
+
+\[
+\int_0^{\infty} \int_{\mathbb{R}^n} y \nabla_x u_f(x, y) \cdot \overline{\nabla_x u_h}(x, y) d x d y=\frac{1}{4} \int_{\mathbb{R}^n} f(x) \overline{h(x)} d x
+\]
+
+
+Remark 3 Later in the course (see Chapter 10) we will derive $L^P$-versions of the above formulas . For now, let us observe that
+
+\[
+\left|\nabla u_f\right|^2=\frac{1}{2} \Delta u_f^2
+\]
+
+and hence it follows from this exercise that
+
+\[
+\int_0^{\infty} \int_{\mathbb{R}^n} y \Delta u_f^2(x, y) d x d y=\int_{\mathbb{R}^n} f(x)^2 d x
+\]
+
+for all $f \in L^2\left(\mathbb{R}^n\right)$.
+
+\begin{proof}
+	We have
+	\begin{align*}
+		& \int_0^{\infty} \int_{\mathbb{R}^n} y \frac{\partial u_f}{\partial y}(x, y) \frac{\overline{\partial u_h}}{\partial y}(x, y) d x d y \\
+		&= \int_0^{\infty} y \int_{\mathbb{R}^n} \widehat{ \frac{\partial u_f}{\partial y}}(\xi, y) \overline{\widehat{ \frac{\partial u_h}{\partial y}}}(\xi, y) d \xi d y \\	
+		&= \int_0^{\infty} y \int_{\mathbb{R}^n} \left[ \frac{\partial}{\partial y} \hat{P}_y(\xi) \hat{f}(\xi) \right] \left[ \frac{\partial}{\partial y} \overline{\hat{P}_y(\xi) \hat{h}(\xi)} \right] d \xi d y \\
+		&= \int_{\mathbb{R}^n} \left[ \int_0^{\infty} y \left| \frac{\partial}{\partial y} \hat{P}_y(\xi) \right|^2 d y \right] \hat{f}(\xi) \overline{\hat{h}(\xi)} d \xi \\	
+	\end{align*}
+	where
+	\[
+		\int_0^{\infty} y \left| \frac{\partial}{\partial y} \hat{P}_y(\xi) \right|^2 d \xi = \int_0^{\infty} y (4 \pi^2 |\xi|^2) e^{-4 \pi y |\xi|} dy = \frac{1}{4}
+	.\]	
+	Thus
+	\begin{align*}
+		\int_0^{\infty} \int_{\mathbb{R}^n} y \frac{\partial u_f}{\partial y}(x, y) \frac{\overline{\partial u_h}}{\partial y}(x, y) d x d y 
+		&= \frac{1}{4} \int_{\mathbb{R}^n} \hat{f}(\xi) \overline{\hat{h}(\xi)} d \xi \\
+		&= \frac{1}{4} \int_{\mathbb{R}^n} f(x) \overline{h(x)} d x
+	\end{align*}
+
+	For the second part, we have
+
+	\begin{align*}
+		& \int_0^{\infty} \int_{\mathbb{R}^n} y \nabla_x u_f(x, y) \cdot \overline{\nabla_x u_h}(x, y) d x d y \\
+		&= \int_0^{\infty} y \int_{\mathbb{R}^n} \widehat{\nabla_x u_f}(\xi, y) \cdot \overline{\widehat{\nabla_x u_h}}(\xi, y) d \xi d y \\
+		&= \int_0^{\infty} y \int_{\mathbb{R}^n} \left[ \widehat{\nabla_x P_y}(\xi) \hat{f}(\xi) \right] \cdot \left[ \overline{\widehat{\nabla_x P_y}(\xi) \hat{h}(\xi)} \right] d \xi d y \\
+		&= \int_{\mathbb{R}^n} \left[ \int_0^{\infty} y \widehat{\Delta_x {P}_{2y}} (\xi) d y \right] \hat{f}(\xi) \overline{\hat{h}(\xi)} d \xi \\
+		&= \int_{\mathbb{R}^n} (4 \pi^2 |\xi|^2) \left[ \int_0^{\infty} y \hat{P}_{2y} (\xi) d y \right] \hat{f}(\xi) \overline{\hat{h}(\xi)} d \xi \\
+		&= \int_{\mathbb{R}^n} \frac{1}{4} \hat{f}(\xi) \overline{\hat{h}(\xi)} d \xi \\
+		&= \frac{1}{4} \int_{\mathbb{R}^n} f(x) \overline{h(x)} d x
+	\end{align*}
+
+	where
+	\begin{align*}
+		\int_0^{\infty} y \hat{P}_{2y} (\xi) d y
+		&= \int_0^{\infty} y e^{-2 \pi (2 y) |\xi|} dy \\
+		&= \frac{1}{16 \pi^2 |\xi|^2}
+	\end{align*}
+\end{proof}
+
+\item Let $\varphi$ be a $C_0^{\infty}\left(\mathbb{R}^n\right)$ radial function. As shown in class, its Fourier transform is also radial. Suppose
+
+\[
+\int_0^{\infty}\left|\hat{\varphi}^{\prime}(y)\right|^2 y d y=A<\infty
+\]
+
+
+Define
+
+\[
+U(x, y)=\left(\varphi_y * f\right)(x)
+\]
+
+and consider the generalized Littlewood-Paley function
+
+\[
+g(f)(x)=\left(\int_0^{\infty} y\left|\frac{\partial U}{\partial y}(x, y)\right|^2 d y\right)^{1 / 2}
+\]
+
+
+Prove that
+
+\[
+\|g(f)\|_2=\sqrt{A}\|f\|_2
+\]
+
+\begin{proof}
+	We have
+	\begin{align*}
+		\|g(f)\|_2^2
+		&= \int _{\mathbb{R}^n} \left( \int _0^\infty y \left| \frac{\partial U}{\partial y} (x, y) \right| ^2 dy \right) dx \\
+		&= \int_0 ^\infty y \int _{\mathbb{R}^n} \left| \frac{\partial U}{\partial y} (x, y) \right| ^2 dx dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \frac{\partial}{\partial y} \left( \varphi_y * f \right) (x, y) \right| ^2 dx dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \left( \frac{\partial}{\partial y} \varphi_y * f \right) (x, y) \right| ^2 dx dy \\
+		&= \int _0^\infty y \int _{\mathbb{R}^n} \left| \widehat{\varphi_y'}(\xi) \hat{f}(\xi) \right| ^2 d \xi dy \\
+		&= \int _{\mathbb{R}^n} \int _0^\infty y \left| \widehat{\varphi_y'}(\xi) \right| ^2 d y \left| \hat{f}(\xi) \right| ^2 d \xi \\	
+		&= A \| \hat{f} \|_2^2 \\
+		&= A \| f \|_2^2
+	\end{align*}
+\end{proof}
+
+\item Let $f$ be a function on the real line $\mathbb{R}$ such that both $f$ and $x f$ are in $L^2(\mathbb{R})$. Prove that $f \in L^1(\mathbb{R})$ and that
+
+\[
+\left(\int_{\mathbb{R}}|f(x)| d x\right)^2 \leq 8\left(\int_{\mathbb{R}}|f(x)|^2 d x\right)^{1 / 2}\left(\int_{\mathbb{R}}|x|^2|f(x)|^2 d x\right)^{1 / 2}
+\]
+
+\begin{proof}
+	We can show that $f \in L^1(\mathbb{R})$ by the following:
+	\begin{align*}
+		\int_{\mathbb{R}} |f(x)| dx
+		&= \int_{\mathbb{R}} (f(x) (1 + |x|^2)^{1 / 2}) \frac{1}{(1 + |x|^2)^{1 / 2}} dx \\
+		&\le \left( \int_{\mathbb{R}} |f(x)|^2 (1 + |x|^2) dx \right) ^{1 / 2} \left( \int_{\mathbb{R}} \frac{1}{1 + |x|^2} dx \right) ^{1 / 2}
+	\end{align*}
+	The left hand side equals $(\| f \|_2^2 + \| x f \|_2^2)^{1 / 2}$, and the right hand side is finite. Thus $f \in L^1(\mathbb{R})$.
+
+	Now, to prove the inequality, we use the strategy for proving ``Peter-Paul inequality''.	
+
+	\begin{align*}
+		\int_{\mathbb{R}} |f(x)| dx 
+	&=  \int_{|x| > \lambda} |f(x)| dx + \int_{|x| \le \lambda} |f(x)| dx \\	
+	&=  \int_{|x| > \lambda} |xf| |x|^{-1} dx + \int_{|x| \le \lambda} |f(x)| \cdot 1 dx \\
+	&\le \left( \int_{|x| > \lambda} |x f|^2 dx \right) ^{1 / 2} \left( \int_{|x| > \lambda} |x|^{-2} dx \right) ^{1 / 2} + \lambda \| f \|_2 \sqrt{2 \lambda} \\
+	&\le \| x f\| _2 \sqrt{2 / \lambda} + \| f \|_2 \sqrt{2 \lambda} 
+	\end{align*}	
+	Choose $\lambda = \| x f \|_2 / \| f \|_2$ to get the desired inequality.
+\end{proof}
+
+
+\end{enumerate}

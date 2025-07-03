@@ -1,0 +1,110 @@
+\studynote{2}{Tue 03 Dec 2024 17:09}{SLLN for BRWRE}
+
+\subsubsection{Rigorous argument for BRW-RE}
+
+In this section we prove lower bound for Proposition~\ref{prop:SLLN-BRWRE}. The proof takes several steps:
+
+\textbf{Step 1. Construction of coarse-grained tree.}
+%Start from a vertex $v \in D_m$ where $S_v = x$, we define a tree $T^v$ as a subtree of the original tree structure. Take $T^v_0 = \{v\} $. Let $D^T_w$ denote the descendants of $w$ in the tree $T$. Then
+%\[
+%	D^{T}_w := \{w' \in D_w: \rho(w', w) = L, S_{w'} > S_w + (x^* - \varepsilon) L \} 
+%.\] 
+
+%Alternatively we can view $T$ as a percolated subtree of the coarse-grained tree $T_C$, with the edge condition $S_{w'} > S_w + (x^* - \varepsilon) L$.
+
+Let $T$ be a tree. We denote by $T(v)$ the subtree rooted at vertex $v$. We denote by $T(k)$ the set of vertexes in the $k$-th generation. We denote $T(v, k) = T(v)(k)$.
+
+Recall $\mathcal{T}$ is the $k$-ary tree associated with the BRW starting at $0$. Start from any $k$-ary subtree $T$ of $\mathcal{T}$ we construct $L$\textit{-coarse-grain} of $T$, denoted as $C_L(T)$, as follows:
+\[
+	C_L(T)(0) = T(0), \quad C_L(T)(v, 1) = T(v, L)
+.\] 
+
+On the coarse-grained tree, we define a percolation condition: for $w \in C_L(T)(v, 1)$,
+\[
+	w \leftrightarrow v \iff  S_w \ge S_v + x L
+.\] 
+where $x = x^* - \varepsilon$.
+
+Denote by $\tilde T$ the percolated subtree of $C_L(T)$.
+
+
+
+\textbf{Step 2. Realign the tree via coupling}. 
+%Take a tree $T_C$. Now, for every element $v \in T_C(1)$, consider a $k$-ary tree $K_v$ isomorphic to the subtree $T_C(v)$. Assign edge values to $K_v$ iteratively as follows: if $S^{K_v}_w < S^{T_C}_w$ then 
+
+Consider a $k$-ary subtree $T$ of $\mathcal{T}$. We define the $L$-\textit{alignment} of $T$, denoted as $A_L(T)$, as follows:
+
+$A_L(T)(0), \ldots, A_L(T)(L - 1)$ is chosen to be identical to $T(0), \ldots, T(L - 1)$. For each $v \in T(L)$, consider an independent copy of BRW starting from $2 \left\lfloor x L / 2 \right\rfloor$, giving a $k$-ary tree $K_v$. Pick a tree isomorphism $\varphi: K_v \to  T(v)$.
+
+Now, take $A_L(T)(L) = \{ K_v(0): v \in T(L)\} $, with $K_v(0)$ being the descendent of the ancestor of $v$. For each $w \in A_L(T)(L)$, if $S_w < S_{\varphi(w)}$, take $A_L(T)(w, 1) = K_v(w, 1)$ and continue the construction on each element of $A_L(T)(w, 1)$. Otherwise, take $A_L(T)(w) = T(w)$.
+
+The resulting construction is a coupling between the original BRW, and a new process with all the elements shifted to position  $xL$ by time $L$, and if the original BRW is on the right of $xL$, the new BRW never exceeds original BRW. That is, $A_L(T)$ represents a BRW that goes strictly slower than $T$.
+
+Now iterate the construction, and define the $L$-\textit{superalignment} of $T$, denoted as $A^*_L(T)$, as
+\[
+	A^*_L(T) = \lim_{n \to \infty } A_{n L} \ldots A_{L} (T)
+.\] 
+
+From now on, we focus on the tree $\widetilde{A^*_L}(\mathcal{T}(v))$, which we simply denote by $\tilde T$ for short.
+
+\textbf{Step 3. Super-criticality of $\tilde T$.} We apply the following theorem to show that $T^v$ is supercritical for any $v$ and large enough $L$:
+
+\begin{theorem}[Athreya-Karlin Theorem '1970]
+	\label{thm:AthreyaKarlthm}
+	Let $\xi_0, \xi_1, \ldots$ be a stationary ergodic process of probability generating functions for offspring distribution of a branching process. Then the branching process survives with positive probability if the following two conditions hold:
+	\begin{enumerate}
+		\item $E \left[ - \log \left( 1 - \varphi_{\xi_0}(0) \right)  \right] < \infty $,
+		\item $E \left[ \log \phi'_{\xi_0}(1) \right] ^- < E \left[ \log \varphi'_{\xi_0}(1) \right] ^+ \le \infty $.
+	\end{enumerate}
+\end{theorem}
+
+Condition (1) holds automatically due to uniform boundedness of $\omega$. To verify (2),
+It suffices to show that
+\[
+	\mathbb{E}\left[ \log E_\omega\left[ |\tilde T(1)| \right]  \right] > 0, \quad \text{ for large }L
+,\] 
+which is equivalent to
+\[
+	\mathbb{E}\left[ \log P_\omega(X_L > xL) \right] > - L \log k, \quad \text{ for large }L
+.\] 
+
+To show this, we use the following LDP:
+\begin{theorem}[Position LDP for ERWRE, Comets et al., '2000]
+	\label{thm:PositionLDPERWREComets}
+	(Theorem 1.) Assume $\eta \in M_1^e(\Sigma)^K$. For $\eta$-a.e. $\omega$, the distributions of $X_n / n$ under $P_\omega$ satisfy a large deviation principle with convex, good rate function $I_\eta^q$.
+\end{theorem}
+
+We have, from large deviation principle,
+\[
+	\frac{1}{L} \log P_\omega(X_L > x L) = - I(x) + o_{L, \omega}(1)
+.\] 
+
+Uniform ellipticity implies that the error term $o_{L, \omega}$ is deterministically bounded. Applying DCT yields
+\[
+	\mathbb{E}\left[\frac{1}{L} \log P_\omega(X_L > x L)\right] = - I(x) + o_{L}(1)
+.\]
+
+Since $I(x) < \log k$,
+\[
+	\mathbb{E}\left[\log P_\omega(X_L > x L)\right] > - L \log k \quad \text{ for large }L
+.\] 
+
+\textbf{Step 4. Many many trees.}
+%We pick the particle $v_1$ that hits $1$ first to start a tree $T^{v_1}$. We then pick a particle $v_2$ that hits $2$ first, and which is not a descendent of $v_1$, to start a tree $T^{v_2}$. Continue in this fashion, we obtain a countable sequence of independent coarse-grained trees. By Borel-Cantelli, there must exist a tree $T^w$ that survives. Then
+%\[
+%	\liminf S_{k L}/ k L \ge (x^* - \varepsilon)
+%.\] 
+
+Pick $v_1 \in \mathcal{T}(1)$, $v_2 \in \mathcal{T}(2) \setminus \mathcal{T}(v_1)$, $v_3 \in \mathcal{T}(3) \setminus \left( \mathcal{T}(v_1) \cup \mathcal{T}(v_2) \right) $, etc. Then $\mathcal{T}(v_1), \mathcal{T}(v_2), \ldots$ are independent. Therefore, $\widetilde{A^*_L}(\mathcal{T}(v_i))_{i= 1, 2, \ldots}$ are independent, and each have a positive probability, independent of $i$, to survive.
+
+By Borel-Cantelli, there exists $i$ such that $\widetilde{A^*_L}(\mathcal{T}(v_i))$ survives. Take a surviving path $w_k \in \widetilde{A^*_L}(\mathcal{T}(v_i))(k)$. Then
+\[
+	M_{i + kL} \ge S_{w_k} = S_{v_i} + k (xL)
+.\] 
+
+Hence
+\[
+	\liminf_{n \to \infty } \frac{M_n}{n} \ge x
+.\] 
+
+This concludes the proof of lower bound for BRWRE-SLLN.
