@@ -1,0 +1,133 @@
+\homework{2}{Wed 01 Oct 2025 21:25}{}
+
+\textbf{Free Particle in Minkowski Spacetime.} Consider a free particle $x^\mu(t)$ in the Minkowski spacetime $ds^2 = \eta_{\mu \nu} dx^\mu dx^\nu$. Take as its action $S = - m \int ds = - m \int dt \left( \frac{ds}{dt} \right) $. Determine its equation of motion.
+
+\begin{proof}[Solution]
+	We observe that $S$ only depends on $\dot{x}^\mu$, thus
+	\begin{align*}
+		\delta S
+		&= - m \int dt \frac{\partial \sqrt{\eta_{\mu \nu}\dot{x}^\mu \dot{x} ^\nu} }{\partial \dot{x}^\alpha} \delta \dot{x}^\alpha \\
+		&= - m \int dt \frac{\eta_{\alpha \beta}\dot{x}^\beta \delta\dot{x} ^\alpha} {2 \frac{ds}{dt}} \\
+		&= 0
+	.\end{align*}
+	For this integral to be zero, we must have
+	\[
+		\eta_{\alpha \beta} \dot{x}^\beta \delta\dot{x} ^\alpha = 0
+	.\] 
+	Integration by part yields
+	\[
+		\eta_{\alpha \beta} \ddot{x} ^\beta \delta x^\alpha = 0
+	.\] 
+	Which implies
+	\[
+		\ddot x = 0
+	.\] 
+	This means that the particle undergoes unaccelerated motion.
+\end{proof}
+
+
+\textbf{Coulomb gauge}. Consider the classical Maxwell fields.
+\begin{itemize}
+	\item Expand the Lagrangian density in the presence of a current in terms of $A^\mu = (\varphi, \vec{A} )$ with $\varphi$ the electrostatic potential and $\vec{A} $ satisfying the coulomb gauge $\vec{\nabla} \cdot \vec{A} (x) = 0$.
+	\item Vary the action with respect to $\varphi$ and $\vec{A} $ to find their equations of motion.
+	\item Find the solution to the equations of motion using Fourier transform.
+\end{itemize}
+\begin{proof}[Solution]
+	Recall the least action principle for classical field theory:
+	\[
+		\delta S = \delta \int \mathcal{L} d x^\mu = 0
+	.\] 
+	where we have for electromagnetism,
+	\[
+		\mathcal{L}(\partial_\mu A_\nu, A_\nu)
+		= - \frac{1}{4} F_{\mu \nu} F^{\mu \nu} + J_\nu A^\nu
+	\] 
+	where $F_{\mu \nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$,  $J_\nu = (\rho, \vec{j} )$, and $A_\nu = (\varphi, \vec{A} )$.
+
+	Vary the Lagrangian, we find
+	\begin{align*}
+		\delta S
+		&= \int d^4 x - F^{\mu \nu} \delta \left( \partial _\mu A_\nu \right) + J_\nu \delta A^\nu \\
+		&= \int d^4 x \partial _\mu F^{\mu \nu} \delta A_\nu  + J_\nu \delta A^\nu \\
+		&= \int d^4 x \left(\partial _\mu F^{\mu \nu}  + J_\nu\right) \delta A^\nu = 0
+	.\end{align*}
+	Thus, the field-theoretic equation of motion is
+	\[
+		\partial _\mu F^{\mu \nu} = J^\nu
+	.\] 
+
+	Under the Coulomb gauge $\nabla \cdot  \vec{A} = 0$, the equation becomes
+	\begin{align*}
+		\Delta \varphi &= - \rho\\
+		\square \vec{A}  &= - \vec{J} + \nabla  \partial_t \varphi
+	.\end{align*}
+	The first equation is Poisson equation for electrostatics. It is solved via the Green's function in three dimensions
+	\[
+		G_3(x) = \frac{1}{4 \pi |x|}
+	.\] 
+	Thus the solution is
+	\[
+		\varphi(t, x) = \int d^3 x' \frac{- \rho(t, x')}{4 \pi |x - x'|}
+	.\] 
+	The second equation is three decoupled wave equations with source terms. Solution is given by the Green's function
+	\[
+		G(t, x) = \frac{1}{4 \pi |x|} \delta\left(t-|x|\right) 
+	.\] 
+	This is derived by Fourier-transforming the wave equation and choosing an appropriate integration contour that preserves causality.
+	The solution of the wave part reads
+	\[
+		\vec{A} (t, x) = 
+		int dt' \int d^3 x \frac{1}{4 \pi |x - x'|} \delta\left(t-t'-|x-x'|\right) \left( \nabla  \partial_t \varphi - \vec{J}  \right) 
+	.\] 
+
+\end{proof}
+
+
+\textbf{Spontaneous Symmetry Breaking.} Consider a complex relativistic scalar field with Lagrangian density
+\[
+	\mathcal{L} = - \frac{1}{2} \left( \partial_\mu \Phi^\dag \right) \left( \partial^\mu \Phi \right) 
+	+ \lambda \left( \Phi^\dag \Phi - \phi_0 \right) ^2
+.\] 
+\begin{itemize}
+	\item Find the classical equations of motion
+	\item Consider constant field configurations and find minima of action.
+	\item Expand the field $\Phi(x^\mu)$ around this minimum to the second order and find the mass of the excitations.
+	\item Is there a massless mode?
+\end{itemize}
+
+\begin{proof}[Solution]
+	Start by computing the Euler-Lagrange equation
+	\[
+		\delta S = 0 \implies
+		\frac{\partial \mathcal{L}}{\partial \Phi}  - \partial_\mu \frac{\partial \mathcal{L}}{\partial (\partial_\mu \Phi)}  = 0
+	.\] 
+	\begin{align*}
+		\frac{\partial \mathcal{L}}{\partial \Phi} &= 2 \lambda \Phi^\dag \left( \Phi^\dag \Phi - \phi_0 \right) \\
+		\frac{\partial \mathcal{L}}{\partial (\partial_\mu \Phi)} &= - \frac{1}{2} (\partial^\mu \Phi)^\dag = - \frac{1}{2} \partial^\mu \Phi^\dag \\
+		\partial_\mu \frac{\partial \mathcal{L}}{\partial (\partial_\mu \Phi)} &= - \frac{1}{2} \partial_\mu \partial^\mu \Phi^\dag
+	.\end{align*}
+	The equation of motion reads
+	\[
+		( \square + 4 \lambda \left( \Phi^\dag \Phi - \phi_0 \right) ) \Phi = 0
+	.\] 
+	This looks like the Klein-Gordon equation except with an extra mass term $\Phi^\dag \Phi$.
+
+	Under the assumption of constant field, $\partial _\mu \Phi \equiv 0$, the Lagrangian density simplifies to
+	\[
+		\mathcal{L} = \lambda \left( \Phi^\dag \Phi - \phi_0 \right) ^2
+	.\] 
+	Assume $\lambda > 0, \phi_0 \ge 0$. We see that the Lagrangian density acquires minimal value $0$ when $\Phi^\dag \Phi = \phi_0$. Hence, actions achieves minimum value $S = 0$ when $\Phi = \sqrt{\phi_0} e^{i \alpha}$, for some $\alpha > 0$.
+
+	To expand $\Phi$ around this minimum, put
+	\[
+		\Phi(x) = \sqrt{\phi_0}  e^{i \alpha} + h(x) + i G(x)
+	\] 
+	where $h, G$ are real scalar fields close to $0$. Insert in the full Lagrangian density and keep only up to second order, we see that
+	\[
+		\mathcal{L} = - \frac{1}{2}( \partial_\mu \partial^\mu h + \partial_\mu \partial^\mu G) 
+		+ 4 \lambda \phi_0 \cos^2 \alpha h^2 + h.c.
+	.\] 
+	There is no mass term for field  $G$; this implies existence of a massless mode (Goldstone boson) described by the field $G(x)$, which is decoupled (up to second order) from $h$.
+\end{proof}
+
+

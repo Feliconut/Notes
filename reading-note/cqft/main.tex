@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{float} % [H] option for figures
+\tcbuselibrary{breakable}
+
+\usepackage[backend=bibtex,style=authoryear-ibid,sorting=nyt,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=true]{biblatex}
+\addbibresource{CQFT.bib}
+\addbibresource{SDE.bib}
+
+\title{Your Title}
+\author{Your Name}
+\date{\today}
+
+\newcommand{\drawpicture}{{\color{cyan!70} This is immediate when one draws a picture.} }
+\newcommand{\why}{{\color{red}(Why?)}}
+\newcommand{\followup}{{\color{orange}(This needs further follow-up.)}}
+\newcommand{\strategy}[1]{{\color{blue} #1}}
+
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem{proposition}{Proposition}
+\begin{document}
+\tableofcontents
+
+% \input{Fribergh10.tex}
+% \input{ZeitouniNote.tex}
+% \input{Comets00.tex}
+% \input{brw-research.tex}
+% \input{minimax.tex}
+\input{gubinelliFBSDESineGordon2024.tex}
+
+
+
+\newpage
+\printbibliography
+
+\end{document}

@@ -47,41 +47,10 @@ Here we follow the demonstration in \autocite[Chapter~27.6]{schwartzQFT2014}, fo
 
 The development crucially depends on the \textbf{Spin-Helicity Formalism}, which is a bi-spinor $\left( \frac{1}{2}, \frac{1}{2} \right) $ representation of spin-1 or spin-0 particles (we focus on spin-1 case). The most important feature is that, every four-momentum $p^\mu \in \mathbb{R}^{1,3}$ is represented in a $2$-tensor with two spinor indices, and $\operatorname{det } p^{\alpha \dot{\alpha}} = p_\mu^2$. When $p_{\mu}^2 = 0$, it can be written in terms of an outer product:
 $p^\mu \mapsto p \rangle  [p $, where $p \rangle$ is a left-handed spinor and $[p$ is its right-handed complex conjugate:  $p \rangle = \left( [p \right) ^\dag$. This is, for instance, true for massless on-shell states for which $p^2 = m^2 = 0$.
+For complex momenta, we have $p \rangle, [p$ not conjugate in general.
 
-This case is also special in that the matrix elements can only depend on the inner products of the respective spinors, and combining with a dimensional analysis argument, one can determine the expression of all 3-point amplitudes up to a coefficient. 
+\textbf{3-point Amplitudes for Gluon Scattering.} This case is also special in that the matrix elements can only depend on the inner products of the respective spinors, and combining with a dimensional analysis argument, one can determine the expression of all 3-point amplitudes up to a coefficient. 
 
-The dimensional analysis argument is as follows: 
-\begin{itemize}
-	\item The helicity spinor representation of a momentum has a redundancy captured by the little group transformation
-	\[
-		p \rangle \to z p \rangle, \quad [p \to z^{-1} [p.
-	\]
-	And the polarization vectors scale as
-	\[
-	\epsilon_p^{-}(r)=\sqrt{2} \frac{p\rangle[r}{[p r]} \rightarrow z^2 \epsilon_p^{-}(r), \quad \epsilon_p^{+}(r)=\sqrt{2} \frac{r\rangle[p}{\langle r p\rangle} \rightarrow z^{-2} \epsilon_p^{+}(r)
-	.\]
-	\item The amplitude only depends on the inner product between the momenta.
-	\item The amplitude must depend on only left-handed inner products or only right-handed inner products. To see this, start from momentum conservation
-	\[
-		1\rangle  [ 1 +  2\rangle [ 2 + 3\rangle  [ 3 = 0
-	\]
-	and contract with $\langle 1, \langle 2$. This gives two equations
-	\[
-	\langle 12\rangle[2=-\langle 13\rangle[3, \quad\langle 21\rangle[1=-\langle 23\rangle[3
-	\]
-	and implies either $\langle 12\rangle = \langle 23\rangle = \langle 31\rangle = 0$ or $[12] = [23] = [31] = 0$. 
-	\item The scaling of the amplitude solely depends on the scaling of the polarization vectors, since only for the polarization term the $\langle \rangle$ and $[]$ are not well-balanced. In particular, for a 3-point amplitude, the number of $\langle \rangle$ minus the number of $[]$ is $2$ for negative helicity gluon, $-2$ for positive helicity gluon. This holds respectively for each gluon. 
-	In particular, the only possible forms for the 3-point amplitude are
-	\[
-	\mathcal{M}(1^{a+}, 2^{b+}, 3^{c+}) = C^{abc} [12][23][31] \quad \text{or} \quad \frac{C^{abc}}{\langle 12\rangle \langle 23\rangle \langle 31\rangle}.
-	\]
-	but the second form diverges in the limit of real momenta, so it is not allowed. Hence the first form is the only possible form.
-	Using the same argument, we have
-	\[
-	\mathcal{M}\left(1^{a+} 2^{b+} 3^{c-}\right)=C^{a b c} \frac{[12]^3}{[13][32]} , \qquad 
-	\mathcal{M}\left(1^{a-} 2^{b-} 3^{c+}\right)=C^{a b c} \frac{\langle 12\rangle^3}{\langle 13\rangle\langle 32\rangle}.
-	\]
-\end{itemize}
 
 
 \subsection{On-shell BCFW Recursion}
@@ -91,7 +60,7 @@ Start with a scattering with in and out momenta $1 \rangle[1, \ldots, n \rangle 
 \[
 	[\hat{i} = [i + z [j, \quad
 	\hat{j} \rangle = j \rangle - z i \rangle, \quad
-	\hat{i} \rangle = \hat{i} \rangle, \quad
+	\hat{i} \rangle = i \rangle, \quad
 	[ \hat{j} = [ j
 .\]
 This shifts the corresponding momenta to
@@ -146,7 +115,15 @@ Using the previous formula, we get the desired result \autocite[(27.117)]{schwar
 \mathcal{M}(1 \ldots n)=\sum_{a, b, h} \mathcal{M}(1, \ldots, a & \left.-1, b+1, \ldots, n \rightarrow \hat{P}^h\right) \\
 & \times \frac{1}{\left(p_a+\cdots+p_b\right)^2} \mathcal{M}\left(\hat{P}^{-h} \rightarrow a, \ldots, b\right)
 \end{aligned}
-.\] 
+.\]o
+
+\subsection{Another point of view}
+
+Give a \textit{planar} theory where \textit{crossing symmetry} holds, the tree-level amplitude for $n$-point scattering can be expressed in terms of \textit{cyclic ordering} of the external momenta. The total amplitude is the sum of all possible feymann diagrams connecting the external momenta, which by the assumption, are \textit{connected planar trees}. We thus need to enumerate all possible planar trees, which can be done by the \textit{BCFW recursion}. For QCD with positively ordered color charges, we have only the planar trees. For electroweak, we have decorated planar trees which include extra information about the type of particles.
+
+Each connected planar tree of $n$ external vertices has the same number of vertices, hence same coupling strength. Hence the $n$-point amplitude is the sum of all possible connected planar trees, each with a coupling strength $g^{n-2}$, where $g$ is the coupling constant. 
+
+
 
 \subsection{Possible direction of Generalization}
 
@@ -168,4 +145,4 @@ In \autocite{Britto:2005fq} two external lines are shifted to complexify the amp
 
 \subsubsection{Loop-level Generalization}
 
-See \autocite{Arkani-Hamed:2010zjl}, where loop-level BCFW recursion is established for Supersymmetric Yang-Mills theory \textit{in the planar limit} (i.e., $SU(N)$ gauge theory with $N \to \infty$). In the planar limit, all Feymann diagrams are planar; its significance is also explained in \autocite{Beisert:2010jr}. In this line of work, the 
+See \autocite{Arkani-Hamed:2010zjl}, where loop-level BCFW recursion is established for Supersymmetric Yang-Mills theory \textit{in the planar limit} (i.e., $SU(N)$ gauge theory with $N \to \infty$). In the planar limit, all Feymann diagrams are planar; its significance is also explained in \autocite{Beisert:2010jr}. In this line of work, theo

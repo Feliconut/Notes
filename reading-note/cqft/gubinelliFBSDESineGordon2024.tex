@@ -1,0 +1,71 @@
+\section{Reading Note: Gubinelli, FBSDE and Sine-Gordon Equation}
+\label{sec:gubinelliFBSDESineGordon2024}
+
+This is the reading note for \autocite{gubinelliFBSDESineGordon2024}. We first write note for various concepts involved in the paper.
+
+\subsection{Stochastic Optimal Control}
+\label{subsec:optimalControl}
+
+A typical optimal control problem is
+
+\[
+\left\{\begin{array}{l}
+d X(t)=[a X(t)+b u(t)] d t+d W(t), \quad t \in[0, T] \\
+X(0)=x
+\end{array}\right.
+\]
+
+\[
+\min J(u)=\frac{1}{2} E\left\{\int_0^T\left[|X(t)|^2+|u(t)|^2\right] d t+|X(T)|^2\right\}
+\]
+
+where $X(\cdot)$ is called the state process, $u(\cdot)$ is called the control process. Both of them are required to be $\left\{\mathcal{F}_t\right\}_{t \geq 0}$-adapted and square integrable. $J(u)$ is the cost functional, which is required to be minimized. The problem is called \textbf{linear-quadratic} if $a, b$ are constants and the cost functional is quadratic in $X$ and $u$. The cost functional includes the integral cost and the terminal cost. 
+
+\subsubsection{Connection to Lagrangian Mechanics and Classical Control}
+
+The classical version of the problem is deterministic optimal control over the time period $[0, T]$ :
+
+\[
+V(x(0), 0)=\min _u\left\{\int_0^T C[x(t), u(t)] d t+D[x(T)]\right\}
+\]
+
+where $C[\cdot]$ is the scalar cost rate function and $D[\cdot]$ is a function that gives the best value at the final state, $x(t)$ is the system state vector, $x(0)$ is assumed given, and $u(t)$ for $0 \leq t \leq T$ is the control vector that we are trying to find. Thus, $V(x, t)$ is the value function.
+
+The system must also be subject to
+
+\[
+\dot{x}(t)=F[x(t), u(t)]
+\]
+
+where $F[\cdot]$ gives the vector determining physical evolution of the state vector over time.
+
+The reference \autocite{yongStochasticControls1999} gives more background to the classical case. Interesting connections remains:
+
+\begin{itemize}
+    \item The Hamiltonian interpretation of the HJB equation, in relation to the Lagrangian root of the problem.
+\end{itemize}
+
+
+
+
+\subsection{FBSDE}
+\label{subsec:fbsde}
+
+We refer to \autocite{maFBSDE2007}. First 3 chapters is all I need. Main Questions:
+\begin{enumerate}
+    \item How is FBSDE defined? Motivation behind the definition?
+    \item When is FBSDE solvable? Conditions for existence and uniqueness?
+    \item Relation to optimal control?
+\end{enumerate}
+
+\subsubsection{Motivation}
+
+\autocite[eqn.~(1.5)]{maFBSDE2007} motivates the following definition
+\begin{align}
+\left\{\begin{array}{l}
+d Y(t)=Z(t) d W(t), \quad t \in[0, T] \\
+Y(T)=\xi
+\end{array}\right.
+\end{align}
+as a proper definition for a \textbf{terminal value problem}, where only Brownian filtration is concerned. The pair $(Y, Z)$ is called a solution, and they are adapted. To motivate the definition, two simple examples of $\xi = 0$ and $\xi \in L^2(T; \mathbb{R})$ are given. In the first case, $(Y, Z) = (\xi, 0)$, and in the second case, $(Y, Z)$ is the martingale representation of $E[\xi | \mathcal{F}_t] = Y(0) + \int_0^t Z(s) d W(s)$.
+

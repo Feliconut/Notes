@@ -1,0 +1,86 @@
+% Sanov Theorem for the empirical measure.
+
+We consider an iid sequence of random variables $X_1, X_2, \ldots \sim \mu$ taking values in a finite set $\Sigma = \{1,2,\ldots,r\} $. Then, the space of probability measures $M_1(\Sigma)$ is a \textit{probability simplex}.
+We can give it geometry by defining the \textit{total-variation} metric:
+\[
+	d(\mu, \nu) = \sum_{s=1}^{r} |\mu_s - \nu_s|
+.\] 
+Now $M_1(\Sigma)$ equipped with $d$ is a Polish space. Every measure (in particular $\mu$) is a point in the simplex.
+
+Now, we are interested in the probability distribution of the  \textit{empirical measure}
+\[
+	L_n = \frac{1}{n} \sum_{i=1}^{n} \delta_{X_i}
+.\] 
+The distribution of $L_n$ would be an element of $M_1(M_1(\Sigma))$, a distribution on the simplex. According to the law of large numbers, we have $L_n \to \mu$ pointwise. We would then be interested in the large deviation behavior of $L_n$.
+
+\begin{theorem}[Sanov's Theorem]
+	\label{thm:Sanovthm}
+	Let $X_1, X_2, \ldots \sim \mu \in M_1(\Sigma)$ where $|\Sigma| = r$. Then the empirical measure $L_n = \frac{1}{n} \sum_{i=1}^{n} \delta_{X_i}$ subject to measure $\mathbb{P}$ has the large deviation principle
+\[
+	\lim \frac{1}{n} \log \mathbb{P}\left( L_n \in B^c_\mu(a) \right) 
+	= - \inf_{\nu \in B^c_\mu(a)} I_\mu(\nu)
+,\] 
+where $B_\mu(a)$ is the closed $d$-ball centered at $\mu$ in $M_1(\Sigma)$, and
+\[
+	I_\mu(\nu) = H(\nu | \mu) \equiv \sum_{s=1}^{r} \nu_s \log \frac{\nu_s}{\mu_s}
+.\] 
+\end{theorem}
+\begin{proof}
+	The proof is combinatoric. We start by discretizing $M_1(\Sigma)$, e.g. let $K_n = \{k \in \mathbb{N}^r: \sum_s k_s = n\} $, and define $\nu(k) = \sum_{s=1}^{r} \frac{k_s}{n} \delta_s$. Now, the probability of $L_n = \nu(k)$ is
+	\[
+		\mathbb{P}(L_n = \nu(k)) = 
+		\prod_{s}^{r} \frac{\mu_s^{k_s}}{k_s!}n! 
+	.\] 
+	where $\frac{n!}{\Pi_s k_s}$ handles overcounting. The probability in the theorem, at fixed $n$, is then a sum of individual probabilities:
+	\[
+		\mathbb{P}\left( L_n \in B^c_\mu(a) \right) 
+		= \sum_{v(k^{(n)}) \in B^c_{\mu}(a)}
+		\prod_{s}^{r} \frac{\mu_s^{k_s}}{k_s!}n!
+	.\] 
+	There are only order $n^{r-1}$ points in $K_n$, which is not significant in the exponential order. Thus we may bound the sum by its largest term, e.g. take $Q_n = \max_{k^{(n)}; \nu(k) \in B^c_\mu(a)} \prod_{s}^{r} \frac{\mu_s^{k_s}}{k_s!}n!$, and put
+	\[
+		Q_n \le \mathbb{P}\left( L_n \in B^c_l\mu(a) \right) \le O(n^{r-1}) Q_n
+	.\] 
+	Which implies
+	\[
+		\frac{1}{n} \log \mathbb{P}\left( L_n \in B^c_\mu(a) \right)  \sim  \frac{1}{n} \log Q_n
+	.\] 
+	Next, let's understand $Q_n$. An application of Stirling's Formula yields
+	\begin{align*}
+		\frac{1}{n} \log \left( \prod_{s=1}^{r} \frac{\mu_s^{k_s}}{k_s!} n!  \right) 
+		&= \sum_{s=1}^{r} \frac{k_s}{n} \left( \log \mu_s - \log \frac{k_s}{n} \right)  \\
+		&= - \sum_s \nu(k)_s \left( \log \frac{\nu(k)_s}{\mu_s} \right)  \\
+		&= - H(\nu(k)| \mu)
+	.\end{align*} 
+	which implies
+	\[
+		Q_n = \max_{k \in K_n; \nu(k) \in B^c_\mu(a)} e^{- n H(\nu(k) | \mu)}
+		= e^{-n \inf H(\nu(k) | \mu)}
+	.\] 
+	Combining these, we get
+	\[
+		\frac{1}{n} \log \mathbb{P}\left(L_n \in B^c_l\mu(a)\right)
+		= - \inf _{k; \nu(k) \in B^c_l\mu(a)} I_\mu(\nu(k))
+	.\] 
+	To finish up the proof, note
+	\begin{itemize}
+		\item $I_\mu(\nu)$ is continuous on $M_1(\Sigma)$,
+		\item $\nu(k), \forall k, n$ is dense in $M_1(\Sigma)$,
+		\item $B^c_\mu(a)$ is open.
+	\end{itemize}
+	Now, for each $\nu \in M_1(\Sigma) \cap B^c_\mu(a)$, pick a neighbor $E \ni \nu$, s.t. $E \subset B^c_\mu(a), \lambda \in E \implies |I_\mu(\nu) - I_\mu(\lambda)| < \varepsilon$. (Note, continuity is used.) Then pick $n$ large so that there exists $k = k^{(n)} $, $v(k) \in E$. We thus have
+\[
+	\inf _{\nu(k') \in B^c_\mu(a)} I_\mu(\nu(k'))
+	\le I_\mu\left( \nu(k) \right) 
+	\le I_\mu(\nu) + \varepsilon
+.\] 
+Take infimum and send $\varepsilon$ to zero, we have
+\[
+	\inf _{\nu(k) \in B^c(\mu(a))} I_\mu(\nu(k)) \le 
+	\inf _{\nu} I_\mu(\nu)
+.\] 
+The other side of the inequality is trivial. Hence we have the proof.
+
+
+\end{proof}
+

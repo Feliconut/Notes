@@ -1,0 +1,149 @@
+\subsection{Covariant formulation of Maxwell's equations}
+
+The Maxwell's equations for classical electromagnetism are
+\begin{equation*}
+	\begin{cases}
+		\nabla \cdot E = \rho & \text{Gauss' Law (electrostatics)}\\
+		\nabla  \cdot B = 0 & \text{Gauss' Law for magnetism}\\
+		\nabla  \times E = - \frac{\partial B}{\partial t} & \text{Faraday's Law}\\
+		\nabla  \times  B = J + \frac{\partial E}{\partial t}  & \text{Ampere-Maxwell Law}
+	\end{cases}
+\end{equation*}
+where $\rho$ is the electric charge and $J$ is electric current. We have set constants $\varepsilon_0$ and $\mu_0$, the electric and magnetic permeability to $1$.
+
+\textbf{Electric and Magnetic Potential.} Introduce  $(\varphi, \vec{A} )$, a scalar field and a vector field in three dimensions, and define
+\begin{align*}
+	E &=  - \nabla \varphi - \frac{\partial \vec{A} }{\partial t}  \\
+	B &= \nabla \times \vec{A} 
+.\end{align*}
+We see that this retains all generality of $E$ and $B$. In other words, any $E$ and $B$ can be put in such form.
+\begin{proof}
+	The Poincare Lemma from differential geometry gives the following special cases:
+	\begin{itemize}
+		\item In $\mathbb{R}^3$, any sourceless vector field is a curl of a scalar field.
+		\item In $\mathbb{R}^3$, any curl-less field is a gradient of a scalar field.
+	\end{itemize}
+	Because $\nabla  \cdot B = 0$, we know  $B = \nabla  \times \vec{A} $. Now the Faraday's Law reads $\nabla \times E = \nabla \times (- \frac{\partial \vec{A} }{\partial t} )$. Therefore $E = - \nabla  \varphi - \frac{\partial \vec{A} }{\partial t} $.
+\end{proof}
+
+Now Gauss' Law and Faraday's Law are embedded into the definition of $E$ and $B$. The remaining two equations become
+\begin{align*}
+	\nabla \cdot E &= - \frac{\partial }{\partial t}  \nabla  \cdot A - \nabla  \cdot  \nabla \varphi = \rho\\
+	\nabla \times B &= \nabla (\nabla \cdot A) - \nabla ^2 A = J + \frac{\partial E}{\partial t} \implies \nabla (\nabla  \cdot A) - \square A = J - \nabla  \frac{\partial }{\partial t} \varphi
+.\end{align*}
+The introduction of \textit{electromagnetic field strength tensor} will enable further simplification.
+
+We have used the vector calculus identity: $\nabla  \times (\nabla  \times B) = \nabla (\nabla \cdot B) - \nabla ^2 B$.
+
+\textbf{Note on Poincare's Lemma.} The statement is
+\begin{lemma}[Poincare's Lemma]
+	\label{lem:Poincare}
+	Every closed $p$-form on an open ball in $\mathbb{R}^n$ is exact for $p$ with $1 ≤ p ≤ n$.
+\end{lemma}
+The statements used above can be derived from the statements $\nabla  \varphi = d \varphi, \nabla \cdot F = * d * F, \nabla \times F = * d F$, where $d$ is total derivative and $*$ is Hodge star operator (geometric dual on the exterior algebra).
+
+\textbf{Lorentz-covariant formulation.}
+Write $A^\mu = (\varphi, - \vec{A} )$, $J^\mu = \left( \rho, - \vec{J}  \right) $. Use convention $\eta_{\mu \nu} = \operatorname{diag} \left( +1, -1, -1, -1 \right) $. 
+Define the \textit{field strength tensor}
+\[
+	F_{\mu \nu} = \partial_ \mu A_ \nu - \partial_\nu A_\mu
+.\] 
+Then for $i = 1, 2, 3$,
+\begin{align*}
+	F_{0 i} &= - \partial_0 A_i - \partial_i \varphi = E_i\\
+	F_{i j} &= \partial_i A_j - \partial_j A_i \\
+	&= - \partial_i \vec{A} _j + \partial_j \vec{A} _i \\
+	&= - \varepsilon_{i j k} \left( \nabla \times \vec{A}  \right) _k = - \varepsilon_{i j k} B_k
+.\end{align*}
+To put it in matrix form,
+\[
+	F_{\mu \nu} =
+	\begin{bmatrix}
+		0 & E_x & E_y & E_z \\
+		 & 0 & -B_z & B_y \\
+		 &  & 0 & -B_x \\
+		 &  &  & 0 \\
+	\end{bmatrix}
+\qquad \text{antisymmetic}
+.\] 
+We immediately see that $F_{\mu \nu}$ contains all physical quantities with no redundancy. The Gauss' and Ampere-Maxwell laws condense into the elegant equation
+\[
+	\partial^ \mu F_{\mu \nu} = J^\nu
+.\] 
+The other two true-by-definition equations manifest in the \textit{Bianchi identity}:
+\[
+	\partial_\lambda F_{\mu \nu} + \text{cyc.} = 0
+.\]
+
+\textbf{Gauge redundancy and gauge fixing.}
+Though the equation $F_{\mu \nu}$ is water-tight as it describes all the physics with nothing extra; to actually solve it we need to choose a specific form of electromagnetic potential $A_\mu$, which involves redundancy. In particular, $A^0$ has no conjugate momentum. The gauge redundancy of $A_\mu$ is given by exactly the following transformation:
+\[
+	A_ \mu \to A_ \mu + \partial_ \mu \chi, \qquad \chi \text{smooth scalar field}
+.\] 
+This is indeed a very large redundancy, which gives us the freedom of imposing additional, arbitrary \textit{constraints} in order to simply the equations. This is called \textit{gauge fixing}.
+
+\textbf{Lorentz gauge.} Fix $\partial_ \mu A^\mu = 0$. The equation condenses to
+\[
+	\square A^ \mu = J^ \mu
+.\] 
+The remaining redundancy is $A_ \mu \to  A_ \mu + \partial_ \mu \chi$ for $\square \chi = 0$.
+
+\textbf{Coulomb gauge.} Fix $\nabla \cdot \vec{A}  = 0$. We are left with the system
+\begin{align*}
+	\Delta \varphi &= - \rho\\
+	\square \vec{A} = - \vec{J} + \nabla \frac{\partial }{\partial t} \varphi
+.\end{align*} 
+The first equation is just a Poisson's equation for electrostatics, and once the first is solved, the second is three decoupled wave equations with known source. Both are readily solvable.
+
+The remaining redundancy is $\Delta \chi = 0$.
+
+\textbf{Weyl gauge}. Fix $\varphi = 0$. We are left with the system
+\begin{align*}
+	&- \frac{\partial }{\partial t} \nabla \cdot \vec{A}  = \rho \\
+	&\nabla (\nabla  \cdot \vec{A} ) - \square \vec{A}  = J
+.\end{align*}
+The remaining redundancy is a space-dependent field $\chi(x)$.
+
+\textbf{Axial gauge}. Fix $n_ \mu A^ \mu = 0$, for some nondegenerate unit vector $n^ \mu$. When $n^ \mu$ is lightlike, this is called the \textbf{lightcone gauge} with remaining redundancy $n \cdot \partial \chi = 0$.
+
+\textbf{Fock-Schwinger (radial) gauge.} $x \cdot \vec{A}  = 0$.
+
+\textbf{Covariant $R_ \xi$ gauge.} Modify the EoM to be $\square A_ \mu - (1 - \frac{1}{\xi}) \partial _ \mu (\partial_ \nu A^\nu) = J_ \mu.$ $\xi = 1$ recovers Lorentz gauge; $\xi = 0$ is called \textbf{Landau gauge.}
+
+
+\textbf{Field-theoretic formulation.}
+Start with the Lagrangian density
+\[
+	\mathcal{L}(\partial_ \mu A^\mu, A^\mu) = - \frac{1}{4} F_{ \mu \nu} F^{\mu \nu} + J_ \mu A^ \mu
+.\] 
+Vary the action $S = \int d^4 x \mathcal{L}$ and set $\delta S = 0$, we obtain the field-theoretic Euler-Lagrange equation for EM
+\[
+	\partial^\mu F_{\mu \nu} + J_ \nu = 0
+.\] 
+
+It is useful to note that
+\[
+	\frac{1}{4}F_{\mu \nu} F^{\mu \nu} = \frac{1}{2} (B^2 - E^2)
+\] 
+has the natural, classical interpretation of energy.
+
+\textbf{Recap: Solution to Poisson and Wave equation via Fourier transform}
+
+Consider the Poisson equation:
+\[
+	\Delta u(x) = f(x)
+.\] 
+Take Fourier transform to obtain
+\[
+	k^2 u(k) = f(k) \implies u(k) = \frac{1}{k^2} f(k)
+.\] 
+Thus, if we define the Green's function
+\[
+	G(x)=\mathcal{F}^{-1}[\frac{1}{k^2}] = \int d^d k \frac{1}{k^2} e^{- i k\cdot x}
+.\] 
+The solution is given by
+\[
+	u(x) = G(x) * f(x)
+.\]
+The same is true for wave equation; see the page \textit{Green's function} on Wikipedia for a list of common Green's functions. The derivation of them is subject of a PDE course and for now we just take them as is.
+

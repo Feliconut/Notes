@@ -1,0 +1,215 @@
+\homework{1}{Fri 19 Sep 2025 08:31}{Homework 1}
+
+I worked out problem 1 and 3 myself and discussed with Patrick on problem 2 part 1 before working out problem 2. For problem 1, I worked out the computation steps on a piece of paper, and then used ChatGPT to transcribe my steps.
+
+1.1. Compute the rate function $I(x)$ in Cramér's Theorem when the random variable $X$ has the following distributions.
+a) $X \sim \operatorname{Bernoilli}(p)$.
+b) $X \sim \operatorname{Poisson}(\mu)$.
+c) $X \sim N\left(\mu, \sigma^2\right)$.
+
+\begin{proof}[Solution]
+	\begin{itemize}
+		\item 
+	Bernoulli (p): $\phi(t)=1-p+p e^t$
+	\item
+	Poisson $(\mu): \phi(t)=\exp \left(\mu\left(e^t-1\right)\right)$
+	\item
+	Normal $\left(\mu, \sigma^2\right): \phi=\exp \left(\mu t+\frac{1}{2} \sigma^2 t^2\right)$
+	\end{itemize}
+	To compute $I(x)$, we perform Lagendre transform on $\phi(t)$. When $\phi(t)$ is differentiable and strictly convex, it is the case that
+	\[
+		\sup_{t \in \mathbb{R}} zt - \log \phi(t) = zt^* - \log \phi(t^*) \quad \text{where } \frac{\phi'(t^*)}{\log \phi(t^*)} = z 
+	.\]  
+% Rate functions via Legendre transform I(z) = sup_t \{ z t - \log \phi(t) \}
+% with \Lambda(t) := \log \phi(t), so I(z) = \sup_t \{ z t - \Lambda(t) \}.
+% At the maximizer t^*, we have \Lambda'(t^*) = z.
+
+\[
+\begin{aligned}
+\textbf{Bernoulli}(p):\quad
+&\phi(t) = 1-p + p e^t,\qquad \Lambda(t)=\log(1-p+pe^t),\\
+&\Lambda'(t) = \frac{p e^t}{\,1-p+pe^t\,}.
+\end{aligned}
+\]
+Solve \(\Lambda'(t^*)=z\) (necessarily \(z\in[0,1]\)):
+\[
+\frac{p e^{t^*}}{1-p+pe^{t^*}} = z
+\;\Longrightarrow\;
+p e^{t^*} = z\,(1-p) + z p e^{t^*}
+\;\Longrightarrow\;
+e^{t^*} = \frac{z(1-p)}{p(1-z)}.
+\]
+Then
+\[
+\begin{aligned}
+I(z) &= z t^* - \Lambda(t^*)
+= z \log\!\left(\frac{z(1-p)}{p(1-z)}\right) - \log\!\Big(1-p+p\,e^{t^*}\Big)\\
+&= z \log\!\frac{z}{p} + (1-z)\log\!\frac{1-z}{1-p},
+\qquad z\in[0,1],\quad I(z)=+\infty \text{ otherwise.}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+\textbf{Poisson}(\mu):\quad
+&\phi(t) = \exp\!\big(\mu(e^t-1)\big),\qquad \Lambda(t)=\mu(e^t-1),\\
+&\Lambda'(t)=\mu e^t.
+\end{aligned}
+\]
+Solve \(\Lambda'(t^*)=z\) (so \(z\ge 0\)):
+\[
+\mu e^{t^*}=z \;\Longrightarrow\; t^*=\log\!\left(\frac{z}{\mu}\right).
+\]
+Then
+\[
+\begin{aligned}
+I(z) &= z t^* - \Lambda(t^*)
+= z \log\!\left(\frac{z}{\mu}\right) - \mu\!\left(\frac{z}{\mu}-1\right)
+= z \log\!\frac{z}{\mu} - z + \mu,\\
+&\hspace{8cm} z\ge 0,\quad I(z)=+\infty \text{ otherwise.}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+\textbf{Normal } \mathcal N(\mu,\sigma^2):\quad
+&\phi(t)=\exp\!\Big(\mu t + \tfrac12 \sigma^2 t^2\Big),\qquad
+\Lambda(t)=\mu t + \tfrac12 \sigma^2 t^2,\\
+&\Lambda'(t)=\mu + \sigma^2 t.
+\end{aligned}
+\]
+Solve \(\Lambda'(t^*)=z\) (any \(z\in\mathbb R\)):
+\[
+\mu + \sigma^2 t^* = z \;\Longrightarrow\; t^*=\frac{z-\mu}{\sigma^2}.
+\]
+Then
+\[
+\begin{aligned}
+I(z) &= z t^* - \Lambda(t^*)
+= z\frac{z-\mu}{\sigma^2} - \left(\mu \frac{z-\mu}{\sigma^2} + \frac12 \sigma^2 \frac{(z-\mu)^2}{\sigma^4}\right)\\
+&= \frac{(z-\mu)^2}{2\sigma^2},\qquad z\in\mathbb R.
+\end{aligned}
+\]
+
+% Final boxed forms
+\[
+\boxed{\,I_{\text{Ber}}(z)= z\log\frac{z}{p} + (1-z)\log\frac{1-z}{1-p}\,,\; z\in[0,1]\,}
+\]
+\[
+\boxed{\,I_{\text{Poisson}}(z)= z\log\frac{z}{\mu} - z + \mu\,,\; z\ge 0\,}
+\]
+\[
+\boxed{\,I_{Z}(z)= \dfrac{(z-\mu)^2}{2\sigma^2}\,,\; z\in\mathbb R\,}
+\]
+	
+
+\end{proof}
+
+
+1.2. a) For $n \geq 1$ and $p \in[0,1]$, let $S_{n, p} \sim \operatorname{Bin}(n, p)$. Prove that for any $\delta>0$ there exists a constant $c_\delta>0$ (which doesn't depend on $p$ or $n$ ) such that
+
+\[
+P\left(\left|\frac{S_{n, p}}{n}-p\right| \geq \delta\right) \leq 2 e^{-c_\delta n}, \quad \forall n \geq 1, p \in[0,1]
+\]
+
+
+Give a specific value of $c_\delta$ that works for $\delta=0.01$ (you may need to use a computer or graphic calculator to determine this value).
+
+b) Suppose that you have access to an i.i.d. sequence of Bernoulli random variables, but you do not know the sucess parameter $p$. An obvious way to estimate the parameter $p$ is by taking the empirical mean of a sample of size $n$; that is $\hat{p}_n=\frac{S_{n, p}}{n}$. Use the above result to determine how large $n$ should be for you to conclude that with at least $99 \%$ certainty your estimate $\hat{p}_n$ is within 0.01 of the true value $p$.
+
+\begin{proof}[Solution]
+	\begin{itemize}
+		\item (a) The LDP says that
+			\[
+				P\left( \left| \frac{S_{n, p}}{n} - p \right|  \ge \delta \right) \simeq e^{- n I(x^*)}, \quad
+				I(x^*) = \inf_{|x - p| \ge \delta} I(x)
+			.\] 
+			Where $I$ is the rate function for Bernoulli distribution of parameter $p$.
+			Here $I(x^*)$ must be positive since the rate function $I$ is non-negative and strictly convex.
+			Hence, for each $\delta, p$ there exists a constant $c_p$ such that the upper bound holds uniformly. But $p \mapsto c_p$ can be chosen to be continuous, and this implies that there is a supremum on the bounded interval $[0,1]$.
+
+			Numerical simulation gives the value
+			\[
+				c_\delta = 0.151, \quad \delta = 0.01
+			.\] 
+		\item (b) To be 99\% certain we want 
+			\[
+				2 e ^{- c_\delta n} \le 0.01
+			.\] 
+			Plug in our value for $c_\delta$, we get
+			\[
+				n = 36
+			.\] 
+	\end{itemize}	
+\end{proof}
+
+1.3. Suppose that $X_1, X_2, \ldots$ are i.i.d. Poisson $(\mu)$ random variables, and let $S_n=\sum_{i=1}^n X_i$.
+a) Explain how we know that
+
+\[
+\lim _{n \rightarrow \infty} P\left(S_n \geq \mu n+x n^\gamma\right)=0, \quad \text { for any } x>0 \text { and } \gamma>\frac{1}{2} .
+\]
+
+
+Why is the assumption $\gamma>\frac{1}{2}$ necessary?
+b) Use Chebychev's inequality in a manner similar to the proof of the upper bound in Cramér's Theorem to get an explicit upper bound on $P\left(S_n \geq \mu n+x n^\gamma\right)$ that depends on $\mu, x, \gamma$ and $n$.
+c) If $\gamma \in(1 / 2,1)$ and $x>0$, prove that the upper bound in part (b) is asymptotically stretched exponential $e^{-c n^{2 \gamma-1}}$ in the sense that
+
+\[
+\limsup _{n \rightarrow \infty} \frac{1}{n^{2 \gamma-1}} \log P\left(S_n \geq \mu n+x n^\gamma\right) \leq f(x, \mu)
+\]
+
+for some $f(x, \mu)>0$ that can be explicitly computed.
+Hint: to compute the asymptotics of the upper bound it may be helpful to use the Taylor expansion $\log (1+x)=x+\mathcal{O}\left(x^2\right)$ as $x \rightarrow 0$.
+
+\begin{proof}
+	\begin{itemize}
+		\item (a) 
+			By the central limit theorem,
+			\[
+				\frac{S_n - \mu n}{\mu \sqrt{n} } \implies N(0,1)
+			.\] 
+			This implies that
+			\[
+				P(S_n \ge \mu n + x n^\gamma) \to P\left( \frac{S_n - \mu n}{\mu \sqrt{n} } \ge \frac{x}{\mu}n^{\gamma - \frac{1}{2}} \right)  \to 
+				\begin{cases}
+					\frac{1}{2} & 0\le \gamma < \frac{1}{2} \\
+					\Phi(\frac{x}{\mu}) & \gamma = \frac{1}{2} \\
+					0 & \gamma > \frac{1}{2}
+				\end{cases}
+			.\] 
+		\item (b)
+			\begin{align*}
+				P(S_n \ge  \mu n + x n^\nu)
+				&= P(e^{\lambda S^n} \ge e^{\lambda \mu n + \lambda x n^\gamma} \\
+				&\le \mathbb{E} e^{\lambda S_n} e^{- \lambda \mu n - \lambda x n^\gamma}  \\
+				&= \exp \left( \nu \mu \left( e^\lambda - 1 \right) - \lambda \mu n - \lambda x n^\gamma \right) 
+			.\end{align*}
+			Differentiate,
+			\begin{align*}
+				0 &= \exp \left( \cdot\right) \left( n \mu e^\lambda - \mu n - x n^\gamma \right) 
+			.\end{align*}
+			We get
+			\[
+				e^\lambda = 1 + \frac{x}{\mu} n^{\gamma - 1}
+			.\] 
+			Plug into the upper bound,
+			\begin{align*}
+				&= \exp(x n^\gamma) \left( 1 + \frac{x}{\mu} n^{\gamma - 1} \right) ^{- (\mu n + x n^\gamma)} \\
+				&=: A 
+			.\end{align*}
+
+		\item (c)
+			\begin{align*}
+				\log A &= x n^\gamma - (\mu n + x n^\gamma) \log \left( 1 + \frac{x}{\mu} n^{\gamma - 1} \right) \\
+				&= x n^\gamma - (\mu n + x n^\gamma) \left(\frac{x}{\mu} n^{\gamma - 1} - \frac{x^2}{2\mu^2} n^{2 \gamma - 2}  + o(n^{2 \gamma - 2})\right) \\
+				&= \frac{x^2}{2\mu}n^{2 \gamma - 1} + o(n^{2 \gamma - 1}) 
+			.\end{align*}
+			That is, for $\gamma \in (1/2, 1)$,
+			\[
+				\limsup_{n \to \infty } \frac{1}{n^{2\gamma - 1}} \log P\left( S_n \ge \mu n + x n^\gamma \right) = \frac{x^2}{\mu}
+			.\] 
+
+	\end{itemize}
+\end{proof}
+

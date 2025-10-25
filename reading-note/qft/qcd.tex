@@ -1,0 +1,412 @@
+\section{QCD amplitudes}
+\label{sec:qcd}
+
+\subsection{Yang-Mills Theory, QCD, and QED}
+\label{sec:yang-mills-qcd-qed}
+
+
+\subsection{QCD Feymann Rules}
+\label{sec:qcd-feymann-rules}
+
+\subsection{Perturbative Computation of Amplitudes}
+
+In this section we review the ``textbook method'' for computing scattering amplitudes in QCD, which involves computing Feynman diagrams.
+
+
+\subsection{Spin-Helicity Formalism}
+\label{sec:spin-helicity-formalism}
+
+\subsubsection{Motivation}
+
+\textbf{Computation Procedure:}
+\begin{enumerate}
+    \item 
+In the ``textbook method'' to computing scattering amplitudes at tree-level, we compute the following quantity:
+\begin{equation}
+    \sum_{\text{spin, color}} |M_n|^2
+\end{equation}
+where $M_n$ is the scattering amplitude of $n$ gluons at a particular color and spin (helicity) configuration.
+\item To compute $M_n$, one draws all contributing Feynman diagrams, and sum up their contributions.
+
+\item When performing the spin sum, we use the following \textit{polarization completeness relation}:
+\begin{align}
+    \label{eq:pol}
+\sum_{\lambda \in\{+,-\}}\left(\varepsilon_\mu^\lambda(p)\right)^* \varepsilon_v^\lambda(p)=-g_{\mu v}+\frac{p_\mu n_v}{p \cdot n}+\frac{n_\mu p_v}{p \cdot n}
+\end{align}
+to cancel out the polarization vectors. After that, we simplify and obtain the total cross-section.
+\end{enumerate}
+
+
+\textbf{Efficiency considerations:}
+\begin{enumerate}
+    \item 
+Take into account the number of diagrams at tree-level for each $n$:
+
+\begin{tabular}{l|rrrrrrr}
+$n$ & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\hline $N_n$ & 4 & 25 & 220 & 2485 & 34300 & 559405 & 10525900
+\end{tabular}\\
+and that each Feymann diagram may contribute several terms, we see that the computation soon becomes formidable.
+
+\item Each time we apply \eqref{eq:pol}, we get three times as many terms. And we have to apply it $O(n)$ times to get all external polarizations.
+
+\item Hence the computational complexity is $O(3^n N_n^2)$.
+
+\end{enumerate}
+
+\textbf{Merits of the Spin-Helicity Formalism:}
+
+\begin{enumerate}
+    \item Instead of treating polarization vectors as abstract objects only to be summed over, we give them explicit representations in terms of spinors. 
+    \item Numerically, each $|M_n|^2$ term is now a complex number, and summing over $2^n$ helicity configurations now gives the total complexity of $O(2^n N_n)$.
+    \item Theoretically, explicit representations allows us to gauge fix them in a way that makes the computation of $M_n$ much simpler.
+\end{enumerate}
+
+\subsubsection{Spinors}
+
+In QFT, fields transform under the Lorentz group $SO(1,3)$, and the particles transform under the little group $SO(3)$ (massive, spins) or $ISO(2)$ (massless, helicities).
+
+The structure of Lorentz algebra $\mathfrak{so}(1,3)$ is given by $6$ generators and the following commutation relations:
+\begin{align*}
+    [J_i, J_j] &= i \epsilon_{ijk} J_k, \\
+    [J_i, K_j] &= i \epsilon_{ijk} K_k, \\
+    [K_i, K_j] &= -i \epsilon_{ijk} J_k,
+\end{align*}
+and elements of the Lorentz group are parameterized as
+\begin{align}
+    \Lambda = e^{i \theta_i J_i + i \beta_j K_j}.
+\end{align}
+
+\begin{example}[4-vector representation of $\mathfrak{so}(1,3)$]
+    \begin{align*}
+        J_1 &= i\begin{pmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & -1 \\
+            0 & 0 & 1 & 0
+        \end{pmatrix}, \quad
+        J_2 &= i\begin{pmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 \\
+            0 & -1 & 0 & 0
+        \end{pmatrix}, \quad
+        J_3 &= i\begin{pmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 0 & -1 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \\
+        K_1 &= i\begin{pmatrix}
+            0 & -1 & 0 & 0 \\
+            -1 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \quad
+        K_2 &= i\begin{pmatrix}
+            0 & 0 & -1 & 0 \\
+            0 & 0 & 0 & 0 \\
+            -1 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \quad
+        K_3 &= i\begin{pmatrix}
+            0 & 0 & 0 & -1 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            -1 & 0 & 0 & 0
+        \end{pmatrix}.
+    \end{align*}
+
+    In short,
+\begin{align*}
+    (J_k)^i_j = - i \epsilon_{ijk}, \quad
+    (J_k)^0_i = (J_k)^i_0 = (J_k)^0_0 = 0, \quad
+    (K_k)^0_k = (K_k)^k_0 = -i
+\end{align*}
+
+The 4-vector representation is a $(\frac{1}{2}, \frac{1}{2})$ representation, see below.
+\end{example}
+
+\begin{example}[Rank-2 tensor representation $V^{\mu \nu}$ of $\mathfrak{so}(1,3)$]
+    The antisymmetric rank-2 tensor:
+    \begin{align*}
+        V^{\mu \nu} &= \begin{pmatrix}
+            0 & K_1 & K_2 & K_3 \\ 
+              & 0 & J_3 & -J_2 \\
+              &   & 0 & J_1 \\
+            -  &   &   & 0
+        \end{pmatrix} \\
+        V^{i j} &= \epsilon_{ijk} J_k, \quad
+        V^{0 i} = K_i \\
+        \Gamma_V &= \exp (i \theta_{\mu \nu} V^{\mu \nu}) \\
+        [V^{\mu \nu}, V^{\rho \sigma}] &= i \left( g^{\nu \rho} V^{\mu \sigma} - g^{\mu \rho} V^{\nu \sigma} - g^{\nu \sigma} V^{\mu \rho} + g^{\mu \sigma} V^{\nu \rho} \right)
+    \end{align*}
+    Note, this is the representation commonly seen in relativistic electrodynamics, the field strength $F^{\mu \nu} = \partial^\mu A^\nu - \partial^\nu A^\mu$, where $A^\mu$ is the vector potential.
+\end{example}
+
+\begin{example}[Pauli Algebra]
+    The Pauli algebra is $su(2) = so(3)$, usually written in terms of the Pauli matrices:
+    \begin{align*}
+        \sigma_1 &= \begin{pmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{pmatrix}, \quad
+        \sigma_2 = \begin{pmatrix}
+            0 & -i \\ 
+            i & 0
+        \end{pmatrix}, \quad
+        \sigma_3 = \begin{pmatrix}
+            1 & 0 \\
+            0 & -1
+        \end{pmatrix}.
+    \end{align*}
+    The commutation relations are given by
+    \begin{align*}
+        [\sigma_i, \sigma_j] &= 2 i \epsilon_{ijk}
+    \end{align*}
+\end{example}
+
+\begin{example}[Differential Operators representation of $\mathfrak{so}(1,3)$]
+    \begin{equation}
+        L^{\mu \nu} = i \left( x^\mu \partial^\nu - x^\nu \partial^\mu \right)
+    \end{equation}
+    This is generators of angular momentum generalized to include time.
+\end{example}
+
+Now, make a change of variable
+\begin{equation}
+    J_i^+ = \frac{1}{2} (J_i + i K_i), \quad J_i^- = \frac{1}{2} (J_i - i K_i)
+\end{equation}
+
+The structure of $\mathfrak{so}(1,3)$ is given by
+\begin{align*}
+    [J_i^+, J_j^+] &= i \epsilon_{ijk} J_k^+, \\
+    [J_i^-, J_j^-] &= i \epsilon_{ijk} J_k^-, \\
+    [J_i^+, J_j^-] &= 0.
+\end{align*}
+
+From this we see that $\mathfrak{so}(1,3)$ can be decomposed into two commuting subalgebras:
+\begin{align*}
+    \mathfrak{so}(1,3) &= \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R,
+\end{align*}
+where $\mathfrak{su}(2)_L$ is generated by $J_i^+$ and $\mathfrak{su}(2)_R$ is generated by $J_i^-$. They are left-handed and right-handed respectively.
+
+Recall the following facts about representations:
+\begin{enumerate}
+    \item Finite-dimensional representations are completely reducible.
+    \item Finite-dimensional irreps of $su(2) = so(3)$ are characterized by half-integers $j \geq 0$, with eigenspaces $V[-2j], V[-2j+1], \ldots, V[2j-1], V[2j]$. That is, $2j+1$-dimensional.
+    \item For each integer representation of $SU(2)$, the covering map $SU(2) \to SO(3)$ induces representation of $SO(3)$ (and exhaust all of them); half-integer representations induce projective representations.
+\end{enumerate}
+We have as consequences:
+\begin{enumerate}
+    \item Finite-dimensional reps of $so(1,3)$ are completely reducible;
+    \item Finite-dimensional irreps of $so(1,3)$ are characterized by two nonnegative half-integers $(A,B)$, as tensor product of two representations of $SU(2)$ with $2A+1$ and $2B+1$ dimensions, respectively.
+    \item $so(3) \leq so(1,3)$, so $(A,B)$-representation of $so(1,3)$ includes a direct sum of $j$-representations of $so(3)$, with $j = |A - B|, |A - B| + 1, \ldots, A + B$.
+\end{enumerate}
+The statement (3) gives the Clebsch-Gordan decomposition. The representation-theoretic statement is
+\begin{theorem}
+    Finite-dimensional irreps of $\mathfrak{g_1} \oplus \mathfrak{g_2}$ are given by the tensor product of irreps of $\mathfrak{g_1}$ and $\mathfrak{g_2}$, i.e., if $V_1$ is an irrep of $\mathfrak{g_1}$ and $V_2$ is an irrep of $\mathfrak{g_2}$, then $V_1 \otimes V_2$ is an irrep of $\mathfrak{g_1} \oplus \mathfrak{g_2}$.
+\end{theorem}
+\begin{proof}
+    Given irreps $V$ and $W$, their tensor product is given by
+    \begin{align*}
+        \rho(x) v \otimes w = (\rho(x) v) \otimes w + v \otimes (\rho(x) w).
+    \end{align*}
+    Now, consider $V$ and $W$ in their respective spectral decompositions. For $v \in V[a]$ and $w \in W[b]$, we have
+    \begin{align*}
+        \rho(x) (v \otimes w) &= (a v) \otimes w + v \otimes (b w) \\
+        &= (a + b) (v \otimes w).
+    \end{align*}
+    This gives the full decomposition of the tensor product $V \otimes W$ into irreps of $\mathfrak{g_1} \oplus \mathfrak{g_2}$:
+    \begin{align*}
+        V \otimes W &= \bigoplus_{a, b} (a + b) (V[a] \otimes W[b]).
+    \end{align*}
+\end{proof}
+
+
+\begin{definition}
+\label{def:spinor}
+A \textbf{spinor} is an element in the $\frac{1}{2}$-representation of the Lorentz algebra $\mathfrak{su}(2)$. A \textbf{bi-spinor} is an element in the $(\frac{1}{2}, \frac{1}{2})$-representation of the Lorentz algebra $\mathfrak{so}(1,3)$.
+\end{definition}
+
+\begin{example}
+    \begin{itemize}
+        \item The $4$-vector ($1$-tensor) representation $V^\mu$ is a $(\frac{1}{2}, \frac{1}{2})$-representation. (to see this, count dimensions.)
+        \item The $2$-tensor representation $V^{\mu \nu}$ of the Lorentz algebra is a $(1,1)$-representation. 
+        To see this, note that the $(1,1)$-representation is $9$-dimensional, and the $2$-tensor representation is $(\frac{1}{2}, \frac{1}{2}) \otimes (\frac{1}{2}, \frac{1}{2}) =
+    (0,0) \oplus(1,0) \oplus(0,1) \oplus(1,1)$, having $16$ dimensions in total.
+        \item In general, the $n$-tensor representation $V^{\mu_1 \ldots \mu_n}$ is a $(\frac{n}{2}, \frac{n}{2})$-representation.
+        Similar as above, the $(\frac{n}{2}, \frac{n}{2})$-representation embeds into the $n$-tensor representation.
+    \end{itemize}
+\end{example}
+
+\begin{fact}
+    There is no finite-dimensional unitary representation of the Lorentz group $SO(1,3)$. In particular, there is no finite-dimensional unitary representation of the Poincare group $ISO(1,3)$.
+\end{fact}
+\begin{proof}
+    Consider a general element, and use the $so(1,3) = su(2) \oplus su(2)$ decomposition:
+    \[
+    \Lambda = \exp(i \theta_j J_j + i \beta_k K_k) = \exp(i (\theta_j - i \beta_j) J_+^j + i (\theta_j + i \beta_j) J_-^j).
+    \]
+    Since $(\theta_j - i \beta_j)$ and $(\theta_j + i \beta_j)$ are not real, the representation is not unitary.
+\end{proof}
+
+\subsubsection{Dirac Algebra}
+
+
+
+
+\subsubsection{Spin-Helicity Formalism}
+
+The most important feature is that, every four-momentum $p^\mu \in \mathbb{R}^{1,3}$ is represented in a $2$-tensor with two spinor indices, and $\operatorname{det } p^{\alpha \dot{\alpha}} = p_\mu^2$. When $p_{\mu}^2 = 0$, it can be written in terms of an outer product:
+$p^\mu \mapsto p \rangle  [p $, where $p \rangle$ is a left-handed spinor and $[p$ is its right-handed complex conjugate:  $p \rangle = \left( [p \right) ^\dag$. This is, for instance, true for massless on-shell states for which $p^2 = m^2 = 0$.
+For complex momenta, we have $p \rangle, [p$ not conjugate in general.
+
+\subsection{Polarization Vectors}
+
+The polarization vectors $\varepsilon^\mu(p, \lambda)$ are defined in terms of the spinors $p \rangle$ and $[p$ as follows:
+\begin{align}
+    \varepsilon^\mu(p, +) &= \frac{1}{\sqrt{2}} \left( p^\mu \rangle + \frac{m}{\sqrt{2}} [p^\mu \right), \\
+    \varepsilon^\mu(p, -) &= \frac{1}{\sqrt{2}} \left( p^\mu \rangle - \frac{m}{\sqrt{2}} [p^\mu \right).
+\end{align}
+
+% The spin-helicity formalism is the bi-spinor $(\frac{1}{2}, \frac{1}{2})$ representation of the Lorentz group $SO(1,3)$. 
+
+
+
+\subsection{Polology}
+\label{sec:polology}
+
+
+\section{On-Shell Methods for QCD Amplitudes}
+\label{sec:on-shell-methods-qcd-amplitudes}
+
+Continuing the discussion made in section~
+\ref{sec:spin-helicity-formalism}, we now see how giving explicit representations of the polarization vectors allows for many simplifications.
+
+\subsection{MHV Amplitudes}
+\label{sec:mhv-amplitudes}
+
+\begin{theorem}
+    For $n > 3$, $n$-point amplitudes in QCD vanish at tree level, if all but one gluon have positive (resp. negative) helicity.
+\end{theorem}
+\begin{proof}
+    If all vertices have positive helicity, we can choice the same reference momentum $r$ for all gluons, and the polarization vectors vanish under inner product:
+    \begin{align}
+\epsilon_i^{+}(r) \cdot \epsilon_j^{+}(r)=\frac{\langle r r\rangle[j i]}{\langle r i\rangle\langle r j\rangle}=0
+\end{align}
+    and we may see from the Feynman rules that each term in the amplitude has at least one such inner product, hence the amplitude vanishes. (Polarizations can be contracted with either polarization or momentum; but there are less vertices than external lines, so at least one such inner product occur.) One can also see that physically: if we interprete one of the gluons as an out-going gluon, then it becomes $g_1^- \ldots g_{n-1}^- \to g_n^+$, which violates the conservation of helicity.
+
+    If there is only one negative helicity gluon, we can choose the reference momenta for the other gluons to be $p_1$, and choose the reference momentum for the negative helicity arbitrarily. Then
+    \begin{align}
+\epsilon_i^{+}(1) \cdot \epsilon_1^{-}(r)=\frac{[i r]\langle 11\rangle}{\langle 1 i\rangle[1 r]}=0.
+\end{align}
+Note that this argument does not work for $n=3$, since in that case we may have $\langle 1 i\rangle[1 r] =\langle 1 3\rangle[1 3] = (p_1 + p_3)^2 = p_2^2 = 0$.
+
+\end{proof}
+
+Due to this fact, the amplitudes with exactly two negative (resp. positive) helicity gluons are called \textbf{Maximally Helicity Violating} (MHV) amplitudes. Amplitudes with three are called \textbf{Next-to-MHV} (NMHV) amplitudes, and so on.
+
+We shall see that, by appropriate choice of reference momenta, the MHV amplitudes can be computed in a very simple way, and the results is also very elegant, the \textbf{Parke-Taylor formula}. Moreover, $N^k$-MHV amplitudes can be expressed as a sum of $N^{k-1}$-MHV amplitudes, giving us the so-called \textbf{MHV vertex expansion}. Finally, we will see that the \textbf{BCFW recursion} can further simplify the computation of on-shell amplitudes.
+
+\subsection{Little Group Scaling and 3-point Amplitudes}
+
+The dimensional analysis argument is as follows: 
+\begin{itemize}
+	\item The helicity spinor representation of a momentum has a redundancy captured by the little group transformation
+	\[
+		p \rangle \to z p \rangle, \quad [p \to z^{-1} [p.
+	\]
+	And the polarization vectors scale as
+	\[
+	\epsilon_p^{-}(r)=\sqrt{2} \frac{p\rangle[r}{[p r]} \rightarrow z^2 \epsilon_p^{-}(r), \quad \epsilon_p^{+}(r)=\sqrt{2} \frac{r\rangle[p}{\langle r p\rangle} \rightarrow z^{-2} \epsilon_p^{+}(r)
+	.\]
+	\item The amplitude only depends on the inner product between the momenta.
+	\item The amplitude must depend on only left-handed inner products or only right-handed inner products. To see this, start from momentum conservation
+	\[
+		1\rangle  [ 1 +  2\rangle [ 2 + 3\rangle  [ 3 = 0
+	\]
+	and contract with $\langle 1, \langle 2$. This gives two equations
+	\[
+	\langle 12\rangle[2=-\langle 13\rangle[3, \quad\langle 21\rangle[1=-\langle 23\rangle[3
+	\]
+	and implies either $\langle 12\rangle = \langle 23\rangle = \langle 31\rangle = 0$ or $[12] = [23] = [31] = 0$. 
+	\item The scaling of the amplitude solely depends on the scaling of the polarization vectors, since only for the polarization term the $\langle \rangle$ and $[]$ are not well-balanced. In particular, for a 3-point amplitude, the number of $\langle \rangle$ minus the number of $[]$ is $2$ for negative helicity gluon, $-2$ for positive helicity gluon. This holds respectively for each gluon. 
+	In particular, the only possible forms for the 3-point amplitude are
+	\[
+	\mathcal{M}(1^{a+}, 2^{b+}, 3^{c+}) = C^{abc} [12][23][31] \quad \text{or} \quad \frac{C^{abc}}{\langle 12\rangle \langle 23\rangle \langle 31\rangle}.
+	\]
+	but the second form diverges in the limit of real momenta, so it is not allowed. Hence the first form is the only possible form.
+	Using the same argument, we have
+	\[
+	\mathcal{M}\left(1^{a+} 2^{b+} 3^{c-}\right)=C^{a b c} \frac{[12]^3}{[13][32]} , \qquad 
+	\mathcal{M}\left(1^{a-} 2^{b-} 3^{c+}\right)=C^{a b c} \frac{\langle 12\rangle^3}{\langle 13\rangle\langle 32\rangle}.
+	\]
+\end{itemize}
+
+\subsection{Color Factors}
+
+\subsubsection{The Photon Decoupling Trick}
+
+\begin{fact}
+    In QCD, non-planar diagrams are suppressed. 
+\end{fact}
+
+
+
+
+\begin{fact}
+    \item QCD tree-level amplitudes can be expressed in terms of a planar theory.
+    \item QCD loop-level amplitudes can be expressed in a planar theory in the large $N$ limit.
+\end{fact}
+
+\subsubsection{Color Ordering}
+
+In this section, we review how to simplify the QCD amplitudes into color-agnostic expressions, that are valid in large $N$ limit. There are two main contributions of this approach. 
+First, the expressions for color-ordered amplitudes are very simple, given by the Parke-Taylor formula.
+Second, this will give us a \textbf{planar} theory since Feymann diagrams with crossings are suppressed by $1/N$-factor and vanish in the planar limit. By exploiting this structure we can compute the amplitudes in a much simpler way, the BCFW recursion.
+
+
+
+
+
+\subsubsection{Amplitudes in Planar Limit}
+
+To compute tree-level $n$-point amplitudes for a planar theory, we enumerate all \textbf{planar trees} with $n$ leaves, compute each tree using Feymann rules,
+and then sum over all trees. For example, for $n = 4$, we have two trees, the $s$-channel and the $t$-channel. For $n = 5$, we have five trees.
+
+However, we don't always need to compute all trees. See two facts:
+\begin{enumerate}
+    \item MHV amplitudes are given by the Parke-Taylor formula, which is a simple expression that can be computed directly.
+    \item By choosing reference momenta we can eliminate the contributions from some trees.
+\end{enumerate}
+
+
+\subsection{BCFW Recursion}
+
+
+\subsection{Example}
+
+\subsection{Further Topics}
+
+
+\section{QED Amplitudes}
+\label{sec:qed-amplitudes}
+
+\subsection{MHV Amplitudes in QED}
+\label{sec:mhv-amplitudes-qed}
+
+\subsection{BCFW Recursion in QED}
+\label{sec:bcfw-recursion-qed}
+
+\subsection{Example}
+
+\subsection{Further Topics}
+
+\section{Massive QED}
+
+
+\section{Loop Amplitudes}
+
+\section{Amplituhedron}
+\label{sec:amplituhedron}

@@ -1,0 +1,133 @@
+\homework{2}{Fri 10 Oct 2025 23:16}{}
+
+\begin{itemize}
+	\item
+		2.1. a) Show that the conclusion of Sanov's Theorem doesn't hold as stated in class for all closed sets. That is, show that there exists a closed set $F \subset \mathcal{P}_m$ such that
+
+\[
+\lim _{n \rightarrow \infty} \frac{1}{n} \log P\left(L_n \in F\right) \neq-\inf _{\nu \in F} H(\nu \mid \rho) .
+\]
+
+b) Show that for any closed subset $F \subset \mathcal{P}_m$ we have
+
+\[
+\limsup _{n \rightarrow \infty} \frac{1}{n} \log P\left(L_n \in F\right) \leq-\inf _{\nu \in F} H(\nu \mid \rho) .
+\]
+
+
+Hint: Consider open subsets $G^{\varepsilon} \searrow F$ as $\varepsilon \rightarrow 0$.
+\begin{proof}
+	Pick $F = \{\nu\} $ where $\nu \in \mathcal{P}_m$ corresponds to an irrational point in the probability simplex. In other words, $\nu = \sum_j \nu_j \delta_j$ where $\nu_j \in [0,1]\setminus \mathbb{Q}$ for at least one $j$. Then, we have $L_n \not\in F$ for all $n$.  Thus the left hand side $\frac{1}{n} \log P(L_n \in F) = - \infty $ and the limit does not exist.
+
+	Now, for any closed subset $F \subset \mathcal{P}_m$, we can pick $G^\varepsilon$ be $\varepsilon$-exterior of $F$, so $F \subset G^\varepsilon$ and $G^\varepsilon$ open.
+	Then
+	\[
+		P(L_n \in F) \le P(L_n \in G^\varepsilon)
+	.\] 
+	So that
+	\[
+		\limsup \frac{1}{n} \log P(L_n \in F) \le 
+		\limsup \frac{1}{n} \log P(L_n \in G^\varepsilon) =
+		- \inf_{\nu \in G^\varepsilon} H(\nu | \rho)
+	.\] 
+	This is true for any $\varepsilon > 0$, so
+	\[
+		\limsup \frac{1}{n} \log P(L_n \in F) \le 
+		- \sup  _{\varepsilon > 0} \inf _{\nu \in G^\varepsilon} H(\nu | \rho)
+	.\] 
+	Since the family $G^\varepsilon$ is monotone decreasing as $\varepsilon \to 0$ and $\cap_{\varepsilon > 0} G^\varepsilon = F$,
+	\[
+		\sup  _{\varepsilon > 0} \inf _{\nu \in G^\varepsilon} H(\nu | \rho) = \inf _{\nu \in F} H(\nu | \rho)
+	.\] 
+\end{proof}
+
+\item 
+	Show the identity claimed in class for the large deviation rate function $I_\rho^2(\nu)$ of the pair empirical measure $L_n^2=\frac{1}{n} \sum_{i=1}^n \delta_{\left(X_i, X_{i+1}\right)}$. That is, if
+
+\[
+I_\rho^2(\nu)=\sum_{i, j} \nu_{i, j} \log \left(\frac{\nu_{i, j}}{\bar{\nu}_i \rho_j}\right)
+\]
+
+then show that
+
+\[
+I_\rho^2(\nu)=H(\bar{\nu} \mid \rho)+H(\nu \mid \bar{\nu} \times \bar{\nu})
+\]
+\begin{proof}
+	\begin{align*}
+		& H(\overline{\nu}  | \rho) + H(\nu | \overline{\nu}  \times \overline{\nu} )\\
+		&= \sum_i \overline{\nu} _i \log \frac{\overline{\nu} _i}{\rho_i} + \sum_{i j}\nu_{i j}\log \frac{\nu_{i j}}{\overline{\nu} _i \overline{\nu} _j} \\
+		&= \sum_{i j} \nu_{i j}\left( \log \frac{\overline{\nu} _i}{\rho_i} + \log \frac{\nu_{i j}}{\overline{\nu} _i \overline{\nu} _j} \right)  \\
+		&= \sum_{i j} \nu_{i j} \log \frac{\nu_{i j}}{\rho_i \overline{\nu} _j} \\
+		&= I^2_\rho(\nu)
+	.\end{align*}
+\end{proof}
+
+\item
+The relative entropy function $H(\nu \mid \rho)$ is defined by
+
+\[
+H(\nu \mid \rho)= \begin{cases}\int \frac{d \nu}{d \rho} \log \left(\frac{d \nu}{d \rho}\right) d \rho & \text { if } \nu \ll \rho \\ \infty & \text { otherwise }\end{cases}
+\]
+
+
+Notes:
+
+
+- Recall that $\nu \ll \rho$ means that $\nu$ is absolutely continuous with respect to $\rho$ and so the Radon-Nikodym derivative $\frac{d \nu}{d \rho}$ exists.
+
+- In class we've mostly been dealing with the relative entropy in the setting of probability measures on finite state spaces, but for this problem we are in the more general setting.
+
+a) Prove that the relative entropy function $\nu \mapsto H(\nu \mid \rho)$ is strictly convex (partial credit if you only prove convexity) on the domain where it is finite. That is, if $\nu \ll \rho, \mu \ll \rho$ and $\nu \neq \mu$ then
+\[
+H(t \nu+(1-t) \mu \mid \rho)<t H(\nu \mid \rho)+(1-t) H(\mu \mid \rho), \quad \forall t \in(0,1) .
+\]
+\begin{proof}
+	Write $f = \frac{d \mu}{d \rho}$ and $g = \frac{d \nu}{d \rho}$. Suppressing $d \rho$ from the integral notation, we would like to prove that
+	\[
+		\int t f \log f + (1-t) g \log g - (t f + (1 - t) g) \log \left( t f + (1 - t) g \right) >  0
+	.\] 
+	Now, since $x \to x \log  x$ is strictly convex, we obtain convexity by integrating the inequality
+	\[
+		t f(\omega) \log f(\omega) + (1 - t) g(\omega) \log  g(\omega) - (t f (\omega) + (1 - t) g(\omega) \log \left( t f(\omega) + (1 - t) g(\omega) \right)  > 0
+	.\] 
+	Now, to prove strict convexity, suppose $f - g > \varepsilon$ over a measurable set $A$. Pointwise application of the convexity of $x \mapsto x \log  x$ tells us that there exists some $\eta > 0$ such that
+	\[
+		t f(\omega) \log f(\omega) + (1 - t) g(\omega) \log  g(\omega) - (t f (\omega) + (1 - t) g(\omega) \log \left( t f(\omega) + (1 - t) g(\omega) \right)  > \eta \qquad
+		\text{on }A
+	.\] 
+	Combining with convexity, this tells us that our integral
+	\[
+		\int \left( \ldots \right) \ge \eta |A| > 0
+	.\] 
+\end{proof}
+
+b) Prove that $H(\nu \mid \rho) \geq 0$, and conclude that $H(\nu \mid \rho)=0$ if and only if $\nu=\rho$.
+\begin{proof}
+	Write $f = \frac{d \nu}{ d \rho}$ which is a measurable function. Approximate $f$ with simple functions $f_n$ from below such that $f_n = \sum_{m=1}^{M_n} c_{n m} 1_{A_{n m}}$ where $c_{n m}\ge 0$ and $(A_{n m})_{1 \le m \le M_n}$ partitions the probability space $\Omega$. We have
+	\[
+		\int |f - f_n| \to 0 \text{  as  } n \to \infty 
+	.\] 
+
+	Since $f$ is a probability density, $\int  f = 1$, so that for large enough $n$,
+	\[
+		\int  f_n = \sum_{m = 1}^{M_n} c_{n m}|A_{n m}| \le 1	.\] 
+	Therefore each $c_{n m} |A_{n m}| \le  1$. Now
+	\begin{align*}
+		&\int f_n \log f_n\\
+		&= \sum_m |A_{n m}| c_{n m} \log c_{n m} \\
+		&= \sum_m |A_{n m}| c_{n m} \log (|A_{n m}| c_{n m}) - c_{n m} |A_{n m}| \log |A_{n m}| \\
+		&\ge \sum_m - c_{n m} |A_{n m}| \log |A_{n m}| \\
+		&\ge 0
+	.\end{align*}
+	In the first inequality, we used the fact that $[0,1]\ni x \mapsto x \log x \le 0$. In the second inequality, we used the fact that $\sum_m |A_{m n}| = 1$ hence $\log |A_{m n}| \le  0$.
+
+	Finally, application of monotone convergence theorem tells us that
+	\[
+		\int f_n \log  f_n \to \int  f \log  f \ge 0
+	.\] 
+
+	If $H(\nu, \rho) = \int f \log  f = 0$, then $\log f \equiv 0$, so $\frac{d \nu}{d \rho} = 1$, hence $\nu = \rho$ are equivalent measures.
+\end{proof}
+\end{itemize}
+
