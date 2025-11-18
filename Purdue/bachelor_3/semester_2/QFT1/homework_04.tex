@@ -1,0 +1,298 @@
+\homework{4}{Fri 14 Nov 2025 21:02}{}
+
+\textbf{Problem 1. Poincare Algebra.}
+
+Consider the Poincare group $(\Lambda^\mu_ \nu, a^\mu)$ in some representation $S(\Lambda, a)$. Expand the representation matrices around $\delta^\mu _ \nu$ and derive the Poincare algebra by imposing multiplication rule for the Poincare group.
+
+\begin{proof}[Solution]
+	We have consulted Weinberg, Chp. 2.4 for the computation. To begin with, consider the Lie group structure for Lorentz transforms and spacetime translations, separately,
+	\[
+	S(\delta^\mu _ \nu + \omega^\mu _ \nu, 0) = 1 + \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} + O(\omega^2),
+	\]
+	\[
+	S(\delta^\mu _ \nu, \epsilon^\mu) = 1 - i \epsilon_\mu P^\mu + O(\epsilon^2).
+	\]
+	Here, $J^{\rho \sigma}$ are the generators of Lorentz transformations and $P^\rho$ are the generators of spacetime translations, both are Hermitian operators (for unitary $S$). Here $J$ and $P$ are representations of the generators induced by $S$. The negative sign is only a convention. Now, we can combine the two to get the representation of the Poincare group,
+	\[
+	S(\delta^\mu _ \nu + \omega^\mu _ \nu, \epsilon^\mu) = 1 + \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} - i \epsilon_\mu P^\mu + O(\omega^2, \epsilon^2, \omega \epsilon).
+	\]
+	This is justified by the following identity from Lie group theory
+	\[
+	\exp(A) \exp(B) = \exp\left(A + B + \frac{1}{2}[A, B] + \ldots\right).
+	\]
+
+	Next, we impose the Lorentz condition
+	\[
+	\eta_{\mu \nu} \Lambda^\mu _ \rho \Lambda^\nu _ \sigma = \eta_{\rho \sigma},
+	\]
+	Infinitesimally, 
+	\[
+	\eta_{\mu \nu} (\delta^\mu _ \rho + \omega^\mu _ \rho)(\delta^\nu _ \sigma + \omega^\nu _ \sigma) = \eta_{\rho \sigma} .
+	\]
+	Expand and drop higher order terms, we get
+	\[
+	\eta_{\rho \sigma} + \eta_{\rho \nu} \omega^\nu _ \sigma + \eta_{\mu \sigma} \omega^\mu _ \rho = \eta_{\rho \sigma}.
+	\]
+	Rearranging gives
+	\[
+	\omega_{\rho \sigma} + \omega_{\sigma \rho} = 0
+	\]
+	which shows that $\omega_{\mu \nu}$ is antisymmetric in its indices. This implies that $J^{\mu \nu}$ is also antisymmetric in its indices: $J^{\mu \nu} = - J^{\nu \mu}$.
+
+	Next, we impose the multiplication rule for the Poincare group,
+	\[
+	S(\Lambda_2, a_2) S(\Lambda_1, a_1) = S(\Lambda_2 \Lambda_1, \Lambda_2 a_1 + a_2).
+	\]
+	Conceptually, the commutation rules can be extracted from the following identity,
+	\[
+	\exp(A) \exp(B) \exp(-A) \exp(-B) = \exp([A, B] + \ldots).
+	\]
+	First consider conjugating an infinitesimal translation by some general Poincare transformation,
+	\begin{align*}
+	S(\Lambda, a) S(\delta + \omega, \epsilon) S^{-1}(\Lambda, a) 
+	&= S(\Lambda, a) S(\delta + \omega, \epsilon) S(\Lambda^{-1}, -\Lambda^{-1} a)\\
+	&= S(\Lambda, a) S((\delta + \omega) \Lambda^{-1}, (\delta + \omega)(-\Lambda^{-1} a) + \epsilon)\\
+	&= S(\Lambda (\delta + \omega) \Lambda^{-1}, - \Lambda (\delta + \omega) \Lambda^{-1} a + \Lambda \epsilon + a)\\
+	&= S(\Lambda (\delta + \omega) \Lambda^{-1}, - \Lambda \omega \Lambda^{-1} a + \Lambda \epsilon)
+	\end{align*}
+	Expanding both sides to first order in $\omega$ and $\epsilon$, we have
+	\begin{align*}
+		S(\Lambda, a) (1 + \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} - i \epsilon_\mu P^\mu) S^{-1}(\Lambda, a)
+		&= 1 + \frac{i}{2} (\Lambda \omega \Lambda^{-1})_{\mu \nu} J^{\mu \nu} - i (- \Lambda \omega \Lambda^{-1} a + \Lambda \epsilon)_\mu P^\mu.
+	\end{align*}
+	Simplify,
+	\begin{align*}
+		S(\Lambda, a) (\frac{1}{2} \omega_{\mu \nu} J^{\mu \nu} - \epsilon_\mu P^\mu) S^{-1}(\Lambda, a)
+		&= \frac{1}{2} (\Lambda^\rho _ \mu \omega _{\rho \sigma} \Lambda^\sigma _ \nu) J^{\mu \nu} + (\Lambda^\rho _ \mu \omega_{\rho \sigma} \Lambda^\sigma _ \nu a^\nu - \Lambda^\rho _ \mu \epsilon_\rho) P^\mu.
+	\end{align*}
+	Equate coefficients of $\omega$ and $\epsilon$ respectively, we get
+	\begin{align}
+		\label{eq:4-1}
+		S(\Lambda, a) J^{\rho \sigma} S^{-1}(\Lambda, a) 
+		&= \Lambda^\rho _ \mu \Lambda^\sigma _ \nu J^{\mu \nu} + 2 \Lambda^\rho _ \mu \Lambda^\sigma _ \nu a^\nu P^\mu \nonumber \\
+		&= \Lambda^\rho _ \mu \Lambda^\sigma _ \nu \left(J^{\mu \nu} + a^\nu P^\mu - a^\mu P^\nu\right)
+	\end{align}
+	\begin{align}
+		\label{eq:4-2}
+		S(\Lambda, a) P^\rho S^{-1}(\Lambda, a) 
+		&= \Lambda^\rho _ \mu P^\mu.
+	\end{align}
+	Now, we make the transformations around \eqref{eq:4-1} and \eqref{eq:4-2} infinitesimal. Let $S(\Lambda, a) = S(\delta + \omega, \epsilon)$, and expand both sides to first order in $\omega$ and $\epsilon$. We have
+	\begin{align*}
+		&\left(1 + \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} - i \epsilon_\mu P^\mu\right) J^{\rho \sigma} \left(1 - \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} + i \epsilon_\mu P^\mu\right)\\
+		&= (\delta^\rho _ \mu + \omega^\rho _ \mu)(\delta^\sigma _ \nu + \omega^\sigma _ \nu) \left(J^{\mu \nu} + \epsilon_\nu P^\mu - \epsilon_\mu P^\nu\right).\\
+		&\left(1 + \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} - i \epsilon_\mu P^\mu\right) P^\rho \left(1 - \frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} + i \epsilon_\mu P^\mu\right) \\
+		&= (\delta^\rho _ \mu + \omega^\rho _ \mu) P^\mu.
+	\end{align*}
+	We can read off the commutation relations
+	\begin{align*}
+		[\frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} - i \epsilon_\mu P^\mu, J^{\rho \sigma}]
+		&= \omega^\sigma _ \nu J^{\rho \nu} + \omega^\rho _ \mu J^{\mu \sigma} + \epsilon_\sigma P^\rho - \epsilon_\rho P^\sigma,\\
+		[\frac{i}{2} \omega_{\mu \nu} J^{\mu \nu} - i \epsilon_\mu P^\mu, P^\rho]
+		&= \omega^\rho _ \mu P^\mu.
+	\end{align*}
+	From this, we solve for the commutation relations of the generators. Recall the conventions
+	\[
+	\omega_{\sigma \rho} = \eta_{\mu \sigma} {\omega^\mu} _ \rho, \quad {\omega^\mu}_ \rho = \eta^{\mu \sigma} \omega_{\sigma \rho}, \quad {\omega_\nu} ^\rho = \eta^{\rho \sigma} \eta_{\nu \mu} {\omega^\mu} _ \sigma.
+	\]
+	We have
+	\begin{align*}
+		i \omega_{\mu \nu} [J^{\mu \nu}, J^{\rho \sigma}]
+		&= 2 {\omega_\mu} ^\rho J^{\mu \sigma} + 2 {\omega_\nu} ^\sigma J^{\rho \nu}\\
+		&= 2 \omega_{\mu \nu} \left(\eta^{\nu \rho} J^{\mu \sigma} - \eta^{\mu \sigma} J^{\rho \nu}\right)\\
+		&= \omega_{\mu \nu}
+			\left(\eta^{\nu \rho} J^{\sigma \mu} - \eta^{\mu \sigma} J^{\rho \nu} + (\mu \leftrightarrow \nu)\right) \\
+		i [J^{\mu \nu}, J^{\rho \sigma}]
+		&= \eta^{\rho \nu} J^{\mu \sigma} - \eta^{\sigma \mu} J^{\rho \nu} - \eta^{\rho \mu} J^{\nu \sigma} + \eta^{\sigma \nu} J^{\rho \mu}.
+	\end{align*}
+	Similarly,
+	\begin{align*}
+		i[P^\mu, J^{\rho \sigma}] 
+		&= \eta^{\mu \rho} P^\sigma - \eta^{\mu \sigma} P^\rho,\\
+		[P^\mu, P^\nu] &= 0.
+	\end{align*}
+
+	Thus, we have derived the Poincare algebra. Next we focus on the $(3 + 1)$-dimensional case. Define the rotation generators $J_i$ and boost generators $K_i$ as
+	\[
+	J_i = \epsilon_{ijk} J^{jk}, \quad K_i = J^{0i}.
+	\]
+	Also set $P^0 = H$ and $P^i = P_i$. We compute the commutation relations in this basis. 
+
+	Recall the Levi-Civita symbol identity
+	\[
+		\epsilon_{i j k} \epsilon_{p q k} = \delta_{i p} \delta_{j q} - \delta_{i q} \delta_{j p}, \quad
+		\epsilon_{i m n} \epsilon_{j m n} = 2 \delta_{i j}, \quad
+		\epsilon_{i j k} \epsilon_{i j k} = 6.
+	\]
+
+	First, consider $[J_i, J_j]$,
+	\begin{align*}
+		i[J_i, J_j] 
+		&= i[\epsilon_{i k l} J^{k l}, \epsilon_{j m n} J^{m n}] \\
+		&= \epsilon_{i k l} \epsilon_{j m n} (-\eta^{l m} J^{k n} + \eta^{k m} J^{l n} + \eta^{n k} J^{m l} - \eta^{n l} J^{m k}) \\
+		&= \dots = J^{i j}\\
+		&= \epsilon_{i j k} J_k.
+	\end{align*}
+	Similarly for other commutators. For complete result see Weiberg, Chp. 2.4, Eq. 2.4.18--2.4.24.
+
+\end{proof}
+
+\textbf{Problem 2. Symmetries of Euclidean Theory.} Consider Euclidean flast space $\mathbb{R}^{d + 1}$. Work out the commutators of the Lie algebra of $SO(d + 1)$. Identify the generators of translations and rotations.
+
+\begin{proof}[Solution]
+	We observe that the proof for the Poincaré algebra in Minkowski space can be adapted to the Euclidean case. The Lorentz condition is replaced by the Euclidean condition
+	\[\delta_{\mu \nu} \Lambda^\mu _ \rho \Lambda^\nu _ \sigma = \delta_{\rho \sigma}.\]
+	The condition is only saying that the transformation is metric-preserving, so the antisymmetry of the generators still holds, regardless of the metric. Thus, we can just replace the Minkowski metric $\eta_{\mu \nu}$ by the Euclidean metric $\delta_{\mu \nu}$ in the derivation of the Poincaré algebra, and we get the Lie algebra of $SO(d + 1)$:
+	\begin{align*}
+		i[J^{\mu \nu}, J^{\rho \sigma}]
+		&= \delta^{\rho \nu} J^{\mu \sigma} - \delta^{\sigma \mu} J^{\rho \nu} - \delta^{\rho \mu} J^{\nu \sigma} + \delta^{\sigma \nu} J^{\rho \mu},\\
+		i[P^\mu, J^{\rho \sigma}]
+		&= \delta^{\mu \rho} P^\sigma - \delta^{\mu \sigma} P^\rho,\\
+		[P^\mu, P^\nu] &= 0.
+	\end{align*}
+	There are $d+1$ translation generators $P^\mu$ and $\frac{(d + 1)d}{2}$ (antisymmetric) rotation generators $J^{\mu \nu}$.
+\end{proof}
+
+\textbf{Problem 3. Proper length of Lorentz vector in bispinor representation $(\frac{1}{2}, \frac{1}{2})$.} Write down the explicit form of a Lorentz vector in the bispinor representation $(\frac{1}{2}, \frac{1}{2})$. Write down the expression of its proper length in terms of spinor indices.
+
+\begin{proof}[Solution]
+	Consult Schwartz, Chp. 27.1.1. A Lorentz vector $P^\mu$ can be represented as a bispinor $P_{\alpha \dot{\beta}}$ via the relation
+	\[
+	P^{\alpha \dot{\beta}} = \sigma_\mu ^{\alpha \dot{\beta}} P^\mu
+	= \begin{pmatrix}
+		P^0 - P^3 & -P^1 + i P^2 \\
+		-P^1 - i P^2 & P^0 + P^3
+	\end{pmatrix}.
+	\]
+	The determinant of this matrix gives
+	\[
+	\det(P^{\alpha \dot{\beta}}) = (P^0)^2 - (P^3)^2 - (P^1)^2 - (P^2)^2 = P^\mu P_\mu.
+	\]
+\end{proof}
+
+\textbf{Problem 4. Show that $SU(2)$ is double cover of $SO(3)$.} 
+
+
+\begin{proof}[Solution]
+	Recall the following facts:
+	\begin{itemize}
+		\item $SU(2)$ is simply connected.
+		\item $su(2) \cong so(3)$ are isomorphic as Lie algebras, given by the the explicit mapping
+		\[
+		i \sigma_1 \leftrightarrow J^{23}, \quad
+		i \sigma_2 \leftrightarrow J^{31}, \quad
+		i \sigma_3 \leftrightarrow J^{12}.
+		\]
+		This fact ensures that there exists a local isomorphism between $SU(2)$ and $SO(3)$, which extends to a covering map.
+		\item $SU(2) \to SO(3)$ is a surjective homomorphism with kernel $\mathbb{Z}_2 = \{\pm I\}$.
+	\end{itemize}
+	From these facts, we conclude that $SU(2)$ is the double cover of $SO(3)$.
+\end{proof}
+
+\textbf{Problem 5. Clifford algebra of Pauli matrices.} Show that $\sigma^\mu_{\alpha \dot{\alpha}}$, $\bar{\sigma}^{\mu}_{\alpha \dot{\alpha}}$ satisfy the Clifford algebra, i.e. $\{\sigma^\mu, \bar{\sigma}^\nu\}_\alpha^{\beta} = 2 \eta^{\mu \nu} \delta_{\alpha}^{\beta}$.
+
+\begin{proof}[Solution]
+	Recall the anticommutation relation of the Pauli matrices,
+	\[
+	\{\sigma_i, \sigma_j\} = 2 \delta_{i j} I.
+	\]
+	Also recall the definitions
+	\[
+	\sigma^\mu = (I, \sigma_1, \sigma_2, \sigma_3), \quad
+	\bar{\sigma}^\mu = (I, -\sigma_1, -\sigma_2, -\sigma_3).
+	\]
+	We compute the anticommutator,
+	\begin{align*}
+		\{\sigma^\mu, \bar{\sigma}^\nu\}
+		&= \delta^{\mu 0} \delta^{\nu 0} \{I, I\} + \delta^\mu_i \delta^\nu _j (- \{\sigma_i, \sigma_j\}) \\
+		&= 2 \delta^{\mu 0} \delta^{\nu 0} I - 2 \delta^\mu_i \delta^\nu _j \delta_{i j} I \\
+		&= 2 \eta^{\mu \nu} I.
+	\end{align*}
+\end{proof}
+
+\textbf{Problem 6. Pauli-Lubanski vector and Casimir invariants of Poincare group.} The Poincare algebra has two Casimir invariants, $P_\mu P^\mu$ and $W_\mu W^\mu$, where $W^\mu = \frac{1}{2} \epsilon^{\mu \nu \alpha \beta} P_\nu J_{\alpha \beta}$ is the Pauli-Lubanski vector. Show that
+\[
+	W^2 = -\frac{1}{2} P^2 J^{\mu \nu} J_{\mu \nu} + P_\mu J^{\mu \nu} P_\lambda J^\lambda _ \nu.
+\]
+Then apply to the massless particle case and express in terms of the helicity basis $J, A, B$.
+
+\begin{proof}[Solution]
+	We recall the following identity involving the Levi-Civita symbol in Minkowski spacetime:
+	\[
+		\epsilon_{\mu \nu \alpha \beta} \epsilon^{\rho \sigma \lambda \gamma}=-\operatorname{det}\left(\begin{array}{llll}
+		\delta_\mu^\rho & \delta_\mu^\sigma & \delta_\mu^\lambda & \delta_\mu^\gamma \\
+		\delta_\nu^\rho & \delta_\nu^\sigma & \delta_\nu^\lambda & \delta_\nu^\gamma \\
+		\delta_\alpha^\rho & \delta_\alpha^\sigma & \delta_\alpha^\lambda & \delta_\alpha^\gamma \\
+		\delta_\beta^\rho & \delta_\beta^\sigma & \delta_\beta^\lambda & \delta_\beta^\gamma
+		\end{array}\right)
+	\]
+	In particular, we have
+	\[
+		\epsilon^{0 1 2 3} = -1, \quad \epsilon_{0 1 2 3} = 1.
+	\]
+	Now, we compute $W^\mu W_\mu$,
+	\begin{align*}
+		W^\mu W_\mu
+		&= \frac{1}{4} (\epsilon^{\mu \nu \alpha \beta} P_\nu J_{\alpha \beta}) (\epsilon^{\mu' w \rho \sigma} P_w J_{\rho \sigma}) \eta_{\mu \mu'} \\
+		&= \frac{1}{4} \epsilon_{\mu \nu' \alpha' \beta'} \eta^{\nu \nu'} \eta^{\alpha \alpha'} \eta^{\beta \beta'} \epsilon^{\mu w \rho \sigma} P_\nu J_{\alpha \beta} P_w J_{\rho \sigma} \\
+		&= -\frac{1}{4} ((\delta^w_{\nu'} \delta^\rho_{\alpha'} \delta^\sigma_{\beta'} + cyc.(\nu', \alpha', \beta')) - (\alpha' \leftrightarrow \beta')) \eta^{\nu \nu'} \eta^{\alpha \alpha'} \eta^{\beta \beta'} P_\nu J_{\alpha \beta} P_w J_{\rho \sigma}\\
+		&= -\frac{1}{4} (2 P^2 J^{\rho \sigma} J_{\rho \sigma} - 4 P_\rho J^{\rho \sigma} P_w {J^w} _ \sigma) \\
+		&= -\frac{1}{2} P^2 J^{\mu \nu} J_{\mu \nu} + P_\mu J^{\mu \nu} P_\lambda {J^\lambda} _ \nu.
+	\end{align*}
+	In the computation, we used the following commutation
+	\begin{align*}
+		P^w J^{\rho \sigma} P_w J_{\rho \sigma}
+		&= P_w (P^w J^{\rho \sigma} + [J^{\rho \sigma}, P^w]) J_{\rho \sigma} \\
+		&= P^2 J^{\rho \sigma} J_{\rho \sigma} - i P_w (\eta^{w \rho} P^\sigma - \eta^{w \sigma} P^\rho) J_{\rho \sigma} \\
+		&= P^2 J^{\rho \sigma} J_{\rho \sigma}.
+	\end{align*}
+	One sees that the second term vanishes due to the term $P^\rho P^\sigma - P^\sigma P^\rho = 0$.
+
+	We are done with the first part of the problem. Next, we apply to the massless particle case. In this case, we have $P^2 = 0$. We may also fix a rest frame where $P^0 = P^1 = E$ and $P^2 = P^3 = 0$. Thus,
+	\[
+		W^2 = P_\mu J^{\mu \nu} P_\lambda {J^\lambda} _ \nu.
+	\]
+	We compute each coordinate of $W^\mu$ separately.
+	\begin{align*}
+		W^0
+		&= \frac{1}{2} \epsilon^{0 \nu \alpha \beta} P_\nu J_{\alpha \beta} \\
+		&= \frac{1}{2} (-\epsilon^{i j k} P_i J_{j k}) \\
+		&= \frac{1}{2} (-P_1) (J^{23}- J^{32}) \\
+		&= E J_1.
+	\end{align*}
+	Note that $P_1 = \eta_{1 1} P^1 = - E$.
+	\begin{align*}
+		W^1
+		&= \frac{1}{2} \epsilon^{1 \nu \alpha \beta} P_\nu J_{\alpha \beta} \\
+		&= \frac{1}{2} E (\epsilon^{1 0 2 3} J_{23} - \epsilon^{1 0 3 2} J_{32}) \\
+		&= \frac{1}{2} E (J^{23} + J^{32}) \\
+		&= E J_1.
+	\end{align*}
+	\begin{align*}
+		W^2
+		&= \frac{1}{2} \epsilon^{2 \nu \alpha \beta} P_\nu J_{\alpha \beta} \\
+		&= \frac{1}{2} E (\epsilon^{2 0 1 3} J_{13} - E \epsilon^{2 1 0 3} J_{03}) \\
+		&= E(J_{1 3} + J_{0 3}) \\
+		&= E(- J_2 - K_3).
+	\end{align*}
+	\begin{align*}
+		W^3
+		&= \frac{1}{2} \epsilon^{3 \nu \alpha \beta} P_\nu J_{\alpha \beta} \\
+		&= \frac{1}{2} E (\epsilon^{3 0 1 2} J_{12} - E \epsilon^{3 1 0 2} J_{02}) \\
+		&= E(J_{1 2} + J_{0 2}) \\
+		&= E(- J_3 + K_2).
+	\end{align*}
+	Thus, $W^\mu$ is given by
+	\[
+		W^\mu = E (J_1, J_1, - J_2 - K_3, - J_3 + K_2).
+	\]
+	Define $J = J_1$, $A = J_2 + K_3$, $B = K_2 - J_3$, we have
+	\[
+		W^\mu = E (J, J, - A, B).
+	\]
+	Thus
+	\[
+		W^2 = E^2 (J^2 - J^2 - A^2 - B^2) = - E^2 (A^2 + B^2).
+	\]
+	Note that $J$ drops out. This is expected since $J$ generates rotations around the momentum direction, which does not affect the helicity of the massless particle.
+\end{proof}

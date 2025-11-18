@@ -1,0 +1,49 @@
+\subsection{Properties of Rate Function}
+
+The rate function has the following properties:
+
+\begin{lemma}
+	\label{lem:HollanderI14}
+	Assume that $\varphi(t) = \mathbb{E}e^{t X_1} < \infty , \forall t \in \mathbb{R}$, then 
+	\begin{enumerate}
+		\item $I$ is lower-semicontinuous and convex on $\mathbb{R}$
+		\item $I$ has compact level sets.
+		\item $I$ I is continuous and strictly convex on $\text{int}(\mathcal{D}_I)$, where $\mathcal{D}_I = \{z \in \mathbb{R}: I(z) < \infty \} $.
+		\item $I$ is smooth on $\text{int}(\mathcal{D}_I)$.
+		\item (SLLN) $I(z) \ge 0$ and $ I(z) = 0$ iff $z = \mu$.
+		\item  (CLT) $I''(\mu) = \frac{1}{\sigma^2}$
+	\end{enumerate}
+	
+\end{lemma}
+\begin{proof}
+We first verify that $L(t) =\log \mathbb{E}e^{t X_1}$ is a Legendre function. In particular we show that $L(t)$ is strictly convex. From construction and the assumption we know $L(t)$ is smooth in $\mathbb{R}$.
+
+This follows from Hölder's inequality. Let  $\theta \in (0,1)$ and define $p = \frac{1}{\theta}, q = \frac{1}{1 - \theta}$. Now we have
+\begin{align*}
+	&\varphi\left( \theta t_1 + (1 - \theta) t_2 \right) 
+	= \mathbb{E}\left[ e^{\theta t_1 X} e^{(1 - \theta) t_2 X} \right] \\
+	&\le \mathbb{E}\left[ e^{t_1 X} \right] ^{\theta} \mathbb{E}\left[ e^{t_2 X} \right] ^{1 - \theta}
+	= \varphi(t_1)^\theta \varphi(t_2)^{1 - \theta}
+.\end{align*} 
+Take log on both sides, one gets convexity. Equality holds only when two exponentials are linearly-dependent, which is true iff $t_1 = t_2$.
+
+We also know that $L$ is pcv. Combining those results and use the properties of Legendre-Frechel transform, we have
+\begin{itemize}
+	\item $I$ is pcv.
+	\item $I$ is strictly convex in its domain.
+	\item $I$ is differentiable in its domain, thus continuous.
+	\item The supremum defining $I$, within its domain, is always attained.
+\end{itemize}
+We have $I(z) \ge z \cdot  0 - \log  \varphi(0) = 0$. This is attained at $z = L'(0) = \mu$. Hence $I(\mu) = 0$. One obtains a smooth dependence of $t^*$ on $z$, plug back into the transformation and differentiate twice, one gets $I''(\mu) = \sigma^2$.
+
+Since $I$ is strictly convex, and attains $0$ as minimum point, it must have bounded level sets. Hence compact.
+\end{proof}
+
+\begin{remark}
+	In the language of general LDP, this is a \textbf{good rate function} (proper, l.s.c., compact level sets), with additional convexity and differentiability properties. 
+
+	In general, a rate function may not always have all those additional good properties.
+
+	One can view properties of $I$ as derived from properties of $L$. Convexity is one example. Also, the derivatives of $L$ at $0$ are related to the moments of $X$ : $L'(0) = \mu, L''(0) = \sigma^2$.
+\end{remark}
+

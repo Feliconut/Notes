@@ -1,0 +1,120 @@
+\homework{3}{Wed 29 Oct 2025 08:57}{}
+
+\begin{itemize}
+	\item 3.1. Suppose that $X_1, X_2, \ldots$ is an i.i.d. sequence with distribution $\rho$ on some finite set. Let $\sigma_\rho^2=\operatorname{Var}\left(X_1\right)$.
+a) Let $v_n$ be the sample variance of the first $n$ terms. That is,
+
+\[
+v_n=\frac{1}{n} \sum_{k=1}^n\left(X_k-\bar{X}_n\right)^2, \quad \text { where } \bar{X}_n=\frac{1}{n} \sum_{k=1}^n X_k
+\]
+
+
+Prove a large deviation principle for $v_n$. That is, prove that
+
+\[
+\begin{aligned}
+\lim _{n \rightarrow \infty} \frac{1}{n} \log P\left(v_n>a\right) & =-\inf _{x>a} J_\rho(x), \quad \forall a>\sigma_\rho^2 \\
+\text { and } \quad \lim _{n \rightarrow \infty} \frac{1}{n} \log P\left(v_n<a\right) & =-\inf _{x<a} J_\rho(x), \quad \forall 0<a<\sigma_\rho^2,
+\end{aligned}
+\]
+
+where the rate function $J_\rho$ can be written as a variational expression involving the relative entropy $H(\cdot \mid \rho)$.
+\\
+b) In general, $J_\rho(x)$ is difficult to compute explicitly but we can compute it explicitly when $\rho=\operatorname{Bernoulli}(p)$. Compute $J_\rho(x)$ when $\rho=\operatorname{Bernoulli}(1 / 4)$.
+
+\begin{proof}[Solution]
+	By Sanov's theorem (for iid r.v. taking value in Polish spaces, see [Dembo and Zeitouni, 2010 Theorem 6.2.10), the empirical distribution  $L_n = \frac{1}{n} \sum_{i = 1}^n \delta_{X_i}$ satisfies LDP with rate $n$ and rate function $H(\cdot  | \rho)$. The sample variance is given by the following continuous map:
+	\begin{align*}
+		T: M_1(\mathbb{R}) &\longrightarrow \mathbb{R}^+ \\
+		\nu &\longmapsto T(\nu) = \mathbb{E}_\nu (X - \mathbb{E}_ \nu X)^2
+	.\end{align*}
+	Then, by contraction principle, the empirical distribution of sample variance $Q_n := L_n \circ T^{-1}$ satisfies the LDP on $\mathbb{R}^+$ with rate  $n$ and rate function $J$ given by
+	\[
+		J(y) = \inf _{\nu \in M_1(\mathbb{R}): T \nu = y} H(\nu | \rho)
+	.\] 
+
+	For $y = \sigma_\rho^2$, we have $T \rho = y$, so $J(\sigma_\rho^2) = 0$. To obtain the tail formulas, we still need to show that $J$ is convex.
+
+	Now consider the case $\rho = \text{Ber}(\frac{1}{4})$. In this case the support of all empirical measures in on $M_1(\{0,1\} )$. All measures $\nu$ are characterized by a single $z \in [0,1]$ by $\nu(z) = (1 - z) \delta_0 + z \delta_1$. We compute the mean, entropy and the sample variance:
+
+	\[
+		\mathbb{E}_\nu X = z
+	.\] 
+	\[
+		\mathbb{E}_\nu (X - z)^2
+		= (1 - z)^2 z + z^2 (1 - z) = z( 1- z)
+	.\] 
+	\[
+		H(\nu | \rho) = (1 - z) \log \frac{1 - z}{\frac{3}{4}} + z \log \frac{z}{\frac{1}{4}}
+	.\] 
+	The rate function is given by the following constraint optimization problem
+	\[
+		\begin{cases}
+			J(y) = \min_{z \in (0,1)} (1 - z) \log \frac{1 - z}{\frac{3}{4}} + z \log \frac{z}{\frac{1}{4}}  \\
+			\text{s.t.} \quad z(1 - z) = y
+		\end{cases}
+	.\] 
+	Using the method of Lagrange multipliers, we obtain the optimizing $z$ :
+	\begin{align}
+z^{*}(v)=\frac{1+\sqrt{1-4 v}}{2}
+\end{align}
+yielding the explicit formula
+\begin{align}
+J=\frac{1}{2}\left[(1-\sqrt{1-4 v}) \log \left(\frac{2(1-\sqrt{1-4 v})}{3}\right)+(1+\sqrt{1-4 v}) \log \left(\frac{1+\sqrt{1-4 v}}{8}\right)\right]
+\end{align}
+
+\end{proof}
+
+\item 3.2. (This problem asks you to complete a step that was omitted in the proof of the contraction principle.)
+
+Recall the setting from the proof of the contraction principle. Suppose that $T: \mathcal{X} \rightarrow \mathcal{Y}$ is a continuous function and $I$ is a rate function on $\mathcal{X}$, and let $J(y)=\inf _{x: T(x)=y} I(x)$.
+
+Let $K_a=\{x \in \mathcal{X}: I(x) \leq a\}$ and let $L_a=\{y \in \mathcal{Y}: J(y) \leq a\}$. Prove that $L_a=T\left(K_a\right)$.
+\begin{proof}[Solution]
+	For each $x \in K_a$, let  $T x = y$ and note that  $J(y) \le I(x) \le a$. Hence $T K_a \subset L_a$.
+
+	From definition of $J(y)$, for each $n \in \mathbb{N}$ we have $x_n \in K_{a + \frac{1}{n}}$ such that $T x_n = y$.
+	Now, since $K_{a + \frac{1}{n}}$ is decreasing as $n \to \infty$, the whole sequence is bounded in $K_{a + 1}$, which is compact. Therefore there exists a subsequential limit $x \in \mathcal{X}$. By continuity of $I$, $x \in K_a$.
+
+	Since $T$ is continuous on $\mathcal{X}$, 
+	\[
+		T x_n \to  T x = y \qquad \text{along a subsequence}
+	.\] 
+	This implies $y \in T K_a$, thus $L_a \subset T K_a$.
+\end{proof}
+
+\item
+	3.3. A sequence of random variables $\left\{Z_n\right\}_{n \geq 1}$ is exponentially tight if for any $M<\infty$ there exists a compact set $K_M \subset \mathcal{X}$ such that
+
+\[
+\limsup _{n \rightarrow \infty} \frac{1}{n} \log P\left(Z_n \notin K_M\right) \leq-M .
+\]
+
+
+Prove that if $\left\{Z_n\right\}$ satisfies a weak LDP with weak rate function $I(x)$ and $\left\{Z_n\right\}$ is exponentially tight, then the weak LDP can be strengthened to a LDP with rate function $I$.
+\begin{proof}[Solution]
+	If $I$ does not have compact level sets in general, then there is some $a$ where the level set $K_a = \{x: I(x) \le a\} $ is closed and unbounded. Then, for any intersection with $K_M$,
+	 \[
+		\limsup \frac{1}{n} \log P(K_a \setminus K_M) \le  -M
+	.\] 
+	If we assume that the unbounded closed set $K_a$ has nonempty, unbounded interior $K_a^\circ$ (which is always true if  $I(x)$ is convex), then by weak LDP
+	\[
+		\liminf \frac{1}{n} \log P(K_a^\circ \setminus  K_M) \ge - I\left( K_a^\circ \setminus K_M \right) \ge - a
+	.\] 
+	This is gives $- M \ge  - a$, which yields contradiction for large enough $M$. Therefore, exponential tightness implies that the level sets of $I$ are in general bounded. Hence $I$ has compact level sets.
+
+	This proof, however, breaks down for some exotic rate functions which is not convex and have infinitely many discrete points.
+
+	Now we prove the strong LDP. Let $M > 0$. Take any closed subset $K$, and a compact subset $K_M$ as in the definition of exponential tightness. Then
+	\begin{align*}
+		&\limsup_{n \to \infty } \frac{1}{n} \log P_n\left( K \right) \\
+		&\le \limsup_{n \to \infty } \frac{1}{n} \log \left(P_n\left( K \cap K_M \right) + P_n\left( K_M^c \right)  \right)\\
+		&\leq (- I(K \cap K_M)) \vee (- M) \\
+		&= - (I(K \cap K_M) \wedge M）
+	.\end{align*}
+	As $M \to \infty $, $K \cap K_M$ increases to $K $; by lower-semicontinuity of $I$, $I(K \cap K_M)$ converges to $- I(K)$. Therefore $- (I(K \cap K_M) \wedge M）\to  - I(K)$, as expected.
+\end{proof}
+
+
+		
+\end{itemize}

@@ -1,0 +1,48 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz-feynman}
+
+\begin{document}
+\tikzfeynmanset{compat=1.0.0}
+\begin{tikzpicture}
+  \begin{feynman}
+    % Define vertices
+    \vertex (g1) at (-3,1) {\(g\)};
+    \vertex (g2) at (-3,-1) {\(g\)};
+    \vertex (v) at (-1,0);
+    \vertex (t) at (1,1) {\(t\)};
+    \vertex (tb) at (1,-1) {\(\bar{t}\)};
+    \vertex (v1) at (3,1.5);
+    \vertex (v2) at (3,0.5);
+    \vertex (v3) at (3,-1.5);
+    \vertex (v4) at (3,-0.5);
+    \vertex (lplus) at (5,1.5) {\(\ell^+\)};
+    \vertex (nu) at (5,0.5) {\(\nu_\ell\)};
+    \vertex (lminus) at (5,-1.5) {\(\ell^-\)};
+    \vertex (nubar) at (5,-0.5) {\(\bar{\nu}_\ell\)};
+    \vertex (b) at (1,2.5) {\(b\)};
+    \vertex (bbar) at (1,-2.5) {\(\bar{b}\)};
+    
+    % Draw diagram
+    \diagram* {
+      % Gluon fusion producing the top pair
+      (g1) -- [gluon] (v) -- [gluon] (g2),
+      (v) -- [fermion] (t),
+      (v) -- [anti fermion] (tb),
+      
+      % Top decay: t -> b + W+
+      (t) -- [fermion] (b),
+      (t) -- [boson, edge label=\(W^+\)] (v2),
+      
+      % Anti-top decay: \bar{t} -> \bar{b} + W-
+      (tb) -- [fermion] (bbar),
+      (tb) -- [boson, edge label=\(W^-\)] (v4),
+      
+      % W decays
+      (v2) -- [fermion] (lplus),
+      (v2) -- [fermion] (nu),
+      (v4) -- [fermion] (lminus),
+      (v4) -- [fermion] (nubar),
+    };
+  \end{feynman}
+\end{tikzpicture}
+\end{document}
