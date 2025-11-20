@@ -53,7 +53,7 @@ b) Since $\mu_2=1-\mu_1$ we can view $I_P(\mu)$ as a function of $\mu_1$. Use yo
 	\[
 		\frac{\mu_1 (1 - p)}{p + (1 - p) r} + \frac{(1 - \mu_1) r (p-1) r^{-2}}{(1 - p) + pr}
 	.\] 
-	This gives the quadratic solution
+	After simplification, we get a quadratic equation. This gives the quadratic solution
 	\[
 		r = \frac{\sqrt{(1 - p)^2 (2 \mu_1 - 1)^2 + 4 p^2 \mu_1 (1 - \mu_1)} - ( 1 - p) (2 \mu_1 - 1) }{2 p \mu_1}
 	.\] 
@@ -64,6 +64,11 @@ b) Since $\mu_2=1-\mu_1$ we can view $I_P(\mu)$ as a function of $\mu_1$. Use yo
 		\includegraphics[width=0.7\textwidth]{figures/hw4.png}
 		\caption{Plot of $I_P(\mu_1, 1 - \mu_1)$ for $p = 0.1, 0.5, 0.75$}
 	\end{figure}
+
+	Therefore, a feasible optimizer is
+	\[
+		(u_1, u_2) = (2 p \mu_1, \sqrt{(1 - p)^2 (2 \mu_1 - 1)^2 + 4 p^2 \mu_1 (1 - \mu_1)} - ( 1 - p) (2 \mu_1 - 1))
+	.\] 
 
 \end{proof}
 
@@ -108,13 +113,13 @@ b) Prove that if the $X_i$ have bi- $\operatorname{Exp}(\mu)$ distribution (that
 		\Lambda(t) = - \theta + \theta \varphi(t)
 		= - \theta + \frac{\theta\mu}{2}\left( \frac{1}{t + \mu} - \frac{1}{t - \mu} \right)
 	.\] 
-	We see that $D_\Lambda = (-\mu, \mu)$ which contains $0$ in its interior. Therefore the assumptions for the Gärtner-Ellis theorem are satisfied and we may apply the first part of the theorem. To apply the second part of the theorem, we may observe from the formula of $\Lambda(t)$ that it is (1) continuous, hence l.s.c., (2) differentiale, on $D_\Lambda$. It only remains to verify that it is (3) steep. To this end, we compute the derivative,
+	We see that $D_\Lambda = (-\mu, \mu)$ which contains $0$ in its interior. Therefore the assumptions for the Gärtner-Ellis theorem are satisfied and we may apply the first part of the theorem. To apply the second part of the theorem, we may observe from the formula of $\Lambda(t)$ that it is (1) continuous and blowing up at $t \to  \pm \mu$, hence l.s.c., (2) differentiale, on $D_\Lambda$. It only remains to verify that it is (3) steep. To this end, we compute the derivative,
 	\[
 F^{\prime}(t)=\frac{\theta \mu}{2}\left(\frac{1}{(t-\mu)^2}-\frac{1}{(t+\mu)^2}\right)
 \]
 We see that as $t \to -\mu$ or $t \to \mu$, the derivative blows up to infinity.
 
-Therefore, both parts of the Gartner-Ellis theorem apply and we obtain an LDP for $Z_n$.
+Therefore, both parts of the Gärtner-Ellis theorem apply and we obtain an LDP for $Z_n$.
 
 \end{proof}
 
@@ -148,7 +153,7 @@ c) Prove that $Z_n$ satisfies a large deviation principle with rate function $\L
 	\begin{align*}
 		\frac{1}{n} \log E e^{n t Z_n}
 		&=\frac{1}{n} \sum_{k=1}^{n} \log \frac{1}{\sqrt{1 - 2 t \frac{k}{n}} }\\
-		&\to \int _0^1 \log \frac{dx}{1 - 2 t x}\\
+		&\to \int _0^1 \log \frac{1}{\sqrt{1 - 2 t x} } dx\\
 		&= -\frac{1}{2} \int _0^1 \log (1 - 2 t x) dx \\
 		&= -\frac{1}{2}\left((1 - \frac{1}{2 t}) \log (1 - 2 t) - 1\right)
 	.\end{align*}
@@ -156,10 +161,36 @@ c) Prove that $Z_n$ satisfies a large deviation principle with rate function $\L
 	\[
 		\Lambda' (t) = - \frac{2 t + \log (1 - 2 t)}{4 t^2}
 	.\] 
-	It blows up when $t \to \frac{1}{2}$, but goes to zero as $t \to  - \infty $. Hence $\Lambda$ is not steep. $\Lambda$ is not lower-semicontinuous because it is defined in a left-neighborhood of $\frac{1}{2}$ but not $t = \frac{1}{2}$, as $\log (1 - 2 t)$ is not defined at that point.
+	It blows up when $t \to \frac{1}{2}$, but goes to zero as $t \to  - \infty $. Hence $\Lambda$ is not steep. Looking at $\Lambda$, we see that $\Lambda$ is finite in a left-neighborhood of $\frac{1}{2}$ but not $t = \frac{1}{2}$, as $\log (1 - 2 t)$ is not defined at $t = \frac{1}{2}$. We also note that the limit as $t \to \frac{1}{2}^-$ is finite:
+	\begin{align*}
+		-\frac{1}{2} \left( (1 - \frac{1}{2t}) \log (1 - 2 t) - 1 \right) 
+		&= \frac{1}{2}\frac{y}{1 - y} \log  y + \frac{1}{2} & y = 1 - 2 t \\
+		&\to \frac{1}{2} & \text{as }y \to 0^+
+	.\end{align*}
+	This is because $y \log  y \to 0$ as $y \to 0$. Therefore, the function $\Lambda$ is not l.s.c. at $t = \frac{1}{2}$.
 
-	Nevertheless, it still satisfies a large deviation principle. We can apply the first part of Gärtner-Ellis theorem. We have already verified that (1) $\Lambda(t)$ exist and (2) $0 \in \int (D_\Lambda) = (\to \infty , \frac{1}{2})$. So it has an LDP upper bound, and an LDP lower bound with open set $G$ replaced by $G \cap E$, where $E$ is the set of exposed points of $\Lambda^*$, where the exposing hyperplane is in $int (D_\Lambda)$.
+	Nevertheless, it still satisfies a large deviation principle. We can apply the first part of Gärtner-Ellis theorem. We have already verified that (1) $\Lambda(t)$ exist and (2) $0 \in \text{int} (D_\Lambda) = (- \infty , \frac{1}{2})$. So it has an LDP upper bound, and an LDP lower bound with open set $G$ replaced by $G \cap E$, where $E$ is the set of exposed points of $\Lambda^*$, where the exposing hyperplane is in $\text{int} (D_\Lambda)$.
 
-	To verify that we indeed have an LDP lower bound, let's look at $\Lambda'(t)$. We see that this function is (1) continuously differentiable, (2) strictly convex. Then we try to show that 
+	To verify that we indeed have an LDP lower bound, let's look at $\Lambda'(t)$. We see that this function is (1) continuously differentiable, (2) strictly monotone increasing, in its domain $D_\Lambda= (- \infty , \frac{1}{2})$. Hence, it has a continuously differentiable and strictly monotone increasing inverse, $g = (\Lambda')^{-1} : (0, + \infty ) \to (- \infty , \frac{1}{2})$. Then, we have that, the supremum in the definition of $\Lambda^*$ is attained at precisely $g(x)$ :
+
+	\[
+		\Lambda^*(x) 
+		:= \sup_{t \in \mathbb{R}} x t - \Lambda(t) 
+		= \sup_{t \in D_\Lambda} x t - \Lambda(t) 
+		= x g(x) - \Lambda(g(x))
+	.\] 
+	Then, we see that $\Lambda^*$ is continuously differentiable. Now let's differentiate it as well:
+	\[
+		\Lambda^{*\prime}(x) = g(x) + x g'(x) - \Lambda'(g(x))g'(x)
+	.\] 
+	Use the fact that $g = (\Lambda')^{-1}$,
+	\[
+		\Lambda^{*\prime}(x) = g(x) + x g'(x) - x g'(x) = g(x)
+	.\] 
+	Then ${\Lambda^*}'' = g'(x) > 0$, so $\Lambda^*$ is strictly convex. Hence every point $x \in D_{\Lambda^*} = (0, + \infty )$ is an exposed point. Also, for every such $x$, the exposing hyperplane is ${\Lambda^*}'(x) = g(x) \in (- \infty , \frac{1}{2}) = D_{\Lambda}$. Hence, $E = D_{\Lambda^*}$. Therefore for every open $G \subset D_{\Lambda^*}$,  $G \cap E = G$, i.e. the LDP lower bound in the second half of Gärtner-Ellis theorem holds.
+
+	
+
+
 \end{proof}
 
