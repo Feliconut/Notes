@@ -1,0 +1,139 @@
+\homework{5}{Wed 17 Dec 2025 16:11}{}
+
+\textbf{Problem 1.} Show that a countable set has fractal dimension zero.
+
+\begin{proof}[Solution]
+	This statement is not true for box-counting dimension. For example, the set of rational numbers in $[0,1]$ is countable but has covering dimension $1$. For another example, the set of rational numbers $\frac{1}{n}, n \ge 1$ has fractal dimension $\frac{1}{2}$.
+
+	However, we show that the Hausdorff dimension is zero for countable sets. To do this, we pick $d$-dimensional balls centered at each point, with radius $\epsilon 2^{-i}$. Then, the Hausdorff content is
+	\[
+		\sum_{i = 1}^\infty (\epsilon 2^{-i})^d < \infty 
+	.\] 
+	This value is finite for all $d > 0$. Hence the Hausdorff dimension is $\le 0$. Hence it is $= 0$.
+\end{proof}
+
+\textbf{Problem 2.} Consider a fixed length random walk
+\[
+	p(\vec{r} ) = \frac{1}{4 \pi a^2} \delta (|\vec{r} | - a)
+.\] 
+Show that after $ n \gg1$ steps this converges to the random walk with Gaussian probability.
+\begin{proof}
+	Apply the multi-dimensional central limit theorem. We have
+	\[
+		\vec{r'}  = \vec{r_1}  + \ldots + \vec{r_n} 
+	\] 
+	where $ \vec{r_i} \sim  \frac{1}{4 \pi a^2} \text{Unif}(S^{d - 1})$.
+	The distribution has mean zero. The distribution is bounded, so it has bounded covariance. It also has $SO(d)$ symmetry, so the covariance matrix is a multiple of identity. By the central limit theorem,
+	\[
+		\vec{r'} / \sqrt{n}  \stackrel{d}{\to } N^d(0, \sigma^2)
+	.\] 
+	Where $\sigma^2$ is the variance of each i.i.d. step, which is equal to $a^2$.
+\end{proof}
+
+\textbf{Problem 3.} Consider the Langevin equation
+\[
+	\dot{q} = - w q + \nu
+\] 
+with Gaussian noise $\left\langle \nu(t) \right\rangle = 0, \left\langle \nu(t) \nu(t') \right\rangle  = \Omega \delta(t - t')$.
+\begin{itemize}
+	\item Compute $\left\langle \left( q(t) - \left\langle q(t) \right\rangle  \right) ^2 \right\rangle _ \nu$.
+		\begin{proof}[Solution]
+			We note that the following steps can be made precise by formulating the problem in SDE.
+
+			We treat the noise as a regular function (which is not true), and solve this ODE. We get
+			\[
+				q(t) = e^{ - w t} q_0 + \int _0^t e^{- w (t - s)} \nu(s) ds
+			.\] 
+			Hence
+			\[
+				\boxed{
+					\left\langle q(t) \right\rangle  = e^{ - w t} q_0
+				}
+			.\] 
+			Now, compute the quadratic variation:
+			\begin{align*}
+\left\langle \left( q(t) - \left\langle q(t) \right\rangle  \right) ^2 \right\rangle _ \nu
+&= \left\langle q(t)^2 \right\rangle _0 \\
+&= \left\langle \int _0^t \int _0^t e^{-w (t - s + t - u)} v(s) v(u) d s \, d u \right\rangle_0  \\
+&=\int _0^t \int _0^t e^{-w (t - s + t - u)} \left\langle  v(s) v(u)  \right\rangle_0 d s \, d u  \\
+&= \int _0^t \int _0^t e^{-w (2t - s - u)} \Omega \delta(s - u) d s \, d u \\
+&= \Omega e^{- 2 w t} \int _0^t e^{2 w s} ds = \boxed{
+	\frac{\Omega}{2 w} (1 - e^{- 2 w t})
+}
+			.\end{align*}
+		\end{proof}
+		
+	\item Compute the transition kernel $P(q, t)$ and the stationary distribution.
+		\begin{proof}[Heuristic computation]
+			Start with the definition $P(x, t | x_0, 0) = \left\langle \delta(x - X(t)) \right\rangle _ \nu$. Formally differentiate wrt t.
+			\[
+				\frac{\partial }{\partial t} P(x, t) = \left\langle - \delta'(x - X(t)) \cdot \left( - w X(t) + \nu(t) \right)  \right\rangle _ \nu
+			.\] 
+			The first term:
+			\begin{align*}
+				\left\langle \delta'(x - X(t)) X(t) \right\rangle _ \nu
+				&= \left\langle \delta'(x - X(t)) x \right\rangle _ \nu\\
+				&= \partial_x \left\langle \delta(x - X(t)) x \right\rangle _ \nu  \\
+				&= \partial_x \left( x P(x, t) \right)  
+			.\end{align*}
+			The second term:
+			\begin{align*}
+				\left\langle \delta'(x - X(t)) \nu(t) \right\rangle _ \nu
+				&= \left\langle  \int \left\langle \nu(t) \nu(s) \right\rangle \frac{\delta \, \delta'(x - X(t))}{\delta \nu(s)} ds \right\rangle_ \nu  \\
+				&= \left\langle \frac{\delta \, \delta'(x - X(t))}{\delta \nu(t)} \right\rangle _ \nu \\
+				&= \left\langle - \delta''(x - X(t)) {\color{blue}{\frac{\delta X(t)}{ \delta \nu(t)}} } \right\rangle _ \nu \\
+				&= - {\color{blue} \frac{1}{2}} \Omega \partial_x^2 P(x, t)
+			.\end{align*}
+			Note that the blue term is a non-rigorous approximation scheme that is related to the Stratonovich integral. This step was hinted by chatGPT.
+
+			Now we have arrived at the Fokker-Planck equation:
+			\[
+				\boxed{
+					\partial_{t} P(x, t) = - \partial_x (- w x P(x, t)) + \frac{1}{2} \partial_x^2 P(x, t)
+				}
+			.\] 
+			Solve this equation for a stationary distribution. Rearrange, we get for the stationary density $\pi(x)$,
+			\[
+				\partial_x \left( w (x \pi) + \frac{1}{2} \Omega \pi \right) = 0
+			.\] 
+			Since $\pi = \pi' = 0$ at infinity, we conclude
+			\[
+				w (x \pi) + \frac{1}{2} \pi' = 0
+			.\] 
+			This gives the solution
+			\[
+				\pi(x) = \frac{1}{(\pi \Omega / w)^{1 / 2}}e^{-\frac{ w |x|^2}{\Omega}}
+			.\] 
+			We see that it is a Gaussian kernel.
+		\end{proof}
+
+		\begin{proof}[Stochastic Calculus Proof]
+			Consider the process $d X_t = - \kappa X_t d t + d W_t$. Define the exponential martingale
+			\[
+				Z_t = \exp \left( \int _0^t \kappa X_t d W_t - \frac{1}{2} \int \kappa^2 X_s^2 ds \right) 
+			.\] 
+			By the Girsanov theorem, $X_t$ is a $\mathbb{Q}$-Brownian motion, where the tilted measure $\mathbb{Q}$ is given by
+			\[
+				\frac{d \mathbb{Q}}{d \mathbb{P}}
+				= Z_t
+			.\] 
+			Now, under the measure  $ \mathbb{Q}$, $W_t$ is a Ito process satisfying the SDE $dW = dX + \kappa X dt$, where $X$ is Brownian motion. $Z_t$ can be written as
+
+			\[
+				Z_t = \exp \left( \frac{\kappa}{2}\left( X_t^2 - x_0^2 - t \right) + \frac{1}{2} \int _0^t \kappa^2 X_s^2 ds \right) 
+			.\] 
+			where we have used the rules for Ito calculus $\int X_s d X_s = \frac{1}{2}(X_s^2 - s)$
+
+			Then, for any test function $f$, we have
+			\[
+				\mathbb{E}_P \left[ f(X_t) \right] 
+				= \mathbb{E}_\mathbb{Q} \left[ f(X_T) \frac{1}{Z_t} \right] 
+			.\] 
+			where we have renamed $t$ to $T$, and treat it as a terminal condition. The Feymann-Kac formula tells us that the value of the expectation is given by a stochastic heat equation, whose solution is known.
+		\end{proof}
+		
+		
+\end{itemize}
+
+
+

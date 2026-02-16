@@ -1,0 +1,496 @@
+\documentclass{if-beamer}
+\usepackage{tikz-cd}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, stmaryrd}
+\newcommand{\MR}[1]{\href{http://www.ams.org/mathscinet-getitem?mr=#1}{MR#1}}
+% --------------------------------------------------- %
+%                  Presentation info	              %
+% --------------------------------------------------- %
+\title[Boué-Dupuis]{Large Deviation Principle for Functionals of Brownian Motion}
+\subtitle{Report for MA595 Large Deviations}
+\author[Liu]{Xiaoyu Liu} % Add the second author here
+\institute[Purdue]{Purdue University \and \textbf{Instructed by Prof. Jonathon Peterson}}
+
+
+    
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{Structure of this talk}
+
+\begin{block}{LDP and Laplace Principle (LP)}
+    \begin{itemize}
+        \item Definitions of LDP and LP.
+        \item Equivalence between LDP and LP.
+    \end{itemize}
+\end{block}
+
+\begin{block}{The Boué-Dupuis formula}
+    \begin{itemize}
+        \item Statement of the formula, and why it is useful.
+        \item Proof of the formula.
+    \end{itemize}
+\end{block}
+
+\begin{block}{Applications of the Boué-Dupuis formula}
+    \begin{itemize}
+        \item LDP for small-noise SDE.
+        \item Semiclassical limit of constructive field theory.
+    \end{itemize}
+\end{block}
+
+
+\end{frame}
+
+
+\section{LP}
+\begin{frame}{The Laplace Principle}
+    \begin{block}<+->{Definition. Laplace Principle}
+        A family of random variables $\{X^n\}_{n > 0}$ on a Polish space $\mathcal{X}$ is said to satisfy the Laplace Principle with rate function $I: \mathcal{X} \to [0, \infty]$ if for all bounded continuous functions $f: \mathcal{X} \to \mathbb{R}$,
+        \[
+        \lim_{n \to \infty} \frac{1}{n} \log \mathbb{E}\left[\exp\left(- n f(X^n)\right)\right] = -\inf_{x \in \mathcal{X}} \{ f(x) + I(x) \}
+        .\]
+    \end{block}
+
+    \begin{itemize}[<+->]
+        \item \textbf{Varadhan's Lemma}: LDP $\implies$ LP.
+        \item \textbf{Equivalence}: LP $\iff$ LDP.
+    \end{itemize}
+
+    \begin{block}<+->{The Weak Convergence Approach (Richard Ellis, 1980s)}
+        \begin{enumerate}
+            \item Variational representation for finite $n$.
+            \item Prove convergence of the variational problem as $n \to \infty$.
+            \item Extract LDP/LP from the limit.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Proof of LP $\implies$ LDP}
+    \begin{block}{Idea}
+        When $h_\infty = \infty \cdot 1_{F^c}$, $F$ closed, we have $E e^{-n h_\infty(X^n)} = P(X^n \in F)$.
+    \end{block}
+    
+    \underline{Upper Bound}
+    Define
+    \[
+        h_j(x) = j \cdot (d(x, F) \wedge 1).
+    \]
+    Then $h_j \uparrow h_\infty$ as $j \to \infty$. Hence
+    \begin{align*}
+        \limsup_{n \to \infty} \frac{1}{n} \log P(X^n \in F) 
+        &= \limsup_{n \to \infty} \frac{1}{n} \log E e^{-n h_\infty(X^n)} \\
+        &\leq \limsup_{n \to \infty} \frac{1}{n} \log E e^{-n h_j(X^n)} \\
+        &= -\inf_{x \in \mathcal{X}} \{ h_j(x) + I(x) \} \\
+        &= - \left( I(F) \wedge \inf_{x \in F^c} h_j(x) + I(x) \right)
+    \end{align*}
+    It suffices to show that $\liminf_{j \to \infty} \inf_{x \in F^c} h_j(x) + I(x) \geq I(F)$.
+\end{frame}
+
+\begin{frame}{Proof of LP $\implies$ LDP (contd.)}
+    \underline{Upper Bound (contd.)}
+    We currently have
+    \[
+        \limsup_{n \to \infty} \frac{1}{n} \log P(X^n \in F) 
+        \leq -\inf_{x \in F^c} h_j(x) + I(x).
+    \]
+    It suffices to show that $\liminf_{j \to \infty} \inf_{x \in F^c} h_j(x) + I(x) \geq I(F)$. $I(F)>0$ wolg.
+    \vspace{1em }
+
+    Note, on $F^c \cap \{ d(x, F) > \epsilon \}$, $h_j(x) \geq j \epsilon \to \infty$.
+    
+    Suppose that $\liminf_{j \to \infty} \inf_{x \in F^c} h_j(x) + I(x) < I(F) - \epsilon$,
+    then there must exist a subsequence $x_j$ such that
+    \[
+        d(x_j, F) < 1/j, \quad h_j(x_j)  < I(F) - \epsilon/2.
+    \]
+    Then $I(x_j) < I(F) - \epsilon/2$, implies that $x_j$ lies in a compact set. Thus there is a subsequential limit $x^* \in F$.
+    
+    $d(x^*, F) = 0 \implies I(x^*) \geq I(F)$. But $I(x^*) \leq I(F) - \epsilon/2$, contradiction.
+\end{frame}
+
+\begin{frame}{Proof of LP $\implies$ LDP (contd.)}
+    \underline{Lower Bound} 
+    Let $G$ be open, assume $I(G) < \infty$ wolg. Take $I(x) < M < \infty$ and $B(x, \delta) \subset G$.
+    
+    Define
+    \[
+        h(y) = M \cdot \left( \frac{d(y, x)}{\delta}\wedge 1\right)
+    \]
+    Then $h(y)$ is bounded continuous, and $h(y) = M$ on $B(x, \delta)^c$. Thus
+
+    \begin{align*}
+        E e^{-n h(X^n)} &\leq e^{-n M} P(X^n \notin B(x, \delta)) + P(X^n \in B(x, \delta)) \\
+        &\leq e^{-n M} + P(X^n \in B(x, \delta))
+    \end{align*}
+    Hence
+    \begin{align*}
+        \liminf_{n \to \infty} \frac{1}{n} \log P(X^n \in B(x, \delta)) \wedge (-M)
+        &\geq -inf_{y \in \mathcal{X}} \{ h(y) + I(y) \} \\
+        &\geq - I(x) > -M
+    \end{align*}
+    Thus,
+    \[
+        \liminf_{n \to \infty} \frac{1}{n} \log P(X^n \in B(x, \delta)) \geq - I(x).
+    \]
+    Therefore
+    \[
+        \liminf_{n \to \infty} \frac{1}{n} \log P(X^n \in G) \geq \liminf_{n \to \infty} \frac{1}{n} \log P(X^n \in B(x, \delta)) \geq - I(x), \quad \forall x \in G.
+    \]
+\end{frame}
+
+\section{The Boué-Dupuis formula}
+
+\begin{frame}{The Boué-Dupuis Formula}
+    \begin{block}{Setup}
+        Let $(\Omega, \mathcal{F}, P)$ be a probability space with a filtration $\{\mathcal{F}_t\}$ supporting a standard $d$-dimensional Brownian motion $W$. Let $\mathcal{A}$ be the collection of all progressively measurable processes $v$ such that
+        \[
+            \int_0^T |v_s|^2 ds < \infty, \quad P-a.s.
+        \]
+    \end{block}
+
+    \begin{block}{The Boué-Dupuis Formula (1998)}
+        For any bounded measurable functional $F: C([0, T], \mathbb{R}^d) \to \mathbb{R}$,
+        \[
+            -\log E\left[e^{-F(W)}\right] = \inf_{v \in \mathcal{A}} E\left[ \frac{1}{2} \int_0^T |v_s|^2 ds + F\left( W + \int_0^{\cdot} v_s ds \right) \right].
+        \]
+    \end{block}
+
+    \begin{itemize}[<+->]
+        \item LHS: Laplace transform of $F(W)$, ingredient for LP, free energy.
+        \item RHS: Stochastic control problem, with cost functional involving $F$.
+        \item Usefulness: Identify $I(x)$ in LP by analyzing the RHS as noise vanishes.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof of the Boué-Dupuis Formula}
+    \underline{Upper Bound} Use two lemmas:
+    \begin{block}{Lemma 1 (Donsker-Varadhan, 1975)}
+        For any probability measure $Q \ll P$,
+        \[
+            -\log E\left[e^{-G(W)}\right] \leq E^Q[G(W)] + R(Q|P),
+        \]
+        where $R(Q|P)$ is the relative entropy of $Q$ with respect to $P$.
+    \end{block}
+    \begin{block}{Lemma 2 (consequence of Girsanov)}
+        For any $v \in \mathcal{A}_s$, there exists a process $\tilde v \in \mathcal{A}_s$ such that under the measure $Q^{\tilde v}$ defined by
+        \[
+            \frac{d Q^{\tilde v}}{d P} = \exp\left( \int_0^T \tilde v_s dW_s - \frac{1}{2} \int_0^T |\tilde v_s|^2 ds \right),
+        \]
+        the process $W^{\tilde v}_t = W_t - \int_0^t \tilde v_s ds$ is a standard Brownian motion, and
+        \[
+            Q^{\tilde v}\left((W^{\tilde v}, \tilde v) \in \cdot \right) \stackrel{d}{=} P\left( (W, v) \in \cdot \right).
+        \]
+    \end{block}
+    
+\end{frame}
+
+\begin{frame}{Proof of the Boué-Dupuis Formula (contd.)}
+    \underline{Upper Bound (contd.)} It suffices to consider simple processes $v$. By Lemma 1,
+    \[
+        -\log E\left[e^{-G(W)}\right] \leq E^{Q}[G(W)] + R(Q|P).
+    \]
+    Take $Q = Q^{\tilde v}$ from Lemma 2, then
+    \begin{align*}
+        E^{Q^{\tilde v}}[G(W)] &= E^{\tilde v}[G(W^{\tilde v} + \int_0^{\cdot} \tilde v_s ds)]\\
+        &= E^P [G(W + \int_0^{\cdot} v_s ds)].
+    \end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Proof of the Boué-Dupuis Formula (contd.)}
+    \underline{Upper Bound (contd.)} On the other hand,
+
+    \begin{align*}
+        R(Q^{\tilde v}|P) &= E^{Q^{\tilde v}}\left[ \log \frac{d Q^{\tilde v}}{d P} \right] \\
+        &= E^{Q^{\tilde v}}\left[ \int_0^T \tilde v_s dW_s - \frac{1}{2} \int_0^T |\tilde v_s|^2 ds \right] \\
+        &= E^{Q^{\tilde v}}\left[ \int_0^T \tilde v_s dW^{\tilde v}_s + \frac{1}{2} \int_0^T |\tilde v_s|^2 ds \right] \\
+        &= E^{Q^{\tilde v}}\left[ \frac{1}{2} \int_0^T |\tilde v_s|^2 ds \right] \\
+        &= E^P\left[ \frac{1}{2} \int_0^T |v_s|^2 ds \right].
+    \end{align*}
+
+    Combining both parts,
+    \[
+        -\log E\left[e^{-G(W)}\right] \leq E^P\left[ \frac{1}{2} \int_0^T |v_s|^2 ds + G\left( W + \int_0^{\cdot} v_s ds \right) \right].
+    \]
+
+\end{frame}
+
+\begin{frame}{Proof of the Boué-Dupuis Formula (contd.)}
+    \underline{Lower Bound} Proof via optimal control (different from Boué-Dupuis 1998).
+
+    We want to show
+    \[
+        -\log E\left[e^{-G(W)}\right] \geq \inf_{v \in \mathcal{A}} E^P\left[ \frac{1}{2} \int_0^T |v_s|^2 ds + G\left( W + \int_0^{\cdot} v_s ds \right) \right].
+    \]
+    It suffices to consider $G$ of the following form
+    \[
+        G(W) = h(W(t_1), W(t_2) - W(t_1), \dots, W(T) - W(t_{n-1})), \qquad h: \mathbb{R}^{K N} \to \mathbb{R} \text{ bounded continuous}.
+    \]
+
+    To this end, we first consider $G$ of the simplest form
+    \[
+        G(W) = g(W(T)).
+    \]
+
+    \begin{block}{Lemma 3}
+        \[
+            -\log E\left[e^{-g(W(T))}\right] = \inf_{v \in \mathcal{A}} E^P\left[ \frac{1}{2} \int_0^T |v_s|^2 ds + g\left( W(T) + \int_0^{T} v_s ds \right) \right].
+        \]
+    \end{block}
+\end{frame}
+
+\begin{frame}{Proof of Lemma 3. $ -\log E\left[e^{-g(W(T))}\right] = \inf_{v \in \mathcal{A}} E^P\left[ \frac{1}{2} \int_0^T |v_s|^2 ds + g\left( W(T) + \int_0^{T} v_s ds \right) \right].$}
+    % \begin{block}{Lemma 3}
+    %     \[
+    %         -\log E\left[e^{-g(W(T))}\right] = \inf_{v \in \mathcal{A}} E^P\left[ \frac{1}{2} \int_0^T |v_s|^2 ds + g\left( W(T) + \int_0^{T} v_s ds \right) \right].
+    %     \]
+    % \end{block}
+    \underline{Proof.} 
+    \begin{enumerate}
+        \item $\phi(z, x, t) = E e^{-g(z, x + W(T - t))} = E [e^{-g(z, W(T))} | W(t) = x]$ satisfies the backward heat equation (by Feynman-Kac):
+        \[
+            \begin{cases}
+                \frac{\partial \phi}{\partial t} + \frac{1}{2} \Delta_x \phi = 0, \quad t < T,\\
+                \phi(z, x, T) = e^{-g(z, x)}.
+            \end{cases}
+        \]
+        \item Let $V(z, x, t) = -\log \phi(z, x, t)$, then $V$ satisfies the HJB equation:
+        \[
+            \begin{cases}
+                \frac{\partial V}{\partial t} - \frac{1}{2} \Delta_x V + \frac{1}{2} |\nabla_x V|^2 = 0, \quad t < T,\\
+                V(z, x, T) = g(z, x).
+            \end{cases}
+        \]
+        
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+    \begin{enumerate}[<+->]
+        \item[2] Let $V(z, x, t) = -\log \phi(z, x, t)$, then $V$ satisfies the HJB equation:
+        \[
+            \begin{cases}
+                \frac{\partial V}{\partial t} - \frac{1}{2} \Delta_x V + \frac{1}{2} |\nabla_x V|^2 = 0, \quad t < T,\\
+                V(z, x, T) = g(z, x).
+            \end{cases}
+        \]
+        \item[3] By verification theorem in stochastic control, this is equivalent to
+        \[
+            \partial_t V - \frac{1}{2} \Delta_x V + \inf_{u} \left\{ u \cdot \nabla_x V + \frac{1}{2} |u|^2 \right\} = 0.
+        \]
+        which is the HJB equation for the control problem
+        \[
+            V(z, x, t) = \inf_{u(t) \in \mathcal{A}} E\left[ \frac{1}{2} \int_t^T |u(s)|^2 ds + g\left( z, X^{u}(T) \right) \Big| X^{u}(t) = x \right],
+        \]
+        and the optimal control is $u^*(s) = -\nabla_x V(z, X(s), s)$.
+        \item[4] Taking $t=0$, $x=0$ gives the desired result.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Proof of the Boué-Dupuis Formula (contd.)}
+    \underline{Lower Bound (contd.)} $G(W) = h(W(t_1), W(t_2) - W(t_1), \dots, W(T) - W(t_{n-1}))$.
+
+    Define
+    \begin{align*}
+        V_K &= h : \mathbb{R}^{K N} \to \mathbb{R}, \\
+        V_j(z_j) &= -\log E\left[ \exp\left( - V_{j+1}(z_j, W(t_{j+1}) - W(t_j)) \right) \right]: \mathbb{R}^{j N} \to \mathbb{R}, \quad j = K-1, \dots, 1,\\
+    \end{align*}
+    Under this definition,
+    \begin{align*}
+        V_0 &= -\log E\left[ e^{- V_1(W(t_1) - W(0))} \right] \\
+        &= -\log E^{\mathcal{F}_{t_1}}\left[ \exp\left( \log E^{\mathcal{F}_{t_2}}\left[ \exp\left( - V_2(z_1, z_2) \right) \right] \right) \right] \\
+        &= - \log E \exp \left( - V_2 (z_1, z_2) \right) \\
+        &\vdots \\
+        &= -\log E\left[ e^{-h(W(t_1), W(t_2) - W(t_1), \dots, W(T) - W(t_{n-1}))} \right] \\
+        &= -\log E\left[e^{-G(W)}\right].
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Proof of the Boué-Dupuis Formula (contd.)}
+    \underline{Lower Bound (contd.)} Now apply Lemma 3 iteratively:
+    \begin{align*}
+        - \log E\left[e^{-G(W)}\right] &= - \log E e^{- V_1(z_1)} \\
+        &= E[ \frac{1}{2} \int_0^{t_1} |u(s)|^2 ds + V_1(W(t_1) + \int_0^{t_1} u(s) ds) ] \\
+        &=: E[ \frac{1}{2} \int_0^{t_1} |u(s)|^2 ds + V_1(\bar{z_1})]
+    \end{align*}
+    where $\bar{z_1} = W(t_1) + \int_0^{t_1} u(s) ds$ is the optimal control.
+    
+    Next,
+    \begin{align*}
+        V_1(\bar{z_1}) &= -\log E \left[ e^{- V_2(\bar{z_1}, z_2)} \right] \\
+        &= E\left[ \frac{1}{2} \int_{t_1}^{t_2} |u(s)|^2 ds + V_2(\bar{z_1}, \bar{z_2}) \right]
+    \end{align*}
+
+    After $K$ iterations, we obtain
+    \[
+        - \log E\left[e^{-G(W)}\right] = E\left[ \frac{1}{2} \int_0^{T} |u(s)|^2 ds + h(\bar{z_1}, \bar{z_2}, \dots, \bar{z_K}) \right].
+    \]
+    Now, we see that the inf is attained by $(u(t))_{t \in [0, T]}$ constructed above. Qed.
+\end{frame}
+
+\section{Application to small-noise SDE}
+
+\begin{frame}{LDP for Small-Noise SDE}
+    \begin{block}{Goal}
+    Consider the SDE
+    \[
+        dX^{\varepsilon}_t = b(X^{\varepsilon}_t) dt + \sqrt{\varepsilon} dW_t, \quad X^{\varepsilon}_0 = x_0,
+    \]
+    where $b: \mathbb{R}^d \to \mathbb{R}^d$ is Lipschitz continuous. We want to show that $\{X^{\varepsilon}\}_{\varepsilon > 0}$ satisfies the LDP on $C([0, T], \mathbb{R}^d)$ with rate function
+    \[
+        I(\phi) = \begin{cases}
+            \frac{1}{2} \int_0^T |\dot{\phi}(t) - b(\phi(t))|^2 dt, & \phi \text{ absolutely continuous}, \phi(0) = x_0,\\
+            \infty, & \text{otherwise}.
+        \end{cases}
+    \]
+    \end{block}
+\end{frame}
+
+\begin{frame}{LDP for Small-Noise SDE}
+    \begin{block}{General Setup}
+        \begin{itemize}[<+->]
+            \item Wiener space $(\Omega = C((\mathbb{R}_+; \mathbb{R}^d), \mathcal{F}, P, X)$ with canonical process $X_t(\omega) = \omega(t)$. $\mu = \text{Law}(X)$.
+            \item $Y^{\varepsilon} := \mathcal{G}^{\varepsilon}(X)$, where $\mathcal{G}^{\varepsilon}: C([0, T], \mathbb{R}^d) \to C([0, T], \mathbb{R}^d)$ is measurable.
+            \item $\mathscr{U}_M \subset L^2_P(\mathbb{R}_+ \times \Omega; \mathbb{R}^d)$ consisting of all $u$ such that $\int_0^T |u(s, \omega)|^2 ds \leq M$ $\mu$-a.s.
+            \item $\mathbb{U}_M \subset L^2(\mathbb{R}_+; \mathbb{R}^d)$ consisting of all deterministic $f$ such that $\int_0^T |f(s)|^2 ds \leq M$.
+            \item $\mathbb{U}_M$ is compact in the weak topology of $L^2$.
+            \item $J(u)(t) = \int_0^t u(s) ds$ is integration operator.
+            \item Assume that there exists a measurable map $\mathcal{G}^0$ s.t.
+            \begin{enumerate}
+                \item Whenever $M < \infty, (u^\epsilon) \subset \mathscr{U}_M$, $u^\epsilon \to u$ in distribution.
+                Then $\mathcal{G}^\epsilon(X + \epsilon^{-1/2} J(u^\epsilon)) \to \mathcal{G}^0(J(u))$ in distribution.
+                \item For every $M < \infty$, the set $\{ \mathcal{G}^0(J(u)): u \in \mathbb{U}_M \}$ is compact.
+            \end{enumerate}
+        \end{itemize}
+    \end{block}
+
+
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Rate Function}
+        Define the rate function $I: \mathcal{E}, \mathbb{R}^d) \to [0, \infty]$ as
+        \[
+            I(\phi) = \frac{1}{2} \inf_{\{u \in L^2([0, T], \mathbb{R}^d): \phi = \mathcal{G}^0(J(u))\}} \int_0^T |u(s)|^2 ds.
+        \]
+        \underline{Lemma.} $I$ is a rate function.
+    \end{block}
+    \begin{block}{Theorem}
+        Under the general setup, the family $\{Y^{\varepsilon}\}_{\varepsilon > 0}$ satisfies the Laplace Principle with rate function $I$ and rate $1/ \varepsilon$.
+    \end{block}
+    \textit{Proof.} Use the Boué-Dupuis formula:
+    \[
+        -\varepsilon \log E\left[ e^{- h(Y^{\varepsilon}) / \varepsilon} \right] = \inf_{u \in \mathscr{A}} E\left[ 
+            \frac{1}{2} \Vert \epsilon^{1/2} u \Vert^2_{L^2_P(\mathbb{R}_+; \mathbb{R}^d)} + h\left( \mathcal{G}^{\varepsilon}(X + J(u)) \right) \right]. 
+    \]
+    Rename $\epsilon^{1/2} u \to u$,
+    \[
+        -\varepsilon \log E\left[ e^{- h(Y^{\varepsilon}) / \varepsilon} \right] = \inf_{u \in \mathscr{A}} E\left[ 
+            \frac{1}{2} \Vert u \Vert^2 + h\left( \mathcal{G}^{\varepsilon}(X + \epsilon^{-1/2} J(u)) \right) \right]. 
+    \]
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Theorem}
+        Under the general setup, the family $\{Y^{\varepsilon}\}_{\varepsilon > 0}$ satisfies the Laplace Principle with rate function $I$ and rate $1/ \varepsilon$.
+    \end{block}
+    \textit{Proof (Contd.)} 
+    \[
+        -\varepsilon \log E\left[ e^{- h(Y^{\varepsilon}) / \varepsilon} \right] = \inf_{u \in \mathscr{A}} E\left[ 
+            \frac{1}{2} \Vert u \Vert^2 + h\left( \mathcal{G}^{\varepsilon}(X + \epsilon^{-1/2} J(u)) \right) \right]. 
+    \]
+    Fix $\delta > 0$, and for every $\varepsilon > 0$, choose $u^{\varepsilon} \in \mathscr{A}$ such that
+    \[
+        -\varepsilon \log E\left[ e^{- h(Y^{\varepsilon}) / \varepsilon} \right] \geq E\left[ 
+            \frac{1}{2} \Vert u^{\varepsilon} \Vert^2 + h\left( \mathcal{G}^{\varepsilon}(X + \epsilon^{-1/2} J(u^{\varepsilon})) \right) \right] - \delta.
+    \]
+    Since $h$ is bounded, $E[ \frac{1}{2} \Vert u^{\varepsilon} \Vert^2 ]$ is uniformly bounded. Replace $u^{\varepsilon}$ by $u^{\varepsilon, N}$ stopped when hitting $N$.
+    Then use compactness of $\mathbb{U}_M$ to extract a weakly convergent subsequence, $u^{\varepsilon, N} \to u \in \mathscr{U}_N$.
+    
+    By assumption 1, $\mathcal{G}^{\varepsilon}(X + \epsilon^{-1/2} J(u^{\varepsilon, N})) \to \mathcal{G}^0(J(u))$ in distribution. By Fatou's lemma,
+    $\liminf_{\varepsilon \to 0} \Vert u^{\varepsilon, N} \Vert^2 \geq \Vert u \Vert^2$.
+
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Theorem}
+        Under the general setup, the family $\{Y^{\varepsilon}\}_{\varepsilon > 0}$ satisfies the Laplace Principle with rate function $I$ and rate $1/ \varepsilon$.
+    \end{block}
+    \textit{Proof (Contd.)} 
+ x    Thus
+
+    \begin{align*}
+        \liminf_{n \to \infty} E &\left[ 
+            \frac{1}{2} \Vert u^{\varepsilon_n, N} \Vert^2 + h\left( \mathcal{G}^{\varepsilon_n}(X + \epsilon_n^{-1/2} J(u^{\varepsilon_n, N})) \right) \right] \\
+        &\geq E\left[ \frac{1}{2} \Vert u \Vert^2 + h\left( \mathcal{G}^0(J(u)) \right) \right] \\
+        &\geq \inf_{v \in \mathscr{A}} E\left[ \frac{1}{2} \Vert v \Vert^2 + h\left( \mathcal{G}^0(J(v)) \right) \right]\\
+        &= \inf_{x \in \mathcal{E}} \inf_{ \{ v : x = \mathcal{G}^0(J(v)) \} } h(x) + E \left[ \frac{1}{2} \Vert v \Vert^2 \right] \\
+        &= \inf_{x \in \mathcal{E}} h(x) + I(x).
+    \end{align*}
+
+    From this, we have
+    \[
+        \liminf_{\varepsilon \to 0} -\varepsilon \log E\left[ e^{- h(Y^{\varepsilon}) / \varepsilon} \right] \geq
+        \inf_{x \in \mathcal{E}} h(x) + I(x) - 2 \delta.
+    \]
+    Since $\delta$ is arbitrary, the lower bound is proved. Upper bound is similar. Qed.
+\end{frame}
+
+
+
+
+\section{Application to CQFT}
+
+\begin{frame}{Semiclassical Limit}
+    
+\end{frame}
+
+\begin{frame}{Sketch of the Proof for LDP of Sine-Gordon Model in Semiclassical Limit}
+\begin{block}{Theorem (Barashkov 2022)}
+    The measure $\nu_{\mathrm{SG}, \hbar}(\mathrm{d} \varphi)=\frac{1}{Z_{\hbar}} e^{-\frac{\lambda}{\hbar} \int \cos \left(\hbar^{1 / 2} \beta \varphi\right)} \mu(\mathrm{d} \varphi)$.
+    satisfies the LDP with rate function 
+    \[
+I(\varphi)=\lambda \int(\cos (\beta \varphi(x))-1) \mathrm{d} x+\frac{1}{2} m^2 \int \varphi^2(x) \mathrm{d} x+\frac{1}{2} \int|\nabla \varphi(x)|^2 \mathrm{~d} x .
+\]
+    and rate $1 / \hbar$ as $\hbar \to 0$.
+\end{block}
+\begin{block}{Sketch of Proof}
+    \begin{itemize}[<+->]
+        \item Use Boué-Dupuis formula to represent the Laplace transform of $\nu_{\mathrm{SG}, \hbar}$.
+%         \[
+% \begin{aligned}
+% & \hbar \log \int e^{-\frac{1}{\hbar} f} \mathrm{~d} \nu_{\mathrm{SG}, \hbar}^{T, \rho}(\mathrm{~d} \phi) \\
+% = & \inf _{u \in \mathbb{H}_a} \mathbb{E}\left[f\left(\hbar^{1 / 2} W_{\infty}+I_{\infty}(u)\right)+\lambda \int \rho(x) \llbracket \cos \left(\hbar^{1 / 2} \beta W_{\infty}+\beta I_{\infty}(u)\right) \rrbracket \mathrm{d} x+\frac{1}{2} \int_0^{\infty}\left\|u_t\right\|_{L^2\left(\mathbb{R}^2\right)}^2 \mathrm{~d} t\right.
+% \end{aligned}
+% \]
+Use $W_t, t \in [0, \infty]$, a cylindrical Brownian motion to interpolate the Gaussian free field $\mu$.
+        \item Analyze the variational problem as $\hbar \to 0$.
+        \item Identify the rate function $I(\varphi)$ from the limit of the variational problem.
+    \end{itemize}
+
+\end{block}
+\end{frame}
+
+
+\section{References}
+%% REFERENCES
+\begin{frame}
+    \begin{center}
+        \Huge Thank you!
+    \end{center}
+    \vfill
+    \begin{itemize}
+        \item Boué, M., \& Dupuis, P. (1998). A variational representation for certain functionals of Brownian motion. The Annals of Probability, 26(4), 1641–1659. 
+        \item 
+        Budhiraja, A., \& Dupuis, P. (2019). Analysis and Approximation of Rare Events: Representations and Weak Convergence Methods (Vol. 94). New York, NY: Springer US. 
+        \item Barashkov, N. (2022, October 4). A stochastic control approach to Sine Gordon EQFT. arXiv. 
+        \item Gubinelli, M. (2022, July 7). The martingale representation theorem and applications. lecture note, UBonn. 
+    \end{itemize}
+\end{frame}
+\end{document}

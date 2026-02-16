@@ -1,0 +1,233 @@
+\homework{6}{Tue 23 Dec 2025 14:20}{}
+
+\textbf{Problem 1.} Propagator on Green's function:
+\begin{itemize}
+	\item Show that both the advanced and retarded propagaors are Green's functions of the Klein-Gordon operator.
+	\item Show that the Feynman propagator is a Green's function.
+\end{itemize}
+	\begin{proof}[Solution]
+		We work with real scalar free field. Recall that
+		\[
+			D(x,y) = \left\langle \Omega \right| \hat{\phi} \left( x \right) \hat{\phi} \dag (y) \left| \Omega \right\rangle = \int \tilde{dk} e^{- i k_ \mu (x^\mu - y^\mu)}
+		.\] 
+		And the Pauli–Jordan function is
+		\[
+			i \Delta(x,y) = \left\langle \Omega \right| \left[ \hat{\phi} (x) \hat{\phi} \dag(y) \right] \left| \Omega \right\rangle 
+		.\] 
+		The advanced and retarded propagators are
+		\[
+			i \Delta_R(x, y) = \theta(x^0 - y^0) i \Delta(x, y), \qquad 
+			i \Delta_A(x,y) = \theta(y^0 - x^0) i \Delta(x,y)
+		.\]
+		Compute
+		\begin{align*}
+\begin{aligned}
+\left(\partial^2+m^2\right) D_R(x-y)= & \left(\partial^2 \theta( \right. \\
+& \left.\left.x^0-y^0\right)\right)\langle 0|[\phi(x), \phi(y)]|0\rangle \\
+& +2\left(\partial_\mu \theta\left(x^0-y^0\right)\right)\left(\partial^\mu\langle 0|[\phi(x), \phi(y)]|0\rangle\right) \\
+& +\theta\left(x^0-y^0\right)\left(\partial^2+m^2\right)\langle 0|[\phi(x), \phi(y)]|0\rangle \\
+= & -\delta\left(x^0-y^0\right)\langle 0|[\pi(x), \phi(y)]|0\rangle \\
+& +2 \delta\left(x^0-y^0\right)\langle 0|[\pi(x), \phi(y)]|0\rangle+0 \\
+= & -i \delta^{(4)}(x-y) .
+\end{aligned}
+\end{align*}
+We have used integration by part on the term with two derivatives on $\theta(x^0 - y^0)$. We have also used the definition of canonical conjugations, which for scalar free field is $\pi = \ddot{\phi} $.
+
+The computation for advanced propagator is similar.
+
+This above computation can be repeated entirely by replacing $[\phi(x), \phi(y)] $ by $\phi (x) \phi(y)$, so $D(x, y)$ is also a Green's function. 
+
+Now $i\Delta_F(x, y) = \theta(x^0 - y_0)D(x - y) + \theta(y^0 - x^0) D(y - x)$. It is stitching-together of two Green's functions, so we need to check if the boundary (theta functions) also solves the Klein-Gordon. Let's compute:
+
+\begin{align*}
+	(\partial^2 + m^2) i \Delta_F
+	&=  \delta(x^0 - y^0) \partial_t D(x - y) + \delta(y^0 - x^0) \partial_t D(y - x) \\
+	&= \delta(x_0 - y_0)\left(
+		\left\langle \Omega \right| \pi(x) \phi(y) \left| \Omega \right\rangle 
+		- \left\langle \Omega \right| \phi(y) \pi(x) \left| \Omega \right\rangle 
+	\right)  \\
+	&= \delta(x^0 - y^0) \left\langle \Omega \right| \left[ \pi(x), \phi(y) \right] \left| \Omega \right\rangle  \\
+	&= - i \hbar \delta^4 (x - y)
+.\end{align*}
+Hence the Feynman propagator is a Green's function.
+	\end{proof}
+
+
+\textbf{Problem 2. Causality and Propagator}
+\begin{itemize}
+	\item Calculate the two point function of massive free fields in $d+1$ dimensions.
+
+\begin{proof}[Solution]
+	Consider complex massive free field, the Lagrangian density is
+	\[
+		\mathcal{L} = \frac{1}{2} \partial_ \mu \phi ^\dag \partial^ \mu \phi - \frac{1}{2} m \phi^\dag \phi
+	.\] 
+	Mode expansion after canonical quantization:
+	\[
+		\phi(\vec{x} ) = \int \tilde{dk} a(\vec{k} ) e^{i \vec{k}  \vec{x} } + b^{\dag} (\vec{k} ) e^{- i \vec{k} \vec{x} }
+	.\] 
+	After time evolution $a(\vec{k} ) \to a(\vec{k} ) e^{- i \omega_k t}$, this becomes
+	\[
+		\phi(x) = \int \tilde{dk} a(\vec{k} ) e^{- i k x} + b^{\dag} (\vec{k} ) e^{i k x}
+	.\] 
+	The two-point function is
+	\[
+		D(x - y) = \left\langle \Omega \right| \phi(x) \phi(y) \left| \Omega \right\rangle = \int \tilde{dk} e^{- i k(x - y)}
+	.\] 
+
+	For time-like separation, we may assume that $x_0 - y_0 > 0$ and $\vec{x}  = \vec{y} $. Then
+	\begin{align*}
+		D(t)
+		&= \int \frac{d^d k}{(2 \pi)^d} \frac{1}{2 \omega_k} e^{- i k^0 t} \\
+		&= \frac{2 \pi^{d / 2}}{\Gamma(\frac{d}{2})} \int_0^\infty  \frac{d k}{(2 \pi)^d} k^{d - 1} \frac{e^{- i \omega_k t}}{2 \omega_k} \\
+		&= \int _m^\infty \frac{dE (E^2 - m^2)^{\frac{d - 2}{2}}}{(4 \pi)^{d / 2} \Gamma(\frac{d}{2})} e^{- i E t}
+	.\end{align*}
+	Compare with standard form of Bessel function:
+	\begin{align*}
+K_\nu(z)=\frac{\sqrt{\pi}\left(\frac{1}{2} z\right)^\nu}{\Gamma\left(\nu+\frac{1}{2}\right)} \int_1^{\infty} e^{-z u}\left(u^2-1\right)^{\nu-\frac{1}{2}} d u
+\end{align*}
+After some algebra we get
+\[
+D(t)=\frac{1}{2^{\frac{d+1}{2}} \pi^{\frac{d+1}{2}}}\left(\frac{m}{i t}\right)^{\frac{d-1}{2}} K_{\frac{d-1}{2}}(i m t)
+\]
+
+For space-like separation, assume that $x^0 = y^0 $ and  $\vec{x}  - \vec{y} = \vec{r} $. Then
+\begin{align*}
+	D(r) &= \int \frac{d^d k}{(2 \pi)^d} \frac{1}{2 \omega_k}e^{- i \vec{k} \vec{r} }
+.\end{align*}
+Use the identity for angular integration
+\[
+\int d \Omega_{d-1} e^{i k r \cos \theta}=(2 \pi)^{d / 2}(k r)^{1-\frac{d}{2}} J_{\frac{d}{2}-1}(k r)
+\]
+We have
+\[
+D(r)=\frac{1}{2(2 \pi)^d}(2 \pi)^{d / 2} r^{1-\frac{d}{2}} \int_0^{\infty} d k \frac{k^{d / 2}}{\sqrt{k^2+m^2}} J_{\frac{d}{2}-1}(k r)
+\]
+which can be written as
+\[
+	D(r) = \frac{m^{\frac{d}{2}}}{(2 \pi)^{\frac{d}{2}+1}} \frac{K_{\frac{d}{2}}(m r)}{r^{\frac{d}{2}}}
+.\] 
+\end{proof}
+
+\item Calculate the commutator.
+
+\begin{proof}[Solution]
+	We separate into time-like and space-like cases. For spacelike separation, note that $D(r)$ is independent of the sign of $(\vec{x}  - \vec{y} )$, so it is an even function of space, and the commutator simply vanishes.
+
+	For timelike, the commutator will be related to $D(\tau)$ where $\tau^2 = (x^0 - y^0)^2 - (\vec{x}  - \vec{y} )^2$ is the proper time. The detail of computation is omitted.
+\end{proof}
+
+
+\textbf{Problem 3. Charge Conjugation.} Derive the action of the charge conjugation operator on a Dirac spinor.
+
+\begin{proof}[Solution]
+	We work in the Weyl basis of the Dirac algebra. We let the conjugation operator $C$ to be a unitary, symmetric operator sending $\gamma^\mu \to  C \gamma^\mu C^{-1} = - \gamma^T$. Then $C = - i \gamma^0 \gamma^2$. (Note: in the Dirac basis, $C = - i \gamma^0 \gamma^2 \gamma^5$.)
+
+	
+\end{proof}
+
+
+	
+\end{itemize}
+
+
+\textbf{Problem 4. Gordon identities.}
+Derive the identities (Schwartz, problem 11.4)
+\[
+\bar{u}(q) \gamma^\mu u(p)=\bar{u}(q)\left[\frac{q^\mu+p^\mu}{2 m}+i \frac{\sigma^{\mu \nu}\left(q_\nu-p_\nu\right)}{2 m}\right] u(p)
+\begin{proof}[Solution]
+We assume that the spinors are on shell, so they satisfy the Dirac equations
+\[
+(\gamma \cdot p - m) u(p) = 0,
+\qquad
+\bar{u}(q) (\gamma \cdot q - m) = 0,
+\]
+where $\gamma \cdot p := \gamma_\nu p^\nu$.
+Equivalently,
+\[
+(\gamma \cdot p) u(p) = m u(p),
+\qquad
+\bar{u}(q) (\gamma \cdot q) = m \bar{u}(q).
+\]
+
+We begin with the quantity $2m\,\bar{u}(q)\gamma^\mu u(p)$.
+Using the on-shell relations, we write
+\[
+\bar{u}(q)(\gamma \cdot q)\gamma^\mu u(p)
+= m\,\bar{u}(q)\gamma^\mu u(p),
+\qquad
+\bar{u}(q)\gamma^\mu(\gamma \cdot p)u(p)
+= m\,\bar{u}(q)\gamma^\mu u(p).
+\]
+Adding these two equations gives
+\[
+2m\,\bar{u}(q)\gamma^\mu u(p)
+=
+\bar{u}(q)\left[
+(\gamma \cdot q)\gamma^\mu
++
+\gamma^\mu(\gamma \cdot p)
+\right]u(p).
+\]
+
+We now simplify the gamma-matrix products. Recall the identity
+\[
+\gamma^\alpha \gamma^\mu
+=
+g^{\alpha\mu}
+-
+i \sigma^{\alpha\mu},
+\qquad
+\sigma^{\mu\nu} := \frac{i}{2}[\gamma^\mu,\gamma^\nu].
+\]
+
+First,
+\[
+(\gamma \cdot q)\gamma^\mu
+=
+\gamma^\alpha q_\alpha \gamma^\mu
+=
+q^\mu + i \sigma^{\mu\nu} q_\nu,
+\]
+where we used the antisymmetry of $\sigma^{\mu\nu}$.
+Similarly,
+\[
+\gamma^\mu(\gamma \cdot p)
+=
+\gamma^\mu \gamma^\beta p_\beta
+=
+p^\mu - i \sigma^{\mu\nu} p_\nu.
+\]
+
+Adding these expressions, we obtain
+\[
+(\gamma \cdot q)\gamma^\mu + \gamma^\mu(\gamma \cdot p)
+=
+(q^\mu + p^\mu)
++
+i \sigma^{\mu\nu}(q_\nu - p_\nu).
+\]
+
+Substituting back, we find
+\[
+2m\,\bar{u}(q)\gamma^\mu u(p)
+=
+\bar{u}(q)\left[
+(q^\mu + p^\mu)
++
+i \sigma^{\mu\nu}(q_\nu - p_\nu)
+\right]u(p).
+\]
+
+Dividing both sides by $2m$ gives the desired Gordon identity:
+\[
+\bar{u}(q)\gamma^\mu u(p)
+=
+\bar{u}(q)\left[
+\frac{q^\mu+p^\mu}{2 m}
++i \frac{\sigma^{\mu \nu}\left(q_\nu-p_\nu\right)}{2 m}
+\right] u(p).
+\]
+\end{proof}
+
+
