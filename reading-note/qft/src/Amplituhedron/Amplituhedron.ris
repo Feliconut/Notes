@@ -1,0 +1,216 @@
+TY  - JOUR
+TI  - BCFW tilings and cluster adjacency for the amplituhedron
+AU  - Even-Zohar, Chaim
+AU  - Lakrec, Tsviqa
+AU  - Parisi, Matteo
+AU  - Sherman-Bennett, Melissa
+AU  - Tessler, Ran
+AU  - Williams, Lauren
+T2  - Proceedings of the National Academy of Sciences
+AB  - In 2005, Britto, Cachazo, Feng, and Witten gave a recurrence (now known as the BCFW recurrence) for computing scattering amplitudes in
+              N
+              = 4 super Yang–Mills theory. Arkani-Hamed and Trnka subsequently introduced the amplituhedron to give a geometric interpretation of the BCFW recurrence. Arkani-Hamed and Trnka conjectured that each way of iterating the BCFW recurrence gives a “triangulation” or “tiling” of the m=4 amplituhedron. In this article, we prove the BCFW tiling conjecture of Arkani-Hamed and Trnka. We also prove the cluster adjacency conjecture for BCFW tiles of the amplituhedron, which says that facets of tiles are cut out by collections of compatible cluster variables for the Grassmannian Gr4,n. Moreover we show that each BCFW tile is the subset of the Grassmannian where certain cluster variables have particular signs.
+DA  - 2025/03/25/
+PY  - 2025
+DO  - 10.1073/pnas.2408572122
+DP  - DOI.org (Crossref)
+VL  - 122
+IS  - 12
+SP  - e2408572122
+J2  - Proc. Natl. Acad. Sci. U.S.A.
+LA  - en
+SN  - 0027-8424, 1091-6490
+UR  - https://pnas.org/doi/10.1073/pnas.2408572122
+Y2  - 2025/06/18/15:13:53
+L1  - files/5188/Even-Zohar et al_2025_BCFW tilings and cluster adjacency for the amplituhedron.pdf
+ER  - 
+
+TY  - JOUR
+TI  - The amplituhedron BCFW triangulation
+AU  - Even-Zohar, Chaim
+AU  - Lakrec, Tsviqa
+AU  - Tessler, Ran J.
+T2  - Inventiones mathematicae
+AB  - The amplituhedron A n , k , 4 $\mathcal{A}_{n,k,4}$ is a geometric object, introduced by Arkani-Hamed and Trnka (2013) in the study of scattering amplitudes in quantum field theories. They conjecture that A n , k , 4 $\mathcal{A}_{n,k,4}$ admits a decomposition into images of BCFW positroid cells, arising from the Britto–Cachazo–Feng–Witten recurrence (2005). We prove that this conjecture is true.
+DA  - 2025/03/01/
+PY  - 2025
+DO  - 10.1007/s00222-025-01316-1
+DP  - link.springer.com
+VL  - 239
+IS  - 3
+SP  - 1009
+EP  - 1138
+J2  - Invent. math.
+LA  - en
+PB  - Springer Berlin Heidelberg
+SN  - 1432-1297
+UR  - https://link.springer.com/article/10.1007/s00222-025-01316-1
+Y2  - 2025/06/18/15:13:56
+L1  - files/5178/Even-Zohar et al_2025_The amplituhedron BCFW triangulation.pdf
+ER  - 
+
+TY  - GEN
+TI  - Scattering Amplitudes and the Positive Grassmannian
+AU  - Arkani-Hamed, Nima
+AU  - Bourjaily, Jacob L.
+AU  - Cachazo, Freddy
+AU  - Goncharov, Alexander B.
+AU  - Postnikov, Alexander
+AU  - Trnka, Jaroslav
+AB  - We establish a direct connection between scattering amplitudes in planar four-dimensional theories and a remarkable mathematical structure known as the positive Grassmannian. The central physical idea is to focus on on-shell diagrams as objects of fundamental importance to scattering amplitudes. We show that the all-loop integrand in N=4 SYM is naturally represented in this way. On-shell diagrams in this theory are intimately tied to a variety of mathematical objects, ranging from a new graphical representation of permutations to a beautiful stratification of the Grassmannian G(k,n) which generalizes the notion of a simplex in projective space. All physically important operations involving on-shell diagrams map to canonical operations on permutations; in particular, BCFW deformations correspond to adjacent transpositions. Each cell of the positive Grassmannian is naturally endowed with positive coordinates and an invariant measure which determines the on-shell function associated with the diagram. This understanding allows us to classify and compute all on-shell diagrams, and give a geometric understanding for all the non-trivial relations among them. Yangian invariance of scattering amplitudes is transparently represented by diffeomorphisms of G(k,n) which preserve the positive structure. Scattering amplitudes in (1+1)-dimensional integrable systems and the ABJM theory in (2+1) dimensions can both be understood as special cases of these ideas. On-shell diagrams in theories with less (or no) supersymmetry are associated with exactly the same structures in the Grassmannian, but with a measure deformed by a factor encoding ultraviolet singularities. The Grassmannian representation of on-shell processes also gives a new understanding of the all-loop integrand for scattering amplitudes, presenting all integrands in a novel dLog form which directly reflects the underlying positive structure.
+DA  - 2014/03/18/
+PY  - 2014
+DO  - 10.48550/arXiv.1212.5605
+DP  - arXiv.org
+PB  - arXiv
+UR  - http://arxiv.org/abs/1212.5605
+Y2  - 2025/06/18/21:24:35
+L1  - files/5187/Arkani-Hamed et al_2014_Scattering Amplitudes and the Positive Grassmannian.pdf
+L2  - files/5182/1212.html
+KW  - reading
+KW  - important
+KW  - Mathematics - Combinatorics
+KW  - High Energy Physics - Theory
+KW  - Mathematics - Algebraic Geometry
+ER  - 
+
+TY  - JOUR
+TI  - Direct Proof Of Tree-Level Recursion Relation In Yang-Mills Theory
+AU  - Britto, Ruth
+AU  - Cachazo, Freddy
+AU  - Feng, Bo
+AU  - Witten, Edward
+T2  - Physical Review Letters
+AB  - Recently, by using the known structure of one-loop scattering amplitudes for gluons in Yang-Mills theory, a recursion relation for tree-level scattering amplitudes has been deduced. Here, we give a short and direct proof of this recursion relation based on properties of tree-level amplitudes only.
+DA  - 2005/05/10/
+PY  - 2005
+DO  - 10.1103/PhysRevLett.94.181602
+DP  - arXiv.org
+VL  - 94
+IS  - 18
+SP  - 181602
+J2  - Phys. Rev. Lett.
+LA  - en
+SN  - 0031-9007, 1079-7114
+UR  - http://arxiv.org/abs/hep-th/0501052
+Y2  - 2025/06/18/21:25:14
+L1  - files/5189/Britto et al_2005_Direct Proof Of Tree-Level Recursion Relation In Yang-Mills Theory.pdf
+KW  - important
+KW  - High Energy Physics - Theory
+KW  - tree-level
+ER  - 
+
+TY  - JOUR
+TI  - The Amplituhedron
+AU  - Arkani-Hamed, Nima
+AU  - Trnka, Jaroslav
+T2  - Journal of High Energy Physics
+AB  - Perturbative scattering amplitudes in gauge theories have remarkable simplicity and hidden infinite dimensional symmetries that are completely obscured in the conventional formulation of field theory using Feynman diagrams. This suggests the existence of a new understanding for scattering amplitudes where locality and unitarity do not play a central role but are derived consequences from a different starting point. In this note we provide such an understanding for N=4 SYM scattering amplitudes in the planar limit, which we identify as ``the volume" of a new mathematical object--the Amplituhedron--generalizing the positive Grassmannian. Locality and unitarity emerge hand-in-hand from positive geometry.
+DA  - 2014/10//
+PY  - 2014
+DO  - 10.1007/JHEP10(2014)030
+DP  - arXiv.org
+VL  - 2014
+IS  - 10
+SP  - 30
+J2  - J. High Energ. Phys.
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/1312.2007
+Y2  - 2025/06/24/12:00:39
+L1  - files/5215/Arkani-Hamed_Trnka_2014_The Amplituhedron.pdf
+L2  - files/5216/1312.html
+KW  - High Energy Physics - Theory
+KW  - Mathematics - Algebraic Geometry
+ER  - 
+
+TY  - JOUR
+TI  - The momentum amplituhedron
+AU  - Damgaard, David
+AU  - Ferro, Livia
+AU  - Lukowski, Tomasz
+AU  - Parisi, Matteo
+T2  - Journal of High Energy Physics
+AB  - In this paper we deﬁne a new object, the momentum amplituhedron, which is the long sought-after positive geometry for tree-level scattering amplitudes in N = 4 super Yang-Mills theory in spinor helicity space. Inspired by the construction of the ordinary amplituhedron, we introduce bosonized spinor helicity variables to represent our external kinematical data, and restrict them to a particular positive region. The momentum amplituhedron Mn,k is then the image of the positive Grassmannian via a map determined by such kinematics. The scattering amplitudes are extracted from the canonical form with logarithmic singularities on the boundaries of this geometry.
+DA  - 2019/08//
+PY  - 2019
+DO  - 10.1007/JHEP08(2019)042
+DP  - DOI.org (Crossref)
+VL  - 2019
+IS  - 8
+SP  - 42
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - https://link.springer.com/10.1007/JHEP08(2019)042
+Y2  - 2025/06/24/15:20:15
+L1  - files/5228/Damgaard et al. - 2019 - The momentum amplituhedron.pdf
+ER  - 
+
+TY  - JOUR
+TI  - Constructive standard model
+AU  - Christensen, Neil
+AU  - Field, Bryan
+T2  - Physical Review D
+DA  - 2018/07/24/
+PY  - 2018
+DO  - 10.1103/PhysRevD.98.016014
+DP  - DOI.org (Crossref)
+VL  - 98
+IS  - 1
+SP  - 016014
+J2  - Phys. Rev. D
+LA  - en
+SN  - 2470-0010, 2470-0029
+UR  - https://link.aps.org/doi/10.1103/PhysRevD.98.016014
+Y2  - 2025/06/24/15:22:59
+L1  - files/5238/Christensen and Field - 2018 - Constructive standard model.pdf
+ER  - 
+
+TY  - JOUR
+TI  - The All-Loop Integrand For Scattering Amplitudes in Planar N=4 SYM
+AU  - Arkani-Hamed, Nima
+AU  - Bourjaily, Jacob L.
+AU  - Cachazo, Freddy
+AU  - Caron-Huot, Simon
+AU  - Trnka, Jaroslav
+T2  - Journal of High Energy Physics
+AB  - We give an explicit recursive formula for the all -loop integrand for scattering amplitudes in N = 4 SYM in the planar limit, manifesting the full Yangian symmetry of the theory. This generalizes the BCFW recursion relation for tree amplitudes to all loop orders, and extends the Grassmannian duality for leading singularities to the full amplitude. It also provides a new physical picture for the meaning of loops, associated with canonical operations for removing particles in a Yangian-invariant way. Loop amplitudes arise from the “entangled” removal of pairs of particles, and are naturally presented as an integral over lines in momentum-twistor space. As expected from manifest Yangian invariance, the integrand is given as a sum over non-local terms, rather than the familiar decomposition in terms of local scalar integrals with rational coeﬃcients. Knowing the integrands explicitly, it is straightforward to express them in local forms if desired; this turns out to be done most naturally using a novel basis of chiral, tensor integrals written in momentum-twistor space, each of which has unit leading singularities. As simple illustrative examples, we present a number of new multi-loop results written in local form, including the 6- and 7-point 2-loop NMHV amplitudes. Very concise expressions are presented for all 2-loop MHV amplitudes, as well as the 5-point 3-loop MHV amplitude. The structure of the loop integrand strongly suggests that the integrals yielding the physical amplitudes are “simple”, and determined by IR-anomalies. We brieﬂy comment on extending these ideas to more general planar theories.
+DA  - 2011/01//
+PY  - 2011
+DO  - 10.1007/JHEP01(2011)041
+DP  - arXiv.org
+VL  - 2011
+IS  - 1
+SP  - 41
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/1008.2958
+Y2  - 2025/06/25/17:32:55
+L1  - files/5273/Arkani-Hamed et al. - 2011 - The All-Loop Integrand For Scattering Amplitudes i.pdf
+KW  - reading
+KW  - important
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - A planar diagram theory for strong interactions
+AU  - Hooft, G. 't
+T2  - Nuclear Physics B
+AB  - A gauge theory with colour gauge group U(N) and quarks having a colour index running from one to N is considered in the limit N → ∞, g2N fixed. It is shown that only planar diagrams with the quarks at the edges dominate; the topological structure of the perturbation series in 1/N is identical to that of the dual models, such that the number 1/N corresponds to the dual coupling constant. For hadrons N is probably equal to three. A mathematical framework is proposed to link these concepts of planar diagrams with the functional integrals of Gervais, Sakita and Mandelstam for the dual string.
+DA  - 1974/04/18/
+PY  - 1974
+DO  - 10.1016/0550-3213(74)90154-0
+DP  - ScienceDirect
+VL  - 72
+IS  - 3
+SP  - 461
+EP  - 473
+J2  - Nuclear Physics B
+SN  - 0550-3213
+UR  - https://www.sciencedirect.com/science/article/pii/0550321374901540
+Y2  - 2025/07/22/14:48:05
+L1  - files/5352/Hooft - 1974 - A planar diagram theory for strong interactions.pdf
+L2  - files/5353/0550321374901540.html
+ER  - 
+

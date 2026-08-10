@@ -1,0 +1,195 @@
+\section{Scattering Amplitudes and Analytic Structure}
+\label{sec:scattering-analytic-structure}
+
+This section is intended to isolate the structural facts about scattering amplitudes: scattering states, the S-matrix, unitarity, analytic structure, and finally polology.
+Polology is not strictly a prerequisite for BCFW, but an understanding of it will give some first intuition.
+
+\subsection{Scattering States and the S-Matrix}
+\label{subsec:scattering-states-and-the-s-matrix}
+
+In a collider experiment, two particles prepared as approximate momentum eigenstates at $t = -\infty$ are collided, and one measures the probability of finding particular momentum eigenstates at $t = +\infty$. We assume that all interactions happen in a finite time interval $-T < t < T$, so that at asymptotic times the states are free, on-shell one-particle states of definite momentum, called \textbf{asymptotic states} \autocite[Chapter~6]{schwartzQFT2014}. The \textbf{S-matrix} encodes how in-states evolve into out-states,
+\[
+    \langle f | S | i \rangle = \langle f; +\infty | i; -\infty \rangle .
+\]
+
+In a free theory $S = \mathbb{1}$, so it is convenient to split off the identity and write
+\begin{align}
+    \label{eq:s-matrix-split}
+    S = \mathbb{1} + i \mathcal{T},
+\end{align}
+where $\mathcal{T}$ is the \textbf{transfer matrix} and describes deviations from the free theory \autocite[(5.16)]{schwartzQFT2014}. Since the S-matrix vanishes unless the initial and final total $4$-momenta agree, we may factor out an overall momentum-conserving delta function to define the invariant \textbf{matrix element} (amplitude) $\mathcal{M}$:
+\begin{align}
+    \label{eq:t-matrix-amplitude}
+    \mathcal{T} = (2\pi)^4 \delta^4\left(\textstyle\sum p\right) \mathcal{M},
+    \qquad
+    \delta^4\left(\textstyle\sum p\right) \equiv \delta^4\!\left(\textstyle\sum p_i^\mu - \sum p_f^\mu\right),
+\end{align}
+so that $\langle f | S - \mathbb{1} | i \rangle = i (2\pi)^4 \delta^4(\sum p) \langle f | \mathcal{M} | i \rangle$ \autocite[(5.17--5.18)]{schwartzQFT2014}. Note that $\mathcal{M}$ is a function of all the momenta and internal states. All of the dynamical content of scattering lives in $\mathcal{M}$, which is what the spinor-helicity and on-shell methods in the following sections are designed to compute efficiently.
+
+\subsection{LSZ Reduction and External States}
+\label{subsec:lsz-reduction-and-external-states}
+
+The \textbf{LSZ (Lehmann-Symanzik-Zimmermann) reduction formula} relates S-matrix elements to time-ordered correlation functions of the interacting fields $\phi(x)$ \autocite[Chapter~6]{schwartzQFT2014}:
+\begin{align}
+    \label{eq:lsz}
+    \langle f | S | i \rangle =
+    \left[ i \int d^4 x_1\, e^{-i p_1 x_1} (\square + m^2) \right]
+    \cdots
+    \left[ i \int d^4 x_n\, e^{i p_n x_n} (\square + m^2) \right]
+    \left\langle \Omega \right| T\{\phi(x_1) \cdots \phi(x_n)\} \left| \Omega \right\rangle,
+\end{align}
+with $-i$ in the exponent for initial states and $+i$ for final states, and $\left| \Omega \right\rangle$ the interacting vacuum. The single assumption needed is that the theory is free at asymptotic times $t = \pm\infty$; no assumption about the form of the interactions in between is required.
+
+The role of the Klein-Gordon operators $(\square + m^2)$ is to amputate the external legs. In momentum space $\square + m^2 \to -p^2 + m^2$, which vanishes on-shell; hence these factors kill every term of the correlator except those carrying a one-particle propagator pole $\frac{1}{p^2 - m^2}$, and the S-matrix element is the residue at that pole. In other words, the LSZ formula projects the asymptotic one-particle states out of the time-ordered product of fields, and physical particles correspond exactly to poles at $p^2 = m^2$ \autocite[(6.1), \S6.1.1]{schwartzQFT2014}. This pole-projection mechanism is the same one invoked in the polology argument of Section~\ref{sec:polology}, where \eqref{eq:lsz} reappears in the analysis of the momentum-space Green's function.
+
+\subsection{Unitarity of the S-Matrix}
+\label{subsec:unitarity-of-the-s-matrix}
+
+Conservation of probability requires the S-matrix to be \textbf{unitary}, $S^\dagger S = \mathbb{1}$ \autocite[(24.5)]{schwartzQFT2014}. The split \eqref{eq:s-matrix-split}, $S = \mathbb{1} + i\mathcal{T}$ gives the constraint
+\begin{align}
+    \label{eq:unitarity-T}
+    i\left( \mathcal{T}^\dagger - \mathcal{T} \right) = \mathcal{T}^\dagger \mathcal{T},
+\end{align}
+so $\mathcal{T}$ is \emph{not} Hermitian; its anti-Hermitian part is fixed by the quadratic right-hand side. Sandwiching \eqref{eq:unitarity-T} between $\langle f|$ and $|i\rangle$ and inserting the completeness relation over all on-shell intermediate states $\left| X \right\rangle$,
+\[
+    \mathbb{1} = \sum_X \int d\Pi_X\, \left| X \right\rangle \left\langle X \right|,
+    \qquad
+    d\Pi_X = \prod_{j \in X} \frac{d^3 p_j}{(2\pi)^3}\frac{1}{2E_j},
+\]
+yields the \textbf{generalized optical theorem}.
+
+\begin{theorem}[Generalized optical theorem]
+    \label{fact:generalized-optical-theorem}
+    \[
+        \mathcal{M}(i \to f) - \mathcal{M}^*(f \to i)
+        = i \sum_X \int d\Pi_X\, (2\pi)^4 \delta^4(p_i - p_X)\,
+        \mathcal{M}(i \to X)\, \mathcal{M}^*(f \to X).
+    \]
+\end{theorem}
+
+This is a non-perturbative result. The right-hand side is quadratic in amplitudes while the left-hand side is linear. The imaginary parts of loop amplitudes are determined by lower-order (on-shell) amplitudes. Specializing to forward scattering $i = f = A$ first gives the decay-rate analogue: for a one-particle state,
+\begin{align}
+    \operatorname{Im}\mathcal{M}(A \to A) = m_A \sum_X \Gamma(A \to X) = m_A\, \Gamma_{\text{tot}},
+\end{align}
+relating the imaginary part of the exact propagator to the total decay rate \autocite[(24.13)]{schwartzQFT2014}. The statement usually called the \textbf{optical theorem} is the corresponding two-particle forward-scattering relation,
+\[
+    \operatorname{Im}\mathcal{M}(A \to A) = 2 E_{\text{CM}} |\vec{p}|\sum_X \sigma(A \to X),
+\]
+which says that the imaginary part of the forward amplitude is proportional to the total cross section.
+
+\subsection{Analytic Structure and Factorization}
+\label{subsec:analytic-structure-and-factorization}
+
+Treating the amplitude $\mathcal{M}$ as an analytic function of the Lorentz-invariant Mandelstam variables (e.g.\ $s = (p_a + \cdots + p_b)^2$ for a subset of external momenta) organizes its singularities into two kinds:
+\begin{itemize}
+    \item \textbf{Poles}, located at $s = m^2$, and correspond to a single on-shell intermediate particle of mass $m$.
+    \item \textbf{Branch cuts}, beginning at multiparticle thresholds. We have the cutting rule
+    \[
+        \operatorname{Im}\frac{1}{p^2 - m^2 + i\epsilon} = -\pi\, \delta(p^2 - m^2)
+    \]
+    \autocite[(24.25)]{schwartzQFT2014} shows that imaginary parts arise precisely when intermediate particles go on-shell.
+\end{itemize}
+
+\subsection{Polology}
+\label{sec:polology}
+
+\textbf{Polology} is the study of the pole structure of Green's functions and scattering amplitudes. Its central result is that an amplitude develops a pole exactly when an intermediate state can go on-shell, and that the residue there factorizes into the product of the two sub-amplitudes joined by that state. 
+
+\begin{align}
+    \label{eq:factorization}
+    \mathcal{M} \;\xrightarrow{\;s \to m^2\;}\;
+    \mathcal{M}_L \,\frac{1}{s - m^2}\, \mathcal{M}_R,
+\end{align}
+
+The argument is non-perturbative: it never expands in a coupling and never refers to a Lagrangian. We follow \autocite[\S24.3]{schwartzQFT2014}, which in turn follows \autocite[\S10.2]{weinbergQFT1995}.
+
+Start with the momentum-space Green's function
+\[
+	G_n(p_1, \ldots, p_n) = \int d^4 x_1\, e^{i p_1 x_1} \ldots \int  d^4 x_n\, e^{- i p_n x_n}\, \left\langle \Omega | T \{\phi(x_1) \ldots \phi(x_n)\} | \Omega \right\rangle
+.\]
+where:
+\begin{itemize}
+	\item The exponentials $e^{i p_1 x_1}, \ldots, e^{- i p_n x_n }$ are the Fourier factors that assign an incoming (resp.\ outgoing) momentum to each external coordinate.
+	\item $\left| \Omega \right\rangle$ is the interacting vacuum, and $T\{\cdots\}$ the time-ordered product.
+	\item The momenta $p_1, \ldots, p_n$ are in general off-shell; we are interested in what happens as a partial sum of them is tuned on-shell.
+\end{itemize}
+
+\begin{theorem}[Polology]
+	Split the external legs into two groups carrying total momentum $p := p_1 + \ldots + p_r = -(p_{r + 1} + \ldots + p_n)$. If there exists a one-particle state $\left| \Psi \right\rangle $ of mass $m$ with nonzero overlap
+	\[
+		\left\langle \Psi \right| T\{\phi(x_1) \ldots \phi(x_r)\} \left| \Omega \right\rangle \neq 0
+	,\]
+	then $G_n$ has a \emph{simple} pole at $p^2 = m^2$, and near that pole it factorizes into the two sub-amplitudes joined by the propagator of $\Psi$.
+\end{theorem}
+In short, the proof inserts a complete set of physical states between two halves of the correlator and isolates the one-particle contribution. It proceeds in four steps.
+
+\textbf{Step 1: split the time-ordered product into two clusters.} Group the fields as $\{x_1,\ldots,x_r\}$ and $\{x_{r+1},\ldots,x_n\}$. When every time in the first group is later than every time in the second, the time ordering separates,
+\begin{align}
+	\left\langle \Omega \right| T\{\phi(x_1)\cdots\phi(x_n)\} \left| \Omega \right\rangle
+	= \Theta_{1r}\,
+	\left\langle \Omega \right| T\{\phi(x_1)\cdots\phi(x_r)\}\, T\{\phi(x_{r+1})\cdots\phi(x_n)\} \left| \Omega \right\rangle
+	+ (\text{other orderings}),
+\end{align}
+where $\Theta_{1r} = \theta\!\left(\min(t_1,\ldots,t_r) - \max(t_{r+1},\ldots,t_n)\right)$ enforces this separation.
+
+\textbf{Step 2: insert a complete set of states.} Between the two clusters insert the resolution of the identity over all physical states, and retain only the one-particle term $\left| \Psi \right\rangle$ of mass $m$:
+\begin{align}
+	= \int \frac{d^3 p_\Psi}{(2\pi)^3\, 2 E_\Psi}\, \Theta_{1r}\,
+	\left\langle \Omega \right| T\{\phi(x_1)\cdots\phi(x_r)\} \left| \Psi \right\rangle
+	\left\langle \Psi \right| T\{\phi(x_{r+1})\cdots\phi(x_n)\} \left| \Omega \right\rangle
+	+ \text{extra}.
+\end{align}
+The ``extra'' collects the other time orderings together with every other one-particle and \emph{all} multi-particle states in the completeness sum; none of these will contribute to the pole at $p^2 = m^2$ that we are after.
+
+\textbf{Step 3: the time integral produces a simple pole.} Translating the fields to the origin with $\phi(x) = e^{i\hat P x}\phi(0) e^{-i\hat P x}$ turns the dependence on the cluster-separating time into the step function $\Theta_{1r}$, which we represent as
+\begin{align}
+	\theta(x) = \int_{-\infty}^{\infty} \frac{d\omega}{2\pi}\, \frac{i}{\omega + i\epsilon}\, e^{-i\omega x}.
+\end{align}
+Carrying out the $d^4 x_i$ integrals enforces overall momentum conservation, and the $\omega$-integral leaves behind a single energy denominator. Because $\left| \Psi \right\rangle$ is on-shell, $E_\Psi = \sqrt{\vec{p}^{\,2} + m^2}$, and near $p^0 = E_\Psi$ this denominator rationalizes to
+\begin{align}
+	\label{eq:polology-rationalize}
+	\frac{1}{E_1 + \cdots + E_r - E_\Psi + i\epsilon}
+	= \frac{p^0 + E_\Psi}{(p^0)^2 - (\vec{p}^{\,2} + m^2) + i\epsilon}
+	\xrightarrow{\,p^0 \to E_\Psi\,}
+	\frac{2 E_\Psi}{p^2 - m^2 + i\epsilon}.
+\end{align}
+The factor $2E_\Psi$ cancels the measure, leaving exactly one power of $\dfrac{1}{p^2 - m^2}$ --- a \emph{simple} pole.
+%TODO rewrite step 3 with more details, follow the development in Schwartz.
+
+\textbf{Step 4: factorization of the residue.} Collecting the pieces,
+\begin{align}
+	\label{eq:polology-factorization}
+	G_n(p_1,\ldots,p_n)
+	\;\xrightarrow{\,p^2 \to m^2\,}\;
+	(2\pi)^4 \delta^4\!\left(\textstyle\sum p\right)\,
+	\frac{i}{p^2 - m^2 + i\epsilon}\,
+	\mathcal{M}_L\, \mathcal{M}_R
+	\;+\; \text{extra},
+\end{align}
+where $\mathcal{M}_L$ is the (leg-amputated, on-shell) amplitude for $\phi(x_1)\cdots\phi(x_r) \to \Psi$ and $\mathcal{M}_R$ that for $\Psi \to \phi(x_{r+1})\cdots\phi(x_n)$. The residue at the pole is the product $\mathcal{M}_L\,\mathcal{M}_R$ of two on-shell sub-amplitudes, which is precisely the local factorization \eqref{eq:factorization}.
+
+
+\subsubsection{Why the poles are simple}
+\label{subsubsec:why-the-poles-are-simple}
+
+The pole found above is first-order, never $\frac{1}{(p^2-m^2)^2}$ or higher. There are two complementary ways to see why, and a unitarity argument that forbids the alternative outright.
+
+\textbf{Counting in the derivation.} The single cluster split in Step~1 introduces exactly one step function $\Theta_{1r}$, hence one factor $\frac{i}{\omega+i\epsilon}$ in Step~3, hence one energy denominator in \eqref{eq:polology-rationalize}. 
+
+\textbf{Spectral representation.} For the exact two-point function, the same physics is captured by the K\"all\'en--Lehmann representation \autocite[\S24.2]{schwartzQFT2014}.
+
+\begin{fact}[K\"all\'en--Lehmann spectral representation]
+\label{fact:kallen-lehmann}
+	The exact propagator of a scalar field can be written as
+	\[
+		\Pi(p^2) = \int_0^\infty dq^2\, \frac{\rho(q^2)}{p^2 - q^2 + i\epsilon},
+	\]
+	with a spectral density $\rho(q^2) \geq 0$ that vanishes for $q^2 \leq 0$. A stable one-particle state of mass $m$ contributes an isolated delta, $\rho(q^2) \supset Z\,\delta(q^2 - m^2)$ with $Z > 0$, while the multi-particle states fill a continuum for $q^2 \geq (\sum_i m_i)^2$.
+\end{fact}
+
+The one-particle delta integrates to a single pole $\dfrac{iZ}{p^2 - m^2 + i\epsilon}$ with positive residue $Z$ (the field-strength renormalization), whereas the continuum integrates to a \emph{branch cut} starting at the multi-particle threshold.
+
+\textbf{Positivity forbids higher-order poles.} Positivity $\rho(q^2) \geq 0$ also bounds the large-$p^2$ behaviour: a propagator cannot fall faster than $1/p^2$ \autocite[\S24.2]{schwartzQFT2014}. 
+Thus the simple-pole structure is not an accident of perturbation theory but a consequence of unitarity.
+
+\textbf{Relevance to BCFW.} In the recursion of Section~\ref{sec:bcfw-recursion} the candidate poles of the shifted amplitude sit at the values of the shift parameter where distinct subsets $p_a + \cdots + p_b$ go on-shell. For \emph{generic} external momenta these locations are all distinct, so no two poles collide and each is simple.

@@ -1,0 +1,308 @@
+\section{BCFW Recursion}
+\label{sec:bcfw-recursion}
+
+
+\subsection{Complex Momentum Shifts}
+\label{subsec:complex-momentum-shifts}
+
+\textbf{Complex Momentum.} 
+Start with a scattering with in and out momenta $1 \rangle[1, \ldots, n \rangle [n $. For now, let's say they are physical, real, on-shell momenta, but this can be generalized. Now, fix some $1 \le i < j \le n$, and for any complex number $z$, set
+\[
+	[\hat{i} = [i + z [j, \quad
+	\hat{j} \rangle = j \rangle - z i \rangle, \quad
+	\hat{i} \rangle = i \rangle, \quad
+	[ \hat{j} = [ j
+.\]
+This shifts the corresponding momenta to
+\[
+	\hat{p} _i = i \rangle [i + z i \rangle [j , \quad
+	\hat{p} _j = j \rangle [j - z i \rangle [j
+.\] 
+This preserves masslessness, and conserves overall momenta. This complexifies the matrix element to a function $\mathcal{M}(z)$, which we assume to be
+	\begin{itemize}
+		\item Analytic except for simple poles.
+		\item Vanishing at infinity.
+		This means $\mathcal{M}(z) \to 0$ as $|z| \to \infty$ for the chosen shift, so the contour integral has no boundary contribution from the circle at infinity. If the amplitude does not vanish there, BCFW recursion receives an additional boundary term and the simple pole sum below is incomplete.
+	\end{itemize}
+
+\subsection{On-Shell Factorization Channels}
+\label{subsec:on-shell-factorization-channels}
+
+\textbf{On-shell intermediate states.} For interval $a \ldots b$ that includes $j$ but not $i$, consider its intermediate momenta $\hat{P} (z) = - z i \rangle [j + \sum_{k = a}^b k \rangle [k$. There is a unique choice of $z$:
+\[
+z_{a, b}^{\star}=\frac{\left(p_a+\cdots+p_b\right)^2}{\langle i a\rangle[a j]+\cdots+\langle i b\rangle[b j]}
+,\] 
+such that $\hat{P} ^2(z^*) = 0$. Now, this state is an on-shell state and has a nonzero matrix element.
+
+
+In the proof of polology it is also guaranteed that the poles can be only simple poles, and we combine this with the further assumption that analyticity holds everywhere other than those poles. This can also be seen from the algebraic form of the color-stripped amplitudes.
+
+\textbf{Recursion.}
+
+Using the assumption of $\mathcal{M}(z)$, vanishing at infinity, we use a contour integral over $\frac{1}{z} \mathcal{M}(z)$ to obtain the following identity:
+
+\[
+	\mathcal{M}(0) = - \sum_{z_0} \frac{1}{z_0} \operatorname{Res} \left( \mathcal{M}(z_0) \right) 
+.\]
+
+
+Using the previous formula, we get the desired result \autocite[(27.117)]{schwartzQFT2014}:
+
+\[
+	\begin{aligned}
+\mathcal{M}(1 \ldots n)=\sum_{a, b, h} \mathcal{M}(1, \ldots, a & \left.-1, b+1, \ldots, n \rightarrow \hat{P}^h\right) \\
+& \times \frac{1}{\left(p_a+\cdots+p_b\right)^2} \mathcal{M}\left(\hat{P}^{-h} \rightarrow a, \ldots, b\right)
+\end{aligned}
+.\]
+
+Each connected planar tree of $n$ external vertices has the same number of vertices, hence same coupling strength. Hence the $n$-point amplitude is the sum of all possible connected planar trees, each with a coupling strength $g^{n-2}$, where $g$ is the coupling constant.
+
+\subsection{Pole Structure and the Efficiency of BCFW}
+\label{subsec:efficiency-of-bcfw}
+
+Before turning to explicit computations, it is worth asking \emph{why} the recursion above is so much cheaper than a direct diagrammatic expansion. The answer is a statement about the pole structure of the color-ordered amplitude, and about how few of those poles the complex shift actually probes.
+
+\textbf{The color-ordered amplitude and its ingredients.} Recall from the color decomposition \eqref{eq:color-decomposition} that the partial amplitude $\widetilde{\mathcal{M}}(1 \ldots n)$ is the sum of all \emph{planar} tree-level color-stripped diagrams with the legs in the fixed cyclic order $1, \ldots, n$ (Section~\ref{sec:color-ordering-planarity}). Each such diagram is a product of just two kinds of factor: contractions of the external momenta $p_i$ and polarizations $\varepsilon_i$ supplied by the color-stripped vertices, and a propagator $1/P^2$ for every internal line. For instance, the $s$-channel contribution to the four-gluon amplitude reads, schematically,
+\[
+	\widetilde{\mathcal{M}}_s(1234) = \underbrace{\frac{1}{2s}}_{\text{internal propagator}}
+	\Big[\, \underbrace{\varepsilon_1 \cdot \varepsilon_2\,(p_1 - p_2) + 2\varepsilon_2\,(p_2 \cdot \varepsilon_1) - 2\varepsilon_1\,(p_1 \cdot \varepsilon_2)}_{\text{external momenta and polarizations}} \,\Big] \times \big[\, 3, 4 \,\big]
+,\]
+where $[\,3,4\,]$ is the analogous structure built from legs $3$ and $4$ \autocite[(27.95),(27.84)]{schwartzQFT2014}. All the singular behaviour thus sits in the internal propagators, which is exactly where the poles live.
+
+\textbf{Factorization on contiguous partitions.} Fix a contiguous partition of the cyclically ordered legs,
+\[
+	[a, a+1, \ldots, b] \;\sqcup\; [b+1, \ldots, a-1]
+,\]
+and write $P_{ab} = p_a + \cdots + p_b$. Among the planar diagrams there are always some in which a \emph{single} internal line, carrying momentum $P_{ab}$, separates the two groups. Because the external momenta and polarizations enter only through the (three-point) vertices, no contraction in such a diagram mixes the $p_i, \varepsilon_i$ of one group with those of the other across that line. Consequently $\widetilde{\mathcal{M}}$ has a pole at $P_{ab}^2 = 0$ whose residue factorizes,
+\begin{align}
+	\label{eq:bcfw-channel-factorization}
+	\begin{split}
+	\widetilde{\mathcal{M}}(1 \ldots n)
+	\;\xrightarrow{\,P_{ab}^2 \to 0\,}\;
+	&\sum_{h} \widetilde{\mathcal{M}}\big(a, \ldots, b \rightarrow P_{ab}^{h}\big)\,
+	\frac{1}{P_{ab}^2}\,
+	\widetilde{\mathcal{M}}\big(P_{ab}^{-h} \rightarrow b+1, \ldots, a-1\big) \\
+	&\;+\; (\text{regular at } P_{ab}^2 = 0)
+	\end{split}
+,\end{align}
+the sum running over the on-shell states $h$ of the exchanged particle. This is the same local factorization found in polology, \eqref{eq:factorization}, now resolved channel by channel, in an almost algebraic way. Enumerating all contiguous partitions therefore fixes the \emph{complete} analytic structure of $\widetilde{\mathcal{M}}$, and reassembling these residues through the contour argument reproduces the recursion of Section~\ref{subsec:on-shell-factorization-channels}.
+
+\begin{remark}[Relation to polology]
+	The channel factorization \eqref{eq:bcfw-channel-factorization} is reminiscent of the polology result of Section~\ref{sec:polology}: in a unitary theory the S-matrix has only simple poles and branch cuts, and the simple poles correspond to the exchange of on-shell intermediate states. The two statements are not, however, the same.
+	\begin{enumerate}
+		\item Polology is a general statement, proved analytically without reference to a Lagrangian or a coupling expansion. It applies to $\widetilde{\mathcal{M}}$ as well, but on its own it only guarantees a factorization for \emph{any} subset of the external legs.
+		\item It is only the color-ordering and planarity (Section~\ref{sec:color-ordering-planarity}), an algebraic fact about the trace basis, that restricts the relevant channels to the \emph{contiguous} partitions used above.
+	\end{enumerate}
+	The factorization through $P_{ab}$ is therefore not an \emph{application} of polology, but a fact that is consistent with it.
+\end{remark}
+
+\textbf{How few poles BCFW needs.} The complex-momentum shift lets us reconstruct $\widetilde{\mathcal{M}}$ from its poles while using only a small subset of them. Picture the $n$ legs on the boundary of a disk in cyclic order; a contiguous partition is then a chord cutting the disk in two. The following counts, for an $n$-point amplitude, make the saving quantitative:
+\begin{center}
+	\small
+	\begin{tabular}{lc}
+		\hline
+		quantity & count \\
+		\hline
+		channels seen by polology (all subsets of legs) & $2^{n-1} - 1$ \\[0.4ex]
+		planar tree diagrams (trees inside the disk) & $C_{n-2} = \dfrac{1}{n-1}\dbinom{2n-4}{n-2}$ \\[1.2ex]
+		distinct propagator poles (polygon diagonals) & $\sim n^2/2$ \\[0.4ex]
+		BCFW channels for a shift $(i,j)$ & $\sim n \ \text{ to }\ \sim (n/2)^2$ \\
+		\hline
+	\end{tabular}
+\end{center}
+The Catalan count is easily checked at $n = 4$: $C_2 = 2$, the two planar channels $s = (12)$ and $t = (23)$. The number of channels the recursion actually sums (the contiguous partitions that separate the two shifted legs $i$ and $j$) depends on \emph{which} pair is shifted. If the legs strictly between $i$ and $j$ split into arcs of $p$ and $q = n - 2 - p$ legs, there are $\sim (p+1)(q+1)$ such partitions. This is smallest, $\sim n$, when $i$ and $j$ are \emph{adjacent} (one arc empty, $p = 0$; an adjacent shift then produces exactly $n - 3$ terms), and largest, $\sim (n/2)^2$, when they sit \emph{antipodally} on the disk ($p \approx q \approx n/2$). Either way the count is polynomial in $n$, replacing the exponential $2^{n-1} - 1$ of unrestricted polology. We see that shifting adjacent legs is simply the most economical choice.
+
+For every planar tree contributing to $\widetilde{\mathcal{M}}(1 \ldots n)$ there is a unique path of internal lines joining the two shifted legs $i$ and $j$ (a tree has a unique path between any two of its leaves). Under the shift $\hat p_i = p_i + z\, i\rangle[j$, $\hat p_j = p_j - z\, i\rangle[j$, a propagator carries $z$-dependent momentum \emph{if and only if} it separates $i$ from $j$, i.e.\ if and only if it lies on that path; any internal line with $i$ and $j$ on the same side has $\hat P^2$ independent of $z$ (the shift cancels in $\hat p_i + \hat p_j$) and so produces no pole in $z$.
+
+The contour integral $\oint \frac{dz}{z}\,\mathcal{M}(z)$ receives residues only from the propagators that separate $i$ from $j$, each put on shell at a single value $z^{\star}_{a,b}$ (Section~\ref{subsec:on-shell-factorization-channels}). All diagrams sharing a given contiguous partition form one family, put on shell by the \emph{same} $z^{\star}_{a,b}$; their internal detail is irrelevant, being repackaged into the two lower-point on-shell subamplitudes. This reduces the sum to a polynomial number of channels, as few as $\sim n$ for an adjacent shift.
+
+\subsection{Worked Computations}
+\label{subsec:worked-computations}
+
+\subsubsection{Four-Gluon MHV Amplitude}
+\label{subsubsec:four-gluon-mhv-amplitude}
+
+We compute the color-ordered four-gluon MHV amplitude $\widetilde{\mathcal{M}}(1^- 2^- 3^+ 4^+)$ twice: first directly from the color-ordered Feynman rules with a shrewd choice of reference momenta \autocite[\S27.3]{schwartzQFT2014}, then from the BCFW recursion \autocite[\S27.5]{schwartzQFT2014}. Comparing the two computations makes the efficiency gain of Section~\ref{subsec:efficiency-of-bcfw} concrete.
+
+\textbf{Without BCFW.} Three color-ordered diagrams contribute in the cyclic order $1234$: the $s$-channel, the $t$-channel, and the four-point contact vertex (note that the $u$-channel is not planar in this ordering). The amplitude is therefore
+\[
+	\widetilde{\mathcal{M}}(1^-2^-3^+4^+) = \widetilde{\mathcal{M}}_s + \widetilde{\mathcal{M}}_t + \widetilde{\mathcal{M}}_{4}
+.\]
+The $s$-channel diagram is the expression quoted schematically in Section~\ref{subsec:efficiency-of-bcfw} \autocite[(27.95)]{schwartzQFT2014}:
+\[
+	\begin{aligned}
+	\widetilde{\mathcal{M}}_s = \frac{1}{2s}
+	&\left[ (\epsilon_1 \cdot \epsilon_2)(p_1 - p_2)^{\mu} + 2\epsilon_2^{\mu}\,(p_2 \cdot \epsilon_1) - 2\epsilon_1^{\mu}\,(p_1 \cdot \epsilon_2) \right] \\
+	\times &\left[ (\epsilon_3 \cdot \epsilon_4)(p_3 - p_4)_{\mu} + 2\epsilon_{4\mu}\,(p_4 \cdot \epsilon_3) - 2\epsilon_{3\mu}\,(p_3 \cdot \epsilon_4) \right]
+	\end{aligned}
+.\]
+Now choose the reference momenta (Section~\ref{subsec:polarization-and-reference-vectors}) as
+\[
+	\epsilon_1 = \epsilon_1^{-}(p_4), \quad
+	\epsilon_2 = \epsilon_2^{-}(p_4), \quad
+	\epsilon_3 = \epsilon_3^{+}(p_1), \quad
+	\epsilon_4 = \epsilon_4^{+}(p_1)
+.\]
+Then every polarization product vanishes except one,
+\[
+	\epsilon_1 \cdot \epsilon_2 = \epsilon_3 \cdot \epsilon_4 = \epsilon_1 \cdot \epsilon_3 = \epsilon_1 \cdot \epsilon_4 = \epsilon_2 \cdot \epsilon_4 = 0,
+	\qquad
+	\epsilon_2 \cdot \epsilon_3 \neq 0,
+\]
+and in addition $\epsilon_1 \cdot p_4 = \epsilon_2 \cdot p_4 = \epsilon_3 \cdot p_1 = \epsilon_4 \cdot p_1 = 0$. Two consequences follow immediately. The contact diagram $\widetilde{\mathcal{M}}_4$ consists solely of pairs of $\epsilon \cdot \epsilon$ products, and needs two nonvanishing ones, so it vanishes. Likewise every term of $\widetilde{\mathcal{M}}_t$ carries at least one vanishing product, so $\widetilde{\mathcal{M}}_t = 0$. In $\widetilde{\mathcal{M}}_s$ exactly one term survives the expansion:
+\[
+	\widetilde{\mathcal{M}}_s = -\frac{2}{s}\,(\epsilon_2 \cdot \epsilon_3)(p_2 \cdot \epsilon_1)(p_3 \cdot \epsilon_4),
+	\qquad s = \langle 12 \rangle [21]
+.\]
+The three factors are bispinor contractions, evaluated with $\big(a\rangle[b\big) \cdot \big(c\rangle[d\big) = \tfrac{1}{2}\langle ac \rangle [db]$:
+\[
+	\epsilon_2 \cdot \epsilon_3 = \frac{\langle 21 \rangle [34]}{[24] \langle 13 \rangle}, \qquad
+	p_2 \cdot \epsilon_1 = \frac{\langle 21 \rangle [42]}{\sqrt{2}\, [14]}, \qquad
+	p_3 \cdot \epsilon_4 = \frac{\langle 31 \rangle [43]}{\sqrt{2}\, \langle 14 \rangle}
+.\]
+Assembling,
+\[
+	\widetilde{\mathcal{M}}_s = -\frac{\langle 21 \rangle^2 \langle 31 \rangle\, [34][42][43]}{\langle 12 \rangle [21]\, \langle 13 \rangle [24]\, [14] \langle 14 \rangle}
+.\]
+Using momentum conservation, $\sum_k k\rangle[k = 0$ contracted with various $\langle a |$ and $| b]$, we get $[24] = -\langle 13 \rangle [34] / \langle 12 \rangle$ (and $[42] = -[24]$), which gives
+\[
+	\widetilde{\mathcal{M}}_s = \frac{\langle 12 \rangle\, [34]^2}{[21]\, [14] \langle 14 \rangle}
+.\]
+Then $[34]^2 = \langle 12 \rangle^2 [21]^2 / \langle 34 \rangle^2$ from $\langle 12 \rangle [21] = \langle 34 \rangle [43]$, and $[21] = \langle 34 \rangle [14] / \langle 32 \rangle$ from $\langle 3 | (1+2+4) | 1] = 0$, leaving
+\[
+	\widetilde{\mathcal{M}}(1^-2^-3^+4^+) = \frac{\langle 12 \rangle^3}{\langle 32 \rangle \langle 34 \rangle \langle 14 \rangle}
+	= \frac{\langle 12 \rangle^4}{\langle 12 \rangle \langle 23 \rangle \langle 34 \rangle \langle 41 \rangle}
+.\]
+The full amplitude then follows from the color decomposition \eqref{eq:color-decomposition} at $n = 4$:
+\[
+	\mathcal{M}(1^{a-} 2^{b-} 3^{c+} 4^{d+}) = -2\left(\sqrt{2}\, i g_s\right)^{2} \sum_{\sigma \in S_4 / Z_4} \mathrm{tr}\!\left(T^{a_{\sigma(1)}} \cdots T^{a_{\sigma(4)}}\right) \widetilde{\mathcal{M}}\!\left(\sigma(1), \ldots, \sigma(4)\right)
+.\]
+
+\textbf{With BCFW.} Now shift $i = 1$, $j = 4$: $[\hat 1 = [1 + z [4$ and $\hat 4 \rangle = 4\rangle - z\, 1\rangle$. The only contiguous interval containing $4$ but not $1$ (with at least two legs on each side) is $\{3,4\}$, and of the two internal helicity assignments only one survives, because the other requires a three-point all-minus (resp.\ all-plus) subamplitude, which vanishes. The recursion therefore produces a \emph{single} term,
+\[
+	\widetilde{\mathcal{M}}(1^-2^-3^+4^+)
+	= \widetilde{\mathcal{M}}\big(\hat 1^- 2^- \hat P^+\big)\, \frac{1}{P^2}\, \widetilde{\mathcal{M}}\big((-\hat P)^- 3^+ \hat 4^+\big),
+	\qquad P = p_3 + p_4 = -p_1 - p_2
+.\]
+Note that both subamplitudes are on-shell (amputated) objects: the external legs carry no propagators, so the only $z$-dependent pole is the single internal line. The on-shell value of the shift parameter is
+\[
+	z^{\star}_{3,4} = \frac{(p_3 + p_4)^2}{\langle 13 \rangle [34] + \langle 14 \rangle [44]} = \frac{\langle 34 \rangle [43]}{\langle 13 \rangle [34]} = \frac{\langle 34 \rangle}{\langle 31 \rangle}
+.\]
+The left factor is the three-point MHV amplitude and the right the three-point $\overline{\text{MHV}}$ amplitude (Section~\ref{subsec:little-group-scaling-and-three-point-amplitudes}); with $\hat 1 \rangle = 1\rangle$ and $[\hat 4 = [4$,
+\[
+	\widetilde{\mathcal{M}}\big(\hat 1^- 2^- \hat P^+\big) = \frac{\langle 12 \rangle^3}{\langle 2 \hat P \rangle \langle \hat P 1 \rangle},
+	\qquad
+	\widetilde{\mathcal{M}}\big((-\hat P)^- 3^+ \hat 4^+\big) = -\frac{[34]^3}{[3 \hat P][\hat P 4]}
+,\]
+where the overall minus comes from the analytic continuation $|{-P}\rangle = i\,|P\rangle$, $|{-P}] = i\,|P]$ (so that $(-P)\rangle[(-P) = -P\rangle[P$): the two square brackets containing $-\hat P$ contribute $i^2 = -1$. The shifted internal momentum is
+\[
+	\hat P \rangle [ \hat P = 3\rangle[3 + \hat 4\rangle[4 = 3\rangle[3 + 4\rangle[4 - z^{\star}\, 1\rangle[4
+,\]
+and the two mixed brackets evaluate to
+\[
+	\langle 1 \hat P \rangle [\hat P 4] = \langle 1 | \hat P | 4] = \langle 13 \rangle [34],
+	\qquad
+	\langle 2 \hat P \rangle [\hat P 3] = \langle 2 \hat 4 \rangle [43],
+\]
+with
+\[
+	\langle 2 \hat 4 \rangle = \langle 24 \rangle - \frac{\langle 34 \rangle}{\langle 31 \rangle} \langle 21 \rangle = \frac{\langle 14 \rangle}{\langle 13 \rangle} \langle 23 \rangle
+,\]
+the last step by the \textbf{Schouten identity}
+\begin{align}
+	\label{eq:schouten}
+	\langle ij \rangle \langle kl \rangle + \langle ik \rangle \langle lj \rangle + \langle il \rangle \langle jk \rangle = 0
+\end{align}
+together with $P^2 = \langle 12 \rangle [21]$,
+\[
+	\begin{aligned}
+	\widetilde{\mathcal{M}}(1^-2^-3^+4^+)
+	&= -\frac{\langle 12 \rangle^3\, [34]^3}{\langle 13 \rangle [34] \cdot \frac{\langle 14 \rangle}{\langle 13 \rangle} \langle 23 \rangle [43] \cdot \langle 12 \rangle [21]} \\
+	&= -\frac{\langle 12 \rangle^2\, [34]^2}{\langle 14 \rangle \langle 23 \rangle\, [43] [21]}
+	= \frac{\langle 12 \rangle^4}{\langle 12 \rangle \langle 23 \rangle \langle 34 \rangle \langle 41 \rangle}
+	\end{aligned}
+,\]
+using $[21] = \langle 34 \rangle [43] / \langle 12 \rangle$ in the last step. This is exactly the Parke-Taylor form found diagrammatically --- but obtained from one term built out of three-point amplitudes, with no reference-momentum gymnastics: the single $\{3,4\}$ channel replaces the three diagrams of the direct computation.
+
+\subsubsection{Parke-Taylor Induction}
+\label{subsubsec:parke-taylor-induction}
+
+The four-point computation generalizes to all multiplicities: BCFW proves the Parke-Taylor formula by induction, one two-particle channel at a time \autocite[\S27.5]{schwartzQFT2014}.
+
+\begin{theorem}[Parke-Taylor]
+	\label{thm:parke-taylor}
+	The color-ordered $n$-gluon MHV amplitude is
+	\begin{align}
+		\label{eq:parke-taylor}
+		\widetilde{\mathcal{M}}\big(1^- 2^- 3^+ \cdots n^+\big)
+		= \frac{\langle 12 \rangle^4}{\langle 12 \rangle \langle 23 \rangle \cdots \langle n1 \rangle}
+	.\end{align}
+\end{theorem}
+
+\begin{proof}
+	Induction on $n$. The base case $n = 4$ is Section~\ref{subsubsec:four-gluon-mhv-amplitude} (and at $n = 3$ the formula reduces to the three-point MHV amplitude of Section~\ref{subsec:little-group-scaling-and-three-point-amplitudes}).
+
+	\textbf{Channel selection.} Shift $i = 1$, $j = n$: $[\hat 1 = [1 + z[n$, $\hat n \rangle = n\rangle - z\, 1\rangle$. The candidate channels are the contiguous intervals $\{a, \ldots, n\}$ with $3 \le a \le n-1$. All but one die on the helicity count. If the internal gluon enters the right subamplitude with positive helicity, that factor is an all-plus amplitude and vanishes. If it enters with negative helicity, the right factor $\widetilde{\mathcal{M}}\big(\hat P^- a^+ \cdots \hat n^+\big)$ has a single negative helicity, and so vanishes by the theorem of Section~\ref{sec:mhv-amplitudes} unless it is a three-point amplitude, i.e.\ unless $a = n - 1$. At five points, for instance, the two candidates are
+	\[
+		\widetilde{\mathcal{M}}\big(\hat 1^- 2^- \hat P^+\big)\, \frac{1}{P^2}\, \underbrace{\widetilde{\mathcal{M}}\big(\hat P^- 3^+ 4^+ \hat 5^+\big)}_{=\,0} \qquad \text{and} \qquad
+		\widetilde{\mathcal{M}}\big(\hat 1^- 2^- 3^+ \hat P^+\big)\, \frac{1}{P^2}\, \widetilde{\mathcal{M}}\big(\hat P^- 4^+ \hat 5^+\big)
+	,\]
+	and only the second survives. Hence at every multiplicity the recursion contains a \emph{single} term, on the channel $\{n{-}1, n\}$.
+
+	\textbf{Inductive step at $n = 7$.} We demonstrate the step from six to seven points; nothing in the computation is special to seven. Shifting $[\hat 1 = [1 + z[7$, $\hat 7\rangle = 7\rangle - z\, 1\rangle$, the surviving channel is $\{6, 7\}$:
+	\[
+		\widetilde{\mathcal{M}}\big(1^- 2^- 3^+ 4^+ 5^+ 6^+ 7^+\big)
+		= \widetilde{\mathcal{M}}\big(\hat 1^- 2^- 3^+ 4^+ 5^+ \hat P^+\big)\, \frac{1}{P^2}\, \widetilde{\mathcal{M}}\big((-\hat P)^- 6^+ \hat 7^+\big)
+	,\]
+	with $P = p_6 + p_7$ and $P^2 = \langle 67 \rangle [76]$. The on-shell shift value and shifted internal momentum are
+	\[
+		z^{\star} = \frac{\langle 67 \rangle [76]}{\langle 16 \rangle [67]} = \frac{\langle 76 \rangle}{\langle 16 \rangle},
+		\qquad
+		\hat P \rangle [\hat P = 6\rangle[6 + 7\rangle[7 - z^{\star}\, 1\rangle[7
+	.\]
+	The left factor is the six-point MHV amplitude, given by \eqref{eq:parke-taylor} by the induction hypothesis (with $\hat 1\rangle = 1\rangle$); the right factor is the three-point $\overline{\text{MHV}}$ amplitude, with the same continuation sign as at four points:
+	\[
+		\begin{aligned}
+		\widetilde{\mathcal{M}}\big(\hat 1^- 2^- 3^+ 4^+ 5^+ \hat P^+\big)
+		&= \frac{\langle 12 \rangle^4}{\langle 12 \rangle \langle 23 \rangle \langle 34 \rangle \langle 45 \rangle \langle 5 \hat P \rangle \langle \hat P 1 \rangle}, \\
+		\widetilde{\mathcal{M}}\big((-\hat P)^- 6^+ \hat 7^+\big)
+		&= -\frac{[67]^3}{[\hat P 6][7 \hat P]}
+		\end{aligned}
+	.\]
+	Exactly as at four points, the mixed brackets collapse:
+	\[
+		\langle 1 \hat P \rangle [\hat P 7] = \langle 16 \rangle [67],
+		\qquad
+		\langle 5 \hat P \rangle [\hat P 6] = \langle 5 \hat 7 \rangle [76],
+	\]
+	with, by the Schouten identity \eqref{eq:schouten},
+	\[
+		\langle 5 \hat 7 \rangle = \langle 57 \rangle - \frac{\langle 76 \rangle}{\langle 16 \rangle} \langle 51 \rangle
+		= -\frac{\langle 56 \rangle \langle 71 \rangle}{\langle 16 \rangle}
+	.\]
+	Therefore, after simplification,
+	\begin{align*}
+		\widetilde{\mathcal{M}}\big(1^- 2^- 3^+ 4^+ 5^+ 6^+ 7^+\big)
+		&= -\frac{\langle 12 \rangle^4}{\langle 12 \rangle \langle 23 \rangle \langle 34 \rangle \langle 45 \rangle \cdot \langle 5 \hat 7 \rangle \cdot \langle 16 \rangle \cdot \langle 67 \rangle} \\
+		&= \frac{\langle 12 \rangle^4}{\langle 12 \rangle \langle 23 \rangle \langle 34 \rangle \langle 45 \rangle \langle 56 \rangle \langle 67 \rangle \langle 71 \rangle}
+	.\end{align*}
+\end{proof}
+
+\begin{remark}
+	At the MHV level the recursion is maximally economical: at \emph{every} multiplicity a single BCFW channel reproduces the full amplitude, so the Parke-Taylor formula propagates from three points upward one two-particle channel at a time. Contrast this with the factorially growing diagram count of Section~\ref{subsec:computational-motivation} --- this is the sharpest instance of the efficiency discussion of Section~\ref{subsec:efficiency-of-bcfw}.
+\end{remark}
+
+\subsection{Limits of the Recursion Relation}
+\label{subsec:limits-of-the-recursion-relation}
+
+\subsubsection{Large-z Behavior and Boundary Terms}
+\label{subsubsec:large-z-behavior-and-boundary-terms}
+
+The current notes identify several assumptions in the proof above: simple poles, tree-level factorization, enumeration of connected intervals in a planar theory, and vanishing of $\mathcal{M}(z)$ at infinity. A separate systematic treatment of boundary terms and failure modes has not yet been written.
+
+\subsubsection{Tree-Level and Planarity Assumptions}
+\label{subsubsec:tree-level-and-planarity-assumptions}
+
+Crossing symmetry is the statement that, after a cyclic permutation of the external legs, the same color-ordered amplitude may admit a different physical interpretation of which states are incoming and which states are outgoing. However, the new physical process is described by the same amplitude.
+
+The fact that there is a unified "amplitude object", is the core of all the modern amplitude methods, including BCFW recursion, and the Amplituhedron.

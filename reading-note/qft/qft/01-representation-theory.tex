@@ -1,0 +1,376 @@
+
+\section{Lorentz and Poincare Representation Theory}
+\label{sec:representation-theory}
+
+\input{qft/poincare.tex}
+
+\subsection{Lorentz Algebra}
+\label{subsec:lorentz-algebra}
+
+In QFT, fields transform under the Lorentz group $SO(1,3)$, and the particles transform under the little group $SO(3)$ (massive, spins) or $ISO(2)$ (massless, helicities).
+
+The structure of Lorentz algebra $\mathfrak{so}(1,3)$ is given by $6$ generators $J_i, K_i$ and the following commutation relations:
+\begin{align*}
+    [J_i, J_j] &= i \epsilon_{ijk} J_k, \\
+    [J_i, K_j] &= i \epsilon_{ijk} K_k, \\
+    [K_i, K_j] &= -i \epsilon_{ijk} J_k,
+\end{align*}
+and elements of the Lorentz group are parameterized as
+\begin{align}
+    \Lambda = e^{i \theta_i J_i + i \beta_j K_j}.
+\end{align}
+
+\subsection{Vector, Tensor and Operator Representations}
+\label{subsec:vector-tensor-and-operator-representations}
+
+\begin{example}[4-vector representation of $\mathfrak{so}(1,3)$]
+    \begin{align*}
+        J_1 &= i\begin{pmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & -1 \\
+            0 & 0 & 1 & 0
+        \end{pmatrix}, \quad
+        J_2 &= i\begin{pmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 \\
+            0 & -1 & 0 & 0
+        \end{pmatrix}, \quad
+        J_3 &= i\begin{pmatrix}
+            0 & 0 & 0 & 0 \\
+            0 & 0 & -1 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \\
+        K_1 &= i\begin{pmatrix}
+            0 & -1 & 0 & 0 \\
+            -1 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \quad
+        K_2 &= i\begin{pmatrix}
+            0 & 0 & -1 & 0 \\
+            0 & 0 & 0 & 0 \\
+            -1 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \quad
+        K_3 &= i\begin{pmatrix}
+            0 & 0 & 0 & -1 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            -1 & 0 & 0 & 0
+        \end{pmatrix}.
+    \end{align*}
+
+    In short,
+\begin{align*}
+    (J_k)^i_j = - i \epsilon_{ijk}, \quad
+    (J_k)^0_i = (J_k)^i_0 = (J_k)^0_0 = 0, \quad
+    (K_k)^0_k = (K_k)^k_0 = -i
+\end{align*}
+
+The 4-vector representation is a $(\frac{1}{2}, \frac{1}{2})$ representation; see Example~\ref{ex:spinors-bispinors}.
+\end{example}
+
+\begin{example}[Rank-2 tensor representation $V^{\mu \nu}$ of $\mathfrak{so}(1,3)$]
+    The antisymmetric rank-2 tensor:
+    \begin{align*}
+        V^{\mu \nu} &= \begin{pmatrix}
+            0 & K_1 & K_2 & K_3 \\ 
+              & 0 & J_3 & -J_2 \\
+              &   & 0 & J_1 \\
+            -  &   &   & 0
+        \end{pmatrix} \\
+        V^{i j} &= \epsilon_{ijk} J_k, \quad
+        V^{0 i} = K_i \\
+        \Gamma_V &= \exp (i \theta_{\mu \nu} V^{\mu \nu}) \\
+        [V^{\mu \nu}, V^{\rho \sigma}] &= i \left( g^{\nu \rho} V^{\mu \sigma} - g^{\mu \rho} V^{\nu \sigma} - g^{\nu \sigma} V^{\mu \rho} + g^{\mu \sigma} V^{\nu \rho} \right)
+    \end{align*}
+    
+\end{example}
+Note, this is the representation commonly seen in relativistic electrodynamics, the field strength $F^{\mu \nu} = \partial^\mu A^\nu - \partial^\nu A^\mu$, where $A^\mu$ is the vector potential. See Section~\ref{sec:covariant-maxwell}.
+
+\begin{example}[Pauli matrices and the spin-$\frac12$ representation]
+    The Pauli matrices furnish the fundamental spin-$\frac12$ representation of $\mathfrak{su}(2)$. They are
+    \begin{align*}
+        \sigma_1 &= \begin{pmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{pmatrix}, \quad
+        \sigma_2 &= \begin{pmatrix}
+            0 & -i \\ 
+            i & 0
+        \end{pmatrix}, \quad
+        \sigma_3 &= \begin{pmatrix}
+            1 & 0 \\
+            0 & -1
+        \end{pmatrix}.
+    \end{align*}
+    Their commutation relations are
+    \begin{align*}
+        [\sigma_i, \sigma_j] &= 2 i \epsilon_{ijk} \sigma_k.
+    \end{align*}
+    Equivalently, the normalized generators $S_i = \frac{1}{2}\sigma_i$ obey
+    \begin{align*}
+        [S_i,S_j] = i \epsilon_{ijk} S_k,
+    \end{align*}
+    which is the usual $\mathfrak{su}(2) \cong \mathfrak{so}(3)$ Lie algebra convention.
+\end{example}
+
+\begin{example}[Differential Operators representation of $\mathfrak{so}(1,3)$]
+    \begin{equation}
+        L^{\mu \nu} = i \left( x^\mu \partial^\nu - x^\nu \partial^\mu \right)
+    \end{equation}
+    This is generators of angular momentum generalized to include time.
+\end{example}
+In the purely spatial rotation subalgebra, the generators can be packaged as
+\[
+    L_i = \frac{1}{2}\epsilon_{ijk}L^{jk}.
+\]
+With the usual quantum-mechanical convention $\mathbf{L}=-i\mathbf{x}\times\nabla$, the quadratic Casimir $\mathbf{L}^2$ is the angular part of the Laplacian on the sphere:
+\[
+    \nabla^2 = \frac{1}{r^2}\partial_r\left(r^2\partial_r\right) - \frac{\mathbf{L}^2}{r^2}.
+\]
+Thus the spherical harmonics $Y_{\ell m}$ are simultaneous eigenfunctions of $\mathbf{L}^2$ and $L_3$, realizing the familiar spin-$\ell$ representations of $SO(3)$.
+
+\subsection{Chiral Decomposition of the Lorentz Algebra}
+\label{subsec:chiral-decomposition-of-the-lorentz-algebra}
+
+Now, make a change of variable
+\begin{equation}
+    J_i^+ = \frac{1}{2} (J_i + i K_i), \quad J_i^- = \frac{1}{2} (J_i - i K_i)
+\end{equation}
+
+The structure of $\mathfrak{so}(1,3)$ can be equivalently written as
+\begin{align*}
+    [J_i^+, J_j^+] &= i \epsilon_{ijk} J_k^+, \\
+    [J_i^-, J_j^-] &= i \epsilon_{ijk} J_k^-, \\
+    [J_i^+, J_j^-] &= 0.
+\end{align*}
+
+From this we see that the complexified Lorentz algebra, $\mathfrak{so}(1,3)_{\mathbb{C}}$ can be decomposed into two commuting subalgebras:
+\begin{align*}
+    \mathfrak{so}(1,3)_{\mathbb{C}} &\cong \mathfrak{sl}_2(\mathbb{C})_L 
+    \oplus \mathfrak{sl}_2(\mathbb{C})_R,
+\end{align*}
+or, as physicists often write,
+\begin{align}
+\mathfrak{s o}(1,3)=\mathfrak{s u}(2)_L \oplus \mathfrak{s u}(2)_R
+\end{align}
+where $\mathfrak{su}(2)_L$ is generated by $J_i^+$ and $\mathfrak{su}(2)_R$ is generated by $J_i^-$. As a convention, we call them \textit{left-handed} and \textit{right-handed} respectively.
+The two factors are distinct by definition: $\mathfrak{su}(2)_L$ is generated by the combinations $J_i^+$, while $\mathfrak{su}(2)_R$ is generated by the independent combinations $J_i^-$. They are not identified inside the connected Lorentz group. However, they are exchanged by parity. Under parity $P$, rotations are unchanged while boosts change sign,
+\[
+    P J_i P^{-1} = J_i, \quad P K_i P^{-1} = -K_i.
+\]
+Therefore
+\[
+    P J_i^+ P^{-1} = J_i^-, \quad P J_i^- P^{-1} = J_i^+.
+\]
+Thus parity interchanges the left- and right-handed Lorentz factors. At the level of irreducible representations, this exchanges the two indices:
+\[
+    (j_L,j_R) \longleftrightarrow (j_R,j_L).
+\]
+
+\subsection{Finite-Dimensional Irreducible Representations of Lorentz Group}
+\label{subsec:finite-dimensional-irreducible-representations-of-lorentz-group}
+
+We may use the chiral decomposition to understand the representation theory of the Lorentz group.
+
+\begin{fact}
+If $\mathfrak{g}_1, \mathfrak{g}_2$ are complex semisimple Lie algebras, then every finite-dimensional irreducible representation of
+$\mathfrak{g}_1 \oplus \mathfrak{g}_2 $
+is of the form $V_1 \otimes V_2$,
+where $V_1$ is an irreducible representation of $\mathfrak{g}_1$, and $V_2$ is an irreducible representation of $\mathfrak{g}_2$.
+\end{fact}
+
+A detailed proof is here:
+\begin{theorem}
+    Finite-dimensional irreps of $\mathfrak{g_1} \oplus \mathfrak{g_2}$ are given by the tensor product of irreps of $\mathfrak{g_1}$ and $\mathfrak{g_2}$, i.e., if $V_1$ is an irrep of $\mathfrak{g_1}$ and $V_2$ is an irrep of $\mathfrak{g_2}$, then $V_1 \otimes V_2$ is an irrep of $\mathfrak{g_1} \oplus \mathfrak{g_2}$.
+\end{theorem}
+\begin{proof}
+    Given irreps $V$ and $W$, their tensor product is given by
+    \begin{align*}
+        \rho(x) v \otimes w = (\rho(x) v) \otimes w + v \otimes (\rho(x) w).
+    \end{align*}
+    Now, consider $V$ and $W$ in their respective spectral decompositions. For $v \in V[a]$ and $w \in W[b]$, we have
+    \begin{align*}
+        \rho(x) (v \otimes w) &= (a v) \otimes w + v \otimes (b w) \\
+        &= (a + b) (v \otimes w).
+    \end{align*}
+    This gives the full decomposition of the tensor product $V \otimes W$ into irreps of $\mathfrak{g_1} \oplus \mathfrak{g_2}$:
+    \begin{align}
+    \label{eqn:clebsch-gordan}
+        V \otimes W &= \bigoplus_{a, b} (a + b) (V[a] \otimes W[b]).
+    \end{align}
+\end{proof}
+
+In the last line of the proof, each factor $V[a] \otimes W[b]$ should be read as a single irreducible representation of $\mathfrak{g}_1 \oplus \mathfrak{g}_2$.
+
+This leads to a complete classification of finite-dimensional irreducible representations of the complexified Lorentz group, using the representation theory of $\mathfrak{sl}_2(\mathbb{C})$:
+
+\begin{fact}
+    Finite-dimensional irreps of $su(2) = so(3)$ are characterized by half-integers $j \geq 0$, with eigenspaces $V[-2j], V[-2j+1], \ldots, V[2j-1], V[2j]$. That is, $2j+1$-dimensional.
+\end{fact}
+
+Therefore, we have the following
+
+\begin{fact}
+    Finite-dimensional irreps of $so(1,3)$ are characterized by two nonnegative half-integers $(A,B)$, as tensor product of two representations of $SU(2)$ with $2A+1$ and $2B+1$ dimensions, respectively.
+\end{fact}
+
+Furthermore, to understand how rotations in the Lorentz group acts on the representation, we may consider the $so(3)$ subalgebra generated by $J_i$. Its representation is given by Clebsch-Gordan coefficients, a consequence of \eqref{eqn:clebsch-gordan}.
+
+\begin{fact}
+    $so(3) \leq so(1,3)$, so $(A,B)$-representation of $so(1,3)$ includes a direct sum of $j$-representations of $so(3)$, with $j = |A - B|, |A - B| + 1, \ldots, A + B$.
+\end{fact}
+
+\subsection{Spin and Helicity}
+\label{subsec:spin-and-helicity}
+
+For massive particles, one can go to the rest frame, where the little group is $SO(3)$ and one-particle states are labeled by a spin $j$ together with a spin projection $m = -j, -j+1, \ldots, j$. Thus a massive spin-$j$ particle has $2j+1$ polarization states.
+
+For massless particles, there is no rest frame. Following Weinberg's discussion of one-particle states, choose instead the standard null momentum
+\[
+    k^\mu = (\kappa,0,0,\kappa), \quad \kappa > 0,
+\]
+and choose standard states $|k,\sigma\rangle$ as simultaneous eigenstates of momentum and of the rotation around the momentum axis \autocite[Chapter~2]{weinbergQFT1995}:
+\[
+    P^\mu |k,\sigma\rangle = k^\mu |k,\sigma\rangle, \quad
+    J_3 |k,\sigma\rangle = \sigma |k,\sigma\rangle.
+\]
+The little group preserving $k^\mu$ is $ISO(2)$. In this standard frame, its Lie algebra is generated by $J_3$ together with the two generators
+\[
+    A = J_2 + K_1, \quad B = -J_1 + K_2,
+\]
+which obey
+\[
+    [J_3,A] = iB, \quad [J_3,B] = -iA, \quad [A,B] = 0.
+\]
+The generators $A$ and $B$ are the translation part of $ISO(2)$. If we associate physical meaning to eigenstates of $A$ and $B$, we would get continuous-spin representations, but no observation supports such continuous spin states. Therefore we let the translation part act trivially on the states. Thus the nontrivial little-group action reduces to the $SO(2)$ rotation generated by $J_3$, and
+\[
+    U(W)|k,\sigma\rangle = e^{i\sigma\theta(W)} |k,\sigma\rangle
+\]
+for a little-group rotation $W$ by angle $\theta(W)$.
+
+The eigenvalue $\sigma$ is the \textbf{helicity}.
+Unlike the helicity of a massive particle, which can be reversed by changing frames, massless helicity is \textit{invariant} under proper orthochronous Lorentz transformations. For example, photons and gluons have physical helicities $h = \pm 1$, while a massless graviton has $h = \pm 2$.
+
+
+\subsection{Projective Representations}
+\label{subsec:projective-representations}
+
+In general, if $G$ is connected with Lie algebra $\mathfrak{g}$ and simply connected (universal) cover $\widetilde G$, then every finite-dimensional representation of $\mathfrak{g}$ integrates uniquely to a representation of $\widetilde G$. It induces a representation of $G$ precisely when the covering kernel acts trivially. For the proper orthochronous Lorentz group,
+\[
+    \operatorname{Spin}^+(1,3) \cong SL(2,\mathbb{C}), \quad
+    SO^+(1,3) \cong SL(2,\mathbb{C}) / \{\pm I\}.
+\]
+Therefore a finite-dimensional Lorentz-algebra representation descends from $SL(2,\mathbb{C})$ to $SO^+(1,3)$ precisely when the central element $-I \in SL(2,\mathbb{C})$ acts as the identity.
+
+Now consider a finite-dimensional irreducible Lorentz-algebra representation labeled by
+\[
+    (j_L,j_R), \quad j_L,j_R \in \left\{0,\frac12,1,\frac32,\ldots\right\}.
+\]
+It has representation space
+\[
+    V_{j_L} \otimes V_{j_R}, \quad
+    \dim(j_L,j_R) = (2j_L+1)(2j_R+1).
+\]
+Write
+\[
+    j_L = \frac{m}{2}, \quad j_R = \frac{n}{2}, \quad m,n \in \mathbb{Z}_{\geq 0}.
+\]
+At the group level, the left-handed factor is modeled on $\operatorname{Sym}^m(\mathbb{C}^2)$ and the right-handed factor on the corresponding right-handed symmetric power.
+This is a standard result from the representation theory of $SL(2,\mathbb{C})$: the spin-$m/2$ representation is the symmetric power $\operatorname{Sym}^m(\mathbb{C}^2)$, namely the completely symmetric subspace of the $m$-fold tensor product $(\mathbb{C}^2)^{\otimes m}$, and similarly for the right-handed factor.
+Since $-I$ acts as $-1$ on the defining two-dimensional spinor representation, it acts as $(-1)^m$ on the left-handed factor and as $(-1)^n$ on the right-handed factor. Hence on the full tensor product,
+\[
+    -I \mapsto (-1)^{m+n} = (-1)^{2j_L+2j_R}.
+\]
+
+Thus the criterion for getting a regular representation for the Lorentz group is
+\begin{fact}
+    The $(j_L,j_R)$ representation of $\mathfrak{so}(1,3)$ integrates to a representation of $SL(2,\mathbb{C})$. It induces an honest representation of $SO^+(1,3)$ iff
+    \[
+        (-1)^{2j_L+2j_R} = 1,
+    \]
+    equivalently iff
+    \[
+        j_L + j_R \in \mathbb{Z}.
+    \]
+\end{fact}
+
+If this condition fails, the representation is still a genuine representation of the double cover $SL(2,\mathbb{C})$, but only a \textit{projective representation} of $SO^+(1,3)$. 
+In general, a projective representation is a representation up to a phase: instead of satisfying the ordinary group law exactly, its operators obey
+\[
+    U(g_1)U(g_2)=e^{i\alpha(g_1,g_2)}U(g_1g_2),
+\]
+for some real phase function $\alpha$. This is natural in quantum theory because physical states are rays rather than vectors, so an overall phase is unobservable; see Weinberg's discussion of symmetries and one-particle states \autocite[Chapter~2]{weinbergQFT1995}.
+
+Finally, the former discussion concerns the connected proper orthochronous Lorentz group $SO^+(1,3)$. The full Lorentz group has additional disconnected components involving parity and time reversal. The labels $(j_L,j_R)$ classify the connected algebraic part; they do not by themselves specify how parity or time reversal acts. In particular, parity exchanges the two chiral factors,
+\[
+    (j_L,j_R) \longleftrightarrow (j_R,j_L).
+\]
+Thus a single irreducible representation can carry parity only when $j_L=j_R$, or else one enlarges the space to
+\[
+    (j_L,j_R) \oplus (j_R,j_L).
+\]
+For instance, a single Weyl spinor is not parity-invariant by itself, while a Dirac spinor
+\[
+    \left(\frac12,0\right) \oplus \left(0,\frac12\right)
+\]
+can carry a parity action.
+
+\subsection{Spinors and Bispinors}
+\label{subsec:spinors-and-bispinors}
+
+\begin{definition}
+\label{def:spinor}
+A \textbf{spinor} is an element in the $\frac{1}{2}$-representation of the Lorentz algebra $\mathfrak{su}(2)$. A \textbf{bi-spinor} is an element in the $(\frac{1}{2}, \frac{1}{2})$-representation of the Lorentz algebra $\mathfrak{so}(1,3)$.
+\end{definition}
+
+\begin{example}
+\label{ex:spinors-bispinors}
+    \begin{itemize}
+        \item The $4$-vector ($1$-tensor) representation $V^\mu$ is a $(\frac{1}{2}, \frac{1}{2})$-representation. One way to see this is by counting dimensions:
+        \[
+            \dim\left(\frac{1}{2},\frac{1}{2}\right) = (2)(2) = 4.
+        \]
+        A more explicit identification sends a real Lorentz vector to a Hermitian bispinor matrix,
+        \[
+            x^\mu \quad \longleftrightarrow \quad X_{\alpha\dot\alpha} = x^\mu \sigma_{\mu\alpha\dot\alpha},
+        \]
+        where
+        \[
+            \sigma^\mu = (I, \sigma^1, \sigma^2, \sigma^3)
+        \]
+        consists of the identity and the three Pauli matrices. Explicitly,
+        \[
+            X = x^\mu \sigma_\mu =
+            \begin{pmatrix}
+                x^0+x^3 & x^1-i x^2 \\
+                x^1+i x^2 & x^0-x^3
+            \end{pmatrix}.
+        \]
+        This matrix is Hermitian exactly when $x^\mu$ is real. Moreover, Lorentz transformations are realized as $X \mapsto M X M^\dagger$ with $M \in SL(2,\mathbb{C})$, preserving $\det X = x^2$. This is the same bispinor viewpoint used in spinor-helicity formalism: for a null momentum $p^2=0$, the matrix $p_{\alpha\dot\alpha}$ has rank one and factorizes as $p_{\alpha\dot\alpha}=\lambda_\alpha \tilde\lambda_{\dot\alpha}$.
+        \item The $2$-tensor representation $V^{\mu \nu}$ of the Lorentz algebra is a $(1,1)$-representation. 
+        To see this, note that the $(1,1)$-representation is $9$-dimensional, and the $2$-tensor representation is $(\frac{1}{2}, \frac{1}{2}) \otimes (\frac{1}{2}, \frac{1}{2}) =
+    (0,0) \oplus(1,0) \oplus(0,1) \oplus(1,1)$, having $16$ dimensions in total.
+        \item In general, the $n$-tensor representation $V^{\mu_1 \ldots \mu_n}$ is a $(\frac{n}{2}, \frac{n}{2})$-representation.
+        Similar as above, the $(\frac{n}{2}, \frac{n}{2})$-representation embeds into the $n$-tensor representation.
+    \end{itemize}
+\end{example}
+
+\subsection{Unitarity and Physical Particle Representations}
+\label{subsec:unitarity-and-physical-particle-representations}
+
+\begin{fact}
+    \label{fact:infinite-dim}
+    There is no finite-dimensional unitary representation of the Lorentz group $SO(1,3)$. In particular, there is no finite-dimensional unitary representation of the Poincare group $ISO(1,3)$.
+\end{fact}
+\begin{proof}
+    Consider a general element, and use the $so(1,3) = su(2) \oplus su(2)$ decomposition:
+    \[
+    \Lambda = \exp(i \theta_j J_j + i \beta_k K_k) = \exp(i (\theta_j - i \beta_j) J_+^j + i (\theta_j + i \beta_j) J_-^j).
+    \]
+    Since $(\theta_j - i \beta_j)$ and $(\theta_j + i \beta_j)$ are not real, the representation is not unitary.
+\end{proof}

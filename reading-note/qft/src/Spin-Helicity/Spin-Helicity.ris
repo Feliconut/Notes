@@ -1,0 +1,705 @@
+TY  - JOUR
+TI  - Direct Proof Of Tree-Level Recursion Relation In Yang-Mills Theory
+AU  - Britto, Ruth
+AU  - Cachazo, Freddy
+AU  - Feng, Bo
+AU  - Witten, Edward
+T2  - Physical Review Letters
+AB  - Recently, by using the known structure of one-loop scattering amplitudes for gluons in Yang-Mills theory, a recursion relation for tree-level scattering amplitudes has been deduced. Here, we give a short and direct proof of this recursion relation based on properties of tree-level amplitudes only.
+DA  - 2005/05/10/
+PY  - 2005
+DO  - 10.1103/PhysRevLett.94.181602
+DP  - arXiv.org
+VL  - 94
+IS  - 18
+SP  - 181602
+J2  - Phys. Rev. Lett.
+LA  - en
+SN  - 0031-9007, 1079-7114
+UR  - http://arxiv.org/abs/hep-th/0501052
+Y2  - 2025/06/18/21:25:14
+L1  - files/5189/Britto et al_2005_Direct Proof Of Tree-Level Recursion Relation In Yang-Mills Theory.pdf
+KW  - important
+KW  - High Energy Physics - Theory
+KW  - tree-level
+ER  - 
+
+TY  - JOUR
+TI  - Recursion relations for scattering amplitudes with massive particles
+AU  - Ballav, Sourav
+AU  - Manna, Arkajyoti
+T2  - Journal of High Energy Physics
+AB  - We use the recently developed massive spinor-helicity formalism [1] of ArkaniHamed et al. to study a new class of recursion relations for tree-level amplitudes in gauge theories. These relations are based on a combined complex deformation of massless as well as massive external momenta. We use these relations to study tree-level amplitudes in scalar QCD as well as amplitudes involving massive vector bosons in the Higgsed phase of Yang-Mills theory. We prove the validity of our proposal by showing that in the limit of inﬁnite momenta of two of the external particles, the amplitude once again is controlled by an enhanced Spin-Lorentz symmetry paralleling the proof of BCFW shift for massless gauge theories. Simple examples illustrate that the proposed shift may lead to an eﬃcient computation of tree-level amplitudes.
+DA  - 2021/03//
+PY  - 2021
+DO  - 10.1007/JHEP03(2021)295
+DP  - DOI.org (Crossref)
+VL  - 2021
+IS  - 3
+SP  - 295
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - http://link.springer.com/10.1007/JHEP03(2021)295
+Y2  - 2025/06/24/15:15:28
+L1  - files/5222/Ballav and Manna - 2021 - Recursion relations for scattering amplitudes with.pdf
+KW  - Massive spin-helicity
+KW  - tree-level
+ER  - 
+
+TY  - GEN
+TI  - Scattering amplitude and its soft decomposition
+AU  - Rasoanaivo, Andriniaina Narindra
+AB  - In the pure scattering theory, the universality of the soft limit has been studied for a long time. In this talk we review the property of soft limit to relate an n-point amplitude to an (n − 1)-point amplitude. We show how this property can be used to decompose amplitudes into diﬀerent complementary soft channel. The existence of such decomposition provides a new way to understand how to construct amplitude solely from them soft limit.
+DA  - 2023/03/08/
+PY  - 2023
+DO  - 10.48550/arXiv.2205.13873
+DP  - arXiv.org
+LA  - en
+PB  - arXiv
+UR  - http://arxiv.org/abs/2205.13873
+Y2  - 2025/06/24/15:18:22
+L1  - files/5224/Rasoanaivo - 2023 - Scattering amplitude and its soft decomposition.pdf
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - Momentum shift and on-shell recursion relation for electroweak theory
+AU  - Ema, Yohei
+AU  - Gao, Ting
+AU  - Ke, Wenqi
+AU  - Liu, Zhen
+AU  - Lyu, Kun-Feng
+AU  - Mahbub, Ishmam
+T2  - Physical Review D
+AB  - We study the all-line transverse (ALT) shift which we developed for on-shell recursion of amplitudes for particles of any mass. We discuss the validity of the shift for general theories of spin
+              
+                ≤
+                1
+              
+              , and illustrate the connection between Ward identity and constructibility for massive spin-1 amplitude under the ALT shift. We apply the shift to the electroweak theory, and various four-point scattering amplitudes among electroweak gauge bosons and fermions are constructed. We show explicitly that the four-point gauge boson contact terms in massive electroweak theory automatically arise after recursive construction, independent of UV completion, and they automatically cancel the terms growing as
+              
+                
+                  
+                    (
+                    energy
+                    )
+                  
+                  4
+                
+              
+              at high energy. We explore UV completion of the electroweak theory that cancels the remaining
+              
+                
+                  
+                    (
+                    energy
+                    )
+                  
+                  2
+                
+              
+              terms and impose unitarity requirements to constrain additional couplings. The ALT shift framework allows consistent treatment in dealing with contact term ambiguities for renormalizable massive and massless theories, which we show can be useful in studying real-world amplitudes with massive spinors.
+            
+            
+              
+              
+                
+                  Published by the American Physical Society
+                  2024
+DA  - 2024/11/07/
+PY  - 2024
+DO  - 10.1103/PhysRevD.110.105002
+DP  - DOI.org (Crossref)
+VL  - 110
+IS  - 10
+SP  - 105002
+J2  - Phys. Rev. D
+LA  - en
+SN  - 2470-0010, 2470-0029
+UR  - https://link.aps.org/doi/10.1103/PhysRevD.110.105002
+Y2  - 2025/06/24/15:20:13
+L1  - files/5227/Ema et al. - 2024 - Momentum shift and on-shell recursion relation for.pdf
+ER  - 
+
+TY  - JOUR
+TI  - Scattering Amplitudes and the Spinor-Helicity Formalism
+AU  - Bogna, Giuseppe
+AB  - Spinor-helicity variables are introduced as solutions to the massless Dirac equation and are used as a tool for calculating several scattering amplitudes. The extension to the massive case is then examined and massless and massive variables are finally used to construct a UV completion of general relativity.
+DP  - Zotero
+LA  - en
+L1  - files/5231/Bogna - Scattering Amplitudes and the Spinor-Helicity Form.pdf
+KW  - ⛔ No DOI found
+ER  - 
+
+TY  - GEN
+TI  - Massive Helicity-Chirality Spinor Formalism from Massless Amplitudes with On-shell Mass Insertion
+AU  - Ni, Yu-Han
+AU  - Wang, Yi-Ning
+AU  - Wu, Chao
+AU  - Yu, Jiang-Hao
+AB  - We introduce a helicity-chirality spinor formalism to describe scattering amplitudes for particles of any masses and spins. The massive spin-spinors introduced by Arkani-hamed-Huang-Huang have been extended to the spin/helicity-transversality spinors, in which a new quantum number transversality, closely related to chirality, is introduced by extending the Poincare symmetry. The massive helicity-chirality amplitudes can be written by the large and small components of massless spinors $\lambda$ and $\eta$ following the $\lambda \sim \sqrt{E}, \eta \sim \mathbf{m}/\sqrt{E}$ expansion order by order, which formulate the power counting rules of a large energy effective theory. Diagrammatically the mass expansion in amplitudes originates from the on-shell mass insertion: the helicity flip and chirality flip, which completely determines the three-point massive amplitudes. From the chirality-helicity unification at the UV, any massive helicity-chirality amplitude can be one-to-one corresponded to massless helicity amplitudes with (without) additional Higgs insertion. This UV-IR correspondence explains the mass enhancement in the weak decay processes $\pi^+ \to \mu^+ \nu$ and $t \to W^+ b$, and isolates the correct UV of the three-point massive QED $F\bar{F}\gamma$ amplitudes in Arkani-hamed-Huang-Huang formalism. From massless-massive correspondence, the massless on-shell techniques can be utilized to construct higher-point massive amplitudes.
+DA  - 2025/02/07/
+PY  - 2025
+DO  - 10.48550/arXiv.2501.09062
+DP  - arXiv.org
+PB  - arXiv
+UR  - http://arxiv.org/abs/2501.09062
+Y2  - 2025/06/24/15:20:35
+L1  - files/5236/Ni et al_2025_Massive Helicity-Chirality Spinor Formalism from Massless Amplitudes with.pdf
+L2  - files/5237/2501.html
+KW  - High Energy Physics - Phenomenology
+KW  - High Energy Physics - Theory
+KW  - Massive spin-helicity
+ER  - 
+
+TY  - GEN
+TI  - Scattering Amplitudes For All Masses and Spins
+AU  - Arkani-Hamed, Nima
+AU  - Huang, Tzu-Chen
+AU  - Huang, Yu-tin
+AB  - We introduce a formalism for describing four-dimensional scattering amplitudes for particles of any mass and spin. This naturally extends the familiar spinor-helicity formalism for massless particles to one where these variables carry an extra SU(2) little group index for massive particles, with the amplitudes for spin S particles transforming as symmetric rank 2S tensors. We systematically characterise all possible three particle amplitudes compatible with Poincare symmetry. Unitarity, in the form of consistent factorization, imposes algebraic conditions that can be used to construct all possible four-particle tree amplitudes. This also gives us a convenient basis in which to expand all possible four-particle amplitudes in terms of what can be called "spinning polynomials". Many general results of quantum field theory follow the analysis of four-particle scattering, ranging from the set of all possible consistent theories for massless particles, to spin-statistics, and the Weinberg-Witten theorem. We also find a transparent understanding for why massive particles of sufficiently high spin can not be "elementary". The Higgs and Super-Higgs mechanisms are naturally discovered as an infrared unification of many disparate helicity amplitudes into a smaller number of massive amplitudes, with a simple understanding for why this can't be extended to Higgsing for gravitons. We illustrate a number of applications of the formalism at one-loop, giving few-line computations of the electron (g-2) as well as the beta function and rational terms in QCD. "Off-shell" observables like correlation functions and form-factors can be thought of as scattering amplitudes with external "probe" particles of general mass and spin, so all these objects--amplitudes, form factors and correlators, can be studied from a common on-shell perspective.
+DA  - 2021/10/31/
+PY  - 2021
+DO  - 10.48550/arXiv.1709.04891
+DP  - arXiv.org
+PB  - arXiv
+UR  - http://arxiv.org/abs/1709.04891
+Y2  - 2025/06/24/15:23:00
+L1  - files/5243/Arkani-Hamed et al_2021_Scattering Amplitudes For All Masses and Spins.pdf
+L2  - files/5244/1709.html
+KW  - reading
+KW  - important
+KW  - High Energy Physics - Theory
+KW  - Massive spin-helicity
+ER  - 
+
+TY  - JOUR
+TI  - General Relativity from Scattering Amplitudes
+AU  - Bjerrum-Bohr, N. E. J.
+AU  - Damgaard, Poul H.
+AU  - Festuccia, Guido
+AU  - Planté, Ludovic
+AU  - Vanhove, Pierre
+T2  - Physical Review Letters
+DA  - 2018/10/25/
+PY  - 2018
+DO  - 10.1103/PhysRevLett.121.171601
+DP  - DOI.org (Crossref)
+VL  - 121
+IS  - 17
+SP  - 171601
+J2  - Phys. Rev. Lett.
+LA  - en
+SN  - 0031-9007, 1079-7114
+UR  - https://link.aps.org/doi/10.1103/PhysRevLett.121.171601
+Y2  - 2025/06/24/15:35:15
+L1  - files/5247/Bjerrum-Bohr et al_2018_General Relativity from Scattering Amplitudes.pdf
+ER  - 
+
+TY  - BOOK
+TI  - Dualities, Helicity Amplitudes, and Little Conformal Symmetry
+AU  - Colwell, Kitran Macey M.
+T2  - Springer Theses
+CY  - Cham
+DA  - 2017///
+PY  - 2017
+DO  - 10.1007/978-3-319-67392-9
+DP  - DOI.org (Crossref)
+LA  - en
+PB  - Springer International Publishing
+SN  - 978-3-319-67391-2 978-3-319-67392-9
+UR  - http://link.springer.com/10.1007/978-3-319-67392-9
+Y2  - 2025/06/24/15:49:55
+L1  - files/5253/Colwell_2017_Dualities, Helicity Amplitudes, and Little Conformal Symmetry.pdf
+KW  - Massive spin-helicity
+ER  - 
+
+TY  - JOUR
+TI  - Scattering amplitudes with massive fermions using BCFW recursion
+AU  - Ozeren, K.J.
+AU  - Stirling, W.J.
+T2  - The European Physical Journal C - Particles and Fields
+AB  - We study the QCD scattering amplitudes for $\bar{q}q\to{gg}$and $\bar{q}q\to{ggg}$where q is a massive fermion. Using a particular choice of massive fermion spinor we derive compact expressions for the partial spin amplitudes for the 2→2 process. We then investigate the corresponding 2→3 amplitudes using the BCFW recursion technique. For the helicity conserving partial amplitudes we present new expressions, but we were unable to treat the helicity-flip amplitudes recursively, except for the case where all the gluon helicities are the same. We therefore evaluate the remaining partial amplitudes using standard Feynman diagram techniques.
+DA  - 2006/10/01/
+PY  - 2006
+DO  - 10.1140/epjc/s10052-006-0007-7
+DP  - Springer Link
+VL  - 48
+IS  - 1
+SP  - 159
+EP  - 168
+J2  - Eur. Phys. J. C
+LA  - en
+SN  - 1434-6052
+UR  - https://doi.org/10.1140/epjc/s10052-006-0007-7
+Y2  - 2025/06/25/08:59:57
+L1  - files/5256/Ozeren and Stirling - 2006 - Scattering amplitudes with massive fermions using .pdf
+KW  - Computability and Recursion Theory
+KW  - Crystallography and Scattering Methods
+KW  - Feynman Diagram
+KW  - Field Theory and Polynomials
+KW  - Massive Fermion
+KW  - Massive Spinor
+KW  - Neutron Scattering
+KW  - Partial Amplitude
+KW  - Quantum Electrodynamics, Relativistic and Many-body Calculations
+KW  - Special Functions
+KW  - Tree Amplitude
+ER  - 
+
+TY  - JOUR
+TI  - Scattering Amplitudes and BCFW in $\mathcal{N}=2^*$ Theory
+AU  - Abhishek, Md
+AU  - Hegde, Subramanya
+AU  - Jatkar, Dileep
+AU  - Saha, Arnab Priya
+T2  - SciPost Physics
+AB  - SciPost Journals Publication Detail SciPost Phys. 13, 008 (2022) Scattering Amplitudes and BCFW in $\mathcal{N}=2^*$ Theory
+DA  - 2022/07/25/
+PY  - 2022
+DO  - 10.21468/SciPostPhys.13.1.008
+DP  - www.scipost.org
+VL  - 13
+IS  - 1
+SP  - 008
+LA  - en
+SN  - 2542-4653
+UR  - https://www.scipost.org/10.21468/SciPostPhys.13.1.008?acad_field_slug=politicalscience
+Y2  - 2025/06/25/09:00:55
+L1  - files/5258/Abhishek et al. - 2022 - Scattering Amplitudes and BCFW in $mathcal{N}=2^.pdf
+ER  - 
+
+TY  - JOUR
+TI  - BCFW recursion for off-shell gluons
+AU  - Van Hameren, A.
+T2  - Journal of High Energy Physics
+AB  - It is shown how tree-level multi-gluon helicity amplitudes with an arbitrary number of oﬀ-shell external gluons can be calculated via BCFW recursion. Compact expressions for helicity amplitudes for scattering processes of three and four gluons, with up to three of them oﬀ-shell, are presented. Also, maximum-helicity-violating conﬁgurations are identiﬁed for up to two oﬀ-shell gluons, and the expressions for their helicity amplitudes for an arbitrary number of on-shell gluons are derived.
+DA  - 2014/07//
+PY  - 2014
+DO  - 10.1007/JHEP07(2014)138
+DP  - DOI.org (Crossref)
+VL  - 2014
+IS  - 7
+SP  - 138
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - http://link.springer.com/10.1007/JHEP07(2014)138
+Y2  - 2025/06/25/09:07:42
+L1  - files/5259/Van Hameren - 2014 - BCFW recursion for off-shell gluons.pdf
+KW  - important
+ER  - 
+
+TY  - JOUR
+TI  - Momentum shift and on-shell constructible massive amplitudes
+AU  - Ema, Yohei
+AU  - Gao, Ting
+AU  - Ke, Wenqi
+AU  - Liu, Zhen
+AU  - Lyu, Kun-Feng
+AU  - Mahbub, Ishmam
+T2  - Physical Review D
+AB  - We construct tree-level amplitude for massive particles using on-shell recursion relations based on two classes of momentum shifts: an all-line transverse shift that deforms momentum by its transverse polarization vector, and a massive Britto-Cachazo-Feng-Witten-type shift. We illustrate that these shifts allow us to correctly calculate four-point and five-point amplitudes in massive QED, without an ambiguity associated with the contact terms that may arise from a simple “gluing” of lower-point on-shell amplitudes. We discuss various aspects and applicability of the two shifts, including the large-𝑧 behavior and complexity scaling. We show that there exists a “good” all-line transverse shift for all possible little group configurations of the external particles, which can be extended to a broader class of theories with massive particles such as massive QCD and theories with massive spin-1 particles. The massive Britto-Cachazo-Feng-Witten-type shift enjoys more simplicity, but a “good” shift does not exist for all the spin states due to the specific choice of spin axis.
+DA  - 2024/11/07/
+PY  - 2024
+DO  - 10.1103/PhysRevD.110.105003
+DP  - APS
+VL  - 110
+IS  - 10
+SP  - 105003
+J2  - Phys. Rev. D
+PB  - American Physical Society
+UR  - https://link.aps.org/doi/10.1103/PhysRevD.110.105003
+Y2  - 2025/06/25/09:41:25
+L1  - files/5262/Ema et al. - 2024 - Momentum shift and on-shell constructible massive .pdf
+ER  - 
+
+TY  - JOUR
+TI  - SPINAS: spinor amplitude subroutines for constructive diagram evaluations
+AU  - Christensen, Neil
+T2  - The European Physical Journal C
+AB  - SPINAS is a C++ package created for the implementation and numerical computation of phase-space points of constructive amplitudes in particle physics. This package contains a suite of classes and methods for handling particles, propagators, spinor products, and processes. SPINAS is structured to offer straightforward usability while ensuring maximum efficiency. This is achieved through a design that emphasizes the storage and reuse of intermediate results within amplitude calculations for each phase-space point. We include a user guide describing how to use the components, a complete example of how to use SPINAS for a scattering amplitude, a discussion of the design and implementation useful for those wishing to contribute, and a discussion of our validation of this package, including both a validation of individual components of the package and a comparison of a complete set of Standard Model processes with Feynman diagrams.
+DA  - 2024/05/24/
+PY  - 2024
+DO  - 10.1140/epjc/s10052-024-12860-0
+DP  - Springer Link
+VL  - 84
+IS  - 5
+SP  - 520
+J2  - Eur. Phys. J. C
+LA  - en
+SN  - 1434-6052
+ST  - SPINAS
+UR  - https://doi.org/10.1140/epjc/s10052-024-12860-0
+Y2  - 2025/06/25/09:43:17
+L1  - files/5264/Christensen - 2024 - SPINAS spinor amplitude subroutines for construct.pdf
+KW  - Quantum Electrodynamics, Relativistic and Many-body Calculations
+KW  - Experimental Particle Physics
+KW  - Nuclear and Particle Physics
+KW  - Open Source
+KW  - Particle Physics
+KW  - Theoretical Particle Physics
+ER  - 
+
+TY  - JOUR
+TI  - A complete set of 4-point amplitudes in the constructive Standard Model
+AU  - Christensen, Neil
+T2  - The European Physical Journal C
+AB  - Abstract
+            
+              We present a complete set of 4-point amplitudes in the constructive Standard Model at tree level. Any 4-point amplitude can be obtained from the results presented here by a suitable choice of masses, a permutation of the particles (by crossing symmetry), and a reversal of the momenta of the outgoing particles. We have validated all of these amplitudes by comparing with Feynman diagrams for a variety of masses, scattering energy and angles, and helicities of the photons and gluons, when they are in the initial states. The standard constructive techniques work for these amplitudes without the need for any contact terms and indeed, contact terms are not allowed. Only three 4-point vertices are used (allowed), involving the Higgs boson and the
+              W
+              and
+              Z
+              bosons. When external photons or gluons are present, the amplitude simplifies to a single spinor-product structure, present in the numerator. In a few cases, however, the propagator structure is more complex, with different terms depending on the charge or color structure. In the case of internal photons or gluons, we find that the massless limit of a massive photon or gluon diagram gives the correct result in all cases. We have additionally found that using the
+              x
+              factor directly gives the correct result in all cases and agrees with the massless limit calculation.
+DA  - 2024/06/20/
+PY  - 2024
+DO  - 10.1140/epjc/s10052-024-12961-w
+DP  - DOI.org (Crossref)
+VL  - 84
+IS  - 6
+SP  - 620
+J2  - Eur. Phys. J. C
+LA  - en
+SN  - 1434-6052
+UR  - https://link.springer.com/10.1140/epjc/s10052-024-12961-w
+Y2  - 2025/06/25/09:44:10
+L1  - files/5266/Christensen - 2024 - A complete set of 4-point amplitudes in the constr.pdf
+ER  - 
+
+TY  - JOUR
+TI  - Recursion for Wilson-line form factors
+AU  - Cohen, Timothy
+AU  - Riembau, Marc
+T2  - Journal of High Energy Physics
+AB  - Matrix elements of Wilson-line dressed operators play a central role in the factorization of soft and collinear modes in gauge theories. When expressed using spinor helicity variables, these so-called form factors admit a classification starting from a Maximally Helicity Violating configuration, in close analogy with gauge theory amplitudes. We show that a single-line complex momentum shift can be used to derive recursion relations that efficiently compute these helicity form factors at tree-level: a combination of lower point form factors and on-shell amplitudes serve as the input building blocks. We obtain novel compact expressions for the 1 → 2 and 1 → 3 splitting functions in QCD, which also serves to validate our methods.
+DA  - 2024/10/17/
+PY  - 2024
+DO  - 10.1007/JHEP10(2024)132
+DP  - Springer Link
+VL  - 2024
+IS  - 10
+SP  - 132
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - https://doi.org/10.1007/JHEP10(2024)132
+Y2  - 2025/06/25/09:53:26
+L1  - files/5268/Cohen and Riembau - 2024 - Recursion for Wilson-line form factors.pdf
+KW  - Computability and Recursion Theory
+KW  - Field Theory and Polynomials
+KW  - Quantum Electrodynamics, Relativistic and Many-body Calculations
+KW  - Special Functions
+KW  - Data Structures
+KW  - Elementary Particles, Quantum Field Theory
+KW  - Higher-Order Perturbative Calculations
+KW  - Jets and Jet Substructure
+KW  - Scattering Amplitudes
+ER  - 
+
+TY  - JOUR
+TI  - On-shell constructibility of tree amplitudes in general field theories
+AU  - Cohen, Timothy
+AU  - Elvang, Henriette
+AU  - Kiermaier, Michael
+T2  - Journal of High Energy Physics
+AB  - We study "on-shell constructibility" of tree amplitudes from recursion relations in general 4-dimensional local field theories with any type of particles, both massless and massive. Our analysis applies to renormalizable as well as non-renormalizable interactions, with or without supersymmetry. We focus on recursion relations that arise from complex deformations of all external momenta. Under certain conditions, these "all-line shift recursion relations" imply the MHV vertex expansion. We derive a simple sufficient criterion for the validity of the all-line shift recursion relations. It depends only on the mass dimensions of the coupling constants and on the sum of helicities of the external particles. Our proof is strikingly simple since it just relies on dimensional analysis and little-group transformation properties. In particular, the results demonstrate that all tree amplitudes with n>4 external states are constructible in any power-counting renormalizable theory. Aspects of all-line shift constructibility are illustrated in numerous examples, ranging from pure scalar theory and the massless Wess-Zumino model to theories with higher-derivative interactions, gluon-Higgs fusion, and Z-boson scattering. We propose a sharp physical interpretation of our constructibility criterion: the all-line shift fails precisely for those classes of n-point amplitudes that can receive local contributions from independent gauge-invariant n-field operators.
+DA  - 2011/04//
+PY  - 2011
+DO  - 10.1007/JHEP04(2011)053
+DP  - arXiv.org
+VL  - 2011
+IS  - 4
+SP  - 53
+J2  - J. High Energ. Phys.
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/1010.0257
+Y2  - 2025/06/25/09:58:19
+L1  - files/5271/Cohen et al. - 2011 - On-shell constructibility of tree amplitudes in ge.pdf
+L2  - files/5272/1010.html
+KW  - High Energy Physics - Phenomenology
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - The All-Loop Integrand For Scattering Amplitudes in Planar N=4 SYM
+AU  - Arkani-Hamed, Nima
+AU  - Bourjaily, Jacob L.
+AU  - Cachazo, Freddy
+AU  - Caron-Huot, Simon
+AU  - Trnka, Jaroslav
+T2  - Journal of High Energy Physics
+AB  - We give an explicit recursive formula for the all -loop integrand for scattering amplitudes in N = 4 SYM in the planar limit, manifesting the full Yangian symmetry of the theory. This generalizes the BCFW recursion relation for tree amplitudes to all loop orders, and extends the Grassmannian duality for leading singularities to the full amplitude. It also provides a new physical picture for the meaning of loops, associated with canonical operations for removing particles in a Yangian-invariant way. Loop amplitudes arise from the “entangled” removal of pairs of particles, and are naturally presented as an integral over lines in momentum-twistor space. As expected from manifest Yangian invariance, the integrand is given as a sum over non-local terms, rather than the familiar decomposition in terms of local scalar integrals with rational coeﬃcients. Knowing the integrands explicitly, it is straightforward to express them in local forms if desired; this turns out to be done most naturally using a novel basis of chiral, tensor integrals written in momentum-twistor space, each of which has unit leading singularities. As simple illustrative examples, we present a number of new multi-loop results written in local form, including the 6- and 7-point 2-loop NMHV amplitudes. Very concise expressions are presented for all 2-loop MHV amplitudes, as well as the 5-point 3-loop MHV amplitude. The structure of the loop integrand strongly suggests that the integrals yielding the physical amplitudes are “simple”, and determined by IR-anomalies. We brieﬂy comment on extending these ideas to more general planar theories.
+DA  - 2011/01//
+PY  - 2011
+DO  - 10.1007/JHEP01(2011)041
+DP  - arXiv.org
+VL  - 2011
+IS  - 1
+SP  - 41
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/1008.2958
+Y2  - 2025/06/25/17:32:55
+L1  - files/5273/Arkani-Hamed et al. - 2011 - The All-Loop Integrand For Scattering Amplitudes i.pdf
+KW  - reading
+KW  - important
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - GEN
+TI  - Tales of 1001 Gluons
+AU  - Weinzierl, Stefan
+AB  - This report is centred around tree-level scattering amplitudes in pure Yang-Mills theories, the most prominent example is given by the tree-level gluon amplitudes of QCD. I will discuss several ways of computing these amplitudes, illustrating in this way recent developments in perturbative quantum ﬁeld theory. Topics covered in this review include colour decomposition, spinor and twistor methods, off- and on-shell recursion, MHV amplitudes and MHV expansion, the Grassmannian and the amplituhedron, the scattering equations and the CHY representation. At the end of this report there will be an outlook on the relation between pure Yang-Mills amplitudes and scattering amplitudes in perturbative quantum gravity.
+DA  - 2017/01/20/
+PY  - 2017
+DO  - 10.48550/arXiv.1610.05318
+DP  - arXiv.org
+LA  - en
+PB  - arXiv
+UR  - http://arxiv.org/abs/1610.05318
+Y2  - 2025/06/25/17:55:21
+L1  - files/5279/Weinzierl - 2017 - Tales of 1001 Gluons.pdf
+KW  - High Energy Physics - Phenomenology
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - Loops and trees
+AU  - Caron-Huot, Simon
+T2  - Journal of High Energy Physics
+AB  - We investigate relations between loop and tree amplitudes in quantum ﬁeld theory that involve putting on-shell some loop propagators. This generalizes the so-called Feynman tree theorems satisﬁed at 1-loop. Exploiting retarded boundary conditions, we give a generalization to ℓ-loop expressing the loops as integrals over the on-shell phase space of exactly ℓ particles. We argue that the corresponding integrand for ℓ > 2 does not involve the forward limit of any physical tree amplitude, except in planar gauge theories. In that case we explicitly construct the relevant physical amplitude. Beyond the planar limit, abandoning direct integral representations, we propose that loops continue to be determined implicitly by the forward limit of physical connected trees, and we formulate a precise conjecture along this line. Finally, we set up technology to compute forward amplitudes in supersymmetric theories, in which speciﬁc simpliﬁcations occur.
+DA  - 2011/05//
+PY  - 2011
+DO  - 10.1007/JHEP05(2011)080
+DP  - arXiv.org
+VL  - 2011
+IS  - 5
+SP  - 80
+J2  - J. High Energ. Phys.
+LA  - en
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/1007.3224
+Y2  - 2025/06/27/14:13:22
+L1  - files/5283/Caron-Huot - 2011 - Loops and trees.pdf
+KW  - High Energy Physics - Phenomenology
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - From multiple unitarity cuts to the coproduct of Feynman integrals
+AU  - Abreu, Samuel
+AU  - Britto, Ruth
+AU  - Duhr, Claude
+AU  - Gardi, Einan
+T2  - Journal of High Energy Physics
+AB  - We develop techniques for computing and analyzing multiple unitarity cuts of Feynman integrals, and reconstructing the integral from these cuts. We study the relations among unitarity cuts of a Feynman integral computed via diagrammatic cutting rules, the discontinuity across the corresponding branch cut, and the coproduct of the integral. For single unitarity cuts, these relations are familiar. Here we show that they can be generalized to sequences of unitarity cuts in different channels. Using concrete one- and two-loop scalar integral examples we demonstrate that it is possible to reconstruct a Feynman integral from either single or double unitarity cuts. Our results offer insight into the analytic structure of Feynman integrals as well as a new approach to computing them.
+DA  - 2014/10//
+PY  - 2014
+DO  - 10.1007/JHEP10(2014)125
+DP  - arXiv.org
+VL  - 2014
+IS  - 10
+SP  - 125
+J2  - J. High Energ. Phys.
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/1401.3546
+Y2  - 2025/06/27/14:38:12
+L1  - files/5290/Abreu et al. - 2014 - From multiple unitarity cuts to the coproduct of F.pdf
+L2  - files/5291/1401.html
+KW  - High Energy Physics - Phenomenology
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - Proof of the MHV vertex expansion for all tree amplitudes in N=4 SYM theory
+AU  - Elvang, Henriette
+AU  - Freedman, Daniel Z.
+AU  - Kiermaier, Michael
+T2  - Journal of High Energy Physics
+AB  - We prove the MHV vertex expansion for all tree amplitudes of N = 4 SYM theory. The proof uses a shift acting on all external momenta, and we show that every NkMHV tree amplitude falls oﬀ as 1/zk, or faster, for large z under this shift. The MHV vertex expansion allows us to derive compact and eﬃcient generating functions for all NkMHV tree amplitudes of the theory. We also derive an improved form of the anti-NMHV generating function. The proof leads to a curious set of sum rules for the diagrams of the MHV vertex expansion.
+DA  - 2009/06/22/
+PY  - 2009
+DO  - 10.1088/1126-6708/2009/06/068
+DP  - arXiv.org
+VL  - 2009
+IS  - 06
+SP  - 068
+EP  - 068
+J2  - J. High Energy Phys.
+LA  - en
+SN  - 1029-8479
+UR  - http://arxiv.org/abs/0811.3624
+Y2  - 2025/07/10/09:12:41
+L1  - files/5308/Elvang et al. - 2009 - Proof of the MHV vertex expansion for all tree amp.pdf
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - MHV techniques for QED processes
+AU  - Ozeren, Kemal J.
+AU  - Stirling, W. James
+T2  - Journal of High Energy Physics
+AB  - Significant progress has been made in the past year in developing new `MHV' techniques for calculating multiparticle scattering amplitudes in Yang-Mills gauge theories. Most of the work so far has focussed on applications to Quantum Chromodynamics, both at tree and one-loop level. We show how such techniques can also be applied to abelian theories such as QED, by studying the simplest tree-level multiparticle process, e+e−→nγ. We compare explicit results for up to n = 5 photons using both the Cachazo, Svrcek and Witten `MHV rules' and the related Britto-Cachazo-Feng `recursion relation' approaches with those using traditional spinor techniques.
+DA  - 2005/11//
+PY  - 2005
+DO  - 10.1088/1126-6708/2005/11/016
+DP  - Institute of Physics
+VL  - 2005
+IS  - 11
+SP  - 016
+J2  - J. High Energy Phys.
+LA  - en
+SN  - 1126-6708
+UR  - https://dx.doi.org/10.1088/1126-6708/2005/11/016
+Y2  - 2025/07/15/13:29:46
+L1  - files/5317/Ozeren_Stirling_2005_MHV techniques for QED processes.pdf
+KW  - reading
+KW  - important
+ER  - 
+
+TY  - GEN
+TI  - Momentum shift and on-shell constructible massive amplitudes
+AU  - Ema, Yohei
+AU  - Gao, Ting
+AU  - Ke, Wenqi
+AU  - Liu, Zhen
+AU  - Lyu, Kun-Feng
+AU  - Mahbub, Ishmam
+AB  - We construct tree-level amplitude for massive particles using on-shell recursion relations based on two classes of momentum shifts: an all-line transverse shift that deforms momentum by its transverse polarization vector, and a massive BCFW-type shift. We illustrate that these shifts allow us to correctly calculate four-point and five-point amplitudes in massive QED, without an ambiguity associated with the contact terms that may arise from a simple “gluing” of lower-point on-shell amplitudes. We discuss various aspects and applicability of the two shifts, including the large-z behavior and complexity scaling. We show that there exists a “good” all-line transverse shift for all possible little group configurations of the external particles, which can be extended to a broader class of theories with massive particles such as massive QCD and theories with massive spin-1 particles. The massive BCFW-type shift enjoys more simplicity, but a “good” shift does not exist for all the spin states due to the specific choice of spin axis.
+DA  - 2024/11/12/
+PY  - 2024
+DO  - 10.48550/arXiv.2403.15538
+DP  - arXiv.org
+LA  - en
+PB  - arXiv
+UR  - http://arxiv.org/abs/2403.15538
+Y2  - 2025/07/15/13:30:04
+L1  - files/5320/Ema et al. - 2024 - Momentum shift and on-shell constructible massive .pdf
+KW  - High Energy Physics - Phenomenology
+KW  - High Energy Physics - Theory
+ER  - 
+
+TY  - JOUR
+TI  - Compact QED Tree-Level Amplitudes From Dressed BCFW Recursion Relations
+AU  - Badger, Simon
+AU  - Henn, Johannes M.
+T2  - Physics Letters B
+AB  - We construct a modified on-shell BCFW recursion relation to derive compact analytic representations of tree-level amplitudes in QED. As an application, we study the amplitudes of a fermion pair coupling to an arbitrary number of photons and give compact formulae for the NMHV and NNMHV case. We demonstrate that the new recursion relation reduces the growth in complexity with additional photons to be exponential rather than factorial.
+DA  - 2010/08//
+PY  - 2010
+DO  - 10.1016/j.physletb.2010.07.021
+DP  - arXiv.org
+VL  - 692
+IS  - 2
+SP  - 143
+EP  - 151
+SN  - 0370-2693
+UR  - http://arxiv.org/abs/1005.4939
+Y2  - 2025/07/15/14:37:23
+L1  - files/5331/Badger_Henn_2010_Compact QED Tree-Level Amplitudes From Dressed BCFW Recursion Relations.pdf
+L2  - files/5332/1005.html
+KW  - High Energy Physics - Phenomenology
+ER  - 
+
+TY  - JOUR
+TI  - The structure of gluon radiation in QCD
+AU  - Parke, S
+AU  - Mangano, Michelangelo L
+DA  - 1990///
+PY  - 1990
+DO  - 10.1063/1.39100
+DP  - CERN Document Server
+UR  - https://cds.cern.ch/record/202049
+Y2  - 2025/07/15/14:43:22
+L1  - files/5335/Parke_Mangano_1990_The structure of gluon radiation in QCD.pdf
+ER  - 
+
+TY  - JOUR
+TI  - Color factorization for fermionic amplitudes
+AU  - Kosower, David A.
+T2  - Nuclear Physics B
+DA  - 1989///
+PY  - 1989
+DO  - 10.1016/0550-3213(89)90361-1
+DP  - Google Scholar
+VL  - 315
+IS  - 2
+SP  - 391
+EP  - 418
+PB  - Elsevier
+UR  - https://www.sciencedirect.com/science/article/pii/0550321389903611
+Y2  - 2025/07/15/14:46:26
+L1  - files/5338/Kosower_1989_Color factorization for fermionic amplitudes.pdf
+ER  - 
+
+TY  - JOUR
+TI  - Quark-gluon amplitudes in the dual expansion
+AU  - Mangano, Michaelangelo
+AU  - Parke, Stephen J.
+T2  - Nuclear Physics B
+DA  - 1988/04//
+PY  - 1988
+DO  - 10.1016/0550-3213(88)90368-9
+DP  - Crossref
+VL  - 299
+IS  - 4
+SP  - 673
+EP  - 692
+LA  - en
+PB  - Elsevier BV
+SN  - 0550-3213
+UR  - https://linkinghub.elsevier.com/retrieve/pii/0550321388903689
+Y2  - 2025/07/15/15:21:10
+L1  - files/5339/Mangano and Parke - 1988 - Quark-gluon amplitudes in the dual expansion.pdf
+ER  - 
+
+TY  - JOUR
+TI  - On-Shell Methods in Perturbative QCD
+AU  - Bern, Zvi
+AU  - Dixon, Lance J.
+AU  - Kosower, David A.
+T2  - Annals of Physics
+AB  - We review on-shell methods for computing multi-parton scattering amplitudes in perturbative QCD, utilizing their unitarity and factorization properties. We focus on aspects which are useful for the construction of one-loop amplitudes needed for phenomenological studies at the Large Hadron Collider.
+DA  - 2007/07//
+PY  - 2007
+DO  - 10.1016/j.aop.2007.04.014
+DP  - arXiv.org
+VL  - 322
+IS  - 7
+SP  - 1587
+EP  - 1634
+SN  - 0003-4916
+UR  - http://arxiv.org/abs/0704.2798
+Y2  - 2025/07/15/15:38:02
+L1  - files/5344/Bern et al_2007_On-Shell Methods in Perturbative QCD.pdf
+L2  - files/5345/0704.html
+KW  - High Energy Physics - Phenomenology
+ER  - 
+
+TY  - JOUR
+TI  - From trees to loops and back
+AU  - Brandhuber, Andreas
+AU  - Spence, Bill
+AU  - Travaglini, Gabriele
+T2  - Journal of High Energy Physics
+AB  - We argue that generic one-loop scattering amplitudes in supersymmetric Yang-Mills theories can be computed equivalently with MHV diagrams or with Feynman diagrams. We first present a general proof of the covariance of one-loop non-MHV amplitudes obtained from MHV diagrams. This proof relies only on the local character in Minkowski space of MHV vertices and on an application of the Feynman Tree Theorem. We then show that the discontinuities of one-loop scattering amplitudes computed with MHV diagrams are precisely the same as those computed with standard methods. Furthermore, we analyse collinear limits and soft limits of generic non-MHV amplitudes in supersymmetric Yang-Mills theories with one-loop MHV diagrams. In particular, we find a simple explicit derivation of the universal one-loop splitting functions in supersymmetric Yang-Mills theories to all orders in the dimensional regularisation parameter, which is in complete agreement with known results. Finally, we present concrete and illustrative applications of Feynman's Tree Theorem to one-loop MHV diagrams as well as to one-loop Feynman diagrams.
+DA  - 2006/01//
+PY  - 2006
+DO  - 10.1088/1126-6708/2006/01/142
+DP  - Institute of Physics
+VL  - 2006
+IS  - 01
+SP  - 142
+J2  - J. High Energy Phys.
+LA  - en
+SN  - 1126-6708
+UR  - https://dx.doi.org/10.1088/1126-6708/2006/01/142
+Y2  - 2025/07/15/15:38:53
+L1  - files/5348/Brandhuber et al_2006_From trees to loops and back.pdf
+ER  - 
+

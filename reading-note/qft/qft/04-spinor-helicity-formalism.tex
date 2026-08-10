@@ -1,0 +1,242 @@
+
+\section{Spinor-Helicity Formalism}
+\label{sec:spin-helicity-formalism}
+
+\subsection{Computational Motivation}
+\label{subsec:computational-motivation}
+
+\textbf{Computation Procedure:}
+\begin{enumerate}
+    \item 
+In the ``textbook method'' to computing scattering amplitudes at tree-level, we compute the following quantity:
+\begin{equation}
+    \sum_{\text{spin, color}} |M_n|^2
+\end{equation}
+where $M_n$ is the scattering amplitude of $n$ gluons at a particular color and spin (helicity) configuration.
+\item To compute $M_n$, one draws all contributing Feynman diagrams, and sum up their contributions.
+
+\item When performing the spin sum, we use the following \textit{polarization completeness relation}:
+\begin{align}
+    \label{eq:pol}
+\sum_{\lambda \in\{+,-\}}\left(\varepsilon_\mu^\lambda(p)\right)^* \varepsilon_v^\lambda(p)=-g_{\mu v}+\frac{p_\mu n_v}{p \cdot n}+\frac{n_\mu p_v}{p \cdot n}
+\end{align}
+to cancel out the polarization vectors. After that, we simplify and obtain the total cross-section.
+\end{enumerate}
+
+
+\textbf{Efficiency considerations:}
+\begin{enumerate}
+    \item 
+Take into account the number of diagrams at tree-level for each $n$:
+
+\begin{tabular}{l|rrrrrrr}
+$n$ & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\hline $N_n$ & 4 & 25 & 220 & 2485 & 34300 & 559405 & 10525900
+\end{tabular}\\
+and that each Feymann diagram may contribute several terms, we see that the computation soon becomes formidable.
+
+\item Each time we apply \eqref{eq:pol}, we get three times as many terms. And we have to apply it $O(n)$ times to get all external polarizations.
+
+\item Hence the computational complexity is $O(3^n N_n^2)$ for symbolic computation.
+
+\end{enumerate}
+
+\textbf{Merits of the Spin-Helicity Formalism:}
+
+\begin{enumerate}
+    \item Instead of treating polarization vectors as abstract objects only to be summed over, we give them explicit representations in terms of spinors. 
+    \item Each polarization vector is written compactly in one term, and the $3^n$ factor goes away.
+    \item Using the "reference momenta" to be introduced shortly, we may gauge fix them in a way that makes the computation of $M_n$ much simpler.
+\end{enumerate}
+
+\subsection{Definition and Motivation}
+\label{subsec:definition-and-motivation}
+
+Here we follow the demonstration in \autocite[Chapter~27.6]{schwartzQFT2014}, for gluon scattering amplitudes (massless spin-1), and QED in massless limit.
+
+The development crucially depends on the \textbf{Spin-Helicity Formalism} \autocite[\S27.1]{schwartzQFT2014}, which trades Lorentz vectors for objects with two-component spinor indices. We build it up in three steps: the bispinor form of a momentum, its factorization into helicity spinors when the momentum is massless, and the invariant inner products of those spinors.
+
+\textbf{From vectors to bispinors.} Every four-momentum $p^\mu \in \mathbb{R}^{1,3}$ can be traded for a $2 \times 2$ Hermitian matrix by contracting with $\sigma^\mu = (I, \sigma^1, \sigma^2, \sigma^3)$,
+\[
+	p_{\alpha \dot\alpha} = p_\mu \sigma^\mu_{\alpha \dot\alpha} =
+	\begin{pmatrix}
+		p^0 + p^3 & p^1 - i p^2 \\
+		p^1 + i p^2 & p^0 - p^3
+	\end{pmatrix}
+.\]
+This is the Lorentz-vector/bispinor identification of Section~\ref{sec:representation-theory}, specifically Example~\ref{ex:spinors-bispinors}: the two indices $\alpha, \dot\alpha$ transform in the left- and right-handed spinor representations, identifying the vector with the $\left( \frac{1}{2}, \frac{1}{2} \right)$ representation. The virtue of the matrix form is that the invariant mass becomes a \emph{determinant},
+\[
+	\operatorname{det} p_{\alpha \dot\alpha} = (p^0)^2 - \vec{p}^{\,2} = p^2
+.\]
+
+\textbf{Massless momenta factorize.} Now let the particle be massless, $p^2 = 0$. The matrix $p_{\alpha \dot\alpha}$ then has vanishing determinant, i.e.\ it has rank one. Every rank-one $2 \times 2$ matrix is an outer product of two two-component vectors. Hence
+\[
+	p_{\alpha \dot\alpha} = \lambda_\alpha \tilde\lambda_{\dot\alpha},
+	\qquad \text{written from here on as} \qquad
+	p \rangle [ p
+,\]
+where the \textbf{helicity spinors} $p\rangle = \lambda$ and $[p = \tilde\lambda$ carry one left-handed and one right-handed spinor index respectively. For \emph{real} momenta, Hermiticity of $p_{\alpha\dot\alpha}$ ties the two together by complex conjugation, $p \rangle = \left( [ p \right)^\dag$; for \emph{complex} momenta $p\rangle$ and $[p$ are independent, a freedom that the BCFW shift of Section~\ref{sec:bcfw-recursion} exploits.
+
+The factorization is not unique: for any nonzero complex number $z$,
+\[
+	p \rangle \to z\, p \rangle,
+	\qquad
+	[ p \to z^{-1} [ p
+\]
+leaves $p\rangle[p$ unchanged. This rescaling is the (complexified) \textbf{little group} of the massless particle, and tracking how amplitudes scale under it is a surprisingly powerful constraint (Section~\ref{subsec:little-group-scaling-and-three-point-amplitudes}).
+
+\textbf{Spinor inner products.} Two left-handed spinors can be contracted with the antisymmetric $\epsilon_{\alpha\beta}$ into a Lorentz invariant, and likewise two right-handed ones. For massless momenta $p, q$ these are written
+\[
+	\langle p q \rangle, \qquad [ p q ],
+\]
+the \textbf{angle} and \textbf{square} brackets. Both are antisymmetric, $\langle pq \rangle = -\langle qp \rangle$ and $[pq] = -[qp]$ (in particular $\langle pp \rangle = [pp] = 0$), and for real momenta they are complex conjugates of each other, $\langle pq \rangle^* = [qp]$. Their product reassembles the only invariant two massless momenta possess:
+\[
+	\langle p q \rangle [ q p ] = 2\, p \cdot q = (p + q)^2
+,\]
+so every Mandelstam invariant becomes a product of brackets, $s_{ij} = \langle ij \rangle [ji]$ \autocite[\S27.1]{schwartzQFT2014}.
+
+\subsection{Polarization and Reference Vectors}
+\label{subsec:polarization-and-reference-vectors}
+
+We follow \autocite[\S27.1.2]{schwartzQFT2014}. The payoff of the bispinor decomposition is that it packages the \emph{two} physical helicities of a massless gauge boson into explicit polarization vectors in a watertight way, with far less redundancy than the polarization-completeness relation \eqref{eq:pol} used in the textbook method (Section~\ref{subsec:computational-motivation}).
+
+\textbf{Definition.} Let $p = p\rangle [p$ be a massless momentum, and pick any lightlike \textbf{reference momentum} $r = r\rangle [r$ with $\langle r p\rangle \neq 0$ and $[p r] \neq 0$. The negative- and positive-helicity polarization vectors are, as bispinors,
+\begin{align}
+	\label{eq:polarization-spinor}
+	\epsilon_p^{-}(r) = \sqrt{2}\,\frac{p\rangle [r}{[p r]},
+	\qquad
+	\epsilon_p^{+}(r) = \sqrt{2}\,\frac{r\rangle [p}{\langle r p\rangle}.
+\end{align}
+In ordinary vector notation these are $\epsilon_p^{-\,\mu}(r) = \frac{\langle p|\gamma^\mu|r]}{\sqrt{2}\,[p r]}$ and $\epsilon_p^{+\,\mu}(r) = \frac{\langle r|\gamma^\mu|p]}{\sqrt{2}\,\langle r p\rangle}$. For real momenta $r\rangle$ and $[r$ are complex conjugates, and $\left( \epsilon_p^{+} \right)^{*} = \epsilon_p^{-}$.
+
+\textbf{Properties.} Equation~\eqref{eq:polarization-spinor} carries everything demanded of a physical polarization vector.
+\begin{itemize}
+	\item \textbf{Transversality.} $p \cdot \epsilon_p^{\pm}(r) = 0$, because the contraction closes an angle bracket $\langle p p\rangle$ or a square bracket $[p p]$, both of which vanish. They are transverse to the reference momentum as well, $r \cdot \epsilon_p^{\pm}(r) = 0$.
+	\item \textbf{Normalization.} $\epsilon_p^{+}\cdot \epsilon_p^{-} = -1$ while $\epsilon_p^{\pm}\cdot \epsilon_p^{\pm} = 0$, exactly as for the usual circular-polarization vectors.
+	\item \textbf{Correct helicity.} Under the little-group rescaling $p\rangle \to z\,p\rangle$, $[p \to z^{-1}[p$, they scale as $\epsilon_p^{-} \to z^{2}\epsilon_p^{-}$ and $\epsilon_p^{+} \to z^{-2}\epsilon_p^{+}$; the exponents $+2$ and $-2$ mark them as the helicity $-1$ and $+1$ states (Section~\ref{subsec:little-group-scaling-and-three-point-amplitudes}).
+	\item \textbf{Completeness.} Summing over the two helicities returns \eqref{eq:pol}, with the arbitrary auxiliary vector $n$ now played by the reference momentum, $n \to r$:
+	\[
+		\sum_{\lambda \in \{+,-\}} \big( \epsilon_p^{\lambda} \big)^{*}_{\mu}\, \epsilon_{p\,\nu}^{\lambda}
+		= -g_{\mu\nu} + \frac{p_\mu r_\nu + r_\mu p_\nu}{p \cdot r}.
+	\]
+\end{itemize}
+
+\textbf{The reference momentum is a gauge redundancy.} Changing it, $r \to r'$, shifts the polarization by a multiple of the momentum,
+\begin{align}
+	\label{eq:reference-gauge-shift}
+	\epsilon_p^{+}(r') - \epsilon_p^{+}(r) \;\propto\; p
+\end{align}
+(and likewise for $\epsilon_p^{-}$), as follows from the Schouten identity. This is a gauge transformation $\epsilon^\mu \to \epsilon^\mu + c\,p^\mu$, so by the Ward identity $p_\mu \mathcal{M}^\mu = 0$ the amplitude does not depend on it. Each external leg may therefore be assigned its \emph{own} reference momentum $r_i$, and every admissible choice yields the same amplitude.
+
+\textbf{By choosing the reference momenta wisely}, we can make make most polarization products vanish and collapses the algebra. Writing $\epsilon_i^{\pm} = \epsilon_{p_i}^{\pm}(r_i)$, the contractions are
+\begin{align*}
+	\epsilon_i^{+}\cdot \epsilon_j^{+} &\propto \langle r_i\, r_j\rangle, &
+	\epsilon_i^{-}\cdot \epsilon_j^{-} &\propto [r_i\, r_j], &
+	\epsilon_i^{+}\cdot \epsilon_j^{-} &\propto \langle r_i\, j\rangle\,[\,i\, r_j\,], \\
+	\epsilon_i^{+}\cdot p_j &\propto \langle r_i\, j\rangle\,[\,j\, i\,], &
+	\epsilon_i^{-}\cdot p_j &\propto [\,r_i\, j\,]\,\langle j\, i\rangle. &&
+\end{align*}
+Hence a single common reference $r_i = r$ for all positive-helicity gluons kills every $\epsilon_i^{+}\cdot \epsilon_j^{+}$ (and similarly a common reference for the negative-helicity gluons), while the choice $r_i = p_j$ kills both $\epsilon_i^{+}\cdot p_j$ and $\epsilon_i^{+}\cdot \epsilon_j^{-}$.
+
+\subsection{Dirac Spinors}
+\label{subsec:dirac-spinors}
+
+For a massless fermion the Dirac equation $\gamma\cdot p\,\, u(p) = 0$ has solutions that are chirality eigenstates, so in the Weyl basis, where a Dirac spinor splits into left- and right-handed two-component pieces, each solution carries only a single angle or square spinor of Section~\ref{subsec:definition-and-motivation}.
+
+\textbf{Massless Dirac spinors.} The negative- and positive-helicity solutions are the left- and right-handed Weyl spinors,
+\begin{align}
+	\label{eq:massless-dirac-spinors}
+	u_-(p) = \begin{pmatrix} p\rangle \\ 0 \end{pmatrix},
+	\qquad
+	u_+(p) = \begin{pmatrix} 0 \\ [p \end{pmatrix},
+\end{align}
+with conjugate (bra) spinors $\bar u_-(p) = [p|$ and $\bar u_+(p) = \langle p|$. 
+
+\subsection{MHV and NMHV Amplitudes}
+\label{sec:mhv-amplitudes}
+
+\begin{theorem}
+	For $n > 3$, $n$-point amplitudes in QCD vanish at tree level, if all but one gluon have positive (resp. negative) helicity.
+\end{theorem}
+\begin{proof}
+	If all vertices have positive helicity, we can choice the same reference momentum $r$ for all gluons, and the polarization vectors vanish under inner product:
+	\begin{align}
+		\epsilon_i^{+}(r) \cdot \epsilon_j^{+}(r)=\frac{\langle r r\rangle[j i]}{\langle r i\rangle\langle r j\rangle}=0
+	\end{align}
+	and we may see from the Feynman rules that each term in the amplitude has at least one such inner product, hence the amplitude vanishes. (Polarizations can be contracted with either polarization or momentum; but there are less vertices than external lines, so at least one such inner product occur.) One can also see that physically: if we interprete one of the gluons as an out-going gluon, then it becomes $g_1^- \ldots g_{n-1}^- \to g_n^+$, which violates the conservation of helicity.
+
+	If there is only one negative helicity gluon, we can choose the reference momenta for the other gluons to be $p_1$, and choose the reference momentum for the negative helicity arbitrarily. Then
+	\begin{align}
+		\epsilon_i^{+}(1) \cdot \epsilon_1^{-}(r)=\frac{[i r]\langle 11\rangle}{\langle 1 i\rangle[1 r]}=0.
+	\end{align}
+	Note that this argument does not work for $n=3$, since in that case we may have $\langle 1 i\rangle[1 r] =\langle 1 3\rangle[1 3] = (p_1 + p_3)^2 = p_2^2 = 0$.
+
+\end{proof}
+
+Due to this fact, the amplitudes with exactly two negative (resp. positive) helicity gluons are called \textbf{Maximally Helicity Violating} (MHV) amplitudes. Amplitudes with three are called \textbf{Next-to-MHV} (NMHV) amplitudes, and so on.
+
+We shall see that, by appropriate choice of reference momenta, the MHV amplitudes can be computed in a very simple way, and the results is also very elegant, the \textbf{Parke-Taylor formula}. Moreover, $N^k$-MHV amplitudes can be expressed as a sum of $N^{k-1}$-MHV amplitudes, giving us the so-called \textbf{MHV vertex expansion}. Finally, we will see that the \textbf{BCFW recursion} can further simplify the computation of on-shell amplitudes.
+
+\subsection{Little Group Scaling and Three-Point Amplitudes}
+\label{subsec:little-group-scaling-and-three-point-amplitudes}
+
+\textbf{3-point amplitudes for gluon scattering.} This case is special because the matrix elements can only depend on the spinor inner products, and little-group scaling together with dimensional analysis determines all 3-point amplitudes up to an overall coefficient. For real on-shell massless 3-point kinematics, momentum conservation forces all Mandelstam invariants to vanish, so the spinors are collinear and both angle and square brackets vanish. For complex momenta, the left- and right-handed spinors are independent rather than complex conjugates; one can consistently have either $[12]=[23]=[31]=0$ with nonzero angle brackets, or $\langle 12\rangle=\langle 23\rangle=\langle 31\rangle=0$ with nonzero square brackets. 
+
+The dimensional analysis argument is as follows: 
+\begin{itemize}
+	\item The helicity spinor representation of a momentum has a redundancy captured by the little group transformation
+	\begin{align*}
+		p\rangle &\longrightarrow z\,p\rangle,
+		& [p &\longrightarrow z^{-1}[p.
+	\end{align*}
+	The polarization vectors then scale as
+	\begin{align*}
+		\epsilon_p^{-}(r)
+		&= \sqrt{2}\,\frac{p\rangle [r}{[p r]}
+		\longrightarrow z^2\epsilon_p^{-}(r), \\
+		\epsilon_p^{+}(r)
+		&= \sqrt{2}\,\frac{r\rangle [p}{\langle r p\rangle}
+		\longrightarrow z^{-2}\epsilon_p^{+}(r).
+	\end{align*}
+	\item The amplitude must depend on only left-handed inner products or only right-handed inner products. To see this, start from momentum conservation
+	\begin{align*}
+		1\rangle [1 + 2\rangle [2 + 3\rangle [3 = 0.
+	\end{align*}
+	and contract with $\langle 1, \langle 2$. This gives two equations
+	\begin{align*}
+		\langle 12\rangle [2 &= -\langle 13\rangle [3, \\
+		\langle 21\rangle [1 &= -\langle 23\rangle [3.
+	\end{align*}
+	and implies either $\langle 12\rangle = \langle 23\rangle = \langle 31\rangle = 0$ or $[12] = [23] = [31] = 0$. 
+	\item The scaling of the amplitude solely depends on the scaling of the polarization vectors, since only for the polarization term the $\langle \rangle$ and $[]$ are not well-balanced. In particular, for a 3-point amplitude, the number of $\langle \rangle$ minus the number of $[]$ is $2$ for negative helicity gluon, $-2$ for positive helicity gluon. This holds respectively for each gluon.
+\end{itemize}
+
+We now determine the amplitudes helicity configuration by helicity configuration, following \autocite[(27.92) and below]{schwartzQFT2014}.
+
+\textbf{All-plus (and all-minus) amplitudes.} Consider first $\mathcal{M}(1^{a+}, 2^{b+}, 3^{c+})$. Each gluon demands little-group weight $z_i^{-2}$, and the only bracket monomials with these weights are
+\begin{align*}
+	\mathcal{M}(1^{a+}, 2^{b+}, 3^{c+})
+	= C^{abc}\,[12][23][31]
+	\qquad \text{or} \qquad
+	\mathcal{M}(1^{a+}, 2^{b+}, 3^{c+})
+	= \frac{\widetilde{C}^{abc}}{\langle 12\rangle\langle 23\rangle\langle 31\rangle}.
+\end{align*}
+The second diverges in the real-momentum limit, where all angle brackets vanish; an amplitude cannot blow up there, so only the first form is allowed. Now count mass dimensions: a $3$-point amplitude in four dimensions carries mass dimension $1$, while $[12][23][31]$ has dimension $3$, so the coefficient $C^{abc}$ must have mass dimension $-2$. Such a coupling can only come from a non-renormalizable theory. \emph{In a renormalizable theory, therefore, $C^{abc} = 0$}. The all-minus amplitude, $\overline{C}^{abc} \langle 12\rangle\langle 23\rangle\langle 31\rangle$, vanishes for the same reason.
+
+\textbf{Mixed helicities.} Next consider $\mathcal{M}(1^{a+}, 2^{b+}, 3^{c-})$, with little-group weights $(-2, -2, +2)$. On the square-bracket branch the unique monomial with these weights is
+\begin{align*}
+	\mathcal{M}\left(1^{a+},2^{b+},3^{c-}\right)
+	= C^{abc}\frac{[12]^3}{[13][32]},
+\end{align*}
+which has mass dimension $1$, a dimensionless coupling $C^{abc}$ in Yang-Mills theory. Little-group scaling has thus fixed the amplitude up to a constant. The conjugate configuration is
+\begin{align*}
+	\mathcal{M}\left(1^{a-},2^{b-},3^{c+}\right)
+	= C^{abc}\frac{\langle 12\rangle^3}{\langle 13\rangle\langle 32\rangle}.
+\end{align*}
+
+\textbf{Antisymmetry of the color factor.} The form of the amplitude dictates the symmetry of its coefficient. Exchange the two same-helicity gluons, $(1, a) \leftrightarrow (2, b)$ and the numerator flips sign, while the denominator is unchanged,. The kinematic factor is therefore \emph{antisymmetric} under the exchange. Since gluons are bosons, the full amplitude must be \emph{symmetric} under the simultaneous exchange of momenta, helicities, and color labels, so the color factor must compensate: $C^{abc} = -C^{bac}$. Running the same argument on the other helicity assignments antisymmetrizes the remaining index pairs, forcing $C^{abc}$ to be totally antisymmetric: the structure constants $f^{abc}$ of Section~\ref{sec:qcd} emerge from on-shell consistency alone, a first step toward the uniqueness argument of Section~\ref{subsec:proof-of-uniqueness-of-yang-mills-theory}.
+
+\subsection{Proof of Uniqueness of Yang-Mills Theory}
+\label{subsec:proof-of-uniqueness-of-yang-mills-theory}
+
+See \autocite[Chapter~27.5.2]{schwartzQFT2014} for a proof of the uniqueness of Yang-Mills theory using the spinor-helicity formalism. The proof is based on the fact that the 3-point amplitudes are uniquely determined by little-group scaling and dimensional analysis, and that the 4-point amplitudes can be constructed from the 3-point amplitudes using factorization and unitarity. This leads to the conclusion that the only consistent theory of massless spin-1 particles is Yang-Mills theory.

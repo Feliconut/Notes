@@ -9,11 +9,12 @@
 \usepackage{longtable}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{xcolor}
 \usepackage{tcolorbox}
-\usepackage[backend=bibtex,style=authoryear,sorting=none,maxcitenames=2, mincitenames=1, maxbibnames=4, uniquelist=false]{biblatex}
+\usepackage[backend=biber,style=authoryear,sorting=none,maxcitenames=2,mincitenames=1,maxbibnames=4,uniquelist=false]{biblatex}
 % \addbibresource{zotero_truncated.bib}
 \addbibresource{QFT.bib}
-% \addbibresource{QFT-amp.bib}
+\addbibresource{QFT-Amp.bib}
 \usepackage{enumitem}
 \usepackage{caption}
 \tcbuselibrary{breakable}
@@ -28,21 +29,21 @@
 \newtheorem{definition}{Definition}
 \newtheorem{fact}{Fact}
 
-
-
 \newcommand{\why}{{\color{red}(Why?)}}
 \newcommand{\followup}{{\color{orange}(This needs further follow-up.)}}
 
-\title{Your Title}
-\author{Your Name}
+\title{Notes on BCFW Recursion Relations\thanks{This is the result of a summer exchange program to TU Dortmund under the guidance of Prof.\ Emmanuel Stamou. The author also want to thank Prof. Andreas Jung from Purdue University for his guidance to the topic of QFT.}}
+\author{Xiaoyu Liu}
 \date{\today}
 
 
 \begin{document}
+\maketitle
+\tableofcontents
 
-% \input{poincare.tex}
-\input{bcfw.tex}
-\input{qcd.tex}
+\input{qft/part1-prerequisites.tex}
+\input{qft/part2-beyond-bcfw.tex}
+
 \newpage
 \printbibliography
 

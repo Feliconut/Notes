@@ -1,0 +1,188 @@
+\section{Non-Abelian Gauge Theory and Gluon Amplitudes}
+\label{sec:qcd}
+
+We follow \autocite[Chapters~25--27]{schwartzQFT2014}.
+
+\subsection{Yang-Mills Theory, QCD, and QED}
+\label{sec:yang-mills-qcd-qed}
+
+A Yang-Mills theory is a gauge theory built on a compact Lie group $G$ (for us $G = SU(N)$). Its Lie algebra is fixed by the generators $T^a$ and the \textbf{structure constants} $f^{abc}$,
+\begin{align}
+    \label{eq:lie-algebra}
+    [T^a, T^b] = i f^{abc} T^c,
+    \qquad
+    \mathrm{tr}(T^a T^b) = \tfrac{1}{2}\delta^{ab},
+\end{align}
+with $a = 1, \ldots, N^2 - 1$ in the fundamental representation \autocite[(25.8),(25.19)]{schwartzQFT2014}. The group is \textbf{abelian} when $f^{abc} = 0$ and \textbf{non-abelian} otherwise.
+
+\begin{itemize}
+    \item \textbf{QED} is the abelian case $G = U(1)$: a single photon, $f^{abc} = 0$, and the gauge boson is electrically neutral.
+    \item \textbf{QCD} is $G = SU(3)$: eight gluons, $f^{abc} \neq 0$, with quarks in the fundamental ($\mathbf{3}$) and gluons in the adjoint representation.
+\end{itemize}
+
+The decisive feature of the non-abelian case is that $f^{abc}\neq 0$ forces the gauge bosons to \emph{carry charge and interact with one another}. This is what makes Yang-Mills the unique renormalizable theory of self-interacting massless spin-1 particles, and (through the opposite-sign vacuum polarization) what makes QCD asymptotically free. Almost every QCD computation uses the constants
+\begin{align}
+    \mathrm{tr}(T^a T^b) = T_F\,\delta^{ab},
+    \quad
+    (T^a T^a)_{ij} = C_F\,\delta_{ij},
+    \quad
+    f^{acd}f^{bcd} = C_A\,\delta^{ab},
+\end{align}
+with $T_F = \tfrac12$, $C_A = N$, and $C_F = \tfrac{N^2-1}{2N}$ \autocite[(25.37--25.39)]{schwartzQFT2014}.
+
+\subsection{Yang-Mills Lagrangian and Gauge Fixing}
+\label{subsec:yang-mills-lagrangian-and-gauge-fixing}
+
+\textbf{Covariant derivative and field strength.} Local gauge invariance is implemented by replacing $\partial_\mu$ with the covariant derivative and building the kinetic term from the field strength,
+\begin{align}
+    D_\mu = \partial_\mu - i g A_\mu^a T^a,
+    \qquad
+    F_{\mu\nu}^a = \partial_\mu A_\nu^a - \partial_\nu A_\mu^a + g f^{abc} A_\mu^b A_\nu^c,
+\end{align}
+where the field strength is the curvature of the connection, $F_{\mu\nu} = \tfrac{i}{g}[D_\mu, D_\nu]$ \autocite[(25.54),(26.2)]{schwartzQFT2014}. The Yang-Mills Lagrangian is
+\begin{align}
+    \label{eq:ym-lagrangian}
+    \mathcal{L}_{\mathrm{YM}} = -\tfrac{1}{4}(F_{\mu\nu}^a)^2 + \bar\psi_i\left(i\gamma^\mu D_{\mu} - m\,\delta\right)\psi ,
+    \qquad D_{\mu} = \partial_\mu\delta- i g A_\mu^a T^a.
+\end{align}
+Under an infinitesimal gauge transformation the gauge field and field strength transform as \autocite[(25.5)]{schwartzQFT2014}
+\begin{align}
+    A_\mu^a \to A_\mu^a + \tfrac{1}{g}\partial_\mu\alpha^a - f^{abc}\alpha^b A_\mu^c,
+    \qquad
+    F_{\mu\nu}^a \to F_{\mu\nu}^a - f^{abc}\alpha^b F_{\mu\nu}^c,
+\end{align}
+so $F_{\mu\nu}^a$ is covariant (not invariant) --- it rotates in the adjoint representation.
+
+\begin{remark}
+    Expanding $-\tfrac14(F_{\mu\nu}^a)^2$ using the $g f^{abc}A_\mu^b A_\nu^c$ piece of $F$ produces \textbf{cubic and quartic gluon self-interactions}, of orders $g$ and $g^2$. These vertices, absent in abelian QED, are the entire source of the richness (and the computational difficulty) of gluon scattering.
+\end{remark}
+
+\textbf{Gauge fixing and ghosts.} The gauge redundancy must be removed before quantizing. In a covariant ($R_\xi$) gauge one adds a gauge-fixing term and, via the Faddeev-Popov procedure, a pair of anticommuting scalar \textbf{ghosts} $c^a, \bar c^a$:
+\begin{align}
+    \mathcal{L} \supset -\frac{1}{2\xi}(\partial_\mu A^\mu_a)^2 + (\partial_\mu \bar c^a)(\delta^{ac}\partial^\mu + g f^{abc}A_\mu^b) c^c .
+\end{align}
+The ghosts are unphysical, but in a covariant gauge they are needed on internal lines to cancel the unphysical gluon polarizations that the Lorentz-covariant propagator $-g^{\mu\nu}$ propagates \autocite[\S25.4.3,\S26.1]{schwartzQFT2014}.
+
+\subsection{Yang-Mills and QCD Feynman Rules}
+\label{sec:qcd-feymann-rules}
+
+We collect the Feynman rules in a covariant $R_\xi$ gauge \autocite[\S26.1]{schwartzQFT2014}; all momenta are taken incoming.
+
+\subsubsection{Propagators and External Gluons}
+\label{subsubsec:propagators-and-external-gluons}
+
+The gluon propagator is the photon propagator dressed with a color delta $\delta^{ab}$,
+\begin{align}
+    \label{eq:gluon-propagator}
+    \frac{i\,\delta^{ab}}{p^2 + i\epsilon}\left[-g^{\mu\nu} + (1-\xi)\frac{p^\mu p^\nu}{p^2}\right]
+    \;\xrightarrow{\;\xi = 1\;}\;
+    \frac{-i\, g^{\mu\nu}\,\delta^{ab}}{p^2 + i\epsilon}
+    ,
+\end{align}
+the last form being Feynman gauge. The ghost and (colored) fermion propagators are
+\begin{align}
+    \text{ghost: } \frac{i\,\delta^{ab}}{p^2 + i\epsilon},
+    \qquad
+    \text{quark: } \frac{i\,\delta^{ij}}{\gamma^\mu p_\mu - m + i\epsilon},
+\end{align}
+with $\delta^{ab}, \delta^{ij}$ enforcing color conservation \autocite[(26.4--26.6)]{schwartzQFT2014}. An external gluon of momentum $p$ and helicity $\lambda$ contributes a polarization vector $\varepsilon^\mu(p, \lambda)$.
+
+\subsubsection{Cubic and Quartic Gluon Vertices}
+\label{subsubsec:cubic-and-quartic-gluon-vertices}
+
+The self-interactions in \eqref{eq:ym-lagrangian} give the three- and four-gluon vertices. For three gluons $(\mu,a;k)$, $(\nu,b;p)$, $(\rho,c;q)$ with $p + k + q = 0$,
+\begin{align}
+    \label{eq:three-gluon-vertex}
+    g f^{abc}\left[g^{\mu\nu}(k - p)^\rho + g^{\nu\rho}(p - q)^\mu + g^{\rho\mu}(q - k)^\nu\right],
+\end{align}
+and for four gluons $(\mu,a),(\nu,b),(\rho,c),(\sigma,d)$,
+\begin{align}
+    \label{eq:four-gluon-vertex}
+    -i g^2\Big[
+    &f^{abe}f^{cde}(g^{\mu\rho}g^{\nu\sigma} - g^{\mu\sigma}g^{\nu\rho})
+    + f^{ace}f^{bde}(g^{\mu\nu}g^{\rho\sigma} - g^{\mu\sigma}g^{\nu\rho}) \notag\\
+    &+ f^{ade}f^{bce}(g^{\mu\nu}g^{\rho\sigma} - g^{\mu\rho}g^{\nu\sigma})
+    \Big]
+    .
+\end{align}
+The remaining vertices are the quark-gluon vertex $i g \gamma^\mu T^a_{ij}$ and the ghost-gluon vertex $-g f^{abc} p^\mu$ (with $p$ the outgoing-ghost momentum) \autocite[(26.9--26.12)]{schwartzQFT2014}.
+
+\subsection{Tree-Level Gluon Scattering in Yang-Mills Theory}
+\label{subsec:tree-level-gluon-scattering-in-yang-mills-theory}
+
+\subsubsection{Textbook Diagrammatic Computation}
+\label{subsubsec:textbook-diagrammatic-computation}
+
+To compute an $n$-gluon amplitude to leading order, one draws every tree diagram built from the vertices above, contracts the Lorentz indices against external polarization vectors, and sums. The number of diagrams grows factorially with $n$ (see the table in Section~\ref{sec:spin-helicity-formalism}), and each $3$- or $4$-gluon vertex carries several momentum/metric terms, so the bookkeeping quickly becomes prohibitive.
+
+\textbf{A concrete example: $gg \to gg$.} Matrix-element and cross-section calculations in QCD increase in complexity extremely fast \autocite[Chapter~27]{schwartzQFT2014}. Already at tree level, $gg \to gg$ receives contributions from Feynman diagrams with a gluon exchanged in the $s$-, $t$- and $u$-channels, and from diagrams with the $4$-point vertex. The $s$-channel diagram alone gives, in Feynman gauge,
+\begin{align}
+	\label{eq:gg-s-channel}
+	\begin{split}
+	i \mathcal{M}_s(p_1 p_2 \to p_3 p_4) = -i\, \frac{g_s^2}{s}\, f^{abe} f^{cde}
+	&\left[ (\varepsilon_1 \cdot \varepsilon_2)(p_1 - p_2)^{\mu} + \varepsilon_2^{\mu}\, (p_2 + q) \cdot \varepsilon_1 + \varepsilon_1^{\mu}\, (-q - p_1) \cdot \varepsilon_2 \right] \\
+	{}\times{}
+	&\left[ (\varepsilon_4^{\star} \cdot \varepsilon_3^{\star})(p_4 - p_3)_{\mu} + \varepsilon_{3\mu}^{\star}\, (p_3 + q) \cdot \varepsilon_4^{\star} + \varepsilon_{4\mu}^{\star}\, (-q - p_4) \cdot \varepsilon_3^{\star} \right]
+	\end{split}
+\end{align}
+\autocite[(27.1)]{schwartzQFT2014}, where $q = p_1 + p_2$ is the intermediate momentum and $a, \ldots, e$ are the color indices of the external and exchanged gluons.
+
+The complexity is visible already here. Each bracket carries three momentum/metric structures, so this single diagram contains $9$ terms; the $t$- and $u$-channel diagrams contribute the same again with permuted legs, and the contact diagram brings the three color structures of \eqref{eq:four-gluon-vertex}. To obtain the unpolarized cross section one must then \emph{square} the summed amplitude and sum over the $2$ helicities and $N^2 - 1$ colors of each external gluon. This leads to thousands of terms for the simplest gluon process there is, and the factorial growth of the diagram count makes matters worse with every added gluon. The remarkable fact, which motivates the rest of this section and the next, is that once all the sums are carried out the answer collapses to a strikingly compact expression.
+
+\subsection{Color Factors, Color Ordering, and Planarity}
+\label{sec:color-ordering-planarity}
+
+\subsubsection{Color Algebra and Trace Bases}
+\label{subsubsec:color-algebra-and-trace-bases}
+Following \autocite[\S27.4]{schwartzQFT2014}, we now separate the two structures that appear multiplied together in every gluon diagram --- a purely kinematic factor and a color factor --- starting from the kinematic side.
+
+\textbf{The color-stripped amplitude.} Define the \textbf{color-ordered Feynman rules} to be the ordinary rules of Section~\ref{sec:qcd-feymann-rules} with the color-and-coupling factor $\sqrt{2}\, i g_s f^{abc}$ stripped from each vertex, keeping only the momentum/metric structure (e.g.\ the bracket of the cubic vertex \eqref{eq:three-gluon-vertex}). These rules know nothing about color: they produce functions of the external momenta $p_i$ and polarizations $\varepsilon_i$ alone.
+
+\begin{definition}[Color-stripped partial amplitude]
+    Fix a cyclic order $1, 2, \ldots, n$ of the external gluons. The \textbf{color-stripped (color-ordered, partial) amplitude} $\widetilde{\mathcal{M}}(1, \ldots, n)$ is the sum of all \emph{planar} diagrams with the external legs in that cyclic order, evaluated with the color-ordered Feynman rules. It is separately gauge invariant.
+\end{definition}
+
+\textbf{(Anti-)symmetry.} The stripped cubic vertex changes sign under the interchange of any two of its legs: swapping $(\mu, k) \leftrightarrow (\nu, p)$ in \eqref{eq:three-gluon-vertex} sends the bracket to minus itself. (This antisymmetry is exactly what compensates the antisymmetry of $f^{abc}$, making the full vertex Bose symmetric.) Two properties of the partial amplitudes follow \autocite[\S27.4]{schwartzQFT2014}:
+\begin{itemize}
+    \item \textbf{Cyclicity.} $\widetilde{\mathcal{M}}(1, 2, \ldots, n) = \widetilde{\mathcal{M}}(2, \ldots, n, 1)$ --- only the cyclic order of the legs enters the definition.
+    \item \textbf{Reflection.} $\widetilde{\mathcal{M}}(1, 2, \ldots, n) = (-1)^{n}\, \widetilde{\mathcal{M}}(n, \ldots, 2, 1)$: reversing the order flips the sign of every cubic vertex, and a planar tree built from cubic vertices has $n - 2$ of them, giving $(-1)^{n-2} = (-1)^n$.
+\end{itemize}
+These symmetries cut down the number of independent partial amplitudes one actually has to compute.
+
+\textbf{Color factors.} Now for the color side. Every tree diagram carries a \textbf{color factor}: a product of structure constants --- one $f^{abc}$ per cubic vertex, a pair $ff$ per quartic vertex --- with the adjoint indices of internal lines summed over. These are not independent; they all reduce to a basis of single traces of fundamental generators using two identities. First, every structure constant is a commutator trace,
+\begin{align}
+    \label{eq:f-as-trace}
+    f^{abc} = -2 i\, \mathrm{tr}\!\left([T^a, T^b]\,T^c\right)
+    = -2 i\left[ \mathrm{tr}(T^a T^b T^c) - \mathrm{tr}(T^a T^c T^b) \right],
+\end{align}
+so a color factor turns into a sum of products of traces. Second, the $SU(N)$ Fierz (completeness) identity contracts the two generators sitting on a summed internal line,
+\begin{align}
+    \label{eq:su-n-fierz}
+    \sum_a T^a_{ij}\, T^a_{kl} = \tfrac{1}{2}\left(\delta_{il}\delta_{kj} - \tfrac{1}{N}\delta_{ij}\delta_{kl}\right)
+\end{align}
+\autocite[(27.49--27.50)]{schwartzQFT2014}. Diagrammatically \eqref{eq:su-n-fierz} either fuses two traces into one or splits one into two, always leaving traces of generators. Applying \eqref{eq:f-as-trace} at every vertex and then \eqref{eq:su-n-fierz} on every internal line eliminates all adjoint sums, and the color factor of any tree diagram collapses to single traces $\mathrm{tr}(T^{a_{\sigma(1)}}\cdots T^{a_{\sigma(n)}})$ of the external colors; the multi-trace and $\tfrac{1}{N}$ terms produced along the way cancel among themselves at tree level (the $U(1)$/photon-decoupling mechanism of Section~\ref{subsubsec:the-photon-decoupling-trick}).
+
+\textbf{The color decomposition.} Collecting, for each surviving single trace, the kinematics that multiplies it --- which is precisely the color-stripped amplitude in the corresponding cyclic order --- reassembles the full amplitude as
+\begin{align}
+    \label{eq:color-decomposition}
+    \mathcal{M}(1, \ldots, n) = -2\left(\sqrt{2}\, i g_s\right)^{n-2}
+    \sum_{\sigma \in S_n / Z_n}
+    \mathrm{tr}\!\left(T^{a_{\sigma(1)}} \cdots T^{a_{\sigma(n)}}\right)
+    \widetilde{\mathcal{M}}\!\left(\sigma(1), \ldots, \sigma(n)\right),
+\end{align}
+the sum running over noncyclic permutations \autocite[(27.84)]{schwartzQFT2014}. The quotient by $Z_n$ is forced by the cyclicity of the trace together with the cyclicity of $\widetilde{\mathcal{M}}$: cyclically related terms are identical and must not be double-counted.
+
+\subsubsection{The Photon Decoupling Trick}
+\label{subsubsec:the-photon-decoupling-trick}
+
+Why only planar, single-trace terms survive has a clean explanation. Embed $SU(N)$ into $U(N) = SU(N)\times U(1)$, i.e.\ add a fictitious ``photon.'' This photon has no self-interaction and the gluons carry no $U(1)$ charge, so it cannot affect gluon scattering; consequently the $\tfrac{1}{N}$ piece of the Fierz identity \eqref{eq:su-n-fierz} cancels and the color factors reduce to single traces over fundamental generators. This is \textbf{photon decoupling} \autocite[\S27.2.1]{schwartzQFT2014}. In 't~Hooft's double-line notation each gluon is a quark--antiquark color pair, and the geometry of the resulting ribbon graphs makes the suppression of non-planar contributions explicit.
+
+\begin{fact}
+    At tree level, $SU(N)$ and $U(N)$ gluon amplitudes agree (photon decoupling), so every color factor reduces to a single trace and only planar color-stripped diagrams contribute to each partial amplitude.
+\end{fact}
+
+\begin{fact}
+    Non-planar diagrams are suppressed by powers of $1/N$. Hence QCD loop-level amplitudes become planar in the large-$N$ ('t~Hooft) limit, $N \to \infty$.
+\end{fact}
+
+More detailed derivations of photon decoupling identities and a systematic treatment of 't~Hooft double-line notation are useful topics for further reading. For the present notes, the main point is the resulting single-trace color decomposition and the planar organization of color-ordered partial amplitudes.
